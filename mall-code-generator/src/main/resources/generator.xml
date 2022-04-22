@@ -22,7 +22,7 @@
             <property name="addRemarkComments" value="true"/>
         </commentGenerator>
 
-        <!-- 数据库连接配置: 连接驱动、连接地址、用户名、密码 -->
+        <!-- 数据库连接配置: 驱动、地址、用户名、密码 -->
         <jdbcConnection driverClass="${driver}"
                         connectionURL="${url}"
                         userId="${username}"
