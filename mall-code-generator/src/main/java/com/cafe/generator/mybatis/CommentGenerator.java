@@ -68,7 +68,6 @@ public class CommentGenerator extends DefaultCommentGenerator {
         for (String remarkLine : remarkLines) {
             field.addJavaDocLine(" * " + remarkLine);
         }
-        addJavadocTag(field, false);
         field.addJavaDocLine(" */");
     }
 

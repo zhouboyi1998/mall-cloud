@@ -19,7 +19,7 @@ import java.util.List;
 public class MybatisGenerator {
 
     /**
-     * 生成 MyBatis 代码
+     * 生成代码: Model、DAO、Mapper
      */
     public static void generate() {
         try {
