@@ -1,10 +1,9 @@
-# 单机
+server:
+  port: 8761
+
 spring:
   application:
     name: eureka-standalone
-
-server:
-  port: 8761
 
 eureka:
   instance:
