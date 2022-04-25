@@ -16,6 +16,12 @@
     <description>公共工具模块</description>
 
     <dependencies>
+        <!-- MySQL 连接 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql-connector.version}</version>
+        </dependency>
         <!-- SpringData Redis -->
         <dependency>
             <groupId>org.springframework.boot</groupId>

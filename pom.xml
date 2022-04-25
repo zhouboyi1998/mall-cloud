@@ -22,6 +22,7 @@
         <module>mall-common</module>
         <module>mall-code-generator</module>
         <module>mall-eureka</module>
+        <module>mall-goods</module>
     </modules>
 
     <properties>
@@ -37,6 +38,8 @@
         <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>7.1.0</minio.version>
+
+        <mall-common.version>1.0-SNAPSHOT</mall-common.version>
     </properties>
 
     <dependencies>
@@ -152,6 +155,12 @@
                 <groupId>io.minio</groupId>
                 <artifactId>minio</artifactId>
                 <version>${minio.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.cafe.mall</groupId>
+                <artifactId>mall-common</artifactId>
+                <version>${mall-common.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
