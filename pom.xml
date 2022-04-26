@@ -22,6 +22,7 @@
         <module>mall-code-generator</module>
         <module>mall-eureka</module>
         <module>mall-goods</module>
+        <module>mall-gateway</module>
     </modules>
 
     <properties>
