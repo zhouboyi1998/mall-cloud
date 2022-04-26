@@ -7,17 +7,6 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/mall_goods?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
-  # SpringBoot 自动装配时, 排除 Nacos 配置, 防止冲突
-  autoconfigure:
-    exclude:
-      - com.alibaba.cloud.nacos.discovery.NacosDiscoveryAutoConfiguration
-      - com.alibaba.cloud.nacos.registry.NacosServiceRegistryAutoConfiguration
-      - com.alibaba.cloud.nacos.discovery.configclient.NacosConfigServerAutoConfiguration
-      - com.alibaba.cloud.nacos.discovery.NacosDiscoveryClientConfiguration
-      - com.alibaba.cloud.nacos.endpoint.NacosDiscoveryEndpointAutoConfiguration
-      - com.alibaba.cloud.nacos.discovery.reactive.NacosReactiveDiscoveryClientConfiguration
-      - com.alibaba.cloud.nacos.NacosServiceAutoConfiguration
-      - com.alibaba.cloud.nacos.ribbon.RibbonNacosAutoConfiguration
 
 # Eureka 客户端配置
 eureka:
