@@ -114,7 +114,7 @@ public class MyBatisPlusGenerator {
         autoGenerator.setStrategy(strategyConfig);
         autoGenerator.setTemplate(templateConfig);
 
-        // 8. 生产代码
+        // 8. 生成代码
         autoGenerator.execute();
     }
 
