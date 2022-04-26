@@ -3,10 +3,7 @@ package com.cafe.generator.plus;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
-import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.baomidou.mybatisplus.generator.config.GlobalConfig;
-import com.baomidou.mybatisplus.generator.config.PackageConfig;
-import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.io.InputStream;
@@ -67,30 +64,22 @@ public class MyBatisPlusGenerator {
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         // 数据库类型
         dataSourceConfig.setDbType(DbType.MYSQL);
-        // 驱动
+        // 数据库信息
         dataSourceConfig.setDriverName(properties.getProperty("driver"));
-        // 地址
         dataSourceConfig.setUrl(properties.getProperty("url"));
-        // 用户名
         dataSourceConfig.setUsername(properties.getProperty("username"));
-        // 密码
         dataSourceConfig.setPassword(properties.getProperty("password"));
 
         // 4. 生成路径配置
         PackageConfig packageConfig = new PackageConfig();
         // 父路径
         packageConfig.setParent(properties.getProperty("/"));
-        // Model 生成路径
+        // 代码生成路径
         packageConfig.setEntity(properties.getProperty("model-package"));
-        // Mapper 映射文件生成路径
-        packageConfig.setXml(properties.getProperty("mapper-package"));
-        // DAO 接口生成路径
         packageConfig.setMapper(properties.getProperty("dao-package"));
-        // Service 接口生成路径
+        packageConfig.setXml(properties.getProperty("mapper-package"));
         packageConfig.setService(properties.getProperty("service-package"));
-        // Service 实现类生成路径
         packageConfig.setServiceImpl(properties.getProperty("service-impl-package"));
-        // Controller 生成路径
         packageConfig.setController(properties.getProperty("controller-package"));
 
         // 5. 策略配置
@@ -108,13 +97,23 @@ public class MyBatisPlusGenerator {
         // REST API 风格
         strategyConfig.setRestControllerStyle(true);
 
-        // 6. 生成器加载配置
+        // 6. 指定自定义模板
+        TemplateConfig templateConfig = new TemplateConfig();
+        templateConfig.setEntity("/templates/entity.java.vm");
+        templateConfig.setMapper("/templates/mapper.java.vm");
+        templateConfig.setXml("/templates/mapper.xml.vm");
+        templateConfig.setService("/templates/service.java.vm");
+        templateConfig.setServiceImpl("/templates/serviceImpl.java.vm");
+        templateConfig.setController("/templates/controller.java.vm");
+
+        // 7. 生成器加载配置
         autoGenerator.setGlobalConfig(globalConfig);
         autoGenerator.setDataSource(dataSourceConfig);
         autoGenerator.setPackageInfo(packageConfig);
         autoGenerator.setStrategy(strategyConfig);
+        autoGenerator.setTemplate(templateConfig);
 
-        // 7. 生产代码
+        // 8. 生产代码
         autoGenerator.execute();
     }
 

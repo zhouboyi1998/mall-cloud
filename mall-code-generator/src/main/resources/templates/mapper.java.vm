@@ -1,0 +1,19 @@
+package ${package.Mapper};
+
+import ${package.Entity}.${entity};
+import ${superMapperClassPackage};
+
+/**
+ * @Project: mall-cloud
+ * @Package: ${package.Mapper}
+ * @Author: ${author}
+ * @Date: ${DATE}
+ * @Description: $!{table.comment} Mapper 接口
+ */
+#if(${kotlin})
+interface ${table.mapperName} : ${superMapperClass}<${entity}>
+#else
+public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
+
+}
+#end
