@@ -1,4 +1,4 @@
-package com.cafe;
+package com.cafe.goods;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;

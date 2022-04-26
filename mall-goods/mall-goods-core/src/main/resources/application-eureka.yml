@@ -1,6 +1,3 @@
-server:
-  port: 18081
-
 spring:
   application:
     name: mall-goods
@@ -29,18 +26,3 @@ eureka:
       default-zone: http://127.0.0.1:8761/eureka
   instance:
     prefer-ip-address: true
-
-# Feign 配置
-feign:
-  # Feign 调用时使用 Hystrix 熔断
-  hystrix:
-    enabled: true
-
-hystrix:
-  command:
-    default:
-      execution:
-        isolation:
-          thread:
-            # 超时熔断时间 10000 毫秒
-            timeoutInMilliseconds: 10000
