@@ -13,7 +13,7 @@
     <groupId>com.cafe.mall</groupId>
     <artifactId>mall-common</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>公共工具模块</description>
+    <description>公共模块</description>
 
     <dependencies>
         <!-- MySQL 连接 -->
@@ -38,10 +38,10 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
         <!-- Eureka-Client 注册中心客户端 -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
+        </dependency>-->
         <!-- Nacos 注册中心-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

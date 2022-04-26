@@ -97,8 +97,9 @@ public class MyBatisPlusGenerator {
         // REST API 风格
         strategyConfig.setRestControllerStyle(true);
 
-        // 6. 指定自定义模板
+        // 6. 模板配置
         TemplateConfig templateConfig = new TemplateConfig();
+        // 使用自定义模板
         templateConfig.setEntity("/templates/entity.java.vm");
         templateConfig.setMapper("/templates/mapper.java.vm");
         templateConfig.setXml("/templates/mapper.xml.vm");
@@ -113,7 +114,7 @@ public class MyBatisPlusGenerator {
         autoGenerator.setStrategy(strategyConfig);
         autoGenerator.setTemplate(templateConfig);
 
-        // 8. 生产代码
+        // 8. 生成代码
         autoGenerator.execute();
     }
 
