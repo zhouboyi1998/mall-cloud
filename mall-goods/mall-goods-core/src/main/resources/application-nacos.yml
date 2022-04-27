@@ -13,12 +13,3 @@ spring:
       # 注册中心
       discovery:
         server-addr: http://127.0.0.1:8848
-  # SpringBoot 自动装配时, 排除 Eureka 配置, 防止冲突
-  autoconfigure:
-    exclude:
-      - org.springframework.cloud.netflix.eureka.EurekaClientAutoConfiguration
-      - org.springframework.cloud.netflix.eureka.config.EurekaClientConfigServerAutoConfiguration
-      - org.springframework.cloud.netflix.eureka.EurekaDiscoveryClientConfiguration
-      - org.springframework.cloud.netflix.eureka.reactive.EurekaReactiveDiscoveryClientConfiguration
-      - org.springframework.cloud.netflix.eureka.loadbalancer.LoadBalancerEurekaAutoConfiguration
-      - org.springframework.cloud.netflix.ribbon.eureka.RibbonEurekaAutoConfiguration
