@@ -1,6 +1,5 @@
 package com.cafe.generator.mybatis;
 
-import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
@@ -16,7 +15,7 @@ import java.util.List;
  * @Date: 2022/4/22 14:37
  * @Description: MyBatis Generator 代码生成器
  */
-public class MybatisGenerator {
+public class MyBatisGenerator {
 
     /**
      * 生成代码: Model、DAO、Mapper
@@ -29,7 +28,7 @@ public class MybatisGenerator {
             boolean overwrite = true;
 
             // 读取 XML 配置文件
-            InputStream inputStream = MybatisGenerator.class
+            InputStream inputStream = MyBatisGenerator.class
                 .getResourceAsStream("/generator.xml");
             // 创建 MyBatis Generator 配置解析器
             ConfigurationParser configurationParser = new ConfigurationParser(warnings);
@@ -39,8 +38,8 @@ public class MybatisGenerator {
 
             DefaultShellCallback callback = new DefaultShellCallback(overwrite);
             // 创建 MyBatis Generator
-            MyBatisGenerator myBatisGenerator
-                = new MyBatisGenerator(configuration, callback, warnings);
+            org.mybatis.generator.api.MyBatisGenerator myBatisGenerator
+                = new org.mybatis.generator.api.MyBatisGenerator(configuration, callback, warnings);
             // 生成代码
             myBatisGenerator.generate(null);
 
