@@ -16,7 +16,7 @@ import ${superControllerClassPackage};
  * @Package: ${package.Controller}
  * @Author: ${author}
  * @Date: ${date}
- * @Description: $!{table.comment} 前端控制器
+ * @Description: $!{table.comment} (控制器)
  */
 #if(${restControllerStyle})
 @RestController

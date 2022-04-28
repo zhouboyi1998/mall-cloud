@@ -8,7 +8,7 @@ import ${superMapperClassPackage};
  * @Package: ${package.Mapper}
  * @Author: ${author}
  * @Date: ${DATE}
- * @Description: $!{table.comment} Mapper 接口
+ * @Description: $!{table.comment} (Mapper 接口)
  */
 #if(${kotlin})
 interface ${table.mapperName} : ${superMapperClass}<${entity}>
