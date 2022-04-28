@@ -1,4 +1,4 @@
-package com.cafe.util;
+package com.cafe.common.util;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -6,7 +6,7 @@ import java.util.Random;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.util
+ * @Package: com.cafe.common.util
  * @Author: zhouboyi
  * @Date: 2022/4/21 14:19
  * @Description: 生成随机内容工具类

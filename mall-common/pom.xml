@@ -22,11 +22,6 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>${mysql-connector.version}</version>
         </dependency>
-        <!-- MyBatis 分页插件 -->
-        <dependency>
-            <groupId>com.github.pagehelper</groupId>
-            <artifactId>pagehelper-spring-boot-starter</artifactId>
-        </dependency>
         <!-- MyBatis-Plus 相关依赖 -->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -37,11 +32,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!-- Eureka-Client 注册中心客户端 -->
-        <!--<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>-->
         <!-- Nacos 注册中心-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>

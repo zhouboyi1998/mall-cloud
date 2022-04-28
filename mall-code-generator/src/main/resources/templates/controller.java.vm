@@ -1,7 +1,8 @@
 package ${package.Controller};
 
+import ${package.Service}.${table.serviceName};
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 #if(${restControllerStyle})
 import org.springframework.web.bind.annotation.RestController;
 #else
@@ -16,7 +17,7 @@ import ${superControllerClassPackage};
  * @Package: ${package.Controller}
  * @Author: ${author}
  * @Date: ${date}
- * @Description: $!{table.comment} 前端控制器
+ * @Description: $!{table.comment} (控制器)
  */
 #if(${restControllerStyle})
 @RestController
@@ -34,5 +35,11 @@ public class ${table.controllerName} extends ${superControllerClass} {
 public class ${table.controllerName} {
 #end
 
+    private ${table.serviceName} ${table.serviceName.substring(0, 1).toLowerCase()}${table.serviceName.substring(1)};
+
+    @Autowired
+    public ${table.controllerName}(${table.serviceName} ${table.serviceName.substring(0, 1).toLowerCase()}${table.serviceName.substring(1)}) {
+        this.${table.serviceName.substring(0, 1).toLowerCase()}${table.serviceName.substring(1)} = ${table.serviceName.substring(0, 1).toLowerCase()}${table.serviceName.substring(1)};
+    }
 }
 #end

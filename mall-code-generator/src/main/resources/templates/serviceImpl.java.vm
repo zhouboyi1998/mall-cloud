@@ -4,14 +4,15 @@ import ${package.Entity}.${entity};
 import ${package.Mapper}.${table.mapperName};
 import ${package.Service}.${table.serviceName};
 import ${superServiceImplClassPackage};
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * @Project: mall-cloud
  * @Package: ${package.ServiceImpl}
  * @Author: ${author}
- * @Date: ${DATE}
- * @Description: $!{table.comment} 服务实现类
+ * @Date: ${date}
+ * @Description: $!{table.comment} (服务实现类)
  */
 @Service
 #if(${kotlin})
@@ -21,5 +22,11 @@ open class ${table.serviceImplName} : ${superServiceImplClass}<${table.mapperNam
 #else
 public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.mapperName}, ${entity}> implements ${table.serviceName} {
 
+    private ${table.mapperName} ${table.mapperName.substring(0, 1).toLowerCase()}${table.mapperName.substring(1)};
+
+    @Autowired
+    public ${table.serviceImplName}(${table.mapperName} ${table.mapperName.substring(0, 1).toLowerCase()}${table.mapperName.substring(1)}) {
+        this.${table.mapperName.substring(0, 1).toLowerCase()}${table.mapperName.substring(1)} = ${table.mapperName.substring(0, 1).toLowerCase()}${table.mapperName.substring(1)};
+    }
 }
 #end

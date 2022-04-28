@@ -33,8 +33,8 @@ public class CommentGenerator extends DefaultCommentGenerator {
     @Override
     public void addConfigurationProperties(Properties properties) {
         super.addConfigurationProperties(properties);
-        this.addRemarkComments = StringUtility
-            .isTrue(properties.getProperty("addRemarkComments"));
+        this.addRemarkComments
+            = StringUtility.isTrue(properties.getProperty("addRemarkComments"));
     }
 
     /**
@@ -48,7 +48,7 @@ public class CommentGenerator extends DefaultCommentGenerator {
         // 根据参数和备注信息判断是否添加备注信息
         if (addRemarkComments && StringUtility.stringHasValue(remarks)) {
             addFieldJavaDoc(field, remarks);
-            //数据库中特殊字符需要转义
+            // 数据库中特殊字符需要转义
             if (remarks.contains("\"")) {
                 remarks = remarks.replace("\"", "'");
             }
