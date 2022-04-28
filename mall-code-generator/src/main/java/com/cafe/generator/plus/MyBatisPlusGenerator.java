@@ -51,10 +51,14 @@ public class MyBatisPlusGenerator {
         globalConfig.setOutputDir("mall-code-generator/src/main/java");
         // 作者
         globalConfig.setAuthor("zhouboyi");
-        // 去掉 Service 接口的前缀 I
+        // 去掉 Service 接口的前缀 "I"
         globalConfig.setServiceName("%sService");
         // 主键策略为自增
         globalConfig.setIdType(IdType.AUTO);
+        // 生成 BaseResultMap
+        globalConfig.setBaseResultMap(true);
+        // 生成通用查询结果列
+        globalConfig.setBaseColumnList(true);
         // 开启 Swagger 模式
         globalConfig.setSwagger2(true);
         // 生成后是否打开资源管理器

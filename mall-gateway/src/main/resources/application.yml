@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        # 定位配置
+        locator:
+          # 使用微服务名称进行定位
+          enabled: true
+          # 设置服务名称为小写, 默认 false 为大写
+          lower-case-service-id: true
+      # 路由配置
+      routes:
+        - id: mall-goods
+          uri: lb://mall-goods
+          predicates:
+            - Path=/mall-goods/**
+          filters:
+            - StripPrefix=1

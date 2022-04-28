@@ -21,11 +21,4 @@
         <module>mall-goods-api</module>
     </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.cafe.mall</groupId>
-            <artifactId>mall-common</artifactId>
-        </dependency>
-    </dependencies>
-
 </project>

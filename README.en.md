@@ -15,10 +15,10 @@
 </a>
 </p>
 
-### 📖 README 
+### 📖 Language 
 [简体中文](./README.md) | English
 
-### 💼 项目模块
+### 💼 Project Module
 ```
 mall-cloud
 |-- mall-code-generator
