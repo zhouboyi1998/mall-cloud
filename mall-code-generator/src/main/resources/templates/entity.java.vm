@@ -19,8 +19,8 @@ import lombok.experimental.Accessors;
  * @Project: mall-cloud
  * @Package: ${package.Entity}
  * @Author: ${author}
- * @Date: ${DATE}
- * @Description: $!{table.comment}
+ * @Date: ${date}
+ * @Description: $!{table.comment} (实体类)
  */
 #if(${entityLombokModel})
 @Data

@@ -2,6 +2,7 @@ package com.cafe.goods;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @Project: mall-cloud
@@ -11,6 +12,7 @@ import org.springframework.cloud.client.SpringCloudApplication;
  * @Description:
  */
 @SpringCloudApplication
+@ComponentScan("com.cafe")
 public class GoodsApplication {
 
     public static void main(String[] args) {
