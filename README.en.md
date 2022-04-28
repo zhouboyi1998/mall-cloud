@@ -14,3 +14,21 @@
 <img src="https://img.shields.io/badge/MinIO-7.1.0-crimson"> 
 </a>
 </p>
+
+### 📖 README 
+[简体中文](./README.md) | English
+
+### 💼 项目模块
+```
+mall-cloud
+|-- mall-code-generator
+|-- mall-common
+|-- mall-eureka
+|-- mall-gateway
+|-- mall-goods
+    |-- mall-goods-api
+    |-- mall-goods-core
+```
+
+### 📜 Licence
+[MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2022
