@@ -7,7 +7,7 @@ import ${superMapperClassPackage};
  * @Project: mall-cloud
  * @Package: ${package.Mapper}
  * @Author: ${author}
- * @Date: ${DATE}
+ * @Date: ${date}
  * @Description: $!{table.comment} (Mapper 接口)
  */
 #if(${kotlin})

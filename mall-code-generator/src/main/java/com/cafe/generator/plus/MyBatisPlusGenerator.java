@@ -51,7 +51,7 @@ public class MyBatisPlusGenerator {
         globalConfig.setOutputDir("mall-code-generator/src/main/java");
         // 作者
         globalConfig.setAuthor("zhouboyi");
-        // 去掉 Service 接口的前缀 I
+        // 去掉 Service 接口的前缀 "I"
         globalConfig.setServiceName("%sService");
         // 主键策略为自增
         globalConfig.setIdType(IdType.AUTO);
