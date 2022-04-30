@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @Description: MyBatis-Plus 配置类
  */
 @Configuration
-public class MybatisPlusConfig {
+public class MyBatisPlusConfig {
 
     /**
      * MyBatis-Plus 拦截器
