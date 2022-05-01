@@ -15,12 +15,24 @@ public class RandomUtil {
 
     private static Random random = new Random();
 
+    /**
+     * 数字
+     */
     private static String number = "0123456789";
 
+    /**
+     * 大写字母
+     */
     private static String capital = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
+    /**
+     * 小写字母
+     */
     private static String lowercase = "abcdefghijklmnopqrstuvwxyz";
 
+    /**
+     * 手机号码开头
+     */
     private static String[] mobileNumberBegin = {
         "130", "131", "132", "133", "134", "135", "136", "137", "138", "139",
         "145", "147", "149", "150", "151", "152", "153", "155", "156", "157",
@@ -100,8 +112,8 @@ public class RandomUtil {
     /**
      * 生成 start 和 end 之间的一个整数
      *
-     * @param start 开始
-     * @param end   结束
+     * @param start
+     * @param end
      * @return
      */
     public static int generateNumber(int start, int end) {
