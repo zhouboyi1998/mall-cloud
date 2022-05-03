@@ -42,10 +42,7 @@ public class MyBatisPlusGenerator {
 
     public static void generate() {
 
-        // 1. 创建代码生成器
-        AutoGenerator autoGenerator = new AutoGenerator();
-
-        // 2. 全局配置
+        // 1. 全局配置
         GlobalConfig globalConfig = new GlobalConfig();
         // 项目路径
         globalConfig.setOutputDir("mall-code-generator/src/main/java");
@@ -64,7 +61,7 @@ public class MyBatisPlusGenerator {
         // 生成后是否打开资源管理器
         globalConfig.setOpen(false);
 
-        // 3. 数据源配置
+        // 2. 数据源配置
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         // 数据库类型
         dataSourceConfig.setDbType(DbType.MYSQL);
@@ -74,7 +71,7 @@ public class MyBatisPlusGenerator {
         dataSourceConfig.setUsername(properties.getProperty("username"));
         dataSourceConfig.setPassword(properties.getProperty("password"));
 
-        // 4. 生成路径配置
+        // 3. 生成路径配置
         PackageConfig packageConfig = new PackageConfig();
         // 父路径
         packageConfig.setParent(properties.getProperty("/"));
@@ -86,7 +83,7 @@ public class MyBatisPlusGenerator {
         packageConfig.setServiceImpl(properties.getProperty("service-impl-package"));
         packageConfig.setController(properties.getProperty("controller-package"));
 
-        // 5. 策略配置
+        // 4. 策略配置
         StrategyConfig strategyConfig = new StrategyConfig();
         // 类命名规则: 下划线转驼峰
         strategyConfig.setNaming(NamingStrategy.underline_to_camel);
@@ -96,12 +93,12 @@ public class MyBatisPlusGenerator {
         strategyConfig.setTablePrefix("mall_");
         // 逻辑删除字段名
         strategyConfig.setLogicDeleteFieldName("is_deleted");
-        // 去除布尔类型的 is 前缀, 类型为 tinyint(1)
+        // 去除布尔类型的 is 前缀, 类型为 tinyint(1) 才能成功去除
         strategyConfig.setEntityBooleanColumnRemoveIsPrefix(true);
         // REST API 风格
         strategyConfig.setRestControllerStyle(true);
 
-        // 6. 模板配置
+        // 5. 模板配置
         TemplateConfig templateConfig = new TemplateConfig();
         // 使用自定义模板
         templateConfig.setEntity("/templates/entity.java.vm");
@@ -111,15 +108,13 @@ public class MyBatisPlusGenerator {
         templateConfig.setServiceImpl("/templates/serviceImpl.java.vm");
         templateConfig.setController("/templates/controller.java.vm");
 
-        // 7. 生成器加载配置
-        autoGenerator.setGlobalConfig(globalConfig);
-        autoGenerator.setDataSource(dataSourceConfig);
-        autoGenerator.setPackageInfo(packageConfig);
-        autoGenerator.setStrategy(strategyConfig);
-        autoGenerator.setTemplate(templateConfig);
-
-        // 8. 生成代码
-        autoGenerator.execute();
+        // 6. 创建代码生成器, 加载配置, 执行生成代码
+        new AutoGenerator()
+            .setGlobalConfig(globalConfig)
+            .setDataSource(dataSourceConfig)
+            .setPackageInfo(packageConfig)
+            .setStrategy(strategyConfig)
+            .execute();
     }
 
     public static void main(String[] args) {
