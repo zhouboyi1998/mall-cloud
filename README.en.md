@@ -23,8 +23,11 @@
 mall-cloud
 |-- mall-code-generator
 |-- mall-common
+    |-- mall-common-core
+    |-- mall-common-gateway
 |-- mall-eureka
 |-- mall-gateway
+    |-- mall-gateway-management
 |-- mall-goods
     |-- mall-goods-api
     |-- mall-goods-core
