@@ -1,4 +1,4 @@
-package com.cafe.gateway.config;
+package com.cafe.common.gateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

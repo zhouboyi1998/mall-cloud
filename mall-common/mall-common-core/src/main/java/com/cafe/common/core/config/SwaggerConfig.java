@@ -1,4 +1,4 @@
-package com.cafe.common.config;
+package com.cafe.common.core.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.config
+ * @Package: com.cafe.common.core.config
  * @Author: zhouboyi
  * @Date: 2022/5/3 23:12
  * @Description: Swagger 配置类
