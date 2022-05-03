@@ -1,7 +1,8 @@
-package com.cafe.gateway;
+package com.cafe.gateway.management;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @Project: mall-cloud
@@ -11,9 +12,10 @@ import org.springframework.cloud.client.SpringCloudApplication;
  * @Description:
  */
 @SpringCloudApplication
-public class GatewayApplication {
+@ComponentScan("com.cafe")
+public class GatewayManagementApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(GatewayApplication.class, args);
+        SpringApplication.run(GatewayManagementApplication.class, args);
     }
 }

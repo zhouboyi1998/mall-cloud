@@ -1,4 +1,4 @@
-package com.cafe.common.config;
+package com.cafe.common.core.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.config
+ * @Package: com.cafe.common.core.config
  * @Author: zhouboyi
  * @Date: 2022/04/29 11:12
  * @Description: MyBatis-Plus 配置类
