@@ -23,8 +23,11 @@
 mall-cloud
 |-- mall-code-generator (MyBatis 代码生成器)
 |-- mall-common (公共模块)
+    |-- mall-common-core (核心业务公共模块)
+    |-- mall-common-gateway (网关公共模块)
 |-- mall-eureka (Netflix Eureka 注册中心)
 |-- mall-gateway (SpringCloud Gateway 网关)
+    |-- mall-gateway-management (SpringCloud Gateway 后台管理系统网关)
 |-- mall-goods (商品模块)
     |-- mall-goods-api (商品模块远程调用接口)
     |-- mall-goods-core (商品模块核心业务)

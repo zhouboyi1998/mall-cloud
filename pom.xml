@@ -40,7 +40,8 @@
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>7.1.0</minio.version>
 
-        <mall-common.version>1.0-SNAPSHOT</mall-common.version>
+        <mall-common-core.version>1.0-SNAPSHOT</mall-common-core.version>
+        <mall-common-gateway.version>1.0-SNAPSHOT</mall-common-gateway.version>
         <mall-goods-api.version>1.0-SNAPSHOT</mall-goods-api.version>
     </properties>
 
@@ -157,8 +158,13 @@
             <!-- mall 项目相关模块 -->
             <dependency>
                 <groupId>com.cafe.mall</groupId>
-                <artifactId>mall-common</artifactId>
-                <version>${mall-common.version}</version>
+                <artifactId>mall-common-core</artifactId>
+                <version>${mall-common-core.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe.mall</groupId>
+                <artifactId>mall-common-gateway</artifactId>
+                <version>${mall-common-gateway.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe.mall</groupId>

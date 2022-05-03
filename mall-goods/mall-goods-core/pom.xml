@@ -18,11 +18,12 @@
     <dependencies>
         <dependency>
             <groupId>com.cafe.mall</groupId>
-            <artifactId>mall-common</artifactId>
+            <artifactId>mall-common-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe.mall</groupId>
             <artifactId>mall-goods-api</artifactId>
         </dependency>
     </dependencies>
+
 </project>
