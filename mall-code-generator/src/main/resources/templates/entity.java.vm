@@ -20,7 +20,7 @@ import lombok.experimental.Accessors;
  * @Package: ${package.Entity}
  * @Author: ${author}
  * @Date: ${date}
- * @Description: $!{table.comment} (实体类)
+ * @Description: ${table.comment} (实体类)
  */
 #if(${entityLombokModel})
 @Data
