@@ -4,27 +4,25 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <artifactId>mall-cloud</artifactId>
+        <artifactId>mall-order</artifactId>
         <groupId>com.cafe.mall</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cafe.mall</groupId>
-    <artifactId>mall-goods</artifactId>
+    <artifactId>mall-order-core</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>商品模块</description>
-
-    <packaging>pom</packaging>
-    <modules>
-        <module>mall-goods-api</module>
-        <module>mall-goods-core</module>
-    </modules>
+    <description>订单模块核心业务</description>
 
     <dependencies>
         <dependency>
             <groupId>com.cafe.mall</groupId>
-            <artifactId>mall-common-core</artifactId>
+            <artifactId>mall-order-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe.mall</groupId>
+            <artifactId>mall-goods-api</artifactId>
         </dependency>
     </dependencies>
 

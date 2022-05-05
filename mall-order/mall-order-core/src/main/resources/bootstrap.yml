@@ -1,0 +1,6 @@
+server:
+  port: 18082
+
+spring:
+  application:
+    name: mall-order

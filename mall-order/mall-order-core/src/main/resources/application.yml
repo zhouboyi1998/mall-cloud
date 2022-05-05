@@ -1,0 +1,30 @@
+spring:
+  profiles:
+    active: nacos
+
+# Feign 配置
+feign:
+  # 开启 Hystrix
+  hystrix:
+    enabled: true
+
+# Hystrix 配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            # 超时熔断时间 10000 毫秒
+            timeoutInMilliseconds: 10000
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  global-config:
+    db-config:
+      # 数据库表命名使用下划线分割
+      table-underline: true
+  configuration:
+    # 打印 SQL 到控制台
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
