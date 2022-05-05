@@ -18,11 +18,12 @@
 
     <packaging>pom</packaging>
     <modules>
-        <module>mall-common</module>
         <module>mall-code-generator</module>
+        <module>mall-common</module>
         <module>mall-eureka</module>
-        <module>mall-goods</module>
         <module>mall-gateway</module>
+        <module>mall-goods</module>
+        <module>mall-order</module>
     </modules>
 
     <properties>
@@ -43,6 +44,7 @@
         <mall-common-core.version>1.0-SNAPSHOT</mall-common-core.version>
         <mall-common-gateway.version>1.0-SNAPSHOT</mall-common-gateway.version>
         <mall-goods-api.version>1.0-SNAPSHOT</mall-goods-api.version>
+        <mall-order-api.version>1.0-SNAPSHOT</mall-order-api.version>
     </properties>
 
     <dependencies>
@@ -170,6 +172,11 @@
                 <groupId>com.cafe.mall</groupId>
                 <artifactId>mall-goods-api</artifactId>
                 <version>${mall-goods-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe.mall</groupId>
+                <artifactId>mall-order-api</artifactId>
+                <version>${mall-order-api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
