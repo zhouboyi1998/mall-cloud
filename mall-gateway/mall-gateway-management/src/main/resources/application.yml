@@ -1,10 +1,7 @@
 spring:
+  profiles:
+    active: nacos
   cloud:
-    # Nacos 配置
-    nacos:
-      # 注册中心
-      discovery:
-        server-addr: http://127.0.0.1:8848
     # 网关配置
     gateway:
       # 服务发现配置

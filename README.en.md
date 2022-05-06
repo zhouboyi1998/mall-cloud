@@ -21,6 +21,9 @@
 ### 💼 Project Module
 ```
 mall-cloud
+|-- mall-admin
+    |-- mall-admin-api
+    |-- mall-admin-core
 |-- mall-code-generator
 |-- mall-common
     |-- mall-common-core
@@ -31,6 +34,11 @@ mall-cloud
 |-- mall-goods
     |-- mall-goods-api
     |-- mall-goods-core
+|-- mall-order
+    |-- mall-order-api
+    |-- mall-order-core
+|-- mall-security
+    |-- mall-security-management
 ```
 
 ### 📜 Licence

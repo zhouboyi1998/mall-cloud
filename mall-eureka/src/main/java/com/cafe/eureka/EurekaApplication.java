@@ -9,7 +9,7 @@ import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
  * @Package: com.cafe
  * @Author: zhouboyi
  * @Date: 2022/4/24 15:57
- * @Description:
+ * @Description: Eureka 注册中心启动类
  */
 @SpringBootApplication
 @EnableEurekaServer

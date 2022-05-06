@@ -4,27 +4,27 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <artifactId>mall-common</artifactId>
+        <artifactId>mall-security</artifactId>
         <groupId>com.cafe.mall</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cafe.mall</groupId>
-    <artifactId>mall-common-gateway</artifactId>
+    <artifactId>mall-security-management</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>网关公共模块</description>
+    <description>后台管理系统安全</description>
 
     <dependencies>
-        <!-- SpringCloud Gateway 网关-->
+        <!-- SpringBoot Web 相关依赖 -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-gateway</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!-- SpringSecurity 安全框架 -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-security</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <!-- Oauth2 单点登录 -->
         <dependency>
@@ -36,15 +36,15 @@
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
         </dependency>
-        <!-- Hystrix 服务熔断、降级 -->
+        <!-- SpringData Redis -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
-        <!-- Nacos 注册中心-->
+
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <groupId>com.cafe.mall</groupId>
+            <artifactId>mall-admin-api</artifactId>
         </dependency>
     </dependencies>
 
