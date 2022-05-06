@@ -9,10 +9,10 @@ import org.springframework.context.annotation.ComponentScan;
  * @Package: com.cafe.gateway
  * @Author: zhouboyi
  * @Date: 2022/4/26 10:55
- * @Description:
+ * @Description: SpringCloud Gateway 后台管理系统网关启动类
  */
 @SpringCloudApplication
-@ComponentScan("com.cafe")
+@ComponentScan(basePackages = "com.cafe")
 public class GatewayManagementApplication {
 
     public static void main(String[] args) {
