@@ -18,12 +18,14 @@
 
     <packaging>pom</packaging>
     <modules>
+        <module>mall-admin</module>
         <module>mall-code-generator</module>
         <module>mall-common</module>
         <module>mall-eureka</module>
         <module>mall-gateway</module>
         <module>mall-goods</module>
         <module>mall-order</module>
+        <module>mall-security</module>
     </modules>
 
     <properties>
@@ -43,6 +45,7 @@
 
         <mall-common-core.version>1.0-SNAPSHOT</mall-common-core.version>
         <mall-common-gateway.version>1.0-SNAPSHOT</mall-common-gateway.version>
+        <mall-admin-api.version>1.0-SNAPSHOT</mall-admin-api.version>
         <mall-goods-api.version>1.0-SNAPSHOT</mall-goods-api.version>
         <mall-order-api.version>1.0-SNAPSHOT</mall-order-api.version>
     </properties>
@@ -157,7 +160,7 @@
                 <version>${minio.version}</version>
             </dependency>
 
-            <!-- mall 项目相关模块 -->
+            <!-- 公共模块 -->
             <dependency>
                 <groupId>com.cafe.mall</groupId>
                 <artifactId>mall-common-core</artifactId>
@@ -167,6 +170,12 @@
                 <groupId>com.cafe.mall</groupId>
                 <artifactId>mall-common-gateway</artifactId>
                 <version>${mall-common-gateway.version}</version>
+            </dependency>
+            <!-- 远程调用接口 -->
+            <dependency>
+                <groupId>com.cafe.mall</groupId>
+                <artifactId>mall-admin-api</artifactId>
+                <version>${mall-admin-api.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe.mall</groupId>

@@ -13,7 +13,7 @@
     <groupId>com.cafe.mall</groupId>
     <artifactId>mall-gateway-management</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>SpringCloud Gateway 后台管理系统网关</description>
+    <description>后台管理系统网关</description>
 
     <dependencies>
         <dependency>

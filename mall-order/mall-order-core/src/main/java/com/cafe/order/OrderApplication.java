@@ -10,7 +10,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @Package: com.cafe.order
  * @Author: zhouboyi
  * @Date: 2022/5/6 9:34
- * @Description:
+ * @Description: 订单模块启动类
  */
 @SpringCloudApplication
 @EnableFeignClients(basePackages = "com.cafe.goods.feign")

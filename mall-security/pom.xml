@@ -11,16 +11,13 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cafe.mall</groupId>
-    <artifactId>mall-eureka</artifactId>
+    <artifactId>mall-security</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>Eureka 注册中心模块</description>
+    <description>SpringSecurity 安全模块</description>
 
-    <dependencies>
-        <!-- Eureka 注册中心服务端 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
-        </dependency>
-    </dependencies>
+    <packaging>pom</packaging>
+    <modules>
+        <module>mall-security-management</module>
+    </modules>
 
 </project>
