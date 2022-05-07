@@ -25,7 +25,7 @@
 
         <!-- 数据库连接配置: 驱动、地址、用户名、密码 -->
         <jdbcConnection driverClass="${driver}"
-                        connectionURL="${url}"
+                        connectionURL="${url-prefix}${module}${url-suffix}"
                         userId="${username}"
                         password="${password}">
             <!-- 解决 MySQL 驱动升级到 8.0 后不生成指定数据库代码的问题 -->
@@ -41,16 +41,16 @@
         </javaTypeResolver>
 
         <!-- Model 实体类生成路径 -->
-        <javaModelGenerator targetPackage="${model-package}"
+        <javaModelGenerator targetPackage="${project-package}.${module}.${model-package}"
                             targetProject="mall-code-generator\src\main\java"/>
 
         <!-- Mapper 映射文件生成路径 -->
-        <sqlMapGenerator targetPackage="${mapper-package}"
+        <sqlMapGenerator targetPackage="${project-package}.${module}.${mapper-package}"
                          targetProject="mall-code-generator\src\main\java"/>
 
         <!-- Dao 接口生成路径 -->
         <javaClientGenerator type="XMLMAPPER"
-                             targetPackage="${dao-package}"
+                             targetPackage="${project-package}.${module}.${dao-package}"
                              targetProject="mall-code-generator\src\main\java"/>
 
         <!-- tableName="%" 表示: 生成全部表-->

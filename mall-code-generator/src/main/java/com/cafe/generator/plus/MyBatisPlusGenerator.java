@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
+import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
+import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 
 import java.io.InputStream;
@@ -22,6 +25,11 @@ public class MyBatisPlusGenerator {
      * 配置文件
      */
     private static Properties properties;
+
+    /**
+     * MySQL 类型枚举
+     */
+    private enum MySqlType {DECIMAL, DATETIME}
 
     static {
         try {
@@ -67,21 +75,35 @@ public class MyBatisPlusGenerator {
         dataSourceConfig.setDbType(DbType.MYSQL);
         // 数据库信息
         dataSourceConfig.setDriverName(properties.getProperty("driver"));
-        dataSourceConfig.setUrl(properties.getProperty("url"));
+        dataSourceConfig.setUrl(properties.getProperty("url-prefix") + properties.getProperty("module") + properties.getProperty("url-suffix"));
         dataSourceConfig.setUsername(properties.getProperty("username"));
         dataSourceConfig.setPassword(properties.getProperty("password"));
+        // 指定 MySQL 类型和 Java 类型的映射
+        dataSourceConfig.setTypeConvert(new MySqlTypeConvert() {
+            @Override
+            public IColumnType processTypeConvert(GlobalConfig config, String fieldType) {
+                if (fieldType.toUpperCase().contains(MySqlType.DECIMAL.toString())) {
+                    return DbColumnType.DOUBLE;
+                } else if (fieldType.toUpperCase().contains(MySqlType.DATETIME.toString())) {
+                    return DbColumnType.DATE;
+                }
+                return (DbColumnType) super.processTypeConvert(config, fieldType);
+            }
+        });
 
         // 3. 生成路径配置
         PackageConfig packageConfig = new PackageConfig();
         // 父路径
         packageConfig.setParent(properties.getProperty("/"));
+        // 路径前缀拼接
+        String prefix = properties.getProperty("project-package") + "." + properties.getProperty("module") + ".";
         // 代码生成路径
-        packageConfig.setEntity(properties.getProperty("model-package"));
-        packageConfig.setMapper(properties.getProperty("dao-package"));
-        packageConfig.setXml(properties.getProperty("mapper-package"));
-        packageConfig.setService(properties.getProperty("service-package"));
-        packageConfig.setServiceImpl(properties.getProperty("service-impl-package"));
-        packageConfig.setController(properties.getProperty("controller-package"));
+        packageConfig.setEntity(prefix + properties.getProperty("model-package"));
+        packageConfig.setMapper(prefix + properties.getProperty("dao-package"));
+        packageConfig.setXml(prefix + properties.getProperty("mapper-package"));
+        packageConfig.setService(prefix + properties.getProperty("service-package"));
+        packageConfig.setServiceImpl(prefix + properties.getProperty("service-impl-package"));
+        packageConfig.setController(prefix + properties.getProperty("controller-package"));
 
         // 4. 策略配置
         StrategyConfig strategyConfig = new StrategyConfig();
@@ -118,6 +140,7 @@ public class MyBatisPlusGenerator {
     }
 
     public static void main(String[] args) {
+        // 使用 MyBatis-Plus Generator 生成代码
         generate();
     }
 }
