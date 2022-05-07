@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 #if(${restControllerStyle})
@@ -118,8 +118,8 @@ public class ${table.controllerName} {
     @ApiImplicitParam(name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", value = "${table.comment}Model", required = true, paramType = "body", dataType = "${entity}")
     @PostMapping("/insert")
     public ResponseEntity<Boolean> insert(@RequestBody ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}) {
-        ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}.setCreateTime(LocalDateTime.now());
-        ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}.setUpdateTime(LocalDateTime.now());
+        ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}.setCreateTime(new Date());
+        ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}.setUpdateTime(new Date());
         Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.save(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
         return ResponseEntity.ok(code);
     }
