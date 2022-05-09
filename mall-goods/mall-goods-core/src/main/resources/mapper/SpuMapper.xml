@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe.goods.dao.SpuMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cafe.goods.model.Spu">
+        <id column="id" property="id" />
+        <result column="spu_name" property="spuName" />
+        <result column="brand_id" property="brandId" />
+        <result column="category_id" property="categoryId" />
+        <result column="category_code" property="categoryCode" />
+        <result column="original_price" property="originalPrice" />
+        <result column="discount_price" property="discountPrice" />
+        <result column="seckill_price" property="seckillPrice" />
+        <result column="image" property="image" />
+        <result column="comment_count" property="commentCount" />
+        <result column="caption" property="caption" />
+        <result column="intro" property="intro" />
+        <result column="sort" property="sort" />
+        <result column="check_status" property="checkStatus" />
+        <result column="shelf_status" property="shelfStatus" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="deleted" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, spu_name, brand_id, category_id, category_code, original_price, discount_price, seckill_price, image, comment_count, caption, intro, sort, check_status, shelf_status, create_time, update_time, is_deleted
+</sql>
+
+</mapper>
