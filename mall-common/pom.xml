@@ -19,6 +19,7 @@
     <modules>
         <module>mall-common-core</module>
         <module>mall-common-gateway</module>
+        <module>mall-common-security</module>
     </modules>
 
 </project>

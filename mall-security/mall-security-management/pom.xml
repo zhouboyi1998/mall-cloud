@@ -16,32 +16,10 @@
     <description>后台管理系统安全</description>
 
     <dependencies>
-        <!-- SpringBoot Web 相关依赖 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.cafe.mall</groupId>
+            <artifactId>mall-common-security</artifactId>
         </dependency>
-        <!-- SpringSecurity 安全框架 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
-        </dependency>
-        <!-- Oauth2 单点登录 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
-        </dependency>
-        <!-- JJWT 登录令牌 -->
-        <dependency>
-            <groupId>io.jsonwebtoken</groupId>
-            <artifactId>jjwt</artifactId>
-        </dependency>
-        <!-- SpringData Redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>com.cafe.mall</groupId>
             <artifactId>mall-admin-api</artifactId>
