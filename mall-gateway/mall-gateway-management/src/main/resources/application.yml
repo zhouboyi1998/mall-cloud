@@ -16,6 +16,6 @@ spring:
         - id: mall-goods
           uri: lb://mall-goods
           predicates:
-            - Path=/mall-goods/**
+            - Path=/api/goods/**
           filters:
-            - StripPrefix=1
+            - StripPrefix=2

@@ -45,6 +45,8 @@
 
         <mall-common-core.version>1.0-SNAPSHOT</mall-common-core.version>
         <mall-common-gateway.version>1.0-SNAPSHOT</mall-common-gateway.version>
+        <mall-common-security.version>1.0-SNAPSHOT</mall-common-security.version>
+
         <mall-admin-api.version>1.0-SNAPSHOT</mall-admin-api.version>
         <mall-goods-api.version>1.0-SNAPSHOT</mall-goods-api.version>
         <mall-order-api.version>1.0-SNAPSHOT</mall-order-api.version>
@@ -170,6 +172,11 @@
                 <groupId>com.cafe.mall</groupId>
                 <artifactId>mall-common-gateway</artifactId>
                 <version>${mall-common-gateway.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe.mall</groupId>
+                <artifactId>mall-common-security</artifactId>
+                <version>${mall-common-security.version}</version>
             </dependency>
             <!-- 远程调用接口 -->
             <dependency>
