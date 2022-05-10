@@ -16,6 +16,12 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, role_name, description, status, create_time, update_time, is_deleted
-</sql>
+    </sql>
 
+    <select id="listRoleName" resultType="java.lang.String">
+        SELECT role_name
+        FROM mall_role AS r
+        LEFT JOIN mall_admin_role_relation AS ar ON ar.role_id = r.id
+        WHERE ar.admin_id = ${adminId}
+    </select>
 </mapper>

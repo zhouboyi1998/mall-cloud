@@ -18,6 +18,6 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, brand_name, letter, brand_image, sort, status, create_time, update_time, is_deleted
-</sql>
+    </sql>
 
 </mapper>

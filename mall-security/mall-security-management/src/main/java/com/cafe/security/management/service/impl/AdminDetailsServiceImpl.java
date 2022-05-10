@@ -2,6 +2,7 @@ package com.cafe.security.management.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.cafe.admin.feign.AdminFeign;
+import com.cafe.admin.feign.RoleFeign;
 import com.cafe.admin.model.Admin;
 import com.cafe.common.security.constant.ExceptionMessageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,17 +31,26 @@ public class AdminDetailsServiceImpl implements UserDetailsService {
 
     private AdminFeign adminFeign;
 
+    private RoleFeign roleFeign;
+
     @Autowired
-    public AdminDetailsServiceImpl(AdminFeign adminFeign) {
+    public AdminDetailsServiceImpl(AdminFeign adminFeign, RoleFeign roleFeign) {
         this.adminFeign = adminFeign;
+        this.roleFeign = roleFeign;
     }
 
     @Override
     public UserDetails loadUserByUsername(String adminName) throws UsernameNotFoundException {
+        // 查询管理员信息
         Admin admin = adminFeign.one(adminName).getBody();
 
+        // 根据管理员id查询角色名称列表
+        List<String> roleNameList = roleFeign.listRoleName(admin.getId()).getBody();
+        // 转换为数组形式
+        String[] roleNameArray = roleNameList.toArray(new String[roleNameList.size()]);
+
         if (ObjectUtil.isNotNull(admin)) {
-            User userDetails = new User(admin.getAdminName(), admin.getPassword(), AuthorityUtils.createAuthorityList("ROLE_ADMIN"));
+            User userDetails = new User(admin.getAdminName(), admin.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
             if (!userDetails.isEnabled()) {
                 throw new DisabledException(ExceptionMessageEnum.ACCOUNT_DISABLED.getMessage());
             } else if (!userDetails.isAccountNonLocked()) {
