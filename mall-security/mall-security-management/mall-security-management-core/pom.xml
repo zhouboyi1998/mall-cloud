@@ -4,21 +4,25 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <artifactId>mall-gateway</artifactId>
+        <artifactId>mall-security-management</artifactId>
         <groupId>com.cafe.mall</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cafe.mall</groupId>
-    <artifactId>mall-gateway-management</artifactId>
+    <artifactId>mall-security-management-core</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>后台管理系统网关模块</description>
+    <description>后台管理系统安全</description>
 
     <dependencies>
         <dependency>
             <groupId>com.cafe.mall</groupId>
-            <artifactId>mall-common-gateway</artifactId>
+            <artifactId>mall-security-management-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe.mall</groupId>
+            <artifactId>mall-admin-api</artifactId>
         </dependency>
     </dependencies>
 

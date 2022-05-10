@@ -24,7 +24,7 @@ import java.util.List;
  * @Package: com.cafe.security.management.service.impl
  * @Author: zhouboyi
  * @Date: 2022/5/6 11:19
- * @Description: Admin 详细信息加载类
+ * @Description: 管理员账号详细信息加载类
  */
 @Service
 public class AdminDetailsServiceImpl implements UserDetailsService {

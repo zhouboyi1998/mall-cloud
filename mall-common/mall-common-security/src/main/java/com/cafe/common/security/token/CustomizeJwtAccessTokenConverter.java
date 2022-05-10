@@ -14,7 +14,7 @@ import java.util.Map;
  * @Package: com.cafe.common.security.token
  * @Author: zhouboyi
  * @Date: 2022/5/9 10:48
- * @Description: 自定义 JWT Token 转换器
+ * @Description: 自定义 JWT 访问令牌转换器
  */
 public class CustomizeJwtAccessTokenConverter implements TokenEnhancer {
 

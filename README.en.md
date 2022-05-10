@@ -15,10 +15,12 @@
 </a>
 </p>
 
-### 📖 Language 
+### 📖 Language
+
 [简体中文](./README.md) | English
 
 ### 💼 Project Module
+
 ```
 mall-cloud
 |-- mall-admin
@@ -39,7 +41,10 @@ mall-cloud
     |-- mall-order-core
 |-- mall-security
     |-- mall-security-management
+        |-- mall-security-management-api
+        |-- mall-security-management-core
 ```
 
 ### 📜 Licence
+
 [MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2022
