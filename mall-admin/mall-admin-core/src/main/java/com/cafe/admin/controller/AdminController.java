@@ -95,6 +95,15 @@ public class AdminController {
         return ResponseEntity.ok(admin);
     }
 
+    @ApiOperation(value = "根据管理员用户名查询单个管理员")
+    @ApiImplicitParam(name = "adminName", value = "管理员用户名", required = true, paramType = "path", dataType = "String")
+    @GetMapping("/one/name/{adminName}")
+    public ResponseEntity<Admin> one(@PathVariable(value = "adminName") String adminName) {
+        LambdaQueryWrapper<Admin> wrapper = new LambdaQueryWrapper<Admin>().eq(Admin::getAdminName, adminName);
+        Admin admin = adminService.getOne(wrapper);
+        return ResponseEntity.ok(admin);
+    }
+
     @ApiOperation(value = "新增管理员")
     @ApiImplicitParam(name = "admin", value = "管理员Model", required = true, paramType = "body", dataType = "Admin")
     @PostMapping("/insert")

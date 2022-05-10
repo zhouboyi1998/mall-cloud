@@ -11,7 +11,7 @@ import java.util.Date;
  * @Project: mall-cloud
  * @Package: com.cafe.admin.model
  * @Author: zhouboyi
- * @Date: 2022-05-09
+ * @Date: 2022-05-10
  * @Description: 管理员 (实体类)
  */
 @TableName("mall_admin")
@@ -29,9 +29,6 @@ public class Admin implements Serializable {
 
     @ApiModelProperty(value = "管理员密码")
     private String password;
-
-    @ApiModelProperty(value = "管理员类型：1 超级管理员，2 普通管理员，3 商家，4 开发人员，5 测试人员")
-    private Integer adminType;
 
     @ApiModelProperty(value = "状态：1 正常，0 禁用")
     private Integer status;
@@ -72,14 +69,6 @@ public class Admin implements Serializable {
         this.password = password;
     }
 
-    public Integer getAdminType() {
-        return adminType;
-    }
-
-    public void setAdminType(Integer adminType) {
-        this.adminType = adminType;
-    }
-
     public Integer getStatus() {
         return status;
     }
@@ -118,7 +107,6 @@ public class Admin implements Serializable {
         "id=" + id +
         ", adminName=" + adminName +
         ", password=" + password +
-        ", adminType=" + adminType +
         ", status=" + status +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +

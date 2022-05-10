@@ -20,6 +20,6 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, category_name, parent_id, category_level, category_code, goods_count, sort, status, create_time, update_time, is_deleted
-</sql>
+    </sql>
 
 </mapper>

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cafe.admin.bo.MenuPathAndRoleNameBO;
 import com.cafe.admin.model.RoleMenuRelation;
 import com.cafe.admin.service.RoleMenuRelationService;
 import com.cafe.common.core.util.MyBatisPlusWrapperUtil;
@@ -135,5 +136,12 @@ public class RoleMenuRelationController {
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = roleMenuRelationService.removeByIds(ids);
         return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "获取菜单路径和角色名称对应关系列表")
+    @GetMapping("/list/menuPath/roleName/bo")
+    public ResponseEntity<List<MenuPathAndRoleNameBO>> listMenuPathAndRoleNameBO() {
+        List<MenuPathAndRoleNameBO> boList = roleMenuRelationService.listMenuPathAndRoleNameBO();
+        return ResponseEntity.ok(boList);
     }
 }

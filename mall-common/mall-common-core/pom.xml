@@ -16,7 +16,7 @@
     <description>核心业务公共模块</description>
 
     <dependencies>
-        <!-- SpringBoot Web 相关依赖 -->
+        <!-- Spring Boot Web 相关依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

@@ -27,6 +27,6 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, spu_name, brand_id, category_id, category_code, original_price, discount_price, seckill_price, image, comment_count, caption, intro, sort, check_status, shelf_status, create_time, update_time, is_deleted
-</sql>
+    </sql>
 
 </mapper>

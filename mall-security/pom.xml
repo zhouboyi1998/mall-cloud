@@ -13,7 +13,7 @@
     <groupId>com.cafe.mall</groupId>
     <artifactId>mall-security</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>SpringSecurity 安全模块</description>
+    <description>Spring Security 安全模块</description>
 
     <packaging>pom</packaging>
     <modules>

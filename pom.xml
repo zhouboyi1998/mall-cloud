@@ -39,6 +39,7 @@
         <mybatis-plus-generator.version>3.4.1</mybatis-plus-generator.version>
         <velocity.version>2.3</velocity.version>
         <jjwt.version>0.9.0</jjwt.version>
+        <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
         <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>7.1.0</minio.version>
@@ -50,26 +51,27 @@
         <mall-admin-api.version>1.0-SNAPSHOT</mall-admin-api.version>
         <mall-goods-api.version>1.0-SNAPSHOT</mall-goods-api.version>
         <mall-order-api.version>1.0-SNAPSHOT</mall-order-api.version>
+        <mall-security-management-api.version>1.0-SNAPSHOT</mall-security-management-api.version>
     </properties>
 
     <dependencies>
-        <!-- SpringBoot 测试相关依赖 -->
+        <!-- Spring Boot 测试相关依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- SpringBoot AOP 相关依赖 -->
+        <!-- Spring Boot AOP 相关依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <!-- SpringBoot 服务健康监控 -->
+        <!-- Spring Boot 服务健康监控 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!-- SpringBoot 配置相关依赖 -->
+        <!-- Spring Boot 配置相关依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -79,7 +81,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- SpringCloud 相关依赖 -->
+            <!-- Spring Cloud 相关依赖 -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -87,7 +89,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- SpringCloud Alibaba 相关依赖 -->
+            <!-- Spring Cloud Alibaba 相关依赖 -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -137,11 +139,17 @@
                 <artifactId>velocity-engine-core</artifactId>
                 <version>${velocity.version}</version>
             </dependency>
-            <!-- JJWT 登录令牌 -->
+            <!-- JJWT 令牌 -->
             <dependency>
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.version}</version>
+            </dependency>
+            <!-- Nimbus JOSE + JWT 令牌 -->
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>${nimbus-jose-jwt.version}</version>
             </dependency>
             <!-- Swagger2 API 文档 -->
             <dependency>
@@ -193,6 +201,11 @@
                 <groupId>com.cafe.mall</groupId>
                 <artifactId>mall-order-api</artifactId>
                 <version>${mall-order-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe.mall</groupId>
+                <artifactId>mall-security-management-api</artifactId>
+                <version>${mall-security-management-api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
