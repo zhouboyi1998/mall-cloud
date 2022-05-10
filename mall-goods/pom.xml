@@ -21,11 +21,4 @@
         <module>mall-goods-core</module>
     </modules>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.cafe.mall</groupId>
-            <artifactId>mall-common-core</artifactId>
-        </dependency>
-    </dependencies>
-
 </project>

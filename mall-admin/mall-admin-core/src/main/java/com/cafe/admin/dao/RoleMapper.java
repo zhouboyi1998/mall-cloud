@@ -3,6 +3,9 @@ package com.cafe.admin.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cafe.admin.model.Role;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @Project: mall-cloud
@@ -14,4 +17,11 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface RoleMapper extends BaseMapper<Role> {
 
+    /**
+     * 根据管理员id查询角色名称列表
+     *
+     * @param adminId 管理员id
+     * @return
+     */
+    List<String> listRoleName(@Param(value = "adminId") Long adminId);
 }

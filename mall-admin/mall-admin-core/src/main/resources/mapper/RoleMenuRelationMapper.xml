@@ -11,9 +11,24 @@
         <result column="update_time" property="updateTime" />
     </resultMap>
 
+    <resultMap id="RoleNameListResult" type="java.lang.String">
+        <result column="role_name"/>
+    </resultMap>
+    
+    <resultMap id="BOMap" type="com.cafe.admin.bo.MenuPathAndRoleNameBO">
+        <result column="path" property="path" />
+        <collection property="roleNameList" resultMap="RoleNameListResult" javaType="java.util.List" />
+    </resultMap>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, role_id, menu_id, create_time, update_time
-</sql>
+    </sql>
 
+    <select id="listMenuPathAndRoleNameBO" resultMap="BOMap">
+        SELECT m.path, r.role_name
+        FROM mall_menu AS m
+        LEFT JOIN mall_role_menu_relation AS mr ON mr.menu_id = m.id
+        LEFT JOIN mall_role AS r ON r.id = mr.role_id
+    </select>
 </mapper>

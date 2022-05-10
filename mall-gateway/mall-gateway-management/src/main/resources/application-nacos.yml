@@ -5,3 +5,13 @@ spring:
       # 注册中心
       discovery:
         server-addr: http://127.0.0.1:8848
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: 'http://127.0.0.1:18072/keyPair/rsa/publicKey'
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    database: 0
