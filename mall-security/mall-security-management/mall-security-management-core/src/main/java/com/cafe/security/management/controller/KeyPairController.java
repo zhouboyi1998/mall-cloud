@@ -19,7 +19,7 @@ import java.util.Map;
  * @Date: 2022/5/10 21:34
  * @Description: 密钥对接口
  */
-@RestController("/ ")
+@RestController()
 public class KeyPairController {
 
     private KeyPair keyPair;

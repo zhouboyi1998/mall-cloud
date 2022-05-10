@@ -1,7 +1,10 @@
 package com.cafe.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.cafe.admin.bo.MenuPathAndRoleNameBO;
 import com.cafe.admin.model.RoleMenuRelation;
+
+import java.util.List;
 
 /**
  * @Project: mall-cloud
@@ -12,4 +15,10 @@ import com.cafe.admin.model.RoleMenuRelation;
  */
 public interface RoleMenuRelationService extends IService<RoleMenuRelation> {
 
+    /**
+     * 获取菜单路径和角色名称对应关系列表
+     *
+     * @return
+     */
+    List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO();
 }

@@ -3,6 +3,7 @@ package com.cafe.security.management;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
+import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @Project: mall-cloud
@@ -12,6 +13,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @Description:
  */
 @SpringCloudApplication
+@ComponentScan(basePackages = "com.cafe")
 @EnableFeignClients(basePackages = "com.cafe.admin.feign")
 public class SecurityManagementApplication {
 

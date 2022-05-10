@@ -5,6 +5,7 @@ import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
+import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +17,7 @@ import java.util.Map;
  * @Date: 2022/5/9 10:48
  * @Description: 自定义 JWT 访问令牌转换器
  */
+@Component
 public class CustomizeJwtAccessTokenConverter implements TokenEnhancer {
 
     @Override
