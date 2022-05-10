@@ -7,6 +7,8 @@ import com.cafe.admin.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.admin.service.impl
@@ -22,5 +24,10 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     @Autowired
     public RoleServiceImpl(RoleMapper roleMapper) {
         this.roleMapper = roleMapper;
+    }
+
+    @Override
+    public List<String> listRoleName(Long adminId) {
+        return roleMapper.listRoleName(adminId);
     }
 }

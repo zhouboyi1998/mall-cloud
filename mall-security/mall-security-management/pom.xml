@@ -13,17 +13,12 @@
     <groupId>com.cafe.mall</groupId>
     <artifactId>mall-security-management</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>后台管理系统安全</description>
+    <description>后台管理系统安全模块</description>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.cafe.mall</groupId>
-            <artifactId>mall-common-security</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe.mall</groupId>
-            <artifactId>mall-admin-api</artifactId>
-        </dependency>
-    </dependencies>
+    <packaging>pom</packaging>
+    <modules>
+        <module>mall-security-management-api</module>
+        <module>mall-security-management-core</module>
+    </modules>
 
 </project>

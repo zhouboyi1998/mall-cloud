@@ -1,11 +1,14 @@
 package com.cafe.admin.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cafe.admin.bo.MenuPathAndRoleNameBO;
 import com.cafe.admin.dao.RoleMenuRelationMapper;
 import com.cafe.admin.model.RoleMenuRelation;
 import com.cafe.admin.service.RoleMenuRelationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @Project: mall-cloud
@@ -22,5 +25,10 @@ public class RoleMenuRelationServiceImpl extends ServiceImpl<RoleMenuRelationMap
     @Autowired
     public RoleMenuRelationServiceImpl(RoleMenuRelationMapper roleMenuRelationMapper) {
         this.roleMenuRelationMapper = roleMenuRelationMapper;
+    }
+
+    @Override
+    public List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO() {
+        return roleMenuRelationMapper.listMenuPathAndRoleNameBO();
     }
 }

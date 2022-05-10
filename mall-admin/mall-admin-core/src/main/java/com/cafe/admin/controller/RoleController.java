@@ -136,4 +136,12 @@ public class RoleController {
         Boolean code = roleService.removeByIds(ids);
         return ResponseEntity.ok(code);
     }
+
+    @ApiOperation(value = "根据管理员id查询角色名称列表")
+    @ApiImplicitParam(name = "adminId", value = "管理员id", required = true, paramType = "path", dataType = "Long")
+    @GetMapping("/list/name/{adminId}")
+    public ResponseEntity<List<String>> listRoleName(@PathVariable(value = "adminId") Long adminId) {
+        List<String> roleNameList = roleService.listRoleName(adminId);
+        return ResponseEntity.ok(roleNameList);
+    }
 }

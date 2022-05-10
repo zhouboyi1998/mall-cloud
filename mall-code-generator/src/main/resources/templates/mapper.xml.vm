@@ -33,7 +33,7 @@
         ${field.columnName},
 #end
         ${table.fieldNames}
-</sql>
+    </sql>
 
 #end
 </mapper>

@@ -14,6 +14,6 @@
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, admin_id, role_id, create_time, update_time
-</sql>
+    </sql>
 
 </mapper>
