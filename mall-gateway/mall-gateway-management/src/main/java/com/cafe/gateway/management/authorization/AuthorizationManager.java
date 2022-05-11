@@ -38,11 +38,12 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {
         // 从 Redis 中获取当前路径可访问角色列表
         URI uri = authorizationContext.getExchange().getRequest().getURI();
+        String path = uri.getPath();
         Object obj = redisTemplate.opsForHash().get(RedisEnum.RESOURCE_ROLE_MAP.getValue(), uri.getPath());
         List<String> authorities = Convert.toList(String.class, obj);
         authorities = authorities
             .stream()
-            .map(i -> i = AuthEnum.AUTHORITY_PREFIX + i)
+            .map(i -> i = AuthEnum.AUTHORITY_PREFIX.getValue() + i)
             .collect(Collectors.toList());
 
         // 认证通过且角色匹配的用户可访问当前路径
