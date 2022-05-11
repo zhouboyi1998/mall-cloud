@@ -1,4 +1,4 @@
-package com.cafe.common.security.config;
+package com.cafe.security.management.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.security.config
+ * @Package: com.cafe.security.management.config
  * @Author: zhouboyi
  * @Date: 2022/5/10 22:17
  * @Description: Redis 配置

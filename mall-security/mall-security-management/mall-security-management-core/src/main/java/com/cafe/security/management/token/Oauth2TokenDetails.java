@@ -1,8 +1,8 @@
-package com.cafe.common.security.token;
+package com.cafe.security.management.token;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.security.token
+ * @Package: com.cafe.security.management.token
  * @Author: zhouboyi
  * @Date: 2022/5/9 10:48
  * @Description: 自定义令牌信息封装

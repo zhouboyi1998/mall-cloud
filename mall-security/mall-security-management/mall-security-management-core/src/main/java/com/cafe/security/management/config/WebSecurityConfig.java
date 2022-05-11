@@ -1,4 +1,4 @@
-package com.cafe.common.security.config;
+package com.cafe.security.management.config;
 
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
@@ -12,7 +12,7 @@ import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.security.config
+ * @Package: com.cafe.security.management.config
  * @Author: zhouboyi
  * @Date: 2022/5/10 22:17
  * @Description: SpringSecurity Web 配置

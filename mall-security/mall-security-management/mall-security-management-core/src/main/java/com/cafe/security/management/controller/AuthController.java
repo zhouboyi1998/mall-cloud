@@ -1,6 +1,6 @@
 package com.cafe.security.management.controller;
 
-import com.cafe.common.security.token.Oauth2TokenDetails;
+import com.cafe.security.management.token.Oauth2TokenDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;

@@ -10,7 +10,7 @@ package com.cafe.security.management.constant;
 public enum AuthEnum {
 
     /**
-     * JWT存储权限前缀
+     * JWT 存储权限前缀
      */
     AUTHORITY_PREFIX("ROLE_"),
 
@@ -22,7 +22,7 @@ public enum AuthEnum {
     /**
      * 后台管理 client_id
      */
-    ADMIN_CLIENT_ID("admin-app"),
+    MANAGEMENT_CLIENT_ID("management-app"),
 
     /**
      * 前台商城 client_id

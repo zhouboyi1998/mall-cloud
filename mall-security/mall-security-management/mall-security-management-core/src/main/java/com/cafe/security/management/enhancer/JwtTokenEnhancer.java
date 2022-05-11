@@ -1,4 +1,4 @@
-package com.cafe.common.security.enhancer;
+package com.cafe.security.management.enhancer;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
@@ -12,13 +12,13 @@ import java.util.Map;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.security.enhancer
+ * @Package: com.cafe.security.management.enhancer
  * @Author: zhouboyi
  * @Date: 2022/5/9 10:48
  * @Description: 自定义 JWT 访问令牌转换器
  */
 @Component
-public class CustomizeJwtAccessTokenConverter implements TokenEnhancer {
+public class JwtTokenEnhancer implements TokenEnhancer {
 
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken oAuth2AccessToken, OAuth2Authentication oAuth2Authentication) {

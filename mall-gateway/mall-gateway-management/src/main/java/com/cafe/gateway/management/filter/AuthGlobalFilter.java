@@ -1,6 +1,7 @@
 package com.cafe.gateway.management.filter;
 
 import cn.hutool.core.util.StrUtil;
+import com.cafe.security.management.constant.AuthEnum;
 import com.nimbusds.jose.JWSObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,13 +29,13 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String token = exchange.getRequest().getHeaders().getFirst("Authorization");
+        String token = exchange.getRequest().getHeaders().getFirst(AuthEnum.JWT_TOKEN_HEADER.getValue());
         if (StrUtil.isEmpty(token)) {
             return chain.filter(exchange);
         }
         try {
             // 从 Token 中解析用户信息并设置到 Header 中去
-            String realToken = token.replace("Bearer ", "");
+            String realToken = token.replace(AuthEnum.JWT_TOKEN_PREFIX.getValue(), "");
             JWSObject jwsObject = JWSObject.parse(realToken);
             String userStr = jwsObject.getPayload().toString();
             LOGGER.info("AuthGlobalFilter.filter() user:{}", userStr);

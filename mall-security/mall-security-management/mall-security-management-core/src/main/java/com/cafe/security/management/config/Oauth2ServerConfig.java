@@ -1,6 +1,7 @@
 package com.cafe.security.management.config;
 
-import com.cafe.common.security.enhancer.CustomizeJwtAccessTokenConverter;
+import com.cafe.security.management.constant.AuthEnum;
+import com.cafe.security.management.enhancer.JwtTokenEnhancer;
 import com.cafe.security.management.service.impl.AdminDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -36,19 +37,19 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
     private PasswordEncoder passwordEncoder;
     private AuthenticationManager authenticationManager;
-    private CustomizeJwtAccessTokenConverter customizeJwtAccessTokenConverter;
+    private JwtTokenEnhancer jwtTokenEnhancer;
     private AdminDetailsServiceImpl adminDetailsServiceImpl;
 
     @Autowired
     public Oauth2ServerConfig(
         PasswordEncoder passwordEncoder,
         AuthenticationManager authenticationManager,
-        CustomizeJwtAccessTokenConverter customizeJwtAccessTokenConverter,
+        JwtTokenEnhancer jwtTokenEnhancer,
         AdminDetailsServiceImpl adminDetailsServiceImpl
     ) {
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
-        this.customizeJwtAccessTokenConverter = customizeJwtAccessTokenConverter;
+        this.jwtTokenEnhancer = jwtTokenEnhancer;
         this.adminDetailsServiceImpl = adminDetailsServiceImpl;
     }
 
@@ -88,7 +89,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
             // 使用内存
             .inMemory()
             // 客户端id
-            .withClient("management")
+            .withClient(AuthEnum.MANAGEMENT_CLIENT_ID.getValue())
             // 客户端密钥: 生成 RSA证书文件(jwt.jks) 时设置的密钥
             .secret(new SCryptPasswordEncoder().encode("123456"))
             // 授权模式: password 密码模式, refresh_token 开启刷新令牌
@@ -112,7 +113,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         // List 存储令牌增强器
         List<TokenEnhancer> tokenEnhancerList = new ArrayList<TokenEnhancer>();
         // 自定义 JWT 访问令牌转换器
-        tokenEnhancerList.add(customizeJwtAccessTokenConverter);
+        tokenEnhancerList.add(jwtTokenEnhancer);
         // OAuth2 JWT 访问令牌转换器
         tokenEnhancerList.add(jwtAccessTokenConverter());
 

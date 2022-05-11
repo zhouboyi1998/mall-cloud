@@ -1,4 +1,4 @@
-package com.cafe.common.security.tool;
+package com.cafe.security.management.tool;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -6,7 +6,7 @@ import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.security.util
+ * @Package: com.cafe.security.management.tool
  * @Author: zhouboyi
  * @Date: 2022/5/9 17:00
  * @Description: SpringSecurity 自定义密码工具箱

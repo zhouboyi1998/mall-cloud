@@ -1,4 +1,4 @@
-package com.cafe.common.security.constant;
+package com.cafe.security.management.constant;
 
 /**
  * @Project: mall-cloud
