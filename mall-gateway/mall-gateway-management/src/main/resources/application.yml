@@ -31,4 +31,4 @@ secure:
   ignore:
     urls:
       - "/actuator/**"
-      - "/auth/oauth/token"
+      - "/api/security/oauth/token"

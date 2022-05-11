@@ -23,8 +23,8 @@
         </dependency>
         <!-- SpringSecurity 安全框架 -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-security</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-security</artifactId>
         </dependency>
         <!-- Oauth2 单点登录 -->
         <dependency>
@@ -35,7 +35,6 @@
         <dependency>
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
-            <version>${nimbus-jose-jwt.version}</version>
         </dependency>
         <!-- SpringData Redis -->
         <dependency>

@@ -15,4 +15,12 @@
     <version>1.0-SNAPSHOT</version>
     <description>后台管理系统安全模块</description>
 
+    <dependencies>
+        <!-- OpenFeign 远程方法调用 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+    </dependencies>
+
 </project>

@@ -18,6 +18,10 @@
     <dependencies>
         <dependency>
             <groupId>com.cafe.mall</groupId>
+            <artifactId>mall-common-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe.mall</groupId>
             <artifactId>mall-security-management-api</artifactId>
         </dependency>
         <dependency>
@@ -26,6 +30,7 @@
         </dependency>
     </dependencies>
 
+    <!-- 导入.jks证书文件到资源文件夹 -->
     <build>
         <resources>
             <resource>

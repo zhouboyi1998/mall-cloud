@@ -1,6 +1,7 @@
 package com.cafe.gateway.management.config;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
@@ -11,16 +12,17 @@ import java.util.List;
  * @Date: 2022/5/11 0:58
  * @Description:
  */
+@Component
+@ConfigurationProperties(prefix = "secure.ignore")
 public class IgnoreUrlsConfig {
 
-    @Value("${secure.ignore.urls}")
-    private List<String> ignoreUrls;
+    private List<String> urls;
 
-    public List<String> getIgnoreUrls() {
-        return ignoreUrls;
+    public List<String> getUrls() {
+        return urls;
     }
 
-    public void setIgnoreUrls(List<String> ignoreUrls) {
-        this.ignoreUrls = ignoreUrls;
+    public void setUrls(List<String> urls) {
+        this.urls = urls;
     }
 }

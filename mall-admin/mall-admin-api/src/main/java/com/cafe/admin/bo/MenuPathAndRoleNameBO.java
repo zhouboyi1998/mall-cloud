@@ -1,6 +1,6 @@
 package com.cafe.admin.bo;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * @Project: mall-cloud
@@ -15,7 +15,7 @@ public class MenuPathAndRoleNameBO {
 
     private String path;
 
-    private List<String> roleNameList;
+    private ArrayList<String> roleNameList;
 
     public String getPath() {
         return path;
@@ -25,11 +25,11 @@ public class MenuPathAndRoleNameBO {
         this.path = path;
     }
 
-    public List<String> getRoleNameList() {
+    public ArrayList<String> getRoleNameList() {
         return roleNameList;
     }
 
-    public void setRoleNameList(List<String> roleNameList) {
+    public void setRoleNameList(ArrayList<String> roleNameList) {
         this.roleNameList = roleNameList;
     }
 

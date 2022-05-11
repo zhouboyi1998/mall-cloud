@@ -1,6 +1,6 @@
 package com.cafe.security.management.config;
 
-import com.cafe.common.security.token.CustomizeJwtAccessTokenConverter;
+import com.cafe.common.security.enhancer.CustomizeJwtAccessTokenConverter;
 import com.cafe.security.management.service.impl.AdminDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

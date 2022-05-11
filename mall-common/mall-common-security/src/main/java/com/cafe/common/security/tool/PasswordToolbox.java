@@ -19,7 +19,7 @@ public class PasswordToolbox {
      * @param plaintext 明文
      * @return 密文
      */
-    public String encodeBCrypt(String plaintext) {
+    public static String encodeBCrypt(String plaintext) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.encode(plaintext);
     }
@@ -31,9 +31,9 @@ public class PasswordToolbox {
      * @param plaintext  明文
      * @return
      */
-    public Boolean matchBCrypt(String ciphertext, String plaintext) {
+    public static Boolean matchBCrypt(String plaintext, String ciphertext) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        return passwordEncoder.matches(ciphertext, plaintext);
+        return passwordEncoder.matches(plaintext, ciphertext);
     }
 
     /**
@@ -42,7 +42,7 @@ public class PasswordToolbox {
      * @param plaintext 明文
      * @return 密文
      */
-    public String encodeSCrypt(String plaintext) {
+    public static String encodeSCrypt(String plaintext) {
         PasswordEncoder passwordEncoder = new SCryptPasswordEncoder();
         return passwordEncoder.encode(plaintext);
     }
@@ -54,12 +54,12 @@ public class PasswordToolbox {
      * @param plaintext  明文
      * @return
      */
-    public Boolean matchSCrypt(String ciphertext, String plaintext) {
+    public static Boolean matchSCrypt(String plaintext, String ciphertext) {
         PasswordEncoder passwordEncoder = new SCryptPasswordEncoder();
-        return passwordEncoder.matches(ciphertext, plaintext);
+        return passwordEncoder.matches(plaintext, ciphertext);
     }
 
     public static void main(String[] args) {
-        System.out.println(new PasswordToolbox().encodeSCrypt("tester"));
+        System.out.println(encodeSCrypt(""));
     }
 }
