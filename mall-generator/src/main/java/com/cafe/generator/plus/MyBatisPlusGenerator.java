@@ -53,7 +53,7 @@ public class MyBatisPlusGenerator {
         // 1. 全局配置
         GlobalConfig globalConfig = new GlobalConfig();
         // 项目路径
-        globalConfig.setOutputDir("mall-code-generator/src/main/java");
+        globalConfig.setOutputDir("mall-generator/src/main/java");
         // 作者
         globalConfig.setAuthor("zhouboyi");
         // 去掉 Service 接口的前缀 "I"
