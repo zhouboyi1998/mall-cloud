@@ -42,16 +42,16 @@
 
         <!-- Model 实体类生成路径 -->
         <javaModelGenerator targetPackage="${project-package}.${module}.${model-package}"
-                            targetProject="mall-code-generator\src\main\java"/>
+                            targetProject="mall-generator\src\main\java"/>
 
         <!-- Mapper 映射文件生成路径 -->
         <sqlMapGenerator targetPackage="${project-package}.${module}.${mapper-package}"
-                         targetProject="mall-code-generator\src\main\java"/>
+                         targetProject="mall-generator\src\main\java"/>
 
         <!-- Dao 接口生成路径 -->
         <javaClientGenerator type="XMLMAPPER"
                              targetPackage="${project-package}.${module}.${dao-package}"
-                             targetProject="mall-code-generator\src\main\java"/>
+                             targetProject="mall-generator\src\main\java"/>
 
         <!-- tableName="%" 表示: 生成全部表-->
         <table tableName="%">

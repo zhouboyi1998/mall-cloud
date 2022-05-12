@@ -19,10 +19,10 @@
     <packaging>pom</packaging>
     <modules>
         <module>mall-admin</module>
-        <module>mall-code-generator</module>
         <module>mall-common</module>
         <module>mall-eureka</module>
         <module>mall-gateway</module>
+        <module>mall-generator</module>
         <module>mall-goods</module>
         <module>mall-order</module>
         <module>mall-security</module>
