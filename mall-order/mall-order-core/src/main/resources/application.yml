@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: nacos
+    active: dev
 
 # Feign 配置
 feign:
