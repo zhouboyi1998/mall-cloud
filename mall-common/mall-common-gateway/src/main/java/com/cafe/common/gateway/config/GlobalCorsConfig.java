@@ -8,7 +8,7 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.gateway.config
+ * @Package: com.cafe.common.gateway.config
  * @Author: zhouboyi
  * @Date: 2022/4/30 20:59
  * @Description: 全局跨域配置
