@@ -16,12 +16,12 @@
     <description>安全公共模块</description>
 
     <dependencies>
-        <!-- SpringBoot Web 相关依赖 -->
+        <!-- Spring Boot Web 相关依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
-        <!-- SpringSecurity 安全框架 -->
+        <!-- Spring Security 安全框架 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-security</artifactId>

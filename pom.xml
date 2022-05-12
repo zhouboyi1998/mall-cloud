@@ -55,23 +55,23 @@
     </properties>
 
     <dependencies>
-        <!-- SpringBoot 测试相关依赖 -->
+        <!-- Spring Boot 测试相关依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- SpringBoot AOP 相关依赖 -->
+        <!-- Spring Boot AOP 相关依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
-        <!-- SpringBoot 服务健康监控 -->
+        <!-- Spring Boot 服务健康监控 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
-        <!-- SpringBoot 配置相关依赖 -->
+        <!-- Spring Boot 配置相关依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -81,7 +81,7 @@
 
     <dependencyManagement>
         <dependencies>
-            <!-- SpringCloud 相关依赖 -->
+            <!-- Spring Cloud 相关依赖 -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -89,7 +89,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- SpringCloud Alibaba 相关依赖 -->
+            <!-- Spring Cloud Alibaba 相关依赖 -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
