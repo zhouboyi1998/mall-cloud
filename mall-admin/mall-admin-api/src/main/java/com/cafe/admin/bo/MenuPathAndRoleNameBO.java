@@ -1,5 +1,6 @@
 package com.cafe.admin.bo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -9,7 +10,7 @@ import java.util.ArrayList;
  * @Date: 2022/5/10 23:33
  * @Description:
  */
-public class MenuPathAndRoleNameBO {
+public class MenuPathAndRoleNameBO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

@@ -8,10 +8,10 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.gateway.config
+ * @Package: com.cafe.common.gateway.config
  * @Author: zhouboyi
  * @Date: 2022/4/30 20:59
- * @Description: 全局跨域配置
+ * @Description: 网关全局跨域配置
  */
 @Configuration
 public class GlobalCorsConfig {
@@ -32,7 +32,7 @@ public class GlobalCorsConfig {
         /**
          * 请求拦截配置
          * "/**" 表示拦截所有请求
-         * 并使用 config 中的配置, 对拦截的请求进行跨域处理
+         * 并使用上面 CorsConfiguration 中的配置, 对拦截的请求进行跨域处理
          */
         source.registerCorsConfiguration("/**", config);
 

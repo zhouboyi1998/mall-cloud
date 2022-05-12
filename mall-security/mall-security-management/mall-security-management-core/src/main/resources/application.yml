@@ -1,7 +1,36 @@
 spring:
   profiles:
-    active: nacos
-  # 自动装配时排除以下配置
+    active: dev
+  # 自动装配时排除 JDBC 数据源配置
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+# RSA 证书口令, 生成 RSA 证书文件 (jwt.jks) 时设置
+rsa:
+  credential:
+    # 密钥库名称
+    keystore: "jwt.jks"
+    # 密钥库口令
+    storepass: "123456"
+    # 别名
+    alias: "jwt"
+    # 密钥口令
+    keypass: "123456"
+
+# 客户端详细信息配置
+client:
+  details:
+    # 客户端id
+    client-id: "management"
+    # 授权模式
+    authorized-grant-types:
+      - "password"
+      - "refresh_token"
+    # 授权范围
+    scopes:
+      - "all"
+    # 访问令牌过期时间: 1小时
+    access-token-validity-seconds: 3600
+    # 访问令牌过期时间: 24小时
+    refresh-token-validity-seconds: 86400

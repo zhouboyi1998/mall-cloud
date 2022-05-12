@@ -22,8 +22,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id
-        , menu_name, menu_title, description, path, parent_id, menu_level, menu_code, menu_type, sort, status, create_time, update_time, is_deleted
+        id, menu_name, menu_title, description, path, parent_id, menu_level, menu_code, menu_type, sort, status, create_time, update_time, is_deleted
     </sql>
 
 </mapper>

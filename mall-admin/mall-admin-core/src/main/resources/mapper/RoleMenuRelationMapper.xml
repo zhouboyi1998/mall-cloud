@@ -11,10 +11,10 @@
         <result column="update_time" property="updateTime" />
     </resultMap>
 
+    <!-- 通过两个 resultMap 配合, 将接收的数据转换为 List 类型 -->
     <resultMap id="RoleNameListResult" type="java.lang.String">
         <result column="role_name"/>
     </resultMap>
-    
     <resultMap id="BOMap" type="com.cafe.admin.bo.MenuPathAndRoleNameBO">
         <result column="path" property="path" />
         <collection property="roleNameList" resultMap="RoleNameListResult" javaType="java.util.List" />

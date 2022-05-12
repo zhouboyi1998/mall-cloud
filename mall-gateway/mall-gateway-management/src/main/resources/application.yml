@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: nacos
+    active: dev
   cloud:
     # 网关配置
     gateway:

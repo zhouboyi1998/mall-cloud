@@ -44,6 +44,7 @@
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>7.1.0</minio.version>
 
+        <mall-common-constant.version>1.0-SNAPSHOT</mall-common-constant.version>
         <mall-common-core.version>1.0-SNAPSHOT</mall-common-core.version>
         <mall-common-gateway.version>1.0-SNAPSHOT</mall-common-gateway.version>
         <mall-common-security.version>1.0-SNAPSHOT</mall-common-security.version>
@@ -171,6 +172,11 @@
             </dependency>
 
             <!-- 公共模块 -->
+            <dependency>
+                <groupId>com.cafe.mall</groupId>
+                <artifactId>mall-common-constant</artifactId>
+                <version>${mall-common-constant.version}</version>
+            </dependency>
             <dependency>
                 <groupId>com.cafe.mall</groupId>
                 <artifactId>mall-common-core</artifactId>

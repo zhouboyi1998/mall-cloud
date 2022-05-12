@@ -26,8 +26,10 @@ mall-cloud
     |-- mall-admin-api (远程调用接口)
     |-- mall-admin-core (核心业务)
 |-- mall-common (公共模块)
+    |-- mall-common-constant (常量公共模块)
     |-- mall-common-core (核心公共模块)
     |-- mall-common-gateway (网关公共模块)
+    |-- mall-common-security (安全公共模块)
 |-- mall-eureka (Eureka 注册中心模块)
 |-- mall-gateway (Spring Cloud Gateway 网关模块)
     |-- mall-gateway-management (后台管理系统网关模块)
@@ -46,4 +48,4 @@ mall-cloud
 
 ### 📜 开源协议
 
-[MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2022
+[MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2022 周博义
