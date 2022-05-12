@@ -26,8 +26,10 @@ mall-cloud
     |-- mall-admin-api
     |-- mall-admin-core
 |-- mall-common
+    |-- mall-common-constant
     |-- mall-common-core
     |-- mall-common-gateway
+    |-- mall-common-security
 |-- mall-eureka
 |-- mall-gateway
     |-- mall-gateway-management
@@ -46,4 +48,4 @@ mall-cloud
 
 ### 📜 Licence
 
-[MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2022
+[MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2022 周博义

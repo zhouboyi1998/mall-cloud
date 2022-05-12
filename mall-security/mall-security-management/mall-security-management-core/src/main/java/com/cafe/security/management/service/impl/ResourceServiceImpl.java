@@ -2,7 +2,7 @@ package com.cafe.security.management.service.impl;
 
 import com.cafe.admin.bo.MenuPathAndRoleNameBO;
 import com.cafe.admin.feign.RoleMenuRelationFeign;
-import com.cafe.security.management.constant.RedisEnum;
+import com.cafe.common.constant.RedisConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -22,8 +22,6 @@ import java.util.TreeMap;
  */
 @Service
 public class ResourceServiceImpl {
-
-    private Map<String, ArrayList<String>> relationMap;
 
     private RedisTemplate<String, Object> redisTemplate;
 
@@ -47,12 +45,12 @@ public class ResourceServiceImpl {
         List<MenuPathAndRoleNameBO> boList = roleMenuRelationFeign.listMenuPathAndRoleNameBO().getBody();
 
         // 将对应关系组装成 Map 格式
-        relationMap = new TreeMap<String, ArrayList<String>>();
+        Map<String, ArrayList<String>> relationMap = new TreeMap<String, ArrayList<String>>();
         for (MenuPathAndRoleNameBO bo : boList) {
             relationMap.put(bo.getPath(), bo.getRoleNameList());
         }
 
         // 将对应关系放入 Redis 中, 提供给网关查询
-        redisTemplate.opsForHash().putAll(RedisEnum.RESOURCE_ROLE_MAP.getValue(), relationMap);
+        redisTemplate.opsForHash().putAll(RedisConstant.RESOURCE_ROLE_MAP, relationMap);
     }
 }
