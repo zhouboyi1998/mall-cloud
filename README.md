@@ -1,4 +1,4 @@
-<h1 align="center">mall-cloud</h1>
+<h1 align="center">🏪 mall-cloud</h1>
 
 <p align="center">
 <a target="_blank" href="https://gitee.com/zhouboyi/mall-cloud">
@@ -31,7 +31,7 @@ mall-cloud
     |-- mall-common-core (核心公共模块)
     |-- mall-common-gateway (网关公共模块)
 |-- mall-eureka (Eureka 注册中心模块)
-|-- mall-gateway (SpringCloud Gateway 网关模块)
+|-- mall-gateway (Spring Cloud Gateway 网关模块)
     |-- mall-gateway-management (后台管理系统网关模块)
 |-- mall-goods (商品模块)
     |-- mall-goods-api (远程调用接口)
@@ -39,7 +39,7 @@ mall-cloud
 |-- mall-order (订单模块)
     |-- mall-order-api (远程调用接口)
     |-- mall-order-core (核心业务)
-|-- mall-security (SpringSecurity 安全模块)
+|-- mall-security (Spring Security 安全模块)
     |-- mall-security-management (后台管理系统安全模块)
         |-- mall-security-management-api (远程调用接口)
         |-- mall-security-management-core (核心业务)

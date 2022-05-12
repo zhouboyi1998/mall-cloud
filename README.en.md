@@ -1,4 +1,4 @@
-<h1 align="center">mall-cloud</h1>
+<h1 align="center">🏪 mall-cloud</h1>
 
 <p align="center">
 <a target="_blank" href="https://gitee.com/zhouboyi/mall-cloud">

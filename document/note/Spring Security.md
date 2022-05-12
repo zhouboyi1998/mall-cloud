@@ -1,6 +1,6 @@
-### 📝 笔记
+<h2 align="center">📔 Spring Security</h2>
 
-#### mall-security 模块
+### ⚓ 模块搭建
 
 * 生成 RSA 证书文件
 
@@ -8,8 +8,11 @@
 使用 JDK 自带的 keytool 生成
 在 JDK /bin 目录下执行以下命令
 keytool -genkey -alias jwt -keyalg RSA -keystore jwt.jks
-按提示设置密码和其他信息, 生成 RSA 证书文件(jwt.jks)
+按提示设置密码和其他信息
+生成 RSA 证书文件 (jwt.jks)
 ```
+
+### 📑 基础知识
 
 * OAuth2 四种授权模式
 
