@@ -46,4 +46,4 @@ mall-cloud
 
 ### 📜 开源协议
 
-[MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2022
+[MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2022 周博义
