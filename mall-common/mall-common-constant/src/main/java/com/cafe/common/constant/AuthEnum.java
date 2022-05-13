@@ -5,7 +5,7 @@ package com.cafe.common.constant;
  * @Package: com.cafe.common.constant
  * @Author: zhouboyi
  * @Date: 2022/5/10 23:14
- * @Description:
+ * @Description: 认证信息相关常量
  */
 public enum AuthEnum {
 
@@ -30,16 +30,6 @@ public enum AuthEnum {
     PORTAL_CLIENT_ID("portal-app"),
 
     /**
-     * 后台管理接口路径匹配
-     */
-    ADMIN_URL_PATTERN("/mall-admin/**"),
-
-    /**
-     * Redis 缓存权限规则 Key
-     */
-    RESOURCE_ROLES_MAP_KEY("auth:resourceRolesMap"),
-
-    /**
      * 认证信息 Http 请求头
      */
     JWT_TOKEN_HEADER("Authorization"),
@@ -52,7 +42,17 @@ public enum AuthEnum {
     /**
      * 用户信息 Http 请求头
      */
-    USER_TOKEN_HEADER("user");
+    USER_TOKEN_HEADER("user"),
+
+    /**
+     * 后台管理接口路径匹配
+     */
+    MANAGEMENT_URL_PATTERN("/api/**"),
+
+    /**
+     * 前台商城接口路径匹配
+     */
+    PORTAL_URL_PATTERN("/api/**");
 
     private String value;
 

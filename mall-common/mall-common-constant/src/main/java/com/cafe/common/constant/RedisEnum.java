@@ -5,11 +5,18 @@ package com.cafe.common.constant;
  * @Package: com.cafe.common.constant
  * @Author: zhouboyi
  * @Date: 2022/5/10 23:09
- * @Description:
+ * @Description: Redis 缓存相关常量
  */
 public enum RedisEnum {
 
+    /**
+     * 存储资源与角色对应关系的 Redis Key
+     */
     RESOURCE_ROLE_MAP("AUTH:RESOURCE_ROLES_MAP"),
+
+    /**
+     * 缓存控制: 无缓存
+     */
     NO_CACHE("no-cache");
 
     private String value;

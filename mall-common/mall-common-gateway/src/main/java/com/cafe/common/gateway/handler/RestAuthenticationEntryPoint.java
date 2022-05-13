@@ -32,7 +32,7 @@ public class RestAuthenticationEntryPoint implements ServerAuthenticationEntryPo
         // 设置 HTTP 状态码
         response.setStatusCode(HttpStatus.OK);
         // 设置 HTTP 请求头
-        // 请求内容: application/json
+        // 内容类型: application/json
         response.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
         // 允许跨域访问: 所有路径
         response.getHeaders().set(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, MediaType.ALL.getType());

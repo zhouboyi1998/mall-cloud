@@ -71,9 +71,9 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      */
     @Bean
     public KeyPair keyPair() {
-        // 使用证书和生成证书时设置的密钥库口令 (-storepass) 获取密钥对
+        // 使用 keystore 和 storepass 获取密钥对
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
-            new ClassPathResource(rsaCredentialConfig.getFilename()),
+            new ClassPathResource(rsaCredentialConfig.getKeystore()),
             rsaCredentialConfig.getStorepass().toCharArray()
         );
 

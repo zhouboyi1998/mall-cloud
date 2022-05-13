@@ -15,9 +15,14 @@ import org.springframework.stereotype.Component;
 public class RsaCredentialConfig {
 
     /**
-     * 证书文件名
+     * 密钥库名称
      */
-    private String filename;
+    private String keystore;
+
+    /**
+     * 密钥库口令
+     */
+    private String storepass;
 
     /**
      * 别名
@@ -29,17 +34,20 @@ public class RsaCredentialConfig {
      */
     private String keypass;
 
-    /**
-     * 密钥库口令
-     */
-    private String storepass;
-
-    public String getFilename() {
-        return filename;
+    public String getKeystore() {
+        return keystore;
     }
 
-    public void setFilename(String filename) {
-        this.filename = filename;
+    public void setKeystore(String keystore) {
+        this.keystore = keystore;
+    }
+
+    public String getStorepass() {
+        return storepass;
+    }
+
+    public void setStorepass(String storepass) {
+        this.storepass = storepass;
     }
 
     public String getAlias() {
@@ -56,13 +64,5 @@ public class RsaCredentialConfig {
 
     public void setKeypass(String keypass) {
         this.keypass = keypass;
-    }
-
-    public String getStorepass() {
-        return storepass;
-    }
-
-    public void setStorepass(String storepass) {
-        this.storepass = storepass;
     }
 }
