@@ -77,8 +77,10 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
             rsaCredentialConfig.getStorepass().toCharArray()
         );
 
-        return keyStoreKeyFactory
-            .getKeyPair(rsaCredentialConfig.getAlias(), rsaCredentialConfig.getStorepass().toCharArray());
+        return keyStoreKeyFactory.getKeyPair(
+            rsaCredentialConfig.getAlias(),
+            rsaCredentialConfig.getStorepass().toCharArray()
+        );
     }
 
     /**
