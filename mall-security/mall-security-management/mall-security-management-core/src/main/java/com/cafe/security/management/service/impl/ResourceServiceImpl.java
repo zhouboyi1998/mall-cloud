@@ -23,8 +23,6 @@ import java.util.TreeMap;
 @Service
 public class ResourceServiceImpl {
 
-    private Map<String, ArrayList<String>> relationMap;
-
     private RedisTemplate<String, Object> redisTemplate;
 
     private RoleMenuRelationFeign roleMenuRelationFeign;
@@ -47,7 +45,7 @@ public class ResourceServiceImpl {
         List<MenuPathAndRoleNameBO> boList = roleMenuRelationFeign.listMenuPathAndRoleNameBO().getBody();
 
         // 将对应关系组装成 Map 格式
-        relationMap = new TreeMap<String, ArrayList<String>>();
+        Map<String, ArrayList<String>> relationMap = new TreeMap<String, ArrayList<String>>();
         for (MenuPathAndRoleNameBO bo : boList) {
             relationMap.put(bo.getPath(), bo.getRoleNameList());
         }

@@ -65,16 +65,16 @@ public class ResourceSecurityConfig {
             .jwt()
             .jwtAuthenticationConverter(jwtAuthenticationConverter());
 
-        // 加入过滤器, 移除白名单 URL 的 JWT 请求头
         http
-            .addFilterBefore(ignoreUrlsRemoveJwtFilter, SecurityWebFiltersOrder.AUTHENTICATION);
-
-        http
+            // 添加过滤器: 移除白名单 URL 中的 JWT 请求头
+            .addFilterBefore(ignoreUrlsRemoveJwtFilter, SecurityWebFiltersOrder.AUTHENTICATION)
             .authorizeExchange()
             // 白名单配置
-            .pathMatchers(ArrayUtil.toArray(ignoreUrlsConfig.getUrls(), String.class)).permitAll()
+            .pathMatchers(ArrayUtil.toArray(ignoreUrlsConfig.getUrls(), String.class))
+            .permitAll()
             // 鉴权管理器配置
-            .anyExchange().access(authorizationManager)
+            .anyExchange()
+            .access(authorizationManager)
             .and()
             .exceptionHandling()
             // 处理未授权
@@ -82,7 +82,8 @@ public class ResourceSecurityConfig {
             // 处理未认证
             .authenticationEntryPoint(restAuthenticationEntryPoint)
             .and()
-            .csrf().disable();
+            .csrf()
+            .disable();
         return http.build();
     }
 
