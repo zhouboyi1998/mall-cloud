@@ -31,14 +31,14 @@ public class KeyPairController {
         this.keyPair = keyPair;
     }
 
-    @ApiOperation(value = "获取 RSA 私钥")
+    @ApiOperation(value = "获取 RSA 公钥")
     @GetMapping("/rsa/publicKey")
     public ResponseEntity<Map<String, Object>> getRsaPublicKey() {
-        // 从 RSA 密钥对中获取公钥
+        // 从证书中获取公钥
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        // 使用公钥生成私钥
+        // 使用公钥生成 Nimbus JOSE + JWT 提供的 RSA 密钥 (只存储公钥)
         RSAKey key = new RSAKey.Builder(publicKey).build();
-        // 将私钥信息转换为 Map 格式
+        // 将密钥转换为 Map 格式
         Map<String, Object> map = new JWKSet(key).toJSONObject();
         return ResponseEntity.ok(map);
     }

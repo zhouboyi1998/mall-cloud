@@ -27,8 +27,8 @@ public class PasswordToolbox {
     /**
      * BCrypt 匹配
      *
-     * @param ciphertext 密文
      * @param plaintext  明文
+     * @param ciphertext 密文
      * @return
      */
     public static Boolean matchBCrypt(String plaintext, String ciphertext) {
@@ -50,8 +50,8 @@ public class PasswordToolbox {
     /**
      * BCrypt 匹配
      *
-     * @param ciphertext 密文
      * @param plaintext  明文
+     * @param ciphertext 密文
      * @return
      */
     public static Boolean matchSCrypt(String plaintext, String ciphertext) {

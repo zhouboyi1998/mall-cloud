@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
  * @Package: com.cafe.common.gateway.authorization
  * @Author: zhouboyi
  * @Date: 2022/5/10 23:02
- * @Description:
+ * @Description: 授权管理器
  */
 @Component
 public class AuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {

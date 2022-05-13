@@ -20,13 +20,20 @@ import java.text.ParseException;
  * @Package: com.cafe.common.gateway.filter
  * @Author: zhouboyi
  * @Date: 2022/5/10 23:01
- * @Description: 解析用户信息的全局过滤器
+ * @Description: 全局过滤器 (解析 JWT 中的用户认证信息)
  */
 @Component
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
     private static Logger LOGGER = LoggerFactory.getLogger(AuthGlobalFilter.class);
 
+    /**
+     * 解析 JWT 获取其中的用户信息
+     *
+     * @param exchange
+     * @param chain
+     * @return
+     */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         String token = exchange.getRequest().getHeaders().getFirst(AuthEnum.JWT_TOKEN_HEADER.getValue());

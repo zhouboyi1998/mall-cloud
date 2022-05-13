@@ -29,42 +29,56 @@ import java.util.List;
  * @Package: com.cafe.common.security.config
  * @Author: zhouboyi
  * @Date: 2022/5/9 10:13
- * @Description: OAuth2 认证服务相关配置
+ * @Description: OAuth2 认证服务配置
  */
 @Configuration
 @EnableAuthorizationServer
 public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
+    /**
+     * 使用 SCrypt 加密
+     */
     @Qualifier("sCryptPasswordEncoder")
     private PasswordEncoder passwordEncoder;
+
     private AuthenticationManager authenticationManager;
+
     private JwtTokenEnhancer jwtTokenEnhancer;
+
     private UserDetailsService userDetailsService;
+
+    private RsaCredentialConfig rsaCredentialConfig;
 
     @Autowired
     public Oauth2ServerConfig(
         PasswordEncoder passwordEncoder,
         AuthenticationManager authenticationManager,
         JwtTokenEnhancer jwtTokenEnhancer,
-        UserDetailsService userDetailsService
+        UserDetailsService userDetailsService,
+        RsaCredentialConfig rsaCredentialConfig
     ) {
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtTokenEnhancer = jwtTokenEnhancer;
         this.userDetailsService = userDetailsService;
+        this.rsaCredentialConfig = rsaCredentialConfig;
     }
 
     /**
-     * 从 RSA证书文件(jwt.jks) 中获取密钥对
+     * 从 RSA 证书文件 (jwt.jks) 中获取密钥对
      *
      * @return
      */
     @Bean
     public KeyPair keyPair() {
+        // 使用证书和生成证书时设置的密钥库口令 (-storepass) 获取密钥对
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
-            new ClassPathResource("jwt.jks"), "123456".toCharArray()
+            new ClassPathResource(rsaCredentialConfig.getFilename()),
+            rsaCredentialConfig.getStorepass().toCharArray()
         );
-        return keyStoreKeyFactory.getKeyPair("jwt", "123456".toCharArray());
+
+        return keyStoreKeyFactory
+            .getKeyPair(rsaCredentialConfig.getAlias(), rsaCredentialConfig.getStorepass().toCharArray());
     }
 
     /**
@@ -91,15 +105,15 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
             .inMemory()
             // 客户端id
             .withClient(AuthEnum.MANAGEMENT_CLIENT_ID.getValue())
-            // 客户端密钥: 生成 RSA证书文件(jwt.jks) 时设置的密钥
-            .secret(passwordEncoder.encode("123456"))
+            // 客户端密钥: 生成 RSA 证书文件 (jwt.jks) 时设置的密钥口令 (-keypass)
+            .secret(passwordEncoder.encode(rsaCredentialConfig.getKeypass()))
             // 授权模式: password 密码模式, refresh_token 开启刷新令牌
             .authorizedGrantTypes("password", "refresh_token")
             // 授权范围
             .scopes("all")
-            // 访问令牌 access_token 过期时间
+            // 访问令牌 access_token 过期时间 (1小时)
             .accessTokenValiditySeconds(3600)
-            // 刷新令牌 refresh_token 过期时间
+            // 刷新令牌 refresh_token 过期时间 (24小时)
             .refreshTokenValiditySeconds(86400);
     }
 

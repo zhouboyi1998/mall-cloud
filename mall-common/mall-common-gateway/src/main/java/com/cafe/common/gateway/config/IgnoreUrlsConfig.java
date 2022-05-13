@@ -10,12 +10,15 @@ import java.util.List;
  * @Package: com.cafe.common.gateway.config
  * @Author: zhouboyi
  * @Date: 2022/5/11 0:58
- * @Description:
+ * @Description: 获取 application 中定义的白名单 URL
  */
 @Component
 @ConfigurationProperties(prefix = "secure.ignore")
 public class IgnoreUrlsConfig {
 
+    /**
+     * 白名单 URL 列表
+     */
     private List<String> urls;
 
     public List<String> getUrls() {

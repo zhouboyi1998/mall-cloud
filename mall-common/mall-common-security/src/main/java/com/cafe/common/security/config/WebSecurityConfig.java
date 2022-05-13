@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
             .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
-            // 允许直接访问 /keyPair/rsa/publicKey 接口, 获取 RSA 私钥
+            // 允许直接访问 /keyPair/rsa/publicKey 接口, 获取 RSA 公钥信息
             .antMatchers("/keyPair/rsa/publicKey").permitAll()
             .anyRequest()
             .authenticated();
@@ -44,6 +44,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+    /**
+     * 使用 SCrypt 加密
+     *
+     * @return
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new SCryptPasswordEncoder();

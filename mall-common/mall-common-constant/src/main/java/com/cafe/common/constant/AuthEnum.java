@@ -2,7 +2,7 @@ package com.cafe.common.constant;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.security.management.constant
+ * @Package: com.cafe.common.constant
  * @Author: zhouboyi
  * @Date: 2022/5/10 23:14
  * @Description:

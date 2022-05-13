@@ -11,7 +11,7 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
  * @Package: com.cafe.common.gateway.config
  * @Author: zhouboyi
  * @Date: 2022/4/30 20:59
- * @Description: 全局跨域配置
+ * @Description: 网关全局跨域配置
  */
 @Configuration
 public class GlobalCorsConfig {

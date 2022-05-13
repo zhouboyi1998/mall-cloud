@@ -40,20 +40,20 @@ public class AuthController {
      * @return
      * @throws HttpRequestMethodNotSupportedException
      */
-    @RequestMapping(value = "/token", method = RequestMethod.POST)
+    @RequestMapping(value = "/token", method = {RequestMethod.POST})
     public ResponseEntity<Oauth2TokenDetails> postAccessToken(
         Principal principal,
         @RequestParam Map<String, String> parameters
     ) throws HttpRequestMethodNotSupportedException {
-        // 获取 Token 信息
+        // 使用 TokenEndpoint 生成访问令牌
         OAuth2AccessToken oAuth2AccessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
 
-        // 将 Token 信息封装到自定义封装类中返回
+        // 将访问令牌信息封装到自定义令牌信息封装类中返回
         Oauth2TokenDetails oauth2TokenDetails = new Oauth2TokenDetails();
         oauth2TokenDetails.setToken(oAuth2AccessToken.getValue());
         oauth2TokenDetails.setRefreshToken(oAuth2AccessToken.getRefreshToken().getValue());
-        oauth2TokenDetails.setExpiresIn(oAuth2AccessToken.getExpiresIn());
         oauth2TokenDetails.setTokenHead("Bearer ");
+        oauth2TokenDetails.setExpiresIn(oAuth2AccessToken.getExpiresIn());
 
         return ResponseEntity.ok(oauth2TokenDetails);
     }

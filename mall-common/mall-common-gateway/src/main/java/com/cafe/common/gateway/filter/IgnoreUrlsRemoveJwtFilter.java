@@ -19,7 +19,7 @@ import java.util.List;
  * @Package: com.cafe.common.gateway.config
  * @Author: zhouboyi
  * @Date: 2022/5/11 11:07
- * @Description: 过滤器, 移除白名单 URL 的 JWT 请求头
+ * @Description: 白名单 URL 过滤器
  */
 @Component
 public class IgnoreUrlsRemoveJwtFilter implements WebFilter {
@@ -31,6 +31,13 @@ public class IgnoreUrlsRemoveJwtFilter implements WebFilter {
         this.ignoreUrlsConfig = ignoreUrlsConfig;
     }
 
+    /**
+     * 移除白名单 URL 的 JWT 请求头
+     *
+     * @param exchange
+     * @param chain
+     * @return
+     */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();

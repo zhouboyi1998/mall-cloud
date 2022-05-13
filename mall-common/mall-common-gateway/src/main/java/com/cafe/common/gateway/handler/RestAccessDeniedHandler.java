@@ -1,6 +1,7 @@
 package com.cafe.common.gateway.handler;
 
 import cn.hutool.json.JSONUtil;
+import com.cafe.common.constant.RedisEnum;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ import java.nio.charset.Charset;
  * @Package: com.cafe.common.gateway.handle
  * @Author: zhouboyi
  * @Date: 2022/5/11 10:39
- * @Description:
+ * @Description: 自定义用户未授权处理类
  */
 @Component
 public class RestAccessDeniedHandler implements ServerAccessDeniedHandler {
@@ -28,11 +29,16 @@ public class RestAccessDeniedHandler implements ServerAccessDeniedHandler {
     @Override
     public Mono<Void> handle(ServerWebExchange exchange, AccessDeniedException denied) {
         ServerHttpResponse response = exchange.getResponse();
+        // 设置 HTTP 状态码
         response.setStatusCode(HttpStatus.OK);
+        // 设置 HTTP 请求头
+        // 请求内容: application/json
         response.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-        response.getHeaders().set("Access-Control-Allow-Origin", "*");
-        response.getHeaders().set("Cache-Control", "no-cache");
-        String body = JSONUtil.toJsonStr(ResponseEntity.status(HttpStatus.FORBIDDEN).body(denied.getMessage()));
+        // 允许跨域访问: 所有路径
+        response.getHeaders().set(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, MediaType.ALL.getType());
+        // 缓存控制: 无缓存
+        response.getHeaders().set(HttpHeaders.CACHE_CONTROL, RedisEnum.NO_CACHE.getValue());
+        String body = JSONUtil.toJsonStr(ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(denied.getMessage()));
         DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(Charset.forName("UTF-8")));
         return response.writeWith(Mono.just(buffer));
     }
