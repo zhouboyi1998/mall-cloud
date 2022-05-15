@@ -25,7 +25,7 @@ import java.text.ParseException;
 @Component
 public class AuthGlobalFilter implements GlobalFilter, Ordered {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(AuthGlobalFilter.class);
+    private static Logger logger = LoggerFactory.getLogger(AuthGlobalFilter.class);
 
     /**
      * 解析 JWT 获取其中的用户信息
@@ -41,13 +41,24 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
             return chain.filter(exchange);
         }
         try {
-            // 从 Token 中解析用户信息并设置到 Header 中去
+            // 从 Token 中解析用户信息并设置到 Header 中
+            // 解析令牌
             String realToken = token.replace(AuthEnum.JWT_TOKEN_PREFIX.getValue(), "");
             JWSObject jwsObject = JWSObject.parse(realToken);
+            // 获取用户信息
             String userStr = jwsObject.getPayload().toString();
-            LOGGER.info("AuthGlobalFilter.filter() user:{}", userStr);
-            ServerHttpRequest request = exchange.getRequest().mutate().header("user", userStr).build();
-            exchange = exchange.mutate().request(request).build();
+            // 打印日志
+            logger.info("AuthGlobalFilter.filter() user:{}", userStr);
+            // 将用户信息设置到请求头中
+            ServerHttpRequest request = exchange
+                .getRequest()
+                .mutate()
+                .header(AuthEnum.USER_TOKEN_HEADER.getValue(), userStr)
+                .build();
+            exchange = exchange
+                .mutate()
+                .request(request)
+                .build();
         } catch (ParseException e) {
             e.printStackTrace();
         }

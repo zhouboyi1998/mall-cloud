@@ -26,7 +26,7 @@ public class Oauth2TokenDetails implements Serializable {
     /**
      * 访问令牌头前缀
      */
-    private String tokenHead;
+    private String tokenPrefix;
 
     /**
      * 有效时间 (秒)
@@ -49,12 +49,12 @@ public class Oauth2TokenDetails implements Serializable {
         this.refreshToken = refreshToken;
     }
 
-    public String getTokenHead() {
-        return tokenHead;
+    public String getTokenPrefix() {
+        return tokenPrefix;
     }
 
-    public void setTokenHead(String tokenHead) {
-        this.tokenHead = tokenHead;
+    public void setTokenPrefix(String tokenPrefix) {
+        this.tokenPrefix = tokenPrefix;
     }
 
     public Integer getExpiresIn() {

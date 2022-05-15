@@ -10,29 +10,14 @@ package com.cafe.common.constant;
 public enum AuthEnum {
 
     /**
-     * JWT 存储权限前缀
+     * 权限前缀
      */
     AUTHORITY_PREFIX("ROLE_"),
 
     /**
-     * JWT 存储权限属性
+     * 权限名称
      */
     AUTHORITY_CLAIM_NAME("authorities"),
-
-    /**
-     * 后台管理 client_id
-     */
-    MANAGEMENT_CLIENT_ID("management-app"),
-
-    /**
-     * 前台商城 client_id
-     */
-    PORTAL_CLIENT_ID("portal-app"),
-
-    /**
-     * 认证信息 Http 请求头
-     */
-    JWT_TOKEN_HEADER("Authorization"),
 
     /**
      * JWT 令牌前缀
@@ -40,19 +25,14 @@ public enum AuthEnum {
     JWT_TOKEN_PREFIX("Bearer "),
 
     /**
-     * 用户信息 Http 请求头
+     * 认证信息请求头 (JWT 令牌请求头)
      */
-    USER_TOKEN_HEADER("user"),
+    JWT_TOKEN_HEADER("Authorization"),
 
     /**
-     * 后台管理接口路径匹配
+     * 用户信息请求头
      */
-    MANAGEMENT_URL_PATTERN("/api/**"),
-
-    /**
-     * 前台商城接口路径匹配
-     */
-    PORTAL_URL_PATTERN("/api/**");
+    USER_TOKEN_HEADER("user");
 
     private String value;
 

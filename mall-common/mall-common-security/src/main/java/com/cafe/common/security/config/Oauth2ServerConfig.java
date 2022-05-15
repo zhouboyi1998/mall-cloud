@@ -66,6 +66,11 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     private RsaCredentialConfig rsaCredentialConfig;
 
     /**
+     * 客户端详细信息配置
+     */
+    private ClientDetailsConfig clientDetailsConfig;
+
+    /**
      * Redis 连接工厂
      */
     private RedisConnectionFactory redisConnectionFactory;
@@ -77,6 +82,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         JwtTokenEnhancer jwtTokenEnhancer,
         UserDetailsService userDetailsService,
         RsaCredentialConfig rsaCredentialConfig,
+        ClientDetailsConfig clientDetailsConfig,
         RedisConnectionFactory redisConnectionFactory
     ) {
         this.passwordEncoder = passwordEncoder;
@@ -84,6 +90,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         this.jwtTokenEnhancer = jwtTokenEnhancer;
         this.userDetailsService = userDetailsService;
         this.rsaCredentialConfig = rsaCredentialConfig;
+        this.clientDetailsConfig = clientDetailsConfig;
         this.redisConnectionFactory = redisConnectionFactory;
     }
 
@@ -142,17 +149,17 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
             // 使用内存
             .inMemory()
             // 客户端id
-            .withClient(AuthEnum.MANAGEMENT_CLIENT_ID.getValue())
+            .withClient(clientDetailsConfig.getClientId())
             // 客户端密钥: 生成 RSA 证书文件 (jwt.jks) 时设置的密钥口令 (-keypass)
             .secret(passwordEncoder.encode(rsaCredentialConfig.getKeypass()))
             // 授权模式: password 密码模式, refresh_token 开启刷新令牌
-            .authorizedGrantTypes("password", "refresh_token")
+            .authorizedGrantTypes(clientDetailsConfig.getAuthorizedGrantTypes())
             // 授权范围
-            .scopes("all")
-            // 访问令牌 access_token 过期时间 (1小时)
-            .accessTokenValiditySeconds(3600)
-            // 刷新令牌 refresh_token 过期时间 (24小时)
-            .refreshTokenValiditySeconds(86400);
+            .scopes(clientDetailsConfig.getScopes())
+            // 访问令牌 access_token 过期时间
+            .accessTokenValiditySeconds(clientDetailsConfig.getAccessTokenValiditySeconds())
+            // 刷新令牌 refresh_token 过期时间
+            .refreshTokenValiditySeconds(clientDetailsConfig.getRefreshTokenValiditySeconds());
     }
 
     /**
