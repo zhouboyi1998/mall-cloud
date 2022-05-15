@@ -1,7 +1,6 @@
 package com.cafe.common.security.config;
 
-import com.cafe.common.constant.AuthEnum;
-import com.cafe.common.constant.RedisEnum;
+import com.cafe.common.constant.RedisConstant;
 import com.cafe.common.security.enhancer.JwtTokenEnhancer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -103,7 +102,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     public TokenStore tokenStore() {
         // 使用 Redis 存储令牌
         RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
-        redisTokenStore.setPrefix(RedisEnum.TOKEN_PREFIX.getValue());
+        redisTokenStore.setPrefix(RedisConstant.TOKEN_PREFIX);
         return redisTokenStore;
     }
 

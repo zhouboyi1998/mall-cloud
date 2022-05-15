@@ -2,7 +2,7 @@ package com.cafe.security.management.service.impl;
 
 import com.cafe.admin.bo.MenuPathAndRoleNameBO;
 import com.cafe.admin.feign.RoleMenuRelationFeign;
-import com.cafe.common.constant.RedisEnum;
+import com.cafe.common.constant.RedisConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
@@ -51,6 +51,6 @@ public class ResourceServiceImpl {
         }
 
         // 将对应关系放入 Redis 中, 提供给网关查询
-        redisTemplate.opsForHash().putAll(RedisEnum.RESOURCE_ROLE_MAP.getValue(), relationMap);
+        redisTemplate.opsForHash().putAll(RedisConstant.RESOURCE_ROLE_MAP, relationMap);
     }
 }

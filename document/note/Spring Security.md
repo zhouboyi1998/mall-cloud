@@ -34,7 +34,10 @@ implicit (隐藏模式)
     |-- 不支持 refresh_token
 ```
 
+---
+
 * Spring Security 中 4 种令牌存储方式
+
 ```
 JdbcTokenStore (保存到数据库)
 InMemoryTokenStore (保存到本地内存)

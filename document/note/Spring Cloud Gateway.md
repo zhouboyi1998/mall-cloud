@@ -13,6 +13,8 @@
 </dependency>
 ```
 
+---
+
 * 配合 Spring Security 使用时
 * 不要导入 Spring Boot / Spring Cloud 提供的 `starter`
 * starter 中有 Web 相关配置，会产生冲突

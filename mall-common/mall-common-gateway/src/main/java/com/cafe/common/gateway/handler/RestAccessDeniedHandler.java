@@ -1,7 +1,7 @@
 package com.cafe.common.gateway.handler;
 
 import cn.hutool.json.JSONUtil;
-import com.cafe.common.constant.RedisEnum;
+import com.cafe.common.constant.RedisConstant;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -37,7 +37,7 @@ public class RestAccessDeniedHandler implements ServerAccessDeniedHandler {
         // 允许跨域访问: 所有路径
         response.getHeaders().set(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, MediaType.ALL.getType());
         // 缓存控制: 无缓存
-        response.getHeaders().set(HttpHeaders.CACHE_CONTROL, RedisEnum.NO_CACHE.getValue());
+        response.getHeaders().set(HttpHeaders.CACHE_CONTROL, RedisConstant.NO_CACHE);
         String body = JSONUtil.toJsonStr(ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(denied.getMessage()));
         DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(Charset.forName("UTF-8")));
         return response.writeWith(Mono.just(buffer));

@@ -5,7 +5,7 @@ import com.cafe.common.gateway.authorization.AuthorizationManager;
 import com.cafe.common.gateway.filter.IgnoreUrlsRemoveJwtFilter;
 import com.cafe.common.gateway.handler.RestAccessDeniedHandler;
 import com.cafe.common.gateway.handler.RestAuthenticationEntryPoint;
-import com.cafe.common.constant.AuthEnum;
+import com.cafe.common.constant.AuthenticationConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -90,8 +90,8 @@ public class ResourceSecurityConfig {
     @Bean
     public Converter<Jwt, ? extends Mono<? extends AbstractAuthenticationToken>> jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        jwtGrantedAuthoritiesConverter.setAuthorityPrefix(AuthEnum.AUTHORITY_PREFIX.getValue());
-        jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName(AuthEnum.AUTHORITY_CLAIM_NAME.getValue());
+        jwtGrantedAuthoritiesConverter.setAuthorityPrefix(AuthenticationConstant.AUTHORITY_PREFIX);
+        jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName(AuthenticationConstant.AUTHORITY_CLAIM_NAME);
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
         return new ReactiveJwtAuthenticationConverterAdapter(jwtAuthenticationConverter);

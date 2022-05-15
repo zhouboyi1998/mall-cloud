@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.cafe.admin.feign.AdminFeign;
 import com.cafe.admin.feign.RoleFeign;
 import com.cafe.admin.model.Admin;
-import com.cafe.common.constant.ExceptionMessageEnum;
+import com.cafe.common.enumeration.ExceptionMessageEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.CredentialsExpiredException;

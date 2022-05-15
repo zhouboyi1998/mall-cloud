@@ -1,4 +1,4 @@
-package com.cafe.common.constant;
+package com.cafe.common.enumeration;
 
 /**
  * @Project: mall-cloud
@@ -28,7 +28,7 @@ public enum ExceptionMessageEnum {
      */
     private String message;
 
-    private ExceptionMessageEnum(Integer code, String message) {
+    ExceptionMessageEnum(Integer code, String message) {
         this.code = code;
         this.message = message;
     }

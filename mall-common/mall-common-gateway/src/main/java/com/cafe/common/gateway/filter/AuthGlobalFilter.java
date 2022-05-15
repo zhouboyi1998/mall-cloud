@@ -1,7 +1,7 @@
 package com.cafe.common.gateway.filter;
 
 import cn.hutool.core.util.StrUtil;
-import com.cafe.common.constant.AuthEnum;
+import com.cafe.common.constant.AuthenticationConstant;
 import com.nimbusds.jose.JWSObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,14 +36,14 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
      */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String token = exchange.getRequest().getHeaders().getFirst(AuthEnum.JWT_TOKEN_HEADER.getValue());
+        String token = exchange.getRequest().getHeaders().getFirst(AuthenticationConstant.JWT_TOKEN_HEADER);
         if (StrUtil.isEmpty(token)) {
             return chain.filter(exchange);
         }
         try {
             // 从 Token 中解析用户信息并设置到 Header 中
             // 解析令牌
-            String realToken = token.replace(AuthEnum.JWT_TOKEN_PREFIX.getValue(), "");
+            String realToken = token.replace(AuthenticationConstant.JWT_TOKEN_PREFIX, "");
             JWSObject jwsObject = JWSObject.parse(realToken);
             // 获取用户信息
             String userStr = jwsObject.getPayload().toString();
@@ -53,7 +53,7 @@ public class AuthGlobalFilter implements GlobalFilter, Ordered {
             ServerHttpRequest request = exchange
                 .getRequest()
                 .mutate()
-                .header(AuthEnum.USER_TOKEN_HEADER.getValue(), userStr)
+                .header(AuthenticationConstant.USER_TOKEN_HEADER, userStr)
                 .build();
             exchange = exchange
                 .mutate()

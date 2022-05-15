@@ -1,6 +1,6 @@
 package com.cafe.common.security.controller;
 
-import com.cafe.common.constant.AuthEnum;
+import com.cafe.common.constant.AuthenticationConstant;
 import com.cafe.common.security.token.Oauth2TokenDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +53,7 @@ public class AuthController {
         Oauth2TokenDetails oauth2TokenDetails = new Oauth2TokenDetails();
         oauth2TokenDetails.setToken(oAuth2AccessToken.getValue());
         oauth2TokenDetails.setRefreshToken(oAuth2AccessToken.getRefreshToken().getValue());
-        oauth2TokenDetails.setTokenPrefix(AuthEnum.JWT_TOKEN_PREFIX.getValue());
+        oauth2TokenDetails.setTokenPrefix(AuthenticationConstant.JWT_TOKEN_PREFIX);
         oauth2TokenDetails.setExpiresIn(oAuth2AccessToken.getExpiresIn());
 
         return ResponseEntity.ok(oauth2TokenDetails);

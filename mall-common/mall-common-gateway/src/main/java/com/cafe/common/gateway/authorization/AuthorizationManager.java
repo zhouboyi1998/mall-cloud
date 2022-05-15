@@ -1,8 +1,8 @@
 package com.cafe.common.gateway.authorization;
 
 import cn.hutool.core.convert.Convert;
-import com.cafe.common.constant.AuthEnum;
-import com.cafe.common.constant.RedisEnum;
+import com.cafe.common.constant.AuthenticationConstant;
+import com.cafe.common.constant.RedisConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authorization.AuthorizationDecision;
@@ -38,11 +38,11 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {
         // 从 Redis 中获取当前路径可访问角色列表
         URI uri = authorizationContext.getExchange().getRequest().getURI();
-        Object obj = redisTemplate.opsForHash().get(RedisEnum.RESOURCE_ROLE_MAP.getValue(), uri.getPath());
+        Object obj = redisTemplate.opsForHash().get(RedisConstant.RESOURCE_ROLE_MAP, uri.getPath());
         List<String> authorities = Convert.toList(String.class, obj);
         authorities = authorities
             .stream()
-            .map(i -> i = AuthEnum.AUTHORITY_PREFIX.getValue() + i)
+            .map(i -> i = AuthenticationConstant.AUTHORITY_PREFIX + i)
             .collect(Collectors.toList());
 
         // 认证通过且角色匹配的用户可访问当前路径
