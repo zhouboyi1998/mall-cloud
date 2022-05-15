@@ -1,12 +1,14 @@
 package com.cafe.common.security.config;
 
 import com.cafe.common.constant.AuthEnum;
+import com.cafe.common.constant.RedisEnum;
 import com.cafe.common.security.enhancer.JwtTokenEnhancer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,7 +19,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 
 import java.security.KeyPair;
@@ -41,13 +45,30 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Qualifier("sCryptPasswordEncoder")
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * 认证管理器
+     */
     private AuthenticationManager authenticationManager;
 
+    /**
+     * 自定义令牌增强器
+     */
     private JwtTokenEnhancer jwtTokenEnhancer;
 
+    /**
+     * 用户详细信息加载类
+     */
     private UserDetailsService userDetailsService;
 
+    /**
+     * RSA 证书配置
+     */
     private RsaCredentialConfig rsaCredentialConfig;
+
+    /**
+     * Redis 连接工厂
+     */
+    private RedisConnectionFactory redisConnectionFactory;
 
     @Autowired
     public Oauth2ServerConfig(
@@ -55,13 +76,28 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         AuthenticationManager authenticationManager,
         JwtTokenEnhancer jwtTokenEnhancer,
         UserDetailsService userDetailsService,
-        RsaCredentialConfig rsaCredentialConfig
+        RsaCredentialConfig rsaCredentialConfig,
+        RedisConnectionFactory redisConnectionFactory
     ) {
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtTokenEnhancer = jwtTokenEnhancer;
         this.userDetailsService = userDetailsService;
         this.rsaCredentialConfig = rsaCredentialConfig;
+        this.redisConnectionFactory = redisConnectionFactory;
+    }
+
+    /**
+     * 配置令牌存储方式 (如果不配置, 默认使用 JDBC 存储)
+     *
+     * @return
+     */
+    @Bean
+    public TokenStore tokenStore() {
+        // 使用 Redis 存储令牌
+        RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
+        redisTokenStore.setPrefix(RedisEnum.TOKEN_PREFIX.getValue());
+        return redisTokenStore;
     }
 
     /**
@@ -127,7 +163,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        // List 存储令牌增强器
+        // 存储令牌增强器集合
         List<TokenEnhancer> tokenEnhancerList = new ArrayList<TokenEnhancer>();
         // 自定义 JWT 访问令牌转换器
         tokenEnhancerList.add(jwtTokenEnhancer);
@@ -147,7 +183,9 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
             // 配置访问令牌转换器, 使用 OAuth2 官方提供的
             .accessTokenConverter(jwtAccessTokenConverter())
             // 配置自定义的令牌增强器链
-            .tokenEnhancer(tokenEnhancerChain);
+            .tokenEnhancer(tokenEnhancerChain)
+            // 配置令牌存储方式: 使用 Redis 存储
+            .tokenStore(tokenStore());
     }
 
     /**

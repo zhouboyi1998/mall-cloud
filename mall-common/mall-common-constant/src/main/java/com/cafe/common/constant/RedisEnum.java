@@ -10,9 +10,14 @@ package com.cafe.common.constant;
 public enum RedisEnum {
 
     /**
-     * 存储资源与角色对应关系的 Redis Key
+     * 资源-角色对应关系的 Key
      */
-    RESOURCE_ROLE_MAP("AUTH:RESOURCE_ROLES_MAP"),
+    RESOURCE_ROLE_MAP("AUTH:RESOURCE_ROLE_MAP"),
+
+    /**
+     * 令牌存储相关的 Key 前缀
+     */
+    TOKEN_PREFIX("AUTH:TOKEN_"),
 
     /**
      * 缓存控制: 无缓存
