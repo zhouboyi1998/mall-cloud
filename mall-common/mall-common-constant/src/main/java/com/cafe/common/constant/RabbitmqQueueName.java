@@ -1,0 +1,13 @@
+package com.cafe.common.constant;
+
+/**
+ * @Project: mall-cloud
+ * @Package: com.cafe.common.constant
+ * @Author: zhouboyi
+ * @Date: 2022/5/19 10:09
+ * @Description: RabbitMQ 队列名称
+ */
+public class RabbitmqQueueName {
+
+    public static final String ROLE_MENU_RELATION = "admin.role-menu-relation";
+}
