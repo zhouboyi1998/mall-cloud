@@ -11,8 +11,15 @@ spring:
     port: 6379
     password: 123456
     database: 0
+  # RabbitMQ 配置
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: binlog
+    password: binlog
+  # Spring 配置
   main:
-    # 允许存在多个 Feign 调用相同 Service 的接口
+    # 允许 bean 定义覆盖
     allow-bean-definition-overriding: true
 
 # Actuator Health 服务健康监控监控

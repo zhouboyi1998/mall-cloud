@@ -25,7 +25,7 @@ import java.text.ParseException;
 @Component
 public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
 
-    private static Logger logger = LoggerFactory.getLogger(AuthenticationGlobalFilter.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(AuthenticationGlobalFilter.class);
 
     /**
      * 解析 JWT 获取其中的用户信息
@@ -48,7 +48,7 @@ public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
             // 获取用户信息
             String userStr = jwsObject.getPayload().toString();
             // 打印日志
-            logger.info("AuthGlobalFilter.filter() user:{}", userStr);
+            LOGGER.info("AuthGlobalFilter.filter() user:{}", userStr);
             // 将用户信息设置到请求头中
             ServerHttpRequest request = exchange
                 .getRequest()

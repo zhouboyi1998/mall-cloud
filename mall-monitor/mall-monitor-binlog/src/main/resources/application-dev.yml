@@ -1,0 +1,27 @@
+spring:
+  cloud:
+    # Nacos 配置
+    nacos:
+      # 注册中心
+      discovery:
+        server-addr: http://127.0.0.1:8848
+  # RabbitMQ 配置
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: binlog
+    password: binlog
+    # 消息确认类型: 确认消息是否成功到达交换机 (Exchange)
+    publisher-confirm-type: correlated
+    # 确认消息是否成功到达队列 (Queue)
+    publisher-returns: true
+
+# 数据库监听配置
+binlog:
+  host: "127.0.0.1"
+  port: 3306
+  username: "root"
+  password: "123456"
+  server-id: 1
+  table-name:
+    - "mall_admin.mall_role_menu_relation"

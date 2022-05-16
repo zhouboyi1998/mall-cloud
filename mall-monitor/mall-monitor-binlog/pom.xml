@@ -11,9 +11,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cafe.mall</groupId>
-    <artifactId>mall-monitor-mysql</artifactId>
+    <artifactId>mall-monitor-binlog</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>MySQL 数据库监听模块</description>
+    <description>MySQL Binlog 数据库监听模块</description>
 
     <dependencies>
         <!-- Spring Boot Web 相关依赖 -->
@@ -26,6 +26,11 @@
             <groupId>com.github.shyiko</groupId>
             <artifactId>mysql-binlog-connector-java</artifactId>
         </dependency>
+        <!-- AMQP 协议 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
         <!-- Nacos 注册中心-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -35,6 +40,16 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+        </dependency>
+        <!-- Hutool 工具包 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cafe.mall</groupId>
+            <artifactId>mall-common-constant</artifactId>
         </dependency>
     </dependencies>
 

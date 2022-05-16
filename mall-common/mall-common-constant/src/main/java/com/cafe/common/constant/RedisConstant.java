@@ -18,9 +18,4 @@ public class RedisConstant {
      * 令牌存储相关的 Key 前缀
      */
     public static final String TOKEN_PREFIX = "AUTH:TOKEN_";
-
-    /**
-     * 缓存控制: 无缓存
-     */
-    public static final String NO_CACHE = "no-cache";
 }
