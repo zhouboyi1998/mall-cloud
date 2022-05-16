@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -138,10 +139,19 @@ public class RoleMenuRelationController {
         return ResponseEntity.ok(code);
     }
 
-    @ApiOperation(value = "获取菜单路径和角色名称对应关系列表")
+    @ApiOperation(value = "获取所有菜单路径和角色名称对应关系")
     @GetMapping("/list/menuPath/roleName/bo")
     public ResponseEntity<List<MenuPathAndRoleNameBO>> listMenuPathAndRoleNameBO() {
-        List<MenuPathAndRoleNameBO> boList = roleMenuRelationService.listMenuPathAndRoleNameBO();
+        // 空 List 不会生成 WHERE 条件, 即查询所有
+        List<Long> ids = new ArrayList<Long>();
+        List<MenuPathAndRoleNameBO> boList = roleMenuRelationService.listMenuPathAndRoleNameBO(ids);
+        return ResponseEntity.ok(boList);
+    }
+
+    @ApiOperation(value = "按 ids 获取菜单路径和角色名称对应关系列表")
+    @PostMapping("/list/menuPath/roleName/bo")
+    public ResponseEntity<List<MenuPathAndRoleNameBO>> listMenuPathAndRoleNameBO(@RequestBody List<Long> ids) {
+        List<MenuPathAndRoleNameBO> boList = roleMenuRelationService.listMenuPathAndRoleNameBO(ids);
         return ResponseEntity.ok(boList);
     }
 }

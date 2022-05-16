@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cafe.admin.bo.MenuPathAndRoleNameBO;
 import com.cafe.admin.model.RoleMenuRelation;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,9 +19,10 @@ import java.util.List;
 public interface RoleMenuRelationMapper extends BaseMapper<RoleMenuRelation> {
 
     /**
-     * 获取菜单路径和角色名称对应关系列表
+     * 获取菜单路径和角色名称对应关系
      *
+     * @param ids
      * @return
      */
-    List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO();
+    List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO(@Param(value = "ids") List<Long> ids);
 }

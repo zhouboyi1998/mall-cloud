@@ -16,9 +16,10 @@ import java.util.List;
 public interface RoleMenuRelationService extends IService<RoleMenuRelation> {
 
     /**
-     * 获取菜单路径和角色名称对应关系列表
+     * 获取菜单路径和角色名称对应关系
      *
+     * @param ids
      * @return
      */
-    List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO();
+    List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO(List<Long> ids);
 }

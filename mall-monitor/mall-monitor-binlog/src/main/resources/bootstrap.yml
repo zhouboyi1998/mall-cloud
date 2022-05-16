@@ -3,4 +3,4 @@ server:
 
 spring:
   application:
-    name: mall-monitor-mysql
+    name: mall-monitor-binlog

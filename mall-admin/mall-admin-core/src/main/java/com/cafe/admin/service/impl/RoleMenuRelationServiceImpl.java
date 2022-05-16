@@ -28,7 +28,7 @@ public class RoleMenuRelationServiceImpl extends ServiceImpl<RoleMenuRelationMap
     }
 
     @Override
-    public List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO() {
-        return roleMenuRelationMapper.listMenuPathAndRoleNameBO();
+    public List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO(List<Long> ids) {
+        return roleMenuRelationMapper.listMenuPathAndRoleNameBO(ids);
     }
 }

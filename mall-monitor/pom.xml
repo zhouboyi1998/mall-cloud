@@ -17,7 +17,7 @@
 
     <packaging>pom</packaging>
     <modules>
-        <module>mall-monitor-mysql</module>
+        <module>mall-monitor-binlog</module>
     </modules>
 
 </project>
