@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    # Nacos 配置
+    nacos:
+      # 注册中心
+      discovery:
+        server-addr: http://127.0.0.1:8848
+
+# 被监听数据库的连接配置
+binlog:
+  host: "127.0.0.1"
+  port: 3306
+  username: "root"
+  password: "123456"
+  server-id: 1
+  # 表名带上数据库前缀, 防止出错
+  table-name:
+    - "mall_admin.mall_role_menu_relation"

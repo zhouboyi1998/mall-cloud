@@ -24,6 +24,7 @@
         <module>mall-gateway</module>
         <module>mall-generator</module>
         <module>mall-goods</module>
+        <module>mall-monitor</module>
         <module>mall-order</module>
         <module>mall-security</module>
     </modules>
@@ -43,6 +44,7 @@
         <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>7.1.0</minio.version>
+        <mysql-binlog-connector>0.21.0</mysql-binlog-connector>
 
         <mall-common-constant.version>1.0-SNAPSHOT</mall-common-constant.version>
         <mall-common-core.version>1.0-SNAPSHOT</mall-common-core.version>
@@ -169,6 +171,12 @@
                 <groupId>io.minio</groupId>
                 <artifactId>minio</artifactId>
                 <version>${minio.version}</version>
+            </dependency>
+            <!-- Binlog MySQL 数据库监听 -->
+            <dependency>
+                <groupId>com.github.shyiko</groupId>
+                <artifactId>mysql-binlog-connector-java</artifactId>
+                <version>${mysql-binlog-connector}</version>
             </dependency>
 
             <!-- 公共模块 -->
