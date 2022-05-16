@@ -1,7 +1,7 @@
 spring:
   profiles:
-    active: nacos
-  # 自动装配时排除以下配置
+    active: dev
+  # 自动装配时排除 JDBC 数据源配置
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
