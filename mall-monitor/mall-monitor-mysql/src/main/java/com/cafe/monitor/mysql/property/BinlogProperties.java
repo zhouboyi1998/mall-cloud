@@ -1,6 +1,7 @@
 package com.cafe.monitor.mysql.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.List;
  * @Package: com.cafe.monitor.mysql.property
  * @Author: zhouboyi
  * @Date: 2022/5/16 15:09
- * @Description: 获取 application 中定义的 被监听数据库的连接配置
+ * @Description: 获取 application 中定义的数据库监听配置
  */
 @Component
 @ConfigurationProperties(prefix = "binlog")
