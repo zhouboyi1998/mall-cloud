@@ -23,9 +23,9 @@ import java.text.ParseException;
  * @Description: 全局过滤器 (解析 JWT 中的用户认证信息)
  */
 @Component
-public class AuthGlobalFilter implements GlobalFilter, Ordered {
+public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
 
-    private static Logger logger = LoggerFactory.getLogger(AuthGlobalFilter.class);
+    private static Logger logger = LoggerFactory.getLogger(AuthenticationGlobalFilter.class);
 
     /**
      * 解析 JWT 获取其中的用户信息
