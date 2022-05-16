@@ -1,4 +1,4 @@
-package com.cafe.common.gateway.config;
+package com.cafe.common.gateway.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -7,14 +7,14 @@ import java.util.List;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.gateway.config
+ * @Package: com.cafe.common.gateway.property
  * @Author: zhouboyi
  * @Date: 2022/5/11 0:58
  * @Description: 获取 application 中定义的白名单 URL
  */
 @Component
 @ConfigurationProperties(prefix = "secure.ignore")
-public class IgnoreUrlsConfig {
+public class IgnoreUrlsProperties {
 
     /**
      * 白名单 URL 列表

@@ -6,6 +6,7 @@ import com.cafe.common.gateway.filter.IgnoreUrlsRemoveJwtFilter;
 import com.cafe.common.gateway.handler.RestAccessDeniedHandler;
 import com.cafe.common.gateway.handler.RestAuthenticationEntryPoint;
 import com.cafe.common.constant.AuthenticationConstant;
+import com.cafe.common.gateway.property.IgnoreUrlsProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -32,27 +33,42 @@ import reactor.core.publisher.Mono;
 @EnableWebFluxSecurity
 public class ResourceSecurityConfig {
 
+    /**
+     * 白名单 URL 过滤器
+     */
     private IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter;
 
-    private IgnoreUrlsConfig ignoreUrlsConfig;
+    /**
+     * 白名单 URL 配置
+     */
+    private IgnoreUrlsProperties ignoreUrlsProperties;
 
+    /**
+     * 授权管理器
+     */
     private AuthorizationManager authorizationManager;
 
+    /**
+     * 未授权处理类
+     */
     private RestAccessDeniedHandler restAccessDeniedHandler;
 
+    /**
+     * 未认证处理类
+     */
     private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
     @Autowired
     public ResourceSecurityConfig(
         IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter,
-        IgnoreUrlsConfig ignoreUrlsConfig,
+        IgnoreUrlsProperties ignoreUrlsProperties,
         AuthorizationManager authorizationManager,
         RestAccessDeniedHandler restAccessDeniedHandler,
         RestAuthenticationEntryPoint restAuthenticationEntryPoint
 
     ) {
         this.ignoreUrlsRemoveJwtFilter = ignoreUrlsRemoveJwtFilter;
-        this.ignoreUrlsConfig = ignoreUrlsConfig;
+        this.ignoreUrlsProperties = ignoreUrlsProperties;
         this.authorizationManager = authorizationManager;
         this.restAccessDeniedHandler = restAccessDeniedHandler;
         this.restAuthenticationEntryPoint = restAuthenticationEntryPoint;
@@ -70,7 +86,7 @@ public class ResourceSecurityConfig {
             .addFilterBefore(ignoreUrlsRemoveJwtFilter, SecurityWebFiltersOrder.AUTHENTICATION)
             .authorizeExchange()
             // 白名单配置
-            .pathMatchers(ArrayUtil.toArray(ignoreUrlsConfig.getUrls(), String.class))
+            .pathMatchers(ArrayUtil.toArray(ignoreUrlsProperties.getUrls(), String.class))
             .permitAll()
             // 鉴权管理器配置
             .anyExchange()

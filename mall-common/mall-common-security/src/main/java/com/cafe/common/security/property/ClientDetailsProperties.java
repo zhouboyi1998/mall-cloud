@@ -1,18 +1,18 @@
-package com.cafe.common.security.config;
+package com.cafe.common.security.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.security.config
+ * @Package: com.cafe.common.security.property
  * @Author: zhouboyi
  * @Date: 2022/5/15 18:53
  * @Description: 获取 application 中定义的客户端详细信息配置
  */
 @Component
 @ConfigurationProperties(prefix = "client.details")
-public class ClientDetailsConfig {
+public class ClientDetailsProperties {
 
     /**
      * 客户端id

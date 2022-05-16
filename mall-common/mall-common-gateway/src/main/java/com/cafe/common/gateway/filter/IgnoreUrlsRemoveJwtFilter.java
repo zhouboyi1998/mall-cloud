@@ -1,6 +1,6 @@
 package com.cafe.common.gateway.filter;
 
-import com.cafe.common.gateway.config.IgnoreUrlsConfig;
+import com.cafe.common.gateway.property.IgnoreUrlsProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
@@ -24,11 +24,11 @@ import java.util.List;
 @Component
 public class IgnoreUrlsRemoveJwtFilter implements WebFilter {
 
-    private IgnoreUrlsConfig ignoreUrlsConfig;
+    private IgnoreUrlsProperties ignoreUrlsProperties;
 
     @Autowired
-    public IgnoreUrlsRemoveJwtFilter(IgnoreUrlsConfig ignoreUrlsConfig) {
-        this.ignoreUrlsConfig = ignoreUrlsConfig;
+    public IgnoreUrlsRemoveJwtFilter(IgnoreUrlsProperties ignoreUrlsProperties) {
+        this.ignoreUrlsProperties = ignoreUrlsProperties;
     }
 
     /**
@@ -44,7 +44,7 @@ public class IgnoreUrlsRemoveJwtFilter implements WebFilter {
         URI uri = request.getURI();
         PathMatcher pathMatcher = new AntPathMatcher();
         // 移除白名单 URL 的 JWT 请求头
-        List<String> ignoreUrls = ignoreUrlsConfig.getUrls();
+        List<String> ignoreUrls = ignoreUrlsProperties.getUrls();
         for (String ignoreUrl : ignoreUrls) {
             if (pathMatcher.match(ignoreUrl, uri.getPath())) {
                 request = exchange.getRequest().mutate().header("Authorization", "").build();

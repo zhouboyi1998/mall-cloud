@@ -2,7 +2,7 @@ package com.cafe.common.enumeration;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.constant
+ * @Package: com.cafe.common.enumeration
  * @Author: zhouboyi
  * @Date: 2022/5/9 9:09
  * @Description: 错误信息枚举

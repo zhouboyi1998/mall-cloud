@@ -2,6 +2,8 @@ package com.cafe.common.security.config;
 
 import com.cafe.common.constant.RedisConstant;
 import com.cafe.common.security.enhancer.JwtTokenEnhancer;
+import com.cafe.common.security.property.ClientDetailsProperties;
+import com.cafe.common.security.property.RsaCredentialProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -62,12 +64,12 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     /**
      * RSA 证书配置
      */
-    private RsaCredentialConfig rsaCredentialConfig;
+    private RsaCredentialProperties rsaCredentialProperties;
 
     /**
      * 客户端详细信息配置
      */
-    private ClientDetailsConfig clientDetailsConfig;
+    private ClientDetailsProperties clientDetailsProperties;
 
     /**
      * Redis 连接工厂
@@ -80,16 +82,16 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         AuthenticationManager authenticationManager,
         JwtTokenEnhancer jwtTokenEnhancer,
         UserDetailsService userDetailsService,
-        RsaCredentialConfig rsaCredentialConfig,
-        ClientDetailsConfig clientDetailsConfig,
+        RsaCredentialProperties rsaCredentialProperties,
+        ClientDetailsProperties clientDetailsProperties,
         RedisConnectionFactory redisConnectionFactory
     ) {
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtTokenEnhancer = jwtTokenEnhancer;
         this.userDetailsService = userDetailsService;
-        this.rsaCredentialConfig = rsaCredentialConfig;
-        this.clientDetailsConfig = clientDetailsConfig;
+        this.rsaCredentialProperties = rsaCredentialProperties;
+        this.clientDetailsProperties = clientDetailsProperties;
         this.redisConnectionFactory = redisConnectionFactory;
     }
 
@@ -115,13 +117,13 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     public KeyPair keyPair() {
         // 使用 keystore 和 storepass 获取密钥对
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
-            new ClassPathResource(rsaCredentialConfig.getKeystore()),
-            rsaCredentialConfig.getStorepass().toCharArray()
+            new ClassPathResource(rsaCredentialProperties.getKeystore()),
+            rsaCredentialProperties.getStorepass().toCharArray()
         );
 
         return keyStoreKeyFactory.getKeyPair(
-            rsaCredentialConfig.getAlias(),
-            rsaCredentialConfig.getStorepass().toCharArray()
+            rsaCredentialProperties.getAlias(),
+            rsaCredentialProperties.getStorepass().toCharArray()
         );
     }
 
@@ -148,17 +150,17 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
             // 使用内存
             .inMemory()
             // 客户端id
-            .withClient(clientDetailsConfig.getClientId())
+            .withClient(clientDetailsProperties.getClientId())
             // 客户端密钥: 生成 RSA 证书文件 (jwt.jks) 时设置的密钥口令 (-keypass)
-            .secret(passwordEncoder.encode(rsaCredentialConfig.getKeypass()))
+            .secret(passwordEncoder.encode(rsaCredentialProperties.getKeypass()))
             // 授权模式: password 密码模式, refresh_token 开启刷新令牌
-            .authorizedGrantTypes(clientDetailsConfig.getAuthorizedGrantTypes())
+            .authorizedGrantTypes(clientDetailsProperties.getAuthorizedGrantTypes())
             // 授权范围
-            .scopes(clientDetailsConfig.getScopes())
+            .scopes(clientDetailsProperties.getScopes())
             // 访问令牌 access_token 过期时间
-            .accessTokenValiditySeconds(clientDetailsConfig.getAccessTokenValiditySeconds())
+            .accessTokenValiditySeconds(clientDetailsProperties.getAccessTokenValiditySeconds())
             // 刷新令牌 refresh_token 过期时间
-            .refreshTokenValiditySeconds(clientDetailsConfig.getRefreshTokenValiditySeconds());
+            .refreshTokenValiditySeconds(clientDetailsProperties.getRefreshTokenValiditySeconds());
     }
 
     /**
