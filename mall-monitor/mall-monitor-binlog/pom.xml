@@ -11,9 +11,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cafe.mall</groupId>
-    <artifactId>mall-monitor-mysql</artifactId>
+    <artifactId>mall-monitor-binlog</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>MySQL 数据库监听模块</description>
+    <description>MySQL Binlog 数据库监听模块</description>
 
     <dependencies>
         <!-- Spring Boot Web 相关依赖 -->

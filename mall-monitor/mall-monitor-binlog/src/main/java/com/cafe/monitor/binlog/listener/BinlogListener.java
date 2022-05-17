@@ -1,7 +1,7 @@
-package com.cafe.monitor.mysql.listener;
+package com.cafe.monitor.binlog.listener;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.cafe.monitor.mysql.property.BinlogProperties;
+import com.cafe.monitor.binlog.property.BinlogProperties;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
 import com.github.shyiko.mysql.binlog.event.*;
 import org.slf4j.Logger;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.monitor.mysql.listener
+ * @Package: com.cafe.monitor.binlog.listener
  * @Author: zhouboyi
  * @Date: 2022/5/16 19:48
  * @Description:
