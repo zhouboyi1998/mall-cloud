@@ -5,6 +5,16 @@ spring:
       # 注册中心
       discovery:
         server-addr: http://127.0.0.1:8848
+  # RabbitMQ 配置
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: binlog
+    password: binlog
+    # 消息确认类型: 确认消息是否成功到达交换机 (Exchange)
+    publisher-confirm-type: correlated
+    # 确认消息是否成功到达队列 (Queue)
+    publisher-returns: true
 
 # 数据库监听配置
 binlog:

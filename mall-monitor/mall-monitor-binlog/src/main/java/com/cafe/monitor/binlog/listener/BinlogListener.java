@@ -34,7 +34,7 @@ public class BinlogListener implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
 
         // 新建 Map 存储 Table 信息
         Map<Long, String> tableMap = new HashMap<Long, String>(8);
