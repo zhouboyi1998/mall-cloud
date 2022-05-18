@@ -4,6 +4,8 @@ import com.cafe.admin.bo.MenuPathAndRoleNameBO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -20,10 +22,19 @@ import java.util.List;
 public interface RoleMenuRelationFeign {
 
     /**
-     * 获取菜单路径和角色名称对应列表
+     * 获取所有菜单路径和角色名称对应列表
      *
      * @return
      */
     @GetMapping("/list/menuPath/roleName/bo")
     ResponseEntity<List<MenuPathAndRoleNameBO>> listMenuPathAndRoleNameBO();
+
+    /**
+     * 按 ids 获取菜单路径和角色名称对应关系列表
+     *
+     * @param ids
+     * @return
+     */
+    @PostMapping("/list/menuPath/roleName/bo")
+    ResponseEntity<List<MenuPathAndRoleNameBO>> listMenuPathAndRoleNameBO(@RequestBody List<Long> ids);
 }
