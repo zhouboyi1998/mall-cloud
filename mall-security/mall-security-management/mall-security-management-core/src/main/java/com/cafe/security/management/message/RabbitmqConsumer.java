@@ -3,12 +3,10 @@ package com.cafe.security.management.message;
 import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.RabbitmqExchangeName;
 import com.cafe.common.constant.RabbitmqQueueName;
+import com.cafe.common.constant.RabbitmqRoutingKey;
 import com.cafe.common.constant.StringConstant;
 import com.cafe.common.security.service.ResourceService;
-import org.springframework.amqp.rabbit.annotation.Exchange;
-import org.springframework.amqp.rabbit.annotation.Queue;
-import org.springframework.amqp.rabbit.annotation.QueueBinding;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,16 +34,30 @@ public class RabbitmqConsumer {
      *
      * @param content 消息内容
      */
-    @RabbitListener(
-        bindings = @QueueBinding(
-            value = @Queue(
-                value = RabbitmqQueueName.ROLE_MENU_RELATION,
-                durable = StringConstant.TRUE,
-                autoDelete = StringConstant.FALSE
-            ),
-            exchange = @Exchange(value = RabbitmqExchangeName.BINLOG)
+    @RabbitListeners(value = {
+        @RabbitListener(
+            bindings = @QueueBinding(
+                value = @Queue(
+                    value = RabbitmqQueueName.ROLE_MENU_RELATION,
+                    durable = StringConstant.TRUE,
+                    autoDelete = StringConstant.FALSE
+                ),
+                exchange = @Exchange(value = RabbitmqExchangeName.BINLOG),
+                key = {RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU_RELATION}
+            )
+        ),
+        @RabbitListener(
+            bindings = @QueueBinding(
+                value = @Queue(
+                    value = RabbitmqQueueName.ROLE_MENU_RELATION,
+                    durable = StringConstant.TRUE,
+                    autoDelete = StringConstant.FALSE
+                ),
+                exchange = @Exchange(value = RabbitmqExchangeName.CANAL),
+                key = {RabbitmqRoutingKey.CANAL_TO_ROLE_MENU_RELATION}
+            )
         )
-    )
+    })
     public void listener(String content) {
         // JSONStr 转换为 JSONArray 再转换为 List
         List<Long> ids = JSONUtil.parseArray(content).toList(Long.class);
