@@ -10,4 +10,6 @@ package com.cafe.common.constant;
 public class RabbitmqExchangeName {
 
     public static final String BINLOG = "binlog";
+
+    public static final String CANAL = "canal";
 }

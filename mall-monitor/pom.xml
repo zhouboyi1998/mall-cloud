@@ -18,6 +18,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>mall-monitor-binlog</module>
+        <module>mall-monitor-canal</module>
     </modules>
 
 </project>
