@@ -2,6 +2,7 @@ package com.cafe.monitor.binlog.listener;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.cafe.common.constant.RabbitmqExchangeName;
+import com.cafe.common.constant.RabbitmqRoutingKey;
 import com.cafe.monitor.binlog.message.RabbitmqProducer;
 import com.cafe.monitor.binlog.property.BinlogProperties;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
@@ -24,7 +25,7 @@ import java.util.Map;
  * @Package: com.cafe.monitor.binlog.listener
  * @Author: zhouboyi
  * @Date: 2022/5/16 19:48
- * @Description:
+ * @Description: Binlog 监听器
  */
 @Component
 public class BinlogListener implements CommandLineRunner {
@@ -80,7 +81,7 @@ public class BinlogListener implements CommandLineRunner {
                     // 从监听数据中获取表名
                     String tableName = tableMap.get(updateRowsEventData.getTableId());
                     // 判断是否为需要监听的表
-                    if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTableName().contains(tableName)) {
+                    if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
                         LOGGER.info("Update Operation TableName: " + tableName);
                         // 存储所有修改行的主键id
@@ -91,7 +92,11 @@ public class BinlogListener implements CommandLineRunner {
                             ids.add((Long) row.getValue()[0]);
                         }
                         // 发送消息到 RabbitMQ
-                        rabbitmqProducer.convertAndSend(RabbitmqExchangeName.BINLOG, tableName, ids);
+                        rabbitmqProducer.convertAndSend(
+                            RabbitmqExchangeName.BINLOG,
+                            RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU_RELATION,
+                            ids
+                        );
                     }
                 }
                 // 监听 insert 操作
@@ -101,7 +106,7 @@ public class BinlogListener implements CommandLineRunner {
                     // 从监听数据中获取表名
                     String tableName = tableMap.get(writeRowsEventData.getTableId());
                     // 判断是否为需要监听的表
-                    if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTableName().contains(tableName)) {
+                    if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
                         LOGGER.info("Insert Operation TableName: " + tableName);
                         // 存储所有新增行的主键id
@@ -112,7 +117,11 @@ public class BinlogListener implements CommandLineRunner {
                             ids.add((Long) row[0]);
                         }
                         // 发送消息到 RabbitMQ
-                        rabbitmqProducer.convertAndSend(RabbitmqExchangeName.BINLOG, tableName, ids);
+                        rabbitmqProducer.convertAndSend(
+                            RabbitmqExchangeName.BINLOG,
+                            RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU_RELATION,
+                            ids
+                        );
                     }
                 }
                 //监听 delete 操作
@@ -122,7 +131,7 @@ public class BinlogListener implements CommandLineRunner {
                     // 从监听数据中获取表名
                     String tableName = tableMap.get(deleteRowsEventData.getTableId());
                     // 判断是否为需要监听的表
-                    if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTableName().contains(tableName)) {
+                    if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
                         LOGGER.info("Delete Operation TableName: " + tableName);
                         // 存储所有删除行的主键id
@@ -133,7 +142,11 @@ public class BinlogListener implements CommandLineRunner {
                             ids.add((Long) row[0]);
                         }
                         // 发送消息到 RabbitMQ
-                        rabbitmqProducer.convertAndSend(RabbitmqExchangeName.BINLOG, tableName, ids);
+                        rabbitmqProducer.convertAndSend(
+                            RabbitmqExchangeName.BINLOG,
+                            RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU_RELATION,
+                            ids
+                        );
                     }
                 }
             }

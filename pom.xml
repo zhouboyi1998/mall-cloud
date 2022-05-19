@@ -44,11 +44,13 @@
         <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>7.1.0</minio.version>
-        <mysql-binlog-connector>0.21.0</mysql-binlog-connector>
+        <mysql-binlog-connector.version>0.21.0</mysql-binlog-connector.version>
+        <canal-client.version>1.1.5</canal-client.version>
 
         <mall-common-constant.version>1.0-SNAPSHOT</mall-common-constant.version>
         <mall-common-core.version>1.0-SNAPSHOT</mall-common-core.version>
         <mall-common-gateway.version>1.0-SNAPSHOT</mall-common-gateway.version>
+        <mall-common-monitor.version>1.0-SNAPSHOT</mall-common-monitor.version>
         <mall-common-security.version>1.0-SNAPSHOT</mall-common-security.version>
 
         <mall-admin-api.version>1.0-SNAPSHOT</mall-admin-api.version>
@@ -176,7 +178,13 @@
             <dependency>
                 <groupId>com.github.shyiko</groupId>
                 <artifactId>mysql-binlog-connector-java</artifactId>
-                <version>${mysql-binlog-connector}</version>
+                <version>${mysql-binlog-connector.version}</version>
+            </dependency>
+            <!-- Canal 数据库监听 -->
+            <dependency>
+                <groupId>com.alibaba.otter</groupId>
+                <artifactId>canal.client</artifactId>
+                <version>${canal-client.version}</version>
             </dependency>
 
             <!-- 公共模块 -->
@@ -194,6 +202,11 @@
                 <groupId>com.cafe.mall</groupId>
                 <artifactId>mall-common-gateway</artifactId>
                 <version>${mall-common-gateway.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe.mall</groupId>
+                <artifactId>mall-common-monitor</artifactId>
+                <version>${mall-common-monitor.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe.mall</groupId>
