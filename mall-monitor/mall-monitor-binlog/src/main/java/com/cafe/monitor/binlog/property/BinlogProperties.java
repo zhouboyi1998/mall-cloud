@@ -26,7 +26,7 @@ public class BinlogProperties {
 
     private Long serverId;
 
-    private List<String> tableName;
+    private List<String> table;
 
     public String getHost() {
         return host;
@@ -68,11 +68,11 @@ public class BinlogProperties {
         this.serverId = serverId;
     }
 
-    public List<String> getTableName() {
-        return tableName;
+    public List<String> getTable() {
+        return table;
     }
 
-    public void setTableName(List<String> tableName) {
-        this.tableName = tableName;
+    public void setTable(List<String> table) {
+        this.table = table;
     }
 }

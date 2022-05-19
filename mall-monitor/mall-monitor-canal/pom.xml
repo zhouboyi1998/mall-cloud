@@ -11,15 +11,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cafe.mall</groupId>
-    <artifactId>mall-monitor-binlog</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <description>MySQL Binlog 数据库监听模块</description>
+    <artifactId>mall-monitor-canal</artifactId>
+    <description>Canal 数据库监听模块</description>
 
     <dependencies>
-        <!-- Binlog MySQL 数据库监听 -->
+        <!-- Canal 数据库监听 -->
         <dependency>
-            <groupId>com.github.shyiko</groupId>
-            <artifactId>mysql-binlog-connector-java</artifactId>
+            <groupId>com.alibaba.otter</groupId>
+            <artifactId>canal.client</artifactId>
         </dependency>
 
         <dependency>
