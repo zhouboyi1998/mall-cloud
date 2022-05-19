@@ -1,6 +1,9 @@
-package com.cafe.security.management.consumer;
+package com.cafe.security.management.message;
 
 import cn.hutool.json.JSONUtil;
+import com.cafe.common.constant.RabbitmqExchangeName;
+import com.cafe.common.constant.RabbitmqQueueName;
+import com.cafe.common.constant.StringConstant;
 import com.cafe.common.security.service.ResourceService;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
@@ -13,10 +16,10 @@ import java.util.List;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.security.management.consumer
+ * @Package: com.cafe.security.management.message
  * @Author: zhouboyi
  * @Date: 2022/5/18 14:56
- * @Description: RabbitMQ 消息消费者
+ * @Description: RabbitMQ 消息消费者 (接收数据库表修改消息)
  */
 @Component
 public class RabbitmqConsumer {
@@ -35,8 +38,12 @@ public class RabbitmqConsumer {
      */
     @RabbitListener(
         bindings = @QueueBinding(
-            value = @Queue(value = "admin.role_menu_relation", autoDelete = "false"),
-            exchange = @Exchange(value = "binlog")
+            value = @Queue(
+                value = RabbitmqQueueName.ROLE_MENU_RELATION,
+                durable = StringConstant.TRUE,
+                autoDelete = StringConstant.FALSE
+            ),
+            exchange = @Exchange(value = RabbitmqExchangeName.BINLOG)
         )
     )
     public void listener(String content) {

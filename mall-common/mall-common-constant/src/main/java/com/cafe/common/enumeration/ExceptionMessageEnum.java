@@ -9,9 +9,6 @@ package com.cafe.common.enumeration;
  */
 public enum ExceptionMessageEnum {
 
-    /**
-     * 枚举值
-     */
     USERNAME_NOTFOUND(1001, "账号不存在"),
     ACCOUNT_DISABLED(1002, "账号不可用"),
     ACCOUNT_LOCKED(1003, "账号被锁定"),

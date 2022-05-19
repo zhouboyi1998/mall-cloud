@@ -1,4 +1,4 @@
-package com.cafe.monitor.binlog.producer;
+package com.cafe.monitor.binlog.message;
 
 import cn.hutool.json.JSONUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.monitor.binlog.producer
+ * @Package: com.cafe.monitor.binlog.message
  * @Author: zhouboyi
  * @Date: 2022/5/18 15:03
  * @Description: RabbitMQ 消息生产者

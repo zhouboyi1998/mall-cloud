@@ -1,8 +1,8 @@
 package com.cafe.monitor.binlog.listener;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.cafe.common.enumeration.RabbitmqExchangeEnum;
-import com.cafe.monitor.binlog.producer.RabbitmqProducer;
+import com.cafe.common.constant.RabbitmqExchangeName;
+import com.cafe.monitor.binlog.message.RabbitmqProducer;
 import com.cafe.monitor.binlog.property.BinlogProperties;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
 import com.github.shyiko.mysql.binlog.event.*;
@@ -91,7 +91,7 @@ public class BinlogListener implements CommandLineRunner {
                             ids.add((Long) row.getValue()[0]);
                         }
                         // 发送消息到 RabbitMQ
-                        rabbitmqProducer.convertAndSend(RabbitmqExchangeEnum.BINLOG.getName(), tableName, ids);
+                        rabbitmqProducer.convertAndSend(RabbitmqExchangeName.BINLOG, tableName, ids);
                     }
                 }
                 // 监听 insert 操作
@@ -112,7 +112,7 @@ public class BinlogListener implements CommandLineRunner {
                             ids.add((Long) row[0]);
                         }
                         // 发送消息到 RabbitMQ
-                        rabbitmqProducer.convertAndSend(RabbitmqExchangeEnum.BINLOG.getName(), tableName, ids);
+                        rabbitmqProducer.convertAndSend(RabbitmqExchangeName.BINLOG, tableName, ids);
                     }
                 }
                 //监听 delete 操作
@@ -133,7 +133,7 @@ public class BinlogListener implements CommandLineRunner {
                             ids.add((Long) row[0]);
                         }
                         // 发送消息到 RabbitMQ
-                        rabbitmqProducer.convertAndSend(RabbitmqExchangeEnum.BINLOG.getName(), tableName, ids);
+                        rabbitmqProducer.convertAndSend(RabbitmqExchangeName.BINLOG, tableName, ids);
                     }
                 }
             }
@@ -142,9 +142,9 @@ public class BinlogListener implements CommandLineRunner {
         // 开启数据库连接
         try {
             binaryLogClient.connect();
-            LOGGER.info("Listen on the database successfully!");
+            LOGGER.info("Listen on the database " + binlogProperties.getHost() + ":" + binlogProperties.getPort() + " successfully!");
         } catch (IOException e) {
-            LOGGER.error("Database connection error by {}", e.getMessage());
+            LOGGER.error("Database " + binlogProperties.getHost() + ":" + binlogProperties.getPort() + " connection error by {}", e.getMessage());
         }
     }
 }
