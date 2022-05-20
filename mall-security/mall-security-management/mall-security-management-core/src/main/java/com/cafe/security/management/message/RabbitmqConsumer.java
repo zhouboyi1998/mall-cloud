@@ -1,8 +1,9 @@
 package com.cafe.security.management.message;
 
 import cn.hutool.json.JSONUtil;
-import com.cafe.common.constant.RabbitmqExchangeName;
-import com.cafe.common.constant.RabbitmqQueueName;
+import com.cafe.admin.model.RoleMenuRelation;
+import com.cafe.common.constant.RabbitmqExchange;
+import com.cafe.common.constant.RabbitmqQueue;
 import com.cafe.common.constant.RabbitmqRoutingKey;
 import com.cafe.common.constant.StringConstant;
 import com.cafe.common.security.service.ResourceService;
@@ -10,6 +11,7 @@ import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -38,30 +40,35 @@ public class RabbitmqConsumer {
         @RabbitListener(
             bindings = @QueueBinding(
                 value = @Queue(
-                    value = RabbitmqQueueName.ROLE_MENU_RELATION,
+                    value = RabbitmqQueue.ROLE_MENU_RELATION,
                     durable = StringConstant.TRUE,
                     autoDelete = StringConstant.FALSE
                 ),
-                exchange = @Exchange(value = RabbitmqExchangeName.BINLOG),
+                exchange = @Exchange(value = RabbitmqExchange.BINLOG),
                 key = {RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU_RELATION}
             )
         ),
         @RabbitListener(
             bindings = @QueueBinding(
                 value = @Queue(
-                    value = RabbitmqQueueName.ROLE_MENU_RELATION,
+                    value = RabbitmqQueue.ROLE_MENU_RELATION,
                     durable = StringConstant.TRUE,
                     autoDelete = StringConstant.FALSE
                 ),
-                exchange = @Exchange(value = RabbitmqExchangeName.CANAL),
+                exchange = @Exchange(value = RabbitmqExchange.CANAL),
                 key = {RabbitmqRoutingKey.CANAL_TO_ROLE_MENU_RELATION}
             )
         )
     })
     public void listener(String content) {
+        // 存储 菜单ids
+        List<Long> menuIds = new ArrayList<Long>();
         // JSONStr 转换为 JSONArray 再转换为 List
-        List<Long> ids = JSONUtil.parseArray(content).toList(Long.class);
+        List<RoleMenuRelation> roleMenuRelationList = JSONUtil.parseArray(content).toList(RoleMenuRelation.class);
+        for (RoleMenuRelation roleMenuRelation : roleMenuRelationList) {
+            menuIds.add(roleMenuRelation.getMenuId());
+        }
         // 更新 Redis 中的数据
-        resourceService.updateRelationData(ids);
+        resourceService.updateRelationData(menuIds);
     }
 }

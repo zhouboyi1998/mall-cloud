@@ -1,4 +1,4 @@
-<h2 align="center">📔 Database</h2>
+<h2 align="center">📔 MySQL</h2>
 
 ### 📝 SQL 规范
 
@@ -15,8 +15,8 @@
 
 * 禁止使用 `NULL` 关键字来判断是否等于 `NULL` 值
 * 如果需要判断是否等于 `NULL` 值：使用 `ISNULL()` 函数
-    1. `NULL = NULL` 的返回结果是 `NULL` 而不是 `false`
-    2. `NULL <> NULL` 的返回结果是 `NULL` 而不是 `true`
+    1. `NULL = NULL` 的返回结果是 `NULL` 而不是 `true`
+    2. `NULL <> NULL` 的返回结果是 `NULL` 而不是 `false`
     3. `NULL <> 1` 的返回结果是 `NULL` 而不是 `true`
 
 ---
@@ -38,7 +38,7 @@
 
 ---
 
-### 数据库监听
+### 🩺 数据库监听
 
 * `Binlog` 是一个二进制日志文件，记录 `MySQL` 数据库表的变更历史
 * `MySQL` 使用该日志文件进行主从复制、增量备份、数据库还原
