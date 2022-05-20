@@ -7,7 +7,7 @@ package com.cafe.common.constant;
  * @Date: 2022/5/19 10:09
  * @Description: RabbitMQ 队列名称
  */
-public class RabbitmqQueueName {
+public class RabbitmqQueue {
 
     public static final String ROLE_MENU_RELATION = "admin.role-menu-relation";
 }

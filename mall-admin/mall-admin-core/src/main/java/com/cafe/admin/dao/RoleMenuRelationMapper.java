@@ -21,8 +21,8 @@ public interface RoleMenuRelationMapper extends BaseMapper<RoleMenuRelation> {
     /**
      * 获取菜单路径和角色名称对应关系
      *
-     * @param ids
+     * @param menuIds
      * @return
      */
-    List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO(@Param(value = "ids") List<Long> ids);
+    List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO(@Param(value = "menuIds") List<Long> menuIds);
 }

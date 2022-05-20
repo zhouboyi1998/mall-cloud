@@ -29,6 +29,7 @@ mall-cloud
     |-- mall-common-constant
     |-- mall-common-core
     |-- mall-common-gateway
+    |-- mall-common-monitor
     |-- mall-common-security
 |-- mall-eureka
 |-- mall-gateway
@@ -37,6 +38,9 @@ mall-cloud
 |-- mall-goods
     |-- mall-goods-api
     |-- mall-goods-core
+|-- mall-monitor
+    |-- mall-monitor-binlog
+    |-- mall-monitor-canal
 |-- mall-order
     |-- mall-order-api
     |-- mall-order-core
