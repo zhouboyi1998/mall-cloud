@@ -1,10 +1,8 @@
-package com.cafe.monitor.binlog.listener;
+package com.cafe.monitor.binlog.database.listener;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.cafe.common.constant.RabbitmqExchangeName;
-import com.cafe.common.constant.RabbitmqRoutingKey;
-import com.cafe.monitor.binlog.message.RabbitmqProducer;
-import com.cafe.monitor.binlog.property.BinlogProperties;
+import com.cafe.monitor.binlog.message.handler.MessageContentHandler;
+import com.cafe.monitor.binlog.database.property.BinlogProperties;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
 import com.github.shyiko.mysql.binlog.event.*;
 import org.slf4j.Logger;
@@ -22,7 +20,7 @@ import java.util.Map;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.monitor.binlog.listener
+ * @Package: com.cafe.monitor.binlog.database.listener
  * @Author: zhouboyi
  * @Date: 2022/5/16 19:48
  * @Description: Binlog 监听器
@@ -34,15 +32,15 @@ public class BinlogListener implements CommandLineRunner {
 
     private BinlogProperties binlogProperties;
 
-    private RabbitmqProducer rabbitmqProducer;
+    private MessageContentHandler messageContentHandler;
 
     @Autowired
     public BinlogListener(
         BinlogProperties binlogProperties,
-        RabbitmqProducer rabbitmqProducer
+        MessageContentHandler messageContentHandler
     ) {
         this.binlogProperties = binlogProperties;
-        this.rabbitmqProducer = rabbitmqProducer;
+        this.messageContentHandler = messageContentHandler;
     }
 
     @Override
@@ -85,18 +83,14 @@ public class BinlogListener implements CommandLineRunner {
                         // 打印日志
                         LOGGER.info("Update Operation TableName: " + tableName);
                         // 存储所有修改行的主键id
-                        List<Long> ids = new ArrayList<Long>();
+                        List<Serializable[]> beforeAndAfterRowList = new ArrayList<Serializable[]>();
                         // 循环每一行修改的数据
                         for (Map.Entry<Serializable[], Serializable[]> row : updateRowsEventData.getRows()) {
-                            // 获取该行数据的第一列, 即主键id
-                            ids.add((Long) row.getValue()[0]);
+                            beforeAndAfterRowList.add(row.getKey());
+                            beforeAndAfterRowList.add(row.getValue());
                         }
-                        // 发送消息到 RabbitMQ
-                        rabbitmqProducer.convertAndSend(
-                            RabbitmqExchangeName.BINLOG,
-                            RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU_RELATION,
-                            ids
-                        );
+                        // 将数据交给消息内容处理器
+                        messageContentHandler.handle(tableName, beforeAndAfterRowList);
                     }
                 }
                 // 监听 insert 操作
@@ -109,19 +103,8 @@ public class BinlogListener implements CommandLineRunner {
                     if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
                         LOGGER.info("Insert Operation TableName: " + tableName);
-                        // 存储所有新增行的主键id
-                        List<Long> ids = new ArrayList<Long>();
-                        // 循环每一行新增的数据
-                        for (Serializable[] row : writeRowsEventData.getRows()) {
-                            // 获取该行数据的第一列, 即主键id
-                            ids.add((Long) row[0]);
-                        }
-                        // 发送消息到 RabbitMQ
-                        rabbitmqProducer.convertAndSend(
-                            RabbitmqExchangeName.BINLOG,
-                            RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU_RELATION,
-                            ids
-                        );
+                        // 将数据交给消息内容处理器
+                        messageContentHandler.handle(tableName, writeRowsEventData.getRows());
                     }
                 }
                 //监听 delete 操作
@@ -134,19 +117,8 @@ public class BinlogListener implements CommandLineRunner {
                     if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
                         LOGGER.info("Delete Operation TableName: " + tableName);
-                        // 存储所有删除行的主键id
-                        List<Long> ids = new ArrayList<Long>();
-                        // 循环每一行删除的数据
-                        for (Serializable[] row : deleteRowsEventData.getRows()) {
-                            // 获取该行数据的第一列, 即主键id
-                            ids.add((Long) row[0]);
-                        }
-                        // 发送消息到 RabbitMQ
-                        rabbitmqProducer.convertAndSend(
-                            RabbitmqExchangeName.BINLOG,
-                            RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU_RELATION,
-                            ids
-                        );
+                        // 将数据交给消息内容处理器
+                        messageContentHandler.handle(tableName, deleteRowsEventData.getRows());
                     }
                 }
             }

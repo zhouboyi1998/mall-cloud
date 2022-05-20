@@ -30,11 +30,11 @@ public interface RoleMenuRelationFeign {
     ResponseEntity<List<MenuPathAndRoleNameBO>> listMenuPathAndRoleNameBO();
 
     /**
-     * 按 ids 获取菜单路径和角色名称对应关系列表
+     * 根据 菜单ids 获取菜单路径和角色名称对应关系列表
      *
-     * @param ids
+     * @param menuIds
      * @return
      */
     @PostMapping("/list/menuPath/roleName/bo")
-    ResponseEntity<List<MenuPathAndRoleNameBO>> listMenuPathAndRoleNameBO(@RequestBody List<Long> ids);
+    ResponseEntity<List<MenuPathAndRoleNameBO>> listMenuPathAndRoleNameBO(@RequestBody List<Long> menuIds);
 }

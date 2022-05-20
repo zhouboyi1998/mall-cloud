@@ -33,15 +33,11 @@
         LEFT JOIN mall_role_menu_relation AS rm ON rm.menu_id = m.id
         LEFT JOIN mall_role AS r ON r.id = rm.role_id
         <where>
-            <if test="ids.size() != 0">
-                AND rm.menu_id IN (
-                SELECT menu_id
-                FROM mall_role_menu_relation
-                WHERE id IN
-                <foreach collection="ids" item="id" open="(" close=")" separator=",">
-                    #{id}
+            <if test="menuIds.size() != 0">
+                AND rm.menu_id IN
+                <foreach collection="menuIds" item="menuId" open="(" close=")" separator=",">
+                    #{menuId}
                 </foreach>
-                )
             </if>
         </where>
         )
