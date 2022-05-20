@@ -1,4 +1,4 @@
-<h2 align="center">📔 Database</h2>
+<h2 align="center">📔 MySQL</h2>
 
 ### 📝 SQL 规范
 
@@ -15,8 +15,8 @@
 
 * 禁止使用 `NULL` 关键字来判断是否等于 `NULL` 值
 * 如果需要判断是否等于 `NULL` 值：使用 `ISNULL()` 函数
-    1. `NULL = NULL` 的返回结果是 `NULL` 而不是 `false`
-    2. `NULL <> NULL` 的返回结果是 `NULL` 而不是 `true`
+    1. `NULL = NULL` 的返回结果是 `NULL` 而不是 `true`
+    2. `NULL <> NULL` 的返回结果是 `NULL` 而不是 `false`
     3. `NULL <> 1` 的返回结果是 `NULL` 而不是 `true`
 
 ---

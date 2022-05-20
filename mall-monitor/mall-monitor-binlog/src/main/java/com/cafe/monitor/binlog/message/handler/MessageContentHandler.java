@@ -1,7 +1,7 @@
 package com.cafe.monitor.binlog.message.handler;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.cafe.common.constant.DatabaseTableAndExchangerAndKey;
+import com.cafe.common.constant.DatabaseTableAndExchangeAndKey;
 import com.cafe.common.constant.RabbitmqExchange;
 import com.cafe.monitor.binlog.database.constant.DatabaseTableAndBean;
 import com.cafe.monitor.binlog.message.producer.RabbitmqProducer;
@@ -58,7 +58,7 @@ public class MessageContentHandler {
         // 发送消息到 RabbitMQ
         rabbitmqProducer.convertAndSend(
             RabbitmqExchange.BINLOG,
-            DatabaseTableAndExchangerAndKey.TABLE_EXCHANGER_KEY_MAP.get(tableName).get(RabbitmqExchange.BINLOG),
+            DatabaseTableAndExchangeAndKey.TABLE_EXCHANGE_KEY_MAP.get(tableName).get(RabbitmqExchange.BINLOG),
             rowMapList
         );
     }
