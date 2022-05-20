@@ -18,8 +18,8 @@ public interface RoleMenuRelationService extends IService<RoleMenuRelation> {
     /**
      * 获取菜单路径和角色名称对应关系
      *
-     * @param ids
+     * @param menuIds
      * @return
      */
-    List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO(List<Long> ids);
+    List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO(List<Long> menuIds);
 }

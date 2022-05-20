@@ -52,9 +52,9 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public void updateRelationData(List<Long> ids) {
-        // 按 ids 获取菜单路径和角色名称对应关系列表
-        List<MenuPathAndRoleNameBO> boList = roleMenuRelationFeign.listMenuPathAndRoleNameBO(ids).getBody();
+    public void updateRelationData(List<Long> menuIds) {
+        // 按菜单ids获取菜单路径和角色名称对应关系列表
+        List<MenuPathAndRoleNameBO> boList = roleMenuRelationFeign.listMenuPathAndRoleNameBO(menuIds).getBody();
         // 更新 Redis 中的对应关系
         for (MenuPathAndRoleNameBO bo : boList) {
             redisTemplate.opsForHash().put(RedisConstant.RESOURCE_ROLE_MAP, bo.getPath(), bo.getRoleNameList());
