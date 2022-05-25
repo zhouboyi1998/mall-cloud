@@ -45,7 +45,7 @@ public class ResourceServiceImpl implements ResourceService {
         // 将对应关系组装成 Map 格式
         Map<String, ArrayList<String>> relationMap = new TreeMap<String, ArrayList<String>>();
         for (MenuPathAndRoleNameBO bo : boList) {
-            relationMap.put(bo.getPath(), bo.getRoleNameList());
+            relationMap.put(bo.getMenuPath(), bo.getRoleNameList());
         }
         // 将对应关系放入 Redis 中, 提供给网关查询
         redisTemplate.opsForHash().putAll(RedisConstant.RESOURCE_ROLE_MAP, relationMap);
@@ -57,7 +57,7 @@ public class ResourceServiceImpl implements ResourceService {
         List<MenuPathAndRoleNameBO> boList = roleMenuRelationFeign.listMenuPathAndRoleNameBO(menuIds).getBody();
         // 更新 Redis 中的对应关系
         for (MenuPathAndRoleNameBO bo : boList) {
-            redisTemplate.opsForHash().put(RedisConstant.RESOURCE_ROLE_MAP, bo.getPath(), bo.getRoleNameList());
+            redisTemplate.opsForHash().put(RedisConstant.RESOURCE_ROLE_MAP, bo.getMenuPath(), bo.getRoleNameList());
         }
     }
 }

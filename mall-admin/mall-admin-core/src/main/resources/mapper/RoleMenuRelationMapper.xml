@@ -16,7 +16,7 @@
         <result column="role_name" />
     </resultMap>
     <resultMap id="BOMap" type="com.cafe.admin.bo.MenuPathAndRoleNameBO">
-        <result column="path" property="path" />
+        <result column="menu_path" property="menuPath" />
         <collection property="roleNameList" resultMap="RoleNameListResult" javaType="java.util.List" />
     </resultMap>
 
@@ -28,7 +28,7 @@
 
     <select id="listMenuPathAndRoleNameBO" resultMap="BOMap">
         (
-        SELECT m.path, r.role_name
+        SELECT m.menu_path, r.role_name
         FROM mall_menu AS m
         LEFT JOIN mall_role_menu_relation AS rm ON rm.menu_id = m.id
         LEFT JOIN mall_role AS r ON r.id = rm.role_id
@@ -43,7 +43,7 @@
         )
         UNION
         (
-        SELECT m.path, r.role_name
+        SELECT m.menu_path, r.role_name
         FROM mall_menu AS m
         LEFT JOIN mall_role_menu_relation AS rm ON rm.menu_id = m.id
         LEFT JOIN mall_role AS r ON r.id = rm.role_id
