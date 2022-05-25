@@ -34,7 +34,7 @@ public class Menu implements Serializable {
     private String description;
 
     @ApiModelProperty(value = "菜单路径")
-    private String path;
+    private String menuPath;
 
     @ApiModelProperty(value = "上级分类 ID")
     private Integer parentId;
@@ -51,8 +51,8 @@ public class Menu implements Serializable {
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
-    @ApiModelProperty(value = "状态：1 正常，0 禁用")
-    private Integer status;
+    @ApiModelProperty(value = "状态：0 禁用，1 正常")
+    private Integer menuStatus;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
@@ -98,12 +98,12 @@ public class Menu implements Serializable {
         this.description = description;
     }
 
-    public String getPath() {
-        return path;
+    public String getMenuPath() {
+        return menuPath;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setMenuPath(String menuPath) {
+        this.menuPath = menuPath;
     }
 
     public Integer getParentId() {
@@ -146,12 +146,12 @@ public class Menu implements Serializable {
         this.sort = sort;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getMenuStatus() {
+        return menuStatus;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setMenuStatus(Integer menuStatus) {
+        this.menuStatus = menuStatus;
     }
 
     public Date getCreateTime() {
@@ -185,13 +185,13 @@ public class Menu implements Serializable {
         ", menuName=" + menuName +
         ", menuTitle=" + menuTitle +
         ", description=" + description +
-        ", path=" + path +
+        ", menuPath=" + menuPath +
         ", parentId=" + parentId +
         ", menuLevel=" + menuLevel +
         ", menuCode=" + menuCode +
         ", menuType=" + menuType +
         ", sort=" + sort +
-        ", status=" + status +
+        ", menuStatus=" + menuStatus +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         ", deleted=" + deleted +

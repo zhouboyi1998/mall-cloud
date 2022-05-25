@@ -8,22 +8,22 @@ import java.util.ArrayList;
  * @Package: com.cafe.admin.bo
  * @Author: zhouboyi
  * @Date: 2022/5/10 23:33
- * @Description:
+ * @Description: 菜单路径与角色名称对应关系BO
  */
 public class MenuPathAndRoleNameBO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private String path;
+    private String menuPath;
 
     private ArrayList<String> roleNameList;
 
-    public String getPath() {
-        return path;
+    public String getMenuPath() {
+        return menuPath;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setMenuPath(String menuPath) {
+        this.menuPath = menuPath;
     }
 
     public ArrayList<String> getRoleNameList() {
@@ -37,7 +37,7 @@ public class MenuPathAndRoleNameBO implements Serializable {
     @Override
     public String toString() {
         return "MenuPathAndRoleNameBO{" +
-            ", path=" + path +
+            ", menuPath=" + menuPath +
             ", roleNameList=" + roleNameList +
             "}";
     }
