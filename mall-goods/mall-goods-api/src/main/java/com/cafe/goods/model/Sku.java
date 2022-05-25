@@ -57,8 +57,8 @@ public class Sku implements Serializable {
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
-    @ApiModelProperty(value = "是否上架：0 下架，1 上架（商家使用）")
-    private Integer shelfStatus;
+    @ApiModelProperty(value = "状态：0 未审核，1 审核未通过，2 审核通过，3 上架")
+    private Integer skuStatus;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
@@ -168,12 +168,12 @@ public class Sku implements Serializable {
         this.sort = sort;
     }
 
-    public Integer getShelfStatus() {
-        return shelfStatus;
+    public Integer getSkuStatus() {
+        return skuStatus;
     }
 
-    public void setShelfStatus(Integer shelfStatus) {
-        this.shelfStatus = shelfStatus;
+    public void setSkuStatus(Integer skuStatus) {
+        this.skuStatus = skuStatus;
     }
 
     public Date getCreateTime() {
@@ -215,7 +215,7 @@ public class Sku implements Serializable {
         ", imageList=" + imageList +
         ", specificationName=" + specificationName +
         ", sort=" + sort +
-        ", shelfStatus=" + shelfStatus +
+        ", skuStatus=" + skuStatus +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         ", deleted=" + deleted +
