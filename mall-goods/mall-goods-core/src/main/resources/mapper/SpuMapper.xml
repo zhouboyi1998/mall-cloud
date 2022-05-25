@@ -17,8 +17,7 @@
         <result column="caption" property="caption" />
         <result column="intro" property="intro" />
         <result column="sort" property="sort" />
-        <result column="check_status" property="checkStatus" />
-        <result column="shelf_status" property="shelfStatus" />
+        <result column="spu_status" property="spuStatus" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
         <result column="is_deleted" property="deleted" />
@@ -26,7 +25,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, spu_name, brand_id, category_id, category_code, original_price, discount_price, seckill_price, image, comment_count, caption, intro, sort, check_status, shelf_status, create_time, update_time, is_deleted
+        id, spu_name, brand_id, category_id, category_code, original_price, discount_price, seckill_price, image, comment_count, caption, intro, sort, spu_status, create_time, update_time, is_deleted
     </sql>
 
 </mapper>

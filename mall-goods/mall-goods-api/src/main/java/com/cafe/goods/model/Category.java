@@ -42,8 +42,8 @@ public class Category implements Serializable {
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
-    @ApiModelProperty(value = "状态：1 正常")
-    private Integer status;
+    @ApiModelProperty(value = "状态：0 禁用，1 正常")
+    private Integer categoryStatus;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
@@ -113,12 +113,12 @@ public class Category implements Serializable {
         this.sort = sort;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getCategoryStatus() {
+        return categoryStatus;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setCategoryStatus(Integer categoryStatus) {
+        this.categoryStatus = categoryStatus;
     }
 
     public Date getCreateTime() {
@@ -155,7 +155,7 @@ public class Category implements Serializable {
         ", categoryCode=" + categoryCode +
         ", goodsCount=" + goodsCount +
         ", sort=" + sort +
-        ", status=" + status +
+        ", categoryStatus=" + categoryStatus +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         ", deleted=" + deleted +

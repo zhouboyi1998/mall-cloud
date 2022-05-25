@@ -30,8 +30,8 @@ public class Role implements Serializable {
     @ApiModelProperty(value = "描述信息")
     private String description;
 
-    @ApiModelProperty(value = "状态：1 正常，0 禁用")
-    private Integer status;
+    @ApiModelProperty(value = "状态：0 禁用，1 正常")
+    private Integer roleStatus;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
@@ -69,12 +69,12 @@ public class Role implements Serializable {
         this.description = description;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getRoleStatus() {
+        return roleStatus;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setRoleStatus(Integer roleStatus) {
+        this.roleStatus = roleStatus;
     }
 
     public Date getCreateTime() {
@@ -107,7 +107,7 @@ public class Role implements Serializable {
         "id=" + id +
         ", roleName=" + roleName +
         ", description=" + description +
-        ", status=" + status +
+        ", roleStatus=" + roleStatus +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         ", deleted=" + deleted +

@@ -30,8 +30,8 @@ public class Admin implements Serializable {
     @ApiModelProperty(value = "管理员密码")
     private String password;
 
-    @ApiModelProperty(value = "状态：1 正常，0 禁用")
-    private Integer status;
+    @ApiModelProperty(value = "状态：0 禁用，1 正常")
+    private Integer adminStatus;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
@@ -69,12 +69,12 @@ public class Admin implements Serializable {
         this.password = password;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getAdminStatus() {
+        return adminStatus;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setAdminStatus(Integer adminStatus) {
+        this.adminStatus = adminStatus;
     }
 
     public Date getCreateTime() {
@@ -107,7 +107,7 @@ public class Admin implements Serializable {
         "id=" + id +
         ", adminName=" + adminName +
         ", password=" + password +
-        ", status=" + status +
+        ", adminStatus=" + adminStatus +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         ", deleted=" + deleted +

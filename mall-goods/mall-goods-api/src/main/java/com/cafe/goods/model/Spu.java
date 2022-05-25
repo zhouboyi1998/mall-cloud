@@ -60,11 +60,8 @@ public class Spu implements Serializable {
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
-    @ApiModelProperty(value = "审核状态：0 未审核，1 审核未通过，2 审核通过（审核员使用）")
-    private Integer checkStatus;
-
-    @ApiModelProperty(value = "是否上架：0 下架，1 上架（商家使用）")
-    private Integer shelfStatus;
+    @ApiModelProperty(value = "状态：0 未审核，1 审核未通过，2 审核通过，3 上架")
+    private Integer spuStatus;
 
     @ApiModelProperty(value = "创建时间")
     private Date createTime;
@@ -182,20 +179,12 @@ public class Spu implements Serializable {
         this.sort = sort;
     }
 
-    public Integer getCheckStatus() {
-        return checkStatus;
+    public Integer getSpuStatus() {
+        return spuStatus;
     }
 
-    public void setCheckStatus(Integer checkStatus) {
-        this.checkStatus = checkStatus;
-    }
-
-    public Integer getShelfStatus() {
-        return shelfStatus;
-    }
-
-    public void setShelfStatus(Integer shelfStatus) {
-        this.shelfStatus = shelfStatus;
+    public void setSpuStatus(Integer spuStatus) {
+        this.spuStatus = spuStatus;
     }
 
     public Date getCreateTime() {
@@ -238,8 +227,7 @@ public class Spu implements Serializable {
         ", caption=" + caption +
         ", intro=" + intro +
         ", sort=" + sort +
-        ", checkStatus=" + checkStatus +
-        ", shelfStatus=" + shelfStatus +
+        ", spuStatus=" + spuStatus +
         ", createTime=" + createTime +
         ", updateTime=" + updateTime +
         ", deleted=" + deleted +
