@@ -48,7 +48,7 @@ public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
             // 获取用户信息
             String userStr = jwsObject.getPayload().toString();
             // 打印日志
-            LOGGER.info("AuthGlobalFilter.filter() user:{}", userStr);
+            LOGGER.info("AuthenticationGlobalFilter.filter() user:{}", userStr);
             // 将用户信息设置到请求头中
             ServerHttpRequest request = exchange
                 .getRequest()
@@ -60,6 +60,7 @@ public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
                 .request(request)
                 .build();
         } catch (ParseException e) {
+            LOGGER.error("AuthenticationGlobalFilter.filter() failed to parse token: {}", e.getMessage());
             e.printStackTrace();
         }
         return chain.filter(exchange);

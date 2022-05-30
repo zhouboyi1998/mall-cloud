@@ -147,7 +147,8 @@ public class RoleMenuRelationController {
         return ResponseEntity.ok(boList);
     }
 
-    @ApiOperation(value = "根据 菜单ids 获取菜单路径和角色名称对应关系列表")
+    @ApiOperation(value = "根据 菜单id列表 获取菜单路径和角色名称对应关系列表")
+    @ApiImplicitParam(name = "menuIds", value = "菜单id列表", required = true, paramType = "body", dataType = "List<Long>")
     @PostMapping("/list/menuPath/roleName/bo")
     public ResponseEntity<List<MenuPathAndRoleNameBO>> listMenuPathAndRoleNameBO(@RequestBody List<Long> menuIds) {
         List<MenuPathAndRoleNameBO> boList = roleMenuRelationService.listMenuPathAndRoleNameBO(menuIds);

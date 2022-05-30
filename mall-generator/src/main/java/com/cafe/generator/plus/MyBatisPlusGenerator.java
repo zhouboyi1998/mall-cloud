@@ -8,6 +8,8 @@ import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.util.Properties;
@@ -20,6 +22,8 @@ import java.util.Properties;
  * @Description: MyBatis-Plus Generator 代码生成器
  */
 public class MyBatisPlusGenerator {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(MyBatisPlusGenerator.class);
 
     /**
      * 配置文件
@@ -44,7 +48,7 @@ public class MyBatisPlusGenerator {
             // 关闭输入流
             inputStream.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("MyBatisPlusGenerator failed to create properties: {}", e.getMessage());
         }
     }
 

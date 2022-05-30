@@ -3,6 +3,8 @@ package com.cafe.generator.mybatis;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -16,6 +18,8 @@ import java.util.List;
  * @Description: MyBatis Generator 代码生成器
  */
 public class MyBatisGenerator {
+
+    private static Logger LOGGER = LoggerFactory.getLogger(MyBatisGenerator.class);
 
     /**
      * 生成代码: Model、DAO、Mapper
@@ -48,7 +52,7 @@ public class MyBatisGenerator {
                 System.out.println(warning);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("MyBatisGenerator.generate() failed to generate code: {}", e.getMessage());
         }
     }
 
