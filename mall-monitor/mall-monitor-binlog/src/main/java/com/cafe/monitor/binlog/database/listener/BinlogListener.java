@@ -81,7 +81,7 @@ public class BinlogListener implements CommandLineRunner {
                     // 判断是否为需要监听的表
                     if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
-                        LOGGER.info("Update Operation TableName: " + tableName);
+                        LOGGER.info("Update Operation TableName: {}", tableName);
                         // 存储所有修改行的主键id
                         List<Serializable[]> beforeAndAfterRowList = new ArrayList<Serializable[]>();
                         // 循环每一行修改的数据
@@ -102,7 +102,7 @@ public class BinlogListener implements CommandLineRunner {
                     // 判断是否为需要监听的表
                     if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
-                        LOGGER.info("Insert Operation TableName: " + tableName);
+                        LOGGER.info("Insert Operation TableName: {}", tableName);
                         // 将数据交给消息内容处理器
                         messageContentHandler.handle(tableName, writeRowsEventData.getRows());
                     }
@@ -116,7 +116,7 @@ public class BinlogListener implements CommandLineRunner {
                     // 判断是否为需要监听的表
                     if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
-                        LOGGER.info("Delete Operation TableName: " + tableName);
+                        LOGGER.info("Delete Operation TableName: {}", tableName);
                         // 将数据交给消息内容处理器
                         messageContentHandler.handle(tableName, deleteRowsEventData.getRows());
                     }
@@ -127,9 +127,11 @@ public class BinlogListener implements CommandLineRunner {
         // 开启数据库连接
         try {
             binaryLogClient.connect();
-            LOGGER.info("Listen on the database " + binlogProperties.getHost() + ":" + binlogProperties.getPort() + " successfully!");
+            LOGGER.info("BinlogListener.run() successful to listen on the database {}:{}",
+                binlogProperties.getHost(), binlogProperties.getPort());
         } catch (IOException e) {
-            LOGGER.error("Database " + binlogProperties.getHost() + ":" + binlogProperties.getPort() + " connection error by {}", e.getMessage());
+            LOGGER.error("BinlogListener.run() failed to listen on the database {}:{}, connection error by {}",
+                binlogProperties.getHost(), binlogProperties.getPort(), e.getMessage());
         }
     }
 }

@@ -30,7 +30,7 @@ public interface RoleMenuRelationFeign {
     ResponseEntity<List<MenuPathAndRoleNameBO>> listMenuPathAndRoleNameBO();
 
     /**
-     * 根据 菜单ids 获取菜单路径和角色名称对应关系列表
+     * 根据 菜单id列表 获取菜单路径和角色名称对应关系列表
      *
      * @param menuIds
      * @return
