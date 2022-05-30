@@ -127,9 +127,11 @@ public class BinlogListener implements CommandLineRunner {
         // 开启数据库连接
         try {
             binaryLogClient.connect();
-            LOGGER.info("Listen on the database {}:{} successfully!", binlogProperties.getHost(), binlogProperties.getPort());
+            LOGGER.info("BinlogListener.run() successful to listen on the database {}:{}",
+                binlogProperties.getHost(), binlogProperties.getPort());
         } catch (IOException e) {
-            LOGGER.error("Database {}:{} connection error by {}", binlogProperties.getHost(), binlogProperties.getPort(), e.getMessage());
+            LOGGER.error("BinlogListener.run() failed to listen on the database {}:{}, connection error by {}",
+                binlogProperties.getHost(), binlogProperties.getPort(), e.getMessage());
         }
     }
 }
