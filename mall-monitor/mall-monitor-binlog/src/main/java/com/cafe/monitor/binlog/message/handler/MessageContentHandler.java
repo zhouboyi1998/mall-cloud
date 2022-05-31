@@ -1,9 +1,9 @@
 package com.cafe.monitor.binlog.message.handler;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.cafe.common.constant.DatabaseTableAndExchangeAndKey;
+import com.cafe.common.constant.ExchangeSourceRoutingRelation;
 import com.cafe.common.constant.RabbitmqExchange;
-import com.cafe.monitor.binlog.database.constant.DatabaseTableAndBean;
+import com.cafe.monitor.binlog.database.constant.TableBeanRelation;
 import com.cafe.monitor.binlog.message.producer.RabbitmqProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -58,7 +58,7 @@ public class MessageContentHandler {
         // 发送消息到 RabbitMQ
         rabbitmqProducer.convertAndSend(
             RabbitmqExchange.BINLOG,
-            DatabaseTableAndExchangeAndKey.TABLE_EXCHANGE_KEY_MAP.get(tableName).get(RabbitmqExchange.BINLOG),
+            ExchangeSourceRoutingRelation.getRoutingKey(RabbitmqExchange.BINLOG, tableName),
             rowMapList
         );
     }
@@ -73,7 +73,7 @@ public class MessageContentHandler {
         // 存储列名的字符串集合
         List<String> fieldNameList = new ArrayList<String>();
         // 根据表名获取对应的 JavaBean 列名数组
-        Field[] fields = DatabaseTableAndBean.TABLE_BEAN_MAP.get(tableName).getDeclaredFields();
+        Field[] fields = TableBeanRelation.TABLE_BEAN_MAP.get(tableName).getDeclaredFields();
         for (Field field : fields) {
             // 获取列名的最后一段 (去除列名的修饰符、类名前缀)
             fieldNameList.add(field.toString().substring(field.toString().lastIndexOf(".") + 1));
