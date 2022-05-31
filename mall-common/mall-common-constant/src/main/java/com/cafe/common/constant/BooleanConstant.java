@@ -7,7 +7,7 @@ package com.cafe.common.constant;
  * @Date: 2022/5/19 10:47
  * @Description: 字符串常量
  */
-public class StringConstant {
+public class BooleanConstant {
 
     public static final String TRUE = "true";
 

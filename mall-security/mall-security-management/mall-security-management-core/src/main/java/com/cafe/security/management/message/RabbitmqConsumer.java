@@ -5,7 +5,7 @@ import com.cafe.admin.model.RoleMenuRelation;
 import com.cafe.common.constant.RabbitmqExchange;
 import com.cafe.common.constant.RabbitmqQueue;
 import com.cafe.common.constant.RabbitmqRoutingKey;
-import com.cafe.common.constant.StringConstant;
+import com.cafe.common.constant.BooleanConstant;
 import com.cafe.common.security.service.ResourceService;
 import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,8 +41,8 @@ public class RabbitmqConsumer {
             bindings = @QueueBinding(
                 value = @Queue(
                     value = RabbitmqQueue.ROLE_MENU_RELATION,
-                    durable = StringConstant.TRUE,
-                    autoDelete = StringConstant.FALSE
+                    durable = BooleanConstant.TRUE,
+                    autoDelete = BooleanConstant.FALSE
                 ),
                 exchange = @Exchange(value = RabbitmqExchange.BINLOG),
                 key = {RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU_RELATION}
@@ -52,8 +52,8 @@ public class RabbitmqConsumer {
             bindings = @QueueBinding(
                 value = @Queue(
                     value = RabbitmqQueue.ROLE_MENU_RELATION,
-                    durable = StringConstant.TRUE,
-                    autoDelete = StringConstant.FALSE
+                    durable = BooleanConstant.TRUE,
+                    autoDelete = BooleanConstant.FALSE
                 ),
                 exchange = @Exchange(value = RabbitmqExchange.CANAL),
                 key = {RabbitmqRoutingKey.CANAL_TO_ROLE_MENU_RELATION}

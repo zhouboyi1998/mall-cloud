@@ -41,6 +41,16 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.cafe.mall</groupId>
+            <artifactId>mall-common-constant</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cafe.mall</groupId>
+            <artifactId>mall-admin-api</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
