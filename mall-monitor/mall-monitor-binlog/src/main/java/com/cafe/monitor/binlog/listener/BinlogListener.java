@@ -1,8 +1,8 @@
-package com.cafe.monitor.binlog.database.listener;
+package com.cafe.monitor.binlog.listener;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.cafe.monitor.binlog.message.handler.MessageContentHandler;
-import com.cafe.monitor.binlog.database.property.BinlogProperties;
+import com.cafe.common.monitor.message.handler.MessageContentHandler;
+import com.cafe.monitor.binlog.property.BinlogProperties;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
 import com.github.shyiko.mysql.binlog.event.*;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ import java.util.Map;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.monitor.binlog.database.listener
+ * @Package: com.cafe.monitor.binlog.listener
  * @Author: zhouboyi
  * @Date: 2022/5/16 19:48
  * @Description: Binlog 监听器
