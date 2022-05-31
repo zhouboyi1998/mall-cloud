@@ -7,7 +7,7 @@ package com.cafe.common.constant;
  * @Date: 2022/5/19 17:22
  * @Description: 数据库表操作类型
  */
-public class DatabaseTableOperatingType {
+public class TableOperatingType {
 
     public static final String INSERT = "insert";
 

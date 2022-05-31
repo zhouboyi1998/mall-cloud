@@ -1,4 +1,4 @@
-package com.cafe.monitor.binlog.database.property;
+package com.cafe.monitor.binlog.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.monitor.binlog.database.property
+ * @Package: com.cafe.monitor.binlog.property
  * @Author: zhouboyi
  * @Date: 2022/5/16 15:09
  * @Description: 获取 application 中定义的数据库监听配置
