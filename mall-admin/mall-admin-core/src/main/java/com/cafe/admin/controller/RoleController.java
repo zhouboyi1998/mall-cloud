@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -99,8 +99,8 @@ public class RoleController {
     @ApiImplicitParam(name = "role", value = "管理员角色Model", required = true, paramType = "body", dataType = "Role")
     @PostMapping("/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Role role) {
-        role.setCreateTime(new Date());
-        role.setUpdateTime(new Date());
+        role.setCreateTime(LocalDateTime.now());
+        role.setUpdateTime(LocalDateTime.now());
         Boolean code = roleService.save(role);
         return ResponseEntity.ok(code);
     }

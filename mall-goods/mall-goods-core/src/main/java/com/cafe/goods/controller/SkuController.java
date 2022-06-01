@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -99,8 +99,8 @@ public class SkuController {
     @ApiImplicitParam(name = "sku", value = "Stock Keeping Unit 库存量单位Model", required = true, paramType = "body", dataType = "Sku")
     @PostMapping("/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Sku sku) {
-        sku.setCreateTime(new Date());
-        sku.setUpdateTime(new Date());
+        sku.setCreateTime(LocalDateTime.now());
+        sku.setUpdateTime(LocalDateTime.now());
         Boolean code = skuService.save(sku);
         return ResponseEntity.ok(code);
     }
