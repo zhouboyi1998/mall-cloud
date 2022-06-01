@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -99,8 +99,8 @@ public class MenuController {
     @ApiImplicitParam(name = "menu", value = "菜单Model", required = true, paramType = "body", dataType = "Menu")
     @PostMapping("/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Menu menu) {
-        menu.setCreateTime(new Date());
-        menu.setUpdateTime(new Date());
+        menu.setCreateTime(LocalDateTime.now());
+        menu.setUpdateTime(LocalDateTime.now());
         Boolean code = menuService.save(menu);
         return ResponseEntity.ok(code);
     }

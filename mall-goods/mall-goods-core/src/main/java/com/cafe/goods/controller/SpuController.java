@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -99,8 +99,8 @@ public class SpuController {
     @ApiImplicitParam(name = "spu", value = "Standard Product Unit 标准化产品单元Model", required = true, paramType = "body", dataType = "Spu")
     @PostMapping("/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Spu spu) {
-        spu.setCreateTime(new Date());
-        spu.setUpdateTime(new Date());
+        spu.setCreateTime(LocalDateTime.now());
+        spu.setUpdateTime(LocalDateTime.now());
         Boolean code = spuService.save(spu);
         return ResponseEntity.ok(code);
     }

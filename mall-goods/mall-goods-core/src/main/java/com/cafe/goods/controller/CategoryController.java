@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -99,8 +99,8 @@ public class CategoryController {
     @ApiImplicitParam(name = "category", value = "分类Model", required = true, paramType = "body", dataType = "Category")
     @PostMapping("/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Category category) {
-        category.setCreateTime(new Date());
-        category.setUpdateTime(new Date());
+        category.setCreateTime(LocalDateTime.now());
+        category.setUpdateTime(LocalDateTime.now());
         Boolean code = categoryService.save(category);
         return ResponseEntity.ok(code);
     }
