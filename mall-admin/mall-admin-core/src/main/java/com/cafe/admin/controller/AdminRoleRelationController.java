@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -99,8 +99,8 @@ public class AdminRoleRelationController {
     @ApiImplicitParam(name = "adminRoleRelation", value = "用户-角色关联Model", required = true, paramType = "body", dataType = "AdminRoleRelation")
     @PostMapping("/insert")
     public ResponseEntity<Boolean> insert(@RequestBody AdminRoleRelation adminRoleRelation) {
-        adminRoleRelation.setCreateTime(new Date());
-        adminRoleRelation.setUpdateTime(new Date());
+        adminRoleRelation.setCreateTime(LocalDateTime.now());
+        adminRoleRelation.setUpdateTime(LocalDateTime.now());
         Boolean code = adminRoleRelationService.save(adminRoleRelation);
         return ResponseEntity.ok(code);
     }

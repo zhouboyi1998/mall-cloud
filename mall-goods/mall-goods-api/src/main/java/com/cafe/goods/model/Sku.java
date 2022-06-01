@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
@@ -61,10 +61,10 @@ public class Sku implements Serializable {
     private Integer skuStatus;
 
     @ApiModelProperty(value = "创建时间")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     @ApiModelProperty(value = "更新时间")
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
     @ApiModelProperty(value = "逻辑删除：0 未删除，1 已删除")
     @TableField("is_deleted")
@@ -176,19 +176,19 @@ public class Sku implements Serializable {
         this.skuStatus = skuStatus;
     }
 
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 

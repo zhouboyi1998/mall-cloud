@@ -89,7 +89,7 @@ public class MyBatisPlusGenerator {
                 if (fieldType.toUpperCase().contains(MySqlType.DECIMAL.toString())) {
                     return DbColumnType.DOUBLE;
                 } else if (fieldType.toUpperCase().contains(MySqlType.DATETIME.toString())) {
-                    return DbColumnType.DATE;
+                    return DbColumnType.LOCAL_DATE_TIME;
                 }
                 return (DbColumnType) super.processTypeConvert(config, fieldType);
             }

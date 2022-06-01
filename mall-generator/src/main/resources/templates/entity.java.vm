@@ -37,7 +37,7 @@ import lombok.experimental.Accessors;
 @TableName("${table.name}")
 #end
 #if(${swagger2})
-@ApiModel(value="${entity}对象", description="$!{table.comment}")
+@ApiModel(value = "${entity}对象", description = "$!{table.comment}")
 #end
 #if(${superEntityClass})
 public class ${entity} extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
@@ -54,7 +54,7 @@ public class ${entity} implements Serializable {
 #foreach($field in ${table.fields})
 
 #if(${field.keyFlag})
-#set($keyPropertyName=${field.propertyName})
+#set($keyPropertyName = ${field.propertyName})
 #end
 #if("$!field.comment" != "")
   #if(${swagger2})
@@ -86,11 +86,11 @@ public class ${entity} implements Serializable {
     @TableField("${field.annotationColumnName}")
 #end
 ## 乐观锁注解
-#if(${versionFieldName}==${field.name})
+#if(${versionFieldName} == ${field.name})
     @Version
 #end
 ## 逻辑删除注解
-#if(${logicDeleteFieldName}==${field.name})
+#if(${logicDeleteFieldName} == ${field.name})
     @TableLogic
 #end
     private ${field.propertyType} ${field.propertyName};
@@ -100,9 +100,9 @@ public class ${entity} implements Serializable {
 #if(!${entityLombokModel})
 #foreach($field in ${table.fields})
   #if(${field.propertyType.equals("boolean")})
-    #set($getprefix="is")
+    #set($getprefix = "is")
   #else
-    #set($getprefix="get")
+    #set($getprefix = "get")
   #end
 
     public ${field.propertyType} ${getprefix}${field.capitalName}() {
@@ -146,7 +146,7 @@ public class ${entity} implements Serializable {
     public String toString() {
         return "${entity}{" +
   #foreach($field in ${table.fields})
-    #if($!{foreach.index}==0)
+    #if($!{foreach.index} == 0)
         "${field.propertyName}=" + ${field.propertyName} +
     #else
         ", ${field.propertyName}=" + ${field.propertyName} +

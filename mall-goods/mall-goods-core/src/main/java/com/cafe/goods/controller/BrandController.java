@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -99,8 +99,8 @@ public class BrandController {
     @ApiImplicitParam(name = "brand", value = "品牌Model", required = true, paramType = "body", dataType = "Brand")
     @PostMapping("/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Brand brand) {
-        brand.setCreateTime(new Date());
-        brand.setUpdateTime(new Date());
+        brand.setCreateTime(LocalDateTime.now());
+        brand.setUpdateTime(LocalDateTime.now());
         Boolean code = brandService.save(brand);
         return ResponseEntity.ok(code);
     }

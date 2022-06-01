@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
@@ -33,10 +33,10 @@ public class AdminRoleRelation implements Serializable {
     private Long roleId;
 
     @ApiModelProperty(value = "创建时间")
-    private Date createTime;
+    private LocalDateTime createTime;
 
     @ApiModelProperty(value = "更新时间")
-    private Date updateTime;
+    private LocalDateTime updateTime;
 
 
     public Long getId() {
@@ -63,19 +63,19 @@ public class AdminRoleRelation implements Serializable {
         this.roleId = roleId;
     }
 
-    public Date getCreateTime() {
+    public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
     }
 
