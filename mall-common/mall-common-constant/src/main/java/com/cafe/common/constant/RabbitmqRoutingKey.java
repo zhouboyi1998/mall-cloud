@@ -9,7 +9,7 @@ package com.cafe.common.constant;
  */
 public class RabbitmqRoutingKey {
 
-    public static final String BINLOG_TO_ROLE_MENU_RELATION = "binlog-to-role-menu-relation";
+    public static final String BINLOG_TO_ROLE_MENU_RELATION = "binlog-to-admin.role-menu-relation";
 
-    public static final String CANAL_TO_ROLE_MENU_RELATION = "canal-to-role-menu-relation";
+    public static final String CANAL_TO_ROLE_MENU_RELATION = "canal-to-admin.role-menu-relation";
 }
