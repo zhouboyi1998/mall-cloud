@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -108,8 +108,8 @@ public class AdminController {
     @ApiImplicitParam(name = "admin", value = "管理员Model", required = true, paramType = "body", dataType = "Admin")
     @PostMapping("/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Admin admin) {
-        admin.setCreateTime(new Date());
-        admin.setUpdateTime(new Date());
+        admin.setCreateTime(LocalDateTime.now());
+        admin.setUpdateTime(LocalDateTime.now());
         Boolean code = adminService.save(admin);
         return ResponseEntity.ok(code);
     }

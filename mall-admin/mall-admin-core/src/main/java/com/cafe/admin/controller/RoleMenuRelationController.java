@@ -16,8 +16,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -101,8 +101,8 @@ public class RoleMenuRelationController {
     @ApiImplicitParam(name = "roleMenuRelation", value = "角色-菜单关联Model", required = true, paramType = "body", dataType = "RoleMenuRelation")
     @PostMapping("/insert")
     public ResponseEntity<Boolean> insert(@RequestBody RoleMenuRelation roleMenuRelation) {
-        roleMenuRelation.setCreateTime(new Date());
-        roleMenuRelation.setUpdateTime(new Date());
+        roleMenuRelation.setCreateTime(LocalDateTime.now());
+        roleMenuRelation.setUpdateTime(LocalDateTime.now());
         Boolean code = roleMenuRelationService.save(roleMenuRelation);
         return ResponseEntity.ok(code);
     }

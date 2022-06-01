@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -99,8 +99,8 @@ public class CategoryBrandRelationController {
     @ApiImplicitParam(name = "categoryBrandRelation", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrandRelation")
     @PostMapping("/insert")
     public ResponseEntity<Boolean> insert(@RequestBody CategoryBrandRelation categoryBrandRelation) {
-        categoryBrandRelation.setCreateTime(new Date());
-        categoryBrandRelation.setUpdateTime(new Date());
+        categoryBrandRelation.setCreateTime(LocalDateTime.now());
+        categoryBrandRelation.setUpdateTime(LocalDateTime.now());
         Boolean code = categoryBrandRelationService.save(categoryBrandRelation);
         return ResponseEntity.ok(code);
     }
