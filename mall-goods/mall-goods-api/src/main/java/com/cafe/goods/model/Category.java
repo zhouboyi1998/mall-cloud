@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * @Description: 分类 (实体类)
  */
 @TableName("mall_category")
-@ApiModel(value="Category对象", description="分类")
+@ApiModel(value = "Category对象", description = "分类")
 public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -148,17 +148,17 @@ public class Category implements Serializable {
     @Override
     public String toString() {
         return "Category{" +
-        "id=" + id +
-        ", categoryName=" + categoryName +
-        ", parentId=" + parentId +
-        ", categoryLevel=" + categoryLevel +
-        ", categoryCode=" + categoryCode +
-        ", goodsCount=" + goodsCount +
-        ", sort=" + sort +
-        ", categoryStatus=" + categoryStatus +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", deleted=" + deleted +
-        "}";
+            "id=" + id +
+            ", categoryName=" + categoryName +
+            ", parentId=" + parentId +
+            ", categoryLevel=" + categoryLevel +
+            ", categoryCode=" + categoryCode +
+            ", goodsCount=" + goodsCount +
+            ", sort=" + sort +
+            ", categoryStatus=" + categoryStatus +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
+            ", deleted=" + deleted +
+            "}";
     }
 }
