@@ -28,8 +28,6 @@ public class MyBatisGenerator {
         try {
             // 存储 MyBatis Generator 执行过程中的报错信息
             List<String> warnings = new ArrayList<String>();
-            // 当生成的代码重复时, 覆盖源代码
-            boolean overwrite = true;
 
             // 读取 XML 配置文件
             InputStream inputStream = MyBatisGenerator.class
@@ -40,7 +38,8 @@ public class MyBatisGenerator {
             Configuration configuration = configurationParser.parseConfiguration(inputStream);
             inputStream.close();
 
-            DefaultShellCallback callback = new DefaultShellCallback(overwrite);
+            // true: 当生成的代码重复时, 覆盖源代码
+            DefaultShellCallback callback = new DefaultShellCallback(true);
             // 创建 MyBatis Generator
             org.mybatis.generator.api.MyBatisGenerator myBatisGenerator
                 = new org.mybatis.generator.api.MyBatisGenerator(configuration, callback, warnings);

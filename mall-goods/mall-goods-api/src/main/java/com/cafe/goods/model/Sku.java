@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * @Description: Stock Keeping Unit 库存量单位 (实体类)
  */
 @TableName("mall_sku")
-@ApiModel(value="Sku对象", description="Stock Keeping Unit 库存量单位")
+@ApiModel(value = "Sku对象", description = "Stock Keeping Unit 库存量单位")
 public class Sku implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -203,22 +203,22 @@ public class Sku implements Serializable {
     @Override
     public String toString() {
         return "Sku{" +
-        "id=" + id +
-        ", skuName=" + skuName +
-        ", spuId=" + spuId +
-        ", originalPrice=" + originalPrice +
-        ", discountPrice=" + discountPrice +
-        ", seckillPrice=" + seckillPrice +
-        ", stock=" + stock +
-        ", saleCount=" + saleCount +
-        ", image=" + image +
-        ", imageList=" + imageList +
-        ", specificationName=" + specificationName +
-        ", sort=" + sort +
-        ", skuStatus=" + skuStatus +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", deleted=" + deleted +
-        "}";
+            "id=" + id +
+            ", skuName=" + skuName +
+            ", spuId=" + spuId +
+            ", originalPrice=" + originalPrice +
+            ", discountPrice=" + discountPrice +
+            ", seckillPrice=" + seckillPrice +
+            ", stock=" + stock +
+            ", saleCount=" + saleCount +
+            ", image=" + image +
+            ", imageList=" + imageList +
+            ", specificationName=" + specificationName +
+            ", sort=" + sort +
+            ", skuStatus=" + skuStatus +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
+            ", deleted=" + deleted +
+            "}";
     }
 }

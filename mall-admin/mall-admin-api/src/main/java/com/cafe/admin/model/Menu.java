@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * @Description: 菜单 (实体类)
  */
 @TableName("mall_menu")
-@ApiModel(value="Menu对象", description="菜单")
+@ApiModel(value = "Menu对象", description = "菜单")
 public class Menu implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -181,20 +181,20 @@ public class Menu implements Serializable {
     @Override
     public String toString() {
         return "Menu{" +
-        "id=" + id +
-        ", menuName=" + menuName +
-        ", menuTitle=" + menuTitle +
-        ", description=" + description +
-        ", menuPath=" + menuPath +
-        ", parentId=" + parentId +
-        ", menuLevel=" + menuLevel +
-        ", menuCode=" + menuCode +
-        ", menuType=" + menuType +
-        ", sort=" + sort +
-        ", menuStatus=" + menuStatus +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", deleted=" + deleted +
-        "}";
+            "id=" + id +
+            ", menuName=" + menuName +
+            ", menuTitle=" + menuTitle +
+            ", description=" + description +
+            ", menuPath=" + menuPath +
+            ", parentId=" + parentId +
+            ", menuLevel=" + menuLevel +
+            ", menuCode=" + menuCode +
+            ", menuType=" + menuType +
+            ", sort=" + sort +
+            ", menuStatus=" + menuStatus +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
+            ", deleted=" + deleted +
+            "}";
     }
 }

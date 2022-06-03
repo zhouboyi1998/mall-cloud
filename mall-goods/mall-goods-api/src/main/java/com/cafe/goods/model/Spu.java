@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * @Description: Standard Product Unit 标准化产品单元 (实体类)
  */
 @TableName("mall_spu")
-@ApiModel(value="Spu对象", description="Standard Product Unit 标准化产品单元")
+@ApiModel(value = "Spu对象", description = "Standard Product Unit 标准化产品单元")
 public class Spu implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -214,23 +214,23 @@ public class Spu implements Serializable {
     @Override
     public String toString() {
         return "Spu{" +
-        "id=" + id +
-        ", spuName=" + spuName +
-        ", brandId=" + brandId +
-        ", categoryId=" + categoryId +
-        ", categoryCode=" + categoryCode +
-        ", originalPrice=" + originalPrice +
-        ", discountPrice=" + discountPrice +
-        ", seckillPrice=" + seckillPrice +
-        ", image=" + image +
-        ", commentCount=" + commentCount +
-        ", caption=" + caption +
-        ", intro=" + intro +
-        ", sort=" + sort +
-        ", spuStatus=" + spuStatus +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", deleted=" + deleted +
-        "}";
+            "id=" + id +
+            ", spuName=" + spuName +
+            ", brandId=" + brandId +
+            ", categoryId=" + categoryId +
+            ", categoryCode=" + categoryCode +
+            ", originalPrice=" + originalPrice +
+            ", discountPrice=" + discountPrice +
+            ", seckillPrice=" + seckillPrice +
+            ", image=" + image +
+            ", commentCount=" + commentCount +
+            ", caption=" + caption +
+            ", intro=" + intro +
+            ", sort=" + sort +
+            ", spuStatus=" + spuStatus +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
+            ", deleted=" + deleted +
+            "}";
     }
 }
