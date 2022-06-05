@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * @Description: 管理员角色 (实体类)
  */
 @TableName("mall_role")
-@ApiModel(value="Role对象", description="管理员角色")
+@ApiModel(value = "Role对象", description = "管理员角色")
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -104,13 +104,13 @@ public class Role implements Serializable {
     @Override
     public String toString() {
         return "Role{" +
-        "id=" + id +
-        ", roleName=" + roleName +
-        ", description=" + description +
-        ", roleStatus=" + roleStatus +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", deleted=" + deleted +
-        "}";
+            "id=" + id +
+            ", roleName=" + roleName +
+            ", description=" + description +
+            ", roleStatus=" + roleStatus +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
+            ", deleted=" + deleted +
+            "}";
     }
 }

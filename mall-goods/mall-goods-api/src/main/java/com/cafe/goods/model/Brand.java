@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * @Description: 品牌 (实体类)
  */
 @TableName("mall_brand")
-@ApiModel(value="Brand对象", description="品牌")
+@ApiModel(value = "Brand对象", description = "品牌")
 public class Brand implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -126,15 +126,15 @@ public class Brand implements Serializable {
     @Override
     public String toString() {
         return "Brand{" +
-        "id=" + id +
-        ", brandName=" + brandName +
-        ", letter=" + letter +
-        ", brandImage=" + brandImage +
-        ", sort=" + sort +
-        ", brandStatus=" + brandStatus +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", deleted=" + deleted +
-        "}";
+            "id=" + id +
+            ", brandName=" + brandName +
+            ", letter=" + letter +
+            ", brandImage=" + brandImage +
+            ", sort=" + sort +
+            ", brandStatus=" + brandStatus +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
+            ", deleted=" + deleted +
+            "}";
     }
 }

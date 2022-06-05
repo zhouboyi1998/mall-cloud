@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
  * @Description: 管理员 (实体类)
  */
 @TableName("mall_admin")
-@ApiModel(value="Admin对象", description="管理员")
+@ApiModel(value = "Admin对象", description = "管理员")
 public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -104,13 +104,13 @@ public class Admin implements Serializable {
     @Override
     public String toString() {
         return "Admin{" +
-        "id=" + id +
-        ", adminName=" + adminName +
-        ", password=" + password +
-        ", adminStatus=" + adminStatus +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        ", deleted=" + deleted +
-        "}";
+            "id=" + id +
+            ", adminName=" + adminName +
+            ", password=" + password +
+            ", adminStatus=" + adminStatus +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
+            ", deleted=" + deleted +
+            "}";
     }
 }
