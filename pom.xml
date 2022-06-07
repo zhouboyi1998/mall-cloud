@@ -21,6 +21,7 @@
         <module>mall-admin</module>
         <module>mall-common</module>
         <module>mall-eureka</module>
+        <module>mall-file</module>
         <module>mall-gateway</module>
         <module>mall-generator</module>
         <module>mall-goods</module>
@@ -43,7 +44,7 @@
         <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
         <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <fastdfs.version>1.27.0.0</fastdfs.version>
-        <minio.version>7.1.0</minio.version>
+        <minio.version>8.3.4</minio.version>
         <mysql-binlog-connector.version>0.21.0</mysql-binlog-connector.version>
         <canal-client.version>1.1.5</canal-client.version>
 
