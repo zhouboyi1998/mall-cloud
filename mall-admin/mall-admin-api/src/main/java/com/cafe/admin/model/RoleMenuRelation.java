@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  * @Description: 角色-菜单关联 (实体类)
  */
 @TableName("mall_role_menu_relation")
-@ApiModel(value="RoleMenuRelation对象", description="角色-菜单关联")
+@ApiModel(value = "RoleMenuRelation对象", description = "角色-菜单关联")
 public class RoleMenuRelation implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -82,11 +82,11 @@ public class RoleMenuRelation implements Serializable {
     @Override
     public String toString() {
         return "RoleMenuRelation{" +
-        "id=" + id +
-        ", roleId=" + roleId +
-        ", menuId=" + menuId +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
+            "id=" + id +
+            ", roleId=" + roleId +
+            ", menuId=" + menuId +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
+            "}";
     }
 }
