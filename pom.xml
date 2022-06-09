@@ -46,6 +46,7 @@
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>8.3.4</minio.version>
         <squareup-okhttp3.version>4.9.3</squareup-okhttp3.version>
+        <tomcat-embed.version>9.0.46</tomcat-embed.version>
         <mysql-binlog-connector.version>0.21.0</mysql-binlog-connector.version>
         <canal-client.version>1.1.5</canal-client.version>
 
@@ -194,6 +195,12 @@
                 <groupId>com.alibaba.otter</groupId>
                 <artifactId>canal.client</artifactId>
                 <version>${canal-client.version}</version>
+            </dependency>
+            <!-- Tomcat embed 相关依赖 -->
+            <dependency>
+                <groupId>org.apache.tomcat.embed</groupId>
+                <artifactId>tomcat-embed-core</artifactId>
+                <version>${tomcat-embed.version}</version>
             </dependency>
 
             <!-- 公共模块 -->
