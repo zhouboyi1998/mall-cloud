@@ -1,8 +1,7 @@
 package com.cafe.file.minio.tool;
 
 import cn.hutool.core.lang.UUID;
-import cn.hutool.core.util.ObjectUtil;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.stereotype.Component;
 
 /**
  * @Project: mall-cloud
@@ -11,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @Date: 2022/6/9 11:31
  * @Description: Minio 工具类
  */
+@Component
 public class MinioTool {
 
     /**
