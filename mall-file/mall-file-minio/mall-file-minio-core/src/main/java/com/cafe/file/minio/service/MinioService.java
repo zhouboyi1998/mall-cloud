@@ -16,7 +16,8 @@ public interface MinioService {
     /**
      * 文件上传
      *
-     * @param file 文件
+     * @param bucket 存储桶
+     * @param file   文件
      * @return
      */
     String upload(String bucket, MultipartFile file);
@@ -24,6 +25,7 @@ public interface MinioService {
     /**
      * 文件下载
      *
+     * @param bucket       存储桶
      * @param fileName     文件名
      * @param httpResponse
      * @return
@@ -33,6 +35,7 @@ public interface MinioService {
     /**
      * 获取文件外链 (永久)
      *
+     * @param bucket   存储桶
      * @param fileName 文件名
      * @return
      */
@@ -41,6 +44,7 @@ public interface MinioService {
     /**
      * 获取文件外链 (限时)
      *
+     * @param bucket   存储桶
      * @param fileName 文件名
      * @param expiry   过期时间 (单位: 秒)
      * @return

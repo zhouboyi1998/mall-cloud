@@ -45,7 +45,7 @@ public class MinioServiceImpl implements MinioService {
     public String upload(String bucket, MultipartFile file) {
         try {
             // 生成文件名
-            String fileName = MinioTool.generateFileName();
+            String fileName = MinioTool.generateFileName(file.getOriginalFilename(), false);
             // 构造参数
             PutObjectArgs args = PutObjectArgs
                 .builder()
