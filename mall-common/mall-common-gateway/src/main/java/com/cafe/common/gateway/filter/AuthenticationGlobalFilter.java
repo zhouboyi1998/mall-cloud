@@ -61,7 +61,6 @@ public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
                 .build();
         } catch (ParseException e) {
             LOGGER.error("AuthenticationGlobalFilter.filter() failed to parse token: {}", e.getMessage());
-            e.printStackTrace();
         }
         return chain.filter(exchange);
     }
