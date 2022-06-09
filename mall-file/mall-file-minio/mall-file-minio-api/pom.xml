@@ -4,21 +4,23 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <artifactId>mall-file</artifactId>
+        <artifactId>mall-file-minio</artifactId>
         <groupId>com.cafe.mall</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cafe.mall</groupId>
-    <artifactId>mall-file-minio</artifactId>
+    <artifactId>mall-file-minio-api</artifactId>
     <version>1.0-SNAPSHOT</version>
     <description>MinIO 文件存储模块</description>
 
-    <packaging>pom</packaging>
-    <modules>
-        <module>mall-file-minio-api</module>
-        <module>mall-file-minio-core</module>
-    </modules>
+    <dependencies>
+        <!-- OpenFeign 远程方法调用 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

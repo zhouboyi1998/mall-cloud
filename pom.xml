@@ -45,6 +45,7 @@
         <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>8.3.4</minio.version>
+        <squareup-okhttp3.version>4.9.3</squareup-okhttp3.version>
         <mysql-binlog-connector.version>0.21.0</mysql-binlog-connector.version>
         <canal-client.version>1.1.5</canal-client.version>
 
@@ -58,6 +59,7 @@
         <mall-goods-api.version>1.0-SNAPSHOT</mall-goods-api.version>
         <mall-order-api.version>1.0-SNAPSHOT</mall-order-api.version>
         <mall-security-management-api.version>1.0-SNAPSHOT</mall-security-management-api.version>
+        <mall-file-minio-api.version>1.0-SNAPSHOT</mall-file-minio-api.version>
     </properties>
 
     <dependencies>
@@ -175,6 +177,12 @@
                 <artifactId>minio</artifactId>
                 <version>${minio.version}</version>
             </dependency>
+            <!-- OK HTTP 网络通信 -->
+            <dependency>
+                <groupId>com.squareup.okhttp3</groupId>
+                <artifactId>okhttp</artifactId>
+                <version>${squareup-okhttp3.version}</version>
+            </dependency>
             <!-- Binlog MySQL 数据库监听 -->
             <dependency>
                 <groupId>com.github.shyiko</groupId>
@@ -234,6 +242,11 @@
                 <groupId>com.cafe.mall</groupId>
                 <artifactId>mall-security-management-api</artifactId>
                 <version>${mall-security-management-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe.mall</groupId>
+                <artifactId>mall-file-minio-api</artifactId>
+                <version>${mall-file-minio-api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
