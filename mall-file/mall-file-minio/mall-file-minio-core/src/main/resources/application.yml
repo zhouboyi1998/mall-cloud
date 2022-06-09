@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: dev
+  servlet:
+    # 文件设置
+    multipart:
+      # 文件上传最大限制
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+# Feign 配置
+feign:
+  # 开启 Hystrix
+  hystrix:
+    enabled: true
+
+# Hystrix 配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            # 超时熔断时间 10000 毫秒
+            timeoutInMilliseconds: 10000
+
+# MinIO 配置
+minio:
+  # 服务地址
+  endpoint: http://127.0.0.1:9000
+  # 文件地址
+  file-host: http://127.0.0.1:9000
+  # 存储桶名称
+  bucket: bucket-mall
+  # 用户名
+  access-key: administrator
+  # 密码
+  secret-key: 123456789
