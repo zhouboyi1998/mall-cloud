@@ -18,19 +18,17 @@ public class MinioTool {
      *
      * @return
      */
-    public static String generateFileName() {
-        // 生成 UUID 后去除其中的 - 符号
-        return UUID.randomUUID().toString().replace("-", "");
-    }
-
-    /**
-     * 根据文件原始名称生成 UUID 文件名
-     *
-     * @param fileName
-     * @return
-     */
-    public static String generateFileName(String fileName) {
-        // 生成 UUID 后去除其中的 - 符号
-        return UUID.fromString(fileName).toString().replace("-", "");
+    public static String generateFileName(String originalFilename, Boolean flag) {
+        // 获取文件扩展名
+        String extension = originalFilename.indexOf(".") > -1 ?
+            originalFilename.substring(originalFilename.indexOf(".")) : "";
+        // 生成 UUID, 去除其中的 - 符号, 添加文件扩展名
+        if (flag) {
+            // flag == true, 根据文件原始名生成 UUID
+            return UUID.fromString(originalFilename).toString().replace("-", "") + extension;
+        } else {
+            // flag == false, 直接生成 UUID
+            return UUID.randomUUID().toString().replace("-", "") + extension;
+        }
     }
 }
