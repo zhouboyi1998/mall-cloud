@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.cafe.admin.constant.AdminTableBeanMap;
 import com.cafe.common.constant.RabbitmqExchange;
 import com.cafe.common.monitor.message.producer.RabbitmqProducer;
-import com.cafe.common.monitor.message.constant.ExchangeRoutingKeyMap;
+import com.cafe.common.monitor.message.constant.ExchangeSourceRoutingMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -58,7 +58,7 @@ public class MessageContentHandler {
         // 发送消息到 RabbitMQ
         rabbitmqProducer.convertAndSend(
             RabbitmqExchange.BINLOG,
-            ExchangeRoutingKeyMap.getRoutingKey(RabbitmqExchange.BINLOG, tableName),
+            ExchangeSourceRoutingMap.EXCHANGE_SOURCE_ROUTING_MAP.get(RabbitmqExchange.BINLOG, tableName),
             rowMapList
         );
     }
