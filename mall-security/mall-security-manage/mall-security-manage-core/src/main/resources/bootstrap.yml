@@ -1,0 +1,6 @@
+server:
+  port: 18072
+
+spring:
+  application:
+    name: mall-security-manage
