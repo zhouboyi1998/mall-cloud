@@ -31,11 +31,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .authorizeRequests()
-            .requestMatchers(EndpointRequest.toAnyEndpoint()).permitAll()
+            .requestMatchers(EndpointRequest.toAnyEndpoint())
+            .permitAll()
             // 允许直接访问 /keyPair/rsa/publicKey 接口, 获取 RSA 公钥信息
-            .antMatchers("/keyPair/rsa/publicKey").permitAll()
+            .antMatchers("/keyPair/rsa/publicKey")
+            .permitAll()
             .anyRequest()
-            .authenticated();
+            .authenticated()
+            .and()
+            .cors()
+            .and()
+            .csrf()
+            .disable();
     }
 
     @Bean

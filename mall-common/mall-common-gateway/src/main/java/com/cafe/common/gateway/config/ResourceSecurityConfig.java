@@ -65,7 +65,6 @@ public class ResourceSecurityConfig {
         AuthorizationManager authorizationManager,
         RestAccessDeniedHandler restAccessDeniedHandler,
         RestAuthenticationEntryPoint restAuthenticationEntryPoint
-
     ) {
         this.ignoreUrlsRemoveJwtFilter = ignoreUrlsRemoveJwtFilter;
         this.ignoreUrlsProperties = ignoreUrlsProperties;
