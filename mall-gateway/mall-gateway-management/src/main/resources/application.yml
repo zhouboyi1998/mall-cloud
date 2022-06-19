@@ -16,19 +16,19 @@ spring:
         - id: mall-security-management
           uri: lb://mall-security-management
           predicates:
-            - Path=/api/security/**
+            - Path=/security/**
           filters:
-            - StripPrefix=2
+            - StripPrefix=1
         - id: mall-goods
           uri: lb://mall-goods
           predicates:
-            - Path=/api/goods/**
+            - Path=/goods/**
           filters:
-            - StripPrefix=2
+            - StripPrefix=1
 
 # 白名单路径配置
 secure:
   ignore:
     urls:
       - "/actuator/**"
-      - "/api/security/oauth/token"
+      - "/security/oauth/token"
