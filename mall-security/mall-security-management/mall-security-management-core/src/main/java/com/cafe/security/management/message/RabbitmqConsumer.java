@@ -37,28 +37,16 @@ public class RabbitmqConsumer {
      * @param content 消息内容
      */
     @RabbitListeners(value = {
-        @RabbitListener(
-            bindings = @QueueBinding(
-                value = @Queue(
-                    value = RabbitmqQueue.ROLE_MENU_RELATION,
-                    durable = BooleanConstant.TRUE,
-                    autoDelete = BooleanConstant.FALSE
-                ),
-                exchange = @Exchange(value = RabbitmqExchange.BINLOG),
-                key = {RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU_RELATION}
-            )
-        ),
-        @RabbitListener(
-            bindings = @QueueBinding(
-                value = @Queue(
-                    value = RabbitmqQueue.ROLE_MENU_RELATION,
-                    durable = BooleanConstant.TRUE,
-                    autoDelete = BooleanConstant.FALSE
-                ),
-                exchange = @Exchange(value = RabbitmqExchange.CANAL),
-                key = {RabbitmqRoutingKey.CANAL_TO_ROLE_MENU_RELATION}
-            )
-        )
+        @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(value = RabbitmqQueue.ROLE_MENU_RELATION, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
+            exchange = @Exchange(value = RabbitmqExchange.BINLOG),
+            key = {RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU_RELATION}
+        )),
+        @RabbitListener(bindings = @QueueBinding(
+            value = @Queue(value = RabbitmqQueue.ROLE_MENU_RELATION, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
+            exchange = @Exchange(value = RabbitmqExchange.CANAL),
+            key = {RabbitmqRoutingKey.CANAL_TO_ROLE_MENU_RELATION}
+        ))
     })
     public void listener(String content) {
         // 存储 菜单ids
