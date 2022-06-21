@@ -205,6 +205,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
         // 允许客户端的表单身份验证
-        security.allowFormAuthenticationForClients();
+        security
+            .allowFormAuthenticationForClients();
     }
 }

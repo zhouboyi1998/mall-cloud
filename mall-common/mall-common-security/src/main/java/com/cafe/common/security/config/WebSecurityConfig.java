@@ -9,6 +9,8 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 /**
  * @Project: mall-cloud
@@ -30,19 +32,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+            .csrf()
+            .disable()
+            .cors()
+            .and()
             .authorizeRequests()
             .requestMatchers(EndpointRequest.toAnyEndpoint())
             .permitAll()
-            // 允许直接访问 /keyPair/rsa/publicKey 接口, 获取 RSA 公钥信息
+            // 允许直接访问 /key/rsa/public 接口, 获取 RSA 公钥信息
             .antMatchers(new String[]{"/oauth/**", "/key/**"})
             .permitAll()
             .anyRequest()
-            .authenticated()
-            .and()
-            .cors()
-            .and()
-            .csrf()
-            .disable();
+            .authenticated();
     }
 
     @Bean

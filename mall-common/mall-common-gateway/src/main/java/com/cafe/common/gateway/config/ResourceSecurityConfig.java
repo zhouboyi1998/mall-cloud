@@ -76,6 +76,10 @@ public class ResourceSecurityConfig {
     @Bean
     public SecurityWebFilterChain webFluxSecurityFilterChain(ServerHttpSecurity http) {
         http
+            .csrf()
+            .disable()
+            .cors()
+            .and()
             // 添加过滤器: 移除白名单 URL 中的 JWT 请求头
             .addFilterBefore(ignoreUrlsRemoveJwtFilter, SecurityWebFiltersOrder.AUTHENTICATION)
             .authorizeExchange()
@@ -92,8 +96,6 @@ public class ResourceSecurityConfig {
             // 处理未认证
             .authenticationEntryPoint(restAuthenticationEntryPoint)
             .and()
-            .csrf()
-            .disable()
             .oauth2ResourceServer()
             .jwt()
             .jwtAuthenticationConverter(jwtAuthenticationConverter());

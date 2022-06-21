@@ -15,7 +15,7 @@ import java.util.Map;
  * @Description:
  */
 @FeignClient("mall-security-management")
-@RequestMapping("/keyPair")
+@RequestMapping("/key")
 public interface KeyPairFeign {
 
     /**
@@ -23,6 +23,6 @@ public interface KeyPairFeign {
      *
      * @return
      */
-    @GetMapping("/rsa/publicKey")
+    @GetMapping("/rsa/public")
     ResponseEntity<Map<String, Object>> getRsaPublicKey();
 }

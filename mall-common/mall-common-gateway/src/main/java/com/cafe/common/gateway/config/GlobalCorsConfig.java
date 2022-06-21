@@ -5,6 +5,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
+import org.springframework.web.reactive.config.CorsRegistry;
+import org.springframework.web.reactive.config.WebFluxConfigurer;
 
 /**
  * @Project: mall-cloud
@@ -14,7 +16,7 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
  * @Description: 网关全局跨域配置
  */
 @Configuration
-public class GlobalCorsConfig {
+public class GlobalCorsConfig implements WebFluxConfigurer {
 
     @Bean
     public CorsWebFilter corsWebFilter() {
@@ -37,5 +39,15 @@ public class GlobalCorsConfig {
         source.registerCorsConfiguration("/**", config);
 
         return new CorsWebFilter(source);
+    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry
+            .addMapping("/**")
+            .allowedOrigins("*")
+            .allowedHeaders("*")
+            .allowedMethods("*")
+            .allowCredentials(true);
     }
 }
