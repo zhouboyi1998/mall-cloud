@@ -16,7 +16,7 @@ import org.springframework.web.reactive.config.WebFluxConfigurer;
  * @Description: 网关全局跨域配置
  */
 @Configuration
-public class GlobalCorsConfig implements WebFluxConfigurer {
+public class GlobalCorsConfig {
 
     @Bean
     public CorsWebFilter corsWebFilter() {
@@ -39,15 +39,5 @@ public class GlobalCorsConfig implements WebFluxConfigurer {
         source.registerCorsConfiguration("/**", config);
 
         return new CorsWebFilter(source);
-    }
-
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-        registry
-            .addMapping("/**")
-            .allowedOrigins("*")
-            .allowedHeaders("*")
-            .allowedMethods("*")
-            .allowCredentials(true);
     }
 }

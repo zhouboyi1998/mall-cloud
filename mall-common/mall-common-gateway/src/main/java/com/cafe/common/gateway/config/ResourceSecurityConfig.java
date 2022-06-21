@@ -34,6 +34,11 @@ import reactor.core.publisher.Mono;
 public class ResourceSecurityConfig {
 
     /**
+     * 全局跨域配置
+     */
+    private GlobalCorsConfig globalCorsConfig;
+
+    /**
      * 白名单 URL 过滤器
      */
     private IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter;
@@ -60,12 +65,14 @@ public class ResourceSecurityConfig {
 
     @Autowired
     public ResourceSecurityConfig(
+        GlobalCorsConfig globalCorsConfig,
         IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter,
         IgnoreUrlsProperties ignoreUrlsProperties,
         AuthorizationManager authorizationManager,
         RestAccessDeniedHandler restAccessDeniedHandler,
         RestAuthenticationEntryPoint restAuthenticationEntryPoint
     ) {
+        this.globalCorsConfig = globalCorsConfig;
         this.ignoreUrlsRemoveJwtFilter = ignoreUrlsRemoveJwtFilter;
         this.ignoreUrlsProperties = ignoreUrlsProperties;
         this.authorizationManager = authorizationManager;
@@ -80,6 +87,8 @@ public class ResourceSecurityConfig {
             .disable()
             .cors()
             .and()
+            // 添加过滤器: 添加全局跨域配置
+            .addFilterBefore(globalCorsConfig.corsWebFilter(), SecurityWebFiltersOrder.CORS)
             // 添加过滤器: 移除白名单 URL 中的 JWT 请求头
             .addFilterBefore(ignoreUrlsRemoveJwtFilter, SecurityWebFiltersOrder.AUTHENTICATION)
             .authorizeExchange()
