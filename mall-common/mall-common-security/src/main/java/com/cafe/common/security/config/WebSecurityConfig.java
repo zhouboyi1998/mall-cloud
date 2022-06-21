@@ -34,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .requestMatchers(EndpointRequest.toAnyEndpoint())
             .permitAll()
             // 允许直接访问 /keyPair/rsa/publicKey 接口, 获取 RSA 公钥信息
-            .antMatchers("/keyPair/rsa/publicKey")
+            .antMatchers(new String[]{"/oauth/**", "/key/**"})
             .permitAll()
             .anyRequest()
             .authenticated()

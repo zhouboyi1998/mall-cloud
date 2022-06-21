@@ -21,7 +21,7 @@ import java.util.Map;
  * @Description: 密钥对接口
  */
 @RestController
-@RequestMapping(value = "/keyPair")
+@RequestMapping(value = "/key")
 public class KeyPairController {
 
     private KeyPair keyPair;
@@ -32,7 +32,7 @@ public class KeyPairController {
     }
 
     @ApiOperation(value = "获取 RSA 公钥")
-    @GetMapping("/rsa/publicKey")
+    @GetMapping("/rsa/public")
     public ResponseEntity<Map<String, Object>> getRsaPublicKey() {
         // 从证书中获取公钥
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();

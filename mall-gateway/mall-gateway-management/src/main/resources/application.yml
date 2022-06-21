@@ -30,5 +30,5 @@ spring:
 secure:
   ignore:
     urls:
+      - "/security/**"
       - "/actuator/**"
-      - "/security/oauth/token"
