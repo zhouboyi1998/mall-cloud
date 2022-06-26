@@ -226,11 +226,6 @@
                 <artifactId>mall-common-monitor</artifactId>
                 <version>${mall-common-monitor.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.cafe.mall</groupId>
-                <artifactId>mall-common-security</artifactId>
-                <version>${mall-common-security.version}</version>
-            </dependency>
             <!-- 远程调用接口 -->
             <dependency>
                 <groupId>com.cafe.mall</groupId>
