@@ -38,7 +38,7 @@ import ${superControllerClassPackage};
 #else
 @Controller
 #end
-@RequestMapping("#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
+@RequestMapping(value = "#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end")
 #if(${kotlin})
 class ${table.controllerName}#if(${superControllerClass}) : ${superControllerClass}()#end
 
@@ -57,7 +57,7 @@ public class ${table.controllerName} {
     }
 
     @ApiOperation(value = "查询${table.comment}列表")
-    @GetMapping("/list")
+    @GetMapping(value = "/list")
     public ResponseEntity<List<${entity}>> list() {
         List<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.list();
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List);
@@ -65,19 +65,19 @@ public class ${table.controllerName} {
 
     @ApiOperation(value = "根据条件查询${table.comment}列表")
     @ApiImplicitParam(name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", value = "${table.comment}Model", required = true, paramType = "body", dataType = "${entity}")
-    @PostMapping("/list")
+    @PostMapping(value = "/list")
     public ResponseEntity<List<${entity}>> listByWrapper(@RequestBody ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}) {
         Wrapper<${entity}> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
         List<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.list(wrapper);
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List);
     }
 
-    @ApiOperation("分页查询${table.comment}列表")
-    @ApiImplicitParams({
+    @ApiOperation(value = "分页查询${table.comment}列表")
+    @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
     })
-    @GetMapping("/page/{current}/{size}")
+    @GetMapping(value = "/page/{current}/{size}")
     public ResponseEntity<IPage<${entity}>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
@@ -88,12 +88,12 @@ public class ${table.controllerName} {
     }
 
     @ApiOperation(value = "根据条件分页查询${table.comment}")
-    @ApiImplicitParams({
+    @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long"),
         @ApiImplicitParam(name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", value = "${table.comment}Model", required = true, paramType = "body", dataType = "${entity}")
     })
-    @PostMapping("/page/{current}/{size}")
+    @PostMapping(value = "/page/{current}/{size}")
     public ResponseEntity<IPage<${entity}>> pageByWrapper(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
@@ -105,10 +105,37 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
     }
 
+    @ApiOperation(value = "分页查询${table.comment}列表")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<${entity}>")
+    @GetMapping(value = "/page")
+    public ResponseEntity<IPage<${entity}>> page(@RequestBody Page<${entity}> page) {
+        Page<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.page(page);
+        return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
+    }
+
+    @ApiOperation(value = "根据条件分页查询${table.comment}")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<${entity}>")
+    @PostMapping(value = "/page")
+    public ResponseEntity<IPage<${entity}>> pageByWrapper(@RequestBody Page<${entity}> page) {
+        ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} = page.getRecords().get(0);
+        Wrapper<${entity}> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
+        Page<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.page(page, wrapper);
+        return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
+    }
+
     @ApiOperation(value = "根据id查询单个${table.comment}")
     @ApiImplicitParam(name = "id", value = "${table.comment}id", required = true, paramType = "path", dataType = "Long")
-    @GetMapping("/one/{id}")
+    @GetMapping(value = "/one/{id}")
     public ResponseEntity<${entity}> one(@PathVariable(value = "id") Long id) {
+        LambdaQueryWrapper<${entity}> wrapper = new LambdaQueryWrapper<${entity}>().eq(${entity}::getId, id);
+        ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.getOne(wrapper);
+        return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
+    }
+
+    @ApiOperation(value = "根据id查询单个${table.comment}")
+    @ApiImplicitParam(name = "id", value = "${table.comment}id", required = true, paramType = "query", dataType = "Long")
+    @GetMapping(value = "/one")
+    public ResponseEntity<${entity}> one2(@RequestParam Long id) {
         LambdaQueryWrapper<${entity}> wrapper = new LambdaQueryWrapper<${entity}>().eq(${entity}::getId, id);
         ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.getOne(wrapper);
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
@@ -116,7 +143,7 @@ public class ${table.controllerName} {
 
     @ApiOperation(value = "新增${table.comment}")
     @ApiImplicitParam(name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", value = "${table.comment}Model", required = true, paramType = "body", dataType = "${entity}")
-    @PostMapping("/insert")
+    @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}) {
         ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}.setCreateTime(LocalDateTime.now());
         ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}.setUpdateTime(LocalDateTime.now());
@@ -126,7 +153,7 @@ public class ${table.controllerName} {
 
     @ApiOperation(value = "根据id修改${table.comment}")
     @ApiImplicitParam(name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", value = "${table.comment}Model", required = true, paramType = "body", dataType = "${entity}")
-    @PutMapping("/update")
+    @PutMapping(value = "/update")
     public ResponseEntity<Boolean> update(@RequestBody ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}) {
         Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.updateById(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
         return ResponseEntity.ok(code);
@@ -134,7 +161,7 @@ public class ${table.controllerName} {
 
     @ApiOperation(value = "根据ids批量修改${table.comment}")
     @ApiImplicitParam(name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List", value = "${table.comment}列表", required = true, paramType = "body", dataType = "List<${entity}>")
-    @PutMapping("/update/batch")
+    @PutMapping(value = "/update/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List) {
         Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.updateBatchById(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List);
         return ResponseEntity.ok(code);
@@ -142,15 +169,23 @@ public class ${table.controllerName} {
 
     @ApiOperation(value = "根据id删除${table.comment}")
     @ApiImplicitParam(name = "id", value = "${table.comment}id", required = true, paramType = "path", dataType = "Long")
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
+        Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.removeById(id);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "根据id删除${table.comment}")
+    @ApiImplicitParam(name = "id", value = "${table.comment}id", required = true, paramType = "query", dataType = "Long")
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete2(@RequestParam Long id) {
         Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.removeById(id);
         return ResponseEntity.ok(code);
     }
 
     @ApiOperation(value = "根据ids批量删除${table.comment}")
     @ApiImplicitParam(name = "ids", value = "${table.comment}id列表", required = true, paramType = "body", dataType = "List<Long>")
-    @DeleteMapping("/delete/batch")
+    @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.removeByIds(ids);
         return ResponseEntity.ok(code);

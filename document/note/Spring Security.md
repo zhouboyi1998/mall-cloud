@@ -2,14 +2,13 @@
 
 ### 🧰 模块搭建
 
-* 生成 RSA 证书文件
+* 使用 JDK 自带的 keytool 生成 RSA 证书文件
+    * 在 JDK /bin 目录下执行以下命令
+    * 然后按提示设置密码等信息
+    * 最终会生成一个 RSA 证书文件 (jwt.jks)
 
 ```
-使用 JDK 自带的 keytool 生成
-在 JDK /bin 目录下执行以下命令
 keytool -genkey -alias jwt -keyalg RSA -keystore jwt.jks
-按提示设置密码和其他信息
-生成 RSA 证书文件 (jwt.jks)
 ```
 
 ### 📑 基础知识
