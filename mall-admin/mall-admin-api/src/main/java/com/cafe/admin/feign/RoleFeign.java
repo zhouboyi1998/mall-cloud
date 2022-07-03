@@ -15,8 +15,8 @@ import java.util.List;
  * @Date: 2022/5/10 9:55
  * @Description:
  */
-@FeignClient("mall-admin")
-@RequestMapping("/role")
+@FeignClient(value = "mall-admin")
+@RequestMapping(value = "/role")
 public interface RoleFeign {
 
     /**
@@ -25,6 +25,6 @@ public interface RoleFeign {
      * @param adminId 管理员id
      * @return
      */
-    @GetMapping("/list/name/{adminId}")
+    @GetMapping(value = "/list/name/{adminId}")
     ResponseEntity<List<String>> listRoleName(@PathVariable(value = "adminId") Long adminId);
 }

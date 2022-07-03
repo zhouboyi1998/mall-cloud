@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Api(value = "分类-品牌关联接口")
 @RestController
-@RequestMapping("/categoryBrandRelation")
+@RequestMapping(value = "/categoryBrandRelation")
 public class CategoryBrandRelationController {
 
     private CategoryBrandRelationService categoryBrandRelationService;
@@ -38,7 +38,7 @@ public class CategoryBrandRelationController {
     }
 
     @ApiOperation(value = "查询分类-品牌关联列表")
-    @GetMapping("/list")
+    @GetMapping(value = "/list")
     public ResponseEntity<List<CategoryBrandRelation>> list() {
         List<CategoryBrandRelation> categoryBrandRelationList = categoryBrandRelationService.list();
         return ResponseEntity.ok(categoryBrandRelationList);
@@ -46,19 +46,19 @@ public class CategoryBrandRelationController {
 
     @ApiOperation(value = "根据条件查询分类-品牌关联列表")
     @ApiImplicitParam(name = "categoryBrandRelation", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrandRelation")
-    @PostMapping("/list")
+    @PostMapping(value = "/list")
     public ResponseEntity<List<CategoryBrandRelation>> listByWrapper(@RequestBody CategoryBrandRelation categoryBrandRelation) {
         Wrapper<CategoryBrandRelation> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(categoryBrandRelation);
         List<CategoryBrandRelation> categoryBrandRelationList = categoryBrandRelationService.list(wrapper);
         return ResponseEntity.ok(categoryBrandRelationList);
     }
 
-    @ApiOperation("分页查询分类-品牌关联列表")
-    @ApiImplicitParams({
+    @ApiOperation(value = "分页查询分类-品牌关联列表")
+    @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
     })
-    @GetMapping("/page/{current}/{size}")
+    @GetMapping(value = "/page/{current}/{size}")
     public ResponseEntity<IPage<CategoryBrandRelation>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
@@ -69,12 +69,12 @@ public class CategoryBrandRelationController {
     }
 
     @ApiOperation(value = "根据条件分页查询分类-品牌关联")
-    @ApiImplicitParams({
+    @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long"),
         @ApiImplicitParam(name = "categoryBrandRelation", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrandRelation")
     })
-    @PostMapping("/page/{current}/{size}")
+    @PostMapping(value = "/page/{current}/{size}")
     public ResponseEntity<IPage<CategoryBrandRelation>> pageByWrapper(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
@@ -88,7 +88,7 @@ public class CategoryBrandRelationController {
 
     @ApiOperation(value = "根据id查询单个分类-品牌关联")
     @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "path", dataType = "Long")
-    @GetMapping("/one/{id}")
+    @GetMapping(value = "/one/{id}")
     public ResponseEntity<CategoryBrandRelation> one(@PathVariable(value = "id") Long id) {
         LambdaQueryWrapper<CategoryBrandRelation> wrapper = new LambdaQueryWrapper<CategoryBrandRelation>().eq(CategoryBrandRelation::getId, id);
         CategoryBrandRelation categoryBrandRelation = categoryBrandRelationService.getOne(wrapper);
@@ -97,7 +97,7 @@ public class CategoryBrandRelationController {
 
     @ApiOperation(value = "新增分类-品牌关联")
     @ApiImplicitParam(name = "categoryBrandRelation", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrandRelation")
-    @PostMapping("/insert")
+    @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody CategoryBrandRelation categoryBrandRelation) {
         categoryBrandRelation.setCreateTime(LocalDateTime.now());
         categoryBrandRelation.setUpdateTime(LocalDateTime.now());
@@ -107,7 +107,7 @@ public class CategoryBrandRelationController {
 
     @ApiOperation(value = "根据id修改分类-品牌关联")
     @ApiImplicitParam(name = "categoryBrandRelation", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrandRelation")
-    @PutMapping("/update")
+    @PutMapping(value = "/update")
     public ResponseEntity<Boolean> update(@RequestBody CategoryBrandRelation categoryBrandRelation) {
         Boolean code = categoryBrandRelationService.updateById(categoryBrandRelation);
         return ResponseEntity.ok(code);
@@ -115,7 +115,7 @@ public class CategoryBrandRelationController {
 
     @ApiOperation(value = "根据ids批量修改分类-品牌关联")
     @ApiImplicitParam(name = "categoryBrandRelationList", value = "分类-品牌关联列表", required = true, paramType = "body", dataType = "List<CategoryBrandRelation>")
-    @PutMapping("/update/batch")
+    @PutMapping(value = "/update/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<CategoryBrandRelation> categoryBrandRelationList) {
         Boolean code = categoryBrandRelationService.updateBatchById(categoryBrandRelationList);
         return ResponseEntity.ok(code);
@@ -123,7 +123,7 @@ public class CategoryBrandRelationController {
 
     @ApiOperation(value = "根据id删除分类-品牌关联")
     @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "path", dataType = "Long")
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
         Boolean code = categoryBrandRelationService.removeById(id);
         return ResponseEntity.ok(code);
@@ -131,7 +131,7 @@ public class CategoryBrandRelationController {
 
     @ApiOperation(value = "根据ids批量删除分类-品牌关联")
     @ApiImplicitParam(name = "ids", value = "分类-品牌关联id列表", required = true, paramType = "body", dataType = "List<Long>")
-    @DeleteMapping("/delete/batch")
+    @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = categoryBrandRelationService.removeByIds(ids);
         return ResponseEntity.ok(code);
