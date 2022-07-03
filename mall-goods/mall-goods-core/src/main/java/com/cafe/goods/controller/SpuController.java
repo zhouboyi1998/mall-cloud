@@ -86,10 +86,37 @@ public class SpuController {
         return ResponseEntity.ok(spuPage);
     }
 
+    @ApiOperation(value = "分页查询Standard Product Unit 标准化产品单元列表")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Spu>")
+    @GetMapping(value = "/page")
+    public ResponseEntity<IPage<Spu>> page(@RequestBody Page<Spu> page) {
+        Page<Spu> spuPage = spuService.page(page);
+        return ResponseEntity.ok(spuPage);
+    }
+
+    @ApiOperation(value = "根据条件分页查询Standard Product Unit 标准化产品单元")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Spu>")
+    @PostMapping(value = "/page")
+    public ResponseEntity<IPage<Spu>> pageByWrapper(@RequestBody Page<Spu> page) {
+        Spu spu = page.getRecords().get(0);
+        Wrapper<Spu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(spu);
+        Page<Spu> spuPage = spuService.page(page, wrapper);
+        return ResponseEntity.ok(spuPage);
+    }
+
     @ApiOperation(value = "根据id查询单个Standard Product Unit 标准化产品单元")
     @ApiImplicitParam(name = "id", value = "Standard Product Unit 标准化产品单元id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Spu> one(@PathVariable(value = "id") Long id) {
+        LambdaQueryWrapper<Spu> wrapper = new LambdaQueryWrapper<Spu>().eq(Spu::getId, id);
+        Spu spu = spuService.getOne(wrapper);
+        return ResponseEntity.ok(spu);
+    }
+
+    @ApiOperation(value = "根据id查询单个Standard Product Unit 标准化产品单元")
+    @ApiImplicitParam(name = "id", value = "Standard Product Unit 标准化产品单元id", required = true, paramType = "query", dataType = "Long")
+    @GetMapping(value = "/one")
+    public ResponseEntity<Spu> one2(@RequestParam Long id) {
         LambdaQueryWrapper<Spu> wrapper = new LambdaQueryWrapper<Spu>().eq(Spu::getId, id);
         Spu spu = spuService.getOne(wrapper);
         return ResponseEntity.ok(spu);
@@ -125,6 +152,14 @@ public class SpuController {
     @ApiImplicitParam(name = "id", value = "Standard Product Unit 标准化产品单元id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
+        Boolean code = spuService.removeById(id);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "根据id删除Standard Product Unit 标准化产品单元")
+    @ApiImplicitParam(name = "id", value = "Standard Product Unit 标准化产品单元id", required = true, paramType = "query", dataType = "Long")
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete2(@RequestParam Long id) {
         Boolean code = spuService.removeById(id);
         return ResponseEntity.ok(code);
     }

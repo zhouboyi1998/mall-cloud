@@ -86,10 +86,37 @@ public class AdminController {
         return ResponseEntity.ok(adminPage);
     }
 
+    @ApiOperation(value = "分页查询管理员列表")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Admin>")
+    @GetMapping(value = "/page")
+    public ResponseEntity<IPage<Admin>> page(@RequestBody Page<Admin> page) {
+        Page<Admin> adminPage = adminService.page(page);
+        return ResponseEntity.ok(adminPage);
+    }
+
+    @ApiOperation(value = "根据条件分页查询管理员")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Admin>")
+    @PostMapping(value = "/page")
+    public ResponseEntity<IPage<Admin>> pageByWrapper(@RequestBody Page<Admin> page) {
+        Admin admin = page.getRecords().get(0);
+        Wrapper<Admin> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(admin);
+        Page<Admin> adminPage = adminService.page(page, wrapper);
+        return ResponseEntity.ok(adminPage);
+    }
+
     @ApiOperation(value = "根据id查询单个管理员")
     @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Admin> one(@PathVariable(value = "id") Long id) {
+        LambdaQueryWrapper<Admin> wrapper = new LambdaQueryWrapper<Admin>().eq(Admin::getId, id);
+        Admin admin = adminService.getOne(wrapper);
+        return ResponseEntity.ok(admin);
+    }
+
+    @ApiOperation(value = "根据id查询单个管理员")
+    @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "query", dataType = "Long")
+    @GetMapping(value = "/one")
+    public ResponseEntity<Admin> one2(@RequestParam Long id) {
         LambdaQueryWrapper<Admin> wrapper = new LambdaQueryWrapper<Admin>().eq(Admin::getId, id);
         Admin admin = adminService.getOne(wrapper);
         return ResponseEntity.ok(admin);
@@ -134,6 +161,14 @@ public class AdminController {
     @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
+        Boolean code = adminService.removeById(id);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "根据id删除管理员")
+    @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "query", dataType = "Long")
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete2(@RequestParam Long id) {
         Boolean code = adminService.removeById(id);
         return ResponseEntity.ok(code);
     }

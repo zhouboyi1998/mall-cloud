@@ -86,10 +86,37 @@ public class AdminRoleRelationController {
         return ResponseEntity.ok(adminRoleRelationPage);
     }
 
+    @ApiOperation(value = "分页查询用户-角色关联列表")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<AdminRoleRelation>")
+    @GetMapping(value = "/page")
+    public ResponseEntity<IPage<AdminRoleRelation>> page(@RequestBody Page<AdminRoleRelation> page) {
+        Page<AdminRoleRelation> adminRoleRelationPage = adminRoleRelationService.page(page);
+        return ResponseEntity.ok(adminRoleRelationPage);
+    }
+
+    @ApiOperation(value = "根据条件分页查询用户-角色关联")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<AdminRoleRelation>")
+    @PostMapping(value = "/page")
+    public ResponseEntity<IPage<AdminRoleRelation>> pageByWrapper(@RequestBody Page<AdminRoleRelation> page) {
+        AdminRoleRelation adminRoleRelation = page.getRecords().get(0);
+        Wrapper<AdminRoleRelation> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(adminRoleRelation);
+        Page<AdminRoleRelation> adminRoleRelationPage = adminRoleRelationService.page(page, wrapper);
+        return ResponseEntity.ok(adminRoleRelationPage);
+    }
+
     @ApiOperation(value = "根据id查询单个用户-角色关联")
     @ApiImplicitParam(name = "id", value = "用户-角色关联id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<AdminRoleRelation> one(@PathVariable(value = "id") Long id) {
+        LambdaQueryWrapper<AdminRoleRelation> wrapper = new LambdaQueryWrapper<AdminRoleRelation>().eq(AdminRoleRelation::getId, id);
+        AdminRoleRelation adminRoleRelation = adminRoleRelationService.getOne(wrapper);
+        return ResponseEntity.ok(adminRoleRelation);
+    }
+
+    @ApiOperation(value = "根据id查询单个用户-角色关联")
+    @ApiImplicitParam(name = "id", value = "用户-角色关联id", required = true, paramType = "query", dataType = "Long")
+    @GetMapping(value = "/one")
+    public ResponseEntity<AdminRoleRelation> one2(@RequestParam Long id) {
         LambdaQueryWrapper<AdminRoleRelation> wrapper = new LambdaQueryWrapper<AdminRoleRelation>().eq(AdminRoleRelation::getId, id);
         AdminRoleRelation adminRoleRelation = adminRoleRelationService.getOne(wrapper);
         return ResponseEntity.ok(adminRoleRelation);
@@ -125,6 +152,14 @@ public class AdminRoleRelationController {
     @ApiImplicitParam(name = "id", value = "用户-角色关联id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
+        Boolean code = adminRoleRelationService.removeById(id);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "根据id删除用户-角色关联")
+    @ApiImplicitParam(name = "id", value = "用户-角色关联id", required = true, paramType = "query", dataType = "Long")
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete2(@RequestParam Long id) {
         Boolean code = adminRoleRelationService.removeById(id);
         return ResponseEntity.ok(code);
     }

@@ -86,10 +86,37 @@ public class MenuController {
         return ResponseEntity.ok(menuPage);
     }
 
+    @ApiOperation(value = "分页查询菜单列表")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Menu>")
+    @GetMapping(value = "/page")
+    public ResponseEntity<IPage<Menu>> page(@RequestBody Page<Menu> page) {
+        Page<Menu> menuPage = menuService.page(page);
+        return ResponseEntity.ok(menuPage);
+    }
+
+    @ApiOperation(value = "根据条件分页查询菜单")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Menu>")
+    @PostMapping(value = "/page")
+    public ResponseEntity<IPage<Menu>> pageByWrapper(@RequestBody Page<Menu> page) {
+        Menu menu = page.getRecords().get(0);
+        Wrapper<Menu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(menu);
+        Page<Menu> menuPage = menuService.page(page, wrapper);
+        return ResponseEntity.ok(menuPage);
+    }
+
     @ApiOperation(value = "根据id查询单个菜单")
     @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Menu> one(@PathVariable(value = "id") Long id) {
+        LambdaQueryWrapper<Menu> wrapper = new LambdaQueryWrapper<Menu>().eq(Menu::getId, id);
+        Menu menu = menuService.getOne(wrapper);
+        return ResponseEntity.ok(menu);
+    }
+
+    @ApiOperation(value = "根据id查询单个菜单")
+    @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "query", dataType = "Long")
+    @GetMapping(value = "/one")
+    public ResponseEntity<Menu> one2(@RequestParam Long id) {
         LambdaQueryWrapper<Menu> wrapper = new LambdaQueryWrapper<Menu>().eq(Menu::getId, id);
         Menu menu = menuService.getOne(wrapper);
         return ResponseEntity.ok(menu);
@@ -125,6 +152,14 @@ public class MenuController {
     @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
+        Boolean code = menuService.removeById(id);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "根据id删除菜单")
+    @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "query", dataType = "Long")
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete2(@RequestParam Long id) {
         Boolean code = menuService.removeById(id);
         return ResponseEntity.ok(code);
     }

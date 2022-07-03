@@ -86,10 +86,37 @@ public class BrandController {
         return ResponseEntity.ok(brandPage);
     }
 
+    @ApiOperation(value = "分页查询品牌列表")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Brand>")
+    @GetMapping(value = "/page")
+    public ResponseEntity<IPage<Brand>> page(@RequestBody Page<Brand> page) {
+        Page<Brand> brandPage = brandService.page(page);
+        return ResponseEntity.ok(brandPage);
+    }
+
+    @ApiOperation(value = "根据条件分页查询品牌")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Brand>")
+    @PostMapping(value = "/page")
+    public ResponseEntity<IPage<Brand>> pageByWrapper(@RequestBody Page<Brand> page) {
+        Brand brand = page.getRecords().get(0);
+        Wrapper<Brand> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(brand);
+        Page<Brand> brandPage = brandService.page(page, wrapper);
+        return ResponseEntity.ok(brandPage);
+    }
+
     @ApiOperation(value = "根据id查询单个品牌")
     @ApiImplicitParam(name = "id", value = "品牌id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Brand> one(@PathVariable(value = "id") Long id) {
+        LambdaQueryWrapper<Brand> wrapper = new LambdaQueryWrapper<Brand>().eq(Brand::getId, id);
+        Brand brand = brandService.getOne(wrapper);
+        return ResponseEntity.ok(brand);
+    }
+
+    @ApiOperation(value = "根据id查询单个品牌")
+    @ApiImplicitParam(name = "id", value = "品牌id", required = true, paramType = "query", dataType = "Long")
+    @GetMapping(value = "/one")
+    public ResponseEntity<Brand> one2(@RequestParam Long id) {
         LambdaQueryWrapper<Brand> wrapper = new LambdaQueryWrapper<Brand>().eq(Brand::getId, id);
         Brand brand = brandService.getOne(wrapper);
         return ResponseEntity.ok(brand);
@@ -125,6 +152,14 @@ public class BrandController {
     @ApiImplicitParam(name = "id", value = "品牌id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
+        Boolean code = brandService.removeById(id);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "根据id删除品牌")
+    @ApiImplicitParam(name = "id", value = "品牌id", required = true, paramType = "query", dataType = "Long")
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete2(@RequestParam Long id) {
         Boolean code = brandService.removeById(id);
         return ResponseEntity.ok(code);
     }

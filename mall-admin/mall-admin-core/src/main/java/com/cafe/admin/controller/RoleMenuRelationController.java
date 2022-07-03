@@ -88,10 +88,37 @@ public class RoleMenuRelationController {
         return ResponseEntity.ok(roleMenuRelationPage);
     }
 
+    @ApiOperation(value = "分页查询角色-菜单关联列表")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<RoleMenuRelation>")
+    @GetMapping(value = "/page")
+    public ResponseEntity<IPage<RoleMenuRelation>> page(@RequestBody Page<RoleMenuRelation> page) {
+        Page<RoleMenuRelation> roleMenuRelationPage = roleMenuRelationService.page(page);
+        return ResponseEntity.ok(roleMenuRelationPage);
+    }
+
+    @ApiOperation(value = "根据条件分页查询角色-菜单关联")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<RoleMenuRelation>")
+    @PostMapping(value = "/page")
+    public ResponseEntity<IPage<RoleMenuRelation>> pageByWrapper(@RequestBody Page<RoleMenuRelation> page) {
+        RoleMenuRelation roleMenuRelation = page.getRecords().get(0);
+        Wrapper<RoleMenuRelation> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(roleMenuRelation);
+        Page<RoleMenuRelation> roleMenuRelationPage = roleMenuRelationService.page(page, wrapper);
+        return ResponseEntity.ok(roleMenuRelationPage);
+    }
+
     @ApiOperation(value = "根据id查询单个角色-菜单关联")
     @ApiImplicitParam(name = "id", value = "角色-菜单关联id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<RoleMenuRelation> one(@PathVariable(value = "id") Long id) {
+        LambdaQueryWrapper<RoleMenuRelation> wrapper = new LambdaQueryWrapper<RoleMenuRelation>().eq(RoleMenuRelation::getId, id);
+        RoleMenuRelation roleMenuRelation = roleMenuRelationService.getOne(wrapper);
+        return ResponseEntity.ok(roleMenuRelation);
+    }
+
+    @ApiOperation(value = "根据id查询单个角色-菜单关联")
+    @ApiImplicitParam(name = "id", value = "角色-菜单关联id", required = true, paramType = "query", dataType = "Long")
+    @GetMapping(value = "/one")
+    public ResponseEntity<RoleMenuRelation> one2(@RequestParam Long id) {
         LambdaQueryWrapper<RoleMenuRelation> wrapper = new LambdaQueryWrapper<RoleMenuRelation>().eq(RoleMenuRelation::getId, id);
         RoleMenuRelation roleMenuRelation = roleMenuRelationService.getOne(wrapper);
         return ResponseEntity.ok(roleMenuRelation);
@@ -127,6 +154,14 @@ public class RoleMenuRelationController {
     @ApiImplicitParam(name = "id", value = "角色-菜单关联id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
+        Boolean code = roleMenuRelationService.removeById(id);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "根据id删除角色-菜单关联")
+    @ApiImplicitParam(name = "id", value = "角色-菜单关联id", required = true, paramType = "query", dataType = "Long")
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete2(@RequestParam Long id) {
         Boolean code = roleMenuRelationService.removeById(id);
         return ResponseEntity.ok(code);
     }

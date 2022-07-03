@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.core.util.MyBatisPlusWrapperUtil;
+import com.cafe.goods.model.Brand;
 import com.cafe.goods.model.Category;
 import com.cafe.goods.service.CategoryService;
 import io.swagger.annotations.Api;
@@ -86,10 +87,37 @@ public class CategoryController {
         return ResponseEntity.ok(categoryPage);
     }
 
+    @ApiOperation(value = "分页查询分类列表")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Category>")
+    @GetMapping(value = "/page")
+    public ResponseEntity<IPage<Category>> page(@RequestBody Page<Category> page) {
+        Page<Category> categoryPage = categoryService.page(page);
+        return ResponseEntity.ok(categoryPage);
+    }
+
+    @ApiOperation(value = "根据条件分页查询分类")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Category>")
+    @PostMapping(value = "/page")
+    public ResponseEntity<IPage<Category>> pageByWrapper(@RequestBody Page<Category> page) {
+        Category category = page.getRecords().get(0);
+        Wrapper<Category> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(category);
+        Page<Category> categoryPage = categoryService.page(page, wrapper);
+        return ResponseEntity.ok(categoryPage);
+    }
+
     @ApiOperation(value = "根据id查询单个分类")
     @ApiImplicitParam(name = "id", value = "分类id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Category> one(@PathVariable(value = "id") Long id) {
+        LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<Category>().eq(Category::getId, id);
+        Category category = categoryService.getOne(wrapper);
+        return ResponseEntity.ok(category);
+    }
+
+    @ApiOperation(value = "根据id查询单个分类")
+    @ApiImplicitParam(name = "id", value = "分类id", required = true, paramType = "query", dataType = "Long")
+    @GetMapping(value = "/one")
+    public ResponseEntity<Category> one2(@RequestParam Long id) {
         LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<Category>().eq(Category::getId, id);
         Category category = categoryService.getOne(wrapper);
         return ResponseEntity.ok(category);
@@ -125,6 +153,14 @@ public class CategoryController {
     @ApiImplicitParam(name = "id", value = "分类id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
+        Boolean code = categoryService.removeById(id);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "根据id删除分类")
+    @ApiImplicitParam(name = "id", value = "分类id", required = true, paramType = "query", dataType = "Long")
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete2(@RequestParam Long id) {
         Boolean code = categoryService.removeById(id);
         return ResponseEntity.ok(code);
     }

@@ -105,10 +105,37 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
     }
 
+    @ApiOperation(value = "分页查询${table.comment}列表")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<${entity}>")
+    @GetMapping(value = "/page")
+    public ResponseEntity<IPage<${entity}>> page(@RequestBody Page<${entity}> page) {
+        Page<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.page(page);
+        return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
+    }
+
+    @ApiOperation(value = "根据条件分页查询${table.comment}")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<${entity}>")
+    @PostMapping(value = "/page")
+    public ResponseEntity<IPage<${entity}>> pageByWrapper(@RequestBody Page<${entity}> page) {
+        ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} = page.getRecords().get(0);
+        Wrapper<${entity}> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
+        Page<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.page(page, wrapper);
+        return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
+    }
+
     @ApiOperation(value = "根据id查询单个${table.comment}")
     @ApiImplicitParam(name = "id", value = "${table.comment}id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<${entity}> one(@PathVariable(value = "id") Long id) {
+        LambdaQueryWrapper<${entity}> wrapper = new LambdaQueryWrapper<${entity}>().eq(${entity}::getId, id);
+        ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.getOne(wrapper);
+        return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
+    }
+
+    @ApiOperation(value = "根据id查询单个${table.comment}")
+    @ApiImplicitParam(name = "id", value = "${table.comment}id", required = true, paramType = "query", dataType = "Long")
+    @GetMapping(value = "/one")
+    public ResponseEntity<${entity}> one2(@RequestParam Long id) {
         LambdaQueryWrapper<${entity}> wrapper = new LambdaQueryWrapper<${entity}>().eq(${entity}::getId, id);
         ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.getOne(wrapper);
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
@@ -144,6 +171,14 @@ public class ${table.controllerName} {
     @ApiImplicitParam(name = "id", value = "${table.comment}id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
+        Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.removeById(id);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "根据id删除${table.comment}")
+    @ApiImplicitParam(name = "id", value = "${table.comment}id", required = true, paramType = "query", dataType = "Long")
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete2(@RequestParam Long id) {
         Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.removeById(id);
         return ResponseEntity.ok(code);
     }
