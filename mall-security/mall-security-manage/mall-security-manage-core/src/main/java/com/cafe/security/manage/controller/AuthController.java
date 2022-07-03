@@ -7,10 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Map;
@@ -23,7 +20,7 @@ import java.util.Map;
  * @Description: 登录认证接口
  */
 @RestController
-@RequestMapping("/oauth")
+@RequestMapping(value = "/oauth")
 public class AuthController {
 
     private TokenEndpoint tokenEndpoint;
@@ -41,7 +38,7 @@ public class AuthController {
      * @return
      * @throws HttpRequestMethodNotSupportedException
      */
-    @RequestMapping(value = "/token", method = {RequestMethod.POST})
+    @PostMapping(value = "/token")
     public ResponseEntity<Oauth2TokenDetails> postAccessToken(
         Principal principal,
         @RequestParam Map<String, String> parameters

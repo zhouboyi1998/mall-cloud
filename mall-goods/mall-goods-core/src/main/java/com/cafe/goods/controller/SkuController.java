@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Api(value = "Stock Keeping Unit 库存量单位接口")
 @RestController
-@RequestMapping("/sku")
+@RequestMapping(value = "/sku")
 public class SkuController {
 
     private SkuService skuService;
@@ -38,7 +38,7 @@ public class SkuController {
     }
 
     @ApiOperation(value = "查询Stock Keeping Unit 库存量单位列表")
-    @GetMapping("/list")
+    @GetMapping(value = "/list")
     public ResponseEntity<List<Sku>> list() {
         List<Sku> skuList = skuService.list();
         return ResponseEntity.ok(skuList);
@@ -46,19 +46,19 @@ public class SkuController {
 
     @ApiOperation(value = "根据条件查询Stock Keeping Unit 库存量单位列表")
     @ApiImplicitParam(name = "sku", value = "Stock Keeping Unit 库存量单位Model", required = true, paramType = "body", dataType = "Sku")
-    @PostMapping("/list")
+    @PostMapping(value = "/list")
     public ResponseEntity<List<Sku>> listByWrapper(@RequestBody Sku sku) {
         Wrapper<Sku> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(sku);
         List<Sku> skuList = skuService.list(wrapper);
         return ResponseEntity.ok(skuList);
     }
 
-    @ApiOperation("分页查询Stock Keeping Unit 库存量单位列表")
-    @ApiImplicitParams({
+    @ApiOperation(value = "分页查询Stock Keeping Unit 库存量单位列表")
+    @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
     })
-    @GetMapping("/page/{current}/{size}")
+    @GetMapping(value = "/page/{current}/{size}")
     public ResponseEntity<IPage<Sku>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
@@ -69,12 +69,12 @@ public class SkuController {
     }
 
     @ApiOperation(value = "根据条件分页查询Stock Keeping Unit 库存量单位")
-    @ApiImplicitParams({
+    @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long"),
         @ApiImplicitParam(name = "sku", value = "Stock Keeping Unit 库存量单位Model", required = true, paramType = "body", dataType = "Sku")
     })
-    @PostMapping("/page/{current}/{size}")
+    @PostMapping(value = "/page/{current}/{size}")
     public ResponseEntity<IPage<Sku>> pageByWrapper(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
@@ -86,10 +86,37 @@ public class SkuController {
         return ResponseEntity.ok(skuPage);
     }
 
+    @ApiOperation(value = "分页查询Stock Keeping Unit 库存量单位列表")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Sku>")
+    @GetMapping(value = "/page")
+    public ResponseEntity<IPage<Sku>> page(@RequestBody Page<Sku> page) {
+        Page<Sku> skuPage = skuService.page(page);
+        return ResponseEntity.ok(skuPage);
+    }
+
+    @ApiOperation(value = "根据条件分页查询Stock Keeping Unit 库存量单位")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Sku>")
+    @PostMapping(value = "/page")
+    public ResponseEntity<IPage<Sku>> pageByWrapper(@RequestBody Page<Sku> page) {
+        Sku sku = page.getRecords().get(0);
+        Wrapper<Sku> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(sku);
+        Page<Sku> skuPage = skuService.page(page, wrapper);
+        return ResponseEntity.ok(skuPage);
+    }
+
     @ApiOperation(value = "根据id查询单个Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "id", value = "Stock Keeping Unit 库存量单位id", required = true, paramType = "path", dataType = "Long")
-    @GetMapping("/one/{id}")
+    @GetMapping(value = "/one/{id}")
     public ResponseEntity<Sku> one(@PathVariable(value = "id") Long id) {
+        LambdaQueryWrapper<Sku> wrapper = new LambdaQueryWrapper<Sku>().eq(Sku::getId, id);
+        Sku sku = skuService.getOne(wrapper);
+        return ResponseEntity.ok(sku);
+    }
+
+    @ApiOperation(value = "根据id查询单个Stock Keeping Unit 库存量单位")
+    @ApiImplicitParam(name = "id", value = "Stock Keeping Unit 库存量单位id", required = true, paramType = "query", dataType = "Long")
+    @GetMapping(value = "/one")
+    public ResponseEntity<Sku> one2(@RequestParam Long id) {
         LambdaQueryWrapper<Sku> wrapper = new LambdaQueryWrapper<Sku>().eq(Sku::getId, id);
         Sku sku = skuService.getOne(wrapper);
         return ResponseEntity.ok(sku);
@@ -97,7 +124,7 @@ public class SkuController {
 
     @ApiOperation(value = "新增Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "sku", value = "Stock Keeping Unit 库存量单位Model", required = true, paramType = "body", dataType = "Sku")
-    @PostMapping("/insert")
+    @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Sku sku) {
         sku.setCreateTime(LocalDateTime.now());
         sku.setUpdateTime(LocalDateTime.now());
@@ -107,7 +134,7 @@ public class SkuController {
 
     @ApiOperation(value = "根据id修改Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "sku", value = "Stock Keeping Unit 库存量单位Model", required = true, paramType = "body", dataType = "Sku")
-    @PutMapping("/update")
+    @PutMapping(value = "/update")
     public ResponseEntity<Boolean> update(@RequestBody Sku sku) {
         Boolean code = skuService.updateById(sku);
         return ResponseEntity.ok(code);
@@ -115,7 +142,7 @@ public class SkuController {
 
     @ApiOperation(value = "根据ids批量修改Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "skuList", value = "Stock Keeping Unit 库存量单位列表", required = true, paramType = "body", dataType = "List<Sku>")
-    @PutMapping("/update/batch")
+    @PutMapping(value = "/update/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<Sku> skuList) {
         Boolean code = skuService.updateBatchById(skuList);
         return ResponseEntity.ok(code);
@@ -123,15 +150,23 @@ public class SkuController {
 
     @ApiOperation(value = "根据id删除Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "id", value = "Stock Keeping Unit 库存量单位id", required = true, paramType = "path", dataType = "Long")
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
+        Boolean code = skuService.removeById(id);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "根据id删除Stock Keeping Unit 库存量单位")
+    @ApiImplicitParam(name = "id", value = "Stock Keeping Unit 库存量单位id", required = true, paramType = "query", dataType = "Long")
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete2(@RequestParam Long id) {
         Boolean code = skuService.removeById(id);
         return ResponseEntity.ok(code);
     }
 
     @ApiOperation(value = "根据ids批量删除Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "ids", value = "Stock Keeping Unit 库存量单位id列表", required = true, paramType = "body", dataType = "List<Long>")
-    @DeleteMapping("/delete/batch")
+    @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = skuService.removeByIds(ids);
         return ResponseEntity.ok(code);

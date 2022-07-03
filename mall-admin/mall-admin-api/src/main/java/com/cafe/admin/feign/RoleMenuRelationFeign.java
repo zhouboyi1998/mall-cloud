@@ -17,8 +17,8 @@ import java.util.List;
  * @Date: 2022/5/10 23:53
  * @Description:
  */
-@FeignClient("mall-admin")
-@RequestMapping("/roleMenuRelation")
+@FeignClient(value = "mall-admin")
+@RequestMapping(value = "/roleMenuRelation")
 public interface RoleMenuRelationFeign {
 
     /**
@@ -26,7 +26,7 @@ public interface RoleMenuRelationFeign {
      *
      * @return
      */
-    @GetMapping("/list/menuPath/roleName/bo")
+    @GetMapping(value = "/list/menuPath/roleName/bo")
     ResponseEntity<List<MenuPathAndRoleNameBO>> listMenuPathAndRoleNameBO();
 
     /**
@@ -35,6 +35,6 @@ public interface RoleMenuRelationFeign {
      * @param menuIds
      * @return
      */
-    @PostMapping("/list/menuPath/roleName/bo")
+    @PostMapping(value = "/list/menuPath/roleName/bo")
     ResponseEntity<List<MenuPathAndRoleNameBO>> listMenuPathAndRoleNameBO(@RequestBody List<Long> menuIds);
 }

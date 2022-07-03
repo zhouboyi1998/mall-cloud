@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date: 2022/5/6 9:25
  * @Description:
  */
-@FeignClient("mall-goods")
-@RequestMapping("/spu")
+@FeignClient(value = "mall-goods")
+@RequestMapping(value = "/spu")
 public interface SpuFeign {
 
     /**
@@ -24,6 +24,6 @@ public interface SpuFeign {
      * @param id
      * @return
      */
-    @GetMapping("/one/{id}")
+    @GetMapping(value = "/one/{id}")
     ResponseEntity<Spu> one(@PathVariable(value = "id") Long id);
 }
