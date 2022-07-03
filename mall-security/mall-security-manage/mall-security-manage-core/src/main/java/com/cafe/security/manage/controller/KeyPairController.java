@@ -32,7 +32,7 @@ public class KeyPairController {
     }
 
     @ApiOperation(value = "获取 RSA 公钥")
-    @GetMapping("/rsa/public")
+    @GetMapping(value = "/rsa/public")
     public ResponseEntity<Map<String, Object>> getRsaPublicKey() {
         // 从证书中获取公钥
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();

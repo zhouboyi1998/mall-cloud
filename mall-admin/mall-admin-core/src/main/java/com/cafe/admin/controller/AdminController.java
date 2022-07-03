@@ -27,7 +27,7 @@ import java.util.List;
  */
 @Api(value = "管理员接口")
 @RestController
-@RequestMapping("/admin")
+@RequestMapping(value = "/admin")
 public class AdminController {
 
     private AdminService adminService;
@@ -38,7 +38,7 @@ public class AdminController {
     }
 
     @ApiOperation(value = "查询管理员列表")
-    @GetMapping("/list")
+    @GetMapping(value = "/list")
     public ResponseEntity<List<Admin>> list() {
         List<Admin> adminList = adminService.list();
         return ResponseEntity.ok(adminList);
@@ -46,19 +46,19 @@ public class AdminController {
 
     @ApiOperation(value = "根据条件查询管理员列表")
     @ApiImplicitParam(name = "admin", value = "管理员Model", required = true, paramType = "body", dataType = "Admin")
-    @PostMapping("/list")
+    @PostMapping(value = "/list")
     public ResponseEntity<List<Admin>> listByWrapper(@RequestBody Admin admin) {
         Wrapper<Admin> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(admin);
         List<Admin> adminList = adminService.list(wrapper);
         return ResponseEntity.ok(adminList);
     }
 
-    @ApiOperation("分页查询管理员列表")
-    @ApiImplicitParams({
+    @ApiOperation(value = "分页查询管理员列表")
+    @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
     })
-    @GetMapping("/page/{current}/{size}")
+    @GetMapping(value = "/page/{current}/{size}")
     public ResponseEntity<IPage<Admin>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
@@ -69,12 +69,12 @@ public class AdminController {
     }
 
     @ApiOperation(value = "根据条件分页查询管理员")
-    @ApiImplicitParams({
+    @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long"),
         @ApiImplicitParam(name = "admin", value = "管理员Model", required = true, paramType = "body", dataType = "Admin")
     })
-    @PostMapping("/page/{current}/{size}")
+    @PostMapping(value = "/page/{current}/{size}")
     public ResponseEntity<IPage<Admin>> pageByWrapper(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
@@ -86,10 +86,37 @@ public class AdminController {
         return ResponseEntity.ok(adminPage);
     }
 
+    @ApiOperation(value = "分页查询管理员列表")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Admin>")
+    @GetMapping(value = "/page")
+    public ResponseEntity<IPage<Admin>> page(@RequestBody Page<Admin> page) {
+        Page<Admin> adminPage = adminService.page(page);
+        return ResponseEntity.ok(adminPage);
+    }
+
+    @ApiOperation(value = "根据条件分页查询管理员")
+    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Admin>")
+    @PostMapping(value = "/page")
+    public ResponseEntity<IPage<Admin>> pageByWrapper(@RequestBody Page<Admin> page) {
+        Admin admin = page.getRecords().get(0);
+        Wrapper<Admin> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(admin);
+        Page<Admin> adminPage = adminService.page(page, wrapper);
+        return ResponseEntity.ok(adminPage);
+    }
+
     @ApiOperation(value = "根据id查询单个管理员")
     @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "path", dataType = "Long")
-    @GetMapping("/one/{id}")
+    @GetMapping(value = "/one/{id}")
     public ResponseEntity<Admin> one(@PathVariable(value = "id") Long id) {
+        LambdaQueryWrapper<Admin> wrapper = new LambdaQueryWrapper<Admin>().eq(Admin::getId, id);
+        Admin admin = adminService.getOne(wrapper);
+        return ResponseEntity.ok(admin);
+    }
+
+    @ApiOperation(value = "根据id查询单个管理员")
+    @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "query", dataType = "Long")
+    @GetMapping(value = "/one")
+    public ResponseEntity<Admin> one2(@RequestParam Long id) {
         LambdaQueryWrapper<Admin> wrapper = new LambdaQueryWrapper<Admin>().eq(Admin::getId, id);
         Admin admin = adminService.getOne(wrapper);
         return ResponseEntity.ok(admin);
@@ -97,7 +124,7 @@ public class AdminController {
 
     @ApiOperation(value = "根据管理员用户名查询单个管理员")
     @ApiImplicitParam(name = "adminName", value = "管理员用户名", required = true, paramType = "path", dataType = "String")
-    @GetMapping("/one/name/{adminName}")
+    @GetMapping(value = "/one/name/{adminName}")
     public ResponseEntity<Admin> one(@PathVariable(value = "adminName") String adminName) {
         LambdaQueryWrapper<Admin> wrapper = new LambdaQueryWrapper<Admin>().eq(Admin::getAdminName, adminName);
         Admin admin = adminService.getOne(wrapper);
@@ -106,7 +133,7 @@ public class AdminController {
 
     @ApiOperation(value = "新增管理员")
     @ApiImplicitParam(name = "admin", value = "管理员Model", required = true, paramType = "body", dataType = "Admin")
-    @PostMapping("/insert")
+    @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Admin admin) {
         admin.setCreateTime(LocalDateTime.now());
         admin.setUpdateTime(LocalDateTime.now());
@@ -116,7 +143,7 @@ public class AdminController {
 
     @ApiOperation(value = "根据id修改管理员")
     @ApiImplicitParam(name = "admin", value = "管理员Model", required = true, paramType = "body", dataType = "Admin")
-    @PutMapping("/update")
+    @PutMapping(value = "/update")
     public ResponseEntity<Boolean> update(@RequestBody Admin admin) {
         Boolean code = adminService.updateById(admin);
         return ResponseEntity.ok(code);
@@ -124,7 +151,7 @@ public class AdminController {
 
     @ApiOperation(value = "根据ids批量修改管理员")
     @ApiImplicitParam(name = "adminList", value = "管理员列表", required = true, paramType = "body", dataType = "List<Admin>")
-    @PutMapping("/update/batch")
+    @PutMapping(value = "/update/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<Admin> adminList) {
         Boolean code = adminService.updateBatchById(adminList);
         return ResponseEntity.ok(code);
@@ -132,15 +159,23 @@ public class AdminController {
 
     @ApiOperation(value = "根据id删除管理员")
     @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "path", dataType = "Long")
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
+        Boolean code = adminService.removeById(id);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "根据id删除管理员")
+    @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "query", dataType = "Long")
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete2(@RequestParam Long id) {
         Boolean code = adminService.removeById(id);
         return ResponseEntity.ok(code);
     }
 
     @ApiOperation(value = "根据ids批量删除管理员")
     @ApiImplicitParam(name = "ids", value = "管理员id列表", required = true, paramType = "body", dataType = "List<Long>")
-    @DeleteMapping("/delete/batch")
+    @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = adminService.removeByIds(ids);
         return ResponseEntity.ok(code);

@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date: 2022/5/7 17:29
  * @Description:
  */
-@FeignClient("mall-admin")
-@RequestMapping("/admin")
+@FeignClient(value = "mall-admin")
+@RequestMapping(value = "/admin")
 public interface AdminFeign {
 
     /**
@@ -24,6 +24,6 @@ public interface AdminFeign {
      * @param adminName
      * @return
      */
-    @GetMapping("/one/name/{adminName}")
+    @GetMapping(value = "/one/name/{adminName}")
     ResponseEntity<Admin> one(@PathVariable(value = "adminName") String adminName);
 }
