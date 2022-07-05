@@ -53,9 +53,7 @@
 
         <mall-common-constant.version>1.0-SNAPSHOT</mall-common-constant.version>
         <mall-common-core.version>1.0-SNAPSHOT</mall-common-core.version>
-        <mall-common-gateway.version>1.0-SNAPSHOT</mall-common-gateway.version>
-        <mall-common-monitor.version>1.0-SNAPSHOT</mall-common-monitor.version>
-        <mall-common-security.version>1.0-SNAPSHOT</mall-common-security.version>
+        <mall-common-rabbitmq.version>1.0-SNAPSHOT</mall-common-rabbitmq.version>
 
         <mall-admin-api.version>1.0-SNAPSHOT</mall-admin-api.version>
         <mall-goods-api.version>1.0-SNAPSHOT</mall-goods-api.version>
@@ -223,8 +221,8 @@
             </dependency>
             <dependency>
                 <groupId>com.cafe.mall</groupId>
-                <artifactId>mall-common-monitor</artifactId>
-                <version>${mall-common-monitor.version}</version>
+                <artifactId>mall-common-rabbitmq</artifactId>
+                <version>${mall-common-rabbitmq.version}</version>
             </dependency>
             <!-- 远程调用接口 -->
             <dependency>

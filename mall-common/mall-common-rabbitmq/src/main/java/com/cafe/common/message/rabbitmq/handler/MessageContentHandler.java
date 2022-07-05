@@ -1,10 +1,10 @@
-package com.cafe.common.monitor.message.handler;
+package com.cafe.common.message.rabbitmq.handler;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.cafe.admin.constant.AdminTableBeanMap;
 import com.cafe.common.constant.RabbitmqExchange;
-import com.cafe.common.monitor.message.producer.RabbitmqProducer;
-import com.cafe.common.monitor.message.constant.ExchangeSourceRoutingMap;
+import com.cafe.common.message.rabbitmq.producer.RabbitmqProducer;
+import com.cafe.common.message.rabbitmq.constant.ExchangeSourceRoutingMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

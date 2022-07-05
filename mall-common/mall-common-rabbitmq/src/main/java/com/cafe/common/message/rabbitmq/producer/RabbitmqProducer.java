@@ -1,4 +1,4 @@
-package com.cafe.common.monitor.message.producer;
+package com.cafe.common.message.rabbitmq.producer;
 
 import cn.hutool.json.JSONUtil;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;

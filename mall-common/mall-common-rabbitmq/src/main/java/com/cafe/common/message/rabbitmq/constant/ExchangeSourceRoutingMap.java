@@ -1,4 +1,4 @@
-package com.cafe.common.monitor.message.constant;
+package com.cafe.common.message.rabbitmq.constant;
 
 import com.cafe.admin.constant.AdminTable;
 import com.cafe.common.constant.RabbitmqExchange;

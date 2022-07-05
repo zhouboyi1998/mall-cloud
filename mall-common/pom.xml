@@ -19,7 +19,7 @@
     <modules>
         <module>mall-common-constant</module>
         <module>mall-common-core</module>
-        <module>mall-common-monitor</module>
+        <module>mall-common-rabbitmq</module>
     </modules>
 
 </project>
