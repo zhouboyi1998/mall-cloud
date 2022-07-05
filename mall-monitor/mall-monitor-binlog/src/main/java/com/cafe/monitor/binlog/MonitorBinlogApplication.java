@@ -1,7 +1,7 @@
 package com.cafe.monitor.binlog;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -11,7 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @Date: 2022/5/16 15:06
  * @Description: MySQL Binlog 数据库监听模块启动类
  */
-@SpringCloudApplication
+@SpringBootApplication
 @ComponentScan(basePackages = "com.cafe")
 public class MonitorBinlogApplication {
 

@@ -24,7 +24,7 @@
 
         <dependency>
             <groupId>com.cafe.mall</groupId>
-            <artifactId>mall-common-monitor</artifactId>
+            <artifactId>mall-common-rabbitmq</artifactId>
         </dependency>
     </dependencies>
 
