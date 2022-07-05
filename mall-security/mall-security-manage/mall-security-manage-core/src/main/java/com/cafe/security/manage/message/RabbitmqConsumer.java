@@ -1,7 +1,7 @@
 package com.cafe.security.manage.message;
 
 import cn.hutool.json.JSONUtil;
-import com.cafe.admin.model.RoleMenuRelation;
+import com.cafe.admin.model.RoleMenu;
 import com.cafe.common.constant.RabbitmqExchange;
 import com.cafe.common.constant.RabbitmqQueue;
 import com.cafe.common.constant.RabbitmqRoutingKey;
@@ -34,27 +34,27 @@ public class RabbitmqConsumer {
     /**
      * 监听 RabbitMQ 接收消息
      *
-     * @param content 消息内容
+     * @param message JSON 字符串格式的消息内容
      */
     @RabbitListeners(value = {
         @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = RabbitmqQueue.ROLE_MENU_RELATION, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
+            value = @Queue(value = RabbitmqQueue.ROLE_MENU, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
             exchange = @Exchange(value = RabbitmqExchange.BINLOG),
-            key = {RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU_RELATION}
+            key = {RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU}
         )),
         @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = RabbitmqQueue.ROLE_MENU_RELATION, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
+            value = @Queue(value = RabbitmqQueue.ROLE_MENU, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
             exchange = @Exchange(value = RabbitmqExchange.CANAL),
-            key = {RabbitmqRoutingKey.CANAL_TO_ROLE_MENU_RELATION}
+            key = {RabbitmqRoutingKey.CANAL_TO_ROLE_MENU}
         ))
     })
-    public void listener(String content) {
+    public void listener(String message) {
         // 存储 菜单ids
         List<Long> menuIds = new ArrayList<Long>();
         // JSONStr 转换为 JSONArray 再转换为 List
-        List<RoleMenuRelation> roleMenuRelationList = JSONUtil.parseArray(content).toList(RoleMenuRelation.class);
-        for (RoleMenuRelation roleMenuRelation : roleMenuRelationList) {
-            menuIds.add(roleMenuRelation.getMenuId());
+        List<RoleMenu> roleMenuList = JSONUtil.parseArray(message).toList(RoleMenu.class);
+        for (RoleMenu roleMenu : roleMenuList) {
+            menuIds.add(roleMenu.getMenuId());
         }
         // 更新 Redis 中的数据
         resourceService.updateRelationData(menuIds);

@@ -1,6 +1,3 @@
-server:
-  port: 18073
-
 spring:
   application:
     name: mall-monitor-binlog

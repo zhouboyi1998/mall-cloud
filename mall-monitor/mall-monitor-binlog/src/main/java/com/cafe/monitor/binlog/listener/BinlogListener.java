@@ -1,7 +1,7 @@
 package com.cafe.monitor.binlog.listener;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.cafe.common.monitor.message.handler.MessageContentHandler;
+import com.cafe.monitor.binlog.handler.MessageContentHandler;
 import com.cafe.monitor.binlog.property.BinlogProperties;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
 import com.github.shyiko.mysql.binlog.event.*;

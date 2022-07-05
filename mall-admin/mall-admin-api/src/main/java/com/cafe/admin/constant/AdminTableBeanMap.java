@@ -1,6 +1,6 @@
 package com.cafe.admin.constant;
 
-import com.cafe.admin.model.RoleMenuRelation;
+import com.cafe.admin.model.RoleMenu;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +15,6 @@ import java.util.Map;
 public class AdminTableBeanMap {
 
     public static final Map<String, Class<?>> TABLE_BEAN_MAP = new HashMap<String, Class<?>>() {{
-        put(AdminTable.ROLE_MENU_RELATION, RoleMenuRelation.class);
+        put(AdminTable.ROLE_MENU, RoleMenu.class);
     }};
 }
