@@ -15,20 +15,9 @@
     <description>Canal 数据库监听模块</description>
 
     <dependencies>
-        <!-- Canal 数据库监听 -->
-        <dependency>
-            <groupId>com.alibaba.otter</groupId>
-            <artifactId>canal.client</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>com.cafe.mall</groupId>
-            <artifactId>mall-common-monitor</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe.mall</groupId>
-            <artifactId>mall-common-constant</artifactId>
+            <artifactId>mall-common-rabbitmq</artifactId>
         </dependency>
     </dependencies>
-
 </project>
