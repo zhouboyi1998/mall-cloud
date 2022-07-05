@@ -1,10 +1,10 @@
-package com.cafe.common.message.rabbitmq.handler;
+package com.cafe.monitor.binlog.handler;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.cafe.admin.constant.AdminTableBeanMap;
 import com.cafe.common.constant.RabbitmqExchange;
-import com.cafe.common.message.rabbitmq.producer.RabbitmqProducer;
 import com.cafe.common.message.rabbitmq.constant.ExchangeSourceRoutingMap;
+import com.cafe.common.message.rabbitmq.producer.RabbitmqProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ import java.util.Map;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.monitor.message.handler
+ * @Package: com.cafe.monitor.binlog.handler
  * @Author: zhouboyi
  * @Date: 2022/5/19 17:01
  * @Description: 消息内容处理器

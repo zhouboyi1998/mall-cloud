@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.monitor.message.producer
+ * @Package: com.cafe.common.message.rabbitmq.producer
  * @Author: zhouboyi
  * @Date: 2022/5/18 15:03
  * @Description: RabbitMQ 消息生产者
