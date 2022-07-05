@@ -9,5 +9,5 @@ package com.cafe.common.constant;
  */
 public class RabbitmqQueue {
 
-    public static final String ROLE_MENU = "admin.role-menu";
+    public static final String ROLE_MENU = "role-menu";
 }
