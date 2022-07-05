@@ -18,8 +18,8 @@ import java.util.List;
  * @Description:
  */
 @FeignClient(value = "mall-admin")
-@RequestMapping(value = "/roleMenuRelation")
-public interface RoleMenuRelationFeign {
+@RequestMapping(value = "/roleMenu")
+public interface RoleMenuFeign {
 
     /**
      * 获取所有菜单路径和角色名称对应列表

@@ -1,4 +1,4 @@
-package com.cafe.admin.model;
+package com.cafe.goods.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -11,26 +11,26 @@ import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.admin.model
+ * @Package: com.cafe.goods.model
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 角色-菜单关联 (实体类)
+ * @Description: 分类-品牌关联 (实体类)
  */
-@TableName("mall_role_menu_relation")
-@ApiModel(value = "RoleMenuRelation对象", description = "角色-菜单关联")
-public class RoleMenuRelation implements Serializable {
+@TableName("mall_category_brand_")
+@ApiModel(value = "CategoryBrand对象", description = "分类-品牌关联")
+public class CategoryBrand implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "角色-菜单关联ID")
+    @ApiModelProperty(value = "分类-品牌关联ID")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "角色ID")
-    private Long roleId;
+    @ApiModelProperty(value = "分类ID")
+    private Long categoryId;
 
-    @ApiModelProperty(value = "菜单ID")
-    private Long menuId;
+    @ApiModelProperty(value = "品牌ID")
+    private Long brandId;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
@@ -47,20 +47,20 @@ public class RoleMenuRelation implements Serializable {
         this.id = id;
     }
 
-    public Long getRoleId() {
-        return roleId;
+    public Long getCategoryId() {
+        return categoryId;
     }
 
-    public void setRoleId(Long roleId) {
-        this.roleId = roleId;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
-    public Long getMenuId() {
-        return menuId;
+    public Long getBrandId() {
+        return brandId;
     }
 
-    public void setMenuId(Long menuId) {
-        this.menuId = menuId;
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
     }
 
     public LocalDateTime getCreateTime() {
@@ -81,10 +81,10 @@ public class RoleMenuRelation implements Serializable {
 
     @Override
     public String toString() {
-        return "RoleMenuRelation{" +
+        return "CategoryBrand{" +
             "id=" + id +
-            ", roleId=" + roleId +
-            ", menuId=" + menuId +
+            ", categoryId=" + categoryId +
+            ", brandId=" + brandId +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +
             "}";

@@ -1,7 +1,7 @@
 package com.cafe.goods.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.goods.model.CategoryBrandRelation;
+import com.cafe.goods.model.CategoryBrand;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -12,6 +12,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @Description: 分类-品牌关联 (Mapper 接口)
  */
 @Mapper
-public interface CategoryBrandRelationMapper extends BaseMapper<CategoryBrandRelation> {
+public interface CategoryBrandMapper extends BaseMapper<CategoryBrand> {
 
 }

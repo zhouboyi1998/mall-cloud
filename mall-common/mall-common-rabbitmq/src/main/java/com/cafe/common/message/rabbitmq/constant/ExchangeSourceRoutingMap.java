@@ -15,6 +15,6 @@ import org.apache.commons.collections4.map.MultiKeyMap;
 public class ExchangeSourceRoutingMap {
 
     public static final MultiKeyMap<String, String> EXCHANGE_SOURCE_ROUTING_MAP = new MultiKeyMap<String, String>() {{
-        put(RabbitmqExchange.BINLOG, AdminTable.ROLE_MENU_RELATION, RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU_RELATION);
+        put(RabbitmqExchange.BINLOG, AdminTable.ROLE_MENU, RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU);
     }};
 }

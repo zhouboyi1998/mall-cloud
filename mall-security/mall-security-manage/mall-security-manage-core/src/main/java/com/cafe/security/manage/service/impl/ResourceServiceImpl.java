@@ -1,7 +1,7 @@
 package com.cafe.security.manage.service.impl;
 
 import com.cafe.admin.bo.MenuPathAndRoleNameBO;
-import com.cafe.admin.feign.RoleMenuRelationFeign;
+import com.cafe.admin.feign.RoleMenuFeign;
 import com.cafe.common.constant.RedisConstant;
 import com.cafe.security.manage.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,22 +26,22 @@ public class ResourceServiceImpl implements ResourceService {
 
     private RedisTemplate<String, Object> redisTemplate;
 
-    private RoleMenuRelationFeign roleMenuRelationFeign;
+    private RoleMenuFeign roleMenuFeign;
 
     @Autowired
     public ResourceServiceImpl(
         RedisTemplate<String, Object> redisTemplate,
-        RoleMenuRelationFeign roleMenuRelationFeign
+        RoleMenuFeign roleMenuFeign
     ) {
         this.redisTemplate = redisTemplate;
-        this.roleMenuRelationFeign = roleMenuRelationFeign;
+        this.roleMenuFeign = roleMenuFeign;
     }
 
     @PostConstruct
     @Override
     public void initRelationData() {
         // 获取所有菜单路径和角色名称对应关系
-        List<MenuPathAndRoleNameBO> boList = roleMenuRelationFeign.listMenuPathAndRoleNameBO().getBody();
+        List<MenuPathAndRoleNameBO> boList = roleMenuFeign.listMenuPathAndRoleNameBO().getBody();
         // 将对应关系组装成 Map 格式
         Map<String, ArrayList<String>> relationMap = new TreeMap<String, ArrayList<String>>();
         for (MenuPathAndRoleNameBO bo : boList) {
@@ -54,7 +54,7 @@ public class ResourceServiceImpl implements ResourceService {
     @Override
     public void updateRelationData(List<Long> menuIds) {
         // 按菜单ids获取菜单路径和角色名称对应关系列表
-        List<MenuPathAndRoleNameBO> boList = roleMenuRelationFeign.listMenuPathAndRoleNameBO(menuIds).getBody();
+        List<MenuPathAndRoleNameBO> boList = roleMenuFeign.listMenuPathAndRoleNameBO(menuIds).getBody();
         // 更新 Redis 中的对应关系
         for (MenuPathAndRoleNameBO bo : boList) {
             redisTemplate.opsForHash().put(RedisConstant.RESOURCE_ROLE_MAP, bo.getMenuPath(), bo.getRoleNameList());

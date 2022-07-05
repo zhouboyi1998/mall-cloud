@@ -1,7 +1,7 @@
 package com.cafe.admin.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.admin.model.AdminRoleRelation;
+import com.cafe.admin.model.AdminRole;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -12,6 +12,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @Description: 用户-角色关联 (Mapper 接口)
  */
 @Mapper
-public interface AdminRoleRelationMapper extends BaseMapper<AdminRoleRelation> {
+public interface AdminRoleMapper extends BaseMapper<AdminRole> {
 
 }

@@ -2,9 +2,9 @@ package com.cafe.admin.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.admin.bo.MenuPathAndRoleNameBO;
-import com.cafe.admin.dao.RoleMenuRelationMapper;
-import com.cafe.admin.model.RoleMenuRelation;
-import com.cafe.admin.service.RoleMenuRelationService;
+import com.cafe.admin.dao.RoleMenuMapper;
+import com.cafe.admin.model.RoleMenu;
+import com.cafe.admin.service.RoleMenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,17 +18,17 @@ import java.util.List;
  * @Description: 角色-菜单关联 (服务实现类)
  */
 @Service
-public class RoleMenuRelationServiceImpl extends ServiceImpl<RoleMenuRelationMapper, RoleMenuRelation> implements RoleMenuRelationService {
+public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> implements RoleMenuService {
 
-    private RoleMenuRelationMapper roleMenuRelationMapper;
+    private RoleMenuMapper roleMenuMapper;
 
     @Autowired
-    public RoleMenuRelationServiceImpl(RoleMenuRelationMapper roleMenuRelationMapper) {
-        this.roleMenuRelationMapper = roleMenuRelationMapper;
+    public RoleMenuServiceImpl(RoleMenuMapper roleMenuMapper) {
+        this.roleMenuMapper = roleMenuMapper;
     }
 
     @Override
     public List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO(List<Long> menuIds) {
-        return roleMenuRelationMapper.listMenuPathAndRoleNameBO(menuIds);
+        return roleMenuMapper.listMenuPathAndRoleNameBO(menuIds);
     }
 }

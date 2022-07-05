@@ -1,7 +1,7 @@
 package com.cafe.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cafe.admin.model.AdminRoleRelation;
+import com.cafe.admin.model.AdminRole;
 
 /**
  * @Project: mall-cloud
@@ -10,6 +10,6 @@ import com.cafe.admin.model.AdminRoleRelation;
  * @Date: 2022-05-09
  * @Description: 用户-角色关联 (服务类)
  */
-public interface AdminRoleRelationService extends IService<AdminRoleRelation> {
+public interface AdminRoleService extends IService<AdminRole> {
 
 }
