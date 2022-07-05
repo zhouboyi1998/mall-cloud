@@ -31,8 +31,8 @@ public class RabbitmqProducer {
      */
     public <T> void convertAndSend(String exchange, String routingKey, T content) {
         // 将消息内容转换为 JSON 字符串格式
-        String jsonContent = JSONUtil.toJsonStr(content);
+        String message = JSONUtil.toJsonStr(content);
         // 发送消息到 RabbitMQ
-        rabbitTemplate.convertAndSend(exchange, routingKey, JSONUtil.toJsonStr(jsonContent));
+        rabbitTemplate.convertAndSend(exchange, routingKey, JSONUtil.toJsonStr(message));
     }
 }

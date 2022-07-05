@@ -34,7 +34,7 @@ public class RabbitmqConsumer {
     /**
      * 监听 RabbitMQ 接收消息
      *
-     * @param content 消息内容
+     * @param message JSON 字符串格式的消息内容
      */
     @RabbitListeners(value = {
         @RabbitListener(bindings = @QueueBinding(
@@ -48,11 +48,11 @@ public class RabbitmqConsumer {
             key = {RabbitmqRoutingKey.CANAL_TO_ROLE_MENU_RELATION}
         ))
     })
-    public void listener(String content) {
+    public void listener(String message) {
         // 存储 菜单ids
         List<Long> menuIds = new ArrayList<Long>();
         // JSONStr 转换为 JSONArray 再转换为 List
-        List<RoleMenuRelation> roleMenuRelationList = JSONUtil.parseArray(content).toList(RoleMenuRelation.class);
+        List<RoleMenuRelation> roleMenuRelationList = JSONUtil.parseArray(message).toList(RoleMenuRelation.class);
         for (RoleMenuRelation roleMenuRelation : roleMenuRelationList) {
             menuIds.add(roleMenuRelation.getMenuId());
         }
