@@ -15,7 +15,7 @@
     <resultMap id="RoleNameListResult" type="java.lang.String">
         <result column="role_name" />
     </resultMap>
-    <resultMap id="BOMap" type="com.cafe.admin.bo.MenuPathAndRoleNameBO">
+    <resultMap id="BOMap" type="com.cafe.admin.bo.MenuRoleRelationBO">
         <result column="menu_path" property="menuPath"/>
         <collection property="roleNameList" resultMap="RoleNameListResult" javaType="java.util.List"/>
     </resultMap>
@@ -25,7 +25,7 @@
         id, role_id, menu_id, create_time, update_time
     </sql>
 
-    <select id="listMenuPathAndRoleNameBO" resultMap="BOMap">
+    <select id="listMenuRoleRelationBO" resultMap="BOMap">
         (
         SELECT m.menu_path, r.role_name
         FROM mall_menu AS m

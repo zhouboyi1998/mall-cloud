@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * @Date: 2022/5/10 23:33
  * @Description: 菜单路径与角色名称对应关系BO
  */
-public class MenuPathAndRoleNameBO implements Serializable {
+public class MenuRoleRelationBO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -36,7 +36,7 @@ public class MenuPathAndRoleNameBO implements Serializable {
 
     @Override
     public String toString() {
-        return "MenuPathAndRoleNameBO{" +
+        return "MenuRoleRelationBO{" +
             ", menuPath=" + menuPath +
             ", roleNameList=" + roleNameList +
             "}";
