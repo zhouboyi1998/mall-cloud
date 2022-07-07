@@ -1,7 +1,7 @@
 package com.cafe.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cafe.admin.bo.MenuPathAndRoleNameBO;
+import com.cafe.admin.bo.MenuRoleRelationBO;
 import com.cafe.admin.model.RoleMenu;
 
 import java.util.List;
@@ -21,5 +21,5 @@ public interface RoleMenuService extends IService<RoleMenu> {
      * @param menuIds
      * @return
      */
-    List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO(List<Long> menuIds);
+    List<MenuRoleRelationBO> listMenuRoleRelationBO(List<Long> menuIds);
 }
