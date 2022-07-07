@@ -1,7 +1,7 @@
 package com.cafe.admin.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.admin.bo.MenuPathAndRoleNameBO;
+import com.cafe.admin.bo.MenuRoleRelationBO;
 import com.cafe.admin.model.RoleMenu;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -24,5 +24,5 @@ public interface RoleMenuMapper extends BaseMapper<RoleMenu> {
      * @param menuIds
      * @return
      */
-    List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO(@Param(value = "menuIds") List<Long> menuIds);
+    List<MenuRoleRelationBO> listMenuRoleRelationBO(@Param(value = "menuIds") List<Long> menuIds);
 }

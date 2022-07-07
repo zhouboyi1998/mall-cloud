@@ -1,7 +1,7 @@
 package com.cafe.admin.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.cafe.admin.bo.MenuPathAndRoleNameBO;
+import com.cafe.admin.bo.MenuRoleRelationBO;
 import com.cafe.admin.dao.RoleMenuMapper;
 import com.cafe.admin.model.RoleMenu;
 import com.cafe.admin.service.RoleMenuService;
@@ -28,7 +28,7 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
     }
 
     @Override
-    public List<MenuPathAndRoleNameBO> listMenuPathAndRoleNameBO(List<Long> menuIds) {
-        return roleMenuMapper.listMenuPathAndRoleNameBO(menuIds);
+    public List<MenuRoleRelationBO> listMenuRoleRelationBO(List<Long> menuIds) {
+        return roleMenuMapper.listMenuRoleRelationBO(menuIds);
     }
 }

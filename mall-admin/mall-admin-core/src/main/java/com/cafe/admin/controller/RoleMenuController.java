@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.admin.bo.MenuPathAndRoleNameBO;
+import com.cafe.admin.bo.MenuRoleRelationBO;
 import com.cafe.admin.model.RoleMenu;
 import com.cafe.admin.service.RoleMenuService;
 import com.cafe.common.core.util.MyBatisPlusWrapperUtil;
@@ -176,17 +176,17 @@ public class RoleMenuController {
 
     @ApiOperation(value = "获取所有菜单路径和角色名称对应关系")
     @GetMapping(value = "/list/menuPath/roleName/bo")
-    public ResponseEntity<List<MenuPathAndRoleNameBO>> listMenuPathAndRoleNameBO() {
+    public ResponseEntity<List<MenuRoleRelationBO>> listMenuRoleRelationBO() {
         List<Long> menuIds = new ArrayList<Long>();
-        List<MenuPathAndRoleNameBO> boList = roleMenuService.listMenuPathAndRoleNameBO(menuIds);
+        List<MenuRoleRelationBO> boList = roleMenuService.listMenuRoleRelationBO(menuIds);
         return ResponseEntity.ok(boList);
     }
 
     @ApiOperation(value = "根据 菜单id列表 获取菜单路径和角色名称对应关系列表")
     @ApiImplicitParam(name = "menuIds", value = "菜单id列表", required = true, paramType = "body", dataType = "List<Long>")
     @PostMapping(value = "/list/menuPath/roleName/bo")
-    public ResponseEntity<List<MenuPathAndRoleNameBO>> listMenuPathAndRoleNameBO(@RequestBody List<Long> menuIds) {
-        List<MenuPathAndRoleNameBO> boList = roleMenuService.listMenuPathAndRoleNameBO(menuIds);
+    public ResponseEntity<List<MenuRoleRelationBO>> listMenuRoleRelationBO(@RequestBody List<Long> menuIds) {
+        List<MenuRoleRelationBO> boList = roleMenuService.listMenuRoleRelationBO(menuIds);
         return ResponseEntity.ok(boList);
     }
 }
