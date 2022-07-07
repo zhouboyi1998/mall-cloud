@@ -4,25 +4,25 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cafe.admin.model.Menu">
-        <id column="id" property="id"/>
-        <result column="menu_name" property="menuName"/>
-        <result column="menu_title" property="menuTitle"/>
-        <result column="description" property="description"/>
-        <result column="menu_path" property="menuPath"/>
-        <result column="parent_id" property="parentId"/>
-        <result column="menu_level" property="menuLevel"/>
-        <result column="menu_code" property="menuCode"/>
-        <result column="menu_type" property="menuType"/>
-        <result column="sort" property="sort"/>
-        <result column="menu_status" property="menuStatus"/>
-        <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime"/>
-        <result column="is_deleted" property="deleted"/>
+        <id column="id" property="id" />
+        <result column="menu_name" property="menuName" />
+        <result column="menu_title" property="menuTitle" />
+        <result column="menu_icon" property="menuIcon" />
+        <result column="menu_path" property="menuPath" />
+        <result column="parent_id" property="parentId" />
+        <result column="menu_level" property="menuLevel" />
+        <result column="menu_code" property="menuCode" />
+        <result column="menu_type" property="menuType" />
+        <result column="sort" property="sort" />
+        <result column="menu_status" property="menuStatus" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="deleted" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, menu_name, menu_title, description, menu_path, parent_id, menu_level, menu_code, menu_type, sort, menu_status, create_time, update_time, is_deleted
+        id, menu_name, menu_title, menu_icon, menu_path, parent_id, menu_level, menu_code, menu_type, sort, menu_status, create_time, update_time, is_deleted
     </sql>
 
 </mapper>
