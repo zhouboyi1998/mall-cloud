@@ -30,8 +30,8 @@ public class Menu implements Serializable {
     @ApiModelProperty(value = "菜单显示标题")
     private String menuTitle;
 
-    @ApiModelProperty(value = "描述信息")
-    private String description;
+    @ApiModelProperty(value = "菜单图标")
+    private String menuIcon;
 
     @ApiModelProperty(value = "菜单路径")
     private String menuPath;
@@ -90,12 +90,12 @@ public class Menu implements Serializable {
         this.menuTitle = menuTitle;
     }
 
-    public String getDescription() {
-        return description;
+    public String getMenuIcon() {
+        return menuIcon;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setMenuIcon(String menuIcon) {
+        this.menuIcon = menuIcon;
     }
 
     public String getMenuPath() {
@@ -184,7 +184,7 @@ public class Menu implements Serializable {
             "id=" + id +
             ", menuName=" + menuName +
             ", menuTitle=" + menuTitle +
-            ", description=" + description +
+            ", description=" + menuIcon +
             ", menuPath=" + menuPath +
             ", parentId=" + parentId +
             ", menuLevel=" + menuLevel +
