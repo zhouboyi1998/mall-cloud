@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.admin.model.Menu;
 import com.cafe.admin.service.MenuService;
+import com.cafe.admin.vo.MenuTreeVO;
 import com.cafe.common.core.util.MyBatisPlusWrapperUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -170,5 +172,12 @@ public class MenuController {
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = menuService.removeByIds(ids);
         return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "获取树形格式的菜单列表")
+    @GetMapping(value = "/listMenuTree")
+    public ResponseEntity<List<MenuTreeVO>> listMenuTree(HttpServletRequest request) {
+        List<MenuTreeVO> menuTreeVOList = menuService.listMenuTree(request);
+        return ResponseEntity.ok(menuTreeVOList);
     }
 }

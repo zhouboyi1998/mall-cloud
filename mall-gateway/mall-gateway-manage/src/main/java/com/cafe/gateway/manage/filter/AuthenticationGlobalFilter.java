@@ -48,12 +48,12 @@ public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
             // 获取用户信息
             String userStr = jwsObject.getPayload().toString();
             // 打印日志
-            LOGGER.info("AuthenticationGlobalFilter.filter() user:{}", userStr);
+            LOGGER.info("AuthenticationGlobalFilter.filter() user-details:{}", userStr);
             // 将用户信息设置到请求头中
             ServerHttpRequest request = exchange
                 .getRequest()
                 .mutate()
-                .header(AuthenticationConstant.USER_TOKEN_HEADER, userStr)
+                .header(AuthenticationConstant.USER_DETAILS_HEADER, userStr)
                 .build();
             exchange = exchange
                 .mutate()

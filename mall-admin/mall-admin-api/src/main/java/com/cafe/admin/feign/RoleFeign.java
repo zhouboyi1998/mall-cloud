@@ -20,6 +20,14 @@ import java.util.List;
 public interface RoleFeign {
 
     /**
+     * 查询所有角色名称列表
+     *
+     * @return
+     */
+    @GetMapping(value = "/list/name")
+    ResponseEntity<List<String>> listRoleName();
+
+    /**
      * 根据管理员id查询角色名称列表
      *
      * @param adminId 管理员id

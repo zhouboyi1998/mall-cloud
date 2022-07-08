@@ -20,6 +20,10 @@
             <groupId>com.cafe.mall</groupId>
             <artifactId>mall-common-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cafe.mall</groupId>
+            <artifactId>mall-common-constant</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
