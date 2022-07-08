@@ -46,7 +46,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         // 根据管理员id查询角色名称列表
         List<String> roleNameList = roleFeign.listRoleName(admin.getId()).getBody();
-        // 转换为数组形式
+        // 角色名称列表转换为数组形式
         String[] roleNameArray = roleNameList.toArray(new String[roleNameList.size()]);
 
         if (ObjectUtil.isNotNull(admin)) {

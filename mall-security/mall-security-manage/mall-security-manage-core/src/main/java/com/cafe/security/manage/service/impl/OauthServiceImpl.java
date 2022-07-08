@@ -1,47 +1,37 @@
-package com.cafe.security.manage.controller;
+package com.cafe.security.manage.service.impl;
 
 import com.cafe.common.constant.AuthenticationConstant;
+import com.cafe.security.manage.service.OauthService;
 import com.cafe.security.manage.token.Oauth2TokenDetails;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
+import org.springframework.stereotype.Service;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
-import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Map;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.security.manage.controller
+ * @Package: com.cafe.security.manage.service.impl
  * @Author: zhouboyi
- * @Date: 2022/5/10 21:34
- * @Description: 登录认证接口
+ * @Date: 2022/7/8 9:48
+ * @Description:
  */
-@RestController
-@RequestMapping(value = "/oauth")
-public class AuthController {
+@Service
+public class OauthServiceImpl implements OauthService {
 
     private TokenEndpoint tokenEndpoint;
 
     @Autowired
-    public AuthController(TokenEndpoint tokenEndpoint) {
+    public OauthServiceImpl(TokenEndpoint tokenEndpoint) {
         this.tokenEndpoint = tokenEndpoint;
     }
 
-    /**
-     * Oauth2 登录认证
-     *
-     * @param principal
-     * @param parameters
-     * @return
-     * @throws HttpRequestMethodNotSupportedException
-     */
-    @PostMapping(value = "/token")
-    public ResponseEntity<Oauth2TokenDetails> postAccessToken(
-        Principal principal,
-        @RequestParam Map<String, String> parameters
+    @Override
+    public Oauth2TokenDetails postAccessToken(
+        Principal principal, Map<String, String> parameters
     ) throws HttpRequestMethodNotSupportedException {
         // 使用 TokenEndpoint 生成访问令牌
         OAuth2AccessToken oAuth2AccessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
@@ -53,6 +43,6 @@ public class AuthController {
         oauth2TokenDetails.setTokenPrefix(AuthenticationConstant.JWT_TOKEN_PREFIX);
         oauth2TokenDetails.setExpiresIn(oAuth2AccessToken.getExpiresIn());
 
-        return ResponseEntity.ok(oauth2TokenDetails);
+        return oauth2TokenDetails;
     }
 }

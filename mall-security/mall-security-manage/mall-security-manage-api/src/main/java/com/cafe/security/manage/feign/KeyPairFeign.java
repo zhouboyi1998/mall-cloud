@@ -15,7 +15,7 @@ import java.util.Map;
  * @Description:
  */
 @FeignClient(value = "mall-security-manage")
-@RequestMapping(value = "/key")
+@RequestMapping(value = "/keyPair")
 public interface KeyPairFeign {
 
     /**
