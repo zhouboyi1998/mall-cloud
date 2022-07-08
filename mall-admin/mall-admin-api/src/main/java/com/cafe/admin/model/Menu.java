@@ -37,7 +37,7 @@ public class Menu implements Serializable {
     private String menuPath;
 
     @ApiModelProperty(value = "上级分类 ID")
-    private Integer parentId;
+    private Long parentId;
 
     @ApiModelProperty(value = "菜单等级：1 一级菜单，2 二级菜单，3 三级菜单")
     private Integer menuLevel;
@@ -106,11 +106,11 @@ public class Menu implements Serializable {
         this.menuPath = menuPath;
     }
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public void setParentId(Long parentId) {
         this.parentId = parentId;
     }
 

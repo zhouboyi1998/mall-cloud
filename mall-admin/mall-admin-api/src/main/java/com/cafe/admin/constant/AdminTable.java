@@ -9,5 +9,7 @@ package com.cafe.admin.constant;
  */
 public class AdminTable {
 
+    public static final String ROLE = "mall_admin.mall_role";
+
     public static final String ROLE_MENU = "mall_admin.mall_role_menu";
 }

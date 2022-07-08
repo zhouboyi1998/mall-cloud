@@ -2,7 +2,11 @@ package com.cafe.admin.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cafe.admin.model.Menu;
+import com.cafe.admin.vo.MenuTreeVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @Project: mall-cloud
@@ -14,4 +18,11 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface MenuMapper extends BaseMapper<Menu> {
 
+    /**
+     * 获取树形格式的菜单列表
+     *
+     * @param roleNameList
+     * @return
+     */
+    List<MenuTreeVO> listMenuTreeVO(@Param("roleNameList") List<String> roleNameList);
 }

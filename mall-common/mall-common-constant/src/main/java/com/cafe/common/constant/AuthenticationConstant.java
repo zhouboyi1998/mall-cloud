@@ -32,5 +32,5 @@ public class AuthenticationConstant {
     /**
      * 用户信息请求头
      */
-    public static final String USER_TOKEN_HEADER = "user";
+    public static final String USER_DETAILS_HEADER = "user-details";
 }

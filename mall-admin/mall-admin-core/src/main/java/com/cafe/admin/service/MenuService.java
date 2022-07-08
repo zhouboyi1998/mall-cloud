@@ -2,6 +2,10 @@ package com.cafe.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cafe.admin.model.Menu;
+import com.cafe.admin.vo.MenuTreeVO;
+
+import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 /**
  * @Project: mall-cloud
@@ -12,4 +16,11 @@ import com.cafe.admin.model.Menu;
  */
 public interface MenuService extends IService<Menu> {
 
+    /**
+     * 获取树形格式的菜单列表
+     *
+     * @param request
+     * @return
+     */
+    List<MenuTreeVO> listMenuTree(HttpServletRequest request);
 }

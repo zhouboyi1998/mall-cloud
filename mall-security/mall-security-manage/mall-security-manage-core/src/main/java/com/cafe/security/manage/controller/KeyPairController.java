@@ -1,7 +1,6 @@
 package com.cafe.security.manage.controller;
 
-import com.nimbusds.jose.jwk.JWKSet;
-import com.nimbusds.jose.jwk.RSAKey;
+import com.cafe.security.manage.service.KeyPairService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,8 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.security.KeyPair;
-import java.security.interfaces.RSAPublicKey;
 import java.util.Map;
 
 /**
@@ -21,25 +18,20 @@ import java.util.Map;
  * @Description: 密钥对接口
  */
 @RestController
-@RequestMapping(value = "/key")
+@RequestMapping(value = "/keyPair")
 public class KeyPairController {
 
-    private KeyPair keyPair;
+    private KeyPairService keyPairService;
 
     @Autowired
-    public KeyPairController(KeyPair keyPair) {
-        this.keyPair = keyPair;
+    public KeyPairController(KeyPairService keyPairService) {
+        this.keyPairService = keyPairService;
     }
 
     @ApiOperation(value = "获取 RSA 公钥")
-    @GetMapping(value = "/rsa/public")
+    @GetMapping(value = "/rsa")
     public ResponseEntity<Map<String, Object>> getRsaPublicKey() {
-        // 从证书中获取公钥
-        RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
-        // 使用公钥生成 Nimbus JOSE + JWT 提供的 RSA 密钥 (只存储公钥)
-        RSAKey key = new RSAKey.Builder(publicKey).build();
-        // 将密钥转换为 Map 格式
-        Map<String, Object> map = new JWKSet(key).toJSONObject();
+        Map<String, Object> map = keyPairService.getRsaPublicKey();
         return ResponseEntity.ok(map);
     }
 }

@@ -4,9 +4,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.admin.dao.RoleMapper;
 import com.cafe.admin.model.Role;
 import com.cafe.admin.service.RoleService;
+import com.cafe.common.constant.RedisConstant;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -21,13 +24,38 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
     private RoleMapper roleMapper;
 
+    private RedisTemplate<String, Object> redisTemplate;
+
     @Autowired
-    public RoleServiceImpl(RoleMapper roleMapper) {
+    public RoleServiceImpl(
+        RoleMapper roleMapper,
+        RedisTemplate<String, Object> redisTemplate
+    ) {
         this.roleMapper = roleMapper;
+        this.redisTemplate = redisTemplate;
     }
 
     @Override
-    public List<String> listRoleName(Long adminId) {
-        return roleMapper.listRoleName(adminId);
+    public List<String> listRoleName() {
+        return roleMapper.listRoleName();
+    }
+
+    @Override
+    public List<String> listRoleNameByAdminId(Long adminId) {
+        return roleMapper.listRoleNameByAdminId(adminId);
+    }
+
+    @PostConstruct
+    @Override
+    public void initRoleNameMap() {
+        // 获取所有角色名称
+        List<String> roleNameList = roleMapper.listRoleName();
+        // 清空 Redis 中原来的 List
+        redisTemplate.opsForList().trim(RedisConstant.ROLE_NAME_LIST, 0, 0);
+        redisTemplate.opsForList().leftPop(RedisConstant.ROLE_NAME_LIST);
+        // 将角色名称保存到 Redis 中
+        for (String roleName : roleNameList) {
+            redisTemplate.opsForList().rightPush(RedisConstant.ROLE_NAME_LIST, roleName);
+        }
     }
 }

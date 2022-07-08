@@ -13,7 +13,6 @@ import org.springframework.security.web.server.authorization.AuthorizationContex
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,9 +35,9 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
 
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {
-        // 从 Redis 中获取当前路径可访问角色列表
-        URI uri = authorizationContext.getExchange().getRequest().getURI();
-        Object obj = redisTemplate.opsForHash().get(RedisConstant.RESOURCE_ROLE_MAP, uri.getPath());
+        // 获取所有角色列表 (拥有任意角色权限即可访问所有接口)
+        Long size = redisTemplate.opsForList().size(RedisConstant.ROLE_NAME_LIST);
+        Object obj = redisTemplate.opsForList().range(RedisConstant.ROLE_NAME_LIST, 0, size);
         List<String> authorities = Convert.toList(String.class, obj);
         authorities = authorities
             .stream()
