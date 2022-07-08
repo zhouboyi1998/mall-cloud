@@ -25,10 +25,16 @@ spring:
             - Path=/goods/**
           filters:
             - StripPrefix=1
+        - id: mall-admin
+          uri: lb://mall-admin
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix=1
 
 # 白名单路径配置
 secure:
   ignore:
     urls:
-      - "/security/**"
       - "/actuator/**"
+      - "/security/**"

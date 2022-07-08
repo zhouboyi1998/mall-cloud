@@ -172,11 +172,18 @@ public class RoleController {
         return ResponseEntity.ok(code);
     }
 
+    @ApiOperation(value = "查询所有角色名称列表")
+    @GetMapping(value = "/list/name")
+    public ResponseEntity<List<String>> listRoleName() {
+        List<String> roleNameList = roleService.listRoleName();
+        return ResponseEntity.ok(roleNameList);
+    }
+
     @ApiOperation(value = "根据管理员id查询角色名称列表")
     @ApiImplicitParam(name = "adminId", value = "管理员id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/list/name/{adminId}")
-    public ResponseEntity<List<String>> listRoleName(@PathVariable(value = "adminId") Long adminId) {
-        List<String> roleNameList = roleService.listRoleName(adminId);
+    public ResponseEntity<List<String>> listRoleNameByAdminId(@PathVariable(value = "adminId") Long adminId) {
+        List<String> roleNameList = roleService.listRoleNameByAdminId(adminId);
         return ResponseEntity.ok(roleNameList);
     }
 }

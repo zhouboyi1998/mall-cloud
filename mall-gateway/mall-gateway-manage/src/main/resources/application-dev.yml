@@ -9,7 +9,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: 'http://127.0.0.1:18072/key/rsa/public'
+          jwk-set-uri: "http://127.0.0.1:18072/keyPair/rsa"
   redis:
     host: 127.0.0.1
     port: 6379

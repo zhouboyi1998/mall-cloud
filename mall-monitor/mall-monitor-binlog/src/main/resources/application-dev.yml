@@ -18,4 +18,5 @@ binlog:
   password: 123456
   server-id: 1
   table:
+    - mall_admin.mall_role
     - mall_admin.mall_role_menu
