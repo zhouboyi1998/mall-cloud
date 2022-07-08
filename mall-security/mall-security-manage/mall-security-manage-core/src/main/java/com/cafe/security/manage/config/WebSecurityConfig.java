@@ -37,8 +37,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .requestMatchers(EndpointRequest.toAnyEndpoint())
             .permitAll()
-            // 允许直接访问的接口
-            .antMatchers(new String[]{"/oauth/**", "/keyPair/**"})
+            // 允许直接访问自身的所有接口
+            .antMatchers(new String[]{"/**"})
             .permitAll()
             .anyRequest()
             .authenticated();

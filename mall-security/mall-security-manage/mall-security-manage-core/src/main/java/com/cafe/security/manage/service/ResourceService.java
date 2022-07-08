@@ -13,14 +13,18 @@ public interface ResourceService {
 
     /**
      * 初始化菜单路径和角色名称对应关系到 Redis 中
-     * 在依赖注入结束, 类初始化后立即执行此方法
      */
-    void initRelationData();
+    void initMenuRoleRelation();
 
     /**
      * 更新菜单路径和角色名称对应关系
      *
-     * @param ids
+     * @param menuIds 对应关系发生变更的菜单id列表
      */
-    void updateRelationData(List<Long> ids);
+    void updateMenuRoleRelation(List<Long> menuIds);
+
+    /**
+     * 初始化角色名称到 Redis 中
+     */
+    void initRoleNameMap();
 }

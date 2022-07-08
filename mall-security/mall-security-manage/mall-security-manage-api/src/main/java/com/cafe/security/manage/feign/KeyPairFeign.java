@@ -23,6 +23,6 @@ public interface KeyPairFeign {
      *
      * @return
      */
-    @GetMapping(value = "/rsa/public")
+    @GetMapping(value = "/rsa")
     ResponseEntity<Map<String, Object>> getRsaPublicKey();
 }

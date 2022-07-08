@@ -57,6 +57,6 @@ public class RabbitmqConsumer {
             menuIds.add(roleMenu.getMenuId());
         }
         // 更新 Redis 中的数据
-        resourceService.updateRelationData(menuIds);
+        resourceService.updateMenuRoleRelation(menuIds);
     }
 }

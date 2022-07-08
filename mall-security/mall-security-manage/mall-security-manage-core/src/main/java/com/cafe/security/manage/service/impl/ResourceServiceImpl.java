@@ -1,6 +1,8 @@
 package com.cafe.security.manage.service.impl;
 
 import com.cafe.admin.bo.MenuRoleRelationBO;
+import com.cafe.admin.feign.AdminFeign;
+import com.cafe.admin.feign.RoleFeign;
 import com.cafe.admin.feign.RoleMenuFeign;
 import com.cafe.common.constant.RedisConstant;
 import com.cafe.security.manage.service.ResourceService;
@@ -26,20 +28,25 @@ public class ResourceServiceImpl implements ResourceService {
 
     private RedisTemplate<String, Object> redisTemplate;
 
+    private RoleFeign roleFeign;
+
     private RoleMenuFeign roleMenuFeign;
 
     @Autowired
     public ResourceServiceImpl(
         RedisTemplate<String, Object> redisTemplate,
+        AdminFeign adminFeign,
+        RoleFeign roleFeign,
         RoleMenuFeign roleMenuFeign
     ) {
         this.redisTemplate = redisTemplate;
+        this.roleFeign = roleFeign;
         this.roleMenuFeign = roleMenuFeign;
     }
 
     @PostConstruct
     @Override
-    public void initRelationData() {
+    public void initMenuRoleRelation() {
         // 获取所有菜单路径和角色名称对应关系
         List<MenuRoleRelationBO> boList = roleMenuFeign.listMenuRoleRelationBO().getBody();
         // 将对应关系组装成 Map 格式
@@ -47,17 +54,28 @@ public class ResourceServiceImpl implements ResourceService {
         for (MenuRoleRelationBO bo : boList) {
             relationMap.put(bo.getMenuPath(), bo.getRoleNameList());
         }
-        // 将对应关系放入 Redis 中, 提供给网关查询
+        // 将对应关系保存到 Redis 中, 提供给网关查询
         redisTemplate.opsForHash().putAll(RedisConstant.RESOURCE_ROLE_MAP, relationMap);
     }
 
     @Override
-    public void updateRelationData(List<Long> menuIds) {
+    public void updateMenuRoleRelation(List<Long> menuIds) {
         // 按菜单ids获取菜单路径和角色名称对应关系列表
         List<MenuRoleRelationBO> boList = roleMenuFeign.listMenuRoleRelationBO(menuIds).getBody();
         // 更新 Redis 中的对应关系
         for (MenuRoleRelationBO bo : boList) {
             redisTemplate.opsForHash().put(RedisConstant.RESOURCE_ROLE_MAP, bo.getMenuPath(), bo.getRoleNameList());
+        }
+    }
+
+    @PostConstruct
+    @Override
+    public void initRoleNameMap() {
+        // 获取所有角色名称
+        List<String> roleNameList = roleFeign.listRoleName().getBody();
+        // 将角色名称保存到 Redis 中, 提供给网关查询
+        for (String roleName : roleNameList) {
+            redisTemplate.opsForList().rightPush(RedisConstant.ROLE_NAME_LIST, roleName);
         }
     }
 }

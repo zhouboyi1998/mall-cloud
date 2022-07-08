@@ -15,6 +15,11 @@ public class RedisConstant {
     public static final String RESOURCE_ROLE_MAP = "AUTH:RESOURCE_ROLE_MAP";
 
     /**
+     * 角色名称列表
+     */
+    public static final String ROLE_NAME_LIST = "AUTH:ROLE_NAME_LIST";
+
+    /**
      * 令牌存储相关的 Key 前缀
      */
     public static final String TOKEN_PREFIX = "AUTH:TOKEN_";

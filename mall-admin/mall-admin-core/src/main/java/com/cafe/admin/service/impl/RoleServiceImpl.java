@@ -27,7 +27,12 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
-    public List<String> listRoleName(Long adminId) {
-        return roleMapper.listRoleName(adminId);
+    public List<String> listRoleName() {
+        return roleMapper.listRoleName();
+    }
+
+    @Override
+    public List<String> listRoleNameByAdminId(Long adminId) {
+        return roleMapper.listRoleNameByAdminId(adminId);
     }
 }
