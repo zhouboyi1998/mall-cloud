@@ -8,6 +8,7 @@ import com.cafe.admin.dao.MenuMapper;
 import com.cafe.admin.model.Menu;
 import com.cafe.admin.service.MenuService;
 import com.cafe.admin.vo.MenuTreeVO;
+import com.cafe.common.constant.AuthenticationConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,9 +36,11 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Override
     public List<MenuTreeVO> listMenuTree(HttpServletRequest request) {
         // 获取请求头中的 user 详细信息, 转换为 JSON 对象
-        JSONObject userDetails = JSONUtil.parseObj(request.getHeader("user"));
+        JSONObject userDetails
+            = JSONUtil.parseObj(request.getHeader(AuthenticationConstant.USER_DETAILS_HEADER));
         // 获取角色列表, 转换为 List 对象
-        List<String> roleNameList = ((JSONArray) userDetails.get("authorities")).toList(String.class);
+        List<String> roleNameList
+            = ((JSONArray) userDetails.get(AuthenticationConstant.AUTHORITY_CLAIM_NAME)).toList(String.class);
 
         // 根据角色列表获取对应的菜单列表
         List<MenuTreeVO> menuList = menuMapper.listMenuTreeVO(roleNameList);

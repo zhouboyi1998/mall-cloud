@@ -12,7 +12,7 @@ public class RedisConstant {
     /**
      * 资源-角色对应关系的 Key
      */
-    public static final String RESOURCE_ROLE_MAP = "AUTH:RESOURCE_ROLE_MAP";
+    public static final String MENU_ROLE_MAP = "AUTH:MENU_ROLE_MAP";
 
     /**
      * 角色名称列表

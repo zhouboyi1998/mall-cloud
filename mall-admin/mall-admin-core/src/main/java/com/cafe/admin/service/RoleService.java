@@ -28,4 +28,9 @@ public interface RoleService extends IService<Role> {
      * @return
      */
     List<String> listRoleNameByAdminId(Long adminId);
+
+    /**
+     * 初始化角色名称列表到 Redis 中
+     */
+    void initRoleNameMap();
 }

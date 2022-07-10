@@ -30,7 +30,6 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql-connector.version}</version>
         </dependency>
         <!-- MyBatis-Plus 相关依赖 -->
         <dependency>
