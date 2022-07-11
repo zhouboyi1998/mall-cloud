@@ -58,4 +58,14 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             redisTemplate.opsForList().rightPush(RedisConstant.ROLE_NAME_LIST, roleName);
         }
     }
+
+    @Override
+    public void saveRoleNameMap(String roleName) {
+        redisTemplate.opsForList().rightPush(RedisConstant.ROLE_NAME_LIST, roleName);
+    }
+
+    @Override
+    public void removeRoleNameMap(String roleName) {
+        redisTemplate.opsForList().remove(RedisConstant.ROLE_NAME_LIST, 1, roleName);
+    }
 }

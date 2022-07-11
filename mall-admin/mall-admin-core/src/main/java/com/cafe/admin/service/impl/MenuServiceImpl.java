@@ -42,7 +42,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         List<String> roleNameList
             = ((JSONArray) userDetails.get(AuthenticationConstant.AUTHORITY_CLAIM_NAME)).toList(String.class);
 
-        // 根据角色列表获取对应的菜单列表
+        // 根据角色列表获取对应的菜单列表树形VO
         List<MenuTreeVO> menuList = menuMapper.listMenuTreeVO(roleNameList);
         // 组装成树形格式, 设置 children 字段
         List<MenuTreeVO> menuTreeVOList = menuList
@@ -59,15 +59,15 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     /**
      * 组装树形
      *
-     * @param root     当前节点
+     * @param node     当前节点
      * @param menuList 所有节点
      * @return
      */
-    private List<MenuTreeVO> getChildren(MenuTreeVO root, List<MenuTreeVO> menuList) {
+    private List<MenuTreeVO> getChildren(MenuTreeVO node, List<MenuTreeVO> menuList) {
         List<MenuTreeVO> children = menuList
             .stream()
             // 筛选出当前节点的所有子节点
-            .filter(menuTreeVO -> menuTreeVO.getParentId().equals(root.getId()))
+            .filter(menuTreeVO -> menuTreeVO.getParentId().equals(node.getId()))
             // 递归调用组装树形结构
             .map(menuTreeVO -> menuTreeVO.setChildren(getChildren(menuTreeVO, menuList)))
             .collect(Collectors.toList());
