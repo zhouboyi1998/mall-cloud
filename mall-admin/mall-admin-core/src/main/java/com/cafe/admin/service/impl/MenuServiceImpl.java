@@ -59,15 +59,15 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     /**
      * 组装树形
      *
-     * @param root     当前节点
+     * @param node     当前节点
      * @param menuList 所有节点
      * @return
      */
-    private List<MenuTreeVO> getChildren(MenuTreeVO root, List<MenuTreeVO> menuList) {
+    private List<MenuTreeVO> getChildren(MenuTreeVO node, List<MenuTreeVO> menuList) {
         List<MenuTreeVO> children = menuList
             .stream()
             // 筛选出当前节点的所有子节点
-            .filter(menuTreeVO -> menuTreeVO.getParentId().equals(root.getId()))
+            .filter(menuTreeVO -> menuTreeVO.getParentId().equals(node.getId()))
             // 递归调用组装树形结构
             .map(menuTreeVO -> menuTreeVO.setChildren(getChildren(menuTreeVO, menuList)))
             .collect(Collectors.toList());
