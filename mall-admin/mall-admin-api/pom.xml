@@ -24,6 +24,10 @@
             <groupId>com.cafe.mall</groupId>
             <artifactId>mall-common-constant</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cafe.mall</groupId>
+            <artifactId>mall-common-rabbitmq</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

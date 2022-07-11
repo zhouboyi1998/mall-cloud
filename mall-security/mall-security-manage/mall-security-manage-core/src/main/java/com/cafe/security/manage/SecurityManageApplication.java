@@ -4,6 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 /**
  * @Project: mall-cloud
@@ -13,8 +14,9 @@ import org.springframework.context.annotation.ComponentScan;
  * @Description:
  */
 @SpringCloudApplication
-@ComponentScan(basePackages = "com.cafe")
+@EnableSwagger2WebMvc
 @EnableFeignClients(basePackages = "com.cafe.admin.feign")
+@ComponentScan(basePackages = "com.cafe")
 public class SecurityManageApplication {
 
     public static void main(String[] args) {

@@ -31,16 +31,6 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-collections4</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.cafe.mall</groupId>
-            <artifactId>mall-common-constant</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>com.cafe.mall</groupId>
-            <artifactId>mall-admin-api</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

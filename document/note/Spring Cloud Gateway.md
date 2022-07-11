@@ -6,7 +6,7 @@
 * 注意依赖的其它模块也不能有 web 依赖包
 * 如果需要 Web 相关功能，可以选择 `spring-boot-starter-webflux` 依赖包
 
-```
+```pom
 <dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-webflux</artifactId>
