@@ -2,6 +2,7 @@ package com.cafe.monitor.binlog.handler;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.cafe.admin.constant.AdminTableBeanMap;
+import com.cafe.common.constant.MonitorConstant;
 import com.cafe.common.constant.RabbitmqExchange;
 import com.cafe.common.message.rabbitmq.constant.ExchangeSourceRoutingMap;
 import com.cafe.common.message.rabbitmq.producer.RabbitmqProducer;
@@ -38,7 +39,7 @@ public class MessageContentHandler {
      * @param tableName
      * @param rowList
      */
-    public void handle(String tableName, List<Serializable[]> rowList) {
+    public void handle(String tableName, List<Serializable[]> rowList, String operation) {
         // 存储 JSONObject (每一行改动的数据) 的集合
         List<Map<String, Object>> rowMapList = new ArrayList<Map<String, Object>>();
         // 根据表名获取 JavaBean 列名集合
@@ -55,11 +56,17 @@ public class MessageContentHandler {
                 rowMapList.add(rowMap);
             }
         }
+
+        // 组装最终的消息内容
+        Map<String, Object> content = new HashMap<String, Object>(2);
+        content.put(MonitorConstant.OPERATION, operation);
+        content.put(MonitorConstant.DATA, rowMapList);
+
         // 发送消息到 RabbitMQ
         rabbitmqProducer.convertAndSend(
             RabbitmqExchange.BINLOG,
             ExchangeSourceRoutingMap.EXCHANGE_SOURCE_ROUTING_MAP.get(RabbitmqExchange.BINLOG, tableName),
-            rowMapList
+            content
         );
     }
 

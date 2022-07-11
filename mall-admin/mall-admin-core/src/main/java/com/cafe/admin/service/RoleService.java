@@ -33,4 +33,18 @@ public interface RoleService extends IService<Role> {
      * 初始化角色名称列表到 Redis 中
      */
     void initRoleNameMap();
+
+    /**
+     * 新增指定的角色名称到 Redis 的角色名称列表中
+     *
+     * @param roleName
+     */
+    void saveRoleNameMap(String roleName);
+
+    /**
+     * 从 Redis 的角色名称列表中删除指定的角色名称
+     *
+     * @param roleName
+     */
+    void removeRoleNameMap(String roleName);
 }

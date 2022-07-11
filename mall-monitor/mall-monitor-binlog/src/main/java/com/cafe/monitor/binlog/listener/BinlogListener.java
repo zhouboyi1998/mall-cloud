@@ -1,6 +1,7 @@
 package com.cafe.monitor.binlog.listener;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.cafe.common.constant.MonitorConstant;
 import com.cafe.monitor.binlog.handler.MessageContentHandler;
 import com.cafe.monitor.binlog.property.BinlogProperties;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
@@ -82,15 +83,18 @@ public class BinlogListener implements CommandLineRunner {
                     if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
                         LOGGER.info("Update Operation TableName: {}", tableName);
-                        // 存储所有修改行的主键id
-                        List<Serializable[]> beforeAndAfterRowList = new ArrayList<Serializable[]>();
+                        // 存储监听到的修改前的数据
+                        List<Serializable[]> beforeRowList = new ArrayList<Serializable[]>();
+                        // 存储监听到的修改后的数据
+                        List<Serializable[]> afterRowList = new ArrayList<Serializable[]>();
                         // 循环每一行修改的数据
                         for (Map.Entry<Serializable[], Serializable[]> row : updateRowsEventData.getRows()) {
-                            beforeAndAfterRowList.add(row.getKey());
-                            beforeAndAfterRowList.add(row.getValue());
+                            beforeRowList.add(row.getKey());
+                            afterRowList.add(row.getValue());
                         }
                         // 将数据交给消息内容处理器
-                        messageContentHandler.handle(tableName, beforeAndAfterRowList);
+                        messageContentHandler.handle(tableName, beforeRowList, MonitorConstant.UPDATE_BEFORE);
+                        messageContentHandler.handle(tableName, afterRowList, MonitorConstant.UPDATE_AFTER);
                     }
                 }
                 // 监听 insert 操作
@@ -103,8 +107,8 @@ public class BinlogListener implements CommandLineRunner {
                     if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
                         LOGGER.info("Insert Operation TableName: {}", tableName);
-                        // 将数据交给消息内容处理器
-                        messageContentHandler.handle(tableName, writeRowsEventData.getRows());
+                        // 将监听到的新增数据交给消息内容处理器
+                        messageContentHandler.handle(tableName, writeRowsEventData.getRows(), MonitorConstant.INSERT);
                     }
                 }
                 //监听 delete 操作
@@ -117,8 +121,8 @@ public class BinlogListener implements CommandLineRunner {
                     if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
                         LOGGER.info("Delete Operation TableName: {}", tableName);
-                        // 将数据交给消息内容处理器
-                        messageContentHandler.handle(tableName, deleteRowsEventData.getRows());
+                        // 将监听到的删除数据交给消息内容处理器
+                        messageContentHandler.handle(tableName, deleteRowsEventData.getRows(), MonitorConstant.DELETE);
                     }
                 }
             }
