@@ -48,7 +48,7 @@
         <squareup-okhttp3.version>4.9.3</squareup-okhttp3.version>
         <tomcat-embed.version>9.0.46</tomcat-embed.version>
         <mysql-binlog-connector.version>0.21.0</mysql-binlog-connector.version>
-        <canal-client.version>1.1.5</canal-client.version>
+        <canal.version>1.1.5</canal.version>
         <commons-collections4.version>4.4</commons-collections4.version>
 
         <mall-common-constant.version>1.0-SNAPSHOT</mall-common-constant.version>
@@ -153,7 +153,7 @@
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.version}</version>
             </dependency>
-            <!-- Nimbus JOSE + JWT 令牌 -->
+            <!-- Nimbus JOSE JWT 令牌 -->
             <dependency>
                 <groupId>com.nimbusds</groupId>
                 <artifactId>nimbus-jose-jwt</artifactId>
@@ -193,7 +193,12 @@
             <dependency>
                 <groupId>com.alibaba.otter</groupId>
                 <artifactId>canal.client</artifactId>
-                <version>${canal-client.version}</version>
+                <version>${canal.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.otter</groupId>
+                <artifactId>canal.protocol</artifactId>
+                <version>${canal.version}</version>
             </dependency>
             <!-- Tomcat embed 相关依赖 -->
             <dependency>

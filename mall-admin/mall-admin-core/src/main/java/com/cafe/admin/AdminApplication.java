@@ -3,6 +3,7 @@ package com.cafe.admin;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.context.annotation.ComponentScan;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 /**
  * @Project: mall-cloud
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @Description: 管理员模块启动类
  */
 @SpringCloudApplication
+@EnableSwagger2WebMvc
 @ComponentScan(basePackages = "com.cafe")
 public class AdminApplication {
 

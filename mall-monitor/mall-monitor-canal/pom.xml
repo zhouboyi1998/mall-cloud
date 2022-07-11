@@ -12,12 +12,28 @@
 
     <groupId>com.cafe.mall</groupId>
     <artifactId>mall-monitor-canal</artifactId>
+    <version>1.0-SNAPSHOT</version>
     <description>Canal 数据库监听模块</description>
 
     <dependencies>
         <dependency>
+            <groupId>com.alibaba.otter</groupId>
+            <artifactId>canal.client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.otter</groupId>
+            <artifactId>canal.protocol</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>com.cafe.mall</groupId>
             <artifactId>mall-common-rabbitmq</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.cafe.mall</groupId>
+            <artifactId>mall-admin-api</artifactId>
+        </dependency>
     </dependencies>
+
 </project>
