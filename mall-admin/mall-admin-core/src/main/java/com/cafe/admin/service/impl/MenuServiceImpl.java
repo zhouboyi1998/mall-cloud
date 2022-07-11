@@ -42,7 +42,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         List<String> roleNameList
             = ((JSONArray) userDetails.get(AuthenticationConstant.AUTHORITY_CLAIM_NAME)).toList(String.class);
 
-        // 根据角色列表获取对应的菜单列表
+        // 根据角色列表获取对应的菜单列表树形VO
         List<MenuTreeVO> menuList = menuMapper.listMenuTreeVO(roleNameList);
         // 组装成树形格式, 设置 children 字段
         List<MenuTreeVO> menuTreeVOList = menuList
