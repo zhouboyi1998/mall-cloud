@@ -22,32 +22,16 @@
 
 ```
 mall-cloud
-|-- mall-admin
-    |-- mall-admin-api
-    |-- mall-admin-core
-|-- mall-common
-    |-- mall-common-constant
-    |-- mall-common-core
-    |-- mall-common-gateway
-    |-- mall-common-monitor
-    |-- mall-common-security
-|-- mall-eureka
-|-- mall-gateway
-    |-- mall-gateway-management
-|-- mall-generator
-|-- mall-goods
-    |-- mall-goods-api
-    |-- mall-goods-core
-|-- mall-monitor
-    |-- mall-monitor-binlog
-    |-- mall-monitor-canal
-|-- mall-order
-    |-- mall-order-api
-    |-- mall-order-core
-|-- mall-security
-    |-- mall-security-management
-        |-- mall-security-management-api
-        |-- mall-security-management-core
+    |-- mall-admin
+    |-- mall-common
+    |-- mall-eureka
+    |-- mall-file
+    |-- mall-gateway
+    |-- mall-generator
+    |-- mall-goods
+    |-- mall-monitor
+    |-- mall-order
+    |-- mall-security
 ```
 
 ### 📜 Licence

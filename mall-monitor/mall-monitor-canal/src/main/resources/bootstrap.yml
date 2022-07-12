@@ -1,6 +1,0 @@
-server:
-  port: 18052
-
-spring:
-  application:
-    name: mall-monitor-canal
