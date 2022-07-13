@@ -7,7 +7,7 @@
     * 然后按提示设置密码等信息
     * 最终会生成一个 RSA 证书文件 (jwt.jks)
 
-```
+```bash
 keytool -genkey -alias jwt -keyalg RSA -keystore jwt.jks
 ```
 

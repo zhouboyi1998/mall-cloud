@@ -48,7 +48,7 @@
 * 数据库监听需要启用 `Binlog`，开启 `MySQL` 主从模式
 * 查看 `MySQL` 是否启用了 `Binlog`
 
-```
+```sql
 show variables like 'log_bin';
 ```
 
@@ -56,8 +56,29 @@ show variables like 'log_bin';
 * 如果没有启用，修改 `MySQL` 配置文件 `my.ini` / `my.cnf`
 * 配置文件中添加以下三行
 
-```
+```ini
 log_bin=mysql-bin
 binlog-format=ROW
 server-id=1
 ```
+
+#### Canal 数据库监听
+
+* `GitHub` 下载 `canal.deployer-1.1.5`
+* `/conf/canal.properties` 配置文件中添加以下配置
+
+```properties
+# 数据库 URL
+canal.instance.master.address=127.0.0.1:3306
+# 数据库 Username / Password
+canal.instance.dbUsername=canal
+canal.instance.dbPassword=canal
+canal.instance.connectionCharset = UTF-8
+
+# 监听的 Database
+canal.instance.defaultDatabaseName=
+# 监听的 Table, 可以指定, 多个用逗号分割, 这里的正则表示监听所有
+canal.instance.filter.regex=.*\\..*
+```
+
+* Windows 环境使用 `/bin/startup.bat` 启动 Canal Server
