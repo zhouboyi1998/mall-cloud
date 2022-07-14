@@ -111,7 +111,7 @@ public class BinlogListener implements CommandLineRunner {
                         messageContentHandler.handle(tableName, writeRowsEventData.getRows(), MonitorConstant.INSERT);
                     }
                 }
-                //监听 delete 操作
+                // 监听 delete 操作
                 else if (eventData instanceof DeleteRowsEventData) {
                     // 转换为 delete 监听数据
                     DeleteRowsEventData deleteRowsEventData = (DeleteRowsEventData) eventData;

@@ -32,6 +32,7 @@ public class CanalEntryHandler {
      * @param entryList
      */
     public void canalEntryHandle(List<CanalEntry.Entry> entryList) {
+        // 循环解析每一行变更的数据
         for (CanalEntry.Entry entry : entryList) {
             // 跳过事务相关的实体
             if (entry.getEntryType() == CanalEntry.EntryType.TRANSACTIONBEGIN ||
@@ -39,7 +40,7 @@ public class CanalEntryHandler {
                 continue;
             }
 
-            // RowChange 对象中包含了一行数据变化的所有特征
+            // 获取 RowChange 对象, 其中包含了一行数据变更的所有特征
             CanalEntry.RowChange rowChange;
             try {
                 rowChange = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
@@ -47,35 +48,29 @@ public class CanalEntryHandler {
                 throw new RuntimeException("ERROR: Failed to parser from entry store value, entry: " + entry, e);
             }
 
-            // 获取操作类型: insert / update / delete
+            // 获取数据库变更事件类型: insert / update / delete
             CanalEntry.EventType eventType = rowChange.getEventType();
-            // 打印 Header 信息
+            // 获取 Entry Header
             CanalEntry.Header header = entry.getHeader();
-            LOGGER.info(
-                "Binlog FileName: {}, Binlog FileOffset: {}, Database: {}, Table: {}, EventType: {}",
-                header.getLogfileName(), header.getLogfileOffset(),
-                header.getSchemaName(), header.getTableName(), eventType
-            );
-
-            // 判断是否是 DDL 语句
-            if (rowChange.getIsDdl()) {
-                LOGGER.info("DDL: true, SQL: {}", rowChange.getSql());
-            }
 
             // 判断是否为需要处理的表
             if (canalProperties.getTable().contains(header.getSchemaName() + "." + header.getTableName())) {
                 // 循环获取 RowChange 对象里的每一行数据
                 for (CanalEntry.RowData rowData : rowChange.getRowDatasList()) {
-                    if (eventType == CanalEntry.EventType.DELETE) {
-                        // 如果是删除语句
-                        printColumn(rowData.getBeforeColumnsList());
-                    } else if (eventType == CanalEntry.EventType.INSERT) {
-                        // 如果是新增语句
-                        printColumn(rowData.getAfterColumnsList());
-                    } else {
-                        // 如果是更新语句
-                        printColumn(rowData.getBeforeColumnsList());
-                        printColumn(rowData.getAfterColumnsList());
+                    // 判断数据库变更事件类型
+                    switch (eventType) {
+                        case UPDATE:
+                            printColumn(rowData.getBeforeColumnsList());
+                            printColumn(rowData.getAfterColumnsList());
+                            break;
+                        case INSERT:
+                            printColumn(rowData.getAfterColumnsList());
+                            break;
+                        case DELETE:
+                            printColumn(rowData.getBeforeColumnsList());
+                            break;
+                        default:
+                            break;
                     }
                 }
             }
@@ -89,7 +84,7 @@ public class CanalEntryHandler {
      */
     private void printColumn(List<CanalEntry.Column> columnList) {
         for (CanalEntry.Column column : columnList) {
-            System.out.println(column.getName() + " : " + column.getValue() + "\tupdate=" + column.getUpdated());
+            System.out.println(column.getName() + " : " + column.getValue() + " -- update=" + column.getUpdated());
         }
     }
 }

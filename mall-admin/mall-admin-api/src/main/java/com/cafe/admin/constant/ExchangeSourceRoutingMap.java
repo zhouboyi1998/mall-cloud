@@ -1,13 +1,12 @@
-package com.cafe.common.message.rabbitmq.constant;
+package com.cafe.admin.constant;
 
-import com.cafe.admin.constant.AdminTable;
-import com.cafe.common.constant.RabbitmqExchange;
-import com.cafe.common.constant.RabbitmqRoutingKey;
+import com.cafe.common.message.rabbitmq.constant.RabbitmqExchange;
+import com.cafe.common.message.rabbitmq.constant.RabbitmqRoutingKey;
 import org.apache.commons.collections4.map.MultiKeyMap;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.message.rabbitmq.constant
+ * @Package: com.cafe.admin.constant
  * @Author: zhouboyi
  * @Date: 2022/5/20 11:06
  * @Description: 交换机、消息标识、路由键对应关系, 通过前两者获取后者
