@@ -93,8 +93,10 @@ public class BinlogListener implements CommandLineRunner {
                             afterRowList.add(row.getValue());
                         }
                         // 将数据交给消息内容处理器
-                        messageContentHandler.handle(tableName, beforeRowList, MonitorConstant.UPDATE_BEFORE);
-                        messageContentHandler.handle(tableName, afterRowList, MonitorConstant.UPDATE_AFTER);
+                        messageContentHandler.handle(
+                            beforeRowList, afterRowList,
+                            tableName, MonitorConstant.UPDATE
+                        );
                     }
                 }
                 // 监听 insert 操作
@@ -108,7 +110,10 @@ public class BinlogListener implements CommandLineRunner {
                         // 打印日志
                         LOGGER.info("Insert Operation TableName: {}", tableName);
                         // 将监听到的新增数据交给消息内容处理器
-                        messageContentHandler.handle(tableName, writeRowsEventData.getRows(), MonitorConstant.INSERT);
+                        messageContentHandler.handle(
+                            null, writeRowsEventData.getRows(),
+                            tableName, MonitorConstant.INSERT
+                        );
                     }
                 }
                 // 监听 delete 操作
@@ -122,7 +127,10 @@ public class BinlogListener implements CommandLineRunner {
                         // 打印日志
                         LOGGER.info("Delete Operation TableName: {}", tableName);
                         // 将监听到的删除数据交给消息内容处理器
-                        messageContentHandler.handle(tableName, deleteRowsEventData.getRows(), MonitorConstant.DELETE);
+                        messageContentHandler.handle(
+                            deleteRowsEventData.getRows(), null,
+                            tableName, MonitorConstant.DELETE
+                        );
                     }
                 }
             }

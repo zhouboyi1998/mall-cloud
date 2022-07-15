@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
 
-
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.monitor.canal.client
@@ -67,7 +66,7 @@ public class CanalClient implements InitializingBean {
                     }
                 } else {
                     // 如果有数据, 处理数据
-                    canalEntryHandler.canalEntryHandle(message.getEntries());
+                    canalEntryHandler.handle(message.getEntries());
                 }
                 // 根据 batch id 进行确认, 小于或等于该 batch id 的 message都会被 ack
                 connector.ack(batchId);

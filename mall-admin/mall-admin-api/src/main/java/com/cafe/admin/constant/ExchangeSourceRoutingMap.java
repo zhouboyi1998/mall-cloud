@@ -16,5 +16,7 @@ public class ExchangeSourceRoutingMap {
     public static final MultiKeyMap<String, String> EXCHANGE_SOURCE_ROUTING_MAP = new MultiKeyMap<String, String>() {{
         put(RabbitmqExchange.BINLOG, AdminTable.ROLE, RabbitmqRoutingKey.BINLOG_TO_ROLE);
         put(RabbitmqExchange.BINLOG, AdminTable.ROLE_MENU, RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU);
+        put(RabbitmqExchange.CANAL, AdminTable.ROLE, RabbitmqRoutingKey.CANAL_TO_ROLE);
+        put(RabbitmqExchange.CANAL, AdminTable.ROLE_MENU, RabbitmqRoutingKey.CANAL_TO_ROLE_MENU);
     }};
 }

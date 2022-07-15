@@ -10,22 +10,17 @@ package com.cafe.common.constant;
 public class MonitorConstant {
 
     /**
-     * 新增的数据
+     * 更新操作
+     */
+    public static final String UPDATE = "update";
+
+    /**
+     * 新增操作
      */
     public static final String INSERT = "insert";
 
     /**
-     * 更新前的数据
-     */
-    public static final String UPDATE_BEFORE = "update-before";
-
-    /**
-     * 更新后的数据
-     */
-    public static final String UPDATE_AFTER = "update-after";
-
-    /**
-     * 删除的数据
+     * 删除操作
      */
     public static final String DELETE = "delete";
 
@@ -35,7 +30,12 @@ public class MonitorConstant {
     public static final String OPERATION = "operation";
 
     /**
-     * 监听到的变化数据
+     * 监听到的更新前数据
      */
-    public static final String DATA = "data";
+    public static final String BEFORE_DATA = "before_data";
+
+    /**
+     * 监听到的更新后数据
+     */
+    public static final String AFTER_DATA = "after_data";
 }

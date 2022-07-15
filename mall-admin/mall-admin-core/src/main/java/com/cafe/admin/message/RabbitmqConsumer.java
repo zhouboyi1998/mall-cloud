@@ -63,24 +63,30 @@ public class RabbitmqConsumer {
         Map<String, Object> content = JSONUtil.parseObj(message);
         // 获取变更的类型
         String operation = content.get(MonitorConstant.OPERATION).toString();
-        // 获取变更的数据, 类型为 JSONString, 先解析成 JSONArray, 再转换为 List
-        List<Role> roleList = JSONUtil.parseArray(content.get(MonitorConstant.DATA)).toList(Role.class);
+        // 获取变更前的数据
+        List<Role> beforeDataList = JSONUtil.parseArray(content.get(MonitorConstant.BEFORE_DATA)).toList(Role.class);
+        // 获取变更后的数据
+        List<Role> afterDataList = JSONUtil.parseArray(content.get(MonitorConstant.AFTER_DATA)).toList(Role.class);
 
         // 根据变更的类型执行不同的 Redis 操作
         switch (operation) {
+            case MonitorConstant.UPDATE:
+                for (Role role : beforeDataList) {
+                    roleService.removeRoleNameMap(role.getRoleName());
+                }
+                for (Role role : afterDataList) {
+                    roleService.saveRoleNameMap(role.getRoleName());
+                }
+                break;
             case MonitorConstant.INSERT:
-            case MonitorConstant.UPDATE_AFTER:
-                for (Role role : roleList) {
+                for (Role role : afterDataList) {
                     roleService.saveRoleNameMap(role.getRoleName());
                 }
                 break;
             case MonitorConstant.DELETE:
-            case MonitorConstant.UPDATE_BEFORE:
-                for (Role role : roleList) {
+                for (Role role : beforeDataList) {
                     roleService.removeRoleNameMap(role.getRoleName());
                 }
-                break;
-            default:
                 break;
         }
     }
@@ -107,9 +113,15 @@ public class RabbitmqConsumer {
         List<Long> menuIds = new ArrayList<Long>();
         // 获取消息内容
         Map<String, Object> content = JSONUtil.parseObj(message);
-        // 获取变更的数据, 类型为 JSONString, 先解析成 JSONArray, 再转换为 List
-        List<RoleMenu> roleMenuList = JSONUtil.parseArray(content.get(MonitorConstant.DATA)).toList(RoleMenu.class);
-        for (RoleMenu roleMenu : roleMenuList) {
+        // 获取变更前的数据
+        List<RoleMenu> beforeDataList = JSONUtil.parseArray(content.get(MonitorConstant.BEFORE_DATA)).toList(RoleMenu.class);
+        // 获取变更前的数据
+        List<RoleMenu> afterDataList = JSONUtil.parseArray(content.get(MonitorConstant.AFTER_DATA)).toList(RoleMenu.class);
+
+        for (RoleMenu roleMenu : beforeDataList) {
+            menuIds.add(roleMenu.getMenuId());
+        }
+        for (RoleMenu roleMenu : afterDataList) {
             menuIds.add(roleMenu.getMenuId());
         }
         // 更新 Redis 中的数据
