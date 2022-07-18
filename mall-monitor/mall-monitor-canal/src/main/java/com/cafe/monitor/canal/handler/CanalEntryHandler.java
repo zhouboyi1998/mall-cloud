@@ -56,6 +56,10 @@ public class CanalEntryHandler {
 
             // 获取 Entry Header
             CanalEntry.Header header = entry.getHeader();
+            // 打印日志
+            LOGGER.info("Database: {}, Table: {}, Operation: {}",
+                header.getSchemaName(), header.getTableName(), header.getEventType());
+
             // 判断是否为需要处理的表
             String tableName = header.getSchemaName() + "." + header.getTableName();
             if (canalProperties.getTable().contains(tableName)) {
