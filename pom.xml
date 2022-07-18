@@ -153,7 +153,7 @@
                 <artifactId>jjwt</artifactId>
                 <version>${jjwt.version}</version>
             </dependency>
-            <!-- Nimbus JOSE + JWT 令牌 -->
+            <!-- Nimbus JOSE JWT 令牌 -->
             <dependency>
                 <groupId>com.nimbusds</groupId>
                 <artifactId>nimbus-jose-jwt</artifactId>
