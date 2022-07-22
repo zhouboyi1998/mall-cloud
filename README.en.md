@@ -17,7 +17,6 @@
 <img src="https://img.shields.io/badge/MinIO-8.3.4-crimson">
 <img src="https://img.shields.io/badge/MySQL Binlog Connector-0.21.0-dodgerblue">
 <img src="https://img.shields.io/badge/Canal-1.1.5-orange">
-</a>
 </p>
 
 ### 📖 Language
