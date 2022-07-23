@@ -1,0 +1,6 @@
+server:
+  port: 18075
+
+spring:
+  application:
+    name: mall-file-fastdfs
