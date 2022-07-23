@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  * @Date: 2022/6/9 20:03
  * @Description:
  */
-@FeignClient("mall-file-minio")
-@RequestMapping("/minio")
+@FeignClient(value = "mall-file-minio")
+@RequestMapping(value = "/minio")
 public interface MinioFeign {
 
     /**

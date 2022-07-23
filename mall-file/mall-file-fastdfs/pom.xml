@@ -4,21 +4,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <artifactId>mall-cloud</artifactId>
+        <artifactId>mall-file</artifactId>
         <groupId>com.cafe.mall</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cafe.mall</groupId>
-    <artifactId>mall-file</artifactId>
+    <artifactId>mall-file-fastdfs</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>文件存储模块</description>
+    <description>FastDFS 文件存储模块</description>
 
     <packaging>pom</packaging>
     <modules>
-        <module>mall-file-fastdfs</module>
-        <module>mall-file-minio</module>
+        <module>mall-file-fastdfs-api</module>
+        <module>mall-file-fastdfs-core</module>
     </modules>
 
 </project>
