@@ -27,16 +27,16 @@
 
 ```
 mall-cloud
-    |-- mall-admin (管理员模块)
+    |-- mall-admin (管理员)
     |-- mall-common (公共代码)
     |-- mall-eureka (注册中心)
-    |-- mall-file (文件系统)
-    |-- mall-gateway (网关模块)
+    |-- mall-file (文件存储)
+    |-- mall-gateway (网关)
     |-- mall-generator (代码生成器)
-    |-- mall-goods (商品模块)
+    |-- mall-goods (商品)
     |-- mall-monitor (数据库监听)
-    |-- mall-order (订单模块)
-    |-- mall-security (安全模块)
+    |-- mall-order (订单)
+    |-- mall-security (安全)
 ```
 
 ### 📜 开源协议
