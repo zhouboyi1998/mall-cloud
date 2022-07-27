@@ -11,10 +11,6 @@ spring:
     port: 6379
     password: 123456
     database: 0
-  # Spring 配置
-  main:
-    # 允许 bean 定义覆盖
-    allow-bean-definition-overriding: true
 
 # Actuator Health 服务健康监控监控
 management:

@@ -2,7 +2,6 @@ package com.cafe.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.admin.model.Role;
 import com.cafe.admin.service.RoleService;
@@ -59,7 +58,7 @@ public class RoleController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
     })
     @GetMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<Role>> page(
+    public ResponseEntity<Page<Role>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
@@ -75,7 +74,7 @@ public class RoleController {
         @ApiImplicitParam(name = "role", value = "管理员角色Model", required = true, paramType = "body", dataType = "Role")
     })
     @PostMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<Role>> pageByWrapper(
+    public ResponseEntity<Page<Role>> pageByWrapper(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
         @RequestBody Role role
@@ -87,9 +86,13 @@ public class RoleController {
     }
 
     @ApiOperation(value = "分页查询管理员角色列表")
-    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Role>")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+    })
     @GetMapping(value = "/page")
-    public ResponseEntity<IPage<Role>> page(@RequestBody Page<Role> page) {
+    public ResponseEntity<Page<Role>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+        Page<Role> page = new Page<Role>().setCurrent(current).setSize(size);
         Page<Role> rolePage = roleService.page(page);
         return ResponseEntity.ok(rolePage);
     }
@@ -97,7 +100,7 @@ public class RoleController {
     @ApiOperation(value = "根据条件分页查询管理员角色")
     @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Role>")
     @PostMapping(value = "/page")
-    public ResponseEntity<IPage<Role>> pageByWrapper(@RequestBody Page<Role> page) {
+    public ResponseEntity<Page<Role>> pageByWrapper(@RequestBody Page<Role> page) {
         Role role = page.getRecords().get(0);
         Wrapper<Role> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(role);
         Page<Role> rolePage = roleService.page(page, wrapper);

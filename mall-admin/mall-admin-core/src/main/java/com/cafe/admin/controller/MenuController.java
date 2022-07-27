@@ -2,7 +2,6 @@ package com.cafe.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.admin.model.Menu;
 import com.cafe.admin.service.MenuService;
@@ -61,7 +60,7 @@ public class MenuController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
     })
     @GetMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<Menu>> page(
+    public ResponseEntity<Page<Menu>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
@@ -77,7 +76,7 @@ public class MenuController {
         @ApiImplicitParam(name = "menu", value = "菜单Model", required = true, paramType = "body", dataType = "Menu")
     })
     @PostMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<Menu>> pageByWrapper(
+    public ResponseEntity<Page<Menu>> pageByWrapper(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
         @RequestBody Menu menu
@@ -89,9 +88,13 @@ public class MenuController {
     }
 
     @ApiOperation(value = "分页查询菜单列表")
-    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Menu>")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+    })
     @GetMapping(value = "/page")
-    public ResponseEntity<IPage<Menu>> page(@RequestBody Page<Menu> page) {
+    public ResponseEntity<Page<Menu>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+        Page<Menu> page = new Page<Menu>().setCurrent(current).setSize(size);
         Page<Menu> menuPage = menuService.page(page);
         return ResponseEntity.ok(menuPage);
     }
@@ -99,7 +102,7 @@ public class MenuController {
     @ApiOperation(value = "根据条件分页查询菜单")
     @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Menu>")
     @PostMapping(value = "/page")
-    public ResponseEntity<IPage<Menu>> pageByWrapper(@RequestBody Page<Menu> page) {
+    public ResponseEntity<Page<Menu>> pageByWrapper(@RequestBody Page<Menu> page) {
         Menu menu = page.getRecords().get(0);
         Wrapper<Menu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(menu);
         Page<Menu> menuPage = menuService.page(page, wrapper);

@@ -20,11 +20,11 @@ public class Spu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "商品 ID")
+    @ApiModelProperty(value = "SPU ID")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
-    @ApiModelProperty(value = "商品名称")
+    @ApiModelProperty(value = "SPU 名称")
     private String spuName;
 
     @ApiModelProperty(value = "品牌 ID")
@@ -36,25 +36,25 @@ public class Spu implements Serializable {
     @ApiModelProperty(value = "分类码（存储多级分类ID）")
     private String categoryCode;
 
-    @ApiModelProperty(value = "商品原价")
+    @ApiModelProperty(value = "SPU 原价")
     private Double originalPrice;
 
-    @ApiModelProperty(value = "商品折扣价")
+    @ApiModelProperty(value = "SPU 折扣价")
     private Double discountPrice;
 
-    @ApiModelProperty(value = "商品秒杀价")
+    @ApiModelProperty(value = "SPU 秒杀价")
     private Double seckillPrice;
 
-    @ApiModelProperty(value = "商品主图 URL")
+    @ApiModelProperty(value = "SPU 主图")
     private String image;
 
-    @ApiModelProperty(value = "商品评论数量")
+    @ApiModelProperty(value = "SPU 评论数量")
     private Long commentCount;
 
-    @ApiModelProperty(value = "商品说明")
+    @ApiModelProperty(value = "SPU 说明")
     private String caption;
 
-    @ApiModelProperty(value = "商品详情介绍")
+    @ApiModelProperty(value = "SPU 详情介绍")
     private String intro;
 
     @ApiModelProperty(value = "排序号")
@@ -73,7 +73,6 @@ public class Spu implements Serializable {
     @TableField("is_deleted")
     @TableLogic
     private Boolean deleted;
-
 
     public Long getId() {
         return id;
