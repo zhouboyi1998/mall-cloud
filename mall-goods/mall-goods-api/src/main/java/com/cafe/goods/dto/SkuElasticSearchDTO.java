@@ -1,27 +1,23 @@
-package com.cafe.goods.model;
+package com.cafe.goods.dto;
 
-import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.goods.model
+ * @Package: com.cafe.goods.dto
  * @Author: zhouboyi
- * @Date: 2022-05-09
- * @Description: Stock Keeping Unit 库存量单位 (实体类)
+ * @Date: 2022/7/27 17:14
+ * @Description:
  */
-@TableName("mall_sku")
-@ApiModel(value = "Sku对象", description = "Stock Keeping Unit 库存量单位")
-public class Sku implements Serializable {
+@ApiModel(value = "SkuElasticSearchDTO对象", description = "ElasticSearch 相关的 SKU DTO")
+public class SkuElasticSearchDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "SKU ID")
-    @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty(value = "SKU 名称")
@@ -54,22 +50,18 @@ public class Sku implements Serializable {
     @ApiModelProperty(value = "SKU 规格")
     private String specification;
 
-    @ApiModelProperty(value = "排序号")
-    private Integer sort;
+    @ApiModelProperty(value = "SPU 名称")
+    private String spuName;
 
-    @ApiModelProperty(value = "状态：0 未审核，1 审核未通过，2 审核通过，3 上架")
-    private Integer skuStatus;
+    @ApiModelProperty(value = "品牌名称")
+    private String brandName;
 
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
+    @ApiModelProperty(value = "分类名称")
+    private String categoryName;
 
-    @ApiModelProperty(value = "更新时间")
-    private LocalDateTime updateTime;
-
-    @ApiModelProperty(value = "逻辑删除：0 未删除，1 已删除")
-    @TableField("is_deleted")
-    @TableLogic
-    private Boolean deleted;
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
 
     public Long getId() {
         return id;
@@ -159,65 +151,47 @@ public class Sku implements Serializable {
         this.specification = specification;
     }
 
-    public Integer getSort() {
-        return sort;
+    public String getSpuName() {
+        return spuName;
     }
 
-    public void setSort(Integer sort) {
-        this.sort = sort;
+    public void setSpuName(String spuName) {
+        this.spuName = spuName;
     }
 
-    public Integer getSkuStatus() {
-        return skuStatus;
+    public String getBrandName() {
+        return brandName;
     }
 
-    public void setSkuStatus(Integer skuStatus) {
-        this.skuStatus = skuStatus;
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
     }
 
-    public LocalDateTime getCreateTime() {
-        return createTime;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     @Override
     public String toString() {
-        return "Sku{" +
+        return "SkuElasticSearchDTO{" +
             "id=" + id +
-            ", skuName=" + skuName +
+            ", skuName='" + skuName + '\'' +
             ", spuId=" + spuId +
             ", originalPrice=" + originalPrice +
             ", discountPrice=" + discountPrice +
             ", seckillPrice=" + seckillPrice +
             ", stock=" + stock +
             ", saleCount=" + saleCount +
-            ", image=" + image +
-            ", imageList=" + imageList +
-            ", specification=" + specification +
-            ", sort=" + sort +
-            ", skuStatus=" + skuStatus +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", deleted=" + deleted +
-            "}";
+            ", image='" + image + '\'' +
+            ", imageList='" + imageList + '\'' +
+            ", specification='" + specification + '\'' +
+            ", spuName='" + spuName + '\'' +
+            ", brandName='" + brandName + '\'' +
+            ", categoryName='" + categoryName + '\'' +
+            '}';
     }
 }

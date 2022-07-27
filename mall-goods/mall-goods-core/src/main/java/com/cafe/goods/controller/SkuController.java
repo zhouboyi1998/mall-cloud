@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.core.util.MyBatisPlusWrapperUtil;
+import com.cafe.goods.dto.SkuElasticSearchDTO;
 import com.cafe.goods.model.Sku;
 import com.cafe.goods.service.SkuService;
 import io.swagger.annotations.Api;
@@ -170,5 +171,20 @@ public class SkuController {
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = skuService.removeByIds(ids);
         return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "分页查询 SkuElasticSearchDTO 列表")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
+    })
+    @GetMapping(value = "/page/es/{current}/{size}")
+    public ResponseEntity<IPage<SkuElasticSearchDTO>> pageSkuElasticSearchDTO(
+        @PathVariable(value = "current") Long current,
+        @PathVariable(value = "size") Long size
+    ) {
+        Page<SkuElasticSearchDTO> page = new Page<SkuElasticSearchDTO>().setCurrent(current).setSize(size);
+        Page<SkuElasticSearchDTO> dtoPage = skuService.pageSkuElasticSearchDTO(page);
+        return ResponseEntity.ok(dtoPage);
     }
 }
