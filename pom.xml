@@ -11,7 +11,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.cafe.mall</groupId>
+    <groupId>com.cafe</groupId>
     <artifactId>mall-cloud</artifactId>
     <version>1.0-SNAPSHOT</version>
     <description>微服务父项目 (管理依赖版本)</description>
@@ -27,6 +27,7 @@
         <module>mall-goods</module>
         <module>mall-monitor</module>
         <module>mall-order</module>
+        <module>mall-search</module>
         <module>mall-security</module>
     </modules>
 
@@ -61,6 +62,7 @@
         <mall-security-manage-api.version>1.0-SNAPSHOT</mall-security-manage-api.version>
         <mall-file-minio-api.version>1.0-SNAPSHOT</mall-file-minio-api.version>
         <mall-file-fastdfs-api.version>1.0-SNAPSHOT</mall-file-fastdfs-api.version>
+        <mall-search-elasticsearch-api.version>1.0-SNAPSHOT</mall-search-elasticsearch-api.version>
     </properties>
 
     <dependencies>
@@ -216,51 +218,56 @@
 
             <!-- 公共模块 -->
             <dependency>
-                <groupId>com.cafe.mall</groupId>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-common-constant</artifactId>
                 <version>${mall-common-constant.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.cafe.mall</groupId>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-common-core</artifactId>
                 <version>${mall-common-core.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.cafe.mall</groupId>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-common-rabbitmq</artifactId>
                 <version>${mall-common-rabbitmq.version}</version>
             </dependency>
 
             <!-- 远程调用接口 -->
             <dependency>
-                <groupId>com.cafe.mall</groupId>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-admin-api</artifactId>
                 <version>${mall-admin-api.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.cafe.mall</groupId>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-goods-api</artifactId>
                 <version>${mall-goods-api.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.cafe.mall</groupId>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-order-api</artifactId>
                 <version>${mall-order-api.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.cafe.mall</groupId>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-security-manage-api</artifactId>
                 <version>${mall-security-manage-api.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.cafe.mall</groupId>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-file-minio-api</artifactId>
                 <version>${mall-file-minio-api.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.cafe.mall</groupId>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-file-fastdfs-api</artifactId>
                 <version>${mall-file-fastdfs-api.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-search-elasticsearch-api</artifactId>
+                <version>${mall-search-elasticsearch-api.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
