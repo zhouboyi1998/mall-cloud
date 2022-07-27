@@ -4,7 +4,10 @@ import com.cafe.file.minio.service.MinioService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 @RestController
 @RequestMapping(value = "/minio")
 public class MinioController {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(MinioController.class);
 
     private MinioService minioService;
 
@@ -39,8 +44,13 @@ public class MinioController {
         @PathVariable(value = "bucket") String bucket,
         MultipartFile file
     ) {
-        String result = minioService.upload(bucket, file);
-        return ResponseEntity.ok(result);
+        try {
+            String result = minioService.upload(bucket, file);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            LOGGER.error("MinioController.upload() failed to upload file: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @ApiOperation(value = "文件下载")
@@ -54,8 +64,13 @@ public class MinioController {
         @PathVariable(value = "fileName") String fileName,
         HttpServletResponse httpResponse
     ) {
-        minioService.download(bucket, fileName, httpResponse);
-        return ResponseEntity.ok("success");
+        try {
+            minioService.download(bucket, fileName, httpResponse);
+            return ResponseEntity.ok("success");
+        } catch (Exception e) {
+            LOGGER.error("MinioController.download() failed to download file: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @ApiOperation(value = "获取文件外链 (永久)")
@@ -68,8 +83,13 @@ public class MinioController {
         @PathVariable(value = "bucket") String bucket,
         @PathVariable(value = "fileName") String fileName
     ) {
-        String url = minioService.getFileUrl(bucket, fileName);
-        return ResponseEntity.ok(url);
+        try {
+            String url = minioService.getFileUrl(bucket, fileName);
+            return ResponseEntity.ok(url);
+        } catch (Exception e) {
+            LOGGER.error("MinioController.getFileUrl() failed to get permanent file url: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @ApiOperation(value = "获取文件外链 (限时)")
@@ -84,7 +104,12 @@ public class MinioController {
         @PathVariable(value = "fileName") String fileName,
         @PathVariable(value = "expiry") Integer expiry
     ) {
-        String url = minioService.getFileUrl(bucket, fileName, expiry);
-        return ResponseEntity.ok(url);
+        try {
+            String url = minioService.getFileUrl(bucket, fileName, expiry);
+            return ResponseEntity.ok(url);
+        } catch (Exception e) {
+            LOGGER.error("MinioController.getFileUrl() failed to get time-limited file url: {}", e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }
