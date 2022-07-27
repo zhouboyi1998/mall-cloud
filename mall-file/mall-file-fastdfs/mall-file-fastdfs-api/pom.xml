@@ -5,12 +5,12 @@
 
     <parent>
         <artifactId>mall-file-fastdfs</artifactId>
-        <groupId>com.cafe.mall</groupId>
+        <groupId>com.cafe</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.cafe.mall</groupId>
+    <groupId>com.cafe</groupId>
     <artifactId>mall-file-fastdfs-api</artifactId>
     <version>1.0-SNAPSHOT</version>
     <description>FastDFS 文件存储模块远程调用接口</description>
