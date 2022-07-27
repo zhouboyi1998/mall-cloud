@@ -14,7 +14,7 @@
         <result column="sale_count" property="saleCount" />
         <result column="image" property="image" />
         <result column="image_list" property="imageList" />
-        <result column="specification_name" property="specificationName" />
+        <result column="specification" property="specification" />
         <result column="sort" property="sort" />
         <result column="sku_status" property="skuStatus" />
         <result column="create_time" property="createTime" />
@@ -24,7 +24,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, sku_name, spu_id, original_price, discount_price, seckill_price, stock, sale_count, image, image_list, specification_name, sort, sku_status, create_time, update_time, is_deleted
+        id, sku_name, spu_id, original_price, discount_price, seckill_price, stock, sale_count, image, image_list, specification, sort, sku_status, create_time, update_time, is_deleted
     </sql>
 
 </mapper>

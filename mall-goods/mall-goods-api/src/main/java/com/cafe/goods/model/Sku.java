@@ -52,7 +52,7 @@ public class Sku implements Serializable {
     private String imageList;
 
     @ApiModelProperty(value = "SKU 规格")
-    private String specificationName;
+    private String specification;
 
     @ApiModelProperty(value = "排序号")
     private Integer sort;
@@ -152,12 +152,12 @@ public class Sku implements Serializable {
         this.imageList = imageList;
     }
 
-    public String getSpecificationName() {
-        return specificationName;
+    public String getSpecification() {
+        return specification;
     }
 
-    public void setSpecificationName(String specificationName) {
-        this.specificationName = specificationName;
+    public void setSpecification(String specification) {
+        this.specification = specification;
     }
 
     public Integer getSort() {
@@ -213,7 +213,7 @@ public class Sku implements Serializable {
             ", saleCount=" + saleCount +
             ", image=" + image +
             ", imageList=" + imageList +
-            ", specificationName=" + specificationName +
+            ", specification=" + specification +
             ", sort=" + sort +
             ", skuStatus=" + skuStatus +
             ", createTime=" + createTime +
