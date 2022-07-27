@@ -1,0 +1,19 @@
+spring:
+  profiles:
+    active: dev
+
+# Feign 配置
+feign:
+  # 开启 Hystrix
+  hystrix:
+    enabled: true
+
+# Hystrix 配置
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            # 超时熔断时间 10000 毫秒
+            timeoutInMilliseconds: 10000

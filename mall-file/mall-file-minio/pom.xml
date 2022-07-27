@@ -5,12 +5,12 @@
 
     <parent>
         <artifactId>mall-file</artifactId>
-        <groupId>com.cafe.mall</groupId>
+        <groupId>com.cafe</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.cafe.mall</groupId>
+    <groupId>com.cafe</groupId>
     <artifactId>mall-file-minio</artifactId>
     <version>1.0-SNAPSHOT</version>
     <description>MinIO 文件存储模块</description>

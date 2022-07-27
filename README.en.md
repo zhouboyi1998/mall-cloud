@@ -12,11 +12,13 @@
 <img src="https://img.shields.io/badge/Spring Cloud-Hoxton.SR12-brightgreen">
 <img src="https://img.shields.io/badge/Spring Cloud Alibaba-2.2.7.RELEASE-brightgreen">
 <img src="https://img.shields.io/badge/MyBatis Plus-3.4.1-dodgerblue">
-<img src="https://img.shields.io/badge/Nimbus JOSE JWT-8.16-yellowgreen">
 <img src="https://img.shields.io/badge/Swagger2 Knife4J-2.0.9-blue">
 <img src="https://img.shields.io/badge/MinIO-8.3.4-crimson">
-<img src="https://img.shields.io/badge/MySQL Binlog Connector-0.21.0-dodgerblue">
+<img src="https://img.shields.io/badge/FastDFS-1.27.0.0-orange">
+<img src="https://img.shields.io/badge/Binlog-0.21.0-dodgerblue">
 <img src="https://img.shields.io/badge/Canal-1.1.5-orange">
+<img src="https://img.shields.io/badge/RabbitMQ-3.6.5-orange">
+<img src="https://img.shields.io/badge/ElasticSearch-7.6.2-mediumturquoise">
 </p>
 
 ### 📖 Language
