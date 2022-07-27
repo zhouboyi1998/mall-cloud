@@ -4,24 +4,18 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <artifactId>mall-file-fastdfs</artifactId>
+        <artifactId>mall-search-elasticsearch</artifactId>
         <groupId>com.cafe</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.cafe</groupId>
-    <artifactId>mall-file-fastdfs-core</artifactId>
+    <artifactId>mall-search-elasticsearch-core</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <description>FastDFS 文件存储模块核心业务</description>
+    <description>ElasticSearch 搜索模块核心业务</description>
 
     <dependencies>
-        <!--FastDFS 客户端-->
-        <dependency>
-            <groupId>net.oschina.zcx7878</groupId>
-            <artifactId>fastdfs-client-java</artifactId>
-            <version>1.27.0.0</version>
-        </dependency>
         <!-- Spring Boot Web 相关依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -50,7 +44,7 @@
 
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-file-fastdfs-api</artifactId>
+            <artifactId>mall-search-elasticsearch-api</artifactId>
         </dependency>
     </dependencies>
 
