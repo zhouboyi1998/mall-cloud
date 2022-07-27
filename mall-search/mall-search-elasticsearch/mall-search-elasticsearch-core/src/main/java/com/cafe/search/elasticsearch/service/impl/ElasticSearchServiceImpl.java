@@ -28,7 +28,8 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
 
     @Override
     public SearchResponse info() throws IOException {
-        SearchRequest searchRequest = new SearchRequest().source(new SearchSourceBuilder());
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        SearchRequest searchRequest = new SearchRequest().source(searchSourceBuilder);
         SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
         return searchResponse;
     }

@@ -25,7 +25,7 @@ import java.text.ParseException;
 @Component
 public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(AuthenticationGlobalFilter.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationGlobalFilter.class);
 
     /**
      * 解析 JWT 获取其中的用户信息

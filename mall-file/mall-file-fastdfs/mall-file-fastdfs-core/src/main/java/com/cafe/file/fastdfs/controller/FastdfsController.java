@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @Description:
  */
 @RestController
-@RequestMapping(value = "fastdfs")
+@RequestMapping(value = "/fastdfs")
 public class FastdfsController {
 
     private FastdfsService fastdfsService;
