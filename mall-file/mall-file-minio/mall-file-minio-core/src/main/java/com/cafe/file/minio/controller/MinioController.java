@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/minio")
 public class MinioController {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(MinioController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MinioController.class);
 
     private MinioService minioService;
 
