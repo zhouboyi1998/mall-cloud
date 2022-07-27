@@ -23,7 +23,7 @@ import java.util.Properties;
  */
 public class MyBatisPlusGenerator {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(MyBatisPlusGenerator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MyBatisPlusGenerator.class);
 
     /**
      * 配置文件

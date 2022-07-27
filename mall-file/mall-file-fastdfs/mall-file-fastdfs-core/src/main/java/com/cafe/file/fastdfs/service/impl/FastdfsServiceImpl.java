@@ -54,7 +54,8 @@ public class FastdfsServiceImpl implements FastdfsService {
         TrackerServer trackerServer = trackerClient.getConnection();
         StorageClient storageClient = new StorageClient(trackerServer, null);
         byte[] bytes = storageClient.download_file(groupName, remoteFileName);
-        return new ByteArrayInputStream(bytes);
+        ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
+        return inputStream;
     }
 
     @Override

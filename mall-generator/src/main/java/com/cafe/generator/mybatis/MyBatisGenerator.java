@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class MyBatisGenerator {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(MyBatisGenerator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MyBatisGenerator.class);
 
     /**
      * 生成代码: Model、DAO、Mapper
