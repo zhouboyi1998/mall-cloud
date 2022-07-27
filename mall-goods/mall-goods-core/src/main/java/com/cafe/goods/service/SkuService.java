@@ -1,6 +1,8 @@
 package com.cafe.goods.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.cafe.goods.dto.SkuElasticSearchDTO;
 import com.cafe.goods.model.Sku;
 
 /**
@@ -12,4 +14,11 @@ import com.cafe.goods.model.Sku;
  */
 public interface SkuService extends IService<Sku> {
 
+    /**
+     * 分页查询 SkuElasticSearchDTO 列表
+     *
+     * @param page
+     * @return
+     */
+    Page<SkuElasticSearchDTO> pageSkuElasticSearchDTO(Page<SkuElasticSearchDTO> page);
 }

@@ -2,9 +2,9 @@ package com.cafe.goods.controller;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.core.util.MyBatisPlusWrapperUtil;
+import com.cafe.goods.dto.SkuElasticSearchDTO;
 import com.cafe.goods.model.Sku;
 import com.cafe.goods.service.SkuService;
 import io.swagger.annotations.Api;
@@ -59,7 +59,7 @@ public class SkuController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
     })
     @GetMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<Sku>> page(
+    public ResponseEntity<Page<Sku>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
@@ -75,7 +75,7 @@ public class SkuController {
         @ApiImplicitParam(name = "sku", value = "Stock Keeping Unit 库存量单位Model", required = true, paramType = "body", dataType = "Sku")
     })
     @PostMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<Sku>> pageByWrapper(
+    public ResponseEntity<Page<Sku>> pageByWrapper(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
         @RequestBody Sku sku
@@ -87,9 +87,13 @@ public class SkuController {
     }
 
     @ApiOperation(value = "分页查询Stock Keeping Unit 库存量单位列表")
-    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Sku>")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+    })
     @GetMapping(value = "/page")
-    public ResponseEntity<IPage<Sku>> page(@RequestBody Page<Sku> page) {
+    public ResponseEntity<Page<Sku>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+        Page<Sku> page = new Page<Sku>().setCurrent(current).setSize(size);
         Page<Sku> skuPage = skuService.page(page);
         return ResponseEntity.ok(skuPage);
     }
@@ -97,7 +101,7 @@ public class SkuController {
     @ApiOperation(value = "根据条件分页查询Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Sku>")
     @PostMapping(value = "/page")
-    public ResponseEntity<IPage<Sku>> pageByWrapper(@RequestBody Page<Sku> page) {
+    public ResponseEntity<Page<Sku>> pageByWrapper(@RequestBody Page<Sku> page) {
         Sku sku = page.getRecords().get(0);
         Wrapper<Sku> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(sku);
         Page<Sku> skuPage = skuService.page(page, wrapper);
@@ -170,5 +174,20 @@ public class SkuController {
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = skuService.removeByIds(ids);
         return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "分页查询 SkuElasticSearchDTO 列表")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
+    })
+    @GetMapping(value = "/page/es/{current}/{size}")
+    public ResponseEntity<Page<SkuElasticSearchDTO>> pageSkuElasticSearchDTO(
+        @PathVariable(value = "current") Long current,
+        @PathVariable(value = "size") Long size
+    ) {
+        Page<SkuElasticSearchDTO> page = new Page<SkuElasticSearchDTO>().setCurrent(current).setSize(size);
+        Page<SkuElasticSearchDTO> dtoPage = skuService.pageSkuElasticSearchDTO(page);
+        return ResponseEntity.ok(dtoPage);
     }
 }
