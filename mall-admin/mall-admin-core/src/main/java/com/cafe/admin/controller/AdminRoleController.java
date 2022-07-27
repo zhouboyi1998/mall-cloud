@@ -2,7 +2,6 @@ package com.cafe.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.admin.model.AdminRole;
 import com.cafe.admin.service.AdminRoleService;
@@ -59,7 +58,7 @@ public class AdminRoleController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
     })
     @GetMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<AdminRole>> page(
+    public ResponseEntity<Page<AdminRole>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
@@ -75,7 +74,7 @@ public class AdminRoleController {
         @ApiImplicitParam(name = "adminRole", value = "用户-角色关联Model", required = true, paramType = "body", dataType = "AdminRole")
     })
     @PostMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<AdminRole>> pageByWrapper(
+    public ResponseEntity<Page<AdminRole>> pageByWrapper(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
         @RequestBody AdminRole adminRole
@@ -87,9 +86,13 @@ public class AdminRoleController {
     }
 
     @ApiOperation(value = "分页查询用户-角色关联列表")
-    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<AdminRole>")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+    })
     @GetMapping(value = "/page")
-    public ResponseEntity<IPage<AdminRole>> page(@RequestBody Page<AdminRole> page) {
+    public ResponseEntity<Page<AdminRole>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+        Page<AdminRole> page = new Page<AdminRole>().setCurrent(current).setSize(size);
         Page<AdminRole> adminRolePage = adminRoleService.page(page);
         return ResponseEntity.ok(adminRolePage);
     }
@@ -97,7 +100,7 @@ public class AdminRoleController {
     @ApiOperation(value = "根据条件分页查询用户-角色关联")
     @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<AdminRole>")
     @PostMapping(value = "/page")
-    public ResponseEntity<IPage<AdminRole>> pageByWrapper(@RequestBody Page<AdminRole> page) {
+    public ResponseEntity<Page<AdminRole>> pageByWrapper(@RequestBody Page<AdminRole> page) {
         AdminRole adminRole = page.getRecords().get(0);
         Wrapper<AdminRole> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(adminRole);
         Page<AdminRole> adminRolePage = adminRoleService.page(page, wrapper);

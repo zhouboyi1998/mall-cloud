@@ -1,6 +1,8 @@
 package com.cafe.goods.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cafe.goods.dto.SkuElasticSearchDTO;
 import com.cafe.goods.model.Sku;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -14,4 +16,11 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SkuMapper extends BaseMapper<Sku> {
 
+    /**
+     * 分页查询 SkuElasticSearchDTO 列表
+     *
+     * @param page
+     * @return
+     */
+    Page<SkuElasticSearchDTO> pageSkuElasticSearchDTO(Page<SkuElasticSearchDTO> page);
 }

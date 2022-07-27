@@ -78,7 +78,7 @@ public class ${table.controllerName} {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
     })
     @GetMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<${entity}>> page(
+    public ResponseEntity<Page<${entity}>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
@@ -94,7 +94,7 @@ public class ${table.controllerName} {
         @ApiImplicitParam(name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", value = "${table.comment}Model", required = true, paramType = "body", dataType = "${entity}")
     })
     @PostMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<${entity}>> pageByWrapper(
+    public ResponseEntity<Page<${entity}>> pageByWrapper(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
         @RequestBody ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}
@@ -106,9 +106,13 @@ public class ${table.controllerName} {
     }
 
     @ApiOperation(value = "分页查询${table.comment}列表")
-    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<${entity}>")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+    })
     @GetMapping(value = "/page")
-    public ResponseEntity<IPage<${entity}>> page(@RequestBody Page<${entity}> page) {
+    public ResponseEntity<Page<${entity}>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+        Page<${entity}> page = new Page<${entity}>().setCurrent(current).setSize(size);
         Page<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.page(page);
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
     }
@@ -116,7 +120,7 @@ public class ${table.controllerName} {
     @ApiOperation(value = "根据条件分页查询${table.comment}")
     @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<${entity}>")
     @PostMapping(value = "/page")
-    public ResponseEntity<IPage<${entity}>> pageByWrapper(@RequestBody Page<${entity}> page) {
+    public ResponseEntity<Page<${entity}>> pageByWrapper(@RequestBody Page<${entity}> page) {
         ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} = page.getRecords().get(0);
         Wrapper<${entity}> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
         Page<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.page(page, wrapper);

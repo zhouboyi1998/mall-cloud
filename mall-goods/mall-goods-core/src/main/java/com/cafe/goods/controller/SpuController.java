@@ -2,7 +2,6 @@ package com.cafe.goods.controller;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.core.util.MyBatisPlusWrapperUtil;
 import com.cafe.goods.model.Spu;
@@ -59,7 +58,7 @@ public class SpuController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
     })
     @GetMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<Spu>> page(
+    public ResponseEntity<Page<Spu>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
@@ -75,7 +74,7 @@ public class SpuController {
         @ApiImplicitParam(name = "spu", value = "Standard Product Unit 标准化产品单元Model", required = true, paramType = "body", dataType = "Spu")
     })
     @PostMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<Spu>> pageByWrapper(
+    public ResponseEntity<Page<Spu>> pageByWrapper(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
         @RequestBody Spu spu
@@ -87,9 +86,13 @@ public class SpuController {
     }
 
     @ApiOperation(value = "分页查询Standard Product Unit 标准化产品单元列表")
-    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Spu>")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+    })
     @GetMapping(value = "/page")
-    public ResponseEntity<IPage<Spu>> page(@RequestBody Page<Spu> page) {
+    public ResponseEntity<Page<Spu>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+        Page<Spu> page = new Page<Spu>().setCurrent(current).setSize(size);
         Page<Spu> spuPage = spuService.page(page);
         return ResponseEntity.ok(spuPage);
     }
@@ -97,7 +100,7 @@ public class SpuController {
     @ApiOperation(value = "根据条件分页查询Standard Product Unit 标准化产品单元")
     @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Spu>")
     @PostMapping(value = "/page")
-    public ResponseEntity<IPage<Spu>> pageByWrapper(@RequestBody Page<Spu> page) {
+    public ResponseEntity<Page<Spu>> pageByWrapper(@RequestBody Page<Spu> page) {
         Spu spu = page.getRecords().get(0);
         Wrapper<Spu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(spu);
         Page<Spu> spuPage = spuService.page(page, wrapper);

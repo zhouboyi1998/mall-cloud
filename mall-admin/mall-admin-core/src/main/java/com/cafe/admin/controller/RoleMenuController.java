@@ -2,7 +2,6 @@ package com.cafe.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.admin.bo.MenuRoleRelationBO;
 import com.cafe.admin.model.RoleMenu;
@@ -61,7 +60,7 @@ public class RoleMenuController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
     })
     @GetMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<RoleMenu>> page(
+    public ResponseEntity<Page<RoleMenu>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
@@ -77,7 +76,7 @@ public class RoleMenuController {
         @ApiImplicitParam(name = "roleMenu", value = "角色-菜单关联Model", required = true, paramType = "body", dataType = "RoleMenu")
     })
     @PostMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<RoleMenu>> pageByWrapper(
+    public ResponseEntity<Page<RoleMenu>> pageByWrapper(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
         @RequestBody RoleMenu roleMenu
@@ -89,9 +88,13 @@ public class RoleMenuController {
     }
 
     @ApiOperation(value = "分页查询角色-菜单关联列表")
-    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<RoleMenu>")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+    })
     @GetMapping(value = "/page")
-    public ResponseEntity<IPage<RoleMenu>> page(@RequestBody Page<RoleMenu> page) {
+    public ResponseEntity<Page<RoleMenu>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+        Page<RoleMenu> page = new Page<RoleMenu>().setCurrent(current).setSize(size);
         Page<RoleMenu> roleMenuPage = roleMenuService.page(page);
         return ResponseEntity.ok(roleMenuPage);
     }
@@ -99,7 +102,7 @@ public class RoleMenuController {
     @ApiOperation(value = "根据条件分页查询角色-菜单关联")
     @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<RoleMenu>")
     @PostMapping(value = "/page")
-    public ResponseEntity<IPage<RoleMenu>> pageByWrapper(@RequestBody Page<RoleMenu> page) {
+    public ResponseEntity<Page<RoleMenu>> pageByWrapper(@RequestBody Page<RoleMenu> page) {
         RoleMenu roleMenu = page.getRecords().get(0);
         Wrapper<RoleMenu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(roleMenu);
         Page<RoleMenu> roleMenuPage = roleMenuService.page(page, wrapper);

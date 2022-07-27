@@ -1,5 +1,7 @@
 package com.cafe.admin.vo;
 
+import io.swagger.annotations.ApiModel;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,6 +12,7 @@ import java.util.List;
  * @Date: 2022/7/7 17:25
  * @Description:
  */
+@ApiModel(value = "MenuTreeVO对象", description = "三级菜单树 VO")
 public class MenuTreeVO implements Serializable {
 
     private static final long serialVersionUID = 1L;

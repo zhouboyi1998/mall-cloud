@@ -2,10 +2,8 @@ package com.cafe.goods.controller;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.core.util.MyBatisPlusWrapperUtil;
-import com.cafe.goods.model.Brand;
 import com.cafe.goods.model.Category;
 import com.cafe.goods.service.CategoryService;
 import io.swagger.annotations.Api;
@@ -60,7 +58,7 @@ public class CategoryController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
     })
     @GetMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<Category>> page(
+    public ResponseEntity<Page<Category>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
@@ -76,7 +74,7 @@ public class CategoryController {
         @ApiImplicitParam(name = "category", value = "分类Model", required = true, paramType = "body", dataType = "Category")
     })
     @PostMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<Category>> pageByWrapper(
+    public ResponseEntity<Page<Category>> pageByWrapper(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
         @RequestBody Category category
@@ -88,9 +86,13 @@ public class CategoryController {
     }
 
     @ApiOperation(value = "分页查询分类列表")
-    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Category>")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+    })
     @GetMapping(value = "/page")
-    public ResponseEntity<IPage<Category>> page(@RequestBody Page<Category> page) {
+    public ResponseEntity<Page<Category>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+        Page<Category> page = new Page<Category>().setCurrent(current).setSize(size);
         Page<Category> categoryPage = categoryService.page(page);
         return ResponseEntity.ok(categoryPage);
     }
@@ -98,7 +100,7 @@ public class CategoryController {
     @ApiOperation(value = "根据条件分页查询分类")
     @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Category>")
     @PostMapping(value = "/page")
-    public ResponseEntity<IPage<Category>> pageByWrapper(@RequestBody Page<Category> page) {
+    public ResponseEntity<Page<Category>> pageByWrapper(@RequestBody Page<Category> page) {
         Category category = page.getRecords().get(0);
         Wrapper<Category> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(category);
         Page<Category> categoryPage = categoryService.page(page, wrapper);
