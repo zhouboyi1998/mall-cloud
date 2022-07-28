@@ -1,6 +1,12 @@
 spring:
   profiles:
     active: dev
+  # 自动装配时排除 JDBC 数据源配置
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  # 允许同名 Bean 覆盖
+  main:
+    allow-bean-definition-overriding: true
 
 # Feign 配置
 feign:

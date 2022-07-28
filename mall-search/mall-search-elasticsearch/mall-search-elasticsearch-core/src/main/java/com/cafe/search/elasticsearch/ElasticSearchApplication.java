@@ -2,6 +2,7 @@ package com.cafe.search.elasticsearch;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
@@ -14,6 +15,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
  */
 @SpringCloudApplication
 @EnableSwagger2WebMvc
+@EnableFeignClients(basePackages = "com.cafe.goods.feign")
 @ComponentScan(basePackages = "com.cafe")
 public class ElasticSearchApplication {
 

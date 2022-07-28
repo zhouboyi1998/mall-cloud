@@ -5,6 +5,9 @@ spring:
   autoconfigure:
     exclude:
       - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+  # 允许同名 Bean 覆盖
+  main:
+    allow-bean-definition-overriding: true
 
 # RSA 证书口令, 生成 RSA 证书文件 (jwt.jks) 时设置
 rsa:

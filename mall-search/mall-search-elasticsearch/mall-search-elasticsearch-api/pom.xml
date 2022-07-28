@@ -16,11 +16,6 @@
     <description>ElasticSearch 搜索模块远程调用接口</description>
 
     <dependencies>
-        <!-- Spring Data ElasticSearch -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-        </dependency>
         <!-- OpenFeign 远程方法调用 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
