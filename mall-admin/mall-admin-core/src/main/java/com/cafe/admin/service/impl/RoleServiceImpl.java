@@ -53,6 +53,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         // 清空 Redis 中原来的 List
         redisTemplate.opsForList().trim(RedisConstant.ROLE_NAME_LIST, 0, 0);
         redisTemplate.opsForList().leftPop(RedisConstant.ROLE_NAME_LIST);
+        // 初始化之前先删除对应的 key, 清空旧的数据
+        redisTemplate.delete(RedisConstant.ROLE_NAME_LIST);
         // 将角色名称保存到 Redis 中
         for (String roleName : roleNameList) {
             redisTemplate.opsForList().rightPush(RedisConstant.ROLE_NAME_LIST, roleName);

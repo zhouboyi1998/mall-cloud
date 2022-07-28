@@ -46,6 +46,7 @@
         <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>8.3.4</minio.version>
+
         <squareup-okhttp3.version>4.9.3</squareup-okhttp3.version>
         <tomcat-embed.version>9.0.46</tomcat-embed.version>
         <mysql-binlog-connector.version>0.21.0</mysql-binlog-connector.version>
@@ -55,6 +56,7 @@
         <mall-common-constant.version>1.0-SNAPSHOT</mall-common-constant.version>
         <mall-common-core.version>1.0-SNAPSHOT</mall-common-core.version>
         <mall-common-rabbitmq.version>1.0-SNAPSHOT</mall-common-rabbitmq.version>
+        <mall-common-rocketmq.version>1.0-SNAPSHOT</mall-common-rocketmq.version>
 
         <mall-admin-api.version>1.0-SNAPSHOT</mall-admin-api.version>
         <mall-goods-api.version>1.0-SNAPSHOT</mall-goods-api.version>
@@ -186,18 +188,20 @@
                 <artifactId>okhttp</artifactId>
                 <version>${squareup-okhttp3.version}</version>
             </dependency>
+
             <!-- Binlog MySQL 数据库监听 -->
             <dependency>
                 <groupId>com.github.shyiko</groupId>
                 <artifactId>mysql-binlog-connector-java</artifactId>
                 <version>${mysql-binlog-connector.version}</version>
             </dependency>
-            <!-- Canal 数据库监听 -->
+            <!-- Canal 客户端 -->
             <dependency>
                 <groupId>com.alibaba.otter</groupId>
                 <artifactId>canal.client</artifactId>
                 <version>${canal.version}</version>
             </dependency>
+            <!-- Canal 协议包 -->
             <dependency>
                 <groupId>com.alibaba.otter</groupId>
                 <artifactId>canal.protocol</artifactId>
@@ -231,6 +235,11 @@
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-common-rabbitmq</artifactId>
                 <version>${mall-common-rabbitmq.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-common-rocketmq</artifactId>
+                <version>${mall-common-rocketmq.version}</version>
             </dependency>
 
             <!-- 远程调用接口 -->

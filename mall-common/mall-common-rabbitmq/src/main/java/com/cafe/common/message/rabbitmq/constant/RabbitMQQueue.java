@@ -7,7 +7,7 @@ package com.cafe.common.message.rabbitmq.constant;
  * @Date: 2022/5/19 10:09
  * @Description: RabbitMQ 队列名称
  */
-public class RabbitmqQueue {
+public class RabbitMQQueue {
 
     public static final String ROLE = "role";
 

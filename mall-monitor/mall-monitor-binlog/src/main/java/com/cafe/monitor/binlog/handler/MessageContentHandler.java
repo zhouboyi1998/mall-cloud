@@ -3,9 +3,9 @@ package com.cafe.monitor.binlog.handler;
 import cn.hutool.core.util.ObjectUtil;
 import com.cafe.admin.constant.AdminTableBeanMap;
 import com.cafe.common.constant.MonitorConstant;
-import com.cafe.common.message.rabbitmq.constant.RabbitmqExchange;
+import com.cafe.common.message.rabbitmq.constant.RabbitMQExchange;
 import com.cafe.admin.constant.ExchangeSourceRoutingMap;
-import com.cafe.common.message.rabbitmq.producer.RabbitmqProducer;
+import com.cafe.common.message.rabbitmq.producer.RabbitMQProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -26,11 +26,11 @@ import java.util.Map;
 @Component
 public class MessageContentHandler {
 
-    private RabbitmqProducer rabbitmqProducer;
+    private RabbitMQProducer rabbitMQProducer;
 
     @Autowired
-    public MessageContentHandler(RabbitmqProducer rabbitmqProducer) {
-        this.rabbitmqProducer = rabbitmqProducer;
+    public MessageContentHandler(RabbitMQProducer rabbitMQProducer) {
+        this.rabbitMQProducer = rabbitMQProducer;
     }
 
     /**
@@ -81,9 +81,9 @@ public class MessageContentHandler {
         }
 
         // 发送消息到 RabbitMQ
-        rabbitmqProducer.convertAndSend(
-            RabbitmqExchange.BINLOG,
-            ExchangeSourceRoutingMap.EXCHANGE_SOURCE_ROUTING_MAP.get(RabbitmqExchange.BINLOG, tableName),
+        rabbitMQProducer.convertAndSend(
+            RabbitMQExchange.BINLOG,
+            ExchangeSourceRoutingMap.EXCHANGE_SOURCE_ROUTING_MAP.get(RabbitMQExchange.BINLOG, tableName),
             content
         );
     }

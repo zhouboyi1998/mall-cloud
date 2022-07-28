@@ -44,6 +44,10 @@
 
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-common-rocketmq</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-search-elasticsearch-api</artifactId>
         </dependency>
         <dependency>

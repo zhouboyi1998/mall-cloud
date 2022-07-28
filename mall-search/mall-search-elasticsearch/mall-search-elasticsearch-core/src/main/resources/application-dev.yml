@@ -10,3 +10,7 @@ spring:
 elastic-search:
   host: 127.0.0.1
   port: 9200
+
+# RocketMQ 配置
+rocketmq:
+  name-server: 127.0.0.1:9876
