@@ -7,7 +7,7 @@ package com.cafe.common.message.rabbitmq.constant;
  * @Date: 2022/5/19 15:04
  * @Description: RabbitMQ 路由键
  */
-public class RabbitmqRoutingKey {
+public class RabbitMQRoutingKey {
 
     public static final String BINLOG_TO_ROLE = "binlog-to-role";
 

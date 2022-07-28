@@ -46,6 +46,7 @@
         <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>8.3.4</minio.version>
+
         <squareup-okhttp3.version>4.9.3</squareup-okhttp3.version>
         <tomcat-embed.version>9.0.46</tomcat-embed.version>
         <mysql-binlog-connector.version>0.21.0</mysql-binlog-connector.version>
@@ -186,18 +187,20 @@
                 <artifactId>okhttp</artifactId>
                 <version>${squareup-okhttp3.version}</version>
             </dependency>
+
             <!-- Binlog MySQL 数据库监听 -->
             <dependency>
                 <groupId>com.github.shyiko</groupId>
                 <artifactId>mysql-binlog-connector-java</artifactId>
                 <version>${mysql-binlog-connector.version}</version>
             </dependency>
-            <!-- Canal 数据库监听 -->
+            <!-- Canal 客户端 -->
             <dependency>
                 <groupId>com.alibaba.otter</groupId>
                 <artifactId>canal.client</artifactId>
                 <version>${canal.version}</version>
             </dependency>
+            <!-- Canal 协议包 -->
             <dependency>
                 <groupId>com.alibaba.otter</groupId>
                 <artifactId>canal.protocol</artifactId>

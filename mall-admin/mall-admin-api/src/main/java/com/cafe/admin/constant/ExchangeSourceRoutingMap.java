@@ -1,7 +1,7 @@
 package com.cafe.admin.constant;
 
-import com.cafe.common.message.rabbitmq.constant.RabbitmqExchange;
-import com.cafe.common.message.rabbitmq.constant.RabbitmqRoutingKey;
+import com.cafe.common.message.rabbitmq.constant.RabbitMQExchange;
+import com.cafe.common.message.rabbitmq.constant.RabbitMQRoutingKey;
 import org.apache.commons.collections4.map.MultiKeyMap;
 
 /**
@@ -14,9 +14,9 @@ import org.apache.commons.collections4.map.MultiKeyMap;
 public class ExchangeSourceRoutingMap {
 
     public static final MultiKeyMap<String, String> EXCHANGE_SOURCE_ROUTING_MAP = new MultiKeyMap<String, String>() {{
-        put(RabbitmqExchange.BINLOG, AdminTable.ROLE, RabbitmqRoutingKey.BINLOG_TO_ROLE);
-        put(RabbitmqExchange.BINLOG, AdminTable.ROLE_MENU, RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU);
-        put(RabbitmqExchange.CANAL, AdminTable.ROLE, RabbitmqRoutingKey.CANAL_TO_ROLE);
-        put(RabbitmqExchange.CANAL, AdminTable.ROLE_MENU, RabbitmqRoutingKey.CANAL_TO_ROLE_MENU);
+        put(RabbitMQExchange.BINLOG, AdminTable.ROLE, RabbitMQRoutingKey.BINLOG_TO_ROLE);
+        put(RabbitMQExchange.BINLOG, AdminTable.ROLE_MENU, RabbitMQRoutingKey.BINLOG_TO_ROLE_MENU);
+        put(RabbitMQExchange.CANAL, AdminTable.ROLE, RabbitMQRoutingKey.CANAL_TO_ROLE);
+        put(RabbitMQExchange.CANAL, AdminTable.ROLE_MENU, RabbitMQRoutingKey.CANAL_TO_ROLE_MENU);
     }};
 }
