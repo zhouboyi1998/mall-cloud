@@ -1,6 +1,7 @@
 package com.cafe.monitor.canal.handler;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
+import com.cafe.common.message.rocketmq.constant.RocketMQTopic;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,6 @@ public class RocketMQContentHandler {
         System.out.println(rowDataList.toString());
         System.out.println(eventType.toString());
 
-        rocketMQTemplate.convertAndSend("elasticsearch", tableName);
+        rocketMQTemplate.convertAndSend(RocketMQTopic.CANAL_ELASTICSEARCH, tableName);
     }
 }

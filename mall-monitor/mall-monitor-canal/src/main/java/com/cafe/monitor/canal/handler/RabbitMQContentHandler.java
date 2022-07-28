@@ -31,8 +31,8 @@ public class RabbitMQContentHandler {
         // 分别存储所有更新前数据和更新后数据
         List<Map<String, Object>> beforeDataList = new ArrayList<Map<String, Object>>();
         List<Map<String, Object>> afterDataList = new ArrayList<Map<String, Object>>();
-        // 循环获取 RowChange 对象里的每一行数据
 
+        // 循环获取 RowChange 对象里的每一行数据
         for (CanalEntry.RowData rowData : rowDataList) {
             switch (eventType) {
                 case UPDATE:
@@ -44,6 +44,8 @@ public class RabbitMQContentHandler {
                     break;
                 case DELETE:
                     beforeDataList.add(convertToMap(rowData.getBeforeColumnsList()));
+                    break;
+                default:
                     break;
             }
         }
