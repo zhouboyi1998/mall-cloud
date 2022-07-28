@@ -55,6 +55,8 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
         for (MenuRoleRelationBO bo : boList) {
             relationMap.put(bo.getMenuPath(), bo.getRoleNameList());
         }
+        // 初始化之前先删除对应的 key, 清空旧的数据
+        redisTemplate.delete(RedisConstant.MENU_ROLE_MAP);
         // 将对应关系保存到 Redis 中
         redisTemplate.opsForHash().putAll(RedisConstant.MENU_ROLE_MAP, relationMap);
     }

@@ -28,7 +28,9 @@ public class CanalProperties {
 
     private Integer batchSize;
 
-    private List<String> table;
+    private List<String> rabbitTable;
+
+    private List<String> rocketTable;
 
     public String getHost() {
         return host;
@@ -78,11 +80,19 @@ public class CanalProperties {
         this.batchSize = batchSize;
     }
 
-    public List<String> getTable() {
-        return table;
+    public List<String> getRabbitTable() {
+        return rabbitTable;
     }
 
-    public void setTable(List<String> table) {
-        this.table = table;
+    public void setRabbitTable(List<String> rabbitTable) {
+        this.rabbitTable = rabbitTable;
+    }
+
+    public List<String> getRocketTable() {
+        return rocketTable;
+    }
+
+    public void setRocketTable(List<String> rocketTable) {
+        this.rocketTable = rocketTable;
     }
 }

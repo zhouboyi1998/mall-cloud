@@ -4,6 +4,7 @@ import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.cafe.monitor.canal.property.CanalProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -22,14 +23,19 @@ public class CanalEntryHandler {
 
     private CanalProperties canalProperties;
 
-    private MessageContentHandler messageContentHandler;
+    private RabbitMQContentHandler rabbitMQContentHandler;
 
+    private RocketMQContentHandler rocketMQContentHandler;
+
+    @Autowired
     public CanalEntryHandler(
         CanalProperties canalProperties,
-        MessageContentHandler messageContentHandler
+        RabbitMQContentHandler rabbitMQContentHandler,
+        RocketMQContentHandler rocketMQContentHandler
     ) {
         this.canalProperties = canalProperties;
-        this.messageContentHandler = messageContentHandler;
+        this.rabbitMQContentHandler = rabbitMQContentHandler;
+        this.rocketMQContentHandler = rocketMQContentHandler;
     }
 
     /**
@@ -62,9 +68,13 @@ public class CanalEntryHandler {
 
             // 判断是否为需要处理的表
             String tableName = header.getSchemaName() + "." + header.getTableName();
-            if (canalProperties.getTable().contains(tableName)) {
-                // 将数据交给消息内容处理器
-                messageContentHandler.handle(tableName, rowChange.getRowDatasList(), rowChange.getEventType());
+            if (canalProperties.getRabbitTable().contains(tableName)) {
+                // 将数据交给 RabbitMQ 消息内容处理器
+                rabbitMQContentHandler.handle(tableName, rowChange.getRowDatasList(), rowChange.getEventType());
+            }
+            if (canalProperties.getRocketTable().contains(tableName)) {
+                // 将数据交给 RocketMQ 消息内容处理器
+                rocketMQContentHandler.handle(tableName, rowChange.getRowDatasList(), rowChange.getEventType());
             }
         }
     }

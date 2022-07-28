@@ -27,7 +27,7 @@ public class ElasticSearchConstant {
     /**
      * 商品默认排序字段
      */
-    public static final String GOODS_DEFAULT_SORT_NAME = "id";
+    public static final String GOODS_DEFAULT_SORT_NAME = "_id";
 
     /**
      * 商品默认排序规则

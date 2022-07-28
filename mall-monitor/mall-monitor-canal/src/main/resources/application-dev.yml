@@ -10,6 +10,25 @@ spring:
     # 确认消息是否成功到达队列 (Queue)
     publisher-returns: true
 
+# RocketMQ 配置
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    # 生产者组名
+    group: group1
+    # 消息发送超时时间
+    send-message-timeout: 3000
+    # 消息达到 4096 字节的时候会被压缩
+    compress-message-body-threshold: 4096
+    # 最大的消息限制
+    max-message-size: 4194304
+    # 同步消息发送失败重试次数
+    retry-times-when-send-failed: 3
+    # 异步消息发送失败重试的次数
+    retry-times-when-send-async-failed: 3
+    # 在内部发送失败时是否重试其他代理 (该参数在有多个 broker 时才会生效)
+    retry-next-server: true
+
 # 数据库监听配置
 canal:
   host: 127.0.0.1
@@ -18,6 +37,11 @@ canal:
   username: canal
   password: canal
   batch-size: 1000
-  table:
+  rabbit-table:
     - mall_admin.mall_role
     - mall_admin.mall_role_menu
+  rocket-table:
+    - mall_goods.mall_sku
+    - mall_goods.mall_spu
+    - mall_goods.mall_brand
+    - mall_goods.mall_category
