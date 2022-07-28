@@ -2,7 +2,6 @@ package com.cafe.admin.controller;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.admin.model.Admin;
 import com.cafe.admin.service.AdminService;
@@ -59,7 +58,7 @@ public class AdminController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
     })
     @GetMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<Admin>> page(
+    public ResponseEntity<Page<Admin>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
@@ -75,7 +74,7 @@ public class AdminController {
         @ApiImplicitParam(name = "admin", value = "管理员Model", required = true, paramType = "body", dataType = "Admin")
     })
     @PostMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<IPage<Admin>> pageByWrapper(
+    public ResponseEntity<Page<Admin>> pageByWrapper(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
         @RequestBody Admin admin
@@ -87,9 +86,13 @@ public class AdminController {
     }
 
     @ApiOperation(value = "分页查询管理员列表")
-    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Admin>")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+    })
     @GetMapping(value = "/page")
-    public ResponseEntity<IPage<Admin>> page(@RequestBody Page<Admin> page) {
+    public ResponseEntity<Page<Admin>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+        Page<Admin> page = new Page<Admin>().setCurrent(current).setSize(size);
         Page<Admin> adminPage = adminService.page(page);
         return ResponseEntity.ok(adminPage);
     }
@@ -97,7 +100,7 @@ public class AdminController {
     @ApiOperation(value = "根据条件分页查询管理员")
     @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Admin>")
     @PostMapping(value = "/page")
-    public ResponseEntity<IPage<Admin>> pageByWrapper(@RequestBody Page<Admin> page) {
+    public ResponseEntity<Page<Admin>> pageByWrapper(@RequestBody Page<Admin> page) {
         Admin admin = page.getRecords().get(0);
         Wrapper<Admin> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(admin);
         Page<Admin> adminPage = adminService.page(page, wrapper);

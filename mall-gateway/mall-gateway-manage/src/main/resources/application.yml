@@ -19,10 +19,34 @@ spring:
             - Path=/security/**
           filters:
             - StripPrefix=1
+        - id: mall-file-minio
+          uri: lb://mall-file-minio
+          predicates:
+            - Path=/minio/**
+          filters:
+            - StripPrefix=1
+        - id: mall-file-fastdfs
+          uri: lb://mall-file-fastdfs
+          predicates:
+            - Path=/fastdfs/**
+          filters:
+            - StripPrefix=1
+        - id: mall-search-elasticsearch
+          uri: lb://mall-search-elasticsearch
+          predicates:
+            - Path=/elastic/**
+          filters:
+            - StripPrefix=1
         - id: mall-goods
           uri: lb://mall-goods
           predicates:
             - Path=/goods/**
+          filters:
+            - StripPrefix=1
+        - id: mall-order
+          uri: lb://mall-order
+          predicates:
+            - Path=/order/**
           filters:
             - StripPrefix=1
         - id: mall-admin

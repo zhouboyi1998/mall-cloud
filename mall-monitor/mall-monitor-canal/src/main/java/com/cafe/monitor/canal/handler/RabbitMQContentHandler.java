@@ -3,8 +3,8 @@ package com.cafe.monitor.canal.handler;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.cafe.admin.constant.ExchangeSourceRoutingMap;
 import com.cafe.common.constant.MonitorConstant;
-import com.cafe.common.message.rabbitmq.constant.RabbitmqExchange;
-import com.cafe.common.message.rabbitmq.producer.RabbitmqProducer;
+import com.cafe.common.message.rabbitmq.constant.RabbitMQExchange;
+import com.cafe.common.message.rabbitmq.producer.RabbitMQProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,16 +15,16 @@ import java.util.*;
  * @Package: com.cafe.monitor.canal.handler
  * @Author: zhouboyi
  * @Date: 2022/7/15 9:52
- * @Description:
+ * @Description: RabbitMQ 消息内容处理器
  */
 @Component
-public class MessageContentHandler {
+public class RabbitMQContentHandler {
 
-    private RabbitmqProducer rabbitmqProducer;
+    private RabbitMQProducer rabbitMQProducer;
 
     @Autowired
-    public MessageContentHandler(RabbitmqProducer rabbitmqProducer) {
-        this.rabbitmqProducer = rabbitmqProducer;
+    public RabbitMQContentHandler(RabbitMQProducer rabbitMQProducer) {
+        this.rabbitMQProducer = rabbitMQProducer;
     }
 
     public void handle(String tableName, List<CanalEntry.RowData> rowDataList, CanalEntry.EventType eventType) {
@@ -55,9 +55,9 @@ public class MessageContentHandler {
         content.put(MonitorConstant.AFTER_DATA, afterDataList);
 
         // 发送消息到 RabbitMQ
-        rabbitmqProducer.convertAndSend(
-            RabbitmqExchange.CANAL,
-            ExchangeSourceRoutingMap.EXCHANGE_SOURCE_ROUTING_MAP.get(RabbitmqExchange.CANAL, tableName),
+        rabbitMQProducer.convertAndSend(
+            RabbitMQExchange.CANAL,
+            ExchangeSourceRoutingMap.EXCHANGE_SOURCE_ROUTING_MAP.get(RabbitMQExchange.CANAL, tableName),
             content
         );
     }

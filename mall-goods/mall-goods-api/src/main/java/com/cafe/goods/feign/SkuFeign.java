@@ -1,6 +1,6 @@
 package com.cafe.goods.feign;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.goods.dto.SkuElasticSearchDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +27,7 @@ public interface SkuFeign {
      * @return
      */
     @GetMapping(value = "/page/es/{current}/{size}")
-    ResponseEntity<IPage<SkuElasticSearchDTO>> pageSkuElasticSearchDTO(
+    ResponseEntity<Page<SkuElasticSearchDTO>> pageSkuElasticSearchDTO(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     );
