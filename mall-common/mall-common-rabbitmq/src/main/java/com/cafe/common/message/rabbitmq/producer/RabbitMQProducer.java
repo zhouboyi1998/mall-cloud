@@ -15,14 +15,14 @@ import org.springframework.stereotype.Component;
  * @Description: RabbitMQ 消息生产者
  */
 @Component
-public class RabbitmqProducer {
+public class RabbitMQProducer {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RabbitmqProducer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQProducer.class);
 
     private RabbitTemplate rabbitTemplate;
 
     @Autowired
-    public RabbitmqProducer(RabbitTemplate rabbitTemplate) {
+    public RabbitMQProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 

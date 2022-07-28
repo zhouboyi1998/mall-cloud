@@ -7,9 +7,9 @@ import com.cafe.admin.service.RoleMenuService;
 import com.cafe.admin.service.RoleService;
 import com.cafe.common.constant.BooleanConstant;
 import com.cafe.common.constant.MonitorConstant;
-import com.cafe.common.message.rabbitmq.constant.RabbitmqExchange;
-import com.cafe.common.message.rabbitmq.constant.RabbitmqQueue;
-import com.cafe.common.message.rabbitmq.constant.RabbitmqRoutingKey;
+import com.cafe.common.message.rabbitmq.constant.RabbitMQExchange;
+import com.cafe.common.message.rabbitmq.constant.RabbitMQQueue;
+import com.cafe.common.message.rabbitmq.constant.RabbitMQRoutingKey;
 import org.springframework.amqp.rabbit.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -26,14 +26,14 @@ import java.util.Map;
  * @Description: RabbitMQ 消息消费者 (接收数据库表修改消息)
  */
 @Component
-public class RabbitmqConsumer {
+public class RabbitMQConsumer {
 
     private RoleService roleService;
 
     private RoleMenuService roleMenuService;
 
     @Autowired
-    public RabbitmqConsumer(
+    public RabbitMQConsumer(
         RoleService roleService,
         RoleMenuService roleMenuService
     ) {
@@ -48,14 +48,14 @@ public class RabbitmqConsumer {
      */
     @RabbitListeners(value = {
         @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = RabbitmqQueue.ROLE, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
-            exchange = @Exchange(value = RabbitmqExchange.BINLOG),
-            key = {RabbitmqRoutingKey.BINLOG_TO_ROLE}
+            value = @Queue(value = RabbitMQQueue.ROLE, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
+            exchange = @Exchange(value = RabbitMQExchange.BINLOG),
+            key = {RabbitMQRoutingKey.BINLOG_TO_ROLE}
         )),
         @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = RabbitmqQueue.ROLE, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
-            exchange = @Exchange(value = RabbitmqExchange.CANAL),
-            key = {RabbitmqRoutingKey.CANAL_TO_ROLE}
+            value = @Queue(value = RabbitMQQueue.ROLE, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
+            exchange = @Exchange(value = RabbitMQExchange.CANAL),
+            key = {RabbitMQRoutingKey.CANAL_TO_ROLE}
         ))
     })
     public void listenerRoleQueue(String message) {
@@ -98,14 +98,14 @@ public class RabbitmqConsumer {
      */
     @RabbitListeners(value = {
         @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = RabbitmqQueue.ROLE_MENU, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
-            exchange = @Exchange(value = RabbitmqExchange.BINLOG),
-            key = {RabbitmqRoutingKey.BINLOG_TO_ROLE_MENU}
+            value = @Queue(value = RabbitMQQueue.ROLE_MENU, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
+            exchange = @Exchange(value = RabbitMQExchange.BINLOG),
+            key = {RabbitMQRoutingKey.BINLOG_TO_ROLE_MENU}
         )),
         @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = RabbitmqQueue.ROLE_MENU, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
-            exchange = @Exchange(value = RabbitmqExchange.CANAL),
-            key = {RabbitmqRoutingKey.CANAL_TO_ROLE_MENU}
+            value = @Queue(value = RabbitMQQueue.ROLE_MENU, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
+            exchange = @Exchange(value = RabbitMQExchange.CANAL),
+            key = {RabbitMQRoutingKey.CANAL_TO_ROLE_MENU}
         ))
     })
     public void listenerRoleMenuQueue(String message) {
