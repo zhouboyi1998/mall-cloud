@@ -1,5 +1,6 @@
 package com.cafe.admin.message;
 
+import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
 import com.cafe.admin.model.Role;
 import com.cafe.admin.model.RoleMenu;
@@ -64,30 +65,22 @@ public class RabbitMQConsumer {
         // 获取变更的类型
         String operation = content.get(MonitorConstant.OPERATION).toString();
         // 获取变更前的数据
-        List<Role> beforeDataList = JSONUtil.parseArray(content.get(MonitorConstant.BEFORE_DATA)).toList(Role.class);
+        List<Role> beforeDataList
+            = JSONUtil.parseArray(content.get(MonitorConstant.BEFORE_DATA)).toList(Role.class);
         // 获取变更后的数据
-        List<Role> afterDataList = JSONUtil.parseArray(content.get(MonitorConstant.AFTER_DATA)).toList(Role.class);
+        List<Role> afterDataList
+            = JSONUtil.parseArray(content.get(MonitorConstant.AFTER_DATA)).toList(Role.class);
 
-        // 根据变更的类型执行不同的 Redis 操作
-        switch (operation) {
-            case MonitorConstant.UPDATE:
-                for (Role role : beforeDataList) {
-                    roleService.removeRoleNameMap(role.getRoleName());
-                }
-                for (Role role : afterDataList) {
-                    roleService.saveRoleNameMap(role.getRoleName());
-                }
-                break;
-            case MonitorConstant.INSERT:
-                for (Role role : afterDataList) {
-                    roleService.saveRoleNameMap(role.getRoleName());
-                }
-                break;
-            case MonitorConstant.DELETE:
-                for (Role role : beforeDataList) {
-                    roleService.removeRoleNameMap(role.getRoleName());
-                }
-                break;
+        // 根据变更的类型执行不同的更新 Redis 操作
+        if (ObjectUtil.equal(MonitorConstant.UPDATE, operation) || ObjectUtil.equal(MonitorConstant.DELETE, operation)) {
+            for (Role role : beforeDataList) {
+                roleService.removeRoleNameMap(role.getRoleName());
+            }
+        }
+        if (ObjectUtil.equal(MonitorConstant.UPDATE, operation) || ObjectUtil.equal(MonitorConstant.INSERT, operation)) {
+            for (Role role : afterDataList) {
+                roleService.saveRoleNameMap(role.getRoleName());
+            }
         }
     }
 
@@ -114,9 +107,11 @@ public class RabbitMQConsumer {
         // 获取消息内容
         Map<String, Object> content = JSONUtil.parseObj(message);
         // 获取变更前的数据
-        List<RoleMenu> beforeDataList = JSONUtil.parseArray(content.get(MonitorConstant.BEFORE_DATA)).toList(RoleMenu.class);
+        List<RoleMenu> beforeDataList
+            = JSONUtil.parseArray(content.get(MonitorConstant.BEFORE_DATA)).toList(RoleMenu.class);
         // 获取变更前的数据
-        List<RoleMenu> afterDataList = JSONUtil.parseArray(content.get(MonitorConstant.AFTER_DATA)).toList(RoleMenu.class);
+        List<RoleMenu> afterDataList
+            = JSONUtil.parseArray(content.get(MonitorConstant.AFTER_DATA)).toList(RoleMenu.class);
 
         for (RoleMenu roleMenu : beforeDataList) {
             menuIds.add(roleMenu.getMenuId());

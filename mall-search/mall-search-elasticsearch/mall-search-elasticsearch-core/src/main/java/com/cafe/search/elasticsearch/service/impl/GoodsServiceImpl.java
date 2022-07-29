@@ -24,6 +24,10 @@ import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.TermQueryBuilder;
+import org.elasticsearch.index.reindex.BulkByScrollResponse;
+import org.elasticsearch.index.reindex.UpdateByQueryRequest;
+import org.elasticsearch.script.Script;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -170,5 +174,30 @@ public class GoodsServiceImpl implements GoodsService {
         // 调用 insertBatch() 方法插入商品数据
         BulkResponse bulkResponse = insertBatch(dtoList);
         return bulkResponse;
+    }
+
+    @Override
+    public BulkResponse importBatch(List<Long> ids) throws IOException {
+        // 根据 SKU ids 获取商品列表
+        List<SkuElasticSearchDTO> dtoList = skuFeign.listSkuElasticSearchDTO(ids).getBody();
+        // 调用 insertBatch() 方法插入商品数据
+        BulkResponse bulkResponse = insertBatch(dtoList);
+        return bulkResponse;
+    }
+
+    @Override
+    public BulkByScrollResponse updateBatchByQuery(String idField, Long idValue, String nameField, String nameValue) throws IOException {
+        // 筛选条件 (只更新符合条件的 document)
+        TermQueryBuilder termQueryBuilder = new TermQueryBuilder(idField, idValue);
+        // 更新脚本
+        Script script = new Script("ctx._source['" + nameField + "'] = '" + nameValue + "';");
+        // 组装批量更新请求
+        UpdateByQueryRequest updateByQueryRequest = new UpdateByQueryRequest(ElasticSearchConstant.GOODS_INDEX)
+            .setQuery(termQueryBuilder)
+            .setScript(script);
+        // 批量更新数据
+        BulkByScrollResponse bulkByScrollResponse
+            = restHighLevelClient.updateByQuery(updateByQueryRequest, RequestOptions.DEFAULT);
+        return bulkByScrollResponse;
     }
 }

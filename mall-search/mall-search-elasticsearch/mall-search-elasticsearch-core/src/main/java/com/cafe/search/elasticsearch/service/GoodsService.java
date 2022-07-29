@@ -7,6 +7,7 @@ import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.index.reindex.BulkByScrollResponse;
 
 import java.io.IOException;
 import java.util.List;
@@ -105,4 +106,25 @@ public interface GoodsService {
      * @throws IOException
      */
     BulkResponse importBatch(Long current, Long size) throws IOException;
+
+    /**
+     * 根据 ids 批量导入商品
+     *
+     * @param ids SKU ID
+     * @return
+     * @throws IOException
+     */
+    BulkResponse importBatch(List<Long> ids) throws IOException;
+
+    /**
+     * 根据 idField 更新 nameField 的值
+     *
+     * @param idField   筛选列的属性名
+     * @param idValue   筛选列的值
+     * @param nameField 更新列的属性名
+     * @param nameValue 更新列的值
+     * @return
+     * @throws IOException
+     */
+    BulkByScrollResponse updateBatchByQuery(String idField, Long idValue, String nameField, String nameValue) throws IOException;
 }
