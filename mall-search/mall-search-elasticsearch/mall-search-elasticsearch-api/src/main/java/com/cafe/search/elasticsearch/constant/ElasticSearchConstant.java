@@ -17,7 +17,7 @@ public class ElasticSearchConstant {
     /**
      * 商品搜索匹配字段
      */
-    public static final String[] GOODS_SEARCH_FIELD = {"name", "skuName", "spuName", "brandName", "categoryName"};
+    public static final String[] GOODS_SEARCH_FIELD = {"skuName", "spuName", "brandName", "categoryName"};
 
     /**
      * 商品默认排序字段
