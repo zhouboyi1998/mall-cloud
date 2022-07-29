@@ -10,11 +10,6 @@ package com.cafe.search.elasticsearch.constant;
 public class ElasticSearchConstant {
 
     /**
-     * 批量操作超时时间
-     */
-    public static final String BULK_TIMEOUT = "60s";
-
-    /**
      * 商品索引
      */
     public static final String GOODS_INDEX = "goods";
@@ -27,10 +22,10 @@ public class ElasticSearchConstant {
     /**
      * 商品默认排序字段
      */
-    public static final String GOODS_DEFAULT_SORT_NAME = "_id";
+    public static final String GOODS_DEFAULT_SORT = "_id";
 
     /**
      * 商品默认排序规则
      */
-    public static final String GOODS_DEFAULT_SORT_RULE = "asc";
+    public static final String GOODS_DEFAULT_RULE = "asc";
 }
