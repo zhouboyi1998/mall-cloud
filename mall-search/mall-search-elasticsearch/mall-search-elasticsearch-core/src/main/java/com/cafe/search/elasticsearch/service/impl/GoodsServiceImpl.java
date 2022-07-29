@@ -13,6 +13,7 @@ import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
+import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -52,10 +53,11 @@ public class GoodsServiceImpl implements GoodsService {
         // 组装搜索条件
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder()
             // 分页条件
-            .from((current - 1) * size)
-            .size(size)
+            .from((current - 1) * size).size(size)
             // 排序条件
-            .sort(sort, SortOrder.fromString(rule));
+            .sort(sort, SortOrder.fromString(rule))
+            // 超时时间
+            .timeout(TimeValue.timeValueSeconds(10));
         // 如果关键词不为空, 组装关键词匹配
         if (ObjectUtil.isNotEmpty(keyword)) {
             QueryBuilder queryBuilder
@@ -74,7 +76,7 @@ public class GoodsServiceImpl implements GoodsService {
         // 分页获取商品列表
         List<SkuElasticSearchDTO> dtoList = skuFeign.pageSkuElasticSearchDTO(current, size).getBody().getRecords();
         // 组装批量插入请求
-        BulkRequest bulkRequest = new BulkRequest().timeout(ElasticSearchConstant.BULK_TIMEOUT);
+        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
         for (SkuElasticSearchDTO dto : dtoList) {
             IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.GOODS_INDEX)
                 // 使用数据库中存储的业务 ID, 不使用 ElasticSearch 随机生成的 ID
