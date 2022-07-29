@@ -18,6 +18,7 @@
 <img src="https://img.shields.io/badge/Binlog-0.21.0-dodgerblue">
 <img src="https://img.shields.io/badge/Canal-1.1.5-orange">
 <img src="https://img.shields.io/badge/RabbitMQ-3.6.5-orange">
+<img src="https://img.shields.io/badge/RocketMQ-4.9.3-orange">
 <img src="https://img.shields.io/badge/ElasticSearch-7.6.2-mediumturquoise">
 </p>
 

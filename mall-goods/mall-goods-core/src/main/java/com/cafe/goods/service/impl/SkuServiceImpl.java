@@ -9,6 +9,8 @@ import com.cafe.goods.service.SkuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.goods.service.impl
@@ -29,5 +31,10 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     @Override
     public Page<SkuElasticSearchDTO> pageSkuElasticSearchDTO(Page<SkuElasticSearchDTO> page) {
         return skuMapper.pageSkuElasticSearchDTO(page);
+    }
+
+    @Override
+    public List<SkuElasticSearchDTO> listSkuElasticSearchDTO(List<Long> ids) {
+        return skuMapper.listSkuElasticSearchDTO(ids);
     }
 }
