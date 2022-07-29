@@ -30,6 +30,21 @@ public class MonitorConstant {
     public static final String OPERATION = "operation";
 
     /**
+     * 数据表名
+     */
+    public static final String TABLE_NAME = "table";
+
+    /**
+     * 数据列名
+     */
+    public static final String FIELD_NAME = "field";
+
+    /**
+     * 监听到的数据
+     */
+    public static final String DATA = "data";
+
+    /**
      * 监听到的更新前数据
      */
     public static final String BEFORE_DATA = "before_data";

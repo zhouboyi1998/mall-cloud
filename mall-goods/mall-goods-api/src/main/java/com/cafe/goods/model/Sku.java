@@ -27,7 +27,7 @@ public class Sku implements Serializable {
     @ApiModelProperty(value = "SKU 名称")
     private String skuName;
 
-    @ApiModelProperty(value = "商品 ID")
+    @ApiModelProperty(value = "SPU ID")
     private Integer spuId;
 
     @ApiModelProperty(value = "SKU 原价")

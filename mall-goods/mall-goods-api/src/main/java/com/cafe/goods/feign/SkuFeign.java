@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.goods.dto.SkuElasticSearchDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @Project: mall-cloud
@@ -31,4 +31,13 @@ public interface SkuFeign {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     );
+
+    /**
+     * 根据 SKU ids 查询 SkuElasticSearchDTO 列表
+     *
+     * @param ids
+     * @return
+     */
+    @PostMapping(value = "/list/es")
+    ResponseEntity<List<SkuElasticSearchDTO>> listSkuElasticSearchDTO(@RequestBody List<Long> ids);
 }

@@ -23,8 +23,8 @@ public class SkuElasticSearchDTO implements Serializable {
     @ApiModelProperty(value = "SKU 名称")
     private String skuName;
 
-    @ApiModelProperty(value = "商品 ID")
-    private Integer spuId;
+    @ApiModelProperty(value = "SPU ID")
+    private Long spuId;
 
     @ApiModelProperty(value = "SKU 原价")
     private Double originalPrice;
@@ -50,6 +50,12 @@ public class SkuElasticSearchDTO implements Serializable {
     @ApiModelProperty(value = "SKU 规格")
     private String specification;
 
+    @ApiModelProperty(value = "品牌 ID")
+    private Long brandId;
+
+    @ApiModelProperty(value = "分类 ID")
+    private Long categoryId;
+
     @ApiModelProperty(value = "SPU 名称")
     private String spuName;
 
@@ -58,10 +64,6 @@ public class SkuElasticSearchDTO implements Serializable {
 
     @ApiModelProperty(value = "分类名称")
     private String categoryName;
-
-    public static long getSerialVersionUID() {
-        return serialVersionUID;
-    }
 
     public Long getId() {
         return id;
@@ -79,11 +81,11 @@ public class SkuElasticSearchDTO implements Serializable {
         this.skuName = skuName;
     }
 
-    public Integer getSpuId() {
+    public Long getSpuId() {
         return spuId;
     }
 
-    public void setSpuId(Integer spuId) {
+    public void setSpuId(Long spuId) {
         this.spuId = spuId;
     }
 
@@ -151,6 +153,22 @@ public class SkuElasticSearchDTO implements Serializable {
         this.specification = specification;
     }
 
+    public Long getBrandId() {
+        return brandId;
+    }
+
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
     public String getSpuName() {
         return spuName;
     }
@@ -189,6 +207,8 @@ public class SkuElasticSearchDTO implements Serializable {
             ", image='" + image + '\'' +
             ", imageList='" + imageList + '\'' +
             ", specification='" + specification + '\'' +
+            ", brandId='" + brandId + '\'' +
+            ", categoryId='" + categoryId + '\'' +
             ", spuName='" + spuName + '\'' +
             ", brandName='" + brandName + '\'' +
             ", categoryName='" + categoryName + '\'' +

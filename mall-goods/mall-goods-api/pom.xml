@@ -20,6 +20,10 @@
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-rocketmq</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

@@ -9,5 +9,11 @@ package com.cafe.common.message.rocketmq.constant;
  */
 public class RocketMQTopic {
 
-    public static final String CANAL_ELASTICSEARCH = "Canal-ElasticSearch";
+    public static final String CANAL_TO_ES_SKU = "CANAL-TO-ES-SKU";
+
+    public static final String CANAL_TO_ES_SPU = "CANAL-TO-ES-SPU";
+
+    public static final String CANAL_TO_ES_BRAND = "CANAL-TO-ES-BRAND";
+
+    public static final String CANAL_TO_ES_CATEGORY = "CANAL-TO-ES-CATEGORY";
 }
