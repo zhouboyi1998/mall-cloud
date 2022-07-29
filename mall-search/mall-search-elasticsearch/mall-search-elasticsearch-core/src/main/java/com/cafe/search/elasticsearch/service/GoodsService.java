@@ -1,9 +1,11 @@
 package com.cafe.search.elasticsearch.service;
 
+import com.cafe.goods.dto.SkuElasticSearchDTO;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.search.SearchResponse;
 
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @Project: mall-cloud
@@ -13,6 +15,33 @@ import java.io.IOException;
  * @Description:
  */
 public interface GoodsService {
+
+    /**
+     * 批量插入商品
+     *
+     * @param dtoList
+     * @return
+     * @throws IOException
+     */
+    BulkResponse insertBatch(List<SkuElasticSearchDTO> dtoList) throws IOException;
+
+    /**
+     * 批量更新商品
+     *
+     * @param dtoList
+     * @return
+     * @throws IOException
+     */
+    BulkResponse updateBatch(List<SkuElasticSearchDTO> dtoList) throws IOException;
+
+    /**
+     * 批量删除商品
+     *
+     * @param esIds
+     * @return
+     * @throws IOException
+     */
+    BulkResponse deleteBatch(List<String> esIds) throws IOException;
 
     /**
      * 搜索商品
@@ -28,7 +57,7 @@ public interface GoodsService {
     SearchResponse search(Integer current, Integer size, String keyword, String sort, String rule) throws IOException;
 
     /**
-     * 批量导入商品数据
+     * 批量导入商品
      *
      * @param current
      * @param size
