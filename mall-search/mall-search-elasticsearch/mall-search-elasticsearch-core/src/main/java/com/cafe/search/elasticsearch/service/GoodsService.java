@@ -105,4 +105,6 @@ public interface GoodsService {
      * @throws IOException
      */
     BulkResponse importBatch(Long current, Long size) throws IOException;
+
+    UpdateResponse updateBatchByQuery() throws IOException;
 }

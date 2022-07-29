@@ -24,6 +24,7 @@ import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.reindex.UpdateByQueryRequest;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -170,5 +171,11 @@ public class GoodsServiceImpl implements GoodsService {
         // 调用 insertBatch() 方法插入商品数据
         BulkResponse bulkResponse = insertBatch(dtoList);
         return bulkResponse;
+    }
+
+    @Override
+    public UpdateResponse updateBatchByQuery() throws IOException {
+        UpdateByQueryRequest updateByQueryRequest = new UpdateByQueryRequest();
+        return null;
     }
 }

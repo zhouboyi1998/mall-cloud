@@ -5,10 +5,14 @@ import com.cafe.admin.constant.ExchangeSourceRoutingMap;
 import com.cafe.common.constant.MonitorConstant;
 import com.cafe.common.message.rabbitmq.constant.RabbitMQExchange;
 import com.cafe.common.message.rabbitmq.producer.RabbitMQProducer;
+import com.cafe.monitor.canal.util.ConvertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Project: mall-cloud
@@ -36,14 +40,14 @@ public class RabbitMQContentHandler {
         for (CanalEntry.RowData rowData : rowDataList) {
             switch (eventType) {
                 case UPDATE:
-                    beforeDataList.add(convertToMap(rowData.getBeforeColumnsList()));
-                    afterDataList.add(convertToMap(rowData.getAfterColumnsList()));
+                    beforeDataList.add(ConvertUtil.convertToMap(rowData.getBeforeColumnsList()));
+                    afterDataList.add(ConvertUtil.convertToMap(rowData.getAfterColumnsList()));
                     break;
                 case INSERT:
-                    afterDataList.add(convertToMap(rowData.getAfterColumnsList()));
+                    afterDataList.add(ConvertUtil.convertToMap(rowData.getAfterColumnsList()));
                     break;
                 case DELETE:
-                    beforeDataList.add(convertToMap(rowData.getBeforeColumnsList()));
+                    beforeDataList.add(ConvertUtil.convertToMap(rowData.getBeforeColumnsList()));
                     break;
                 default:
                     break;
@@ -62,14 +66,5 @@ public class RabbitMQContentHandler {
             ExchangeSourceRoutingMap.EXCHANGE_SOURCE_ROUTING_MAP.get(RabbitMQExchange.CANAL, tableName),
             content
         );
-    }
-
-    private Map<String, Object> convertToMap(List<CanalEntry.Column> columnList) {
-        // 存储属性名与字段值对应关系的 Map
-        Map<String, Object> rowMap = new HashMap<String, Object>(16);
-        for (CanalEntry.Column column : columnList) {
-            rowMap.put(column.getName(), column.getValue());
-        }
-        return rowMap;
     }
 }
