@@ -1,8 +1,5 @@
 package com.cafe.goods.constant;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.goods.constant
@@ -19,10 +16,4 @@ public class GoodsTable {
     public static final String BRAND = "mall_goods.mall_brand";
 
     public static final String CATEGORY = "mall_goods.mall_category";
-
-    public static final List<String> GOODS_RELATION = new ArrayList<String>() {{
-        add(SPU);
-        add(BRAND);
-        add(CATEGORY);
-    }};
 }

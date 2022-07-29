@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.cafe.goods.dto.SkuElasticSearchDTO;
 import com.cafe.goods.model.Sku;
 
+import java.util.List;
+
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.goods.service
@@ -21,4 +23,12 @@ public interface SkuService extends IService<Sku> {
      * @return
      */
     Page<SkuElasticSearchDTO> pageSkuElasticSearchDTO(Page<SkuElasticSearchDTO> page);
+
+    /**
+     * 根据 SKU ids 查询 SkuElasticSearchDTO 列表
+     *
+     * @param ids
+     * @return
+     */
+    List<SkuElasticSearchDTO> listSkuElasticSearchDTO(List<Long> ids);
 }

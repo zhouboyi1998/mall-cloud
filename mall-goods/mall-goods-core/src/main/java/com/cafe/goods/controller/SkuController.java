@@ -190,4 +190,11 @@ public class SkuController {
         Page<SkuElasticSearchDTO> dtoPage = skuService.pageSkuElasticSearchDTO(page);
         return ResponseEntity.ok(dtoPage);
     }
+
+    @ApiOperation(value = "根据 SKU ids 查询 SkuElasticSearchDTO 列表")
+    @ApiImplicitParam(name = "ids", value = "SKU ids", required = true, paramType = "body", dataType = "List<Long>")
+    @PostMapping(value = "/list/es")
+    public ResponseEntity<List<SkuElasticSearchDTO>> listSkuElasticSearchDTO(@RequestBody List<Long> ids) {
+        return ResponseEntity.ok(skuService.listSkuElasticSearchDTO(ids));
+    }
 }
