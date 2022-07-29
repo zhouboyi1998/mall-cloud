@@ -44,8 +44,8 @@ public class GoodsController {
         @PathVariable(value = "current") Integer current,
         @PathVariable(value = "size") Integer size,
         @RequestParam(required = false) String keyword,
-        @RequestParam(required = false, defaultValue = ElasticSearchConstant.GOODS_DEFAULT_SORT_NAME) String sort,
-        @RequestParam(required = false, defaultValue = ElasticSearchConstant.GOODS_DEFAULT_SORT_RULE) String rule
+        @RequestParam(required = false, defaultValue = ElasticSearchConstant.GOODS_DEFAULT_SORT) String sort,
+        @RequestParam(required = false, defaultValue = ElasticSearchConstant.GOODS_DEFAULT_RULE) String rule
     ) throws IOException {
         return ResponseEntity.ok(goodsService.search(current, size, keyword, sort, rule));
     }
