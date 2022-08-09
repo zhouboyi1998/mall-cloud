@@ -46,7 +46,7 @@ public class RoleController {
     @ApiOperation(value = "根据条件查询管理员角色列表")
     @ApiImplicitParam(name = "role", value = "管理员角色Model", required = true, paramType = "body", dataType = "Role")
     @PostMapping(value = "/list")
-    public ResponseEntity<List<Role>> listByWrapper(@RequestBody Role role) {
+    public ResponseEntity<List<Role>> list(@RequestBody Role role) {
         Wrapper<Role> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(role);
         List<Role> roleList = roleService.list(wrapper);
         return ResponseEntity.ok(roleList);
@@ -74,7 +74,7 @@ public class RoleController {
         @ApiImplicitParam(name = "role", value = "管理员角色Model", required = true, paramType = "body", dataType = "Role")
     })
     @PostMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<Page<Role>> pageByWrapper(
+    public ResponseEntity<Page<Role>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
         @RequestBody Role role
@@ -85,41 +85,10 @@ public class RoleController {
         return ResponseEntity.ok(rolePage);
     }
 
-    @ApiOperation(value = "分页查询管理员角色列表")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
-    })
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<Role>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
-        Page<Role> page = new Page<Role>().setCurrent(current).setSize(size);
-        Page<Role> rolePage = roleService.page(page);
-        return ResponseEntity.ok(rolePage);
-    }
-
-    @ApiOperation(value = "根据条件分页查询管理员角色")
-    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Role>")
-    @PostMapping(value = "/page")
-    public ResponseEntity<Page<Role>> pageByWrapper(@RequestBody Page<Role> page) {
-        Role role = page.getRecords().get(0);
-        Wrapper<Role> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(role);
-        Page<Role> rolePage = roleService.page(page, wrapper);
-        return ResponseEntity.ok(rolePage);
-    }
-
     @ApiOperation(value = "根据id查询单个管理员角色")
     @ApiImplicitParam(name = "id", value = "管理员角色id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Role> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<Role>().eq(Role::getId, id);
-        Role role = roleService.getOne(wrapper);
-        return ResponseEntity.ok(role);
-    }
-
-    @ApiOperation(value = "根据id查询单个管理员角色")
-    @ApiImplicitParam(name = "id", value = "管理员角色id", required = true, paramType = "query", dataType = "Long")
-    @GetMapping(value = "/one")
-    public ResponseEntity<Role> one2(@RequestParam Long id) {
         LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<Role>().eq(Role::getId, id);
         Role role = roleService.getOne(wrapper);
         return ResponseEntity.ok(role);
@@ -159,19 +128,58 @@ public class RoleController {
         return ResponseEntity.ok(code);
     }
 
-    @ApiOperation(value = "根据id删除管理员角色")
-    @ApiImplicitParam(name = "id", value = "管理员角色id", required = true, paramType = "query", dataType = "Long")
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> delete2(@RequestParam Long id) {
-        Boolean code = roleService.removeById(id);
-        return ResponseEntity.ok(code);
-    }
-
     @ApiOperation(value = "根据ids批量删除管理员角色")
     @ApiImplicitParam(name = "ids", value = "管理员角色id列表", required = true, paramType = "body", dataType = "List<Long>")
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = roleService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "分页查询管理员角色列表")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+    })
+    @GetMapping(value = "/page")
+    public ResponseEntity<Page<Role>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+        Page<Role> page = new Page<Role>().setCurrent(current).setSize(size);
+        Page<Role> rolePage = roleService.page(page);
+        return ResponseEntity.ok(rolePage);
+    }
+
+    @ApiOperation(value = "根据条件分页查询管理员角色")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "role", value = "管理员角色Model", required = true, paramType = "body", dataType = "Role")
+    })
+    @PostMapping(value = "/page")
+    public ResponseEntity<Page<Role>> pageByParam(
+        @RequestParam Long current,
+        @RequestParam Long size,
+        @RequestBody Role role
+    ) {
+        Page<Role> page = new Page<Role>().setCurrent(current).setSize(size);
+        Wrapper<Role> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(role);
+        Page<Role> rolePage = roleService.page(page, wrapper);
+        return ResponseEntity.ok(rolePage);
+    }
+
+    @ApiOperation(value = "根据id查询单个管理员角色")
+    @ApiImplicitParam(name = "id", value = "管理员角色id", required = true, paramType = "query", dataType = "Long")
+    @GetMapping(value = "/one")
+    public ResponseEntity<Role> oneByParam(@RequestParam Long id) {
+        LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<Role>().eq(Role::getId, id);
+        Role role = roleService.getOne(wrapper);
+        return ResponseEntity.ok(role);
+    }
+
+    @ApiOperation(value = "根据id删除管理员角色")
+    @ApiImplicitParam(name = "id", value = "管理员角色id", required = true, paramType = "query", dataType = "Long")
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
+        Boolean code = roleService.removeById(id);
         return ResponseEntity.ok(code);
     }
 
