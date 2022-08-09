@@ -46,7 +46,7 @@ public class AdminController {
     @ApiOperation(value = "根据条件查询管理员列表")
     @ApiImplicitParam(name = "admin", value = "管理员Model", required = true, paramType = "body", dataType = "Admin")
     @PostMapping(value = "/list")
-    public ResponseEntity<List<Admin>> listByWrapper(@RequestBody Admin admin) {
+    public ResponseEntity<List<Admin>> list(@RequestBody Admin admin) {
         Wrapper<Admin> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(admin);
         List<Admin> adminList = adminService.list(wrapper);
         return ResponseEntity.ok(adminList);
@@ -74,7 +74,7 @@ public class AdminController {
         @ApiImplicitParam(name = "admin", value = "管理员Model", required = true, paramType = "body", dataType = "Admin")
     })
     @PostMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<Page<Admin>> pageByWrapper(
+    public ResponseEntity<Page<Admin>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
         @RequestBody Admin admin
@@ -85,41 +85,10 @@ public class AdminController {
         return ResponseEntity.ok(adminPage);
     }
 
-    @ApiOperation(value = "分页查询管理员列表")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
-    })
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<Admin>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
-        Page<Admin> page = new Page<Admin>().setCurrent(current).setSize(size);
-        Page<Admin> adminPage = adminService.page(page);
-        return ResponseEntity.ok(adminPage);
-    }
-
-    @ApiOperation(value = "根据条件分页查询管理员")
-    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<Admin>")
-    @PostMapping(value = "/page")
-    public ResponseEntity<Page<Admin>> pageByWrapper(@RequestBody Page<Admin> page) {
-        Admin admin = page.getRecords().get(0);
-        Wrapper<Admin> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(admin);
-        Page<Admin> adminPage = adminService.page(page, wrapper);
-        return ResponseEntity.ok(adminPage);
-    }
-
     @ApiOperation(value = "根据id查询单个管理员")
     @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Admin> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Admin> wrapper = new LambdaQueryWrapper<Admin>().eq(Admin::getId, id);
-        Admin admin = adminService.getOne(wrapper);
-        return ResponseEntity.ok(admin);
-    }
-
-    @ApiOperation(value = "根据id查询单个管理员")
-    @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "query", dataType = "Long")
-    @GetMapping(value = "/one")
-    public ResponseEntity<Admin> one2(@RequestParam Long id) {
         LambdaQueryWrapper<Admin> wrapper = new LambdaQueryWrapper<Admin>().eq(Admin::getId, id);
         Admin admin = adminService.getOne(wrapper);
         return ResponseEntity.ok(admin);
@@ -168,19 +137,58 @@ public class AdminController {
         return ResponseEntity.ok(code);
     }
 
-    @ApiOperation(value = "根据id删除管理员")
-    @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "query", dataType = "Long")
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> delete2(@RequestParam Long id) {
-        Boolean code = adminService.removeById(id);
-        return ResponseEntity.ok(code);
-    }
-
     @ApiOperation(value = "根据ids批量删除管理员")
     @ApiImplicitParam(name = "ids", value = "管理员id列表", required = true, paramType = "body", dataType = "List<Long>")
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = adminService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "分页查询管理员列表")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+    })
+    @GetMapping(value = "/page")
+    public ResponseEntity<Page<Admin>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+        Page<Admin> page = new Page<Admin>().setCurrent(current).setSize(size);
+        Page<Admin> adminPage = adminService.page(page);
+        return ResponseEntity.ok(adminPage);
+    }
+
+    @ApiOperation(value = "根据条件分页查询管理员")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "admin", value = "管理员Model", required = true, paramType = "body", dataType = "Admin")
+    })
+    @PostMapping(value = "/page")
+    public ResponseEntity<Page<Admin>> pageByParam(
+        @RequestParam Long current,
+        @RequestParam Long size,
+        @RequestBody Admin admin
+    ) {
+        Page<Admin> page = new Page<Admin>().setCurrent(current).setSize(size);
+        Wrapper<Admin> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(admin);
+        Page<Admin> adminPage = adminService.page(page, wrapper);
+        return ResponseEntity.ok(adminPage);
+    }
+
+    @ApiOperation(value = "根据id查询单个管理员")
+    @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "query", dataType = "Long")
+    @GetMapping(value = "/one")
+    public ResponseEntity<Admin> oneByParam(@RequestParam Long id) {
+        LambdaQueryWrapper<Admin> wrapper = new LambdaQueryWrapper<Admin>().eq(Admin::getId, id);
+        Admin admin = adminService.getOne(wrapper);
+        return ResponseEntity.ok(admin);
+    }
+
+    @ApiOperation(value = "根据id删除管理员")
+    @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "query", dataType = "Long")
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
+        Boolean code = adminService.removeById(id);
         return ResponseEntity.ok(code);
     }
 }

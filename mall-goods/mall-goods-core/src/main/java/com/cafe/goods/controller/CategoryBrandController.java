@@ -46,7 +46,7 @@ public class CategoryBrandController {
     @ApiOperation(value = "根据条件查询分类-品牌关联列表")
     @ApiImplicitParam(name = "categoryBrand", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrand")
     @PostMapping(value = "/list")
-    public ResponseEntity<List<CategoryBrand>> listByWrapper(@RequestBody CategoryBrand categoryBrand) {
+    public ResponseEntity<List<CategoryBrand>> list(@RequestBody CategoryBrand categoryBrand) {
         Wrapper<CategoryBrand> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(categoryBrand);
         List<CategoryBrand> categoryBrandList = categoryBrandService.list(wrapper);
         return ResponseEntity.ok(categoryBrandList);
@@ -74,7 +74,7 @@ public class CategoryBrandController {
         @ApiImplicitParam(name = "categoryBrand", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrand")
     })
     @PostMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<Page<CategoryBrand>> pageByWrapper(
+    public ResponseEntity<Page<CategoryBrand>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
         @RequestBody CategoryBrand categoryBrand
@@ -85,41 +85,10 @@ public class CategoryBrandController {
         return ResponseEntity.ok(categoryBrandPage);
     }
 
-    @ApiOperation(value = "分页查询分类-品牌关联")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
-    })
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<CategoryBrand>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
-        Page<CategoryBrand> page = new Page<CategoryBrand>().setCurrent(current).setSize(size);
-        Page<CategoryBrand> categoryBrandPage = categoryBrandService.page(page);
-        return ResponseEntity.ok(categoryBrandPage);
-    }
-
-    @ApiOperation(value = "根据条件分页查询分类-品牌关联")
-    @ApiImplicitParam(name = "page", value = "分页查询参数", required = true, paramType = "body", dataType = "Page<CategoryBrand>")
-    @PostMapping(value = "/page")
-    public ResponseEntity<Page<CategoryBrand>> pageByWrapper(@RequestBody Page<CategoryBrand> page) {
-        CategoryBrand brand = page.getRecords().get(0);
-        Wrapper<CategoryBrand> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(brand);
-        Page<CategoryBrand> categoryBrandPage = categoryBrandService.page(page, wrapper);
-        return ResponseEntity.ok(categoryBrandPage);
-    }
-
     @ApiOperation(value = "根据id查询单个分类-品牌关联")
     @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<CategoryBrand> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<CategoryBrand>().eq(CategoryBrand::getId, id);
-        CategoryBrand categoryBrand = categoryBrandService.getOne(wrapper);
-        return ResponseEntity.ok(categoryBrand);
-    }
-
-    @ApiOperation(value = "根据id查询单个分类-品牌关联")
-    @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "query", dataType = "Long")
-    @GetMapping(value = "/one")
-    public ResponseEntity<CategoryBrand> one2(@RequestParam Long id) {
         LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<CategoryBrand>().eq(CategoryBrand::getId, id);
         CategoryBrand categoryBrand = categoryBrandService.getOne(wrapper);
         return ResponseEntity.ok(categoryBrand);
@@ -159,19 +128,58 @@ public class CategoryBrandController {
         return ResponseEntity.ok(code);
     }
 
-    @ApiOperation(value = "根据id删除分类-品牌关联")
-    @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "query", dataType = "Long")
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> delete2(@RequestParam Long id) {
-        Boolean code = categoryBrandService.removeById(id);
-        return ResponseEntity.ok(code);
-    }
-
     @ApiOperation(value = "根据ids批量删除分类-品牌关联")
     @ApiImplicitParam(name = "ids", value = "分类-品牌关联id列表", required = true, paramType = "body", dataType = "List<Long>")
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = categoryBrandService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiOperation(value = "分页查询分类-品牌关联")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+    })
+    @GetMapping(value = "/page")
+    public ResponseEntity<Page<CategoryBrand>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+        Page<CategoryBrand> page = new Page<CategoryBrand>().setCurrent(current).setSize(size);
+        Page<CategoryBrand> categoryBrandPage = categoryBrandService.page(page);
+        return ResponseEntity.ok(categoryBrandPage);
+    }
+
+    @ApiOperation(value = "根据条件分页查询分类-品牌关联")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long"),
+        @ApiImplicitParam(name = "categoryBrand", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrand")
+    })
+    @PostMapping(value = "/page")
+    public ResponseEntity<Page<CategoryBrand>> pageByParam(
+        @RequestParam Long current,
+        @RequestParam Long size,
+        @RequestBody CategoryBrand categoryBrand
+    ) {
+        Page<CategoryBrand> page = new Page<CategoryBrand>().setCurrent(current).setSize(size);
+        Wrapper<CategoryBrand> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(categoryBrand);
+        Page<CategoryBrand> categoryBrandPage = categoryBrandService.page(page, wrapper);
+        return ResponseEntity.ok(categoryBrandPage);
+    }
+
+    @ApiOperation(value = "根据id查询单个分类-品牌关联")
+    @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "query", dataType = "Long")
+    @GetMapping(value = "/one")
+    public ResponseEntity<CategoryBrand> oneByParam(@RequestParam Long id) {
+        LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<CategoryBrand>().eq(CategoryBrand::getId, id);
+        CategoryBrand categoryBrand = categoryBrandService.getOne(wrapper);
+        return ResponseEntity.ok(categoryBrand);
+    }
+
+    @ApiOperation(value = "根据id删除分类-品牌关联")
+    @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "query", dataType = "Long")
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
+        Boolean code = categoryBrandService.removeById(id);
         return ResponseEntity.ok(code);
     }
 }

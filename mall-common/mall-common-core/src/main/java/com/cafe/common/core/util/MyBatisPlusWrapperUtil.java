@@ -68,10 +68,12 @@ public class MyBatisPlusWrapperUtil {
         Map<String, Field> fieldMap = ReflectUtil.getFieldMap(model.getClass());
         // 迭代器循环
         Iterator iterator = fieldMap.entrySet().iterator();
-        // 跳过 Model 的第一个值 serialVersionUID (序列化ID, 不是表的字段)
-        iterator.next();
         while (iterator.hasNext()) {
             Map.Entry entry = (Map.Entry) iterator.next();
+            // 跳过 serialVersionUID 属性
+            if ("serialVersionUID".equals(entry.getKey())) {
+                continue;
+            }
             // 获取属性
             Field field = (Field) entry.getValue();
             // 根据传入的对象和属性, 获取属性值
