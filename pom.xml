@@ -46,6 +46,7 @@
         <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>8.3.4</minio.version>
+        <rocketmq-starter.version>2.2.2</rocketmq-starter.version>
 
         <squareup-okhttp3.version>4.9.3</squareup-okhttp3.version>
         <tomcat-embed.version>9.0.46</tomcat-embed.version>
@@ -188,7 +189,6 @@
                 <artifactId>okhttp</artifactId>
                 <version>${squareup-okhttp3.version}</version>
             </dependency>
-
             <!-- Binlog MySQL 数据库监听 -->
             <dependency>
                 <groupId>com.github.shyiko</groupId>
@@ -218,6 +218,12 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
                 <version>${commons-collections4.version}</version>
+            </dependency>
+            <!-- RocketMQ Starter -->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq-starter.version}</version>
             </dependency>
 
             <!-- 公共模块 -->
