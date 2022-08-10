@@ -20,7 +20,6 @@
         <dependency>
             <groupId>net.oschina.zcx7878</groupId>
             <artifactId>fastdfs-client-java</artifactId>
-            <version>1.27.0.0</version>
         </dependency>
         <!-- Spring Boot Web 相关依赖 -->
         <dependency>
