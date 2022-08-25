@@ -35,5 +35,6 @@
             #{roleName}
         </foreach>
         AND m.menu_status = 1
+        ORDER BY m.sort
     </select>
 </mapper>
