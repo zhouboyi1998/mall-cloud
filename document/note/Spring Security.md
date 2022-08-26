@@ -13,7 +13,7 @@ keytool -genkey -alias jwt -keyalg RSA -keystore jwt.jks
 
 ### 📑 基础知识
 
-* OAuth2 中 4 种授权模式
+#### OAuth2 中 4 种授权模式
 
 ```
 password (密码模式)
@@ -35,11 +35,33 @@ implicit (隐藏模式)
 
 ---
 
-* Spring Security 中 4 种令牌存储方式
+#### Spring Security 中 4 种令牌存储方式
 
 ```
 JdbcTokenStore (保存到数据库)
 InMemoryTokenStore (保存到本地内存)
 RedisTokenStore (保存到 Redis)
 JwkTokenStore (全部信息返回到客户端)
+```
+
+---
+
+#### 刷新令牌是否复用
+
+* **`true`（复用 `Refresh Token`，默认）：**
+    * `Refresh Token` 不会刷新
+    * 如果 `Refresh Token` 同时还设置成只能使用一次
+    * 那么 `Access Token` 再次过期时就只能重新登录了
+
+
+* **`false`（不复用 `Refresh Token`）：**
+    * 使用当前 `Refresh Token` 获取新的 `Access Token` 时
+    * 同时获取新的 `Refresh Token`
+    * 这样只要在 `Refresh Token` 有效期内不断刷新就可以永远不过期
+
+```
+@Override
+public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    endpoints.reuseRefreshTokens(false);
+}
 ```

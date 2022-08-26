@@ -9,11 +9,11 @@ package com.cafe.common.enumeration;
  */
 public enum ExceptionMessageEnum {
 
-    USERNAME_NOTFOUND(1001, "账号不存在"),
-    ACCOUNT_DISABLED(1002, "账号不可用"),
-    ACCOUNT_LOCKED(1003, "账号被锁定"),
-    ACCOUNT_EXPIRED(1004, "账号已过期"),
-    CREDENTIALS_EXPIRED(1005, "证书已过期");
+    USERNAME_NOTFOUND(4001, "账号不存在"),
+    ACCOUNT_DISABLED(4002, "账号不可用"),
+    ACCOUNT_LOCKED(4003, "账号被锁定"),
+    ACCOUNT_EXPIRED(4004, "账号已过期"),
+    CREDENTIALS_EXPIRED(4005, "证书已过期");
 
     /**
      * 错误码
