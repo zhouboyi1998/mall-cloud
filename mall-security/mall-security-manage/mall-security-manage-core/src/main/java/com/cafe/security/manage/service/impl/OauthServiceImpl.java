@@ -38,7 +38,7 @@ public class OauthServiceImpl implements OauthService {
 
         // 将访问令牌信息封装到自定义令牌信息封装类中返回
         Oauth2TokenDetails oauth2TokenDetails = new Oauth2TokenDetails();
-        oauth2TokenDetails.setToken(oAuth2AccessToken.getValue());
+        oauth2TokenDetails.setAccessToken(oAuth2AccessToken.getValue());
         oauth2TokenDetails.setRefreshToken(oAuth2AccessToken.getRefreshToken().getValue());
         oauth2TokenDetails.setTokenPrefix(AuthenticationConstant.JWT_TOKEN_PREFIX);
         oauth2TokenDetails.setExpiresIn(oAuth2AccessToken.getExpiresIn());

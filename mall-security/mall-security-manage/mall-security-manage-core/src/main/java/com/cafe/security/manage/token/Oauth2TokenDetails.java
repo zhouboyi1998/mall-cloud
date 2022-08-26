@@ -16,7 +16,7 @@ public class Oauth2TokenDetails implements Serializable {
     /**
      * 访问令牌
      */
-    private String token;
+    private String accessToken;
 
     /**
      * 刷新令牌
@@ -33,12 +33,12 @@ public class Oauth2TokenDetails implements Serializable {
      */
     private Integer expiresIn;
 
-    public String getToken() {
-        return token;
+    public String getAccessToken() {
+        return accessToken;
     }
 
-    public void setToken(String token) {
-        this.token = token;
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
     public String getRefreshToken() {
