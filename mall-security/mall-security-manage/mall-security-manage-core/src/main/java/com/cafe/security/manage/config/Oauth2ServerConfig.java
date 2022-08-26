@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -153,7 +154,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
             .withClient(clientDetailsProperties.getClientId())
             // 客户端密钥: 生成 RSA 证书文件 (jwt.jks) 时设置的密钥口令 (-keypass)
             .secret(passwordEncoder.encode(rsaCredentialProperties.getKeypass()))
-            // 授权模式: password 密码模式, refresh_token 开启刷新令牌
+            // 授权模式: 目前使用 password 密码, refresh_token 刷新令牌
             .authorizedGrantTypes(clientDetailsProperties.getAuthorizedGrantTypes())
             // 授权范围
             .scopes(clientDetailsProperties.getScopes())
@@ -186,8 +187,12 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         endpoints
             // 配置认证管理器
             .authenticationManager(authenticationManager)
+            // 不复用刷新令牌
+            .reuseRefreshTokens(false)
             // 配置管理员账号详细信息加载类
             .userDetailsService(userDetailsService)
+            // 配置登录请求限制的 HTTP 类型
+            .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
             // 配置访问令牌转换器, 使用 OAuth2 官方提供的
             .accessTokenConverter(jwtAccessTokenConverter())
             // 配置自定义的令牌增强器链

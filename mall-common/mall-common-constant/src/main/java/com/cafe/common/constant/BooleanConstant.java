@@ -5,7 +5,7 @@ package com.cafe.common.constant;
  * @Package: com.cafe.common.constant
  * @Author: zhouboyi
  * @Date: 2022/5/19 10:47
- * @Description: 字符串常量
+ * @Description: 布尔类型对应的字符串常量
  */
 public class BooleanConstant {
 

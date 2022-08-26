@@ -27,13 +27,17 @@ client:
     # 客户端id
     client-id: "manage"
     # 授权模式
+      # password: 密码
+      # authorization_code: 授权码
+      # client_credentials: 客户端
+      # refresh_token: 刷新令牌
     authorized-grant-types:
       - "password"
       - "refresh_token"
     # 授权范围
     scopes:
       - "all"
-    # 访问令牌过期时间: 1小时
+    # 访问令牌过期时间 (1小时)
     access-token-validity-seconds: 3600
-    # 访问令牌过期时间: 24小时
-    refresh-token-validity-seconds: 86400
+    # 刷新令牌过期时间 (30天)
+    refresh-token-validity-seconds: 2592000
