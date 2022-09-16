@@ -7,13 +7,22 @@ import com.cafe.admin.bo.MenuRoleRelationBO;
 import com.cafe.admin.model.RoleMenu;
 import com.cafe.admin.service.RoleMenuService;
 import com.cafe.common.core.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.log.annotation.LogPrint;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -38,6 +47,7 @@ public class RoleMenuController {
         this.roleMenuService = roleMenuService;
     }
 
+    @LogPrint(description = "查询角色-菜单关联列表")
     @ApiOperation(value = "查询角色-菜单关联列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<RoleMenu>> list() {
@@ -45,6 +55,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(roleMenuList);
     }
 
+    @LogPrint(description = "根据条件查询角色-菜单关联列表")
     @ApiOperation(value = "根据条件查询角色-菜单关联列表")
     @ApiImplicitParam(name = "roleMenu", value = "角色-菜单关联Model", required = true, paramType = "body", dataType = "RoleMenu")
     @PostMapping(value = "/list")
@@ -54,6 +65,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(roleMenuList);
     }
 
+    @LogPrint(description = "分页查询角色-菜单关联列表")
     @ApiOperation(value = "分页查询角色-菜单关联列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -69,6 +81,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(roleMenuPage);
     }
 
+    @LogPrint(description = "根据条件分页查询角色-菜单关联")
     @ApiOperation(value = "根据条件分页查询角色-菜单关联")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -87,6 +100,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(roleMenuPage);
     }
 
+    @LogPrint(description = "根据id查询单个角色-菜单关联")
     @ApiOperation(value = "根据id查询单个角色-菜单关联")
     @ApiImplicitParam(name = "id", value = "角色-菜单关联id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
@@ -96,6 +110,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(roleMenu);
     }
 
+    @LogPrint(description = "新增角色-菜单关联")
     @ApiOperation(value = "新增角色-菜单关联")
     @ApiImplicitParam(name = "roleMenu", value = "角色-菜单关联Model", required = true, paramType = "body", dataType = "RoleMenu")
     @PostMapping(value = "/insert")
@@ -106,6 +121,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "根据id修改角色-菜单关联")
     @ApiOperation(value = "根据id修改角色-菜单关联")
     @ApiImplicitParam(name = "roleMenu", value = "角色-菜单关联Model", required = true, paramType = "body", dataType = "RoleMenu")
     @PutMapping(value = "/update")
@@ -114,6 +130,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "根据ids批量修改角色-菜单关联")
     @ApiOperation(value = "根据ids批量修改角色-菜单关联")
     @ApiImplicitParam(name = "roleMenuList", value = "角色-菜单关联列表", required = true, paramType = "body", dataType = "List<RoleMenu>")
     @PutMapping(value = "/update/batch")
@@ -122,6 +139,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "根据id删除角色-菜单关联")
     @ApiOperation(value = "根据id删除角色-菜单关联")
     @ApiImplicitParam(name = "id", value = "角色-菜单关联id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
@@ -130,6 +148,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "根据ids批量删除角色-菜单关联")
     @ApiOperation(value = "根据ids批量删除角色-菜单关联")
     @ApiImplicitParam(name = "ids", value = "角色-菜单关联id列表", required = true, paramType = "body", dataType = "List<Long>")
     @DeleteMapping(value = "/delete/batch")
@@ -138,6 +157,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "分页查询角色-菜单关联列表")
     @ApiOperation(value = "分页查询角色-菜单关联列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -150,6 +170,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(roleMenuPage);
     }
 
+    @LogPrint(description = "根据条件分页查询角色-菜单关联")
     @ApiOperation(value = "根据条件分页查询角色-菜单关联")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -168,6 +189,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(roleMenuPage);
     }
 
+    @LogPrint(description = "根据id查询单个角色-菜单关联")
     @ApiOperation(value = "根据id查询单个角色-菜单关联")
     @ApiImplicitParam(name = "id", value = "角色-菜单关联id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
@@ -177,6 +199,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(roleMenu);
     }
 
+    @LogPrint(description = "根据id删除角色-菜单关联")
     @ApiOperation(value = "根据id删除角色-菜单关联")
     @ApiImplicitParam(name = "id", value = "角色-菜单关联id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
@@ -185,6 +208,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "获取所有菜单路径和角色名称对应关系")
     @ApiOperation(value = "获取所有菜单路径和角色名称对应关系")
     @GetMapping(value = "/list/menuPath/roleName/bo")
     public ResponseEntity<List<MenuRoleRelationBO>> listMenuRoleRelationBO() {
@@ -193,6 +217,7 @@ public class RoleMenuController {
         return ResponseEntity.ok(boList);
     }
 
+    @LogPrint(description = "根据 菜单id列表 获取菜单路径和角色名称对应关系列表")
     @ApiOperation(value = "根据 菜单id列表 获取菜单路径和角色名称对应关系列表")
     @ApiImplicitParam(name = "menuIds", value = "菜单id列表", required = true, paramType = "body", dataType = "List<Long>")
     @PostMapping(value = "/list/menuPath/roleName/bo")

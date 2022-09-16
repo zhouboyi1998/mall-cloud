@@ -1,5 +1,6 @@
 package com.cafe.security.manage.controller;
 
+import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.security.manage.service.KeyPairService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,7 @@ public class KeyPairController {
         this.keyPairService = keyPairService;
     }
 
+    @LogPrint(description = "获取 RSA 公钥")
     @ApiOperation(value = "获取 RSA 公钥")
     @GetMapping(value = "/rsa")
     public ResponseEntity<Map<String, Object>> getRsaPublicKey() {

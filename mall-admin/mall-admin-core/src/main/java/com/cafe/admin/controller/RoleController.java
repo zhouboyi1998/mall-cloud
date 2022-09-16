@@ -6,13 +6,22 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.admin.model.Role;
 import com.cafe.admin.service.RoleService;
 import com.cafe.common.core.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.log.annotation.LogPrint;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,6 +45,7 @@ public class RoleController {
         this.roleService = roleService;
     }
 
+    @LogPrint(description = "查询管理员角色列表")
     @ApiOperation(value = "查询管理员角色列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Role>> list() {
@@ -43,6 +53,7 @@ public class RoleController {
         return ResponseEntity.ok(roleList);
     }
 
+    @LogPrint(description = "根据条件查询管理员角色列表")
     @ApiOperation(value = "根据条件查询管理员角色列表")
     @ApiImplicitParam(name = "role", value = "管理员角色Model", required = true, paramType = "body", dataType = "Role")
     @PostMapping(value = "/list")
@@ -52,6 +63,7 @@ public class RoleController {
         return ResponseEntity.ok(roleList);
     }
 
+    @LogPrint(description = "分页查询管理员角色列表")
     @ApiOperation(value = "分页查询管理员角色列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -67,6 +79,7 @@ public class RoleController {
         return ResponseEntity.ok(rolePage);
     }
 
+    @LogPrint(description = "根据条件分页查询管理员角色")
     @ApiOperation(value = "根据条件分页查询管理员角色")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -85,6 +98,7 @@ public class RoleController {
         return ResponseEntity.ok(rolePage);
     }
 
+    @LogPrint(description = "根据id查询单个管理员角色")
     @ApiOperation(value = "根据id查询单个管理员角色")
     @ApiImplicitParam(name = "id", value = "管理员角色id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
@@ -94,6 +108,7 @@ public class RoleController {
         return ResponseEntity.ok(role);
     }
 
+    @LogPrint(description = "新增管理员角色")
     @ApiOperation(value = "新增管理员角色")
     @ApiImplicitParam(name = "role", value = "管理员角色Model", required = true, paramType = "body", dataType = "Role")
     @PostMapping(value = "/insert")
@@ -104,6 +119,7 @@ public class RoleController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "根据id修改管理员角色")
     @ApiOperation(value = "根据id修改管理员角色")
     @ApiImplicitParam(name = "role", value = "管理员角色Model", required = true, paramType = "body", dataType = "Role")
     @PutMapping(value = "/update")
@@ -112,6 +128,7 @@ public class RoleController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "根据ids批量修改管理员角色")
     @ApiOperation(value = "根据ids批量修改管理员角色")
     @ApiImplicitParam(name = "roleList", value = "管理员角色列表", required = true, paramType = "body", dataType = "List<Role>")
     @PutMapping(value = "/update/batch")
@@ -120,6 +137,7 @@ public class RoleController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "根据id删除管理员角色")
     @ApiOperation(value = "根据id删除管理员角色")
     @ApiImplicitParam(name = "id", value = "管理员角色id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
@@ -128,6 +146,7 @@ public class RoleController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "根据ids批量删除管理员角色")
     @ApiOperation(value = "根据ids批量删除管理员角色")
     @ApiImplicitParam(name = "ids", value = "管理员角色id列表", required = true, paramType = "body", dataType = "List<Long>")
     @DeleteMapping(value = "/delete/batch")
@@ -136,6 +155,7 @@ public class RoleController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "分页查询管理员角色列表")
     @ApiOperation(value = "分页查询管理员角色列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -148,6 +168,7 @@ public class RoleController {
         return ResponseEntity.ok(rolePage);
     }
 
+    @LogPrint(description = "根据条件分页查询管理员角色")
     @ApiOperation(value = "根据条件分页查询管理员角色")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -166,6 +187,7 @@ public class RoleController {
         return ResponseEntity.ok(rolePage);
     }
 
+    @LogPrint(description = "根据id查询单个管理员角色")
     @ApiOperation(value = "根据id查询单个管理员角色")
     @ApiImplicitParam(name = "id", value = "管理员角色id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
@@ -175,6 +197,7 @@ public class RoleController {
         return ResponseEntity.ok(role);
     }
 
+    @LogPrint(description = "根据id删除管理员角色")
     @ApiOperation(value = "根据id删除管理员角色")
     @ApiImplicitParam(name = "id", value = "管理员角色id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
@@ -183,6 +206,7 @@ public class RoleController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "查询所有角色名称列表")
     @ApiOperation(value = "查询所有角色名称列表")
     @GetMapping(value = "/list/name")
     public ResponseEntity<List<String>> listRoleName() {
@@ -190,6 +214,7 @@ public class RoleController {
         return ResponseEntity.ok(roleNameList);
     }
 
+    @LogPrint(description = "根据管理员id查询角色名称列表")
     @ApiOperation(value = "根据管理员id查询角色名称列表")
     @ApiImplicitParam(name = "adminId", value = "管理员id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/list/name/{adminId}")

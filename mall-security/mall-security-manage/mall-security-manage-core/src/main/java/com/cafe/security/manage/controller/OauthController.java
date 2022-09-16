@@ -1,7 +1,10 @@
 package com.cafe.security.manage.controller;
 
+import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.security.manage.service.OauthService;
 import com.cafe.security.manage.token.Oauth2TokenDetails;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -39,9 +42,13 @@ public class OauthController {
      * @return
      * @throws HttpRequestMethodNotSupportedException
      */
+    @LogPrint(description = "Oauth2 登录认证")
+    @ApiOperation(value = "Oauth2 登录认证")
+    @ApiImplicitParam(name = "parameters", value = "登录认证参数", required = true, paramType = "query", dataType = "Map<String, String>")
     @PostMapping(value = "/token")
     public ResponseEntity<Oauth2TokenDetails> postAccessToken(
-        Principal principal, @RequestParam Map<String, String> parameters
+        Principal principal,
+        @RequestParam Map<String, String> parameters
     ) throws HttpRequestMethodNotSupportedException {
         Oauth2TokenDetails oauth2TokenDetails = oauthService.postAccessToken(principal, parameters);
         return ResponseEntity.ok(oauth2TokenDetails);
