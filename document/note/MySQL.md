@@ -7,7 +7,7 @@
     2. 增减字段容易与 `resultMap` 配置不一致
     3. 无用字段增加网络消耗，尤其是 `text` 类型的字段
 
----
+<br/>
 
 * 避免使用 `IS NULL` / `IS NOT NULL` 关键字
 * 如果需要判空：使用 `ISNULL()` / `!ISNULL()` 函数
@@ -19,7 +19,7 @@
     2. `NULL <> NULL` 的返回结果是 `NULL` 而不是 `false`
     3. `NULL <> 1` 的返回结果是 `NULL` 而不是 `true`
 
----
+<br/>
 
 * 禁止使用级联更新和外键
     1. 级联更新是强阻塞，存在数据库更新风暴的风险
@@ -31,7 +31,7 @@
         * 即触发了级联更新
     3. 外键影响数据库的插入速度
 
----
+<br/>
 
 * 禁止使用 `COUNT(列名)` 代替 `COUNT(*)`
 * `COUNT(列名)` 不会统计该列中为空的行
@@ -43,7 +43,7 @@
 * `Binlog` 是一个二进制日志文件，记录 `MySQL` 数据库表的变更历史
 * `MySQL` 使用该日志文件进行主从复制、增量备份、数据库还原
 
----
+<br/>
 
 * 数据库监听需要启用 `Binlog`，开启 `MySQL` 主从模式
 
@@ -73,6 +73,8 @@ binlog-format=ROW
 server-id=1
 ```
 
+---
+
 #### Canal Server 配置
 
 * `GitHub` 下载 `canal.deployer-1.1.5`
@@ -92,6 +94,8 @@ canal.instance.defaultDatabaseName=
 canal.instance.filter.regex=.*\\..*
 ```
 
+<br/>
+
 * MySQL 创建一个专门给 Canal 使用的用户
 
 ```mysql
@@ -110,3 +114,19 @@ ALTER USER 'canal'@'%' IDENTIFIED WITH mysql_native_password BY 'canal';
 
 * Windows 环境使用 `/bin/startup.bat` 启动 Canal Server
 * Linux 环境使用 `/bin/startup.sh` 启动 Canal Server
+
+<br/>
+
+* 如果 `Canal` 停止工作
+* 可以查看安装目录下的 `/logs/example/example.log` 日志文件
+* 查看日志文件中的报错信息，如果出现以下报错：
+
+```
+Could not find first log file name in binary log index file
+```
+
+* 报错原因：`Canal` 无法找到 `Binlog` 文件
+* 解决方法：
+    * 停止 `Canal`
+    * 删除安装目录下的 `/conf/example/meta.dat`
+    * 重启 `Canal`
