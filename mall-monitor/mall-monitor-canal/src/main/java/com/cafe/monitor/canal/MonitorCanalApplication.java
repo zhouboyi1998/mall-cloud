@@ -17,6 +17,8 @@ import org.springframework.context.annotation.ComponentScan;
 public class MonitorCanalApplication {
 
     public static void main(String[] args) {
+        // 指定 RocketMQ 使用的日志框架
+        System.setProperty("rocketmq.client.logUseSlf4j", "true");
         new SpringApplicationBuilder(MonitorCanalApplication.class)
             .web(WebApplicationType.NONE)
             .run(args);
