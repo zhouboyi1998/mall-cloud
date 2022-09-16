@@ -6,13 +6,22 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.admin.model.Admin;
 import com.cafe.admin.service.AdminService;
 import com.cafe.common.core.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.log.annotation.LogPrint;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,6 +45,7 @@ public class AdminController {
         this.adminService = adminService;
     }
 
+    @LogPrint(description = "查询管理员列表")
     @ApiOperation(value = "查询管理员列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Admin>> list() {
@@ -43,6 +53,7 @@ public class AdminController {
         return ResponseEntity.ok(adminList);
     }
 
+    @LogPrint(description = "根据条件查询管理员列表")
     @ApiOperation(value = "根据条件查询管理员列表")
     @ApiImplicitParam(name = "admin", value = "管理员Model", required = true, paramType = "body", dataType = "Admin")
     @PostMapping(value = "/list")
@@ -52,6 +63,7 @@ public class AdminController {
         return ResponseEntity.ok(adminList);
     }
 
+    @LogPrint(description = "分页查询管理员列表")
     @ApiOperation(value = "分页查询管理员列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -67,6 +79,7 @@ public class AdminController {
         return ResponseEntity.ok(adminPage);
     }
 
+    @LogPrint(description = "根据条件分页查询管理员")
     @ApiOperation(value = "根据条件分页查询管理员")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -85,6 +98,7 @@ public class AdminController {
         return ResponseEntity.ok(adminPage);
     }
 
+    @LogPrint(description = "根据id查询单个管理员")
     @ApiOperation(value = "根据id查询单个管理员")
     @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
@@ -94,6 +108,7 @@ public class AdminController {
         return ResponseEntity.ok(admin);
     }
 
+    @LogPrint(description = "根据管理员用户名查询单个管理员")
     @ApiOperation(value = "根据管理员用户名查询单个管理员")
     @ApiImplicitParam(name = "adminName", value = "管理员用户名", required = true, paramType = "path", dataType = "String")
     @GetMapping(value = "/one/name/{adminName}")
@@ -103,6 +118,7 @@ public class AdminController {
         return ResponseEntity.ok(admin);
     }
 
+    @LogPrint(description = "新增管理员")
     @ApiOperation(value = "新增管理员")
     @ApiImplicitParam(name = "admin", value = "管理员Model", required = true, paramType = "body", dataType = "Admin")
     @PostMapping(value = "/insert")
@@ -113,6 +129,7 @@ public class AdminController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "根据id修改管理员")
     @ApiOperation(value = "根据id修改管理员")
     @ApiImplicitParam(name = "admin", value = "管理员Model", required = true, paramType = "body", dataType = "Admin")
     @PutMapping(value = "/update")
@@ -121,6 +138,7 @@ public class AdminController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "根据ids批量修改管理员")
     @ApiOperation(value = "根据ids批量修改管理员")
     @ApiImplicitParam(name = "adminList", value = "管理员列表", required = true, paramType = "body", dataType = "List<Admin>")
     @PutMapping(value = "/update/batch")
@@ -129,6 +147,7 @@ public class AdminController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "根据id删除管理员")
     @ApiOperation(value = "根据id删除管理员")
     @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
@@ -137,6 +156,7 @@ public class AdminController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "根据ids批量删除管理员")
     @ApiOperation(value = "根据ids批量删除管理员")
     @ApiImplicitParam(name = "ids", value = "管理员id列表", required = true, paramType = "body", dataType = "List<Long>")
     @DeleteMapping(value = "/delete/batch")
@@ -145,6 +165,7 @@ public class AdminController {
         return ResponseEntity.ok(code);
     }
 
+    @LogPrint(description = "分页查询管理员列表")
     @ApiOperation(value = "分页查询管理员列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -157,6 +178,7 @@ public class AdminController {
         return ResponseEntity.ok(adminPage);
     }
 
+    @LogPrint(description = "根据条件分页查询管理员")
     @ApiOperation(value = "根据条件分页查询管理员")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -175,6 +197,7 @@ public class AdminController {
         return ResponseEntity.ok(adminPage);
     }
 
+    @LogPrint(description = "根据id查询单个管理员")
     @ApiOperation(value = "根据id查询单个管理员")
     @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
@@ -184,6 +207,7 @@ public class AdminController {
         return ResponseEntity.ok(admin);
     }
 
+    @LogPrint(description = "根据id删除管理员")
     @ApiOperation(value = "根据id删除管理员")
     @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
