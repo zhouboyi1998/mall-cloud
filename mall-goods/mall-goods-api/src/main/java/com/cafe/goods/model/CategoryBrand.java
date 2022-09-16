@@ -38,7 +38,6 @@ public class CategoryBrand implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
 
-
     public Long getId() {
         return id;
     }
