@@ -25,6 +25,3 @@ mybatis-plus:
     db-config:
       # 数据库表命名使用下划线分割
       table-underline: true
-  configuration:
-    # 打印 SQL 到控制台
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

@@ -23,3 +23,9 @@ spring:
     port: 5672
     username: binlog
     password: binlog
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  configuration:
+    # dev 环境打印 SQL 到控制台
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

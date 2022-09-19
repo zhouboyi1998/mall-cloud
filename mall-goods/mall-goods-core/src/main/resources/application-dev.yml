@@ -11,3 +11,9 @@ spring:
       # 注册中心
       discovery:
         server-addr: 127.0.0.1:8848
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  configuration:
+    # dev 环境打印 SQL 到控制台
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
