@@ -29,7 +29,7 @@ import java.lang.reflect.Method;
  */
 @Aspect
 @Component
-@Profile({"dev"})
+@Profile({"dev", "test"})
 public class LogPrintAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(LogPrintAspect.class);
@@ -87,12 +87,12 @@ public class LogPrintAspect {
         logger.info("Request URL    : {}", request.getRequestURL().toString());
         // HTTP 请求类型
         logger.info("HTTP Method    : {}", request.getMethod());
-        // 请求入参
-        logger.info("Request Args   : {}", getRequestParams(joinPoint));
         // 接口类全路径
         logger.info("Class          : {}", joinPoint.getSignature().getDeclaringTypeName());
         // 执行方法
         logger.info("Method         : {}", joinPoint.getSignature().getName());
+        // 请求入参
+        logger.info("Request Args   : {}", getRequestParams(joinPoint));
     }
 
     /**
@@ -116,7 +116,12 @@ public class LogPrintAspect {
                 }
                 // 将参数转换为字符串并存储
                 try {
-                    params += JSONUtil.toJsonStr(arg);
+                    // 如果是 Number 类型, 直接拼接, Hutool JSONUtil.toJsonStr() 方法不能转换 Number 类型
+                    if (arg instanceof Number) {
+                        params += "{" + arg + "}";
+                    } else {
+                        params += JSONUtil.toJsonStr(arg);
+                    }
                 } catch (Exception e) {
                     logger.error(e.getMessage());
                 }
