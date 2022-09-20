@@ -41,3 +41,7 @@ client:
     access-token-validity-seconds: 3600
     # 刷新令牌过期时间 (30天)
     refresh-token-validity-seconds: 2592000
+
+# LogBack 配置
+logging:
+  config: classpath:logback/logback-${spring.profiles.active}.xml
