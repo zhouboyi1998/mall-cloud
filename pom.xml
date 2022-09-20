@@ -7,7 +7,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.3.12.RELEASE</version>
-        <relativePath/>
+        <relativePath />
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -46,13 +46,12 @@
         <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>8.3.4</minio.version>
-        <rocketmq-starter.version>2.2.2</rocketmq-starter.version>
-
         <squareup-okhttp3.version>4.9.3</squareup-okhttp3.version>
-        <tomcat-embed.version>9.0.46</tomcat-embed.version>
         <mysql-binlog-connector.version>0.21.0</mysql-binlog-connector.version>
         <canal.version>1.1.5</canal.version>
+        <tomcat-embed.version>9.0.46</tomcat-embed.version>
         <commons-collections4.version>4.4</commons-collections4.version>
+        <rocketmq-starter.version>2.2.2</rocketmq-starter.version>
 
         <mall-common-constant.version>1.0-SNAPSHOT</mall-common-constant.version>
         <mall-common-core.version>1.0-SNAPSHOT</mall-common-core.version>

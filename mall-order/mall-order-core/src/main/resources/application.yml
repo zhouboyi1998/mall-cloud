@@ -28,3 +28,7 @@ mybatis-plus:
     db-config:
       # 数据库表命名使用下划线分割
       table-underline: true
+
+# LogBack 配置
+logging:
+  config: classpath:logback/logback-${spring.profiles.active}.xml

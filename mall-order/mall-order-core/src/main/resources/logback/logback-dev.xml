@@ -1,0 +1,13 @@
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
+
+    <!-- 导入 SpringBoot 提供的 LogBack 日志配置 -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <!-- 打印 INFO 以上级别的日志 -->
+    <root level="INFO">
+        <!-- 使用 SpringBoot 提供的控制台日志配置 -->
+        <appender-ref ref="CONSOLE" />
+    </root>
+
+</configuration>
