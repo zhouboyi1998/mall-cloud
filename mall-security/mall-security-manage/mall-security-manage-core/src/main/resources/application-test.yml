@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    # Nacos 配置
+    nacos:
+      # 注册中心
+      discovery:
+        server-addr: 127.0.0.1:8848
+  # Redis 配置
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    database: 0
+
+# Actuator Health 服务健康监控监控
+management:
+  endpoints:
+    web:
+      exposure:
+        # 暴露所有端点
+        include: "*"
