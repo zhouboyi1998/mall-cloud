@@ -4,3 +4,6 @@ server:
 spring:
   application:
     name: mall-search-elasticsearch
+
+swagger:
+  description: ElasticSearch 搜索微服务

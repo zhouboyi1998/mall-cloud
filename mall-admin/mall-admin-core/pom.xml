@@ -10,23 +10,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.cafe</groupId>
     <artifactId>mall-admin-core</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <description>管理员模块核心业务</description>
+    <version>${mall-cloud.version}</version>
+    <description>后台管理模块核心业务</description>
 
     <dependencies>
-        <!-- SpringData Redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <!-- AMQP 协议 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-amqp</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-constant</artifactId>
@@ -34,6 +22,14 @@
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-log</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-security</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>

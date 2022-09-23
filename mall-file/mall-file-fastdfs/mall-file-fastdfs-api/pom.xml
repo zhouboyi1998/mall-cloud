@@ -10,9 +10,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.cafe</groupId>
     <artifactId>mall-file-fastdfs-api</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${mall-cloud.version}</version>
     <description>FastDFS 文件存储模块远程调用接口</description>
 
     <dependencies>
@@ -20,6 +19,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-swagger</artifactId>
         </dependency>
     </dependencies>
 

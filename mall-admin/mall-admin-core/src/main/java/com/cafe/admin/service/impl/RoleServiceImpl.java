@@ -47,7 +47,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
     @PostConstruct
     @Override
-    public void initRoleNameMap() {
+    public void initRoleNameList() {
         // 获取所有角色名称
         List<String> roleNameList = roleMapper.listRoleName();
         // 清空 Redis 中原来的 List
@@ -62,12 +62,12 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
-    public void saveRoleNameMap(String roleName) {
+    public void saveRoleNameList(String roleName) {
         redisTemplate.opsForList().rightPush(RedisConstant.ROLE_NAME_LIST, roleName);
     }
 
     @Override
-    public void removeRoleNameMap(String roleName) {
+    public void removeRoleNameList(String roleName) {
         redisTemplate.opsForList().remove(RedisConstant.ROLE_NAME_LIST, 1, roleName);
     }
 }

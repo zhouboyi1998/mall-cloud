@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.admin.model.AdminRole;
 import com.cafe.admin.service.AdminRoleService;
-import com.cafe.common.core.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.common.log.annotation.LogPrint;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

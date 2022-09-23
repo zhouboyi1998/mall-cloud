@@ -1,12 +1,8 @@
 package com.cafe.admin.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.admin.bo.MenuRoleRelationBO;
 import com.cafe.admin.model.RoleMenu;
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-
-import java.util.List;
 
 /**
  * @Project: mall-cloud
@@ -18,11 +14,4 @@ import java.util.List;
 @Mapper
 public interface RoleMenuMapper extends BaseMapper<RoleMenu> {
 
-    /**
-     * 获取菜单路径和角色名称对应关系
-     *
-     * @param menuIds
-     * @return
-     */
-    List<MenuRoleRelationBO> listMenuRoleRelationBO(@Param(value = "menuIds") List<Long> menuIds);
 }
