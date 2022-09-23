@@ -1,4 +1,4 @@
-package com.cafe.gateway.manage.config;
+package com.cafe.common.redis.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.gateway.manage.config
+ * @Package: com.cafe.common.redis.config
  * @Author: zhouboyi
  * @Date: 2022/5/10 22:17
  * @Description: Redis 配置

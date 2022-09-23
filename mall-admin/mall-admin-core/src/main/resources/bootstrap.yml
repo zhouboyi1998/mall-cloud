@@ -4,3 +4,6 @@ server:
 spring:
   application:
     name: mall-admin
+
+swagger:
+  description: 后台管理微服务

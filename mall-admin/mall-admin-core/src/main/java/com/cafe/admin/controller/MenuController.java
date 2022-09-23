@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.admin.model.Menu;
 import com.cafe.admin.service.MenuService;
 import com.cafe.admin.vo.MenuTreeVO;
-import com.cafe.common.core.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.common.log.annotation.LogPrint;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

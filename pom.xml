@@ -54,19 +54,7 @@
         <commons-collections4.version>4.4</commons-collections4.version>
         <rocketmq-starter.version>2.2.2</rocketmq-starter.version>
 
-        <mall-common-constant.version>1.0-SNAPSHOT</mall-common-constant.version>
-        <mall-common-core.version>1.0-SNAPSHOT</mall-common-core.version>
-        <mall-common-log.version>1.0-SNAPSHOT</mall-common-log.version>
-        <mall-common-rabbitmq.version>1.0-SNAPSHOT</mall-common-rabbitmq.version>
-        <mall-common-rocketmq.version>1.0-SNAPSHOT</mall-common-rocketmq.version>
-
-        <mall-admin-api.version>1.0-SNAPSHOT</mall-admin-api.version>
-        <mall-goods-api.version>1.0-SNAPSHOT</mall-goods-api.version>
-        <mall-order-api.version>1.0-SNAPSHOT</mall-order-api.version>
-        <mall-security-manage-api.version>1.0-SNAPSHOT</mall-security-manage-api.version>
-        <mall-file-minio-api.version>1.0-SNAPSHOT</mall-file-minio-api.version>
-        <mall-file-fastdfs-api.version>1.0-SNAPSHOT</mall-file-fastdfs-api.version>
-        <mall-search-elasticsearch-api.version>1.0-SNAPSHOT</mall-search-elasticsearch-api.version>
+        <mall-cloud.version>1.0-SNAPSHOT</mall-cloud.version>
     </properties>
 
     <dependencies>
@@ -231,64 +219,84 @@
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-common-constant</artifactId>
-                <version>${mall-common-constant.version}</version>
+                <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-common-core</artifactId>
-                <version>${mall-common-core.version}</version>
+                <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-common-log</artifactId>
-                <version>${mall-common-log.version}</version>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-common-mysql</artifactId>
+                <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-common-rabbitmq</artifactId>
-                <version>${mall-common-rabbitmq.version}</version>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-common-redis</artifactId>
+                <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-common-rocketmq</artifactId>
-                <version>${mall-common-rocketmq.version}</version>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-common-security</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-common-swagger</artifactId>
+                <version>${mall-cloud.version}</version>
             </dependency>
 
             <!-- 远程调用接口 -->
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-admin-api</artifactId>
-                <version>${mall-admin-api.version}</version>
+                <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-goods-api</artifactId>
-                <version>${mall-goods-api.version}</version>
+                <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-order-api</artifactId>
-                <version>${mall-order-api.version}</version>
+                <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-security-manage-api</artifactId>
-                <version>${mall-security-manage-api.version}</version>
+                <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-file-minio-api</artifactId>
-                <version>${mall-file-minio-api.version}</version>
+                <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-file-fastdfs-api</artifactId>
-                <version>${mall-file-fastdfs-api.version}</version>
+                <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-search-elasticsearch-api</artifactId>
-                <version>${mall-search-elasticsearch-api.version}</version>
+                <version>${mall-cloud.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

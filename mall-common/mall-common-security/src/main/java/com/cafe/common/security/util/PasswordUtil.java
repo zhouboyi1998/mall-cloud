@@ -1,4 +1,4 @@
-package com.cafe.security.manage.util;
+package com.cafe.common.security.util;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -6,10 +6,10 @@ import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.security.manage.util
+ * @Package: com.cafe.common.security.util
  * @Author: zhouboyi
  * @Date: 2022/5/9 17:00
- * @Description: SpringSecurity 自定义密码工具箱
+ * @Description: Spring Security 密码工具箱
  */
 public class PasswordUtil {
 
@@ -48,7 +48,7 @@ public class PasswordUtil {
     }
 
     /**
-     * BCrypt 匹配
+     * SCrypt 匹配
      *
      * @param plaintext  明文
      * @param ciphertext 密文
@@ -57,9 +57,5 @@ public class PasswordUtil {
     public static Boolean matchSCrypt(String plaintext, String ciphertext) {
         PasswordEncoder passwordEncoder = new SCryptPasswordEncoder();
         return passwordEncoder.matches(plaintext, ciphertext);
-    }
-
-    public static void main(String[] args) {
-        System.out.println(encodeSCrypt(""));
     }
 }

@@ -4,3 +4,6 @@ server:
 spring:
   application:
     name: mall-file-fastdfs
+
+swagger:
+  description: FastDFS 文件微服务

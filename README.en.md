@@ -39,6 +39,7 @@ mall-cloud
     |-- mall-goods
     |-- mall-monitor
     |-- mall-order
+    |-- mall-search
     |-- mall-security
 ```
 

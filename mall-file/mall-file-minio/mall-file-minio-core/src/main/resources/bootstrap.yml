@@ -4,3 +4,6 @@ server:
 spring:
   application:
     name: mall-file-minio
+
+swagger:
+  description: MinIO 文件微服务

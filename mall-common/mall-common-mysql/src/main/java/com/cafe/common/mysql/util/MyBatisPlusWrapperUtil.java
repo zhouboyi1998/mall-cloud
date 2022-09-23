@@ -1,4 +1,4 @@
-package com.cafe.common.core.util;
+package com.cafe.common.mysql.util;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
@@ -13,7 +13,7 @@ import java.util.Map;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.core.util
+ * @Package: com.cafe.common.mysql.util
  * @Author: zhouboyi
  * @Date: 2022/5/1 20:21
  * @Description: MyBatis-Plus 条件构造工具类 (只能构造简单条件)

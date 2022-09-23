@@ -39,6 +39,7 @@ mall-cloud
     |-- mall-goods (商品)
     |-- mall-monitor (数据库监听)
     |-- mall-order (订单)
+    |-- mall-search (搜索)
     |-- mall-security (安全)
 ```
 

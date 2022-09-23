@@ -1,7 +1,5 @@
 package com.cafe.common.core.util;
 
-import java.util.ArrayList;
-import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -48,25 +46,18 @@ public class RandomUtil {
      * @param hasLowercase 是否加入小写字母
      * @return
      */
-    private static ArrayList<String> createList(boolean hasNumber,
-                                                boolean hasCapital,
-                                                boolean hasLowercase) {
-        String str = "";
-        if (Objects.equals(true, hasNumber)) {
-            str += number;
+    private static String createCharacterPool(boolean hasNumber, boolean hasCapital, boolean hasLowercase) {
+        StringBuilder builder = new StringBuilder();
+        if (hasNumber) {
+            builder.append(number);
         }
-        if (Objects.equals(true, hasCapital)) {
-            str += capital;
+        if (hasCapital) {
+            builder.append(capital);
         }
-        if (Objects.equals(true, hasLowercase)) {
-            str += lowercase;
+        if (hasLowercase) {
+            builder.append(lowercase);
         }
-        char[] chars = str.toCharArray();
-        ArrayList<String> list = new ArrayList<>();
-        for (char c : chars) {
-            list.add(c + "");
-        }
-        return list;
+        return builder.toString();
     }
 
     /**
@@ -75,15 +66,15 @@ public class RandomUtil {
      * @param length 字符串长度
      * @return
      */
-    public static String generate(int length) {
-        ArrayList<String> list = createList(true, true, true);
-        StringBuffer sb = new StringBuffer();
+    public static String generateString(int length) {
+        String pool = createCharacterPool(true, true, true);
+        int len = pool.length();
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < length; i++) {
-            int size = list.size();
-            String randomStr = list.get(random.nextInt(size));
-            sb.append(randomStr);
+            char c = pool.charAt(random.nextInt(len));
+            builder.append(c);
         }
-        return sb.toString();
+        return builder.toString();
     }
 
     /**
@@ -95,18 +86,15 @@ public class RandomUtil {
      * @param hasLowercase 是否加入小写字母
      * @return
      */
-    public static String generate(int length,
-                                  boolean hasNumber,
-                                  boolean hasCapital,
-                                  boolean hasLowercase) {
-        ArrayList<String> list = createList(hasNumber, hasCapital, hasLowercase);
-        StringBuffer sb = new StringBuffer();
+    public static String generateString(int length, boolean hasNumber, boolean hasCapital, boolean hasLowercase) {
+        String pool = createCharacterPool(hasNumber, hasCapital, hasLowercase);
+        int len = pool.length();
+        StringBuilder builder = new StringBuilder();
         for (int i = 0; i < length; i++) {
-            int size = list.size();
-            String randomStr = list.get(random.nextInt(size));
-            sb.append(randomStr);
+            char c = pool.charAt(random.nextInt(len));
+            builder.append(c);
         }
-        return sb.toString();
+        return builder.toString();
     }
 
     /**
@@ -116,7 +104,7 @@ public class RandomUtil {
      * @param end
      * @return
      */
-    public static int generateNumber(int start, int end) {
+    public static int generateInteger(int start, int end) {
         return (int) (Math.random() * (end - start + 1) + start);
     }
 
@@ -126,9 +114,9 @@ public class RandomUtil {
      * @return
      */
     public static String generateMobileNumber() {
-        String mobileNumber = "";
-        mobileNumber += mobileNumberBegin[generateNumber(0, mobileNumberBegin.length)];
-        mobileNumber += generate(8, true, false, false);
-        return mobileNumber;
+        StringBuilder builder = new StringBuilder();
+        builder.append(mobileNumberBegin[generateInteger(0, mobileNumberBegin.length)]);
+        builder.append(generateString(8, true, false, false));
+        return builder.toString();
     }
 }

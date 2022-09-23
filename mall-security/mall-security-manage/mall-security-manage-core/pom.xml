@@ -10,17 +10,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.cafe</groupId>
     <artifactId>mall-security-manage-core</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <description>后台管理系统安全</description>
+    <version>${mall-cloud.version}</version>
+    <description>后台管理系统安全模块核心业务</description>
 
     <dependencies>
-        <!-- Spring Boot Web 相关依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
         <!-- Spring Security 安全框架 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -36,26 +30,6 @@
             <groupId>com.nimbusds</groupId>
             <artifactId>nimbus-jose-jwt</artifactId>
         </dependency>
-        <!-- SpringData Redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
-        <!-- OpenFeign 远程方法调用 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
-        </dependency>
-        <!-- Hutool 工具包 -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
-        <!-- Swagger2 API 文档 -->
-        <dependency>
-            <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-boot-starter</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>com.cafe</groupId>
@@ -63,7 +37,15 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-common-log</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-redis</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
