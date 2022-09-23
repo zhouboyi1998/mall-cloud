@@ -46,6 +46,7 @@
         <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>8.3.4</minio.version>
+        <!-- 覆盖 Spring Boot 自带的低版本 OK HTTP3, MinIO 需要使用高版本的 -->
         <squareup-okhttp3.version>4.9.3</squareup-okhttp3.version>
         <mysql-binlog-connector.version>0.21.0</mysql-binlog-connector.version>
         <canal.version>1.1.5</canal.version>
