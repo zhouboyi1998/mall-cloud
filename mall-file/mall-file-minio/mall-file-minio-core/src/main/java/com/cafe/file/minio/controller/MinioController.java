@@ -1,5 +1,6 @@
 package com.cafe.file.minio.controller;
 
+import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.file.minio.service.MinioService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -34,6 +35,7 @@ public class MinioController {
         this.minioService = minioService;
     }
 
+    @LogPrint(description = "文件上传")
     @ApiOperation(value = "文件上传")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "bucket", value = "存储桶", required = true, paramType = "path", dataType = "String"),
@@ -53,6 +55,7 @@ public class MinioController {
         }
     }
 
+    @LogPrint(description = "文件下载")
     @ApiOperation(value = "文件下载")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "bucket", value = "存储桶", required = true, paramType = "path", dataType = "String"),
@@ -73,6 +76,7 @@ public class MinioController {
         }
     }
 
+    @LogPrint(description = "获取文件外链 (永久)")
     @ApiOperation(value = "获取文件外链 (永久)")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "bucket", value = "存储桶", required = true, paramType = "path", dataType = "String"),
@@ -92,6 +96,7 @@ public class MinioController {
         }
     }
 
+    @LogPrint(description = "获取文件外链 (限时)")
     @ApiOperation(value = "获取文件外链 (限时)")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "bucket", value = "存储桶", required = true, paramType = "path", dataType = "String"),

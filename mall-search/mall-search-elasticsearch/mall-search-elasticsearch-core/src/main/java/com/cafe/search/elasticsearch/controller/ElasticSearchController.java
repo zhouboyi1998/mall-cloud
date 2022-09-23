@@ -1,5 +1,6 @@
 package com.cafe.search.elasticsearch.controller;
 
+import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.search.elasticsearch.service.ElasticSearchService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -30,12 +31,14 @@ public class ElasticSearchController {
         this.elasticSearchService = elasticSearchService;
     }
 
+    @LogPrint(description = "查询 ElasticSearch 集群信息")
     @ApiOperation(value = "查询 ElasticSearch 集群信息")
     @GetMapping(value = "/info")
     public ResponseEntity<SearchResponse> info() throws IOException {
         return ResponseEntity.ok(elasticSearchService.info());
     }
 
+    @LogPrint(description = "判断索引是否存在")
     @ApiOperation(value = "判断索引是否存在")
     @ApiImplicitParam(name = "name", value = "索引名称", required = true, paramType = "path", dataType = "String")
     @GetMapping(value = "/index/{name}")
@@ -45,6 +48,7 @@ public class ElasticSearchController {
         return ResponseEntity.ok(elasticSearchService.existsIndex(name));
     }
 
+    @LogPrint(description = "创建索引")
     @ApiOperation(value = "创建索引")
     @ApiImplicitParam(name = "name", value = "索引名称", required = true, paramType = "path", dataType = "String")
     @PostMapping(value = "/index/{name}")
@@ -54,6 +58,7 @@ public class ElasticSearchController {
         return ResponseEntity.ok(elasticSearchService.createIndex(name));
     }
 
+    @LogPrint(description = "删除索引")
     @ApiOperation(value = "删除索引")
     @ApiImplicitParam(name = "name", value = "索引名称", required = true, paramType = "path", dataType = "String")
     @DeleteMapping(value = "/index/{name}")

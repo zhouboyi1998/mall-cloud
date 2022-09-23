@@ -1,5 +1,6 @@
 package com.cafe.file.fastdfs.controller;
 
+import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.file.fastdfs.service.FastdfsService;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -29,13 +30,7 @@ public class FastdfsController {
         this.fastdfsService = fastdfsService;
     }
 
-    /**
-     * 文件上传
-     *
-     * @param file
-     * @return
-     * @throws Exception
-     */
+    @LogPrint(description = "文件上传")
     @ApiOperation(value = "文件上传")
     @ApiImplicitParam(name = "file", value = "文件", required = true, paramType = "form", dataType = "MultipartFile")
     @PostMapping(value = "/upload")
