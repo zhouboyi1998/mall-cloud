@@ -4,3 +4,6 @@ server:
 spring:
   application:
     name: mall-goods
+
+swagger:
+  description: 商品微服务

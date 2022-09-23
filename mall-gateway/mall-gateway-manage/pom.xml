@@ -10,9 +10,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.cafe</groupId>
     <artifactId>mall-gateway-manage</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>${mall-cloud.version}</version>
     <description>后台管理系统网关模块</description>
 
     <dependencies>
@@ -31,14 +30,17 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
         </dependency>
+        <!-- Spring Security OAuth2 资源服务器包 -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-resource-server</artifactId>
         </dependency>
+        <!-- Spring Security OAuth2 客户端包 -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-client</artifactId>
         </dependency>
+        <!-- Spring Security OAuth2 集成 Nimbus JOSE + JWT 令牌 -->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-oauth2-jose</artifactId>
@@ -63,11 +65,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <!-- SpringData Redis -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
-        </dependency>
         <!-- Hutool 工具包 -->
         <dependency>
             <groupId>cn.hutool</groupId>
@@ -80,7 +77,17 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-common-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-security-manage-api</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.cafe</groupId>
+                    <artifactId>mall-common-swagger</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 

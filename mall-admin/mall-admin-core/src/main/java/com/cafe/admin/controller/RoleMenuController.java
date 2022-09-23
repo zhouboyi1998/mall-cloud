@@ -3,11 +3,10 @@ package com.cafe.admin.controller;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.admin.bo.MenuRoleRelationBO;
 import com.cafe.admin.model.RoleMenu;
 import com.cafe.admin.service.RoleMenuService;
-import com.cafe.common.core.util.MyBatisPlusWrapperUtil;
 import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -25,7 +24,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -206,23 +204,5 @@ public class RoleMenuController {
     public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
         Boolean code = roleMenuService.removeById(id);
         return ResponseEntity.ok(code);
-    }
-
-    @LogPrint(description = "获取所有菜单路径和角色名称对应关系")
-    @ApiOperation(value = "获取所有菜单路径和角色名称对应关系")
-    @GetMapping(value = "/list/menuPath/roleName/bo")
-    public ResponseEntity<List<MenuRoleRelationBO>> listMenuRoleRelationBO() {
-        List<Long> menuIds = new ArrayList<Long>();
-        List<MenuRoleRelationBO> boList = roleMenuService.listMenuRoleRelationBO(menuIds);
-        return ResponseEntity.ok(boList);
-    }
-
-    @LogPrint(description = "根据 菜单id列表 获取菜单路径和角色名称对应关系列表")
-    @ApiOperation(value = "根据 菜单id列表 获取菜单路径和角色名称对应关系列表")
-    @ApiImplicitParam(name = "menuIds", value = "菜单id列表", required = true, paramType = "body", dataType = "List<Long>")
-    @PostMapping(value = "/list/menuPath/roleName/bo")
-    public ResponseEntity<List<MenuRoleRelationBO>> listMenuRoleRelationBO(@RequestBody List<Long> menuIds) {
-        List<MenuRoleRelationBO> boList = roleMenuService.listMenuRoleRelationBO(menuIds);
-        return ResponseEntity.ok(boList);
     }
 }

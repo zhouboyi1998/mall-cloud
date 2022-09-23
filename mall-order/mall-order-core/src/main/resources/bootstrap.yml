@@ -4,3 +4,6 @@ server:
 spring:
   application:
     name: mall-order
+
+swagger:
+  description: 订单微服务
