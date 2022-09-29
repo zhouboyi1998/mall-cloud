@@ -158,6 +158,7 @@ public class LogPrintAspect {
                 // 判断形参个数和实参个数是否相等 (可能有同名的重载方法)
                 if (clazzs.length == arguments.length) {
                     // 获取 @LogPrint 注解上配置的描述信息
+                    description.append(method.getAnnotation(LogPrint.class).value());
                     description.append(method.getAnnotation(LogPrint.class).description());
                     break;
                 }

@@ -3,6 +3,8 @@ package com.cafe.file.fastdfs.service.impl;
 import com.cafe.file.fastdfs.model.FastdfsFile;
 import com.cafe.file.fastdfs.service.FastdfsService;
 import org.csource.fastdfs.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
@@ -21,14 +23,17 @@ import java.io.InputStream;
 @Service
 public class FastdfsServiceImpl implements FastdfsService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(FastdfsServiceImpl.class);
+
     static {
         try {
             // 获取配置文件位置
             String config = new ClassPathResource("fastdfs_client.conf").getPath();
             // 加载配置文件中的 Tracker 连接信息
             ClientGlobal.init(config);
+            LOGGER.info("Connect FastDFS tracker success.");
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("Connect FastDFS tracker fail: {}", e.getMessage());
         }
     }
 
