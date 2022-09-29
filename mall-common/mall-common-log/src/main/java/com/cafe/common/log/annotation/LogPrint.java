@@ -1,5 +1,7 @@
 package com.cafe.common.log.annotation;
 
+import org.springframework.core.annotation.AliasFor;
+
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -20,5 +22,10 @@ import java.lang.annotation.Target;
 // 注解添加的位置
 @Target(ElementType.METHOD)
 public @interface LogPrint {
+
+    @AliasFor("description")
+    String value() default "";
+
+    @AliasFor("value")
     String description() default "";
 }
