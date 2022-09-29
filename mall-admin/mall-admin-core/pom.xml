@@ -17,10 +17,6 @@
     <dependencies>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-constant</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
             <artifactId>mall-common-log</artifactId>
         </dependency>
         <dependency>
