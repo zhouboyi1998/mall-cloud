@@ -4,7 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.cafe.admin.feign.AdminFeign;
 import com.cafe.admin.feign.RoleFeign;
 import com.cafe.admin.model.Admin;
-import com.cafe.common.enumeration.ExceptionMessageEnum;
+import com.cafe.common.enumeration.HttpStatusCodeEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.CredentialsExpiredException;
@@ -51,17 +51,17 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (ObjectUtil.isNotNull(admin)) {
             User userDetails = new User(admin.getAdminName(), admin.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
             if (!userDetails.isEnabled()) {
-                throw new DisabledException(ExceptionMessageEnum.ACCOUNT_DISABLED.getMessage());
+                throw new DisabledException(HttpStatusCodeEnum.ACCOUNT_DISABLED.getMessage());
             } else if (!userDetails.isAccountNonLocked()) {
-                throw new LockedException(ExceptionMessageEnum.ACCOUNT_LOCKED.getMessage());
+                throw new LockedException(HttpStatusCodeEnum.ACCOUNT_LOCKED.getMessage());
             } else if (!userDetails.isAccountNonExpired()) {
-                throw new AccountExpiredException(ExceptionMessageEnum.ACCOUNT_EXPIRED.getMessage());
+                throw new AccountExpiredException(HttpStatusCodeEnum.ACCOUNT_EXPIRED.getMessage());
             } else if (!userDetails.isCredentialsNonExpired()) {
-                throw new CredentialsExpiredException(ExceptionMessageEnum.CREDENTIALS_EXPIRED.getMessage());
+                throw new CredentialsExpiredException(HttpStatusCodeEnum.CREDENTIALS_EXPIRED.getMessage());
             }
             return userDetails;
         } else {
-            throw new UsernameNotFoundException(ExceptionMessageEnum.USERNAME_NOTFOUND.getMessage());
+            throw new UsernameNotFoundException(HttpStatusCodeEnum.USERNAME_NOT_FOUND.getMessage());
         }
     }
 }

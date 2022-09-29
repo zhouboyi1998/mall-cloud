@@ -15,36 +15,12 @@
     <description>ElasticSearch 搜索模块核心业务</description>
 
     <dependencies>
-        <!-- Spring Boot Web 相关依赖 -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <!-- Hutool 工具包 -->
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-all</artifactId>
-        </dependency>
-        <!-- Nacos 注册中心-->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-        <!-- Hystrix 服务熔断、降级 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
-        </dependency>
         <!-- Spring Data ElasticSearch -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-common-constant</artifactId>
-        </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-log</artifactId>
