@@ -15,9 +15,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @SpringCloudApplication
 @EnableSwagger2WebMvc
 @ComponentScan(basePackages = "com.cafe")
-public class FileMinioApplication {
+public class MinioApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FileMinioApplication.class, args);
+        SpringApplication.run(MinioApplication.class, args);
     }
 }

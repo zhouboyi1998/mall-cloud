@@ -15,12 +15,10 @@
     <description>后台管理系统安全模块远程调用接口</description>
 
     <dependencies>
-        <!-- OpenFeign 远程方法调用 -->
         <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-core</artifactId>
         </dependency>
-
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-swagger</artifactId>

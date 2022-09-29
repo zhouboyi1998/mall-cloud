@@ -15,9 +15,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @SpringCloudApplication
 @EnableSwagger2WebMvc
 @ComponentScan(basePackages = "com.cafe")
-public class FileFastdfsApplication {
+public class FastdfsApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(FileFastdfsApplication.class, args);
+        SpringApplication.run(FastdfsApplication.class, args);
     }
 }

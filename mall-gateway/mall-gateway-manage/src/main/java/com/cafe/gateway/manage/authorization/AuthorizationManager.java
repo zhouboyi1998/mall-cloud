@@ -37,9 +37,9 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {
         // 获取所有角色列表 (拥有任意角色权限即可访问所有接口)
         Long size = redisTemplate.opsForList().size(RedisConstant.ROLE_NAME_LIST);
-        Object obj = redisTemplate.opsForList().range(RedisConstant.ROLE_NAME_LIST, 0, size);
-        List<String> authorities = Convert.toList(String.class, obj);
-        authorities = authorities
+        List<Object> list = redisTemplate.opsForList().range(RedisConstant.ROLE_NAME_LIST, 0, size);
+        List<String> roleNameList = Convert.toList(String.class, list);
+        roleNameList = roleNameList
             .stream()
             .map(i -> i = AuthenticationConstant.AUTHORITY_PREFIX + i)
             .collect(Collectors.toList());
@@ -49,7 +49,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
             .filter(Authentication::isAuthenticated)
             .flatMapIterable(Authentication::getAuthorities)
             .map(GrantedAuthority::getAuthority)
-            .any(authorities::contains)
+            .any(roleNameList::contains)
             .map(AuthorizationDecision::new)
             .defaultIfEmpty(new AuthorizationDecision(false));
     }

@@ -79,16 +79,6 @@
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-redis</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-security-manage-api</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.cafe</groupId>
-                    <artifactId>mall-common-swagger</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
     </dependencies>
 
 </project>

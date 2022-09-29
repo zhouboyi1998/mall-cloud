@@ -1,4 +1,4 @@
-package com.cafe.monitor.binlog;
+package com.cafe.monitor.canal;
 
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -7,17 +7,19 @@ import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.monitor.binlog
+ * @Package: com.cafe.monitor.canal
  * @Author: zhouboyi
- * @Date: 2022/5/16 15:06
- * @Description: MySQL Binlog 数据库监听模块启动类
+ * @Date: 2022/7/13 20:52
+ * @Description:
  */
 @SpringBootApplication
 @ComponentScan(basePackages = "com.cafe")
-public class MonitorBinlogApplication {
+public class CanalApplication {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(MonitorBinlogApplication.class)
+        // 指定 RocketMQ 使用的日志框架
+        System.setProperty("rocketmq.client.logUseSlf4j", "true");
+        new SpringApplicationBuilder(CanalApplication.class)
             .web(WebApplicationType.NONE)
             .run(args);
     }
