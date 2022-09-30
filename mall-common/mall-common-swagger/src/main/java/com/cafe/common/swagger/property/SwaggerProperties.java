@@ -18,7 +18,7 @@ public class SwaggerProperties {
     /**
      * 微服务名称
      */
-    @Value("${spring.application.name}")
+    @Value(value = "${spring.application.name}")
     private String applicationName;
 
     /**

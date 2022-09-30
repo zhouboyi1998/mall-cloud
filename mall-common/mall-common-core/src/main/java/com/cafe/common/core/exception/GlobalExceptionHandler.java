@@ -23,7 +23,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity handler(Exception e) {
-        LOGGER.error("GlobalExceptionHandler catch exception: {}", e.getMessage());
+        LOGGER.error("GlobalExceptionHandler.handler(): catch exception -> {}", e.getMessage());
         return ResponseEntity
             .status(HttpStatus.INTERNAL_SERVER_ERROR)
             .body(HttpStatusCodeEnum.MALL_INTERNAL_SERVER_ERROR.getMessage());

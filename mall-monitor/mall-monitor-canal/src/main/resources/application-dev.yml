@@ -17,7 +17,7 @@ rocketmq:
     # 生产者组名
     group: GROUP-ES
 
-# 数据库监听配置
+# Canal 数据库监听配置 (数据库信息配置)
 canal:
   host: 127.0.0.1
   port: 11111
@@ -25,11 +25,3 @@ canal:
   username: canal
   password: canal
   batch-size: 1000
-  rabbit-table:
-    - mall_admin.mall_role
-    - mall_admin.mall_role_menu
-  rocket-table:
-    - mall_goods.mall_sku
-    - mall_goods.mall_spu
-    - mall_goods.mall_brand
-    - mall_goods.mall_category

@@ -51,7 +51,7 @@ public class MyBatisGenerator {
                 System.out.println(warning);
             }
         } catch (Exception e) {
-            LOGGER.error("MyBatisGenerator.generate() failed to generate code: {}", e.getMessage());
+            LOGGER.error("MyBatisGenerator.generate(): failed to generate code -> {}", e.getMessage());
         }
     }
 

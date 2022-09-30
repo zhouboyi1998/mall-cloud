@@ -15,17 +15,14 @@ import java.lang.annotation.Target;
  * @Date: 2022/9/16 9:19
  * @Description: 接口日志打印注解
  */
-// 生成 Java 文档时, 文档只会记录有 @Documented 修饰的注解
 @Documented
-// 注解保留策略, RUNTIME: 一直保留到运行阶段 (JVM 加载 .class 文件后, 注解仍然保留)
 @Retention(RetentionPolicy.RUNTIME)
-// 注解添加的位置
 @Target(ElementType.METHOD)
 public @interface LogPrint {
 
-    @AliasFor("description")
+    @AliasFor(value = "description")
     String value() default "";
 
-    @AliasFor("value")
+    @AliasFor(value = "value")
     String description() default "";
 }

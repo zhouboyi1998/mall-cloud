@@ -2,7 +2,12 @@ package com.cafe.file.fastdfs.service.impl;
 
 import com.cafe.file.fastdfs.model.FastdfsFile;
 import com.cafe.file.fastdfs.service.FastdfsService;
-import org.csource.fastdfs.*;
+import org.csource.fastdfs.ClientGlobal;
+import org.csource.fastdfs.FileInfo;
+import org.csource.fastdfs.StorageClient;
+import org.csource.fastdfs.StorageServer;
+import org.csource.fastdfs.TrackerClient;
+import org.csource.fastdfs.TrackerServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.ClassPathResource;
@@ -27,13 +32,13 @@ public class FastdfsServiceImpl implements FastdfsService {
 
     static {
         try {
-            // 获取配置文件位置
+            // 获取配置文件的路径
             String config = new ClassPathResource("fastdfs_client.conf").getPath();
             // 加载配置文件中的 Tracker 连接信息
             ClientGlobal.init(config);
-            LOGGER.info("Connect FastDFS tracker success.");
+            LOGGER.info("FastdfsServiceImpl: Connect FastDFS tracker success.");
         } catch (Exception e) {
-            LOGGER.error("Connect FastDFS tracker fail: {}", e.getMessage());
+            LOGGER.error("FastdfsServiceImpl: Connect FastDFS tracker fail -> {}", e.getMessage());
         }
     }
 

@@ -48,7 +48,7 @@ public class MyBatisPlusGenerator {
             // 关闭输入流
             inputStream.close();
         } catch (Exception e) {
-            LOGGER.error("MyBatisPlusGenerator failed to create properties: {}", e.getMessage());
+            LOGGER.error("MyBatisPlusGenerator: failed to create properties -> {}", e.getMessage());
         }
     }
 
