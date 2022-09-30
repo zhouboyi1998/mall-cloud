@@ -4,3 +4,9 @@ spring:
   # 自动装配时排除 JDBC 数据源配置
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+# Binlog 数据库监听配置 (监听表配置)
+binlog:
+  table:
+    - mall_admin.mall_role
+    - mall_admin.mall_role_menu

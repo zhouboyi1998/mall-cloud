@@ -41,7 +41,7 @@ public class RocketMQSkuConsumer implements RocketMQListener<String> {
 
     @Override
     public void onMessage(String message) {
-        LOGGER.info("SKU JSON Message: {}", message);
+        LOGGER.info("RocketMQSkuConsumer.onMessage(): SKU JSON Message -> {}", message);
         // 获取消息内容
         Map<String, Object> content = JSONUtil.parseObj(message);
         // 获取变更的类型
@@ -70,7 +70,7 @@ public class RocketMQSkuConsumer implements RocketMQListener<String> {
                 goodsService.importBatch(importIds);
             }
         } catch (IOException e) {
-            LOGGER.error("Failed to update sku: {}", e.getMessage());
+            LOGGER.error("RocketMQSkuConsumer.onMessage(): Failed to update sku -> {}", e.getMessage());
         }
     }
 }

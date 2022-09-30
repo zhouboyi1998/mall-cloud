@@ -40,7 +40,7 @@ public class RocketMQBrandConsumer implements RocketMQListener<String> {
 
     @Override
     public void onMessage(String message) {
-        LOGGER.info("Brand JSON Message: {}", message);
+        LOGGER.info("RocketMQBrandConsumer.onMessage(): Brand JSON Message -> {}", message);
         // 获取消息内容
         Map<String, Object> content = JSONUtil.parseObj(message);
         // 获取变更后的数据
@@ -55,7 +55,7 @@ public class RocketMQBrandConsumer implements RocketMQListener<String> {
                     GoodsField.BRAND_NAME, brand.getBrandName()
                 );
             } catch (IOException e) {
-                LOGGER.error("Failed to update brand: {}", e.getMessage());
+                LOGGER.error("RocketMQBrandConsumer.onMessage(): Failed to update brand -> {}", e.getMessage());
             }
         }
     }
