@@ -27,6 +27,7 @@ canal:
   batch-size: 1000
   rabbit-table:
     - mall_admin.mall_role
+    - mall_admin.mall_role_menu
   rocket-table:
     - mall_goods.mall_sku
     - mall_goods.mall_spu
