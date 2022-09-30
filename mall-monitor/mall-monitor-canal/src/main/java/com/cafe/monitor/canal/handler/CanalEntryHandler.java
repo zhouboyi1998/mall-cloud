@@ -57,13 +57,13 @@ public class CanalEntryHandler {
             try {
                 rowChange = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
             } catch (Exception e) {
-                throw new RuntimeException("ERROR: Failed to parser from entry store value, entry: " + entry, e);
+                throw new RuntimeException("CanalEntryHandler.handler(): Failed to parser from entry store value, entry -> " + entry, e);
             }
 
             // 获取 Entry Header
             CanalEntry.Header header = entry.getHeader();
             // 打印日志
-            LOGGER.info("Database: {}, Table: {}, Operation: {}",
+            LOGGER.info("CanalEntryHandler.handler(): Database -> {}, Table -> {}, Operation -> {}",
                 header.getSchemaName(), header.getTableName(), header.getEventType());
 
             // 判断是否为需要处理的表

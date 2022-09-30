@@ -40,7 +40,7 @@ public class RocketMQSpuConsumer implements RocketMQListener<String> {
 
     @Override
     public void onMessage(String message) {
-        LOGGER.info("SPU JSON Message: {}", message);
+        LOGGER.info("RocketMQSpuConsumer.onMessage(): SPU JSON Message -> {}", message);
         // 获取消息内容
         Map<String, Object> content = JSONUtil.parseObj(message);
         // 获取变更后的数据
@@ -55,7 +55,7 @@ public class RocketMQSpuConsumer implements RocketMQListener<String> {
                     GoodsField.SPU_NAME, spu.getSpuName()
                 );
             } catch (IOException e) {
-                LOGGER.error("Failed to update spu: {}", e.getMessage());
+                LOGGER.error("RocketMQSpuConsumer.onMessage(): Failed to update spu -> {}", e.getMessage());
             }
         }
     }

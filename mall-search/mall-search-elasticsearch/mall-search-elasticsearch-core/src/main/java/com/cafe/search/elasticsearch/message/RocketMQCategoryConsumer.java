@@ -40,7 +40,7 @@ public class RocketMQCategoryConsumer implements RocketMQListener<String> {
 
     @Override
     public void onMessage(String message) {
-        LOGGER.info("Category JSON Message: {}", message);
+        LOGGER.info("RocketMQCategoryConsumer.onMessage(): Category JSON Message -> {}", message);
         // 获取消息内容
         Map<String, Object> content = JSONUtil.parseObj(message);
         // 获取变更后的数据
@@ -55,7 +55,7 @@ public class RocketMQCategoryConsumer implements RocketMQListener<String> {
                     GoodsField.CATEGORY_NAME, category.getCategoryName()
                 );
             } catch (IOException e) {
-                LOGGER.error("Failed to update category: {}", e.getMessage());
+                LOGGER.error("RocketMQCategoryConsumer.onMessage(): Failed to update category -> {}", e.getMessage());
             }
         }
     }
