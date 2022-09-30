@@ -36,20 +36,22 @@ public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
      */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        // 获取 Request 中的 Token
         String token = exchange.getRequest().getHeaders().getFirst(AuthenticationConstant.JWT_TOKEN_HEADER);
+        // 如果 Token 为空, 直接返回
         if (StrUtil.isEmpty(token)) {
             return chain.filter(exchange);
         }
         try {
-            // 从 Token 中解析用户信息并设置到 Header 中
-            // 解析令牌
+            // 从 Token 中解析用户信息并设置到 Request Header 中
+            // 解析 Token
             String realToken = token.replace(AuthenticationConstant.JWT_TOKEN_PREFIX, "");
             JWSObject jwsObject = JWSObject.parse(realToken);
             // 获取用户信息
             String userStr = jwsObject.getPayload().toString();
             // 打印日志
-            LOGGER.info("AuthenticationGlobalFilter.filter() user-details:{}", userStr);
-            // 将用户信息设置到请求头中
+            LOGGER.info("AuthenticationGlobalFilter.filter(): user-details -> {}", userStr);
+            // 将用户信息设置到 Request Header 中
             ServerHttpRequest request = exchange
                 .getRequest()
                 .mutate()
@@ -60,7 +62,7 @@ public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
                 .request(request)
                 .build();
         } catch (ParseException e) {
-            LOGGER.error("AuthenticationGlobalFilter.filter() failed to parse token: {}", e.getMessage());
+            LOGGER.error("AuthenticationGlobalFilter.filter(): failed to parse token -> {}", e.getMessage());
         }
         return chain.filter(exchange);
     }

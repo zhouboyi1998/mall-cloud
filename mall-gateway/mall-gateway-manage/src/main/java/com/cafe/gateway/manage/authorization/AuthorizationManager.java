@@ -3,6 +3,8 @@ package com.cafe.gateway.manage.authorization;
 import cn.hutool.core.convert.Convert;
 import com.cafe.common.constant.AuthenticationConstant;
 import com.cafe.common.constant.RedisConstant;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authorization.AuthorizationDecision;
@@ -14,7 +16,6 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -26,6 +27,8 @@ import java.util.stream.Collectors;
 @Component
 public class AuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizationManager.class);
+
     private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
@@ -35,16 +38,19 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
 
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {
-        // 获取所有角色列表 (拥有任意角色权限即可访问所有接口)
-        Long size = redisTemplate.opsForList().size(RedisConstant.ROLE_NAME_LIST);
-        List<Object> list = redisTemplate.opsForList().range(RedisConstant.ROLE_NAME_LIST, 0, size);
+        // 获取当前请求路径, 切割成数组
+        String[] array = authorizationContext.getExchange().getRequest().getPath().toString().split("/");
+        // 获取当前菜单路径
+        StringBuilder path = new StringBuilder("/");
+        if (array.length > AuthenticationConstant.MENU_PATH_INDEX) {
+            path.append(array[AuthenticationConstant.MENU_PATH_INDEX]);
+            LOGGER.info("AuthorizationManager.check(): menu-path -> {}", path);
+        }
+        // 获取可以访问当前菜单的角色列表
+        Object list = redisTemplate.opsForHash().get(RedisConstant.MENU_ROLE_MAP, path.toString());
         List<String> roleNameList = Convert.toList(String.class, list);
-        roleNameList = roleNameList
-            .stream()
-            .map(i -> i = AuthenticationConstant.AUTHORITY_PREFIX + i)
-            .collect(Collectors.toList());
 
-        // 认证通过且角色匹配的用户可访问当前路径
+        // 当用户认证通过, 且用户的角色可以访问当前菜单, 当前用户可以访问当前请求
         return mono
             .filter(Authentication::isAuthenticated)
             .flatMapIterable(Authentication::getAuthorities)
