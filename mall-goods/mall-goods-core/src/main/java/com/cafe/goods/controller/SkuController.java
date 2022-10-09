@@ -46,7 +46,7 @@ public class SkuController {
         this.skuService = skuService;
     }
 
-    @LogPrint(description = "查询Stock Keeping Unit 库存量单位列表")
+    @LogPrint(value = "查询Stock Keeping Unit 库存量单位列表")
     @ApiOperation(value = "查询Stock Keeping Unit 库存量单位列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Sku>> list() {
@@ -54,7 +54,7 @@ public class SkuController {
         return ResponseEntity.ok(skuList);
     }
 
-    @LogPrint(description = "根据条件查询Stock Keeping Unit 库存量单位列表")
+    @LogPrint(value = "根据条件查询Stock Keeping Unit 库存量单位列表")
     @ApiOperation(value = "根据条件查询Stock Keeping Unit 库存量单位列表")
     @ApiImplicitParam(name = "sku", value = "Stock Keeping Unit 库存量单位Model", required = true, paramType = "body", dataType = "Sku")
     @PostMapping(value = "/list")
@@ -64,7 +64,7 @@ public class SkuController {
         return ResponseEntity.ok(skuList);
     }
 
-    @LogPrint(description = "分页查询Stock Keeping Unit 库存量单位列表")
+    @LogPrint(value = "分页查询Stock Keeping Unit 库存量单位列表")
     @ApiOperation(value = "分页查询Stock Keeping Unit 库存量单位列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -80,7 +80,7 @@ public class SkuController {
         return ResponseEntity.ok(skuPage);
     }
 
-    @LogPrint(description = "根据条件分页查询Stock Keeping Unit 库存量单位")
+    @LogPrint(value = "根据条件分页查询Stock Keeping Unit 库存量单位")
     @ApiOperation(value = "根据条件分页查询Stock Keeping Unit 库存量单位")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -99,7 +99,7 @@ public class SkuController {
         return ResponseEntity.ok(skuPage);
     }
 
-    @LogPrint(description = "根据id查询单个Stock Keeping Unit 库存量单位")
+    @LogPrint(value = "根据id查询单个Stock Keeping Unit 库存量单位")
     @ApiOperation(value = "根据id查询单个Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "id", value = "Stock Keeping Unit 库存量单位id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
@@ -109,7 +109,7 @@ public class SkuController {
         return ResponseEntity.ok(sku);
     }
 
-    @LogPrint(description = "新增Stock Keeping Unit 库存量单位")
+    @LogPrint(value = "新增Stock Keeping Unit 库存量单位")
     @ApiOperation(value = "新增Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "sku", value = "Stock Keeping Unit 库存量单位Model", required = true, paramType = "body", dataType = "Sku")
     @PostMapping(value = "/insert")
@@ -120,7 +120,7 @@ public class SkuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据id修改Stock Keeping Unit 库存量单位")
+    @LogPrint(value = "根据id修改Stock Keeping Unit 库存量单位")
     @ApiOperation(value = "根据id修改Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "sku", value = "Stock Keeping Unit 库存量单位Model", required = true, paramType = "body", dataType = "Sku")
     @PutMapping(value = "/update")
@@ -129,7 +129,7 @@ public class SkuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据ids批量修改Stock Keeping Unit 库存量单位")
+    @LogPrint(value = "根据ids批量修改Stock Keeping Unit 库存量单位")
     @ApiOperation(value = "根据ids批量修改Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "skuList", value = "Stock Keeping Unit 库存量单位列表", required = true, paramType = "body", dataType = "List<Sku>")
     @PutMapping(value = "/update/batch")
@@ -138,7 +138,7 @@ public class SkuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据id删除Stock Keeping Unit 库存量单位")
+    @LogPrint(value = "根据id删除Stock Keeping Unit 库存量单位")
     @ApiOperation(value = "根据id删除Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "id", value = "Stock Keeping Unit 库存量单位id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
@@ -147,7 +147,7 @@ public class SkuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据ids批量删除Stock Keeping Unit 库存量单位")
+    @LogPrint(value = "根据ids批量删除Stock Keeping Unit 库存量单位")
     @ApiOperation(value = "根据ids批量删除Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "ids", value = "Stock Keeping Unit 库存量单位id列表", required = true, paramType = "body", dataType = "List<Long>")
     @DeleteMapping(value = "/delete/batch")
@@ -156,7 +156,7 @@ public class SkuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "分页查询Stock Keeping Unit 库存量单位列表")
+    @LogPrint(value = "分页查询Stock Keeping Unit 库存量单位列表")
     @ApiOperation(value = "分页查询Stock Keeping Unit 库存量单位列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -169,7 +169,7 @@ public class SkuController {
         return ResponseEntity.ok(skuPage);
     }
 
-    @LogPrint(description = "根据条件分页查询Stock Keeping Unit 库存量单位")
+    @LogPrint(value = "根据条件分页查询Stock Keeping Unit 库存量单位")
     @ApiOperation(value = "根据条件分页查询Stock Keeping Unit 库存量单位")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -188,7 +188,7 @@ public class SkuController {
         return ResponseEntity.ok(skuPage);
     }
 
-    @LogPrint(description = "根据id查询单个Stock Keeping Unit 库存量单位")
+    @LogPrint(value = "根据id查询单个Stock Keeping Unit 库存量单位")
     @ApiOperation(value = "根据id查询单个Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "id", value = "Stock Keeping Unit 库存量单位id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
@@ -198,7 +198,7 @@ public class SkuController {
         return ResponseEntity.ok(sku);
     }
 
-    @LogPrint(description = "根据id删除Stock Keeping Unit 库存量单位")
+    @LogPrint(value = "根据id删除Stock Keeping Unit 库存量单位")
     @ApiOperation(value = "根据id删除Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "id", value = "Stock Keeping Unit 库存量单位id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
@@ -207,7 +207,7 @@ public class SkuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "分页查询 SkuElasticSearchDTO 列表")
+    @LogPrint(value = "分页查询 SkuElasticSearchDTO 列表")
     @ApiOperation(value = "分页查询 SkuElasticSearchDTO 列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -223,7 +223,7 @@ public class SkuController {
         return ResponseEntity.ok(dtoPage);
     }
 
-    @LogPrint(description = "根据 SKU ids 查询 SkuElasticSearchDTO 列表")
+    @LogPrint(value = "根据 SKU ids 查询 SkuElasticSearchDTO 列表")
     @ApiOperation(value = "根据 SKU ids 查询 SkuElasticSearchDTO 列表")
     @ApiImplicitParam(name = "ids", value = "SKU ids", required = true, paramType = "body", dataType = "List<Long>")
     @PostMapping(value = "/list/es")

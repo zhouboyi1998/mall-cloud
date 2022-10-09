@@ -45,7 +45,7 @@ public class CategoryBrandController {
         this.categoryBrandService = categoryBrandService;
     }
 
-    @LogPrint(description = "查询分类-品牌关联列表")
+    @LogPrint(value = "查询分类-品牌关联列表")
     @ApiOperation(value = "查询分类-品牌关联列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<CategoryBrand>> list() {
@@ -53,7 +53,7 @@ public class CategoryBrandController {
         return ResponseEntity.ok(categoryBrandList);
     }
 
-    @LogPrint(description = "根据条件查询分类-品牌关联列表")
+    @LogPrint(value = "根据条件查询分类-品牌关联列表")
     @ApiOperation(value = "根据条件查询分类-品牌关联列表")
     @ApiImplicitParam(name = "categoryBrand", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrand")
     @PostMapping(value = "/list")
@@ -63,7 +63,7 @@ public class CategoryBrandController {
         return ResponseEntity.ok(categoryBrandList);
     }
 
-    @LogPrint(description = "分页查询分类-品牌关联列表")
+    @LogPrint(value = "分页查询分类-品牌关联列表")
     @ApiOperation(value = "分页查询分类-品牌关联列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -79,7 +79,7 @@ public class CategoryBrandController {
         return ResponseEntity.ok(categoryBrandPage);
     }
 
-    @LogPrint(description = "根据条件分页查询分类-品牌关联")
+    @LogPrint(value = "根据条件分页查询分类-品牌关联")
     @ApiOperation(value = "根据条件分页查询分类-品牌关联")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -98,7 +98,7 @@ public class CategoryBrandController {
         return ResponseEntity.ok(categoryBrandPage);
     }
 
-    @LogPrint(description = "根据id查询单个分类-品牌关联")
+    @LogPrint(value = "根据id查询单个分类-品牌关联")
     @ApiOperation(value = "根据id查询单个分类-品牌关联")
     @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
@@ -108,7 +108,7 @@ public class CategoryBrandController {
         return ResponseEntity.ok(categoryBrand);
     }
 
-    @LogPrint(description = "新增分类-品牌关联")
+    @LogPrint(value = "新增分类-品牌关联")
     @ApiOperation(value = "新增分类-品牌关联")
     @ApiImplicitParam(name = "categoryBrand", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrand")
     @PostMapping(value = "/insert")
@@ -119,7 +119,7 @@ public class CategoryBrandController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据id修改分类-品牌关联")
+    @LogPrint(value = "根据id修改分类-品牌关联")
     @ApiOperation(value = "根据id修改分类-品牌关联")
     @ApiImplicitParam(name = "categoryBrand", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrand")
     @PutMapping(value = "/update")
@@ -128,7 +128,7 @@ public class CategoryBrandController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据ids批量修改分类-品牌关联")
+    @LogPrint(value = "根据ids批量修改分类-品牌关联")
     @ApiOperation(value = "根据ids批量修改分类-品牌关联")
     @ApiImplicitParam(name = "categoryBrandList", value = "分类-品牌关联列表", required = true, paramType = "body", dataType = "List<CategoryBrand>")
     @PutMapping(value = "/update/batch")
@@ -137,7 +137,7 @@ public class CategoryBrandController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据id删除分类-品牌关联")
+    @LogPrint(value = "根据id删除分类-品牌关联")
     @ApiOperation(value = "根据id删除分类-品牌关联")
     @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
@@ -146,7 +146,7 @@ public class CategoryBrandController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据ids批量删除分类-品牌关联")
+    @LogPrint(value = "根据ids批量删除分类-品牌关联")
     @ApiOperation(value = "根据ids批量删除分类-品牌关联")
     @ApiImplicitParam(name = "ids", value = "分类-品牌关联id列表", required = true, paramType = "body", dataType = "List<Long>")
     @DeleteMapping(value = "/delete/batch")
@@ -155,7 +155,7 @@ public class CategoryBrandController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "分页查询分类-品牌关联")
+    @LogPrint(value = "分页查询分类-品牌关联")
     @ApiOperation(value = "分页查询分类-品牌关联")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -168,7 +168,7 @@ public class CategoryBrandController {
         return ResponseEntity.ok(categoryBrandPage);
     }
 
-    @LogPrint(description = "根据条件分页查询分类-品牌关联")
+    @LogPrint(value = "根据条件分页查询分类-品牌关联")
     @ApiOperation(value = "根据条件分页查询分类-品牌关联")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -187,7 +187,7 @@ public class CategoryBrandController {
         return ResponseEntity.ok(categoryBrandPage);
     }
 
-    @LogPrint(description = "根据id查询单个分类-品牌关联")
+    @LogPrint(value = "根据id查询单个分类-品牌关联")
     @ApiOperation(value = "根据id查询单个分类-品牌关联")
     @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
@@ -197,7 +197,7 @@ public class CategoryBrandController {
         return ResponseEntity.ok(categoryBrand);
     }
 
-    @LogPrint(description = "根据id删除分类-品牌关联")
+    @LogPrint(value = "根据id删除分类-品牌关联")
     @ApiOperation(value = "根据id删除分类-品牌关联")
     @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")

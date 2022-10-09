@@ -42,7 +42,7 @@ public class OauthController {
      * @return
      * @throws HttpRequestMethodNotSupportedException
      */
-    @LogPrint(description = "Oauth2 登录认证")
+    @LogPrint(value = "Oauth2 登录认证")
     @ApiOperation(value = "Oauth2 登录认证")
     @ApiImplicitParam(name = "parameters", value = "登录认证参数", required = true, paramType = "query", dataType = "Map<String, String>")
     @PostMapping(value = "/token")

@@ -29,7 +29,7 @@ public class KeyPairController {
         this.keyPairService = keyPairService;
     }
 
-    @LogPrint(description = "获取 RSA 公钥")
+    @LogPrint(value = "获取 RSA 公钥")
     @ApiOperation(value = "获取 RSA 公钥")
     @GetMapping(value = "/rsa")
     public ResponseEntity<Map<String, Object>> getRsaPublicKey() {

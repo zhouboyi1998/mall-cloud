@@ -45,7 +45,7 @@ public class BrandController {
         this.brandService = brandService;
     }
 
-    @LogPrint(description = "查询品牌列表")
+    @LogPrint(value = "查询品牌列表")
     @ApiOperation(value = "查询品牌列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Brand>> list() {
@@ -53,7 +53,7 @@ public class BrandController {
         return ResponseEntity.ok(brandList);
     }
 
-    @LogPrint(description = "根据条件查询品牌列表")
+    @LogPrint(value = "根据条件查询品牌列表")
     @ApiOperation(value = "根据条件查询品牌列表")
     @ApiImplicitParam(name = "brand", value = "品牌Model", required = true, paramType = "body", dataType = "Brand")
     @PostMapping(value = "/list")
@@ -63,7 +63,7 @@ public class BrandController {
         return ResponseEntity.ok(brandList);
     }
 
-    @LogPrint(description = "分页查询品牌列表")
+    @LogPrint(value = "分页查询品牌列表")
     @ApiOperation(value = "分页查询品牌列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -79,7 +79,7 @@ public class BrandController {
         return ResponseEntity.ok(brandPage);
     }
 
-    @LogPrint(description = "根据条件分页查询品牌")
+    @LogPrint(value = "根据条件分页查询品牌")
     @ApiOperation(value = "根据条件分页查询品牌")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -98,7 +98,7 @@ public class BrandController {
         return ResponseEntity.ok(brandPage);
     }
 
-    @LogPrint(description = "根据id查询单个品牌")
+    @LogPrint(value = "根据id查询单个品牌")
     @ApiOperation(value = "根据id查询单个品牌")
     @ApiImplicitParam(name = "id", value = "品牌id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
@@ -108,7 +108,7 @@ public class BrandController {
         return ResponseEntity.ok(brand);
     }
 
-    @LogPrint(description = "新增品牌")
+    @LogPrint(value = "新增品牌")
     @ApiOperation(value = "新增品牌")
     @ApiImplicitParam(name = "brand", value = "品牌Model", required = true, paramType = "body", dataType = "Brand")
     @PostMapping(value = "/insert")
@@ -119,7 +119,7 @@ public class BrandController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据id修改品牌")
+    @LogPrint(value = "根据id修改品牌")
     @ApiOperation(value = "根据id修改品牌")
     @ApiImplicitParam(name = "brand", value = "品牌Model", required = true, paramType = "body", dataType = "Brand")
     @PutMapping(value = "/update")
@@ -128,7 +128,7 @@ public class BrandController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据ids批量修改品牌")
+    @LogPrint(value = "根据ids批量修改品牌")
     @ApiOperation(value = "根据ids批量修改品牌")
     @ApiImplicitParam(name = "brandList", value = "品牌列表", required = true, paramType = "body", dataType = "List<Brand>")
     @PutMapping(value = "/update/batch")
@@ -137,7 +137,7 @@ public class BrandController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据id删除品牌")
+    @LogPrint(value = "根据id删除品牌")
     @ApiOperation(value = "根据id删除品牌")
     @ApiImplicitParam(name = "id", value = "品牌id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
@@ -146,7 +146,7 @@ public class BrandController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据ids批量删除品牌")
+    @LogPrint(value = "根据ids批量删除品牌")
     @ApiOperation(value = "根据ids批量删除品牌")
     @ApiImplicitParam(name = "ids", value = "品牌id列表", required = true, paramType = "body", dataType = "List<Long>")
     @DeleteMapping(value = "/delete/batch")
@@ -155,7 +155,7 @@ public class BrandController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "分页查询品牌列表")
+    @LogPrint(value = "分页查询品牌列表")
     @ApiOperation(value = "分页查询品牌列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -168,7 +168,7 @@ public class BrandController {
         return ResponseEntity.ok(brandPage);
     }
 
-    @LogPrint(description = "根据条件分页查询品牌")
+    @LogPrint(value = "根据条件分页查询品牌")
     @ApiOperation(value = "根据条件分页查询品牌")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -187,7 +187,7 @@ public class BrandController {
         return ResponseEntity.ok(brandPage);
     }
 
-    @LogPrint(description = "根据id查询单个品牌")
+    @LogPrint(value = "根据id查询单个品牌")
     @ApiOperation(value = "根据id查询单个品牌")
     @ApiImplicitParam(name = "id", value = "品牌id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
@@ -197,7 +197,7 @@ public class BrandController {
         return ResponseEntity.ok(brand);
     }
 
-    @LogPrint(description = "根据id删除品牌")
+    @LogPrint(value = "根据id删除品牌")
     @ApiOperation(value = "根据id删除品牌")
     @ApiImplicitParam(name = "id", value = "品牌id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")

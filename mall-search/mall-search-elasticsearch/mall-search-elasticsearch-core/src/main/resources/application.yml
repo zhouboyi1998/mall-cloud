@@ -23,3 +23,7 @@ hystrix:
           thread:
             # 超时熔断时间 10000 毫秒
             timeoutInMilliseconds: 10000
+
+# LogBack 配置
+logging:
+  config: classpath:logback/logback-${spring.profiles.active}.xml

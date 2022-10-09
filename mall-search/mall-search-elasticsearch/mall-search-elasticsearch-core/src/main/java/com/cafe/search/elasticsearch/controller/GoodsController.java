@@ -38,7 +38,7 @@ public class GoodsController {
         this.goodsService = goodsService;
     }
 
-    @LogPrint(description = "获取商品")
+    @LogPrint(value = "获取商品")
     @ApiOperation(value = "获取商品")
     @ApiImplicitParam(name = "_id", value = "ElasticSearch ID", required = true, paramType = "path", dataType = "String")
     @GetMapping(value = "/{_id}")
@@ -46,7 +46,7 @@ public class GoodsController {
         return ResponseEntity.ok(goodsService.one(_id));
     }
 
-    @LogPrint(description = "插入商品")
+    @LogPrint(value = "插入商品")
     @ApiOperation(value = "插入商品")
     @ApiImplicitParam(name = "dto", value = "商品", required = true, paramType = "body", dataType = "SkuElasticSearchDTO")
     @PostMapping(value = "")
@@ -54,7 +54,7 @@ public class GoodsController {
         return ResponseEntity.ok(goodsService.insert(dto));
     }
 
-    @LogPrint(description = "更新商品")
+    @LogPrint(value = "更新商品")
     @ApiOperation(value = "更新商品")
     @ApiImplicitParam(name = "dto", value = "商品", required = true, paramType = "body", dataType = "SkuElasticSearchDTO")
     @PutMapping(value = "")
@@ -62,7 +62,7 @@ public class GoodsController {
         return ResponseEntity.ok(goodsService.update(dto));
     }
 
-    @LogPrint(description = "删除商品")
+    @LogPrint(value = "删除商品")
     @ApiOperation(value = "删除商品")
     @ApiImplicitParam(name = "_id", value = "ElasticSearch ID", required = true, paramType = "path", dataType = "String")
     @DeleteMapping(value = "/{_id}")
@@ -70,7 +70,7 @@ public class GoodsController {
         return ResponseEntity.ok(goodsService.delete(_id));
     }
 
-    @LogPrint(description = "批量插入商品")
+    @LogPrint(value = "批量插入商品")
     @ApiOperation(value = "批量插入商品")
     @ApiImplicitParam(name = "dtoList", value = "商品列表", required = true, paramType = "body", dataType = "List<SkuElasticSearchDTO>")
     @PostMapping(value = "/batch")
@@ -78,7 +78,7 @@ public class GoodsController {
         return ResponseEntity.ok(goodsService.insertBatch(dtoList));
     }
 
-    @LogPrint(description = "批量更新商品")
+    @LogPrint(value = "批量更新商品")
     @ApiOperation(value = "批量更新商品")
     @ApiImplicitParam(name = "dtoList", value = "商品列表", required = true, paramType = "body", dataType = "List<SkuElasticSearchDTO>")
     @PutMapping(value = "/batch")
@@ -86,7 +86,7 @@ public class GoodsController {
         return ResponseEntity.ok(goodsService.updateBatch(dtoList));
     }
 
-    @LogPrint(description = "批量删除商品")
+    @LogPrint(value = "批量删除商品")
     @ApiOperation(value = "批量删除商品")
     @ApiImplicitParam(name = "_ids", value = "ElasticSearch ID List", required = true, paramType = "body", dataType = "List<String>")
     @DeleteMapping(value = "/batch")
@@ -94,7 +94,7 @@ public class GoodsController {
         return ResponseEntity.ok(goodsService.deleteBatch(_ids));
     }
 
-    @LogPrint(description = "分页查询商品")
+    @LogPrint(value = "分页查询商品")
     @ApiOperation(value = "分页查询商品")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Integer"),
@@ -114,7 +114,7 @@ public class GoodsController {
         return ResponseEntity.ok(goodsService.page(current, size, keyword, sort, rule));
     }
 
-    @LogPrint(description = "批量导入商品")
+    @LogPrint(value = "批量导入商品")
     @ApiOperation(value = "批量导入商品")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
