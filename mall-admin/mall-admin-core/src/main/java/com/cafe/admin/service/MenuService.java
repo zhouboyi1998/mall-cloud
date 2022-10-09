@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.cafe.admin.model.Menu;
 import com.cafe.admin.vo.MenuTreeVO;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -17,10 +16,10 @@ import java.util.List;
 public interface MenuService extends IService<Menu> {
 
     /**
-     * 获取树形格式的菜单列表
+     * 根据角色列表获取树形格式的菜单列表
      *
-     * @param request
+     * @param userDetails 用户详细信息
      * @return
      */
-    List<MenuTreeVO> listMenuTree(HttpServletRequest request);
+    List<MenuTreeVO> listMenuTree(String userDetails);
 }

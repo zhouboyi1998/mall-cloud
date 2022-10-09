@@ -25,7 +25,7 @@
         id, menu_name, menu_title, menu_icon, menu_path, parent_id, menu_level, menu_code, menu_type, sort, menu_status, create_time, update_time, is_deleted
     </sql>
 
-    <select id="listMenuTreeVO" resultType="com.cafe.admin.vo.MenuTreeVO">
+    <select id="listMenuTree" resultType="com.cafe.admin.vo.MenuTreeVO">
         SELECT DISTINCT m.id, m.menu_name, m.menu_title, m.menu_icon, m.menu_path, m.parent_id, m.sort
         FROM mall_menu AS m
         LEFT JOIN mall_role_menu AS rm ON rm.menu_id = m.id
