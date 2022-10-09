@@ -1,7 +1,6 @@
 package com.cafe.admin.service.impl;
 
 import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.admin.dao.MenuMapper;
@@ -12,7 +11,6 @@ import com.cafe.common.constant.AuthenticationConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,18 +32,17 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     }
 
     @Override
-    public List<MenuTreeVO> listMenuTree(HttpServletRequest request) {
-        // 获取请求头中的 user 详细信息, 转换为 JSON 对象
-        JSONObject userDetails
-            = JSONUtil.parseObj(request.getHeader(AuthenticationConstant.USER_DETAILS_HEADER));
-        // 获取角色列表, 转换为 List 对象
-        List<String> roleNameList
-            = ((JSONArray) userDetails.get(AuthenticationConstant.AUTHORITY_CLAIM_NAME)).toList(String.class);
+    public List<MenuTreeVO> listMenuTree(String userDetails) {
+        // 将用户详细信息转换为 JSON 对象, 从用户详细信息中获取角色列表
+        List<String> roleNameList = ((JSONArray) JSONUtil
+            .parseObj(userDetails)
+            .get(AuthenticationConstant.AUTHORITY_CLAIM_NAME))
+            .toList(String.class);
 
-        // 根据角色列表获取对应的菜单列表树形VO
-        List<MenuTreeVO> menuList = menuMapper.listMenuTreeVO(roleNameList);
+        // 根据角色列表获取对应的菜单列表树形格式 VO
+        List<MenuTreeVO> menuList = menuMapper.listMenuTree(roleNameList);
         // 组装成树形格式, 设置 children 字段
-        List<MenuTreeVO> menuTreeVOList = menuList
+        List<MenuTreeVO> menuTreeList = menuList
             .stream()
             // 筛选出所有一级菜单
             .filter(menuTreeVO -> menuTreeVO.getParentId().equals(0L))
@@ -53,7 +50,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
             .map((menuTreeVO) -> menuTreeVO.setChildren(getChildren(menuTreeVO, menuList)))
             .collect(Collectors.toList());
 
-        return menuTreeVOList;
+        return menuTreeList;
     }
 
     /**
