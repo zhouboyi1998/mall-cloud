@@ -45,7 +45,7 @@ public class SpuController {
         this.spuService = spuService;
     }
 
-    @LogPrint(description = "查询Standard Product Unit 标准化产品单元列表")
+    @LogPrint(value = "查询Standard Product Unit 标准化产品单元列表")
     @ApiOperation(value = "查询Standard Product Unit 标准化产品单元列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Spu>> list() {
@@ -53,7 +53,7 @@ public class SpuController {
         return ResponseEntity.ok(spuList);
     }
 
-    @LogPrint(description = "根据条件查询Standard Product Unit 标准化产品单元列表")
+    @LogPrint(value = "根据条件查询Standard Product Unit 标准化产品单元列表")
     @ApiOperation(value = "根据条件查询Standard Product Unit 标准化产品单元列表")
     @ApiImplicitParam(name = "spu", value = "Standard Product Unit 标准化产品单元Model", required = true, paramType = "body", dataType = "Spu")
     @PostMapping(value = "/list")
@@ -63,7 +63,7 @@ public class SpuController {
         return ResponseEntity.ok(spuList);
     }
 
-    @LogPrint(description = "分页查询Standard Product Unit 标准化产品单元列表")
+    @LogPrint(value = "分页查询Standard Product Unit 标准化产品单元列表")
     @ApiOperation(value = "分页查询Standard Product Unit 标准化产品单元列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -79,7 +79,7 @@ public class SpuController {
         return ResponseEntity.ok(spuPage);
     }
 
-    @LogPrint(description = "根据条件分页查询Standard Product Unit 标准化产品单元")
+    @LogPrint(value = "根据条件分页查询Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据条件分页查询Standard Product Unit 标准化产品单元")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -98,7 +98,7 @@ public class SpuController {
         return ResponseEntity.ok(spuPage);
     }
 
-    @LogPrint(description = "根据id查询单个Standard Product Unit 标准化产品单元")
+    @LogPrint(value = "根据id查询单个Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据id查询单个Standard Product Unit 标准化产品单元")
     @ApiImplicitParam(name = "id", value = "Standard Product Unit 标准化产品单元id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
@@ -108,7 +108,7 @@ public class SpuController {
         return ResponseEntity.ok(spu);
     }
 
-    @LogPrint(description = "新增Standard Product Unit 标准化产品单元")
+    @LogPrint(value = "新增Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "新增Standard Product Unit 标准化产品单元")
     @ApiImplicitParam(name = "spu", value = "Standard Product Unit 标准化产品单元Model", required = true, paramType = "body", dataType = "Spu")
     @PostMapping(value = "/insert")
@@ -119,7 +119,7 @@ public class SpuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据id修改Standard Product Unit 标准化产品单元")
+    @LogPrint(value = "根据id修改Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据id修改Standard Product Unit 标准化产品单元")
     @ApiImplicitParam(name = "spu", value = "Standard Product Unit 标准化产品单元Model", required = true, paramType = "body", dataType = "Spu")
     @PutMapping(value = "/update")
@@ -128,7 +128,7 @@ public class SpuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据ids批量修改Standard Product Unit 标准化产品单元")
+    @LogPrint(value = "根据ids批量修改Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据ids批量修改Standard Product Unit 标准化产品单元")
     @ApiImplicitParam(name = "spuList", value = "Standard Product Unit 标准化产品单元列表", required = true, paramType = "body", dataType = "List<Spu>")
     @PutMapping(value = "/update/batch")
@@ -137,7 +137,7 @@ public class SpuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据id删除Standard Product Unit 标准化产品单元")
+    @LogPrint(value = "根据id删除Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据id删除Standard Product Unit 标准化产品单元")
     @ApiImplicitParam(name = "id", value = "Standard Product Unit 标准化产品单元id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
@@ -146,7 +146,7 @@ public class SpuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据ids批量删除Standard Product Unit 标准化产品单元")
+    @LogPrint(value = "根据ids批量删除Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据ids批量删除Standard Product Unit 标准化产品单元")
     @ApiImplicitParam(name = "ids", value = "Standard Product Unit 标准化产品单元id列表", required = true, paramType = "body", dataType = "List<Long>")
     @DeleteMapping(value = "/delete/batch")
@@ -155,7 +155,7 @@ public class SpuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "分页查询Standard Product Unit 标准化产品单元列表")
+    @LogPrint(value = "分页查询Standard Product Unit 标准化产品单元列表")
     @ApiOperation(value = "分页查询Standard Product Unit 标准化产品单元列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -168,7 +168,7 @@ public class SpuController {
         return ResponseEntity.ok(spuPage);
     }
 
-    @LogPrint(description = "根据条件分页查询Standard Product Unit 标准化产品单元")
+    @LogPrint(value = "根据条件分页查询Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据条件分页查询Standard Product Unit 标准化产品单元")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -187,7 +187,7 @@ public class SpuController {
         return ResponseEntity.ok(spuPage);
     }
 
-    @LogPrint(description = "根据id查询单个Standard Product Unit 标准化产品单元")
+    @LogPrint(value = "根据id查询单个Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据id查询单个Standard Product Unit 标准化产品单元")
     @ApiImplicitParam(name = "id", value = "Standard Product Unit 标准化产品单元id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
@@ -197,7 +197,7 @@ public class SpuController {
         return ResponseEntity.ok(spu);
     }
 
-    @LogPrint(description = "根据id删除Standard Product Unit 标准化产品单元")
+    @LogPrint(value = "根据id删除Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据id删除Standard Product Unit 标准化产品单元")
     @ApiImplicitParam(name = "id", value = "Standard Product Unit 标准化产品单元id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
