@@ -45,7 +45,7 @@ public class AdminRoleController {
         this.adminRoleService = adminRoleService;
     }
 
-    @LogPrint(description = "查询用户-角色关联列表")
+    @LogPrint(value = "查询用户-角色关联列表")
     @ApiOperation(value = "查询用户-角色关联列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<AdminRole>> list() {
@@ -53,7 +53,7 @@ public class AdminRoleController {
         return ResponseEntity.ok(adminRoleList);
     }
 
-    @LogPrint(description = "根据条件查询用户-角色关联列表")
+    @LogPrint(value = "根据条件查询用户-角色关联列表")
     @ApiOperation(value = "根据条件查询用户-角色关联列表")
     @ApiImplicitParam(name = "adminRole", value = "用户-角色关联Model", required = true, paramType = "body", dataType = "AdminRole")
     @PostMapping(value = "/list")
@@ -63,7 +63,7 @@ public class AdminRoleController {
         return ResponseEntity.ok(adminRoleList);
     }
 
-    @LogPrint(description = "分页查询用户-角色关联列表")
+    @LogPrint(value = "分页查询用户-角色关联列表")
     @ApiOperation(value = "分页查询用户-角色关联列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -79,7 +79,7 @@ public class AdminRoleController {
         return ResponseEntity.ok(adminRolePage);
     }
 
-    @LogPrint(description = "根据条件分页查询用户-角色关联")
+    @LogPrint(value = "根据条件分页查询用户-角色关联")
     @ApiOperation(value = "根据条件分页查询用户-角色关联")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -98,7 +98,7 @@ public class AdminRoleController {
         return ResponseEntity.ok(adminRolePage);
     }
 
-    @LogPrint(description = "根据id查询单个用户-角色关联")
+    @LogPrint(value = "根据id查询单个用户-角色关联")
     @ApiOperation(value = "根据id查询单个用户-角色关联")
     @ApiImplicitParam(name = "id", value = "用户-角色关联id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
@@ -108,7 +108,7 @@ public class AdminRoleController {
         return ResponseEntity.ok(adminRole);
     }
 
-    @LogPrint(description = "新增用户-角色关联")
+    @LogPrint(value = "新增用户-角色关联")
     @ApiOperation(value = "新增用户-角色关联")
     @ApiImplicitParam(name = "adminRole", value = "用户-角色关联Model", required = true, paramType = "body", dataType = "AdminRole")
     @PostMapping(value = "/insert")
@@ -119,7 +119,7 @@ public class AdminRoleController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据id修改用户-角色关联")
+    @LogPrint(value = "根据id修改用户-角色关联")
     @ApiOperation(value = "根据id修改用户-角色关联")
     @ApiImplicitParam(name = "adminRole", value = "用户-角色关联Model", required = true, paramType = "body", dataType = "AdminRole")
     @PutMapping(value = "/update")
@@ -128,7 +128,7 @@ public class AdminRoleController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据ids批量修改用户-角色关联")
+    @LogPrint(value = "根据ids批量修改用户-角色关联")
     @ApiOperation(value = "根据ids批量修改用户-角色关联")
     @ApiImplicitParam(name = "adminRoleList", value = "用户-角色关联列表", required = true, paramType = "body", dataType = "List<AdminRole>")
     @PutMapping(value = "/update/batch")
@@ -137,7 +137,7 @@ public class AdminRoleController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据id删除用户-角色关联")
+    @LogPrint(value = "根据id删除用户-角色关联")
     @ApiOperation(value = "根据id删除用户-角色关联")
     @ApiImplicitParam(name = "id", value = "用户-角色关联id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
@@ -146,7 +146,7 @@ public class AdminRoleController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据ids批量删除用户-角色关联")
+    @LogPrint(value = "根据ids批量删除用户-角色关联")
     @ApiOperation(value = "根据ids批量删除用户-角色关联")
     @ApiImplicitParam(name = "ids", value = "用户-角色关联id列表", required = true, paramType = "body", dataType = "List<Long>")
     @DeleteMapping(value = "/delete/batch")
@@ -155,7 +155,7 @@ public class AdminRoleController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "分页查询用户-角色关联列表")
+    @LogPrint(value = "分页查询用户-角色关联列表")
     @ApiOperation(value = "分页查询用户-角色关联列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -168,7 +168,7 @@ public class AdminRoleController {
         return ResponseEntity.ok(adminRolePage);
     }
 
-    @LogPrint(description = "根据条件分页查询用户-角色关联")
+    @LogPrint(value = "根据条件分页查询用户-角色关联")
     @ApiOperation(value = "根据条件分页查询用户-角色关联")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -187,7 +187,7 @@ public class AdminRoleController {
         return ResponseEntity.ok(adminRolePage);
     }
 
-    @LogPrint(description = "根据id查询单个用户-角色关联")
+    @LogPrint(value = "根据id查询单个用户-角色关联")
     @ApiOperation(value = "根据id查询单个用户-角色关联")
     @ApiImplicitParam(name = "id", value = "用户-角色关联id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
@@ -197,7 +197,7 @@ public class AdminRoleController {
         return ResponseEntity.ok(adminRole);
     }
 
-    @LogPrint(description = "根据id删除用户-角色关联")
+    @LogPrint(value = "根据id删除用户-角色关联")
     @ApiOperation(value = "根据id删除用户-角色关联")
     @ApiImplicitParam(name = "id", value = "用户-角色关联id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")

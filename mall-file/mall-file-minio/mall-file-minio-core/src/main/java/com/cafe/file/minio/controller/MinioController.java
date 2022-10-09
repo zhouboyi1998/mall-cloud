@@ -34,7 +34,7 @@ public class MinioController {
         this.minioService = minioService;
     }
 
-    @LogPrint(description = "文件上传")
+    @LogPrint(value = "文件上传")
     @ApiOperation(value = "文件上传")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "bucket", value = "存储桶", required = true, paramType = "path", dataType = "String"),
@@ -49,7 +49,7 @@ public class MinioController {
         return ResponseEntity.ok(result);
     }
 
-    @LogPrint(description = "文件下载")
+    @LogPrint(value = "文件下载")
     @ApiOperation(value = "文件下载")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "bucket", value = "存储桶", required = true, paramType = "path", dataType = "String"),
@@ -65,7 +65,7 @@ public class MinioController {
         return ResponseEntity.ok("success");
     }
 
-    @LogPrint(description = "获取文件外链 (永久)")
+    @LogPrint(value = "获取文件外链 (永久)")
     @ApiOperation(value = "获取文件外链 (永久)")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "bucket", value = "存储桶", required = true, paramType = "path", dataType = "String"),
@@ -80,7 +80,7 @@ public class MinioController {
         return ResponseEntity.ok(url);
     }
 
-    @LogPrint(description = "获取文件外链 (限时)")
+    @LogPrint(value = "获取文件外链 (限时)")
     @ApiOperation(value = "获取文件外链 (限时)")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "bucket", value = "存储桶", required = true, paramType = "path", dataType = "String"),

@@ -64,7 +64,7 @@ public class ${table.controllerName} {
         this.${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service;
     }
 
-    @LogPrint(description = "查询${table.comment}列表")
+    @LogPrint(value = "查询${table.comment}列表")
     @ApiOperation(value = "查询${table.comment}列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<${entity}>> list() {
@@ -72,7 +72,7 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List);
     }
 
-    @LogPrint(description = "根据条件查询${table.comment}列表")
+    @LogPrint(value = "根据条件查询${table.comment}列表")
     @ApiOperation(value = "根据条件查询${table.comment}列表")
     @ApiImplicitParam(name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", value = "${table.comment}Model", required = true, paramType = "body", dataType = "${entity}")
     @PostMapping(value = "/list")
@@ -82,7 +82,7 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List);
     }
 
-    @LogPrint(description = "分页查询${table.comment}列表")
+    @LogPrint(value = "分页查询${table.comment}列表")
     @ApiOperation(value = "分页查询${table.comment}列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -98,7 +98,7 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
     }
 
-    @LogPrint(description = "根据条件分页查询${table.comment}")
+    @LogPrint(value = "根据条件分页查询${table.comment}")
     @ApiOperation(value = "根据条件分页查询${table.comment}")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -117,7 +117,7 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
     }
 
-    @LogPrint(description = "根据id查询单个${table.comment}")
+    @LogPrint(value = "根据id查询单个${table.comment}")
     @ApiOperation(value = "根据id查询单个${table.comment}")
     @ApiImplicitParam(name = "id", value = "${table.comment}id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
@@ -127,7 +127,7 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
     }
 
-    @LogPrint(description = "新增${table.comment}")
+    @LogPrint(value = "新增${table.comment}")
     @ApiOperation(value = "新增${table.comment}")
     @ApiImplicitParam(name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", value = "${table.comment}Model", required = true, paramType = "body", dataType = "${entity}")
     @PostMapping(value = "/insert")
@@ -138,7 +138,7 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据id修改${table.comment}")
+    @LogPrint(value = "根据id修改${table.comment}")
     @ApiOperation(value = "根据id修改${table.comment}")
     @ApiImplicitParam(name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", value = "${table.comment}Model", required = true, paramType = "body", dataType = "${entity}")
     @PutMapping(value = "/update")
@@ -147,7 +147,7 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据ids批量修改${table.comment}")
+    @LogPrint(value = "根据ids批量修改${table.comment}")
     @ApiOperation(value = "根据ids批量修改${table.comment}")
     @ApiImplicitParam(name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List", value = "${table.comment}列表", required = true, paramType = "body", dataType = "List<${entity}>")
     @PutMapping(value = "/update/batch")
@@ -156,7 +156,7 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据id删除${table.comment}")
+    @LogPrint(value = "根据id删除${table.comment}")
     @ApiOperation(value = "根据id删除${table.comment}")
     @ApiImplicitParam(name = "id", value = "${table.comment}id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
@@ -165,7 +165,7 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据ids批量删除${table.comment}")
+    @LogPrint(value = "根据ids批量删除${table.comment}")
     @ApiOperation(value = "根据ids批量删除${table.comment}")
     @ApiImplicitParam(name = "ids", value = "${table.comment}id列表", required = true, paramType = "body", dataType = "List<Long>")
     @DeleteMapping(value = "/delete/batch")
@@ -174,7 +174,7 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "分页查询${table.comment}列表")
+    @LogPrint(value = "分页查询${table.comment}列表")
     @ApiOperation(value = "分页查询${table.comment}列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -187,7 +187,7 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
     }
 
-    @LogPrint(description = "根据条件分页查询${table.comment}")
+    @LogPrint(value = "根据条件分页查询${table.comment}")
     @ApiOperation(value = "根据条件分页查询${table.comment}")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -206,7 +206,7 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
     }
 
-    @LogPrint(description = "根据id查询单个${table.comment}")
+    @LogPrint(value = "根据id查询单个${table.comment}")
     @ApiOperation(value = "根据id查询单个${table.comment}")
     @ApiImplicitParam(name = "id", value = "${table.comment}id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
@@ -216,7 +216,7 @@ public class ${table.controllerName} {
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
     }
 
-    @LogPrint(description = "根据id删除${table.comment}")
+    @LogPrint(value = "根据id删除${table.comment}")
     @ApiOperation(value = "根据id删除${table.comment}")
     @ApiImplicitParam(name = "id", value = "${table.comment}id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")

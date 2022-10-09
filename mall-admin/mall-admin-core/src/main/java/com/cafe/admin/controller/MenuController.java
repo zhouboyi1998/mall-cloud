@@ -48,7 +48,7 @@ public class MenuController {
         this.menuService = menuService;
     }
 
-    @LogPrint(description = "查询菜单列表")
+    @LogPrint(value = "查询菜单列表")
     @ApiOperation(value = "查询菜单列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Menu>> list() {
@@ -56,7 +56,7 @@ public class MenuController {
         return ResponseEntity.ok(menuList);
     }
 
-    @LogPrint(description = "根据条件查询菜单列表")
+    @LogPrint(value = "根据条件查询菜单列表")
     @ApiOperation(value = "根据条件查询菜单列表")
     @ApiImplicitParam(name = "menu", value = "菜单Model", required = true, paramType = "body", dataType = "Menu")
     @PostMapping(value = "/list")
@@ -66,7 +66,7 @@ public class MenuController {
         return ResponseEntity.ok(menuList);
     }
 
-    @LogPrint(description = "分页查询菜单列表")
+    @LogPrint(value = "分页查询菜单列表")
     @ApiOperation(value = "分页查询菜单列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -82,7 +82,7 @@ public class MenuController {
         return ResponseEntity.ok(menuPage);
     }
 
-    @LogPrint(description = "根据条件分页查询菜单")
+    @LogPrint(value = "根据条件分页查询菜单")
     @ApiOperation(value = "根据条件分页查询菜单")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
@@ -101,7 +101,7 @@ public class MenuController {
         return ResponseEntity.ok(menuPage);
     }
 
-    @LogPrint(description = "根据id查询单个菜单")
+    @LogPrint(value = "根据id查询单个菜单")
     @ApiOperation(value = "根据id查询单个菜单")
     @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "path", dataType = "Long")
     @GetMapping(value = "/one/{id}")
@@ -111,7 +111,7 @@ public class MenuController {
         return ResponseEntity.ok(menu);
     }
 
-    @LogPrint(description = "新增菜单")
+    @LogPrint(value = "新增菜单")
     @ApiOperation(value = "新增菜单")
     @ApiImplicitParam(name = "menu", value = "菜单Model", required = true, paramType = "body", dataType = "Menu")
     @PostMapping(value = "/insert")
@@ -122,7 +122,7 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据id修改菜单")
+    @LogPrint(value = "根据id修改菜单")
     @ApiOperation(value = "根据id修改菜单")
     @ApiImplicitParam(name = "menu", value = "菜单Model", required = true, paramType = "body", dataType = "Menu")
     @PutMapping(value = "/update")
@@ -131,7 +131,7 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据ids批量修改菜单")
+    @LogPrint(value = "根据ids批量修改菜单")
     @ApiOperation(value = "根据ids批量修改菜单")
     @ApiImplicitParam(name = "menuList", value = "菜单列表", required = true, paramType = "body", dataType = "List<Menu>")
     @PutMapping(value = "/update/batch")
@@ -140,7 +140,7 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据id删除菜单")
+    @LogPrint(value = "根据id删除菜单")
     @ApiOperation(value = "根据id删除菜单")
     @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "path", dataType = "Long")
     @DeleteMapping(value = "/delete/{id}")
@@ -149,7 +149,7 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据ids批量删除菜单")
+    @LogPrint(value = "根据ids批量删除菜单")
     @ApiOperation(value = "根据ids批量删除菜单")
     @ApiImplicitParam(name = "ids", value = "菜单id列表", required = true, paramType = "body", dataType = "List<Long>")
     @DeleteMapping(value = "/delete/batch")
@@ -158,7 +158,7 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "分页查询菜单列表")
+    @LogPrint(value = "分页查询菜单列表")
     @ApiOperation(value = "分页查询菜单列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -171,7 +171,7 @@ public class MenuController {
         return ResponseEntity.ok(menuPage);
     }
 
-    @LogPrint(description = "根据条件分页查询菜单")
+    @LogPrint(value = "根据条件分页查询菜单")
     @ApiOperation(value = "根据条件分页查询菜单")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
@@ -190,7 +190,7 @@ public class MenuController {
         return ResponseEntity.ok(menuPage);
     }
 
-    @LogPrint(description = "根据id查询单个菜单")
+    @LogPrint(value = "根据id查询单个菜单")
     @ApiOperation(value = "根据id查询单个菜单")
     @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
@@ -200,7 +200,7 @@ public class MenuController {
         return ResponseEntity.ok(menu);
     }
 
-    @LogPrint(description = "根据id删除菜单")
+    @LogPrint(value = "根据id删除菜单")
     @ApiOperation(value = "根据id删除菜单")
     @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
@@ -209,7 +209,7 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(description = "根据角色列表获取树形格式的菜单列表")
+    @LogPrint(value = "根据角色列表获取树形格式的菜单列表")
     @ApiOperation(value = "根据角色列表获取树形格式的菜单列表")
     @ApiImplicitParam(name = AuthenticationConstant.USER_DETAILS_HEADER, value = "用户详细信息", required = true, paramType = "header", dataType = "String")
     @GetMapping(value = "/listMenuTree")

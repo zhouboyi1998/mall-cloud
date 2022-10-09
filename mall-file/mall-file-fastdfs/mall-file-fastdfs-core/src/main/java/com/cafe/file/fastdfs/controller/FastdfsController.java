@@ -30,7 +30,7 @@ public class FastdfsController {
         this.fastdfsService = fastdfsService;
     }
 
-    @LogPrint(description = "文件上传")
+    @LogPrint(value = "文件上传")
     @ApiOperation(value = "文件上传")
     @ApiImplicitParam(name = "file", value = "文件", required = true, paramType = "form", dataType = "MultipartFile")
     @PostMapping(value = "/upload")
