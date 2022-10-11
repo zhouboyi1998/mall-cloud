@@ -163,7 +163,10 @@ public class SkuController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
     })
     @GetMapping(value = "/page")
-    public ResponseEntity<Page<Sku>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+    public ResponseEntity<Page<Sku>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size
+    ) {
         Page<Sku> page = new Page<Sku>().setCurrent(current).setSize(size);
         Page<Sku> skuPage = skuService.page(page);
         return ResponseEntity.ok(skuPage);
@@ -177,9 +180,9 @@ public class SkuController {
         @ApiImplicitParam(name = "sku", value = "Stock Keeping Unit 库存量单位Model", required = true, paramType = "body", dataType = "Sku")
     })
     @PostMapping(value = "/page")
-    public ResponseEntity<Page<Sku>> pageByParam(
-        @RequestParam Long current,
-        @RequestParam Long size,
+    public ResponseEntity<Page<Sku>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size,
         @RequestBody Sku sku
     ) {
         Page<Sku> page = new Page<Sku>().setCurrent(current).setSize(size);
@@ -192,7 +195,7 @@ public class SkuController {
     @ApiOperation(value = "根据id查询单个Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "id", value = "Stock Keeping Unit 库存量单位id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
-    public ResponseEntity<Sku> oneByParam(@RequestParam Long id) {
+    public ResponseEntity<Sku> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<Sku> wrapper = new LambdaQueryWrapper<Sku>().eq(Sku::getId, id);
         Sku sku = skuService.getOne(wrapper);
         return ResponseEntity.ok(sku);
@@ -202,7 +205,7 @@ public class SkuController {
     @ApiOperation(value = "根据id删除Stock Keeping Unit 库存量单位")
     @ApiImplicitParam(name = "id", value = "Stock Keeping Unit 库存量单位id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
+    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = skuService.removeById(id);
         return ResponseEntity.ok(code);
     }

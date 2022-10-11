@@ -162,7 +162,10 @@ public class AdminRoleController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
     })
     @GetMapping(value = "/page")
-    public ResponseEntity<Page<AdminRole>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+    public ResponseEntity<Page<AdminRole>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size
+    ) {
         Page<AdminRole> page = new Page<AdminRole>().setCurrent(current).setSize(size);
         Page<AdminRole> adminRolePage = adminRoleService.page(page);
         return ResponseEntity.ok(adminRolePage);
@@ -176,9 +179,9 @@ public class AdminRoleController {
         @ApiImplicitParam(name = "adminRole", value = "用户-角色关联Model", required = true, paramType = "body", dataType = "AdminRole")
     })
     @PostMapping(value = "/page")
-    public ResponseEntity<Page<AdminRole>> pageByParam(
-        @RequestParam Long current,
-        @RequestParam Long size,
+    public ResponseEntity<Page<AdminRole>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size,
         @RequestBody AdminRole adminRole
     ) {
         Page<AdminRole> page = new Page<AdminRole>().setCurrent(current).setSize(size);
@@ -191,7 +194,7 @@ public class AdminRoleController {
     @ApiOperation(value = "根据id查询单个用户-角色关联")
     @ApiImplicitParam(name = "id", value = "用户-角色关联id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
-    public ResponseEntity<AdminRole> oneByParam(@RequestParam Long id) {
+    public ResponseEntity<AdminRole> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<AdminRole> wrapper = new LambdaQueryWrapper<AdminRole>().eq(AdminRole::getId, id);
         AdminRole adminRole = adminRoleService.getOne(wrapper);
         return ResponseEntity.ok(adminRole);
@@ -201,7 +204,7 @@ public class AdminRoleController {
     @ApiOperation(value = "根据id删除用户-角色关联")
     @ApiImplicitParam(name = "id", value = "用户-角色关联id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
+    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = adminRoleService.removeById(id);
         return ResponseEntity.ok(code);
     }

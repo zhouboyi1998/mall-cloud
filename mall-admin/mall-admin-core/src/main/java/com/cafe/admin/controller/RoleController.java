@@ -162,7 +162,10 @@ public class RoleController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
     })
     @GetMapping(value = "/page")
-    public ResponseEntity<Page<Role>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+    public ResponseEntity<Page<Role>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size
+    ) {
         Page<Role> page = new Page<Role>().setCurrent(current).setSize(size);
         Page<Role> rolePage = roleService.page(page);
         return ResponseEntity.ok(rolePage);
@@ -176,9 +179,9 @@ public class RoleController {
         @ApiImplicitParam(name = "role", value = "管理员角色Model", required = true, paramType = "body", dataType = "Role")
     })
     @PostMapping(value = "/page")
-    public ResponseEntity<Page<Role>> pageByParam(
-        @RequestParam Long current,
-        @RequestParam Long size,
+    public ResponseEntity<Page<Role>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size,
         @RequestBody Role role
     ) {
         Page<Role> page = new Page<Role>().setCurrent(current).setSize(size);
@@ -191,7 +194,7 @@ public class RoleController {
     @ApiOperation(value = "根据id查询单个管理员角色")
     @ApiImplicitParam(name = "id", value = "管理员角色id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
-    public ResponseEntity<Role> oneByParam(@RequestParam Long id) {
+    public ResponseEntity<Role> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<Role>().eq(Role::getId, id);
         Role role = roleService.getOne(wrapper);
         return ResponseEntity.ok(role);
@@ -201,7 +204,7 @@ public class RoleController {
     @ApiOperation(value = "根据id删除管理员角色")
     @ApiImplicitParam(name = "id", value = "管理员角色id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
+    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = roleService.removeById(id);
         return ResponseEntity.ok(code);
     }

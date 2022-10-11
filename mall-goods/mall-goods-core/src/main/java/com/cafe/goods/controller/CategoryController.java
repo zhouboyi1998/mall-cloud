@@ -162,7 +162,10 @@ public class CategoryController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
     })
     @GetMapping(value = "/page")
-    public ResponseEntity<Page<Category>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+    public ResponseEntity<Page<Category>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size
+    ) {
         Page<Category> page = new Page<Category>().setCurrent(current).setSize(size);
         Page<Category> categoryPage = categoryService.page(page);
         return ResponseEntity.ok(categoryPage);
@@ -176,9 +179,9 @@ public class CategoryController {
         @ApiImplicitParam(name = "category", value = "分类Model", required = true, paramType = "body", dataType = "Category")
     })
     @PostMapping(value = "/page")
-    public ResponseEntity<Page<Category>> pageByParam(
-        @RequestParam Long current,
-        @RequestParam Long size,
+    public ResponseEntity<Page<Category>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size,
         @RequestBody Category category
     ) {
         Page<Category> page = new Page<Category>().setCurrent(current).setSize(size);
@@ -191,7 +194,7 @@ public class CategoryController {
     @ApiOperation(value = "根据id查询单个分类")
     @ApiImplicitParam(name = "id", value = "分类id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
-    public ResponseEntity<Category> oneByParam(@RequestParam Long id) {
+    public ResponseEntity<Category> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<Category>().eq(Category::getId, id);
         Category category = categoryService.getOne(wrapper);
         return ResponseEntity.ok(category);
@@ -201,7 +204,7 @@ public class CategoryController {
     @ApiOperation(value = "根据id删除分类")
     @ApiImplicitParam(name = "id", value = "分类id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
+    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = categoryService.removeById(id);
         return ResponseEntity.ok(code);
     }
