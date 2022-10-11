@@ -107,9 +107,9 @@ public class GoodsController {
     public ResponseEntity<SearchResponse> page(
         @PathVariable(value = "current") Integer current,
         @PathVariable(value = "size") Integer size,
-        @RequestParam(required = false) String keyword,
-        @RequestParam(required = false, defaultValue = ElasticSearchConstant.GOODS_DEFAULT_SORT) String sort,
-        @RequestParam(required = false, defaultValue = ElasticSearchConstant.GOODS_DEFAULT_RULE) String rule
+        @RequestParam(value = "keyword", required = false) String keyword,
+        @RequestParam(value = "sort", required = false, defaultValue = ElasticSearchConstant.GOODS_DEFAULT_SORT) String sort,
+        @RequestParam(value = "rule", required = false, defaultValue = ElasticSearchConstant.GOODS_DEFAULT_RULE) String rule
     ) throws IOException {
         return ResponseEntity.ok(goodsService.page(current, size, keyword, sort, rule));
     }

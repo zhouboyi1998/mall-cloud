@@ -162,7 +162,10 @@ public class SpuController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
     })
     @GetMapping(value = "/page")
-    public ResponseEntity<Page<Spu>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+    public ResponseEntity<Page<Spu>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size
+    ) {
         Page<Spu> page = new Page<Spu>().setCurrent(current).setSize(size);
         Page<Spu> spuPage = spuService.page(page);
         return ResponseEntity.ok(spuPage);
@@ -176,9 +179,9 @@ public class SpuController {
         @ApiImplicitParam(name = "spu", value = "Standard Product Unit 标准化产品单元Model", required = true, paramType = "body", dataType = "Spu")
     })
     @PostMapping(value = "/page")
-    public ResponseEntity<Page<Spu>> pageByParam(
-        @RequestParam Long current,
-        @RequestParam Long size,
+    public ResponseEntity<Page<Spu>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size,
         @RequestBody Spu spu
     ) {
         Page<Spu> page = new Page<Spu>().setCurrent(current).setSize(size);
@@ -191,7 +194,7 @@ public class SpuController {
     @ApiOperation(value = "根据id查询单个Standard Product Unit 标准化产品单元")
     @ApiImplicitParam(name = "id", value = "Standard Product Unit 标准化产品单元id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
-    public ResponseEntity<Spu> oneByParam(@RequestParam Long id) {
+    public ResponseEntity<Spu> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<Spu> wrapper = new LambdaQueryWrapper<Spu>().eq(Spu::getId, id);
         Spu spu = spuService.getOne(wrapper);
         return ResponseEntity.ok(spu);
@@ -201,7 +204,7 @@ public class SpuController {
     @ApiOperation(value = "根据id删除Standard Product Unit 标准化产品单元")
     @ApiImplicitParam(name = "id", value = "Standard Product Unit 标准化产品单元id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
+    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = spuService.removeById(id);
         return ResponseEntity.ok(code);
     }
