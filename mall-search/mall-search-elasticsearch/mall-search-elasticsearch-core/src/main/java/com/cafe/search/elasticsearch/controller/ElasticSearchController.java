@@ -18,7 +18,7 @@ import java.io.IOException;
  * @Package: com.cafe.search.elasticsearch.controller
  * @Author: zhouboyi
  * @Date: 2022/7/27 11:06
- * @Description:
+ * @Description: ElasticSearch 信息接口
  */
 @RestController
 @RequestMapping(value = "/elastic")
@@ -35,7 +35,8 @@ public class ElasticSearchController {
     @ApiOperation(value = "查询 ElasticSearch 集群信息")
     @GetMapping(value = "/info")
     public ResponseEntity<SearchResponse> info() throws IOException {
-        return ResponseEntity.ok(elasticSearchService.info());
+        SearchResponse searchResponse = elasticSearchService.info();
+        return ResponseEntity.ok(searchResponse);
     }
 
     @LogPrint(value = "判断索引是否存在")
@@ -45,7 +46,8 @@ public class ElasticSearchController {
     public ResponseEntity<Boolean> existsIndex(
         @PathVariable(value = "name") String name
     ) throws IOException {
-        return ResponseEntity.ok(elasticSearchService.existsIndex(name));
+        Boolean exists = elasticSearchService.existsIndex(name);
+        return ResponseEntity.ok(exists);
     }
 
     @LogPrint(value = "创建索引")
@@ -55,7 +57,8 @@ public class ElasticSearchController {
     public ResponseEntity<CreateIndexResponse> createIndex(
         @PathVariable(value = "name") String name
     ) throws IOException {
-        return ResponseEntity.ok(elasticSearchService.createIndex(name));
+        CreateIndexResponse createIndexResponse = elasticSearchService.createIndex(name);
+        return ResponseEntity.ok(createIndexResponse);
     }
 
     @LogPrint(value = "删除索引")
@@ -65,6 +68,7 @@ public class ElasticSearchController {
     public ResponseEntity<AcknowledgedResponse> deleteIndex(
         @PathVariable(value = "name") String name
     ) throws IOException {
-        return ResponseEntity.ok(elasticSearchService.deleteIndex(name));
+        AcknowledgedResponse acknowledgedResponse = elasticSearchService.deleteIndex(name);
+        return ResponseEntity.ok(acknowledgedResponse);
     }
 }

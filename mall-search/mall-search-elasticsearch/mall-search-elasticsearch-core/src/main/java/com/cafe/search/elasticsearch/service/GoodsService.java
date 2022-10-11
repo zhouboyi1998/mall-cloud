@@ -1,6 +1,6 @@
 package com.cafe.search.elasticsearch.service;
 
-import com.cafe.goods.dto.SkuElasticSearchDTO;
+import com.cafe.goods.bo.GoodsBO;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
@@ -33,20 +33,20 @@ public interface GoodsService {
     /**
      * 插入商品
      *
-     * @param dto
+     * @param goodsBOList
      * @return
      * @throws IOException
      */
-    IndexResponse insert(SkuElasticSearchDTO dto) throws IOException;
+    IndexResponse insert(GoodsBO goodsBOList) throws IOException;
 
     /**
      * 更新商品
      *
-     * @param dto
+     * @param goodsBOList
      * @return
      * @throws IOException
      */
-    UpdateResponse update(SkuElasticSearchDTO dto) throws IOException;
+    UpdateResponse update(GoodsBO goodsBOList) throws IOException;
 
     /**
      * 删除商品
@@ -60,20 +60,20 @@ public interface GoodsService {
     /**
      * 批量插入商品
      *
-     * @param dtoList
+     * @param goodsBOList
      * @return
      * @throws IOException
      */
-    BulkResponse insertBatch(List<SkuElasticSearchDTO> dtoList) throws IOException;
+    BulkResponse insertBatch(List<GoodsBO> goodsBOList) throws IOException;
 
     /**
      * 批量更新商品
      *
-     * @param dtoList
+     * @param goodsBOList
      * @return
      * @throws IOException
      */
-    BulkResponse updateBatch(List<SkuElasticSearchDTO> dtoList) throws IOException;
+    BulkResponse updateBatch(List<GoodsBO> goodsBOList) throws IOException;
 
     /**
      * 批量删除商品
