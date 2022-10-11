@@ -12,7 +12,7 @@ import java.util.List;
  * @Date: 2022/7/7 17:25
  * @Description:
  */
-@ApiModel(value = "MenuTreeVO对象", description = "三级菜单树 VO")
+@ApiModel(value = "MenuTreeVO对象", description = "三级菜单树视图对象")
 public class MenuTreeVO implements Serializable {
 
     private static final long serialVersionUID = 1L;

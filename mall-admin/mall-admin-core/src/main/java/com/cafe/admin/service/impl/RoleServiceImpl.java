@@ -17,7 +17,7 @@ import java.util.List;
  * @Package: com.cafe.admin.service.impl
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 管理员角色 (服务实现类)
+ * @Description: 管理员角色业务实现类
  */
 @Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements RoleService {

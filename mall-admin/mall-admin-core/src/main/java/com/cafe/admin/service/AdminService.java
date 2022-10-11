@@ -8,7 +8,7 @@ import com.cafe.admin.model.Admin;
  * @Package: com.cafe.admin.service
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 管理员 (服务类)
+ * @Description: 管理员业务接口
  */
 public interface AdminService extends IService<Admin> {
 

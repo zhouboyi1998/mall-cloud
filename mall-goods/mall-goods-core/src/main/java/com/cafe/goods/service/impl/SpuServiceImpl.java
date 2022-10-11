@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @Package: com.cafe.goods.service.impl
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: Standard Product Unit 标准化产品单元 (服务实现类)
+ * @Description: Standard Product Unit 标准化产品单元业务实现类
  */
 @Service
 public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuService {

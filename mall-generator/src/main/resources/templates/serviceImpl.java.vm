@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @Package: ${package.ServiceImpl}
  * @Author: ${author}
  * @Date: ${date}
- * @Description: ${table.comment} (服务实现类)
+ * @Description: ${table.comment}业务实现类
  */
 @Service
 #if(${kotlin})

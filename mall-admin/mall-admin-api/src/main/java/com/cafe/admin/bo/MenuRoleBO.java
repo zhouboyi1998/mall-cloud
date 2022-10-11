@@ -10,9 +10,9 @@ import java.util.ArrayList;
  * @Package: com.cafe.admin.bo
  * @Author: zhouboyi
  * @Date: 2022/9/48 09:47
- * @Description: 菜单路径与角色名称对应关系BO
+ * @Description:
  */
-@ApiModel(value = "MenuRoleBO对象", description = "菜单路径与角色名称对应关系BO")
+@ApiModel(value = "MenuRoleBO对象", description = "菜单路径与角色名称对应关系业务对象")
 public class MenuRoleBO implements Serializable {
 
     private static final long serialVersionUID = 1L;

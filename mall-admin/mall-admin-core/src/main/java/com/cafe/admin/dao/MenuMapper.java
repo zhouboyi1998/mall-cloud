@@ -13,7 +13,7 @@ import java.util.List;
  * @Package: com.cafe.admin.dao
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 菜单 (Mapper 接口)
+ * @Description: 菜单数据访问接口
  */
 @Mapper
 public interface MenuMapper extends BaseMapper<Menu> {

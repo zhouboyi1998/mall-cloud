@@ -8,7 +8,7 @@ import com.cafe.goods.model.Category;
  * @Package: com.cafe.goods.service
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 分类 (服务类)
+ * @Description: 分类业务接口
  */
 public interface CategoryService extends IService<Category> {
 
