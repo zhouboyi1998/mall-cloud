@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @Package: com.cafe.admin.service.impl
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 管理员 (服务实现类)
+ * @Description: 管理员业务实现类
  */
 @Service
 public class AdminServiceImpl extends ServiceImpl<AdminMapper, Admin> implements AdminService {

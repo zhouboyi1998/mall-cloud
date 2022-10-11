@@ -31,7 +31,7 @@ import java.util.List;
  * @Package: com.cafe.goods.controller
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: Standard Product Unit 标准化产品单元 (控制器)
+ * @Description: Standard Product Unit 标准化产品单元接口
  */
 @Api(value = "Standard Product Unit 标准化产品单元接口")
 @RestController

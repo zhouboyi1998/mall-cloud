@@ -38,7 +38,7 @@ import ${superControllerClassPackage};
  * @Package: ${package.Controller}
  * @Author: ${author}
  * @Date: ${date}
- * @Description: ${table.comment} (控制器)
+ * @Description: ${table.comment}接口
  */
 @Api(value = "${table.comment}接口")
 #if(${restControllerStyle})

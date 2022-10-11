@@ -10,7 +10,7 @@ import java.util.List;
  * @Package: com.cafe.admin.service
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 角色-菜单关联 (服务类)
+ * @Description: 角色-菜单关联业务接口
  */
 public interface RoleMenuService extends IService<RoleMenu> {
 

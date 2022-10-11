@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
  * @Package: com.cafe.admin.service.impl
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 菜单 (服务实现类)
+ * @Description: 菜单业务实现类
  */
 @Service
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements MenuService {

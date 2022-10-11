@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Package: ${package.Mapper}
  * @Author: ${author}
  * @Date: ${date}
- * @Description: ${table.comment} (Mapper 接口)
+ * @Description: ${table.comment}数据访问接口
  */
 @Mapper
 #if(${kotlin})

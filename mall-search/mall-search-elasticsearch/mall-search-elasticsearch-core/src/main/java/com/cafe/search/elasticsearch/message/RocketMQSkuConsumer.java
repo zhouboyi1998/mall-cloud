@@ -47,11 +47,9 @@ public class RocketMQSkuConsumer implements RocketMQListener<String> {
         // 获取变更的类型
         String operation = content.get(MonitorConstant.OPERATION).toString();
         // 获取变更前的数据
-        List<Sku> beforeDataList
-            = JSONUtil.parseArray(content.get(MonitorConstant.BEFORE_DATA)).toList(Sku.class);
+        List<Sku> beforeDataList = JSONUtil.parseArray(content.get(MonitorConstant.BEFORE_DATA)).toList(Sku.class);
         // 获取变更后的数据
-        List<Sku> afterDataList
-            = JSONUtil.parseArray(content.get(MonitorConstant.AFTER_DATA)).toList(Sku.class);
+        List<Sku> afterDataList = JSONUtil.parseArray(content.get(MonitorConstant.AFTER_DATA)).toList(Sku.class);
 
         // 根据变更的类型执行不同的更新 ElasticSearch 操作
         try {

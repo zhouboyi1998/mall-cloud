@@ -10,7 +10,7 @@ import java.util.List;
  * @Package: com.cafe.admin.service
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 管理员角色 (服务类)
+ * @Description: 管理员角色业务接口
  */
 public interface RoleService extends IService<Role> {
 

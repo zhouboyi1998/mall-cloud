@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Package: com.cafe.admin.dao
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 用户-角色关联 (Mapper 接口)
+ * @Description: 用户-角色关联数据访问接口
  */
 @Mapper
 public interface AdminRoleMapper extends BaseMapper<AdminRole> {

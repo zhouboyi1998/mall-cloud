@@ -31,7 +31,7 @@ import java.util.List;
  * @Package: com.cafe.admin.controller
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 管理员角色 (控制器)
+ * @Description: 管理员角色接口
  */
 @Api(value = "管理员角色接口")
 @RestController
