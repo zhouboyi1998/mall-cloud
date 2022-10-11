@@ -11,7 +11,7 @@ import java.util.List;
  * @Package: com.cafe.admin.service
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 菜单 (服务类)
+ * @Description: 菜单业务接口
  */
 public interface MenuService extends IService<Menu> {
 

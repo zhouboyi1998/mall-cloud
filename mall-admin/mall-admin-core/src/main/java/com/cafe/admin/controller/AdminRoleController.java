@@ -31,7 +31,7 @@ import java.util.List;
  * @Package: com.cafe.admin.controller
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 用户-角色关联 (控制器)
+ * @Description: 用户-角色关联接口
  */
 @Api(value = "用户-角色关联接口")
 @RestController

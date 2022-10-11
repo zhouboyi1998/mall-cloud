@@ -8,7 +8,7 @@ import com.cafe.goods.model.Brand;
  * @Package: com.cafe.goods.service
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 品牌 (服务类)
+ * @Description: 品牌业务接口
  */
 public interface BrandService extends IService<Brand> {
 

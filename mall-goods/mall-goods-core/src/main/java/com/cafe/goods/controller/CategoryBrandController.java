@@ -31,7 +31,7 @@ import java.util.List;
  * @Package: com.cafe.goods.controller
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 分类-品牌关联 (控制器)
+ * @Description: 分类-品牌关联接口
  */
 @Api(value = "分类-品牌关联接口")
 @RestController

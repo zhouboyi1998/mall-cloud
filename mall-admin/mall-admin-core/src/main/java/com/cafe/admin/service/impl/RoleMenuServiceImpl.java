@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
  * @Package: com.cafe.admin.service.impl
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 角色-菜单关联 (服务实现类)
+ * @Description: 角色-菜单关联业务实现类
  */
 @Service
 public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> implements RoleMenuService {

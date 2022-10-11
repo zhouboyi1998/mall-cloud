@@ -8,7 +8,7 @@ import com.cafe.goods.model.CategoryBrand;
  * @Package: com.cafe.goods.service
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 分类-品牌关联 (服务类)
+ * @Description: 分类-品牌关联业务接口
  */
 public interface CategoryBrandService extends IService<CategoryBrand> {
 

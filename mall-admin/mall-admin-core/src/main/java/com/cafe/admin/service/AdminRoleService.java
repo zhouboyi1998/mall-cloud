@@ -8,7 +8,7 @@ import com.cafe.admin.model.AdminRole;
  * @Package: com.cafe.admin.service
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 用户-角色关联 (服务类)
+ * @Description: 用户-角色关联业务接口
  */
 public interface AdminRoleService extends IService<AdminRole> {
 

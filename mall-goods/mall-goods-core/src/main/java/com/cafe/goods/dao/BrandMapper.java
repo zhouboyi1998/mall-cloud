@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Package: com.cafe.goods.dao
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 品牌 (Mapper 接口)
+ * @Description: 品牌数据访问接口
  */
 @Mapper
 public interface BrandMapper extends BaseMapper<Brand> {

@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Package: com.cafe.goods.dao
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 分类 (Mapper 接口)
+ * @Description: 分类数据访问接口
  */
 @Mapper
 public interface CategoryMapper extends BaseMapper<Category> {
