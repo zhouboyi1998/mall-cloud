@@ -1,4 +1,4 @@
-package com.cafe.goods.dto;
+package com.cafe.goods.bo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -7,13 +7,13 @@ import java.io.Serializable;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.goods.dto
+ * @Package: com.cafe.goods.bo
  * @Author: zhouboyi
- * @Date: 2022/7/27 17:14
+ * @Date: 2022/10/11 11:42
  * @Description:
  */
-@ApiModel(value = "SkuElasticSearchDTO对象", description = "ElasticSearch 相关的 SKU DTO")
-public class SkuElasticSearchDTO implements Serializable {
+@ApiModel(value = "GoodsBO对象", description = "商品业务对象")
+public class GoodsBO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -195,7 +195,7 @@ public class SkuElasticSearchDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "SkuElasticSearchDTO{" +
+        return "GoodsDTO{" +
             "id=" + id +
             ", skuName='" + skuName + '\'' +
             ", spuId=" + spuId +
