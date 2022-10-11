@@ -172,7 +172,10 @@ public class AdminController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
     })
     @GetMapping(value = "/page")
-    public ResponseEntity<Page<Admin>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+    public ResponseEntity<Page<Admin>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size
+    ) {
         Page<Admin> page = new Page<Admin>().setCurrent(current).setSize(size);
         Page<Admin> adminPage = adminService.page(page);
         return ResponseEntity.ok(adminPage);
@@ -186,9 +189,9 @@ public class AdminController {
         @ApiImplicitParam(name = "admin", value = "管理员Model", required = true, paramType = "body", dataType = "Admin")
     })
     @PostMapping(value = "/page")
-    public ResponseEntity<Page<Admin>> pageByParam(
-        @RequestParam Long current,
-        @RequestParam Long size,
+    public ResponseEntity<Page<Admin>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size,
         @RequestBody Admin admin
     ) {
         Page<Admin> page = new Page<Admin>().setCurrent(current).setSize(size);
@@ -201,7 +204,7 @@ public class AdminController {
     @ApiOperation(value = "根据id查询单个管理员")
     @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
-    public ResponseEntity<Admin> oneByParam(@RequestParam Long id) {
+    public ResponseEntity<Admin> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<Admin> wrapper = new LambdaQueryWrapper<Admin>().eq(Admin::getId, id);
         Admin admin = adminService.getOne(wrapper);
         return ResponseEntity.ok(admin);
@@ -211,7 +214,7 @@ public class AdminController {
     @ApiOperation(value = "根据id删除管理员")
     @ApiImplicitParam(name = "id", value = "管理员id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
+    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = adminService.removeById(id);
         return ResponseEntity.ok(code);
     }

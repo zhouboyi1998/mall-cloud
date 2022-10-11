@@ -162,7 +162,10 @@ public class CategoryBrandController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
     })
     @GetMapping(value = "/page")
-    public ResponseEntity<Page<CategoryBrand>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+    public ResponseEntity<Page<CategoryBrand>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size
+    ) {
         Page<CategoryBrand> page = new Page<CategoryBrand>().setCurrent(current).setSize(size);
         Page<CategoryBrand> categoryBrandPage = categoryBrandService.page(page);
         return ResponseEntity.ok(categoryBrandPage);
@@ -176,9 +179,9 @@ public class CategoryBrandController {
         @ApiImplicitParam(name = "categoryBrand", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrand")
     })
     @PostMapping(value = "/page")
-    public ResponseEntity<Page<CategoryBrand>> pageByParam(
-        @RequestParam Long current,
-        @RequestParam Long size,
+    public ResponseEntity<Page<CategoryBrand>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size,
         @RequestBody CategoryBrand categoryBrand
     ) {
         Page<CategoryBrand> page = new Page<CategoryBrand>().setCurrent(current).setSize(size);
@@ -191,7 +194,7 @@ public class CategoryBrandController {
     @ApiOperation(value = "根据id查询单个分类-品牌关联")
     @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
-    public ResponseEntity<CategoryBrand> oneByParam(@RequestParam Long id) {
+    public ResponseEntity<CategoryBrand> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<CategoryBrand>().eq(CategoryBrand::getId, id);
         CategoryBrand categoryBrand = categoryBrandService.getOne(wrapper);
         return ResponseEntity.ok(categoryBrand);
@@ -201,7 +204,7 @@ public class CategoryBrandController {
     @ApiOperation(value = "根据id删除分类-品牌关联")
     @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
+    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = categoryBrandService.removeById(id);
         return ResponseEntity.ok(code);
     }

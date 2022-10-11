@@ -162,7 +162,10 @@ public class BrandController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
     })
     @GetMapping(value = "/page")
-    public ResponseEntity<Page<Brand>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+    public ResponseEntity<Page<Brand>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size
+    ) {
         Page<Brand> page = new Page<Brand>().setCurrent(current).setSize(size);
         Page<Brand> brandPage = brandService.page(page);
         return ResponseEntity.ok(brandPage);
@@ -176,9 +179,9 @@ public class BrandController {
         @ApiImplicitParam(name = "brand", value = "品牌Model", required = true, paramType = "body", dataType = "Brand")
     })
     @PostMapping(value = "/page")
-    public ResponseEntity<Page<Brand>> pageByParam(
-        @RequestParam Long current,
-        @RequestParam Long size,
+    public ResponseEntity<Page<Brand>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size,
         @RequestBody Brand brand
     ) {
         Page<Brand> page = new Page<Brand>().setCurrent(current).setSize(size);
@@ -191,7 +194,7 @@ public class BrandController {
     @ApiOperation(value = "根据id查询单个品牌")
     @ApiImplicitParam(name = "id", value = "品牌id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
-    public ResponseEntity<Brand> oneByParam(@RequestParam Long id) {
+    public ResponseEntity<Brand> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<Brand> wrapper = new LambdaQueryWrapper<Brand>().eq(Brand::getId, id);
         Brand brand = brandService.getOne(wrapper);
         return ResponseEntity.ok(brand);
@@ -201,7 +204,7 @@ public class BrandController {
     @ApiOperation(value = "根据id删除品牌")
     @ApiImplicitParam(name = "id", value = "品牌id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
+    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = brandService.removeById(id);
         return ResponseEntity.ok(code);
     }

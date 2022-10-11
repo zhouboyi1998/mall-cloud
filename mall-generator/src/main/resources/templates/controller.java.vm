@@ -181,7 +181,10 @@ public class ${table.controllerName} {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
     })
     @GetMapping(value = "/page")
-    public ResponseEntity<Page<${entity}>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+    public ResponseEntity<Page<${entity}>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size
+    ) {
         Page<${entity}> page = new Page<${entity}>().setCurrent(current).setSize(size);
         Page<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.page(page);
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
@@ -195,9 +198,9 @@ public class ${table.controllerName} {
         @ApiImplicitParam(name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", value = "${table.comment}Model", required = true, paramType = "body", dataType = "${entity}")
     })
     @PostMapping(value = "/page")
-    public ResponseEntity<Page<${entity}>> pageByParam(
-        @RequestParam Long current,
-        @RequestParam Long size,
+    public ResponseEntity<Page<${entity}>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size,
         @RequestBody ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}
     ) {
         Page<${entity}> page = new Page<${entity}>().setCurrent(current).setSize(size);
@@ -210,7 +213,7 @@ public class ${table.controllerName} {
     @ApiOperation(value = "根据id查询单个${table.comment}")
     @ApiImplicitParam(name = "id", value = "${table.comment}id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
-    public ResponseEntity<${entity}> oneByParam(@RequestParam Long id) {
+    public ResponseEntity<${entity}> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<${entity}> wrapper = new LambdaQueryWrapper<${entity}>().eq(${entity}::getId, id);
         ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.getOne(wrapper);
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
@@ -220,7 +223,7 @@ public class ${table.controllerName} {
     @ApiOperation(value = "根据id删除${table.comment}")
     @ApiImplicitParam(name = "id", value = "${table.comment}id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
+    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.removeById(id);
         return ResponseEntity.ok(code);
     }

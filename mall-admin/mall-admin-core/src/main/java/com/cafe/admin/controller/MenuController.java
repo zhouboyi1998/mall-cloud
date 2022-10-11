@@ -165,7 +165,10 @@ public class MenuController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
     })
     @GetMapping(value = "/page")
-    public ResponseEntity<Page<Menu>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+    public ResponseEntity<Page<Menu>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size
+    ) {
         Page<Menu> page = new Page<Menu>().setCurrent(current).setSize(size);
         Page<Menu> menuPage = menuService.page(page);
         return ResponseEntity.ok(menuPage);
@@ -179,9 +182,9 @@ public class MenuController {
         @ApiImplicitParam(name = "menu", value = "菜单Model", required = true, paramType = "body", dataType = "Menu")
     })
     @PostMapping(value = "/page")
-    public ResponseEntity<Page<Menu>> pageByParam(
-        @RequestParam Long current,
-        @RequestParam Long size,
+    public ResponseEntity<Page<Menu>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size,
         @RequestBody Menu menu
     ) {
         Page<Menu> page = new Page<Menu>().setCurrent(current).setSize(size);
@@ -194,7 +197,7 @@ public class MenuController {
     @ApiOperation(value = "根据id查询单个菜单")
     @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
-    public ResponseEntity<Menu> oneByParam(@RequestParam Long id) {
+    public ResponseEntity<Menu> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<Menu> wrapper = new LambdaQueryWrapper<Menu>().eq(Menu::getId, id);
         Menu menu = menuService.getOne(wrapper);
         return ResponseEntity.ok(menu);
@@ -204,7 +207,7 @@ public class MenuController {
     @ApiOperation(value = "根据id删除菜单")
     @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
+    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = menuService.removeById(id);
         return ResponseEntity.ok(code);
     }

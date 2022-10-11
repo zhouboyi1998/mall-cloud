@@ -162,7 +162,10 @@ public class RoleMenuController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
     })
     @GetMapping(value = "/page")
-    public ResponseEntity<Page<RoleMenu>> pageByParam(@RequestParam Long current, @RequestParam Long size) {
+    public ResponseEntity<Page<RoleMenu>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size
+    ) {
         Page<RoleMenu> page = new Page<RoleMenu>().setCurrent(current).setSize(size);
         Page<RoleMenu> roleMenuPage = roleMenuService.page(page);
         return ResponseEntity.ok(roleMenuPage);
@@ -176,9 +179,9 @@ public class RoleMenuController {
         @ApiImplicitParam(name = "roleMenu", value = "角色-菜单关联Model", required = true, paramType = "body", dataType = "RoleMenu")
     })
     @PostMapping(value = "/page")
-    public ResponseEntity<Page<RoleMenu>> pageByParam(
-        @RequestParam Long current,
-        @RequestParam Long size,
+    public ResponseEntity<Page<RoleMenu>> soapPage(
+        @RequestParam(value = "current") Long current,
+        @RequestParam(value = "size") Long size,
         @RequestBody RoleMenu roleMenu
     ) {
         Page<RoleMenu> page = new Page<RoleMenu>().setCurrent(current).setSize(size);
@@ -191,7 +194,7 @@ public class RoleMenuController {
     @ApiOperation(value = "根据id查询单个角色-菜单关联")
     @ApiImplicitParam(name = "id", value = "角色-菜单关联id", required = true, paramType = "query", dataType = "Long")
     @GetMapping(value = "/one")
-    public ResponseEntity<RoleMenu> oneByParam(@RequestParam Long id) {
+    public ResponseEntity<RoleMenu> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<RoleMenu> wrapper = new LambdaQueryWrapper<RoleMenu>().eq(RoleMenu::getId, id);
         RoleMenu roleMenu = roleMenuService.getOne(wrapper);
         return ResponseEntity.ok(roleMenu);
@@ -201,7 +204,7 @@ public class RoleMenuController {
     @ApiOperation(value = "根据id删除角色-菜单关联")
     @ApiImplicitParam(name = "id", value = "角色-菜单关联id", required = true, paramType = "query", dataType = "Long")
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> deleteByParam(@RequestParam Long id) {
+    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = roleMenuService.removeById(id);
         return ResponseEntity.ok(code);
     }
