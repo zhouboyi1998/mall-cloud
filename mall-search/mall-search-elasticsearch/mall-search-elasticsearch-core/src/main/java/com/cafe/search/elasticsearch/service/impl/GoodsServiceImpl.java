@@ -2,8 +2,8 @@ package com.cafe.search.elasticsearch.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
-import com.cafe.goods.dto.SkuElasticSearchDTO;
-import com.cafe.goods.feign.SkuFeign;
+import com.cafe.goods.bo.GoodsBO;
+import com.cafe.goods.feign.GoodsBOFeign;
 import com.cafe.search.elasticsearch.constant.ElasticSearchConstant;
 import com.cafe.search.elasticsearch.service.GoodsService;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -48,15 +48,15 @@ public class GoodsServiceImpl implements GoodsService {
 
     private RestHighLevelClient restHighLevelClient;
 
-    private SkuFeign skuFeign;
+    private GoodsBOFeign goodsBOFeign;
 
     @Autowired
     public GoodsServiceImpl(
         RestHighLevelClient restHighLevelClient,
-        SkuFeign skuFeign
+        GoodsBOFeign goodsBOFeign
     ) {
         this.restHighLevelClient = restHighLevelClient;
-        this.skuFeign = skuFeign;
+        this.goodsBOFeign = goodsBOFeign;
     }
 
     @Override
@@ -69,23 +69,23 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public IndexResponse insert(SkuElasticSearchDTO dto) throws IOException {
+    public IndexResponse insert(GoodsBO goodsBO) throws IOException {
         // 组装插入请求
         IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.GOODS_INDEX)
             .timeout(TimeValue.timeValueSeconds(10))
-            .id(dto.getId().toString())
-            .source(JSONUtil.toJsonStr(dto), XContentType.JSON);
+            .id(goodsBO.getId().toString())
+            .source(JSONUtil.toJsonStr(goodsBO), XContentType.JSON);
         // 插入数据
         IndexResponse indexResponse = restHighLevelClient.index(indexRequest, RequestOptions.DEFAULT);
         return indexResponse;
     }
 
     @Override
-    public UpdateResponse update(SkuElasticSearchDTO dto) throws IOException {
+    public UpdateResponse update(GoodsBO goodsBO) throws IOException {
         // 组装更新请求
-        UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.GOODS_INDEX, dto.getId().toString())
+        UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.GOODS_INDEX, goodsBO.getId().toString())
             .timeout(TimeValue.timeValueSeconds(10))
-            .doc(JSONUtil.toJsonStr(dto), XContentType.JSON);
+            .doc(JSONUtil.toJsonStr(goodsBO), XContentType.JSON);
         // 更新数据
         UpdateResponse updateResponse = restHighLevelClient.update(updateRequest, RequestOptions.DEFAULT);
         return updateResponse;
@@ -102,14 +102,14 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public BulkResponse insertBatch(List<SkuElasticSearchDTO> dtoList) throws IOException {
+    public BulkResponse insertBatch(List<GoodsBO> goodsBOList) throws IOException {
         // 组装批量插入请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
-        for (SkuElasticSearchDTO dto : dtoList) {
+        for (GoodsBO goodsBO : goodsBOList) {
             IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.GOODS_INDEX)
-                // ElasticSearch ID 不自动生成, 使用数据库中存储的业务 ID
-                .id(dto.getId().toString())
-                .source(JSONUtil.toJsonStr(dto), XContentType.JSON);
+                // 不自动生成 ElasticSearch ID, 使用数据库中存储的业务 ID
+                .id(goodsBO.getId().toString())
+                .source(JSONUtil.toJsonStr(goodsBO), XContentType.JSON);
             bulkRequest.add(indexRequest);
         }
         // 批量插入数据
@@ -118,12 +118,12 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public BulkResponse updateBatch(List<SkuElasticSearchDTO> dtoList) throws IOException {
+    public BulkResponse updateBatch(List<GoodsBO> goodsBOList) throws IOException {
         // 组装批量更新请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
-        for (SkuElasticSearchDTO dto : dtoList) {
-            UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.GOODS_INDEX, dto.getId().toString())
-                .doc(JSONUtil.toJsonStr(dto), XContentType.JSON);
+        for (GoodsBO goodsBO : goodsBOList) {
+            UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.GOODS_INDEX, goodsBO.getId().toString())
+                .doc(JSONUtil.toJsonStr(goodsBO), XContentType.JSON);
             bulkRequest.add(updateRequest);
         }
         // 批量更新数据
@@ -161,7 +161,8 @@ public class GoodsServiceImpl implements GoodsService {
             searchSourceBuilder.query(queryBuilder);
         }
         // 组装搜索请求
-        SearchRequest searchRequest = new SearchRequest(ElasticSearchConstant.GOODS_INDEX).source(searchSourceBuilder);
+        SearchRequest searchRequest = new SearchRequest(ElasticSearchConstant.GOODS_INDEX)
+            .source(searchSourceBuilder);
         // 搜索获取返回值
         SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
         return searchResponse;
@@ -170,18 +171,18 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public BulkResponse importBatch(Long current, Long size) throws IOException {
         // 分页获取商品列表
-        List<SkuElasticSearchDTO> dtoList = skuFeign.pageSkuElasticSearchDTO(current, size).getBody().getRecords();
+        List<GoodsBO> goodsBOList = goodsBOFeign.page(current, size).getBody().getRecords();
         // 调用 insertBatch() 方法插入商品数据
-        BulkResponse bulkResponse = insertBatch(dtoList);
+        BulkResponse bulkResponse = insertBatch(goodsBOList);
         return bulkResponse;
     }
 
     @Override
     public BulkResponse importBatch(List<Long> ids) throws IOException {
         // 根据 SKU ids 获取商品列表
-        List<SkuElasticSearchDTO> dtoList = skuFeign.listSkuElasticSearchDTO(ids).getBody();
+        List<GoodsBO> goodsBOList = goodsBOFeign.list(ids).getBody();
         // 调用 insertBatch() 方法插入商品数据
-        BulkResponse bulkResponse = insertBatch(dtoList);
+        BulkResponse bulkResponse = insertBatch(goodsBOList);
         return bulkResponse;
     }
 

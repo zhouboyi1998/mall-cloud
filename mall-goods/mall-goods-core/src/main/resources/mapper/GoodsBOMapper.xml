@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe.goods.dao.GoodsBOMapper">
+
+    <select id="list" resultType="com.cafe.goods.bo.GoodsBO">
+        SELECT k.id, k.sku_name, k.spu_id, k.original_price, k.discount_price, k.seckill_price,
+               k.stock, k.sale_count, k.image, k.image_list, k.specification,
+               p.brand_id, p.category_id, p.spu_name, b.brand_name, c.category_name
+        FROM mall_sku AS k
+        LEFT JOIN mall_spu AS p ON p.id = k.spu_id
+        LEFT JOIN mall_brand AS b ON b.id = p.brand_id
+        LEFT JOIN mall_category AS c ON c.id = p.category_id
+        WHERE k.id IN
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
+    <select id="page" resultType="com.cafe.goods.bo.GoodsBO">
+        SELECT k.id, k.sku_name, k.spu_id, k.original_price, k.discount_price, k.seckill_price,
+               k.stock, k.sale_count, k.image, k.image_list, k.specification,
+               p.brand_id, p.category_id, p.spu_name, b.brand_name, c.category_name
+        FROM mall_sku AS k
+        LEFT JOIN mall_spu AS p ON p.id = k.spu_id
+        LEFT JOIN mall_brand AS b ON b.id = p.brand_id
+        LEFT JOIN mall_category AS c ON c.id = p.category_id
+    </select>
+
+</mapper>

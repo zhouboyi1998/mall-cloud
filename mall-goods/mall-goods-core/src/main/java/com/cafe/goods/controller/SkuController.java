@@ -3,9 +3,8 @@ package com.cafe.goods.controller;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.goods.dto.SkuElasticSearchDTO;
+import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.goods.model.Sku;
 import com.cafe.goods.service.SkuService;
 import io.swagger.annotations.Api;
@@ -32,7 +31,7 @@ import java.util.List;
  * @Package: com.cafe.goods.controller
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: Stock Keeping Unit 库存量单位 (控制器)
+ * @Description: Stock Keeping Unit 库存量单位接口
  */
 @Api(value = "Stock Keeping Unit 库存量单位接口")
 @RestController
@@ -208,29 +207,5 @@ public class SkuController {
     public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = skuService.removeById(id);
         return ResponseEntity.ok(code);
-    }
-
-    @LogPrint(value = "分页查询 SkuElasticSearchDTO 列表")
-    @ApiOperation(value = "分页查询 SkuElasticSearchDTO 列表")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
-    })
-    @GetMapping(value = "/page/es/{current}/{size}")
-    public ResponseEntity<Page<SkuElasticSearchDTO>> pageSkuElasticSearchDTO(
-        @PathVariable(value = "current") Long current,
-        @PathVariable(value = "size") Long size
-    ) {
-        Page<SkuElasticSearchDTO> page = new Page<SkuElasticSearchDTO>().setCurrent(current).setSize(size);
-        Page<SkuElasticSearchDTO> dtoPage = skuService.pageSkuElasticSearchDTO(page);
-        return ResponseEntity.ok(dtoPage);
-    }
-
-    @LogPrint(value = "根据 SKU ids 查询 SkuElasticSearchDTO 列表")
-    @ApiOperation(value = "根据 SKU ids 查询 SkuElasticSearchDTO 列表")
-    @ApiImplicitParam(name = "ids", value = "SKU ids", required = true, paramType = "body", dataType = "List<Long>")
-    @PostMapping(value = "/list/es")
-    public ResponseEntity<List<SkuElasticSearchDTO>> listSkuElasticSearchDTO(@RequestBody List<Long> ids) {
-        return ResponseEntity.ok(skuService.listSkuElasticSearchDTO(ids));
     }
 }
