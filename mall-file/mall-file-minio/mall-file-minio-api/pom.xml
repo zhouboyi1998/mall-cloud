@@ -12,7 +12,7 @@
 
     <artifactId>mall-file-minio-api</artifactId>
     <version>${mall-cloud.version}</version>
-    <description>MinIO 文件存储模块远程调用接口</description>
+    <description>MinIO 文件模块远程调用接口</description>
 
     <dependencies>
         <dependency>

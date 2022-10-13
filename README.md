@@ -30,17 +30,17 @@
 
 ```
 mall-cloud
-    |-- mall-admin (管理员)
+    |-- mall-admin (后台管理模块)
     |-- mall-common (公共代码)
     |-- mall-eureka (注册中心)
-    |-- mall-file (文件存储)
-    |-- mall-gateway (网关)
+    |-- mall-file (文件模块)
+    |-- mall-gateway (API 网关)
     |-- mall-generator (代码生成器)
-    |-- mall-goods (商品)
-    |-- mall-monitor (数据库监听)
-    |-- mall-order (订单)
-    |-- mall-search (搜索)
-    |-- mall-security (安全)
+    |-- mall-goods (商品模块)
+    |-- mall-monitor (数据库监听器)
+    |-- mall-order (订单模块)
+    |-- mall-search (搜索模块)
+    |-- mall-security (安全模块)
 ```
 
 ### 📜 开源协议

@@ -1,7 +1,8 @@
 package com.cafe.goods;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
@@ -12,7 +13,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
  * @Date: 2022/4/25 14:16
  * @Description: 商品模块启动类
  */
-@SpringCloudApplication
+@SpringBootApplication
+@EnableDiscoveryClient
 @EnableSwagger2WebMvc
 @ComponentScan(basePackages = "com.cafe")
 public class GoodsApplication {

@@ -1,8 +1,9 @@
 spring:
   profiles:
     active: dev
+  # 微服务配置
   cloud:
-    # 网关配置
+    # Spring Cloud Gateway 网关配置
     gateway:
       # 服务发现配置
       discovery:
@@ -13,42 +14,49 @@ spring:
           lower-case-service-id: true
       # 路由配置
       routes:
+        # Spring Security 认证模块
         - id: mall-security-manage
           uri: lb://mall-security-manage
           predicates:
             - Path=/security/**
           filters:
             - StripPrefix=1
+        # MinIO 文件模块
         - id: mall-file-minio
           uri: lb://mall-file-minio
           predicates:
             - Path=/minio/**
           filters:
             - StripPrefix=1
+        # FastDFS 文件模块
         - id: mall-file-fastdfs
           uri: lb://mall-file-fastdfs
           predicates:
             - Path=/fastdfs/**
           filters:
             - StripPrefix=1
+        # ElasticSearch 搜索模块
         - id: mall-search-elasticsearch
           uri: lb://mall-search-elasticsearch
           predicates:
             - Path=/elastic/**
           filters:
             - StripPrefix=1
+        # 商品模块
         - id: mall-goods
           uri: lb://mall-goods
           predicates:
             - Path=/goods/**
           filters:
             - StripPrefix=1
+        # 订单模块
         - id: mall-order
           uri: lb://mall-order
           predicates:
             - Path=/order/**
           filters:
             - StripPrefix=1
+        # 后台管理模块
         - id: mall-admin
           uri: lb://mall-admin
           predicates:

@@ -12,7 +12,7 @@
 
     <artifactId>mall-file-minio</artifactId>
     <version>${mall-cloud.version}</version>
-    <description>MinIO 文件存储模块</description>
+    <description>MinIO 文件模块</description>
 
     <packaging>pom</packaging>
     <modules>

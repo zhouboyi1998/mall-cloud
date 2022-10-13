@@ -48,7 +48,7 @@ public class OauthController {
     @PostMapping(value = "/token")
     public ResponseEntity<Oauth2TokenDetails> postAccessToken(
         Principal principal,
-        @RequestParam(value = "parameters") Map<String, String> parameters
+        @RequestParam Map<String, String> parameters
     ) throws HttpRequestMethodNotSupportedException {
         Oauth2TokenDetails oauth2TokenDetails = oauthService.postAccessToken(principal, parameters);
         return ResponseEntity.ok(oauth2TokenDetails);

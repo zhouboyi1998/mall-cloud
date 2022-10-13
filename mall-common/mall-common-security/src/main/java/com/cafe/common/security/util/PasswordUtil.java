@@ -58,4 +58,8 @@ public class PasswordUtil {
         PasswordEncoder passwordEncoder = new SCryptPasswordEncoder();
         return passwordEncoder.matches(plaintext, ciphertext);
     }
+
+    public static void main(String[] args) {
+        System.out.println(encodeSCrypt(""));
+    }
 }
