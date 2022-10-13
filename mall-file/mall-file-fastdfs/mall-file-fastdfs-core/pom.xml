@@ -12,7 +12,7 @@
 
     <artifactId>mall-file-fastdfs-core</artifactId>
     <version>${mall-cloud.version}</version>
-    <description>FastDFS 文件存储模块核心业务</description>
+    <description>FastDFS 文件模块核心业务</description>
 
     <dependencies>
         <!--FastDFS 客户端-->

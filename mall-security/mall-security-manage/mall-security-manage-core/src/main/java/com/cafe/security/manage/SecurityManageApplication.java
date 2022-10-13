@@ -1,7 +1,8 @@
 package com.cafe.security.manage;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
@@ -13,7 +14,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
  * @Date: 2022/5/6 10:54
  * @Description:
  */
-@SpringCloudApplication
+@SpringBootApplication
+@EnableDiscoveryClient
 @EnableSwagger2WebMvc
 @EnableFeignClients(basePackages = "com.cafe.admin.feign")
 @ComponentScan(basePackages = "com.cafe")

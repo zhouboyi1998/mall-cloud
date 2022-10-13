@@ -9,6 +9,12 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
+# Feign 配置
+feign:
+  # Feign 远程方法调用开启 Sentinel 熔断限流
+  sentinel:
+    enabled: true
+
 # RSA 证书口令, 生成 RSA 证书文件 (jwt.jks) 时设置
 rsa:
   credential:
