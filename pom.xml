@@ -35,6 +35,7 @@
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.7.RELEASE</spring-cloud-alibaba.version>
         <hutool.version>5.4.0</hutool.version>
+        <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <mysql-connector.version>8.0.19</mysql-connector.version>
         <mybatis-pagehelper.version>1.3.0</mybatis-pagehelper.version>
         <mybatis-generator.version>1.4.0</mybatis-generator.version>
@@ -43,7 +44,9 @@
         <velocity.version>2.3</velocity.version>
         <jjwt.version>0.9.0</jjwt.version>
         <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
-        <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
+        <bcprov-jdk15on.version>1.64</bcprov-jdk15on.version>
+        <bcpkix-jdk15on.version>1.64</bcpkix-jdk15on.version>
+        <rocketmq-starter.version>2.2.2</rocketmq-starter.version>
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>8.3.4</minio.version>
         <!-- 覆盖 Spring Boot 自带的低版本 OK HTTP3, MinIO 需要使用高版本的 -->
@@ -52,7 +55,6 @@
         <canal.version>1.1.5</canal.version>
         <tomcat-embed.version>9.0.46</tomcat-embed.version>
         <commons-collections4.version>4.4</commons-collections4.version>
-        <rocketmq-starter.version>2.2.2</rocketmq-starter.version>
 
         <mall-cloud.version>1.0-SNAPSHOT</mall-cloud.version>
     </properties>
@@ -106,6 +108,12 @@
                 <artifactId>hutool-all</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
+            <!-- Swagger2 API 文档 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${swagger2-knife4j.version}</version>
+            </dependency>
             <!-- MySQL 连接 -->
             <dependency>
                 <groupId>mysql</groupId>
@@ -154,11 +162,22 @@
                 <artifactId>nimbus-jose-jwt</artifactId>
                 <version>${nimbus-jose-jwt.version}</version>
             </dependency>
-            <!-- Swagger2 API 文档 -->
+            <!-- SCrypt 加密相关依赖 -->
             <dependency>
-                <groupId>com.github.xiaoymin</groupId>
-                <artifactId>knife4j-spring-boot-starter</artifactId>
-                <version>${swagger2-knife4j.version}</version>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcprov-jdk15on</artifactId>
+                <version>${bcprov-jdk15on.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.bouncycastle</groupId>
+                <artifactId>bcpkix-jdk15on</artifactId>
+                <version>${bcpkix-jdk15on.version}</version>
+            </dependency>
+            <!-- RocketMQ Starter -->
+            <dependency>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq-starter.version}</version>
             </dependency>
             <!-- FastDFS 文件存储 -->
             <dependency>
@@ -207,12 +226,6 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
                 <version>${commons-collections4.version}</version>
-            </dependency>
-            <!-- RocketMQ Starter -->
-            <dependency>
-                <groupId>org.apache.rocketmq</groupId>
-                <artifactId>rocketmq-spring-boot-starter</artifactId>
-                <version>${rocketmq-starter.version}</version>
             </dependency>
 
             <!-- 公共模块 -->

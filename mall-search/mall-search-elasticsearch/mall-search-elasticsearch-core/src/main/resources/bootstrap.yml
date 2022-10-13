@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: mall-search-elasticsearch
+    name: mall-elasticsearch
 
 swagger:
   description: ElasticSearch 搜索微服务

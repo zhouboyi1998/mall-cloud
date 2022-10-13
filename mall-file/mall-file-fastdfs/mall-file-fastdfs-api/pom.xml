@@ -12,7 +12,7 @@
 
     <artifactId>mall-file-fastdfs-api</artifactId>
     <version>${mall-cloud.version}</version>
-    <description>FastDFS 文件存储模块远程调用接口</description>
+    <description>FastDFS 文件模块远程调用接口</description>
 
     <dependencies>
         <dependency>

@@ -12,7 +12,7 @@
 
     <artifactId>mall-file-minio-core</artifactId>
     <version>${mall-cloud.version}</version>
-    <description>MinIO 文件存储模块核心业务</description>
+    <description>MinIO 文件模块核心业务</description>
 
     <dependencies>
         <!-- MinIO 文件存储 -->
