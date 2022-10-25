@@ -2,10 +2,10 @@ package com.cafe.search.elasticsearch.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
-import com.cafe.goods.bo.GoodsBO;
-import com.cafe.goods.feign.GoodsBOFeign;
+import com.cafe.goods.bo.Goods;
+import com.cafe.goods.feign.GoodsFeign;
 import com.cafe.search.elasticsearch.constant.ElasticSearchConstant;
-import com.cafe.search.elasticsearch.service.GoodsService;
+import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
@@ -44,19 +44,16 @@ import java.util.List;
  * @Description:
  */
 @Service
-public class GoodsServiceImpl implements GoodsService {
+public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService {
 
     private RestHighLevelClient restHighLevelClient;
 
-    private GoodsBOFeign goodsBOFeign;
+    private GoodsFeign goodsFeign;
 
     @Autowired
-    public GoodsServiceImpl(
-        RestHighLevelClient restHighLevelClient,
-        GoodsBOFeign goodsBOFeign
-    ) {
+    public ElasticSearchGoodsServiceImpl(RestHighLevelClient restHighLevelClient, GoodsFeign goodsFeign) {
         this.restHighLevelClient = restHighLevelClient;
-        this.goodsBOFeign = goodsBOFeign;
+        this.goodsFeign = goodsFeign;
     }
 
     @Override
@@ -69,23 +66,23 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public IndexResponse insert(GoodsBO goodsBO) throws IOException {
+    public IndexResponse insert(Goods goods) throws IOException {
         // 组装插入请求
         IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.GOODS_INDEX)
             .timeout(TimeValue.timeValueSeconds(10))
-            .id(goodsBO.getId().toString())
-            .source(JSONUtil.toJsonStr(goodsBO), XContentType.JSON);
+            .id(goods.getId().toString())
+            .source(JSONUtil.toJsonStr(goods), XContentType.JSON);
         // 插入数据
         IndexResponse indexResponse = restHighLevelClient.index(indexRequest, RequestOptions.DEFAULT);
         return indexResponse;
     }
 
     @Override
-    public UpdateResponse update(GoodsBO goodsBO) throws IOException {
+    public UpdateResponse update(Goods goods) throws IOException {
         // 组装更新请求
-        UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.GOODS_INDEX, goodsBO.getId().toString())
+        UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.GOODS_INDEX, goods.getId().toString())
             .timeout(TimeValue.timeValueSeconds(10))
-            .doc(JSONUtil.toJsonStr(goodsBO), XContentType.JSON);
+            .doc(JSONUtil.toJsonStr(goods), XContentType.JSON);
         // 更新数据
         UpdateResponse updateResponse = restHighLevelClient.update(updateRequest, RequestOptions.DEFAULT);
         return updateResponse;
@@ -102,14 +99,14 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public BulkResponse insertBatch(List<GoodsBO> goodsBOList) throws IOException {
+    public BulkResponse insertBatch(List<Goods> goodsList) throws IOException {
         // 组装批量插入请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
-        for (GoodsBO goodsBO : goodsBOList) {
+        for (Goods goods : goodsList) {
             IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.GOODS_INDEX)
-                // 不自动生成 ElasticSearch ID, 使用数据库中存储的业务 ID
-                .id(goodsBO.getId().toString())
-                .source(JSONUtil.toJsonStr(goodsBO), XContentType.JSON);
+                // ElasticSearch 索引库的主键不使用自动生成的 ID, 使用数据库中存储的业务 ID
+                .id(goods.getId().toString())
+                .source(JSONUtil.toJsonStr(goods), XContentType.JSON);
             bulkRequest.add(indexRequest);
         }
         // 批量插入数据
@@ -118,12 +115,12 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public BulkResponse updateBatch(List<GoodsBO> goodsBOList) throws IOException {
+    public BulkResponse updateBatch(List<Goods> goodsList) throws IOException {
         // 组装批量更新请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
-        for (GoodsBO goodsBO : goodsBOList) {
-            UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.GOODS_INDEX, goodsBO.getId().toString())
-                .doc(JSONUtil.toJsonStr(goodsBO), XContentType.JSON);
+        for (Goods goods : goodsList) {
+            UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.GOODS_INDEX, goods.getId().toString())
+                .doc(JSONUtil.toJsonStr(goods), XContentType.JSON);
             bulkRequest.add(updateRequest);
         }
         // 批量更新数据
@@ -171,27 +168,30 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public BulkResponse importBatch(Long current, Long size) throws IOException {
         // 分页获取商品列表
-        List<GoodsBO> goodsBOList = goodsBOFeign.page(current, size).getBody().getRecords();
-        // 调用 insertBatch() 方法插入商品数据
-        BulkResponse bulkResponse = insertBatch(goodsBOList);
+        List<Goods> goodsList = goodsFeign.page(current, size).getBody().getRecords();
+        // 批量插入商品数据
+        BulkResponse bulkResponse = insertBatch(goodsList);
         return bulkResponse;
     }
 
     @Override
     public BulkResponse importBatch(List<Long> ids) throws IOException {
         // 根据 SKU ids 获取商品列表
-        List<GoodsBO> goodsBOList = goodsBOFeign.list(ids).getBody();
-        // 调用 insertBatch() 方法插入商品数据
-        BulkResponse bulkResponse = insertBatch(goodsBOList);
+        List<Goods> goodsList = goodsFeign.list(ids).getBody();
+        // 批量插入商品数据
+        BulkResponse bulkResponse = insertBatch(goodsList);
         return bulkResponse;
     }
 
     @Override
-    public BulkByScrollResponse updateBatchByQuery(String idField, Long idValue, String nameField, String nameValue) throws IOException {
-        // 筛选条件 (只更新符合条件的 document)
-        TermQueryBuilder termQueryBuilder = new TermQueryBuilder(idField, idValue);
-        // 更新脚本
-        Script script = new Script("ctx._source['" + nameField + "'] = '" + nameValue + "';");
+    public BulkByScrollResponse updateBatchByQuery(
+        String screenField, Long screenValue,
+        String operationField, String operationValue
+    ) throws IOException {
+        // 筛选条件 (筛选出符合条件的 document, 条件为 screenField 字段的值等于 screenValue)
+        TermQueryBuilder termQueryBuilder = new TermQueryBuilder(screenField, screenValue);
+        // 更新脚本 (更新符合条件的 document, 将 operationField 字段的值更新为 operationValue)
+        Script script = new Script("ctx._source['" + operationField + "'] = '" + operationValue + "';");
         // 组装批量更新请求
         UpdateByQueryRequest updateByQueryRequest = new UpdateByQueryRequest(ElasticSearchConstant.GOODS_INDEX)
             .setQuery(termQueryBuilder)

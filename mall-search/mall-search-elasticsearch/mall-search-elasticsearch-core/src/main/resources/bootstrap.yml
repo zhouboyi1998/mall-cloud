@@ -1,9 +1,9 @@
 server:
-  port: 18076
+  port: 18093
 
 spring:
   application:
-    name: mall-elasticsearch
+    name: mall-search-elasticsearch
 
 swagger:
   description: ElasticSearch 搜索微服务

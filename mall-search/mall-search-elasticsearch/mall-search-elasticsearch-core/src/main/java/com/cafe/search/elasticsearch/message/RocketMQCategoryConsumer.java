@@ -6,7 +6,7 @@ import com.cafe.common.message.rocketmq.constant.RocketMQConsumerGroup;
 import com.cafe.common.message.rocketmq.constant.RocketMQTopic;
 import com.cafe.goods.constant.GoodsField;
 import com.cafe.goods.model.Category;
-import com.cafe.search.elasticsearch.service.GoodsService;
+import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.slf4j.Logger;
@@ -31,11 +31,11 @@ public class RocketMQCategoryConsumer implements RocketMQListener<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RocketMQCategoryConsumer.class);
 
-    private GoodsService goodsService;
+    private ElasticSearchGoodsService elasticSearchGoodsService;
 
     @Autowired
-    public RocketMQCategoryConsumer(GoodsService goodsService) {
-        this.goodsService = goodsService;
+    public RocketMQCategoryConsumer(ElasticSearchGoodsService elasticSearchGoodsService) {
+        this.elasticSearchGoodsService = elasticSearchGoodsService;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class RocketMQCategoryConsumer implements RocketMQListener<String> {
         // 更新所有改变的分类名称
         for (Category category : afterDataList) {
             try {
-                goodsService.updateBatchByQuery(
+                elasticSearchGoodsService.updateBatchByQuery(
                     GoodsField.CATEGORY_ID, category.getId(),
                     GoodsField.CATEGORY_NAME, category.getCategoryName()
                 );

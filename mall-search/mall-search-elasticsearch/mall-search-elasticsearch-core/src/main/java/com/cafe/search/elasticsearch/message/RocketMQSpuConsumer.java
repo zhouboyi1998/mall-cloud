@@ -6,7 +6,7 @@ import com.cafe.common.message.rocketmq.constant.RocketMQConsumerGroup;
 import com.cafe.common.message.rocketmq.constant.RocketMQTopic;
 import com.cafe.goods.constant.GoodsField;
 import com.cafe.goods.model.Spu;
-import com.cafe.search.elasticsearch.service.GoodsService;
+import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.slf4j.Logger;
@@ -31,11 +31,11 @@ public class RocketMQSpuConsumer implements RocketMQListener<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RocketMQSpuConsumer.class);
 
-    private GoodsService goodsService;
+    private ElasticSearchGoodsService elasticSearchGoodsService;
 
     @Autowired
-    public RocketMQSpuConsumer(GoodsService goodsService) {
-        this.goodsService = goodsService;
+    public RocketMQSpuConsumer(ElasticSearchGoodsService elasticSearchGoodsService) {
+        this.elasticSearchGoodsService = elasticSearchGoodsService;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class RocketMQSpuConsumer implements RocketMQListener<String> {
         // 更新所有改变的 SPU 名称
         for (Spu spu : afterDataList) {
             try {
-                goodsService.updateBatchByQuery(
+                elasticSearchGoodsService.updateBatchByQuery(
                     GoodsField.SPU_ID, spu.getId(),
                     GoodsField.SPU_NAME, spu.getSpuName()
                 );

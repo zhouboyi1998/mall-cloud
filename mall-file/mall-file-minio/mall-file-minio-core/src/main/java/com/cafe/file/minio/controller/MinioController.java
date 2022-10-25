@@ -2,6 +2,7 @@ package com.cafe.file.minio.controller;
 
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.file.minio.service.MinioService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -21,8 +22,9 @@ import javax.servlet.http.HttpServletResponse;
  * @Package: com.cafe.file.minio.controller
  * @Author: zhouboyi
  * @Date: 2022/6/9 10:24
- * @Description:
+ * @Description: MinIO 文件接口
  */
+@Api(value = "MinIO 文件接口")
 @RestController
 @RequestMapping(value = "/minio")
 public class MinioController {
