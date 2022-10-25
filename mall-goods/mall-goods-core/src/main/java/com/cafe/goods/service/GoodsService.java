@@ -2,7 +2,7 @@ package com.cafe.goods.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cafe.goods.bo.GoodsBO;
+import com.cafe.goods.bo.Goods;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ import java.util.List;
  * @Date: 2022/10/11 11:35
  * @Description:
  */
-public interface GoodsBOService extends IService<GoodsBO> {
+public interface GoodsService extends IService<Goods> {
 
     /**
      * 根据 SKU ids 查询商品列表
@@ -21,7 +21,7 @@ public interface GoodsBOService extends IService<GoodsBO> {
      * @param ids
      * @return
      */
-    List<GoodsBO> list(List<Long> ids);
+    List<Goods> list(List<Long> ids);
 
     /**
      * 分页查询商品列表
@@ -29,5 +29,5 @@ public interface GoodsBOService extends IService<GoodsBO> {
      * @param page
      * @return
      */
-    Page<GoodsBO> page(Page<GoodsBO> page);
+    Page<Goods> page(Page<Goods> page);
 }

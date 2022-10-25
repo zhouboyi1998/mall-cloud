@@ -1,6 +1,6 @@
 package com.cafe.search.elasticsearch.service;
 
-import com.cafe.goods.bo.GoodsBO;
+import com.cafe.goods.bo.Goods;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
@@ -19,7 +19,7 @@ import java.util.List;
  * @Date: 2022/7/28 9:39
  * @Description:
  */
-public interface GoodsService {
+public interface ElasticSearchGoodsService {
 
     /**
      * 获取商品
@@ -33,20 +33,20 @@ public interface GoodsService {
     /**
      * 插入商品
      *
-     * @param goodsBOList
+     * @param goods
      * @return
      * @throws IOException
      */
-    IndexResponse insert(GoodsBO goodsBOList) throws IOException;
+    IndexResponse insert(Goods goods) throws IOException;
 
     /**
      * 更新商品
      *
-     * @param goodsBOList
+     * @param goods
      * @return
      * @throws IOException
      */
-    UpdateResponse update(GoodsBO goodsBOList) throws IOException;
+    UpdateResponse update(Goods goods) throws IOException;
 
     /**
      * 删除商品
@@ -60,20 +60,20 @@ public interface GoodsService {
     /**
      * 批量插入商品
      *
-     * @param goodsBOList
+     * @param goodsList
      * @return
      * @throws IOException
      */
-    BulkResponse insertBatch(List<GoodsBO> goodsBOList) throws IOException;
+    BulkResponse insertBatch(List<Goods> goodsList) throws IOException;
 
     /**
      * 批量更新商品
      *
-     * @param goodsBOList
+     * @param goodsList
      * @return
      * @throws IOException
      */
-    BulkResponse updateBatch(List<GoodsBO> goodsBOList) throws IOException;
+    BulkResponse updateBatch(List<Goods> goodsList) throws IOException;
 
     /**
      * 批量删除商品
@@ -117,14 +117,17 @@ public interface GoodsService {
     BulkResponse importBatch(List<Long> ids) throws IOException;
 
     /**
-     * 根据 idField 更新 nameField 的值
+     * 根据筛选字段更新操作字段的值
      *
-     * @param idField   筛选列的属性名
-     * @param idValue   筛选列的值
-     * @param nameField 更新列的属性名
-     * @param nameValue 更新列的值
+     * @param screenField    筛选字段名
+     * @param screenValue    筛选字段值
+     * @param operationField 操作字段名
+     * @param operationValue 操作字段值
      * @return
      * @throws IOException
      */
-    BulkByScrollResponse updateBatchByQuery(String idField, Long idValue, String nameField, String nameValue) throws IOException;
+    BulkByScrollResponse updateBatchByQuery(
+        String screenField, Long screenValue,
+        String operationField, String operationValue
+    ) throws IOException;
 }
