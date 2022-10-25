@@ -6,7 +6,7 @@ import com.cafe.common.constant.MonitorConstant;
 import com.cafe.common.message.rocketmq.constant.RocketMQConsumerGroup;
 import com.cafe.common.message.rocketmq.constant.RocketMQTopic;
 import com.cafe.goods.model.Sku;
-import com.cafe.search.elasticsearch.service.GoodsService;
+import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.slf4j.Logger;
@@ -32,11 +32,11 @@ public class RocketMQSkuConsumer implements RocketMQListener<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RocketMQSkuConsumer.class);
 
-    private GoodsService goodsService;
+    private ElasticSearchGoodsService elasticSearchGoodsService;
 
     @Autowired
-    public RocketMQSkuConsumer(GoodsService goodsService) {
-        this.goodsService = goodsService;
+    public RocketMQSkuConsumer(ElasticSearchGoodsService elasticSearchGoodsService) {
+        this.elasticSearchGoodsService = elasticSearchGoodsService;
     }
 
     @Override
@@ -58,14 +58,14 @@ public class RocketMQSkuConsumer implements RocketMQListener<String> {
                 for (Sku sku : beforeDataList) {
                     removeIds.add(sku.getId().toString());
                 }
-                goodsService.deleteBatch(removeIds);
+                elasticSearchGoodsService.deleteBatch(removeIds);
             }
             if (ObjectUtil.equal(MonitorConstant.UPDATE, operation) || ObjectUtil.equal(MonitorConstant.INSERT, operation)) {
                 List<Long> importIds = new ArrayList<Long>();
                 for (Sku sku : afterDataList) {
                     importIds.add(sku.getId());
                 }
-                goodsService.importBatch(importIds);
+                elasticSearchGoodsService.importBatch(importIds);
             }
         } catch (IOException e) {
             LOGGER.error("RocketMQSkuConsumer.onMessage(): Failed to update sku -> {}", e.getMessage());

@@ -6,7 +6,7 @@ import com.cafe.common.message.rocketmq.constant.RocketMQConsumerGroup;
 import com.cafe.common.message.rocketmq.constant.RocketMQTopic;
 import com.cafe.goods.constant.GoodsField;
 import com.cafe.goods.model.Brand;
-import com.cafe.search.elasticsearch.service.GoodsService;
+import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.slf4j.Logger;
@@ -31,11 +31,11 @@ public class RocketMQBrandConsumer implements RocketMQListener<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RocketMQBrandConsumer.class);
 
-    private GoodsService goodsService;
+    private ElasticSearchGoodsService elasticSearchGoodsService;
 
     @Autowired
-    public RocketMQBrandConsumer(GoodsService goodsService) {
-        this.goodsService = goodsService;
+    public RocketMQBrandConsumer(ElasticSearchGoodsService elasticSearchGoodsService) {
+        this.elasticSearchGoodsService = elasticSearchGoodsService;
     }
 
     @Override
@@ -50,7 +50,7 @@ public class RocketMQBrandConsumer implements RocketMQListener<String> {
         // 更新所有改变的品牌名称
         for (Brand brand : afterDataList) {
             try {
-                goodsService.updateBatchByQuery(
+                elasticSearchGoodsService.updateBatchByQuery(
                     GoodsField.BRAND_ID, brand.getId(),
                     GoodsField.BRAND_NAME, brand.getBrandName()
                 );

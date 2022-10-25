@@ -2,6 +2,7 @@ package com.cafe.search.elasticsearch.controller;
 
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.search.elasticsearch.service.ElasticSearchService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.elasticsearch.action.search.SearchResponse;
@@ -18,10 +19,11 @@ import java.io.IOException;
  * @Package: com.cafe.search.elasticsearch.controller
  * @Author: zhouboyi
  * @Date: 2022/7/27 11:06
- * @Description: ElasticSearch 信息接口
+ * @Description: ElasticSearch 服务接口
  */
+@Api(value = "ElasticSearch 服务接口")
 @RestController
-@RequestMapping(value = "/elastic")
+@RequestMapping(value = "/server")
 public class ElasticSearchController {
 
     private ElasticSearchService elasticSearchService;

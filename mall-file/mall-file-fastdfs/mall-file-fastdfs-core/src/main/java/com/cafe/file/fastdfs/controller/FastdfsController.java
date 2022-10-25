@@ -2,6 +2,7 @@ package com.cafe.file.fastdfs.controller;
 
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.file.fastdfs.service.FastdfsService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
  * @Package: com.cafe.file.fastdfs.controller
  * @Author: zhouboyi
  * @Date: 2022/7/23 19:35
- * @Description:
+ * @Description: FastDFS 文件接口
  */
+@Api(value = "FastDFS 文件接口")
 @RestController
 @RequestMapping(value = "/fastdfs")
 public class FastdfsController {

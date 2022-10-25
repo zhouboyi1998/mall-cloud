@@ -2,8 +2,8 @@ package com.cafe.goods.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.goods.bo.GoodsBO;
-import com.cafe.goods.service.GoodsBOService;
+import com.cafe.goods.bo.Goods;
+import com.cafe.goods.service.GoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -28,23 +28,23 @@ import java.util.List;
  */
 @Api(value = "商品接口")
 @RestController
-@RequestMapping(value = "/goods/bo")
-public class GoodsBOController {
+@RequestMapping(value = "/goods")
+public class GoodsController {
 
-    private GoodsBOService goodsBOService;
+    private GoodsService goodsService;
 
     @Autowired
-    public GoodsBOController(GoodsBOService goodsBOService) {
-        this.goodsBOService = goodsBOService;
+    public GoodsController(GoodsService goodsService) {
+        this.goodsService = goodsService;
     }
 
     @LogPrint(value = "根据 SKU ids 查询商品列表")
     @ApiOperation(value = "根据 SKU ids 查询商品列表")
     @ApiImplicitParam(name = "ids", value = "SKU ids", required = true, paramType = "body", dataType = "List<Long>")
     @PostMapping(value = "/list")
-    public ResponseEntity<List<GoodsBO>> list(@RequestBody List<Long> ids) {
-        List<GoodsBO> goodsBOList = goodsBOService.list(ids);
-        return ResponseEntity.ok(goodsBOList);
+    public ResponseEntity<List<Goods>> list(@RequestBody List<Long> ids) {
+        List<Goods> goodsList = goodsService.list(ids);
+        return ResponseEntity.ok(goodsList);
     }
 
     @LogPrint(value = "分页查询商品列表")
@@ -54,12 +54,12 @@ public class GoodsBOController {
         @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
     })
     @GetMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<Page<GoodsBO>> page(
+    public ResponseEntity<Page<Goods>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<GoodsBO> page = new Page<GoodsBO>().setCurrent(current).setSize(size);
-        Page<GoodsBO> goodsBOPage = goodsBOService.page(page);
-        return ResponseEntity.ok(goodsBOPage);
+        Page<Goods> page = new Page<Goods>().setCurrent(current).setSize(size);
+        Page<Goods> goodsPage = goodsService.page(page);
+        return ResponseEntity.ok(goodsPage);
     }
 }

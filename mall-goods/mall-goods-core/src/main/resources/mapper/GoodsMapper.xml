@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cafe.goods.dao.GoodsBOMapper">
+<mapper namespace="com.cafe.goods.dao.GoodsMapper">
 
-    <select id="list" resultType="com.cafe.goods.bo.GoodsBO">
+    <select id="list" resultType="com.cafe.goods.bo.Goods">
         SELECT k.id, k.sku_name, k.spu_id, k.original_price, k.discount_price, k.seckill_price,
                k.stock, k.sale_count, k.image, k.image_list, k.specification,
                p.brand_id, p.category_id, p.spu_name, b.brand_name, c.category_name
@@ -16,7 +16,7 @@
         </foreach>
     </select>
 
-    <select id="page" resultType="com.cafe.goods.bo.GoodsBO">
+    <select id="page" resultType="com.cafe.goods.bo.Goods">
         SELECT k.id, k.sku_name, k.spu_id, k.original_price, k.discount_price, k.seckill_price,
                k.stock, k.sale_count, k.image, k.image_list, k.specification,
                p.brand_id, p.category_id, p.spu_name, b.brand_name, c.category_name

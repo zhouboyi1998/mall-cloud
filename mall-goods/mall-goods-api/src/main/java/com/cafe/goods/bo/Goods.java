@@ -12,8 +12,8 @@ import java.io.Serializable;
  * @Date: 2022/10/11 11:42
  * @Description:
  */
-@ApiModel(value = "GoodsBO对象", description = "商品业务对象")
-public class GoodsBO implements Serializable {
+@ApiModel(value = "Goods对象", description = "商品对象")
+public class Goods implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -195,7 +195,7 @@ public class GoodsBO implements Serializable {
 
     @Override
     public String toString() {
-        return "GoodsDTO{" +
+        return "Goods{" +
             "id=" + id +
             ", skuName='" + skuName + '\'' +
             ", spuId=" + spuId +
