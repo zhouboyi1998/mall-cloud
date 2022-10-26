@@ -21,6 +21,13 @@ spring:
             - Path=/security/**
           filters:
             - StripPrefix=1
+        # 后台管理模块
+        - id: mall-admin
+          uri: lb://mall-admin
+          predicates:
+            - Path=/admin/**
+          filters:
+            - StripPrefix=1
         # MinIO 文件模块
         - id: mall-file-minio
           uri: lb://mall-file-minio
@@ -39,7 +46,14 @@ spring:
         - id: mall-search-elasticsearch
           uri: lb://mall-search-elasticsearch
           predicates:
-            - Path=/elastic/**
+            - Path=/elasticsearch/**
+          filters:
+            - StripPrefix=1
+        # Solr 搜索模块
+        - id: mall-search-solr
+          uri: lb://mall-search-solr
+          predicates:
+            - Path=/solr/**
           filters:
             - StripPrefix=1
         # 商品模块
@@ -54,13 +68,6 @@ spring:
           uri: lb://mall-order
           predicates:
             - Path=/order/**
-          filters:
-            - StripPrefix=1
-        # 后台管理模块
-        - id: mall-admin
-          uri: lb://mall-admin
-          predicates:
-            - Path=/admin/**
           filters:
             - StripPrefix=1
 

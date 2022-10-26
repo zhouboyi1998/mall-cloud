@@ -311,6 +311,11 @@
                 <artifactId>mall-search-elasticsearch-api</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-search-solr-api</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
