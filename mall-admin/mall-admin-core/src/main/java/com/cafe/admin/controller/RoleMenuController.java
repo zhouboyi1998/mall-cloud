@@ -55,7 +55,7 @@ public class RoleMenuController {
 
     @LogPrint(value = "根据条件查询角色-菜单关联列表")
     @ApiOperation(value = "根据条件查询角色-菜单关联列表")
-    @ApiImplicitParam(name = "roleMenu", value = "角色-菜单关联Model", required = true, paramType = "body", dataType = "RoleMenu")
+    @ApiImplicitParam(value = "角色-菜单关联Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<RoleMenu>> list(@RequestBody RoleMenu roleMenu) {
         Wrapper<RoleMenu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(roleMenu);
@@ -66,8 +66,8 @@ public class RoleMenuController {
     @LogPrint(value = "分页查询角色-菜单关联列表")
     @ApiOperation(value = "分页查询角色-菜单关联列表")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true)
     })
     @GetMapping(value = "/page/{current}/{size}")
     public ResponseEntity<Page<RoleMenu>> page(
@@ -82,9 +82,9 @@ public class RoleMenuController {
     @LogPrint(value = "根据条件分页查询角色-菜单关联")
     @ApiOperation(value = "根据条件分页查询角色-菜单关联")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "roleMenu", value = "角色-菜单关联Model", required = true, paramType = "body", dataType = "RoleMenu")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "角色-菜单关联Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
     })
     @PostMapping(value = "/page/{current}/{size}")
     public ResponseEntity<Page<RoleMenu>> page(
@@ -100,7 +100,7 @@ public class RoleMenuController {
 
     @LogPrint(value = "根据id查询单个角色-菜单关联")
     @ApiOperation(value = "根据id查询单个角色-菜单关联")
-    @ApiImplicitParam(name = "id", value = "角色-菜单关联id", required = true, paramType = "path", dataType = "Long")
+    @ApiImplicitParam(value = "角色-菜单关联id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<RoleMenu> one(@PathVariable(value = "id") Long id) {
         LambdaQueryWrapper<RoleMenu> wrapper = new LambdaQueryWrapper<RoleMenu>().eq(RoleMenu::getId, id);
@@ -110,7 +110,7 @@ public class RoleMenuController {
 
     @LogPrint(value = "新增角色-菜单关联")
     @ApiOperation(value = "新增角色-菜单关联")
-    @ApiImplicitParam(name = "roleMenu", value = "角色-菜单关联Model", required = true, paramType = "body", dataType = "RoleMenu")
+    @ApiImplicitParam(value = "角色-菜单关联Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody RoleMenu roleMenu) {
         roleMenu.setCreateTime(LocalDateTime.now());
@@ -121,7 +121,7 @@ public class RoleMenuController {
 
     @LogPrint(value = "根据id修改角色-菜单关联")
     @ApiOperation(value = "根据id修改角色-菜单关联")
-    @ApiImplicitParam(name = "roleMenu", value = "角色-菜单关联Model", required = true, paramType = "body", dataType = "RoleMenu")
+    @ApiImplicitParam(value = "角色-菜单关联Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
     @PutMapping(value = "/update")
     public ResponseEntity<Boolean> update(@RequestBody RoleMenu roleMenu) {
         Boolean code = roleMenuService.updateById(roleMenu);
@@ -130,7 +130,7 @@ public class RoleMenuController {
 
     @LogPrint(value = "根据ids批量修改角色-菜单关联")
     @ApiOperation(value = "根据ids批量修改角色-菜单关联")
-    @ApiImplicitParam(name = "roleMenuList", value = "角色-菜单关联列表", required = true, paramType = "body", dataType = "List<RoleMenu>")
+    @ApiImplicitParam(value = "角色-菜单关联列表", name = "roleMenuList", dataType = "List<RoleMenu>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<RoleMenu> roleMenuList) {
         Boolean code = roleMenuService.updateBatchById(roleMenuList);
@@ -139,7 +139,7 @@ public class RoleMenuController {
 
     @LogPrint(value = "根据id删除角色-菜单关联")
     @ApiOperation(value = "根据id删除角色-菜单关联")
-    @ApiImplicitParam(name = "id", value = "角色-菜单关联id", required = true, paramType = "path", dataType = "Long")
+    @ApiImplicitParam(value = "角色-菜单关联id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
         Boolean code = roleMenuService.removeById(id);
@@ -148,7 +148,7 @@ public class RoleMenuController {
 
     @LogPrint(value = "根据ids批量删除角色-菜单关联")
     @ApiOperation(value = "根据ids批量删除角色-菜单关联")
-    @ApiImplicitParam(name = "ids", value = "角色-菜单关联id列表", required = true, paramType = "body", dataType = "List<Long>")
+    @ApiImplicitParam(value = "角色-菜单关联id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = roleMenuService.removeByIds(ids);
@@ -158,8 +158,8 @@ public class RoleMenuController {
     @LogPrint(value = "分页查询角色-菜单关联列表")
     @ApiOperation(value = "分页查询角色-菜单关联列表")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
     })
     @GetMapping(value = "/page")
     public ResponseEntity<Page<RoleMenu>> soapPage(
@@ -174,9 +174,9 @@ public class RoleMenuController {
     @LogPrint(value = "根据条件分页查询角色-菜单关联")
     @ApiOperation(value = "根据条件分页查询角色-菜单关联")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "roleMenu", value = "角色-菜单关联Model", required = true, paramType = "body", dataType = "RoleMenu")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "角色-菜单关联Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
     })
     @PostMapping(value = "/page")
     public ResponseEntity<Page<RoleMenu>> soapPage(
@@ -192,7 +192,7 @@ public class RoleMenuController {
 
     @LogPrint(value = "根据id查询单个角色-菜单关联")
     @ApiOperation(value = "根据id查询单个角色-菜单关联")
-    @ApiImplicitParam(name = "id", value = "角色-菜单关联id", required = true, paramType = "query", dataType = "Long")
+    @ApiImplicitParam(value = "角色-菜单关联id", name = "id", dataType = "Long", paramType = "query", required = true)
     @GetMapping(value = "/one")
     public ResponseEntity<RoleMenu> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<RoleMenu> wrapper = new LambdaQueryWrapper<RoleMenu>().eq(RoleMenu::getId, id);
@@ -202,7 +202,7 @@ public class RoleMenuController {
 
     @LogPrint(value = "根据id删除角色-菜单关联")
     @ApiOperation(value = "根据id删除角色-菜单关联")
-    @ApiImplicitParam(name = "id", value = "角色-菜单关联id", required = true, paramType = "query", dataType = "Long")
+    @ApiImplicitParam(value = "角色-菜单关联id", name = "id", dataType = "Long", paramType = "query", required = true)
     @DeleteMapping(value = "/delete")
     public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = roleMenuService.removeById(id);

@@ -39,7 +39,7 @@ public class SolrGoodsController {
 
     @LogPrint(value = "获取商品")
     @ApiOperation(value = "获取商品")
-    @ApiImplicitParam(name = "id", value = "商品id", required = true, paramType = "path", dataType = "String")
+    @ApiImplicitParam(value = "商品id", name = "id", dataType = "String", paramType = "path", required = true)
     @GetMapping(value = "/{id}")
     public ResponseEntity<SolrGoods> one(@PathVariable(value = "id") String id) {
         SolrGoods solrGoods = solrGoodsService.one(id);
@@ -48,34 +48,34 @@ public class SolrGoodsController {
 
     @LogPrint(value = "插入商品/更新商品")
     @ApiOperation(value = "插入商品/更新商品")
-    @ApiImplicitParam(name = "solrGoods", value = "商品", required = true, paramType = "body", dataType = "SolrGoods")
+    @ApiImplicitParam(value = "商品Model", name = "solrGoods", dataType = "SolrGoods", paramType = "body", required = true)
     @PostMapping(value = "")
     public ResponseEntity<String> save(@RequestBody SolrGoods solrGoods) {
         solrGoodsService.save(solrGoods);
         return ResponseEntity.ok("save success!");
     }
 
-    @LogPrint(value = "删除商品")
-    @ApiOperation(value = "删除商品")
-    @ApiImplicitParam(name = "id", value = "商品id", required = true, paramType = "path", dataType = "String")
-    @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> delete(@PathVariable(value = "id") String id) {
-        solrGoodsService.delete(id);
-        return ResponseEntity.ok("delete success!");
-    }
-
     @LogPrint(value = "批量插入商品/批量更新商品")
     @ApiOperation(value = "批量插入商品/批量更新商品")
-    @ApiImplicitParam(name = "solrGoodsList", value = "商品列表", required = true, paramType = "body", dataType = "List<SolrGoods>")
+    @ApiImplicitParam(value = "商品列表", name = "solrGoodsList", dataType = "List<SolrGoods>", paramType = "body", required = true)
     @PostMapping(value = "/batch")
     public ResponseEntity<String> saveBatch(@RequestBody List<SolrGoods> solrGoodsList) {
         solrGoodsService.saveBatch(solrGoodsList);
         return ResponseEntity.ok("batch save success!");
     }
 
+    @LogPrint(value = "删除商品")
+    @ApiOperation(value = "删除商品")
+    @ApiImplicitParam(value = "商品id", name = "id", dataType = "String", paramType = "path", required = true)
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> delete(@PathVariable(value = "id") String id) {
+        solrGoodsService.delete(id);
+        return ResponseEntity.ok("delete success!");
+    }
+
     @LogPrint(value = "批量删除商品")
     @ApiOperation(value = "批量删除商品")
-    @ApiImplicitParam(name = "ids", value = "商品id列表", required = true, paramType = "body", dataType = "List<String>")
+    @ApiImplicitParam(value = "商品id列表", name = "ids", dataType = "List<String>", paramType = "body", required = true)
     @DeleteMapping(value = "/batch")
     public ResponseEntity<String> deleteBatch(@RequestBody List<String> ids) {
         solrGoodsService.deleteBatch(ids);

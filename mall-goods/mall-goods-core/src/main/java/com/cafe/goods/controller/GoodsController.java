@@ -40,7 +40,7 @@ public class GoodsController {
 
     @LogPrint(value = "根据 SKU ids 查询商品列表")
     @ApiOperation(value = "根据 SKU ids 查询商品列表")
-    @ApiImplicitParam(name = "ids", value = "SKU ids", required = true, paramType = "body", dataType = "List<Long>")
+    @ApiImplicitParam(value = "SKU ids", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Goods>> list(@RequestBody List<Long> ids) {
         List<Goods> goodsList = goodsService.list(ids);
@@ -50,8 +50,8 @@ public class GoodsController {
     @LogPrint(value = "分页查询商品列表")
     @ApiOperation(value = "分页查询商品列表")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true)
     })
     @GetMapping(value = "/page/{current}/{size}")
     public ResponseEntity<Page<Goods>> page(

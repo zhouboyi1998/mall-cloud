@@ -58,7 +58,7 @@ public class MenuController {
 
     @LogPrint(value = "根据条件查询菜单列表")
     @ApiOperation(value = "根据条件查询菜单列表")
-    @ApiImplicitParam(name = "menu", value = "菜单Model", required = true, paramType = "body", dataType = "Menu")
+    @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Menu>> list(@RequestBody Menu menu) {
         Wrapper<Menu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(menu);
@@ -69,8 +69,8 @@ public class MenuController {
     @LogPrint(value = "分页查询菜单列表")
     @ApiOperation(value = "分页查询菜单列表")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true)
     })
     @GetMapping(value = "/page/{current}/{size}")
     public ResponseEntity<Page<Menu>> page(
@@ -85,9 +85,9 @@ public class MenuController {
     @LogPrint(value = "根据条件分页查询菜单")
     @ApiOperation(value = "根据条件分页查询菜单")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "menu", value = "菜单Model", required = true, paramType = "body", dataType = "Menu")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
     })
     @PostMapping(value = "/page/{current}/{size}")
     public ResponseEntity<Page<Menu>> page(
@@ -103,7 +103,7 @@ public class MenuController {
 
     @LogPrint(value = "根据id查询单个菜单")
     @ApiOperation(value = "根据id查询单个菜单")
-    @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "path", dataType = "Long")
+    @ApiImplicitParam(value = "菜单id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Menu> one(@PathVariable(value = "id") Long id) {
         LambdaQueryWrapper<Menu> wrapper = new LambdaQueryWrapper<Menu>().eq(Menu::getId, id);
@@ -113,7 +113,7 @@ public class MenuController {
 
     @LogPrint(value = "新增菜单")
     @ApiOperation(value = "新增菜单")
-    @ApiImplicitParam(name = "menu", value = "菜单Model", required = true, paramType = "body", dataType = "Menu")
+    @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Menu menu) {
         menu.setCreateTime(LocalDateTime.now());
@@ -124,7 +124,7 @@ public class MenuController {
 
     @LogPrint(value = "根据id修改菜单")
     @ApiOperation(value = "根据id修改菜单")
-    @ApiImplicitParam(name = "menu", value = "菜单Model", required = true, paramType = "body", dataType = "Menu")
+    @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
     @PutMapping(value = "/update")
     public ResponseEntity<Boolean> update(@RequestBody Menu menu) {
         Boolean code = menuService.updateById(menu);
@@ -133,7 +133,7 @@ public class MenuController {
 
     @LogPrint(value = "根据ids批量修改菜单")
     @ApiOperation(value = "根据ids批量修改菜单")
-    @ApiImplicitParam(name = "menuList", value = "菜单列表", required = true, paramType = "body", dataType = "List<Menu>")
+    @ApiImplicitParam(value = "菜单列表", name = "menuList", dataType = "List<Menu>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<Menu> menuList) {
         Boolean code = menuService.updateBatchById(menuList);
@@ -142,7 +142,7 @@ public class MenuController {
 
     @LogPrint(value = "根据id删除菜单")
     @ApiOperation(value = "根据id删除菜单")
-    @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "path", dataType = "Long")
+    @ApiImplicitParam(value = "菜单id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
         Boolean code = menuService.removeById(id);
@@ -151,7 +151,7 @@ public class MenuController {
 
     @LogPrint(value = "根据ids批量删除菜单")
     @ApiOperation(value = "根据ids批量删除菜单")
-    @ApiImplicitParam(name = "ids", value = "菜单id列表", required = true, paramType = "body", dataType = "List<Long>")
+    @ApiImplicitParam(value = "菜单id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = menuService.removeByIds(ids);
@@ -161,8 +161,8 @@ public class MenuController {
     @LogPrint(value = "分页查询菜单列表")
     @ApiOperation(value = "分页查询菜单列表")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
     })
     @GetMapping(value = "/page")
     public ResponseEntity<Page<Menu>> soapPage(
@@ -177,9 +177,9 @@ public class MenuController {
     @LogPrint(value = "根据条件分页查询菜单")
     @ApiOperation(value = "根据条件分页查询菜单")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "menu", value = "菜单Model", required = true, paramType = "body", dataType = "Menu")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
     })
     @PostMapping(value = "/page")
     public ResponseEntity<Page<Menu>> soapPage(
@@ -195,7 +195,7 @@ public class MenuController {
 
     @LogPrint(value = "根据id查询单个菜单")
     @ApiOperation(value = "根据id查询单个菜单")
-    @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "query", dataType = "Long")
+    @ApiImplicitParam(value = "菜单id", name = "id", dataType = "Long", paramType = "query", required = true)
     @GetMapping(value = "/one")
     public ResponseEntity<Menu> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<Menu> wrapper = new LambdaQueryWrapper<Menu>().eq(Menu::getId, id);
@@ -205,7 +205,7 @@ public class MenuController {
 
     @LogPrint(value = "根据id删除菜单")
     @ApiOperation(value = "根据id删除菜单")
-    @ApiImplicitParam(name = "id", value = "菜单id", required = true, paramType = "query", dataType = "Long")
+    @ApiImplicitParam(value = "菜单id", name = "id", dataType = "Long", paramType = "query", required = true)
     @DeleteMapping(value = "/delete")
     public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = menuService.removeById(id);
@@ -214,7 +214,7 @@ public class MenuController {
 
     @LogPrint(value = "根据角色列表获取树形格式的菜单列表")
     @ApiOperation(value = "根据角色列表获取树形格式的菜单列表")
-    @ApiImplicitParam(name = AuthenticationConstant.USER_DETAILS_HEADER, value = "用户详细信息", required = true, paramType = "header", dataType = "String")
+    @ApiImplicitParam(value = "用户详细信息", name = AuthenticationConstant.USER_DETAILS_HEADER, dataType = "String", paramType = "header", required = true)
     @GetMapping(value = "/listMenuTree")
     public ResponseEntity<List<MenuTreeVO>> listMenuTree(
         @RequestHeader(value = AuthenticationConstant.USER_DETAILS_HEADER) String userDetails

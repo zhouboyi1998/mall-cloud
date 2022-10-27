@@ -44,7 +44,7 @@ public class OauthController {
      */
     @LogPrint(value = "Oauth2 登录认证")
     @ApiOperation(value = "Oauth2 登录认证")
-    @ApiImplicitParam(name = "parameters", value = "登录认证参数", required = true, paramType = "query", dataType = "Map<String, String>")
+    @ApiImplicitParam(value = "登录认证参数", name = "parameters", dataType = "Map<String, String>", paramType = "query", required = true)
     @PostMapping(value = "/token")
     public ResponseEntity<Oauth2TokenDetails> postAccessToken(
         Principal principal,

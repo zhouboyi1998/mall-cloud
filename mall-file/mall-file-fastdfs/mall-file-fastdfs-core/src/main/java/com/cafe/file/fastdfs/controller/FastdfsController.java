@@ -34,7 +34,7 @@ public class FastdfsController {
 
     @LogPrint(value = "文件上传")
     @ApiOperation(value = "文件上传")
-    @ApiImplicitParam(name = "file", value = "文件", required = true, paramType = "form", dataType = "MultipartFile")
+    @ApiImplicitParam(value = "文件", name = "file", dataType = "MultipartFile", paramType = "form", required = true)
     @PostMapping(value = "/upload")
     public ResponseEntity<String> upload(@RequestParam(value = "file") MultipartFile file) throws Exception {
         // 将文件上传到 FastDFS 中
