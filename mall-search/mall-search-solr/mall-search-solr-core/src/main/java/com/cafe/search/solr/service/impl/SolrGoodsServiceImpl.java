@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.search.solr.service.impl
@@ -29,8 +31,33 @@ public class SolrGoodsServiceImpl implements SolrGoodsService {
     }
 
     @Override
+    public SolrGoods one(String id) {
+        SolrGoods solrGoods = solrTemplate.getById(SolrConstant.GOODS_INDEX, id, SolrGoods.class).get();
+        solrTemplate.commit(SolrConstant.GOODS_INDEX);
+        return solrGoods;
+    }
+
+    @Override
     public void save(SolrGoods solrGoods) {
         solrTemplate.saveBean(SolrConstant.GOODS_INDEX, solrGoods);
+        solrTemplate.commit(SolrConstant.GOODS_INDEX);
+    }
+
+    @Override
+    public void delete(String id) {
+        solrTemplate.deleteByIds(SolrConstant.GOODS_INDEX, id);
+        solrTemplate.commit(SolrConstant.GOODS_INDEX);
+    }
+
+    @Override
+    public void saveBatch(List<SolrGoods> solrGoodsList) {
+        solrTemplate.saveBeans(SolrConstant.GOODS_INDEX, solrGoodsList);
+        solrTemplate.commit(SolrConstant.GOODS_INDEX);
+    }
+
+    @Override
+    public void deleteBatch(List<String> ids) {
+        solrTemplate.deleteByIds(SolrConstant.GOODS_INDEX, ids);
         solrTemplate.commit(SolrConstant.GOODS_INDEX);
     }
 }

@@ -2,6 +2,8 @@ package com.cafe.search.solr.service;
 
 import com.cafe.search.solr.model.SolrGoods;
 
+import java.util.List;
+
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.search.solr.service
@@ -12,9 +14,38 @@ import com.cafe.search.solr.model.SolrGoods;
 public interface SolrGoodsService {
 
     /**
-     * 保存商品 (ID不存在时插入商品 / ID存在时更新商品)
+     * 获取商品
+     *
+     * @param id
+     * @return
+     */
+    SolrGoods one(String id);
+
+    /**
+     * 插入商品/更新商品
      *
      * @param solrGoods
      */
     void save(SolrGoods solrGoods);
+
+    /**
+     * 删除商品
+     *
+     * @param id
+     */
+    void delete(String id);
+
+    /**
+     * 批量插入商品/批量更新商品
+     *
+     * @param solrGoodsList
+     */
+    void saveBatch(List<SolrGoods> solrGoodsList);
+
+    /**
+     * 批量删除商品
+     *
+     * @param ids
+     */
+    void deleteBatch(List<String> ids);
 }
