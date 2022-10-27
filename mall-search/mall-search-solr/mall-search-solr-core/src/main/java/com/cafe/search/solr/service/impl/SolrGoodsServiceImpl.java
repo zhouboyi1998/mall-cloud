@@ -1,5 +1,7 @@
 package com.cafe.search.solr.service.impl;
 
+import cn.hutool.json.JSONUtil;
+import com.cafe.goods.bo.Goods;
 import com.cafe.goods.feign.GoodsFeign;
 import com.cafe.search.solr.constant.SolrConstant;
 import com.cafe.search.solr.model.SolrGoods;
@@ -44,14 +46,14 @@ public class SolrGoodsServiceImpl implements SolrGoodsService {
     }
 
     @Override
-    public void delete(String id) {
-        solrTemplate.deleteByIds(SolrConstant.GOODS_INDEX, id);
+    public void saveBatch(List<SolrGoods> solrGoodsList) {
+        solrTemplate.saveBeans(SolrConstant.GOODS_INDEX, solrGoodsList);
         solrTemplate.commit(SolrConstant.GOODS_INDEX);
     }
 
     @Override
-    public void saveBatch(List<SolrGoods> solrGoodsList) {
-        solrTemplate.saveBeans(SolrConstant.GOODS_INDEX, solrGoodsList);
+    public void delete(String id) {
+        solrTemplate.deleteByIds(SolrConstant.GOODS_INDEX, id);
         solrTemplate.commit(SolrConstant.GOODS_INDEX);
     }
 
@@ -59,5 +61,15 @@ public class SolrGoodsServiceImpl implements SolrGoodsService {
     public void deleteBatch(List<String> ids) {
         solrTemplate.deleteByIds(SolrConstant.GOODS_INDEX, ids);
         solrTemplate.commit(SolrConstant.GOODS_INDEX);
+    }
+
+    @Override
+    public void importBatch(Long current, Long size) {
+        // 分页获取商品列表
+        List<Goods> goodsList = goodsFeign.page(current, size).getBody().getRecords();
+        // 转换类型
+        List<SolrGoods> solrGoodsList = JSONUtil.toList(JSONUtil.parseArray(goodsList), SolrGoods.class);
+        // 批量插入商品数据
+        saveBatch(solrGoodsList);
     }
 }
