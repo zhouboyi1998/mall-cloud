@@ -55,7 +55,7 @@ public class SpuController {
 
     @LogPrint(value = "根据条件查询Standard Product Unit 标准化产品单元列表")
     @ApiOperation(value = "根据条件查询Standard Product Unit 标准化产品单元列表")
-    @ApiImplicitParam(name = "spu", value = "Standard Product Unit 标准化产品单元Model", required = true, paramType = "body", dataType = "Spu")
+    @ApiImplicitParam(value = "Standard Product Unit 标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Spu>> list(@RequestBody Spu spu) {
         Wrapper<Spu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(spu);
@@ -66,8 +66,8 @@ public class SpuController {
     @LogPrint(value = "分页查询Standard Product Unit 标准化产品单元列表")
     @ApiOperation(value = "分页查询Standard Product Unit 标准化产品单元列表")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true)
     })
     @GetMapping(value = "/page/{current}/{size}")
     public ResponseEntity<Page<Spu>> page(
@@ -82,9 +82,9 @@ public class SpuController {
     @LogPrint(value = "根据条件分页查询Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据条件分页查询Standard Product Unit 标准化产品单元")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "spu", value = "Standard Product Unit 标准化产品单元Model", required = true, paramType = "body", dataType = "Spu")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "Standard Product Unit 标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     })
     @PostMapping(value = "/page/{current}/{size}")
     public ResponseEntity<Page<Spu>> page(
@@ -100,7 +100,7 @@ public class SpuController {
 
     @LogPrint(value = "根据id查询单个Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据id查询单个Standard Product Unit 标准化产品单元")
-    @ApiImplicitParam(name = "id", value = "Standard Product Unit 标准化产品单元id", required = true, paramType = "path", dataType = "Long")
+    @ApiImplicitParam(value = "Standard Product Unit 标准化产品单元id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Spu> one(@PathVariable(value = "id") Long id) {
         LambdaQueryWrapper<Spu> wrapper = new LambdaQueryWrapper<Spu>().eq(Spu::getId, id);
@@ -110,7 +110,7 @@ public class SpuController {
 
     @LogPrint(value = "新增Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "新增Standard Product Unit 标准化产品单元")
-    @ApiImplicitParam(name = "spu", value = "Standard Product Unit 标准化产品单元Model", required = true, paramType = "body", dataType = "Spu")
+    @ApiImplicitParam(value = "Standard Product Unit 标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Spu spu) {
         spu.setCreateTime(LocalDateTime.now());
@@ -121,7 +121,7 @@ public class SpuController {
 
     @LogPrint(value = "根据id修改Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据id修改Standard Product Unit 标准化产品单元")
-    @ApiImplicitParam(name = "spu", value = "Standard Product Unit 标准化产品单元Model", required = true, paramType = "body", dataType = "Spu")
+    @ApiImplicitParam(value = "Standard Product Unit 标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     @PutMapping(value = "/update")
     public ResponseEntity<Boolean> update(@RequestBody Spu spu) {
         Boolean code = spuService.updateById(spu);
@@ -130,7 +130,7 @@ public class SpuController {
 
     @LogPrint(value = "根据ids批量修改Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据ids批量修改Standard Product Unit 标准化产品单元")
-    @ApiImplicitParam(name = "spuList", value = "Standard Product Unit 标准化产品单元列表", required = true, paramType = "body", dataType = "List<Spu>")
+    @ApiImplicitParam(value = "Standard Product Unit 标准化产品单元列表", name = "spuList", dataType = "List<Spu>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<Spu> spuList) {
         Boolean code = spuService.updateBatchById(spuList);
@@ -139,7 +139,7 @@ public class SpuController {
 
     @LogPrint(value = "根据id删除Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据id删除Standard Product Unit 标准化产品单元")
-    @ApiImplicitParam(name = "id", value = "Standard Product Unit 标准化产品单元id", required = true, paramType = "path", dataType = "Long")
+    @ApiImplicitParam(value = "Standard Product Unit 标准化产品单元id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
         Boolean code = spuService.removeById(id);
@@ -148,7 +148,7 @@ public class SpuController {
 
     @LogPrint(value = "根据ids批量删除Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据ids批量删除Standard Product Unit 标准化产品单元")
-    @ApiImplicitParam(name = "ids", value = "Standard Product Unit 标准化产品单元id列表", required = true, paramType = "body", dataType = "List<Long>")
+    @ApiImplicitParam(value = "Standard Product Unit 标准化产品单元id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = spuService.removeByIds(ids);
@@ -158,8 +158,8 @@ public class SpuController {
     @LogPrint(value = "分页查询Standard Product Unit 标准化产品单元列表")
     @ApiOperation(value = "分页查询Standard Product Unit 标准化产品单元列表")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
     })
     @GetMapping(value = "/page")
     public ResponseEntity<Page<Spu>> soapPage(
@@ -174,9 +174,9 @@ public class SpuController {
     @LogPrint(value = "根据条件分页查询Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据条件分页查询Standard Product Unit 标准化产品单元")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "spu", value = "Standard Product Unit 标准化产品单元Model", required = true, paramType = "body", dataType = "Spu")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "Standard Product Unit 标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     })
     @PostMapping(value = "/page")
     public ResponseEntity<Page<Spu>> soapPage(
@@ -192,7 +192,7 @@ public class SpuController {
 
     @LogPrint(value = "根据id查询单个Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据id查询单个Standard Product Unit 标准化产品单元")
-    @ApiImplicitParam(name = "id", value = "Standard Product Unit 标准化产品单元id", required = true, paramType = "query", dataType = "Long")
+    @ApiImplicitParam(value = "Standard Product Unit 标准化产品单元id", name = "id", dataType = "Long", paramType = "query", required = true)
     @GetMapping(value = "/one")
     public ResponseEntity<Spu> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<Spu> wrapper = new LambdaQueryWrapper<Spu>().eq(Spu::getId, id);
@@ -202,7 +202,7 @@ public class SpuController {
 
     @LogPrint(value = "根据id删除Standard Product Unit 标准化产品单元")
     @ApiOperation(value = "根据id删除Standard Product Unit 标准化产品单元")
-    @ApiImplicitParam(name = "id", value = "Standard Product Unit 标准化产品单元id", required = true, paramType = "query", dataType = "Long")
+    @ApiImplicitParam(value = "Standard Product Unit 标准化产品单元id", name = "id", dataType = "Long", paramType = "query", required = true)
     @DeleteMapping(value = "/delete")
     public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = spuService.removeById(id);

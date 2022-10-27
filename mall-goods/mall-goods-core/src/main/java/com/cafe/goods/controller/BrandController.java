@@ -55,7 +55,7 @@ public class BrandController {
 
     @LogPrint(value = "根据条件查询品牌列表")
     @ApiOperation(value = "根据条件查询品牌列表")
-    @ApiImplicitParam(name = "brand", value = "品牌Model", required = true, paramType = "body", dataType = "Brand")
+    @ApiImplicitParam(value = "品牌Model", name = "brand", dataType = "Brand", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Brand>> list(@RequestBody Brand brand) {
         Wrapper<Brand> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(brand);
@@ -66,8 +66,8 @@ public class BrandController {
     @LogPrint(value = "分页查询品牌列表")
     @ApiOperation(value = "分页查询品牌列表")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true)
     })
     @GetMapping(value = "/page/{current}/{size}")
     public ResponseEntity<Page<Brand>> page(
@@ -82,9 +82,9 @@ public class BrandController {
     @LogPrint(value = "根据条件分页查询品牌")
     @ApiOperation(value = "根据条件分页查询品牌")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "brand", value = "品牌Model", required = true, paramType = "body", dataType = "Brand")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "品牌Model", name = "brand", dataType = "Brand", paramType = "body", required = true)
     })
     @PostMapping(value = "/page/{current}/{size}")
     public ResponseEntity<Page<Brand>> page(
@@ -100,7 +100,7 @@ public class BrandController {
 
     @LogPrint(value = "根据id查询单个品牌")
     @ApiOperation(value = "根据id查询单个品牌")
-    @ApiImplicitParam(name = "id", value = "品牌id", required = true, paramType = "path", dataType = "Long")
+    @ApiImplicitParam(value = "品牌id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Brand> one(@PathVariable(value = "id") Long id) {
         LambdaQueryWrapper<Brand> wrapper = new LambdaQueryWrapper<Brand>().eq(Brand::getId, id);
@@ -110,7 +110,7 @@ public class BrandController {
 
     @LogPrint(value = "新增品牌")
     @ApiOperation(value = "新增品牌")
-    @ApiImplicitParam(name = "brand", value = "品牌Model", required = true, paramType = "body", dataType = "Brand")
+    @ApiImplicitParam(value = "品牌Model", name = "brand", dataType = "Brand", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Brand brand) {
         brand.setCreateTime(LocalDateTime.now());
@@ -121,7 +121,7 @@ public class BrandController {
 
     @LogPrint(value = "根据id修改品牌")
     @ApiOperation(value = "根据id修改品牌")
-    @ApiImplicitParam(name = "brand", value = "品牌Model", required = true, paramType = "body", dataType = "Brand")
+    @ApiImplicitParam(value = "品牌Model", name = "brand", dataType = "Brand", paramType = "body", required = true)
     @PutMapping(value = "/update")
     public ResponseEntity<Boolean> update(@RequestBody Brand brand) {
         Boolean code = brandService.updateById(brand);
@@ -130,7 +130,7 @@ public class BrandController {
 
     @LogPrint(value = "根据ids批量修改品牌")
     @ApiOperation(value = "根据ids批量修改品牌")
-    @ApiImplicitParam(name = "brandList", value = "品牌列表", required = true, paramType = "body", dataType = "List<Brand>")
+    @ApiImplicitParam(value = "品牌列表", name = "brandList", dataType = "List<Brand>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<Brand> brandList) {
         Boolean code = brandService.updateBatchById(brandList);
@@ -139,7 +139,7 @@ public class BrandController {
 
     @LogPrint(value = "根据id删除品牌")
     @ApiOperation(value = "根据id删除品牌")
-    @ApiImplicitParam(name = "id", value = "品牌id", required = true, paramType = "path", dataType = "Long")
+    @ApiImplicitParam(value = "品牌id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
         Boolean code = brandService.removeById(id);
@@ -148,7 +148,7 @@ public class BrandController {
 
     @LogPrint(value = "根据ids批量删除品牌")
     @ApiOperation(value = "根据ids批量删除品牌")
-    @ApiImplicitParam(name = "ids", value = "品牌id列表", required = true, paramType = "body", dataType = "List<Long>")
+    @ApiImplicitParam(value = "品牌id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = brandService.removeByIds(ids);
@@ -158,8 +158,8 @@ public class BrandController {
     @LogPrint(value = "分页查询品牌列表")
     @ApiOperation(value = "分页查询品牌列表")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
     })
     @GetMapping(value = "/page")
     public ResponseEntity<Page<Brand>> soapPage(
@@ -174,9 +174,9 @@ public class BrandController {
     @LogPrint(value = "根据条件分页查询品牌")
     @ApiOperation(value = "根据条件分页查询品牌")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "brand", value = "品牌Model", required = true, paramType = "body", dataType = "Brand")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "品牌Model", name = "brand", dataType = "Brand", paramType = "body", required = true)
     })
     @PostMapping(value = "/page")
     public ResponseEntity<Page<Brand>> soapPage(
@@ -192,7 +192,7 @@ public class BrandController {
 
     @LogPrint(value = "根据id查询单个品牌")
     @ApiOperation(value = "根据id查询单个品牌")
-    @ApiImplicitParam(name = "id", value = "品牌id", required = true, paramType = "query", dataType = "Long")
+    @ApiImplicitParam(value = "品牌id", name = "id", dataType = "Long", paramType = "query", required = true)
     @GetMapping(value = "/one")
     public ResponseEntity<Brand> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<Brand> wrapper = new LambdaQueryWrapper<Brand>().eq(Brand::getId, id);
@@ -202,7 +202,7 @@ public class BrandController {
 
     @LogPrint(value = "根据id删除品牌")
     @ApiOperation(value = "根据id删除品牌")
-    @ApiImplicitParam(name = "id", value = "品牌id", required = true, paramType = "query", dataType = "Long")
+    @ApiImplicitParam(value = "品牌id", name = "id", dataType = "Long", paramType = "query", required = true)
     @DeleteMapping(value = "/delete")
     public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = brandService.removeById(id);
