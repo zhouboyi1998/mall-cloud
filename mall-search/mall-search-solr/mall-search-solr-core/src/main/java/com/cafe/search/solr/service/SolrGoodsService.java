@@ -29,13 +29,6 @@ public interface SolrGoodsService {
     void save(SolrGoods solrGoods);
 
     /**
-     * 删除商品
-     *
-     * @param id
-     */
-    void delete(String id);
-
-    /**
      * 批量插入商品/批量更新商品
      *
      * @param solrGoodsList
@@ -43,9 +36,24 @@ public interface SolrGoodsService {
     void saveBatch(List<SolrGoods> solrGoodsList);
 
     /**
+     * 删除商品
+     *
+     * @param id
+     */
+    void delete(String id);
+
+    /**
      * 批量删除商品
      *
      * @param ids
      */
     void deleteBatch(List<String> ids);
+
+    /**
+     * 批量导入商品
+     *
+     * @param current
+     * @param size
+     */
+    void importBatch(Long current, Long size);
 }

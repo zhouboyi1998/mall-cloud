@@ -274,6 +274,11 @@
                 <artifactId>mall-common-swagger</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-common-util</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
 
             <!-- 远程调用接口 -->
             <dependency>

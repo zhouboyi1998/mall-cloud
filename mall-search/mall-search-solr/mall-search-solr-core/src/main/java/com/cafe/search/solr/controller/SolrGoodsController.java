@@ -5,6 +5,7 @@ import com.cafe.search.solr.model.SolrGoods;
 import com.cafe.search.solr.service.SolrGoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -80,5 +81,20 @@ public class SolrGoodsController {
     public ResponseEntity<String> deleteBatch(@RequestBody List<String> ids) {
         solrGoodsService.deleteBatch(ids);
         return ResponseEntity.ok("batch delete success!");
+    }
+
+    @LogPrint(value = "批量导入商品")
+    @ApiOperation(value = "批量导入商品")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页数据数量", name = "size", dataType = "Long", paramType = "path", required = true)
+    })
+    @PostMapping(value = "/import/{current}/{size}")
+    public ResponseEntity<String> importBatch(
+        @PathVariable(value = "current") Long current,
+        @PathVariable(value = "size") Long size
+    ) {
+        solrGoodsService.importBatch(current, size);
+        return ResponseEntity.ok("batch import success!");
     }
 }
