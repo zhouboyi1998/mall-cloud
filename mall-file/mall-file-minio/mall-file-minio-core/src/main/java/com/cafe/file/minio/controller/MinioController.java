@@ -39,8 +39,8 @@ public class MinioController {
     @LogPrint(value = "文件上传")
     @ApiOperation(value = "文件上传")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "bucket", value = "存储桶", required = true, paramType = "path", dataType = "String"),
-        @ApiImplicitParam(name = "file", value = "文件", required = true, paramType = "form", dataType = "MultipartFile")
+        @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
+        @ApiImplicitParam(value = "文件", name = "file", dataType = "MultipartFile", paramType = "form", required = true)
     })
     @PostMapping(value = "/upload/{bucket}")
     public ResponseEntity<String> upload(
@@ -54,8 +54,8 @@ public class MinioController {
     @LogPrint(value = "文件下载")
     @ApiOperation(value = "文件下载")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "bucket", value = "存储桶", required = true, paramType = "path", dataType = "String"),
-        @ApiImplicitParam(name = "fileName", value = "文件名", required = true, paramType = "path", dataType = "String")
+        @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
+        @ApiImplicitParam(value = "文件名", name = "fileName", dataType = "String", paramType = "path", required = true)
     })
     @GetMapping(value = "/download/{bucket}/{fileName}")
     public ResponseEntity<String> download(
@@ -70,8 +70,8 @@ public class MinioController {
     @LogPrint(value = "获取文件外链 (永久)")
     @ApiOperation(value = "获取文件外链 (永久)")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "bucket", value = "存储桶", required = true, paramType = "path", dataType = "String"),
-        @ApiImplicitParam(name = "fileName", value = "文件名", required = true, paramType = "path", dataType = "String")
+        @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
+        @ApiImplicitParam(value = "文件名", name = "fileName", dataType = "String", paramType = "path", required = true)
     })
     @GetMapping(value = "/url/{bucket}/{fileName}")
     public ResponseEntity<String> getFileUrl(
@@ -85,9 +85,9 @@ public class MinioController {
     @LogPrint(value = "获取文件外链 (限时)")
     @ApiOperation(value = "获取文件外链 (限时)")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "bucket", value = "存储桶", required = true, paramType = "path", dataType = "String"),
-        @ApiImplicitParam(name = "fileName", value = "文件名", required = true, paramType = "path", dataType = "String"),
-        @ApiImplicitParam(name = "expiry", value = "过期时间 (单位: 秒)", required = true, paramType = "path", dataType = "String")
+        @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
+        @ApiImplicitParam(value = "文件名", name = "fileName", dataType = "String", paramType = "path", required = true),
+        @ApiImplicitParam(value = "过期时间 (单位: 秒)", name = "expiry", dataType = "String", paramType = "path", required = true)
     })
     @GetMapping(value = "/url/{bucket}/{fileName}/{expiry}")
     public ResponseEntity<String> getFileUrl(

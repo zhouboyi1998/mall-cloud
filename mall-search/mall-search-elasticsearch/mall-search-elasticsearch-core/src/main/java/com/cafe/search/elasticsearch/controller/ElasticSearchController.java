@@ -43,7 +43,7 @@ public class ElasticSearchController {
 
     @LogPrint(value = "判断索引是否存在")
     @ApiOperation(value = "判断索引是否存在")
-    @ApiImplicitParam(name = "name", value = "索引名称", required = true, paramType = "path", dataType = "String")
+    @ApiImplicitParam(value = "索引名称", name = "name", dataType = "String", paramType = "path", required = true)
     @GetMapping(value = "/index/{name}")
     public ResponseEntity<Boolean> existsIndex(
         @PathVariable(value = "name") String name
@@ -54,7 +54,7 @@ public class ElasticSearchController {
 
     @LogPrint(value = "创建索引")
     @ApiOperation(value = "创建索引")
-    @ApiImplicitParam(name = "name", value = "索引名称", required = true, paramType = "path", dataType = "String")
+    @ApiImplicitParam(value = "索引名称", name = "name", dataType = "String", paramType = "path", required = true)
     @PostMapping(value = "/index/{name}")
     public ResponseEntity<CreateIndexResponse> createIndex(
         @PathVariable(value = "name") String name
@@ -65,7 +65,7 @@ public class ElasticSearchController {
 
     @LogPrint(value = "删除索引")
     @ApiOperation(value = "删除索引")
-    @ApiImplicitParam(name = "name", value = "索引名称", required = true, paramType = "path", dataType = "String")
+    @ApiImplicitParam(value = "索引名称", name = "name", dataType = "String", paramType = "path", required = true)
     @DeleteMapping(value = "/index/{name}")
     public ResponseEntity<AcknowledgedResponse> deleteIndex(
         @PathVariable(value = "name") String name

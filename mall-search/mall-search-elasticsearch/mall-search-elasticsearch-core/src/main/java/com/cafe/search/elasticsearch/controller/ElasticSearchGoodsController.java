@@ -50,7 +50,7 @@ public class ElasticSearchGoodsController {
 
     @LogPrint(value = "获取商品")
     @ApiOperation(value = "获取商品")
-    @ApiImplicitParam(name = "_id", value = "ElasticSearch id", required = true, paramType = "path", dataType = "String")
+    @ApiImplicitParam(value = "ElasticSearch id", name = "_id", dataType = "String", paramType = "path", required = true)
     @GetMapping(value = "/{_id}")
     public ResponseEntity<GetResponse> one(@PathVariable(value = "_id") String _id) throws IOException {
         GetResponse getResponse = elasticSearchGoodsService.one(_id);
@@ -59,7 +59,7 @@ public class ElasticSearchGoodsController {
 
     @LogPrint(value = "插入商品")
     @ApiOperation(value = "插入商品")
-    @ApiImplicitParam(name = "goods", value = "商品", required = true, paramType = "body", dataType = "Goods")
+    @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
     @PostMapping(value = "")
     public ResponseEntity<IndexResponse> insert(@RequestBody Goods goods) throws IOException {
         IndexResponse indexResponse = elasticSearchGoodsService.insert(goods);
@@ -68,7 +68,7 @@ public class ElasticSearchGoodsController {
 
     @LogPrint(value = "更新商品")
     @ApiOperation(value = "更新商品")
-    @ApiImplicitParam(name = "goods", value = "商品", required = true, paramType = "body", dataType = "Goods")
+    @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
     @PutMapping(value = "")
     public ResponseEntity<UpdateResponse> update(@RequestBody Goods goods) throws IOException {
         UpdateResponse updateResponse = elasticSearchGoodsService.update(goods);
@@ -77,7 +77,7 @@ public class ElasticSearchGoodsController {
 
     @LogPrint(value = "删除商品")
     @ApiOperation(value = "删除商品")
-    @ApiImplicitParam(name = "_id", value = "ElasticSearch id", required = true, paramType = "path", dataType = "String")
+    @ApiImplicitParam(value = "ElasticSearch id", name = "_id", dataType = "String", paramType = "path", required = true)
     @DeleteMapping(value = "/{_id}")
     public ResponseEntity<DeleteResponse> delete(@PathVariable(value = "_id") String _id) throws IOException {
         DeleteResponse deleteResponse = elasticSearchGoodsService.delete(_id);
@@ -86,7 +86,7 @@ public class ElasticSearchGoodsController {
 
     @LogPrint(value = "批量插入商品")
     @ApiOperation(value = "批量插入商品")
-    @ApiImplicitParam(name = "goodsList", value = "商品列表", required = true, paramType = "body", dataType = "List<Goods>")
+    @ApiImplicitParam(value = "商品列表", name = "goodsList", dataType = "List<Goods>", paramType = "body", required = true)
     @PostMapping(value = "/batch")
     public ResponseEntity<BulkResponse> insertBatch(@RequestBody List<Goods> goodsList) throws IOException {
         BulkResponse bulkResponse = elasticSearchGoodsService.insertBatch(goodsList);
@@ -95,7 +95,7 @@ public class ElasticSearchGoodsController {
 
     @LogPrint(value = "批量更新商品")
     @ApiOperation(value = "批量更新商品")
-    @ApiImplicitParam(name = "goodsList", value = "商品列表", required = true, paramType = "body", dataType = "List<Goods>")
+    @ApiImplicitParam(value = "商品列表", name = "goodsList", dataType = "List<Goods>", paramType = "body", required = true)
     @PutMapping(value = "/batch")
     public ResponseEntity<BulkResponse> updateBatch(@RequestBody List<Goods> goodsList) throws IOException {
         BulkResponse bulkResponse = elasticSearchGoodsService.updateBatch(goodsList);
@@ -104,7 +104,7 @@ public class ElasticSearchGoodsController {
 
     @LogPrint(value = "批量删除商品")
     @ApiOperation(value = "批量删除商品")
-    @ApiImplicitParam(name = "_ids", value = "ElasticSearch id列表", required = true, paramType = "body", dataType = "List<String>")
+    @ApiImplicitParam(value = "ElasticSearch id列表", name = "_ids", dataType = "List<String>", paramType = "body", required = true)
     @DeleteMapping(value = "/batch")
     public ResponseEntity<BulkResponse> deleteBatch(@RequestBody List<String> _ids) throws IOException {
         BulkResponse bulkResponse = elasticSearchGoodsService.deleteBatch(_ids);
@@ -114,11 +114,11 @@ public class ElasticSearchGoodsController {
     @LogPrint(value = "分页查询商品")
     @ApiOperation(value = "分页查询商品")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Integer"),
-        @ApiImplicitParam(name = "size", value = "每页数据数量", required = true, paramType = "path", dataType = "Integer"),
-        @ApiImplicitParam(name = "keyword", value = "关键词", required = false, paramType = "query", dataType = "String"),
-        @ApiImplicitParam(name = "sort", value = "排序属性", required = false, paramType = "query", dataType = "String"),
-        @ApiImplicitParam(name = "rule", value = "排序规则", required = false, paramType = "query", dataType = "String")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Integer", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页数据数量", name = "size", dataType = "Integer", paramType = "path", required = true),
+        @ApiImplicitParam(value = "关键词", name = "keyword", dataType = "String", paramType = "query"),
+        @ApiImplicitParam(value = "排序属性", name = "sort", dataType = "String", paramType = "query"),
+        @ApiImplicitParam(value = "排序规则", name = "rule", dataType = "String", paramType = "query")
     })
     @GetMapping(value = "/page/{current}/{size}")
     public ResponseEntity<SearchResponse> page(
@@ -135,8 +135,8 @@ public class ElasticSearchGoodsController {
     @LogPrint(value = "批量导入商品")
     @ApiOperation(value = "批量导入商品")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页数据数量", required = true, paramType = "path", dataType = "Long")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页数据数量", name = "size", dataType = "Long", paramType = "path", required = true)
     })
     @PostMapping(value = "/import/{current}/{size}")
     public ResponseEntity<BulkResponse> importBatch(

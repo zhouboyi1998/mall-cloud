@@ -55,7 +55,7 @@ public class CategoryBrandController {
 
     @LogPrint(value = "根据条件查询分类-品牌关联列表")
     @ApiOperation(value = "根据条件查询分类-品牌关联列表")
-    @ApiImplicitParam(name = "categoryBrand", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrand")
+    @ApiImplicitParam(value = "分类-品牌关联Model", name = "categoryBrand", dataType = "CategoryBrand", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<CategoryBrand>> list(@RequestBody CategoryBrand categoryBrand) {
         Wrapper<CategoryBrand> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(categoryBrand);
@@ -66,8 +66,8 @@ public class CategoryBrandController {
     @LogPrint(value = "分页查询分类-品牌关联列表")
     @ApiOperation(value = "分页查询分类-品牌关联列表")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true)
     })
     @GetMapping(value = "/page/{current}/{size}")
     public ResponseEntity<Page<CategoryBrand>> page(
@@ -82,9 +82,9 @@ public class CategoryBrandController {
     @LogPrint(value = "根据条件分页查询分类-品牌关联")
     @ApiOperation(value = "根据条件分页查询分类-品牌关联")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "path", dataType = "Long"),
-        @ApiImplicitParam(name = "categoryBrand", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrand")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "分类-品牌关联Model", name = "categoryBrand", dataType = "CategoryBrand", paramType = "body", required = true)
     })
     @PostMapping(value = "/page/{current}/{size}")
     public ResponseEntity<Page<CategoryBrand>> page(
@@ -100,7 +100,7 @@ public class CategoryBrandController {
 
     @LogPrint(value = "根据id查询单个分类-品牌关联")
     @ApiOperation(value = "根据id查询单个分类-品牌关联")
-    @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "path", dataType = "Long")
+    @ApiImplicitParam(value = "分类-品牌关联id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<CategoryBrand> one(@PathVariable(value = "id") Long id) {
         LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<CategoryBrand>().eq(CategoryBrand::getId, id);
@@ -110,7 +110,7 @@ public class CategoryBrandController {
 
     @LogPrint(value = "新增分类-品牌关联")
     @ApiOperation(value = "新增分类-品牌关联")
-    @ApiImplicitParam(name = "categoryBrand", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrand")
+    @ApiImplicitParam(value = "分类-品牌关联Model", name = "categoryBrand", dataType = "CategoryBrand", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody CategoryBrand categoryBrand) {
         categoryBrand.setCreateTime(LocalDateTime.now());
@@ -121,7 +121,7 @@ public class CategoryBrandController {
 
     @LogPrint(value = "根据id修改分类-品牌关联")
     @ApiOperation(value = "根据id修改分类-品牌关联")
-    @ApiImplicitParam(name = "categoryBrand", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrand")
+    @ApiImplicitParam(value = "分类-品牌关联Model", name = "categoryBrand", dataType = "CategoryBrand", paramType = "body", required = true)
     @PutMapping(value = "/update")
     public ResponseEntity<Boolean> update(@RequestBody CategoryBrand categoryBrand) {
         Boolean code = categoryBrandService.updateById(categoryBrand);
@@ -130,7 +130,7 @@ public class CategoryBrandController {
 
     @LogPrint(value = "根据ids批量修改分类-品牌关联")
     @ApiOperation(value = "根据ids批量修改分类-品牌关联")
-    @ApiImplicitParam(name = "categoryBrandList", value = "分类-品牌关联列表", required = true, paramType = "body", dataType = "List<CategoryBrand>")
+    @ApiImplicitParam(value = "分类-品牌关联列表", name = "categoryBrandList", dataType = "List<CategoryBrand>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<CategoryBrand> categoryBrandList) {
         Boolean code = categoryBrandService.updateBatchById(categoryBrandList);
@@ -139,7 +139,7 @@ public class CategoryBrandController {
 
     @LogPrint(value = "根据id删除分类-品牌关联")
     @ApiOperation(value = "根据id删除分类-品牌关联")
-    @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "path", dataType = "Long")
+    @ApiImplicitParam(value = "分类-品牌关联id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
         Boolean code = categoryBrandService.removeById(id);
@@ -148,7 +148,7 @@ public class CategoryBrandController {
 
     @LogPrint(value = "根据ids批量删除分类-品牌关联")
     @ApiOperation(value = "根据ids批量删除分类-品牌关联")
-    @ApiImplicitParam(name = "ids", value = "分类-品牌关联id列表", required = true, paramType = "body", dataType = "List<Long>")
+    @ApiImplicitParam(value = "分类-品牌关联id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = categoryBrandService.removeByIds(ids);
@@ -158,8 +158,8 @@ public class CategoryBrandController {
     @LogPrint(value = "分页查询分类-品牌关联")
     @ApiOperation(value = "分页查询分类-品牌关联")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
     })
     @GetMapping(value = "/page")
     public ResponseEntity<Page<CategoryBrand>> soapPage(
@@ -174,9 +174,9 @@ public class CategoryBrandController {
     @LogPrint(value = "根据条件分页查询分类-品牌关联")
     @ApiOperation(value = "根据条件分页查询分类-品牌关联")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(name = "current", value = "页码", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "size", value = "每页显示数量", required = true, paramType = "query", dataType = "Long"),
-        @ApiImplicitParam(name = "categoryBrand", value = "分类-品牌关联Model", required = true, paramType = "body", dataType = "CategoryBrand")
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
+        @ApiImplicitParam(value = "分类-品牌关联Model", name = "categoryBrand", dataType = "CategoryBrand", paramType = "body", required = true)
     })
     @PostMapping(value = "/page")
     public ResponseEntity<Page<CategoryBrand>> soapPage(
@@ -192,7 +192,7 @@ public class CategoryBrandController {
 
     @LogPrint(value = "根据id查询单个分类-品牌关联")
     @ApiOperation(value = "根据id查询单个分类-品牌关联")
-    @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "query", dataType = "Long")
+    @ApiImplicitParam(value = "分类-品牌关联id", name = "id", dataType = "Long", paramType = "query", required = true)
     @GetMapping(value = "/one")
     public ResponseEntity<CategoryBrand> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<CategoryBrand>().eq(CategoryBrand::getId, id);
@@ -202,7 +202,7 @@ public class CategoryBrandController {
 
     @LogPrint(value = "根据id删除分类-品牌关联")
     @ApiOperation(value = "根据id删除分类-品牌关联")
-    @ApiImplicitParam(name = "id", value = "分类-品牌关联id", required = true, paramType = "query", dataType = "Long")
+    @ApiImplicitParam(value = "分类-品牌关联id", name = "id", dataType = "Long", paramType = "query", required = true)
     @DeleteMapping(value = "/delete")
     public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = categoryBrandService.removeById(id);
