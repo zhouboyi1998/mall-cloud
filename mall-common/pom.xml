@@ -25,7 +25,6 @@
         <module>mall-common-rocketmq</module>
         <module>mall-common-security</module>
         <module>mall-common-swagger</module>
-        <module>mall-common-util</module>
     </modules>
 
 </project>
