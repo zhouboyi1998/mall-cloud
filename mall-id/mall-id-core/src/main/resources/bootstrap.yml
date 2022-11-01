@@ -1,0 +1,9 @@
+server:
+  port: 18074
+
+spring:
+  application:
+    name: mall-id
+
+swagger:
+  description: 分布式ID生成微服务
