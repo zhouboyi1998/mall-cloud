@@ -43,19 +43,19 @@ public class Menu implements Serializable {
     @ApiModelProperty(value = "上级分类 ID")
     private Long parentId;
 
-    @ApiModelProperty(value = "菜单等级：1 一级菜单，2 二级菜单，3 三级菜单")
+    @ApiModelProperty(value = "菜单等级: 1 一级菜单, 2 二级菜单, 3 三级菜单")
     private Integer menuLevel;
 
-    @ApiModelProperty(value = "菜单码（存储多级菜单 ID）")
+    @ApiModelProperty(value = "菜单码 (存储多级菜单 ID)")
     private String menuCode;
 
-    @ApiModelProperty(value = "菜单类型：1 侧边栏菜单，2 特殊菜单")
+    @ApiModelProperty(value = "菜单类型: 1 侧边栏菜单, 2 特殊菜单")
     private Integer menuType;
 
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
-    @ApiModelProperty(value = "状态：0 禁用，1 正常")
+    @ApiModelProperty(value = "状态: 0 禁用, 1 正常")
     private Integer menuStatus;
 
     @ApiModelProperty(value = "创建时间")
@@ -64,7 +64,7 @@ public class Menu implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
 
-    @ApiModelProperty(value = "逻辑删除：0 未删除，1 已删除")
+    @ApiModelProperty(value = "逻辑删除: 0 未删除, 1 已删除")
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;

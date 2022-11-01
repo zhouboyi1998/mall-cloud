@@ -12,8 +12,8 @@
         <result column="seckill_price" property="seckillPrice" />
         <result column="stock" property="stock" />
         <result column="sale_count" property="saleCount" />
-        <result column="image" property="image" />
-        <result column="image_list" property="imageList" />
+        <result column="sku_image" property="skuImage" />
+        <result column="sku_image_list" property="skuImageList" />
         <result column="specification" property="specification" />
         <result column="sort" property="sort" />
         <result column="sku_status" property="skuStatus" />
@@ -24,7 +24,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, sku_name, spu_id, original_price, discount_price, seckill_price, stock, sale_count, image, image_list, specification, sort, sku_status, create_time, update_time, is_deleted
+        id, sku_name, spu_id, original_price, discount_price, seckill_price, stock, sale_count, sku_image, sku_image_list, specification, sort, sku_status, create_time, update_time, is_deleted
     </sql>
 
 </mapper>

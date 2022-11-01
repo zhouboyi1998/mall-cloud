@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @Package: com.cafe.goods.service.impl
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: Stock Keeping Unit 库存量单位业务实现类
+ * @Description: 库存量单位业务实现类
  */
 @Service
 public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuService {

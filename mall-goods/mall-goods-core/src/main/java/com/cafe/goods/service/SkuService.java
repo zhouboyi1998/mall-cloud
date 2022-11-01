@@ -8,7 +8,7 @@ import com.cafe.goods.model.Sku;
  * @Package: com.cafe.goods.service
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: Stock Keeping Unit 库存量单位业务接口
+ * @Description: 库存量单位业务接口
  */
 public interface SkuService extends IService<Sku> {
 
