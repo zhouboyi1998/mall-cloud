@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Package: com.cafe.goods.dao
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: Stock Keeping Unit 库存量单位数据访问接口
+ * @Description: 库存量单位数据访问接口
  */
 @Mapper
 public interface SkuMapper extends BaseMapper<Sku> {

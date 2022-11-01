@@ -24,20 +24,20 @@ public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "分类 ID")
+    @ApiModelProperty(value = "分类ID")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty(value = "分类名称")
     private String categoryName;
 
-    @ApiModelProperty(value = "上级分类 ID")
+    @ApiModelProperty(value = "上级分类ID")
     private Integer parentId;
 
-    @ApiModelProperty(value = "分类等级：1 一级分类，2 二级分类，3 三级分类")
+    @ApiModelProperty(value = "分类等级: 1 一级分类, 2 二级分类, 3 三级分类")
     private Integer categoryLevel;
 
-    @ApiModelProperty(value = "分类码（存储多级分类 ID）")
+    @ApiModelProperty(value = "分类码 (存储多级分类 ID)")
     private String categoryCode;
 
     @ApiModelProperty(value = "该分类下的商品数量")
@@ -46,7 +46,7 @@ public class Category implements Serializable {
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
-    @ApiModelProperty(value = "状态：0 禁用，1 正常")
+    @ApiModelProperty(value = "状态: 0 禁用, 1 正常")
     private Integer categoryStatus;
 
     @ApiModelProperty(value = "创建时间")
@@ -55,7 +55,7 @@ public class Category implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
 
-    @ApiModelProperty(value = "逻辑删除：0 未删除，1 已删除")
+    @ApiModelProperty(value = "逻辑删除: 0 未删除, 1 已删除")
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;

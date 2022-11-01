@@ -16,10 +16,10 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.goods.model
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: Stock Keeping Unit 库存量单位 (实体类)
+ * @Description: 库存量单位 (实体类)
  */
 @TableName("mall_sku")
-@ApiModel(value = "Sku对象", description = "Stock Keeping Unit 库存量单位")
+@ApiModel(value = "Sku对象", description = "库存量单位")
 public class Sku implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -50,10 +50,10 @@ public class Sku implements Serializable {
     private Integer saleCount;
 
     @ApiModelProperty(value = "SKU 主图")
-    private String image;
+    private String skuImage;
 
     @ApiModelProperty(value = "SKU 图片列表")
-    private String imageList;
+    private String skuImageList;
 
     @ApiModelProperty(value = "SKU 规格")
     private String specification;
@@ -61,7 +61,7 @@ public class Sku implements Serializable {
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
-    @ApiModelProperty(value = "状态：0 未审核，1 审核未通过，2 审核通过，3 上架")
+    @ApiModelProperty(value = "状态: 0 未审核, 1 审核未通过, 2 审核通过, 3 上架")
     private Integer skuStatus;
 
     @ApiModelProperty(value = "创建时间")
@@ -70,7 +70,7 @@ public class Sku implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
 
-    @ApiModelProperty(value = "逻辑删除：0 未删除，1 已删除")
+    @ApiModelProperty(value = "逻辑删除: 0 未删除, 1 已删除")
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
@@ -139,20 +139,20 @@ public class Sku implements Serializable {
         this.saleCount = saleCount;
     }
 
-    public String getImage() {
-        return image;
+    public String getSkuImage() {
+        return skuImage;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setSkuImage(String skuImage) {
+        this.skuImage = skuImage;
     }
 
-    public String getImageList() {
-        return imageList;
+    public String getSkuImageList() {
+        return skuImageList;
     }
 
-    public void setImageList(String imageList) {
-        this.imageList = imageList;
+    public void setSkuImageList(String skuImageList) {
+        this.skuImageList = skuImageList;
     }
 
     public String getSpecification() {
@@ -214,8 +214,8 @@ public class Sku implements Serializable {
             ", seckillPrice=" + seckillPrice +
             ", stock=" + stock +
             ", saleCount=" + saleCount +
-            ", image=" + image +
-            ", imageList=" + imageList +
+            ", skuImage=" + skuImage +
+            ", skuImageList=" + skuImageList +
             ", specification=" + specification +
             ", sort=" + sort +
             ", skuStatus=" + skuStatus +

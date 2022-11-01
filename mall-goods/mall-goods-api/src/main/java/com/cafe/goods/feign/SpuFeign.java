@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface SpuFeign {
 
     /**
-     * 根据id查询单个Standard Product Unit 标准化产品单元
+     * 根据id查询单个标准化产品单元
      *
      * @param id
      * @return
