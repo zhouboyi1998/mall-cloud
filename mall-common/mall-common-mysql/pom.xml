@@ -30,6 +30,11 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-id-api</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
