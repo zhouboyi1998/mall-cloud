@@ -62,8 +62,8 @@ public class MyBatisPlusGenerator {
         globalConfig.setAuthor("zhouboyi");
         // 去掉 Service 接口的前缀 "I"
         globalConfig.setServiceName("%sService");
-        // 主键策略为自增
-        globalConfig.setIdType(IdType.AUTO);
+        // 主键策略: ID生成器分配主键
+        globalConfig.setIdType(IdType.ASSIGN_ID);
         // 生成 BaseResultMap
         globalConfig.setBaseResultMap(true);
         // 生成通用查询结果列
