@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Package: com.cafe.goods.dao
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: Standard Product Unit 标准化产品单元数据访问接口
+ * @Description: 标准化产品单元数据访问接口
  */
 @Mapper
 public interface SpuMapper extends BaseMapper<Spu> {

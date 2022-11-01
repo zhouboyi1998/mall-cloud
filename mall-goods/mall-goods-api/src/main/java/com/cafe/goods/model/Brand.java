@@ -24,7 +24,7 @@ public class Brand implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "品牌 ID")
+    @ApiModelProperty(value = "品牌ID")
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
@@ -40,7 +40,7 @@ public class Brand implements Serializable {
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
-    @ApiModelProperty(value = "状态：0 禁用，1 正常")
+    @ApiModelProperty(value = "状态: 0 禁用, 1 正常")
     private Integer brandStatus;
 
     @ApiModelProperty(value = "创建时间")
@@ -49,7 +49,7 @@ public class Brand implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
 
-    @ApiModelProperty(value = "逻辑删除：0 未删除，1 已删除")
+    @ApiModelProperty(value = "逻辑删除: 0 未删除, 1 已删除")
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;

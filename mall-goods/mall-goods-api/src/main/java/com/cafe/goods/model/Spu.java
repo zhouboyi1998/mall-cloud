@@ -16,10 +16,10 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.goods.model
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: Standard Product Unit 标准化产品单元 (实体类)
+ * @Description: 标准化产品单元 (实体类)
  */
 @TableName("mall_spu")
-@ApiModel(value = "Spu对象", description = "Standard Product Unit 标准化产品单元")
+@ApiModel(value = "Spu对象", description = "标准化产品单元")
 public class Spu implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,7 +37,7 @@ public class Spu implements Serializable {
     @ApiModelProperty(value = "三级分类 ID")
     private Integer categoryId;
 
-    @ApiModelProperty(value = "分类码（存储多级分类ID）")
+    @ApiModelProperty(value = "分类码 (存储多级分类ID)")
     private String categoryCode;
 
     @ApiModelProperty(value = "SPU 原价")
@@ -50,7 +50,7 @@ public class Spu implements Serializable {
     private Double seckillPrice;
 
     @ApiModelProperty(value = "SPU 主图")
-    private String image;
+    private String spuImage;
 
     @ApiModelProperty(value = "SPU 评论数量")
     private Long commentCount;
@@ -64,7 +64,7 @@ public class Spu implements Serializable {
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
-    @ApiModelProperty(value = "状态：0 未审核，1 审核未通过，2 审核通过，3 上架")
+    @ApiModelProperty(value = "状态: 0 未审核, 1 审核未通过, 2 审核通过, 3 上架")
     private Integer spuStatus;
 
     @ApiModelProperty(value = "创建时间")
@@ -73,7 +73,7 @@ public class Spu implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
 
-    @ApiModelProperty(value = "逻辑删除：0 未删除，1 已删除")
+    @ApiModelProperty(value = "逻辑删除: 0 未删除, 1 已删除")
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
@@ -142,12 +142,12 @@ public class Spu implements Serializable {
         this.seckillPrice = seckillPrice;
     }
 
-    public String getImage() {
-        return image;
+    public String getSpuImage() {
+        return spuImage;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setSpuImage(String spuImage) {
+        this.spuImage = spuImage;
     }
 
     public Long getCommentCount() {
@@ -225,7 +225,7 @@ public class Spu implements Serializable {
             ", originalPrice=" + originalPrice +
             ", discountPrice=" + discountPrice +
             ", seckillPrice=" + seckillPrice +
-            ", image=" + image +
+            ", spuImage=" + spuImage +
             ", commentCount=" + commentCount +
             ", caption=" + caption +
             ", intro=" + intro +
