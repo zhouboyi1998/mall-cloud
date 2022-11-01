@@ -72,7 +72,7 @@ public class ${entity} implements Serializable {
   #elseif(!$null.isNull(${idType}) && "$!idType" != "")
     @TableId(value = "${field.annotationColumnName}", type = IdType.${idType})
   #elseif(${field.convert})
-    @TableId("${field.annotationColumnName}")
+    @TableId(value = "${field.annotationColumnName}")
   #end
 ## 普通字段
 #elseif(${field.fill})
@@ -83,7 +83,7 @@ public class ${entity} implements Serializable {
     @TableField(fill = FieldFill.${field.fill})
   #end
 #elseif(${field.convert})
-    @TableField("${field.annotationColumnName}")
+    @TableField(value = "${field.annotationColumnName}")
 #end
 ## 乐观锁注解
 #if(${versionFieldName} == ${field.name})
