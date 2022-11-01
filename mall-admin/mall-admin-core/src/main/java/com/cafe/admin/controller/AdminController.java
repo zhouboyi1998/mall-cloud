@@ -214,7 +214,9 @@ public class AdminController {
     @ApiImplicitParam(value = "管理员用户名", name = "adminName", dataType = "String", paramType = "path", required = true)
     @GetMapping(value = "/one/name/{adminName}")
     public ResponseEntity<Admin> one(@PathVariable(value = "adminName") String adminName) {
-        LambdaQueryWrapper<Admin> wrapper = new LambdaQueryWrapper<Admin>().eq(Admin::getAdminName, adminName);
+        LambdaQueryWrapper<Admin> wrapper = new LambdaQueryWrapper<Admin>()
+            .select(Admin.class, tableFieldInfo -> true)
+            .eq(Admin::getAdminName, adminName);
         Admin admin = adminService.getOne(wrapper);
         return ResponseEntity.ok(admin);
     }
