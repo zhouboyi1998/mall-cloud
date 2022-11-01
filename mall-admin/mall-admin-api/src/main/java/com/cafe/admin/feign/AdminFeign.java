@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface AdminFeign {
 
     /**
-     * 根据 adminName 查询单个管理员
+     * 根据管理员用户名查询单个管理员
      *
      * @param adminName
      * @return

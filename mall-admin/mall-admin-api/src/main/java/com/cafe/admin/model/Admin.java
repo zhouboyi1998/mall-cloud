@@ -32,6 +32,7 @@ public class Admin implements Serializable {
     private String adminName;
 
     @ApiModelProperty(value = "管理员密码")
+    @TableField(select = false)
     private String password;
 
     @ApiModelProperty(value = "状态：0 禁用，1 正常")
@@ -44,7 +45,7 @@ public class Admin implements Serializable {
     private LocalDateTime updateTime;
 
     @ApiModelProperty(value = "逻辑删除：0 未删除，1 已删除")
-    @TableField("is_deleted")
+    @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
 
