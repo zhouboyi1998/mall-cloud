@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @Date: 2022/10/11 11:42
  * @Description:
  */
-@ApiModel(value = "Goods对象", description = "商品对象")
+@ApiModel(value = "Goods对象", description = "商品")
 public class Goods implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,10 +42,10 @@ public class Goods implements Serializable {
     private Integer saleCount;
 
     @ApiModelProperty(value = "SKU 主图")
-    private String image;
+    private String skuImage;
 
     @ApiModelProperty(value = "SKU 图片列表")
-    private String imageList;
+    private String skuImageList;
 
     @ApiModelProperty(value = "SKU 规格")
     private String specification;
@@ -129,20 +129,20 @@ public class Goods implements Serializable {
         this.saleCount = saleCount;
     }
 
-    public String getImage() {
-        return image;
+    public String getSkuImage() {
+        return skuImage;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setSkuImage(String skuImage) {
+        this.skuImage = skuImage;
     }
 
-    public String getImageList() {
-        return imageList;
+    public String getSkuImageList() {
+        return skuImageList;
     }
 
-    public void setImageList(String imageList) {
-        this.imageList = imageList;
+    public void setSkuImageList(String skuImageList) {
+        this.skuImageList = skuImageList;
     }
 
     public String getSpecification() {
@@ -204,8 +204,8 @@ public class Goods implements Serializable {
             ", seckillPrice=" + seckillPrice +
             ", stock=" + stock +
             ", saleCount=" + saleCount +
-            ", image='" + image + '\'' +
-            ", imageList='" + imageList + '\'' +
+            ", skuImage='" + skuImage + '\'' +
+            ", skuImageList='" + skuImageList + '\'' +
             ", specification='" + specification + '\'' +
             ", brandId='" + brandId + '\'' +
             ", categoryId='" + categoryId + '\'' +

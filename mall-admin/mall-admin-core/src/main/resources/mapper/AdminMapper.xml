@@ -7,7 +7,7 @@
         <id column="id" property="id"/>
         <result column="admin_name" property="adminName"/>
         <result column="password" property="password"/>
-        <result column="admin_status" property="adminStatus"/>
+        <result column="status" property="status"/>
         <result column="create_time" property="createTime"/>
         <result column="update_time" property="updateTime"/>
         <result column="is_deleted" property="deleted"/>
@@ -15,7 +15,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, admin_name, password, admin_status, create_time, update_time, is_deleted
+        id, admin_name, password, status, create_time, update_time, is_deleted
     </sql>
 
 </mapper>

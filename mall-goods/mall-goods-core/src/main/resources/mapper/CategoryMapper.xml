@@ -8,10 +8,8 @@
         <result column="category_name" property="categoryName" />
         <result column="parent_id" property="parentId" />
         <result column="category_level" property="categoryLevel" />
-        <result column="category_code" property="categoryCode" />
-        <result column="goods_count" property="goodsCount" />
         <result column="sort" property="sort" />
-        <result column="category_status" property="categoryStatus" />
+        <result column="status" property="status" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
         <result column="is_deleted" property="deleted" />
@@ -19,7 +17,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, category_name, parent_id, category_level, category_code, goods_count, sort, category_status, create_time, update_time, is_deleted
+        id, category_name, parent_id, category_level, sort, status, create_time, update_time, is_deleted
     </sql>
 
 </mapper>

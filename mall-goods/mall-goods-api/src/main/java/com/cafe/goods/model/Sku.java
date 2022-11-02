@@ -32,7 +32,7 @@ public class Sku implements Serializable {
     private String skuName;
 
     @ApiModelProperty(value = "SPU ID")
-    private Integer spuId;
+    private Long spuId;
 
     @ApiModelProperty(value = "SKU 原价")
     private Double originalPrice;
@@ -61,8 +61,11 @@ public class Sku implements Serializable {
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
-    @ApiModelProperty(value = "状态: 0 未审核, 1 审核未通过, 2 审核通过, 3 上架")
-    private Integer skuStatus;
+    @ApiModelProperty(value = "审核状态: 0 未审核, -1 审核未通过, 1 审核通过")
+    private Integer checkStatus;
+
+    @ApiModelProperty(value = "状态: 0 下架, 1 上架")
+    private Integer status;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
@@ -91,11 +94,11 @@ public class Sku implements Serializable {
         this.skuName = skuName;
     }
 
-    public Integer getSpuId() {
+    public Long getSpuId() {
         return spuId;
     }
 
-    public void setSpuId(Integer spuId) {
+    public void setSpuId(Long spuId) {
         this.spuId = spuId;
     }
 
@@ -171,12 +174,20 @@ public class Sku implements Serializable {
         this.sort = sort;
     }
 
-    public Integer getSkuStatus() {
-        return skuStatus;
+    public Integer getCheckStatus() {
+        return checkStatus;
     }
 
-    public void setSkuStatus(Integer skuStatus) {
-        this.skuStatus = skuStatus;
+    public void setCheckStatus(Integer checkStatus) {
+        this.checkStatus = checkStatus;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public LocalDateTime getCreateTime() {
@@ -218,7 +229,8 @@ public class Sku implements Serializable {
             ", skuImageList=" + skuImageList +
             ", specification=" + specification +
             ", sort=" + sort +
-            ", skuStatus=" + skuStatus +
+            ", checkStatus=" + checkStatus +
+            ", status=" + status +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +
             ", deleted=" + deleted +
