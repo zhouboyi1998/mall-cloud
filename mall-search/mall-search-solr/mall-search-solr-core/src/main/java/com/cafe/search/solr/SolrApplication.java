@@ -17,7 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableSwagger2WebMvc
-@EnableFeignClients(basePackages = "com.cafe.goods.feign")
+@EnableFeignClients(basePackages = {"com.cafe.id.feign", "com.cafe.goods.feign"})
 @ComponentScan(basePackages = "com.cafe")
 public class SolrApplication {
 

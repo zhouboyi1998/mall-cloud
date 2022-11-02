@@ -9,7 +9,7 @@
         <result column="letter" property="letter" />
         <result column="brand_image" property="brandImage" />
         <result column="sort" property="sort" />
-        <result column="brand_status" property="brandStatus" />
+        <result column="status" property="status" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
         <result column="is_deleted" property="deleted" />
@@ -17,7 +17,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, brand_name, letter, brand_image, sort, brand_status, create_time, update_time, is_deleted
+        id, brand_name, letter, brand_image, sort, status, create_time, update_time, is_deleted
     </sql>
 
 </mapper>

@@ -25,7 +25,7 @@ public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "分类ID")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @TableId(value = "id", type = IdType.INPUT)
     private Long id;
 
     @ApiModelProperty(value = "分类名称")
@@ -37,17 +37,11 @@ public class Category implements Serializable {
     @ApiModelProperty(value = "分类等级: 1 一级分类, 2 二级分类, 3 三级分类")
     private Integer categoryLevel;
 
-    @ApiModelProperty(value = "分类码 (存储多级分类 ID)")
-    private String categoryCode;
-
-    @ApiModelProperty(value = "该分类下的商品数量")
-    private Integer goodsCount;
-
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
     @ApiModelProperty(value = "状态: 0 禁用, 1 正常")
-    private Integer categoryStatus;
+    private Integer status;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
@@ -92,22 +86,6 @@ public class Category implements Serializable {
         this.categoryLevel = categoryLevel;
     }
 
-    public String getCategoryCode() {
-        return categoryCode;
-    }
-
-    public void setCategoryCode(String categoryCode) {
-        this.categoryCode = categoryCode;
-    }
-
-    public Integer getGoodsCount() {
-        return goodsCount;
-    }
-
-    public void setGoodsCount(Integer goodsCount) {
-        this.goodsCount = goodsCount;
-    }
-
     public Integer getSort() {
         return sort;
     }
@@ -116,12 +94,12 @@ public class Category implements Serializable {
         this.sort = sort;
     }
 
-    public Integer getCategoryStatus() {
-        return categoryStatus;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setCategoryStatus(Integer categoryStatus) {
-        this.categoryStatus = categoryStatus;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public LocalDateTime getCreateTime() {
@@ -155,10 +133,8 @@ public class Category implements Serializable {
             ", categoryName=" + categoryName +
             ", parentId=" + parentId +
             ", categoryLevel=" + categoryLevel +
-            ", categoryCode=" + categoryCode +
-            ", goodsCount=" + goodsCount +
             ", sort=" + sort +
-            ", categoryStatus=" + categoryStatus +
+            ", status=" + status +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +
             ", deleted=" + deleted +

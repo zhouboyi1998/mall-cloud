@@ -1,6 +1,7 @@
 package com.cafe.admin.vo;
 
 import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,25 +13,33 @@ import java.util.List;
  * @Date: 2022/7/7 17:25
  * @Description:
  */
-@ApiModel(value = "MenuTreeVO对象", description = "三级菜单树视图对象")
+@ApiModel(value = "MenuTreeVO对象", description = "二级菜单树视图")
 public class MenuTreeVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @ApiModelProperty(value = "菜单ID")
     private Long id;
 
+    @ApiModelProperty(value = "菜单名称")
     private String menuName;
 
+    @ApiModelProperty(value = "菜单显示标题")
     private String menuTitle;
 
+    @ApiModelProperty(value = "菜单图标")
     private String menuIcon;
 
+    @ApiModelProperty(value = "菜单路径")
     private String menuPath;
 
+    @ApiModelProperty(value = "上级菜单ID")
     private Long parentId;
 
+    @ApiModelProperty(value = "排序号")
     private Integer sort;
 
+    @ApiModelProperty(value = "子菜单列表")
     private List<MenuTreeVO> children;
 
     public Long getId() {

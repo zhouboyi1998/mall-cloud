@@ -25,7 +25,7 @@ public class Menu implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "菜单ID")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @TableId(value = "id", type = IdType.INPUT)
     private Long id;
 
     @ApiModelProperty(value = "菜单名称")
@@ -40,23 +40,17 @@ public class Menu implements Serializable {
     @ApiModelProperty(value = "菜单路径")
     private String menuPath;
 
-    @ApiModelProperty(value = "上级分类 ID")
+    @ApiModelProperty(value = "上级菜单ID")
     private Long parentId;
 
     @ApiModelProperty(value = "菜单等级: 1 一级菜单, 2 二级菜单, 3 三级菜单")
     private Integer menuLevel;
 
-    @ApiModelProperty(value = "菜单码 (存储多级菜单 ID)")
-    private String menuCode;
-
-    @ApiModelProperty(value = "菜单类型: 1 侧边栏菜单, 2 特殊菜单")
-    private Integer menuType;
-
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
     @ApiModelProperty(value = "状态: 0 禁用, 1 正常")
-    private Integer menuStatus;
+    private Integer status;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
@@ -125,22 +119,6 @@ public class Menu implements Serializable {
         this.menuLevel = menuLevel;
     }
 
-    public String getMenuCode() {
-        return menuCode;
-    }
-
-    public void setMenuCode(String menuCode) {
-        this.menuCode = menuCode;
-    }
-
-    public Integer getMenuType() {
-        return menuType;
-    }
-
-    public void setMenuType(Integer menuType) {
-        this.menuType = menuType;
-    }
-
     public Integer getSort() {
         return sort;
     }
@@ -149,12 +127,12 @@ public class Menu implements Serializable {
         this.sort = sort;
     }
 
-    public Integer getMenuStatus() {
-        return menuStatus;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setMenuStatus(Integer menuStatus) {
-        this.menuStatus = menuStatus;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public LocalDateTime getCreateTime() {
@@ -191,10 +169,8 @@ public class Menu implements Serializable {
             ", menuPath=" + menuPath +
             ", parentId=" + parentId +
             ", menuLevel=" + menuLevel +
-            ", menuCode=" + menuCode +
-            ", menuType=" + menuType +
             ", sort=" + sort +
-            ", menuStatus=" + menuStatus +
+            ", status=" + status +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +
             ", deleted=" + deleted +

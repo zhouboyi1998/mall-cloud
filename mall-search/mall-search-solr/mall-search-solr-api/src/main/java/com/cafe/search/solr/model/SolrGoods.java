@@ -57,11 +57,11 @@ public class SolrGoods implements Serializable {
 
     @ApiModelProperty(value = "SKU 主图")
     @Field
-    private String image;
+    private String skuImage;
 
     @ApiModelProperty(value = "SKU 图片列表")
     @Field
-    private String imageList;
+    private String skuImageList;
 
     @ApiModelProperty(value = "SKU 规格")
     @Field
@@ -151,20 +151,20 @@ public class SolrGoods implements Serializable {
         this.saleCount = saleCount;
     }
 
-    public String getImage() {
-        return image;
+    public String getSkuImage() {
+        return skuImage;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setSkuImage(String skuImage) {
+        this.skuImage = skuImage;
     }
 
-    public String getImageList() {
-        return imageList;
+    public String getSkuImageList() {
+        return skuImageList;
     }
 
-    public void setImageList(String imageList) {
-        this.imageList = imageList;
+    public void setSkuImageList(String skuImageList) {
+        this.skuImageList = skuImageList;
     }
 
     public String getSpecification() {
@@ -226,8 +226,8 @@ public class SolrGoods implements Serializable {
             ", seckillPrice=" + seckillPrice +
             ", stock=" + stock +
             ", saleCount=" + saleCount +
-            ", image='" + image + '\'' +
-            ", imageList='" + imageList + '\'' +
+            ", skuImage='" + skuImage + '\'' +
+            ", skuImageList='" + skuImageList + '\'' +
             ", specification='" + specification + '\'' +
             ", brandId='" + brandId + '\'' +
             ", categoryId='" + categoryId + '\'' +

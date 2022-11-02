@@ -32,13 +32,10 @@ public class Spu implements Serializable {
     private String spuName;
 
     @ApiModelProperty(value = "品牌 ID")
-    private Integer brandId;
+    private Long brandId;
 
     @ApiModelProperty(value = "三级分类 ID")
-    private Integer categoryId;
-
-    @ApiModelProperty(value = "分类码 (存储多级分类ID)")
-    private String categoryCode;
+    private Long categoryId;
 
     @ApiModelProperty(value = "SPU 原价")
     private Double originalPrice;
@@ -64,8 +61,11 @@ public class Spu implements Serializable {
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
-    @ApiModelProperty(value = "状态: 0 未审核, 1 审核未通过, 2 审核通过, 3 上架")
-    private Integer spuStatus;
+    @ApiModelProperty(value = "审核状态: 0 未审核, -1 审核未通过, 1 审核通过")
+    private Integer checkStatus;
+
+    @ApiModelProperty(value = "状态: 0 下架, 1 上架")
+    private Integer status;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
@@ -94,28 +94,20 @@ public class Spu implements Serializable {
         this.spuName = spuName;
     }
 
-    public Integer getBrandId() {
+    public Long getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(Integer brandId) {
+    public void setBrandId(Long brandId) {
         this.brandId = brandId;
     }
 
-    public Integer getCategoryId() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Integer categoryId) {
+    public void setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
-    }
-
-    public String getCategoryCode() {
-        return categoryCode;
-    }
-
-    public void setCategoryCode(String categoryCode) {
-        this.categoryCode = categoryCode;
     }
 
     public Double getOriginalPrice() {
@@ -182,12 +174,20 @@ public class Spu implements Serializable {
         this.sort = sort;
     }
 
-    public Integer getSpuStatus() {
-        return spuStatus;
+    public Integer getCheckStatus() {
+        return checkStatus;
     }
 
-    public void setSpuStatus(Integer spuStatus) {
-        this.spuStatus = spuStatus;
+    public void setCheckStatus(Integer checkStatus) {
+        this.checkStatus = checkStatus;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public LocalDateTime getCreateTime() {
@@ -221,7 +221,6 @@ public class Spu implements Serializable {
             ", spuName=" + spuName +
             ", brandId=" + brandId +
             ", categoryId=" + categoryId +
-            ", categoryCode=" + categoryCode +
             ", originalPrice=" + originalPrice +
             ", discountPrice=" + discountPrice +
             ", seckillPrice=" + seckillPrice +
@@ -230,7 +229,8 @@ public class Spu implements Serializable {
             ", caption=" + caption +
             ", intro=" + intro +
             ", sort=" + sort +
-            ", spuStatus=" + spuStatus +
+            ", checkStatus=" + checkStatus +
+            ", status=" + status +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +
             ", deleted=" + deleted +

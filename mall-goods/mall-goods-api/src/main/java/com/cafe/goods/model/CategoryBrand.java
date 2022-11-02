@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  * @Description: 分类-品牌关联 (实体类)
  */
 @TableName("mall_category_brand_")
-@ApiModel(value = "CategoryBrand对象", description = "分类-品牌关联")
+@ApiModel(value = "CategoryBrand对象", description = "分类-品牌关联关系")
 public class CategoryBrand implements Serializable {
 
     private static final long serialVersionUID = 1L;
