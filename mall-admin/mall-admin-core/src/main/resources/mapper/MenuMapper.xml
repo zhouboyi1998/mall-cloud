@@ -11,10 +11,8 @@
         <result column="menu_path" property="menuPath" />
         <result column="parent_id" property="parentId" />
         <result column="menu_level" property="menuLevel" />
-        <result column="menu_code" property="menuCode" />
-        <result column="menu_type" property="menuType" />
         <result column="sort" property="sort" />
-        <result column="menu_status" property="menuStatus" />
+        <result column="status" property="status" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
         <result column="is_deleted" property="deleted" />
@@ -22,7 +20,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, menu_name, menu_title, menu_icon, menu_path, parent_id, menu_level, menu_code, menu_type, sort, menu_status, create_time, update_time, is_deleted
+        id, menu_name, menu_title, menu_icon, menu_path, parent_id, menu_level, sort, status, create_time, update_time, is_deleted
     </sql>
 
     <select id="listMenuTree" resultType="com.cafe.admin.vo.MenuTreeVO">
@@ -34,8 +32,7 @@
         <foreach collection="roleNameList" item="roleName" open="(" close=")" separator=",">
             #{roleName}
         </foreach>
-        AND m.menu_type = 1
-        AND m.menu_status = 1
+        AND m.status = 1
         ORDER BY m.sort
     </select>
 </mapper>

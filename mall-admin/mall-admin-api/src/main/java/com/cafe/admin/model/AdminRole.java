@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
  * @Description: 用户-角色关联 (实体类)
  */
 @TableName("mall_admin_role")
-@ApiModel(value = "AdminRole对象", description = "用户-角色关联")
+@ApiModel(value = "AdminRole对象", description = "用户-角色关联关系")
 public class AdminRole implements Serializable {
 
     private static final long serialVersionUID = 1L;

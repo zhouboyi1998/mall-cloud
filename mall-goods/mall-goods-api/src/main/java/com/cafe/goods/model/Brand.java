@@ -41,7 +41,7 @@ public class Brand implements Serializable {
     private Integer sort;
 
     @ApiModelProperty(value = "状态: 0 禁用, 1 正常")
-    private Integer brandStatus;
+    private Integer status;
 
     @ApiModelProperty(value = "创建时间")
     private LocalDateTime createTime;
@@ -94,12 +94,12 @@ public class Brand implements Serializable {
         this.sort = sort;
     }
 
-    public Integer getBrandStatus() {
-        return brandStatus;
+    public Integer getStatus() {
+        return status;
     }
 
-    public void setBrandStatus(Integer brandStatus) {
-        this.brandStatus = brandStatus;
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 
     public LocalDateTime getCreateTime() {
@@ -134,7 +134,7 @@ public class Brand implements Serializable {
             ", letter=" + letter +
             ", brandImage=" + brandImage +
             ", sort=" + sort +
-            ", brandStatus=" + brandStatus +
+            ", status=" + status +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +
             ", deleted=" + deleted +
