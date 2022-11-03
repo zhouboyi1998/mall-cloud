@@ -9,10 +9,6 @@ package com.cafe.goods.constant;
  */
 public class GoodsTable {
 
-    public static final String SKU = "mall_goods.mall_sku";
-
-    public static final String SPU = "mall_goods.mall_spu";
-
     public static final String BRAND = "mall_goods.mall_brand";
 
     public static final String CATEGORY = "mall_goods.mall_category";

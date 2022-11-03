@@ -1,6 +1,6 @@
 package com.cafe.search.elasticsearch.service;
 
-import com.cafe.goods.bo.Goods;
+import com.cafe.search.elasticsearch.model.Goods;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
@@ -98,26 +98,7 @@ public interface ElasticSearchGoodsService {
     SearchResponse page(Integer current, Integer size, String keyword, String sort, String rule) throws IOException;
 
     /**
-     * 批量导入商品
-     *
-     * @param current
-     * @param size
-     * @return
-     * @throws IOException
-     */
-    BulkResponse importBatch(Long current, Long size) throws IOException;
-
-    /**
-     * 根据 ids 批量导入商品
-     *
-     * @param ids SKU ID
-     * @return
-     * @throws IOException
-     */
-    BulkResponse importBatch(List<Long> ids) throws IOException;
-
-    /**
-     * 根据筛选字段更新操作字段的值
+     * 批量更新商品 (根据筛选字段更新操作字段的值)
      *
      * @param screenField    筛选字段名
      * @param screenValue    筛选字段值
@@ -126,8 +107,5 @@ public interface ElasticSearchGoodsService {
      * @return
      * @throws IOException
      */
-    BulkByScrollResponse updateBatchByQuery(
-        String screenField, Long screenValue,
-        String operationField, String operationValue
-    ) throws IOException;
+    BulkByScrollResponse updateBatch(String screenField, Long screenValue, String operationField, String operationValue) throws IOException;
 }

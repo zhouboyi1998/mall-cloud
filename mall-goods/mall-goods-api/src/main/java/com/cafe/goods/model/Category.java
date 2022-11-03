@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
  * @Date: 2022-05-09
  * @Description: 分类 (实体类)
  */
-@TableName("mall_category")
 @ApiModel(value = "Category对象", description = "分类")
+@TableName("mall_category")
 public class Category implements Serializable {
 
     private static final long serialVersionUID = 1L;

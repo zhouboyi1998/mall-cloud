@@ -5,13 +5,11 @@ package com.cafe.common.message.rocketmq.constant;
  * @Package: com.cafe.common.message.rocketmq.constant
  * @Author: zhouboyi
  * @Date: 2022/8/8 16:37
- * @Description:
+ * @Description: RocketMQ 消费者组名称
  */
 public class RocketMQConsumerGroup {
 
-    public static final String GROUP_SKU = "GROUP-SKU";
-
-    public static final String GROUP_SPU = "GROUP-SPU";
+    public static final String GROUP_GOODS = "GROUP-GOODS";
 
     public static final String GROUP_BRAND = "GROUP-BRAND";
 

@@ -2,9 +2,8 @@ package com.cafe.search.elasticsearch.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
-import com.cafe.goods.bo.Goods;
-import com.cafe.goods.feign.GoodsFeign;
 import com.cafe.search.elasticsearch.constant.ElasticSearchConstant;
+import com.cafe.search.elasticsearch.model.Goods;
 import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
@@ -48,12 +47,9 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
 
     private RestHighLevelClient restHighLevelClient;
 
-    private GoodsFeign goodsFeign;
-
     @Autowired
-    public ElasticSearchGoodsServiceImpl(RestHighLevelClient restHighLevelClient, GoodsFeign goodsFeign) {
+    public ElasticSearchGoodsServiceImpl(RestHighLevelClient restHighLevelClient) {
         this.restHighLevelClient = restHighLevelClient;
-        this.goodsFeign = goodsFeign;
     }
 
     @Override
@@ -166,28 +162,7 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
     }
 
     @Override
-    public BulkResponse importBatch(Long current, Long size) throws IOException {
-        // 分页获取商品列表
-        List<Goods> goodsList = goodsFeign.page(current, size).getBody().getRecords();
-        // 批量插入商品数据
-        BulkResponse bulkResponse = insertBatch(goodsList);
-        return bulkResponse;
-    }
-
-    @Override
-    public BulkResponse importBatch(List<Long> ids) throws IOException {
-        // 根据 SKU ids 获取商品列表
-        List<Goods> goodsList = goodsFeign.list(ids).getBody();
-        // 批量插入商品数据
-        BulkResponse bulkResponse = insertBatch(goodsList);
-        return bulkResponse;
-    }
-
-    @Override
-    public BulkByScrollResponse updateBatchByQuery(
-        String screenField, Long screenValue,
-        String operationField, String operationValue
-    ) throws IOException {
+    public BulkByScrollResponse updateBatch(String screenField, Long screenValue, String operationField, String operationValue) throws IOException {
         // 筛选条件 (筛选出符合条件的 document, 条件为 screenField 字段的值等于 screenValue)
         TermQueryBuilder termQueryBuilder = new TermQueryBuilder(screenField, screenValue);
         // 更新脚本 (更新符合条件的 document, 将 operationField 字段的值更新为 operationValue)

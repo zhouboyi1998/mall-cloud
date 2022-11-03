@@ -31,9 +31,9 @@ import java.util.List;
  * @Package: com.cafe.admin.controller
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 管理员角色接口
+ * @Description: 角色接口
  */
-@Api(value = "管理员角色接口")
+@Api(value = "角色接口")
 @RestController
 @RequestMapping(value = "/role")
 public class RoleController {
@@ -45,17 +45,17 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-    @LogPrint(value = "查询管理员角色列表")
-    @ApiOperation(value = "查询管理员角色列表")
+    @LogPrint(value = "查询角色列表")
+    @ApiOperation(value = "查询角色列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Role>> list() {
         List<Role> roleList = roleService.list();
         return ResponseEntity.ok(roleList);
     }
 
-    @LogPrint(value = "根据条件查询管理员角色列表")
-    @ApiOperation(value = "根据条件查询管理员角色列表")
-    @ApiImplicitParam(value = "管理员角色Model", name = "role", dataType = "Role", paramType = "body", required = true)
+    @LogPrint(value = "根据条件查询角色列表")
+    @ApiOperation(value = "根据条件查询角色列表")
+    @ApiImplicitParam(value = "角色Model", name = "role", dataType = "Role", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Role>> list(@RequestBody Role role) {
         Wrapper<Role> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(role);
@@ -63,8 +63,8 @@ public class RoleController {
         return ResponseEntity.ok(roleList);
     }
 
-    @LogPrint(value = "分页查询管理员角色列表")
-    @ApiOperation(value = "分页查询管理员角色列表")
+    @LogPrint(value = "分页查询角色列表")
+    @ApiOperation(value = "分页查询角色列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
         @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true)
@@ -79,12 +79,12 @@ public class RoleController {
         return ResponseEntity.ok(rolePage);
     }
 
-    @LogPrint(value = "根据条件分页查询管理员角色")
-    @ApiOperation(value = "根据条件分页查询管理员角色")
+    @LogPrint(value = "根据条件分页查询角色")
+    @ApiOperation(value = "根据条件分页查询角色")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
         @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true),
-        @ApiImplicitParam(value = "管理员角色Model", name = "role", dataType = "Role", paramType = "body", required = true)
+        @ApiImplicitParam(value = "角色Model", name = "role", dataType = "Role", paramType = "body", required = true)
     })
     @PostMapping(value = "/page/{current}/{size}")
     public ResponseEntity<Page<Role>> page(
@@ -98,9 +98,9 @@ public class RoleController {
         return ResponseEntity.ok(rolePage);
     }
 
-    @LogPrint(value = "根据id查询单个管理员角色")
-    @ApiOperation(value = "根据id查询单个管理员角色")
-    @ApiImplicitParam(value = "管理员角色id", name = "id", dataType = "Long", paramType = "path", required = true)
+    @LogPrint(value = "根据id查询单个角色")
+    @ApiOperation(value = "根据id查询单个角色")
+    @ApiImplicitParam(value = "角色id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Role> one(@PathVariable(value = "id") Long id) {
         LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<Role>().eq(Role::getId, id);
@@ -108,9 +108,9 @@ public class RoleController {
         return ResponseEntity.ok(role);
     }
 
-    @LogPrint(value = "新增管理员角色")
-    @ApiOperation(value = "新增管理员角色")
-    @ApiImplicitParam(value = "管理员角色Model", name = "role", dataType = "Role", paramType = "body", required = true)
+    @LogPrint(value = "新增角色")
+    @ApiOperation(value = "新增角色")
+    @ApiImplicitParam(value = "角色Model", name = "role", dataType = "Role", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Role role) {
         role.setCreateTime(LocalDateTime.now());
@@ -119,44 +119,44 @@ public class RoleController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id修改管理员角色")
-    @ApiOperation(value = "根据id修改管理员角色")
-    @ApiImplicitParam(value = "管理员角色Model", name = "role", dataType = "Role", paramType = "body", required = true)
+    @LogPrint(value = "根据id修改角色")
+    @ApiOperation(value = "根据id修改角色")
+    @ApiImplicitParam(value = "角色Model", name = "role", dataType = "Role", paramType = "body", required = true)
     @PutMapping(value = "/update")
     public ResponseEntity<Boolean> update(@RequestBody Role role) {
         Boolean code = roleService.updateById(role);
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量修改管理员角色")
-    @ApiOperation(value = "根据ids批量修改管理员角色")
-    @ApiImplicitParam(value = "管理员角色列表", name = "roleList", dataType = "List<Role>", paramType = "body", required = true)
+    @LogPrint(value = "根据ids批量修改角色")
+    @ApiOperation(value = "根据ids批量修改角色")
+    @ApiImplicitParam(value = "角色列表", name = "roleList", dataType = "List<Role>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<Role> roleList) {
         Boolean code = roleService.updateBatchById(roleList);
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id删除管理员角色")
-    @ApiOperation(value = "根据id删除管理员角色")
-    @ApiImplicitParam(value = "管理员角色id", name = "id", dataType = "Long", paramType = "path", required = true)
+    @LogPrint(value = "根据id删除角色")
+    @ApiOperation(value = "根据id删除角色")
+    @ApiImplicitParam(value = "角色id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
         Boolean code = roleService.removeById(id);
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量删除管理员角色")
-    @ApiOperation(value = "根据ids批量删除管理员角色")
-    @ApiImplicitParam(value = "管理员角色id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
+    @LogPrint(value = "根据ids批量删除角色")
+    @ApiOperation(value = "根据ids批量删除角色")
+    @ApiImplicitParam(value = "角色id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = roleService.removeByIds(ids);
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "分页查询管理员角色列表")
-    @ApiOperation(value = "分页查询管理员角色列表")
+    @LogPrint(value = "分页查询角色列表")
+    @ApiOperation(value = "分页查询角色列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
         @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
@@ -171,12 +171,12 @@ public class RoleController {
         return ResponseEntity.ok(rolePage);
     }
 
-    @LogPrint(value = "根据条件分页查询管理员角色")
-    @ApiOperation(value = "根据条件分页查询管理员角色")
+    @LogPrint(value = "根据条件分页查询角色")
+    @ApiOperation(value = "根据条件分页查询角色")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
         @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "管理员角色Model", name = "role", dataType = "Role", paramType = "body", required = true)
+        @ApiImplicitParam(value = "角色Model", name = "role", dataType = "Role", paramType = "body", required = true)
     })
     @PostMapping(value = "/page")
     public ResponseEntity<Page<Role>> soapPage(
@@ -190,9 +190,9 @@ public class RoleController {
         return ResponseEntity.ok(rolePage);
     }
 
-    @LogPrint(value = "根据id查询单个管理员角色")
-    @ApiOperation(value = "根据id查询单个管理员角色")
-    @ApiImplicitParam(value = "管理员角色id", name = "id", dataType = "Long", paramType = "query", required = true)
+    @LogPrint(value = "根据id查询单个角色")
+    @ApiOperation(value = "根据id查询单个角色")
+    @ApiImplicitParam(value = "角色id", name = "id", dataType = "Long", paramType = "query", required = true)
     @GetMapping(value = "/one")
     public ResponseEntity<Role> soapOne(@RequestParam(value = "id") Long id) {
         LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<Role>().eq(Role::getId, id);
@@ -200,9 +200,9 @@ public class RoleController {
         return ResponseEntity.ok(role);
     }
 
-    @LogPrint(value = "根据id删除管理员角色")
-    @ApiOperation(value = "根据id删除管理员角色")
-    @ApiImplicitParam(value = "管理员角色id", name = "id", dataType = "Long", paramType = "query", required = true)
+    @LogPrint(value = "根据id删除角色")
+    @ApiOperation(value = "根据id删除角色")
+    @ApiImplicitParam(value = "角色id", name = "id", dataType = "Long", paramType = "query", required = true)
     @DeleteMapping(value = "/delete")
     public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
         Boolean code = roleService.removeById(id);

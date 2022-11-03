@@ -1,8 +1,6 @@
 package com.cafe.goods.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.goods.bo.Goods;
 import com.cafe.goods.service.GoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -10,7 +8,6 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,28 +35,15 @@ public class GoodsController {
         this.goodsService = goodsService;
     }
 
-    @LogPrint(value = "根据 SKU ids 查询商品列表")
-    @ApiOperation(value = "根据 SKU ids 查询商品列表")
-    @ApiImplicitParam(value = "SKU ids", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
-    @PostMapping(value = "/list")
-    public ResponseEntity<List<Goods>> list(@RequestBody List<Long> ids) {
-        List<Goods> goodsList = goodsService.list(ids);
-        return ResponseEntity.ok(goodsList);
-    }
-
-    @LogPrint(value = "分页查询商品列表")
-    @ApiOperation(value = "分页查询商品列表")
+    @LogPrint(value = "批量上下架商品")
+    @ApiOperation(value = "批量上下架商品")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true)
+        @ApiImplicitParam(value = "SKU ids", name = "ids", dataType = "List<Long>", paramType = "body", required = true),
+        @ApiImplicitParam(value = "商品状态", name = "status", dataType = "Integer", paramType = "path", required = true)
     })
-    @GetMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<Page<Goods>> page(
-        @PathVariable(value = "current") Long current,
-        @PathVariable(value = "size") Long size
-    ) {
-        Page<Goods> page = new Page<Goods>().setCurrent(current).setSize(size);
-        Page<Goods> goodsPage = goodsService.page(page);
-        return ResponseEntity.ok(goodsPage);
+    @PostMapping(value = "/launch/{status}")
+    public ResponseEntity<Integer> launch(@RequestBody List<Long> ids, @PathVariable(value = "status") Integer status) {
+        goodsService.launch(ids, status);
+        return ResponseEntity.ok(status);
     }
 }

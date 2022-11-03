@@ -1,6 +1,6 @@
 package com.cafe.search.solr.service;
 
-import com.cafe.search.solr.model.SolrGoods;
+import com.cafe.search.solr.model.Goods;
 
 import java.util.List;
 
@@ -19,21 +19,21 @@ public interface SolrGoodsService {
      * @param id
      * @return
      */
-    SolrGoods one(String id);
+    Goods one(String id);
 
     /**
      * 插入商品/更新商品
      *
-     * @param solrGoods
+     * @param goods
      */
-    void save(SolrGoods solrGoods);
+    void save(Goods goods);
 
     /**
      * 批量插入商品/批量更新商品
      *
-     * @param solrGoodsList
+     * @param goodsList
      */
-    void saveBatch(List<SolrGoods> solrGoodsList);
+    void saveBatch(List<Goods> goodsList);
 
     /**
      * 删除商品
@@ -48,12 +48,4 @@ public interface SolrGoodsService {
      * @param ids
      */
     void deleteBatch(List<String> ids);
-
-    /**
-     * 批量导入商品
-     *
-     * @param current
-     * @param size
-     */
-    void importBatch(Long current, Long size);
 }

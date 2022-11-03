@@ -1,6 +1,5 @@
 package com.cafe.goods.service;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cafe.goods.bo.Goods;
 
@@ -16,18 +15,10 @@ import java.util.List;
 public interface GoodsService extends IService<Goods> {
 
     /**
-     * 根据 SKU ids 查询商品列表
+     * 批量上下架商品
      *
      * @param ids
-     * @return
+     * @param status
      */
-    List<Goods> list(List<Long> ids);
-
-    /**
-     * 分页查询商品列表
-     *
-     * @param page
-     * @return
-     */
-    Page<Goods> page(Page<Goods> page);
+    void launch(List<Long> ids, Integer status);
 }
