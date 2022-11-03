@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
@@ -49,6 +50,9 @@ public class Goods implements Serializable {
 
     @ApiModelProperty(value = "SKU 规格")
     private String specification;
+
+    @ApiModelProperty(value = "上架时间")
+    private LocalDateTime launchTime;
 
     @ApiModelProperty(value = "品牌 ID")
     private Long brandId;
@@ -153,6 +157,14 @@ public class Goods implements Serializable {
         this.specification = specification;
     }
 
+    public LocalDateTime getLaunchTime() {
+        return launchTime;
+    }
+
+    public void setLaunchTime(LocalDateTime launchTime) {
+        this.launchTime = launchTime;
+    }
+
     public Long getBrandId() {
         return brandId;
     }
@@ -207,8 +219,9 @@ public class Goods implements Serializable {
             ", skuImage='" + skuImage + '\'' +
             ", skuImageList='" + skuImageList + '\'' +
             ", specification='" + specification + '\'' +
-            ", brandId='" + brandId + '\'' +
-            ", categoryId='" + categoryId + '\'' +
+            ", launchTime=" + launchTime +
+            ", brandId=" + brandId +
+            ", categoryId=" + categoryId +
             ", spuName='" + spuName + '\'' +
             ", brandName='" + brandName + '\'' +
             ", categoryName='" + categoryName + '\'' +

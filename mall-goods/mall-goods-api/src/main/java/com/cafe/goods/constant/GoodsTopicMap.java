@@ -14,8 +14,6 @@ import org.apache.commons.collections4.map.MultiKeyMap;
 public class GoodsTopicMap {
 
     public static final MultiKeyMap<String, String> TOPIC_MAP = new MultiKeyMap<String, String>() {{
-        put(RocketMQProducer.CANAL, GoodsTable.SKU, RocketMQTopic.CANAL_TO_ES_SKU);
-        put(RocketMQProducer.CANAL, GoodsTable.SPU, RocketMQTopic.CANAL_TO_ES_SPU);
         put(RocketMQProducer.CANAL, GoodsTable.BRAND, RocketMQTopic.CANAL_TO_ES_BRAND);
         put(RocketMQProducer.CANAL, GoodsTable.CATEGORY, RocketMQTopic.CANAL_TO_ES_CATEGORY);
     }};

@@ -1,17 +1,13 @@
-package com.cafe.goods.constant;
+package com.cafe.search.elasticsearch.constant;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.goods.constant
+ * @Package: com.cafe.search.elasticsearch.constant
  * @Author: zhouboyi
  * @Date: 2022/7/29 16:57
  * @Description:
  */
 public class GoodsField {
-
-    public static final String SPU_ID = "spuId";
-
-    public static final String SPU_NAME = "spuName";
 
     public static final String BRAND_ID = "brandId";
 

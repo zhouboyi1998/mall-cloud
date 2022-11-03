@@ -4,8 +4,8 @@ import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.MonitorConstant;
 import com.cafe.common.message.rocketmq.constant.RocketMQConsumerGroup;
 import com.cafe.common.message.rocketmq.constant.RocketMQTopic;
-import com.cafe.goods.constant.GoodsField;
-import com.cafe.goods.model.Category;
+import com.cafe.search.elasticsearch.constant.GoodsField;
+import com.cafe.search.elasticsearch.model.Category;
 import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
@@ -40,20 +40,20 @@ public class RocketMQCategoryConsumer implements RocketMQListener<String> {
 
     @Override
     public void onMessage(String message) {
+        // 打印成功接收消息的日志
         LOGGER.info("RocketMQCategoryConsumer.onMessage(): Category JSON Message -> {}", message);
         // 获取消息内容
         Map<String, Object> content = JSONUtil.parseObj(message);
         // 获取变更后的数据
-        List<Category> afterDataList
-            = JSONUtil.parseArray(content.get(MonitorConstant.AFTER_DATA)).toList(Category.class);
+        List<Category> afterDataList = JSONUtil.parseArray(content.get(MonitorConstant.AFTER_DATA)).toList(Category.class);
 
         // 更新所有改变的分类名称
         for (Category category : afterDataList) {
             try {
-                elasticSearchGoodsService.updateBatchByQuery(
-                    GoodsField.CATEGORY_ID, category.getId(),
-                    GoodsField.CATEGORY_NAME, category.getCategoryName()
-                );
+                // 批量更新商品
+                elasticSearchGoodsService.updateBatch(GoodsField.CATEGORY_ID, category.getId(), GoodsField.CATEGORY_NAME, category.getCategoryName());
+                // 打印成功更新分类名称的日志
+                LOGGER.info("RocketMQCategoryConsumer.onMessage(): Update category name success -> {}", message);
             } catch (IOException e) {
                 LOGGER.error("RocketMQCategoryConsumer.onMessage(): Failed to update category -> {}", e.getMessage());
             }

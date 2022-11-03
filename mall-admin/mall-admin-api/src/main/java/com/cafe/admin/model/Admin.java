@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
  * @Date: 2022-05-10
  * @Description: 管理员 (实体类)
  */
-@TableName("mall_admin")
 @ApiModel(value = "Admin对象", description = "管理员")
+@TableName("mall_admin")
 public class Admin implements Serializable {
 
     private static final long serialVersionUID = 1L;

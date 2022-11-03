@@ -16,10 +16,10 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.admin.model
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 管理员角色 (实体类)
+ * @Description: 角色 (实体类)
  */
+@ApiModel(value = "Role对象", description = "角色")
 @TableName("mall_role")
-@ApiModel(value = "Role对象", description = "管理员角色")
 public class Role implements Serializable {
 
     private static final long serialVersionUID = 1L;

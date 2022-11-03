@@ -1,8 +1,8 @@
 package com.cafe.search.elasticsearch.controller;
 
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.goods.bo.Goods;
 import com.cafe.search.elasticsearch.constant.ElasticSearchConstant;
+import com.cafe.search.elasticsearch.model.Goods;
 import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -130,20 +130,5 @@ public class ElasticSearchGoodsController {
     ) throws IOException {
         SearchResponse searchResponse = elasticSearchGoodsService.page(current, size, keyword, sort, rule);
         return ResponseEntity.ok(searchResponse);
-    }
-
-    @LogPrint(value = "批量导入商品")
-    @ApiOperation(value = "批量导入商品")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
-        @ApiImplicitParam(value = "每页数据数量", name = "size", dataType = "Long", paramType = "path", required = true)
-    })
-    @PostMapping(value = "/import/{current}/{size}")
-    public ResponseEntity<BulkResponse> importBatch(
-        @PathVariable(value = "current") Long current,
-        @PathVariable(value = "size") Long size
-    ) throws IOException {
-        BulkResponse bulkResponse = elasticSearchGoodsService.importBatch(current, size);
-        return ResponseEntity.ok(bulkResponse);
     }
 }

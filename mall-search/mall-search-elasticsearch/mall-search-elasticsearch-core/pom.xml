@@ -33,10 +33,6 @@
             <groupId>com.cafe</groupId>
             <artifactId>mall-search-elasticsearch-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-goods-api</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

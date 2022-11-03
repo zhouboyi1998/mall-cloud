@@ -1,85 +1,96 @@
-package com.cafe.goods.model;
+package com.cafe.search.solr.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.cafe.search.solr.constant.SolrConstant;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import org.apache.solr.client.solrj.beans.Field;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.goods.model
+ * @Package: com.cafe.search.solr.model
  * @Author: zhouboyi
- * @Date: 2022-05-09
- * @Description: 库存量单位 (实体类)
+ * @Date: 2022/10/11 11:42
+ * @Description:
  */
-@ApiModel(value = "Sku对象", description = "库存量单位")
-@TableName("mall_sku")
-public class Sku implements Serializable {
+@ApiModel(value = "SolrGoods对象", description = "Solr商品")
+@SolrDocument(collection = SolrConstant.GOODS_INDEX)
+public class Goods implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "SKU ID")
-    @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @Id
+    @Field
     private Long id;
 
     @ApiModelProperty(value = "SKU 名称")
+    @Field
     private String skuName;
 
     @ApiModelProperty(value = "SPU ID")
+    @Field
     private Long spuId;
 
     @ApiModelProperty(value = "SKU 原价")
+    @Field
     private Double originalPrice;
 
     @ApiModelProperty(value = "SKU 折扣价")
+    @Field
     private Double discountPrice;
 
     @ApiModelProperty(value = "SKU 秒杀价")
+    @Field
     private Double seckillPrice;
 
     @ApiModelProperty(value = "库存数量")
+    @Field
     private Integer stock;
 
     @ApiModelProperty(value = "销售数量")
+    @Field
     private Integer saleCount;
 
     @ApiModelProperty(value = "SKU 主图")
+    @Field
     private String skuImage;
 
     @ApiModelProperty(value = "SKU 图片列表")
+    @Field
     private String skuImageList;
 
     @ApiModelProperty(value = "SKU 规格")
+    @Field
     private String specification;
 
-    @ApiModelProperty(value = "排序号")
-    private Integer sort;
-
-    @ApiModelProperty(value = "审核状态: 0 未审核, -1 审核未通过, 1 审核通过")
-    private Integer checkStatus;
-
-    @ApiModelProperty(value = "状态: 0 下架, 1 上架")
-    private Integer status;
-
-    @ApiModelProperty(value = "创建时间")
-    private LocalDateTime createTime;
-
-    @ApiModelProperty(value = "更新时间")
-    private LocalDateTime updateTime;
-
     @ApiModelProperty(value = "上架时间")
+    @Field
     private LocalDateTime launchTime;
 
-    @ApiModelProperty(value = "逻辑删除: 0 未删除, 1 已删除")
-    @TableField(value = "is_deleted")
-    @TableLogic
-    private Boolean deleted;
+    @ApiModelProperty(value = "品牌 ID")
+    @Field
+    private Long brandId;
+
+    @ApiModelProperty(value = "分类 ID")
+    @Field
+    private Long categoryId;
+
+    @ApiModelProperty(value = "SPU 名称")
+    @Field
+    private String spuName;
+
+    @ApiModelProperty(value = "品牌名称")
+    @Field
+    private String brandName;
+
+    @ApiModelProperty(value = "分类名称")
+    @Field
+    private String categoryName;
 
     public Long getId() {
         return id;
@@ -169,46 +180,6 @@ public class Sku implements Serializable {
         this.specification = specification;
     }
 
-    public Integer getSort() {
-        return sort;
-    }
-
-    public void setSort(Integer sort) {
-        this.sort = sort;
-    }
-
-    public Integer getCheckStatus() {
-        return checkStatus;
-    }
-
-    public void setCheckStatus(Integer checkStatus) {
-        this.checkStatus = checkStatus;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-    }
-
     public LocalDateTime getLaunchTime() {
         return launchTime;
     }
@@ -217,35 +188,66 @@ public class Sku implements Serializable {
         this.launchTime = launchTime;
     }
 
-    public Boolean getDeleted() {
-        return deleted;
+    public Long getBrandId() {
+        return brandId;
     }
 
-    public void setDeleted(Boolean deleted) {
-        this.deleted = deleted;
+    public void setBrandId(Long brandId) {
+        this.brandId = brandId;
+    }
+
+    public Long getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getSpuName() {
+        return spuName;
+    }
+
+    public void setSpuName(String spuName) {
+        this.spuName = spuName;
+    }
+
+    public String getBrandName() {
+        return brandName;
+    }
+
+    public void setBrandName(String brandName) {
+        this.brandName = brandName;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
     }
 
     @Override
     public String toString() {
-        return "Sku{" +
+        return "Goods{" +
             "id=" + id +
-            ", skuName=" + skuName +
+            ", skuName='" + skuName + '\'' +
             ", spuId=" + spuId +
             ", originalPrice=" + originalPrice +
             ", discountPrice=" + discountPrice +
             ", seckillPrice=" + seckillPrice +
             ", stock=" + stock +
             ", saleCount=" + saleCount +
-            ", skuImage=" + skuImage +
-            ", skuImageList=" + skuImageList +
-            ", specification=" + specification +
-            ", sort=" + sort +
-            ", checkStatus=" + checkStatus +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
+            ", skuImage='" + skuImage + '\'' +
+            ", skuImageList='" + skuImageList + '\'' +
+            ", specification='" + specification + '\'' +
             ", launchTime=" + launchTime +
-            ", deleted=" + deleted +
-            "}";
+            ", brandId=" + brandId +
+            ", categoryId=" + categoryId +
+            ", spuName='" + spuName + '\'' +
+            ", brandName='" + brandName + '\'' +
+            ", categoryName='" + categoryName + '\'' +
+            '}';
     }
 }

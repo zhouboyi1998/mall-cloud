@@ -16,8 +16,8 @@ import java.time.LocalDateTime;
  * @Date: 2022-05-09
  * @Description: 角色-菜单关联 (实体类)
  */
-@TableName("mall_role_menu")
 @ApiModel(value = "RoleMenu对象", description = "角色-菜单关联关系")
+@TableName("mall_role_menu")
 public class RoleMenu implements Serializable {
 
     private static final long serialVersionUID = 1L;

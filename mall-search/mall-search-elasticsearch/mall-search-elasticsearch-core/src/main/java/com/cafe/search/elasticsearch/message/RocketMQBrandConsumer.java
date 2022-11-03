@@ -4,8 +4,8 @@ import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.MonitorConstant;
 import com.cafe.common.message.rocketmq.constant.RocketMQConsumerGroup;
 import com.cafe.common.message.rocketmq.constant.RocketMQTopic;
-import com.cafe.goods.constant.GoodsField;
-import com.cafe.goods.model.Brand;
+import com.cafe.search.elasticsearch.constant.GoodsField;
+import com.cafe.search.elasticsearch.model.Brand;
 import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
@@ -40,20 +40,20 @@ public class RocketMQBrandConsumer implements RocketMQListener<String> {
 
     @Override
     public void onMessage(String message) {
+        // 打印成功接收消息的日志
         LOGGER.info("RocketMQBrandConsumer.onMessage(): Brand JSON Message -> {}", message);
         // 获取消息内容
         Map<String, Object> content = JSONUtil.parseObj(message);
         // 获取变更后的数据
-        List<Brand> afterDataList
-            = JSONUtil.parseArray(content.get(MonitorConstant.AFTER_DATA)).toList(Brand.class);
+        List<Brand> afterDataList = JSONUtil.parseArray(content.get(MonitorConstant.AFTER_DATA)).toList(Brand.class);
 
         // 更新所有改变的品牌名称
         for (Brand brand : afterDataList) {
             try {
-                elasticSearchGoodsService.updateBatchByQuery(
-                    GoodsField.BRAND_ID, brand.getId(),
-                    GoodsField.BRAND_NAME, brand.getBrandName()
-                );
+                // 批量更新商品
+                elasticSearchGoodsService.updateBatch(GoodsField.BRAND_ID, brand.getId(), GoodsField.BRAND_NAME, brand.getBrandName());
+                // 打印成功更新品牌名称的日志
+                LOGGER.info("RocketMQBrandConsumer.onMessage(): Update brand name success -> {}", message);
             } catch (IOException e) {
                 LOGGER.error("RocketMQBrandConsumer.onMessage(): Failed to update brand -> {}", e.getMessage());
             }

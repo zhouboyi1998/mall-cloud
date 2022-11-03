@@ -1,9 +1,12 @@
 package com.cafe.monitor.canal.handler;
 
+import cn.hutool.json.JSONUtil;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.cafe.admin.constant.AdminRoutingKeyMap;
 import com.cafe.common.message.rabbitmq.constant.RabbitMQExchange;
 import com.cafe.common.message.rabbitmq.producer.RabbitMQProducer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,6 +22,8 @@ import java.util.Map;
  */
 @Component
 public class RabbitMQContentHandler {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQContentHandler.class);
 
     private MessageContentHandler messageContentHandler;
 
@@ -43,5 +48,8 @@ public class RabbitMQContentHandler {
             AdminRoutingKeyMap.ROUTING_KEY_MAP.get(RabbitMQExchange.CANAL, tableName),
             content
         );
+
+        // 打印日志
+        LOGGER.info("RabbitMQContentHandler.handle(): Send RabbitMQ Message -> {}", JSONUtil.toJsonStr(content));
     }
 }

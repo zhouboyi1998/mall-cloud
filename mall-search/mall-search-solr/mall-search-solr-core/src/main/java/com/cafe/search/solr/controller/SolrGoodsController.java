@@ -1,11 +1,10 @@
 package com.cafe.search.solr.controller;
 
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.search.solr.model.SolrGoods;
+import com.cafe.search.solr.model.Goods;
 import com.cafe.search.solr.service.SolrGoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,26 +41,26 @@ public class SolrGoodsController {
     @ApiOperation(value = "获取商品")
     @ApiImplicitParam(value = "商品id", name = "id", dataType = "String", paramType = "path", required = true)
     @GetMapping(value = "/{id}")
-    public ResponseEntity<SolrGoods> one(@PathVariable(value = "id") String id) {
-        SolrGoods solrGoods = solrGoodsService.one(id);
-        return ResponseEntity.ok(solrGoods);
+    public ResponseEntity<Goods> one(@PathVariable(value = "id") String id) {
+        Goods goods = solrGoodsService.one(id);
+        return ResponseEntity.ok(goods);
     }
 
     @LogPrint(value = "插入商品/更新商品")
     @ApiOperation(value = "插入商品/更新商品")
-    @ApiImplicitParam(value = "商品Model", name = "solrGoods", dataType = "SolrGoods", paramType = "body", required = true)
+    @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
     @PostMapping(value = "")
-    public ResponseEntity<String> save(@RequestBody SolrGoods solrGoods) {
-        solrGoodsService.save(solrGoods);
+    public ResponseEntity<String> save(@RequestBody Goods goods) {
+        solrGoodsService.save(goods);
         return ResponseEntity.ok("save success!");
     }
 
     @LogPrint(value = "批量插入商品/批量更新商品")
     @ApiOperation(value = "批量插入商品/批量更新商品")
-    @ApiImplicitParam(value = "商品列表", name = "solrGoodsList", dataType = "List<SolrGoods>", paramType = "body", required = true)
+    @ApiImplicitParam(value = "商品列表", name = "goodsList", dataType = "List<Goods>", paramType = "body", required = true)
     @PostMapping(value = "/batch")
-    public ResponseEntity<String> saveBatch(@RequestBody List<SolrGoods> solrGoodsList) {
-        solrGoodsService.saveBatch(solrGoodsList);
+    public ResponseEntity<String> saveBatch(@RequestBody List<Goods> goodsList) {
+        solrGoodsService.saveBatch(goodsList);
         return ResponseEntity.ok("batch save success!");
     }
 
@@ -81,20 +80,5 @@ public class SolrGoodsController {
     public ResponseEntity<String> deleteBatch(@RequestBody List<String> ids) {
         solrGoodsService.deleteBatch(ids);
         return ResponseEntity.ok("batch delete success!");
-    }
-
-    @LogPrint(value = "批量导入商品")
-    @ApiOperation(value = "批量导入商品")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
-        @ApiImplicitParam(value = "每页数据数量", name = "size", dataType = "Long", paramType = "path", required = true)
-    })
-    @PostMapping(value = "/import/{current}/{size}")
-    public ResponseEntity<String> importBatch(
-        @PathVariable(value = "current") Long current,
-        @PathVariable(value = "size") Long size
-    ) {
-        solrGoodsService.importBatch(current, size);
-        return ResponseEntity.ok("batch import success!");
     }
 }

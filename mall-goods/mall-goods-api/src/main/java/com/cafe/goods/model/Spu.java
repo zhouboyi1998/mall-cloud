@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
  * @Date: 2022-05-09
  * @Description: 标准化产品单元 (实体类)
  */
-@TableName("mall_spu")
 @ApiModel(value = "Spu对象", description = "标准化产品单元")
+@TableName("mall_spu")
 public class Spu implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -72,6 +72,9 @@ public class Spu implements Serializable {
 
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
+
+    @ApiModelProperty(value = "上架时间")
+    private LocalDateTime launchTime;
 
     @ApiModelProperty(value = "逻辑删除: 0 未删除, 1 已删除")
     @TableField(value = "is_deleted")
@@ -206,6 +209,14 @@ public class Spu implements Serializable {
         this.updateTime = updateTime;
     }
 
+    public LocalDateTime getLaunchTime() {
+        return launchTime;
+    }
+
+    public void setLaunchTime(LocalDateTime launchTime) {
+        this.launchTime = launchTime;
+    }
+
     public Boolean getDeleted() {
         return deleted;
     }
@@ -233,6 +244,7 @@ public class Spu implements Serializable {
             ", status=" + status +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +
+            ", launchTime=" + launchTime +
             ", deleted=" + deleted +
             "}";
     }

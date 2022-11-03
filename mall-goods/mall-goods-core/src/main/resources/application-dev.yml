@@ -18,6 +18,13 @@ spring:
       transport:
         dashboard: 127.0.0.1:8858
 
+# RocketMQ 配置
+rocketmq:
+  name-server: 127.0.0.1:9876
+  producer:
+    # 生产者组名
+    group: GROUP-ES
+
 # MyBatis-Plus 配置
 mybatis-plus:
   configuration:

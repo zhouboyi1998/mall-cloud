@@ -15,5 +15,3 @@ canal:
   rocket-table:
     - mall_goods.mall_brand
     - mall_goods.mall_category
-    - mall_goods.mall_sku
-    - mall_goods.mall_spu

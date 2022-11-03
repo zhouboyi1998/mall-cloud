@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
  * @Date: 2022-05-09
  * @Description: 菜单 (实体类)
  */
-@TableName("mall_menu")
 @ApiModel(value = "Menu对象", description = "菜单")
+@TableName("mall_menu")
 public class Menu implements Serializable {
 
     private static final long serialVersionUID = 1L;
