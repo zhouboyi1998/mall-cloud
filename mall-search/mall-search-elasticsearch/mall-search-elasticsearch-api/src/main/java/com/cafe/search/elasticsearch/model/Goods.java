@@ -1,90 +1,72 @@
-package com.cafe.search.solr.model;
+package com.cafe.search.elasticsearch.model;
 
-import com.cafe.search.solr.constant.SolrConstant;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import org.apache.solr.client.solrj.beans.Field;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.search.solr.model
+ * @Package: com.cafe.search.elasticsearch.model
  * @Author: zhouboyi
  * @Date: 2022/10/11 11:42
  * @Description:
  */
-@ApiModel(value = "SolrGoods对象", description = "Solr 商品对象")
-@SolrDocument(collection = SolrConstant.GOODS_INDEX)
-public class SolrGoods implements Serializable {
+@ApiModel(value = "ElasticSearchGoods对象", description = "ElasticSearch商品")
+public class Goods implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "SKU ID")
-    @Id
-    @Field
     private Long id;
 
     @ApiModelProperty(value = "SKU 名称")
-    @Field
     private String skuName;
 
     @ApiModelProperty(value = "SPU ID")
-    @Field
     private Long spuId;
 
     @ApiModelProperty(value = "SKU 原价")
-    @Field
     private Double originalPrice;
 
     @ApiModelProperty(value = "SKU 折扣价")
-    @Field
     private Double discountPrice;
 
     @ApiModelProperty(value = "SKU 秒杀价")
-    @Field
     private Double seckillPrice;
 
     @ApiModelProperty(value = "库存数量")
-    @Field
     private Integer stock;
 
     @ApiModelProperty(value = "销售数量")
-    @Field
     private Integer saleCount;
 
     @ApiModelProperty(value = "SKU 主图")
-    @Field
     private String skuImage;
 
     @ApiModelProperty(value = "SKU 图片列表")
-    @Field
     private String skuImageList;
 
     @ApiModelProperty(value = "SKU 规格")
-    @Field
     private String specification;
 
+    @ApiModelProperty(value = "上架时间")
+    private LocalDateTime launchTime;
+
     @ApiModelProperty(value = "品牌 ID")
-    @Field
     private Long brandId;
 
     @ApiModelProperty(value = "分类 ID")
-    @Field
     private Long categoryId;
 
     @ApiModelProperty(value = "SPU 名称")
-    @Field
     private String spuName;
 
     @ApiModelProperty(value = "品牌名称")
-    @Field
     private String brandName;
 
     @ApiModelProperty(value = "分类名称")
-    @Field
     private String categoryName;
 
     public Long getId() {
@@ -175,6 +157,14 @@ public class SolrGoods implements Serializable {
         this.specification = specification;
     }
 
+    public LocalDateTime getLaunchTime() {
+        return launchTime;
+    }
+
+    public void setLaunchTime(LocalDateTime launchTime) {
+        this.launchTime = launchTime;
+    }
+
     public Long getBrandId() {
         return brandId;
     }
@@ -217,7 +207,7 @@ public class SolrGoods implements Serializable {
 
     @Override
     public String toString() {
-        return "SolrGoods{" +
+        return "Goods{" +
             "id=" + id +
             ", skuName='" + skuName + '\'' +
             ", spuId=" + spuId +
@@ -229,8 +219,9 @@ public class SolrGoods implements Serializable {
             ", skuImage='" + skuImage + '\'' +
             ", skuImageList='" + skuImageList + '\'' +
             ", specification='" + specification + '\'' +
-            ", brandId='" + brandId + '\'' +
-            ", categoryId='" + categoryId + '\'' +
+            ", launchTime=" + launchTime +
+            ", brandId=" + brandId +
+            ", categoryId=" + categoryId +
             ", spuName='" + spuName + '\'' +
             ", brandName='" + brandName + '\'' +
             ", categoryName='" + categoryName + '\'' +

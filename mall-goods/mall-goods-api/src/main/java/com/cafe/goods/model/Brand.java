@@ -18,8 +18,8 @@ import java.time.LocalDateTime;
  * @Date: 2022-05-09
  * @Description: 品牌 (实体类)
  */
-@TableName("mall_brand")
 @ApiModel(value = "Brand对象", description = "品牌")
+@TableName("mall_brand")
 public class Brand implements Serializable {
 
     private static final long serialVersionUID = 1L;

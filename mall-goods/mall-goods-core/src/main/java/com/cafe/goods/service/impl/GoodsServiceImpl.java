@@ -1,14 +1,21 @@
 package com.cafe.goods.service.impl;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.cafe.goods.dao.GoodsMapper;
+import com.cafe.common.constant.MessageConstant;
+import com.cafe.common.message.rocketmq.constant.RocketMQTopic;
 import com.cafe.goods.bo.Goods;
+import com.cafe.goods.dao.GoodsMapper;
 import com.cafe.goods.service.GoodsService;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Project: mall-cloud
@@ -20,20 +27,42 @@ import java.util.List;
 @Service
 public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements GoodsService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(GoodsServiceImpl.class);
+
     private GoodsMapper goodsMapper;
 
+    private RocketMQTemplate rocketMQTemplate;
+
     @Autowired
-    public GoodsServiceImpl(GoodsMapper goodsMapper) {
+    public GoodsServiceImpl(GoodsMapper goodsMapper, RocketMQTemplate rocketMQTemplate) {
         this.goodsMapper = goodsMapper;
+        this.rocketMQTemplate = rocketMQTemplate;
     }
 
     @Override
-    public List<Goods> list(List<Long> ids) {
-        return goodsMapper.list(ids);
-    }
+    public void launch(List<Long> ids, Integer status) {
+        // 更新商品状态
+        goodsMapper.updateStatus(ids, status);
 
-    @Override
-    public Page<Goods> page(Page<Goods> page) {
-        return goodsMapper.page(page);
+        // 组装 RocketMQ 消息内容
+        Map<String, Object> content = new HashMap<String, Object>(2);
+        // 标识消息是上架通知还是下架通知
+        content.put(MessageConstant.STATUS, status);
+
+        if (MessageConstant.LAUNCH.equals(status)) {
+            // 查询上架商品的信息
+            List<Goods> goodsList = goodsMapper.list(ids);
+            // 将上架商品的信息组装进 RocketMQ 消息内容中
+            content.put(MessageConstant.DATA, goodsList);
+        } else {
+            // 将下架商品的主键组装进 RocketMQ 消息内容中
+            content.put(MessageConstant.DATA, ids);
+        }
+
+        // 发送消息到 RocketMQ, 通知 ElasticSearch 上下架商品
+        rocketMQTemplate.convertAndSend(RocketMQTopic.CANAL_TO_ES_GOODS, content);
+
+        // 打印日志
+        LOGGER.info("GoodsServiceImpl.launch(): Send RocketMQ Message -> {}", JSONUtil.toJsonStr(content));
     }
 }
