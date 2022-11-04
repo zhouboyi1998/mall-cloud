@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -155,60 +154,6 @@ public class MenuController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = menuService.removeByIds(ids);
-        return ResponseEntity.ok(code);
-    }
-
-    @LogPrint(value = "分页查询菜单列表")
-    @ApiOperation(value = "分页查询菜单列表")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
-    })
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<Menu>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size
-    ) {
-        Page<Menu> page = new Page<Menu>().setCurrent(current).setSize(size);
-        Page<Menu> menuPage = menuService.page(page);
-        return ResponseEntity.ok(menuPage);
-    }
-
-    @LogPrint(value = "根据条件分页查询菜单")
-    @ApiOperation(value = "根据条件分页查询菜单")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
-    })
-    @PostMapping(value = "/page")
-    public ResponseEntity<Page<Menu>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size,
-        @RequestBody Menu menu
-    ) {
-        Page<Menu> page = new Page<Menu>().setCurrent(current).setSize(size);
-        Wrapper<Menu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(menu);
-        Page<Menu> menuPage = menuService.page(page, wrapper);
-        return ResponseEntity.ok(menuPage);
-    }
-
-    @LogPrint(value = "根据id查询单个菜单")
-    @ApiOperation(value = "根据id查询单个菜单")
-    @ApiImplicitParam(value = "菜单id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @GetMapping(value = "/one")
-    public ResponseEntity<Menu> soapOne(@RequestParam(value = "id") Long id) {
-        LambdaQueryWrapper<Menu> wrapper = new LambdaQueryWrapper<Menu>().eq(Menu::getId, id);
-        Menu menu = menuService.getOne(wrapper);
-        return ResponseEntity.ok(menu);
-    }
-
-    @LogPrint(value = "根据id删除菜单")
-    @ApiOperation(value = "根据id删除菜单")
-    @ApiImplicitParam(value = "菜单id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
-        Boolean code = menuService.removeById(id);
         return ResponseEntity.ok(code);
     }
 

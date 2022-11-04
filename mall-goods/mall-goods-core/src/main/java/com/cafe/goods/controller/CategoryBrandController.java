@@ -3,8 +3,8 @@ package com.cafe.goods.controller;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.goods.model.CategoryBrand;
 import com.cafe.goods.service.CategoryBrandService;
 import io.swagger.annotations.Api;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -152,60 +151,6 @@ public class CategoryBrandController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = categoryBrandService.removeByIds(ids);
-        return ResponseEntity.ok(code);
-    }
-
-    @LogPrint(value = "分页查询分类-品牌关联")
-    @ApiOperation(value = "分页查询分类-品牌关联")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
-    })
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<CategoryBrand>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size
-    ) {
-        Page<CategoryBrand> page = new Page<CategoryBrand>().setCurrent(current).setSize(size);
-        Page<CategoryBrand> categoryBrandPage = categoryBrandService.page(page);
-        return ResponseEntity.ok(categoryBrandPage);
-    }
-
-    @LogPrint(value = "根据条件分页查询分类-品牌关联")
-    @ApiOperation(value = "根据条件分页查询分类-品牌关联")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "分类-品牌关联Model", name = "categoryBrand", dataType = "CategoryBrand", paramType = "body", required = true)
-    })
-    @PostMapping(value = "/page")
-    public ResponseEntity<Page<CategoryBrand>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size,
-        @RequestBody CategoryBrand categoryBrand
-    ) {
-        Page<CategoryBrand> page = new Page<CategoryBrand>().setCurrent(current).setSize(size);
-        Wrapper<CategoryBrand> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(categoryBrand);
-        Page<CategoryBrand> categoryBrandPage = categoryBrandService.page(page, wrapper);
-        return ResponseEntity.ok(categoryBrandPage);
-    }
-
-    @LogPrint(value = "根据id查询单个分类-品牌关联")
-    @ApiOperation(value = "根据id查询单个分类-品牌关联")
-    @ApiImplicitParam(value = "分类-品牌关联id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @GetMapping(value = "/one")
-    public ResponseEntity<CategoryBrand> soapOne(@RequestParam(value = "id") Long id) {
-        LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<CategoryBrand>().eq(CategoryBrand::getId, id);
-        CategoryBrand categoryBrand = categoryBrandService.getOne(wrapper);
-        return ResponseEntity.ok(categoryBrand);
-    }
-
-    @LogPrint(value = "根据id删除分类-品牌关联")
-    @ApiOperation(value = "根据id删除分类-品牌关联")
-    @ApiImplicitParam(value = "分类-品牌关联id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
-        Boolean code = categoryBrandService.removeById(id);
         return ResponseEntity.ok(code);
     }
 }

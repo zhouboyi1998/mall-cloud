@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -152,60 +151,6 @@ public class RoleMenuController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = roleMenuService.removeByIds(ids);
-        return ResponseEntity.ok(code);
-    }
-
-    @LogPrint(value = "分页查询角色-菜单关联列表")
-    @ApiOperation(value = "分页查询角色-菜单关联列表")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
-    })
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<RoleMenu>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size
-    ) {
-        Page<RoleMenu> page = new Page<RoleMenu>().setCurrent(current).setSize(size);
-        Page<RoleMenu> roleMenuPage = roleMenuService.page(page);
-        return ResponseEntity.ok(roleMenuPage);
-    }
-
-    @LogPrint(value = "根据条件分页查询角色-菜单关联")
-    @ApiOperation(value = "根据条件分页查询角色-菜单关联")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "角色-菜单关联Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
-    })
-    @PostMapping(value = "/page")
-    public ResponseEntity<Page<RoleMenu>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size,
-        @RequestBody RoleMenu roleMenu
-    ) {
-        Page<RoleMenu> page = new Page<RoleMenu>().setCurrent(current).setSize(size);
-        Wrapper<RoleMenu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(roleMenu);
-        Page<RoleMenu> roleMenuPage = roleMenuService.page(page, wrapper);
-        return ResponseEntity.ok(roleMenuPage);
-    }
-
-    @LogPrint(value = "根据id查询单个角色-菜单关联")
-    @ApiOperation(value = "根据id查询单个角色-菜单关联")
-    @ApiImplicitParam(value = "角色-菜单关联id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @GetMapping(value = "/one")
-    public ResponseEntity<RoleMenu> soapOne(@RequestParam(value = "id") Long id) {
-        LambdaQueryWrapper<RoleMenu> wrapper = new LambdaQueryWrapper<RoleMenu>().eq(RoleMenu::getId, id);
-        RoleMenu roleMenu = roleMenuService.getOne(wrapper);
-        return ResponseEntity.ok(roleMenu);
-    }
-
-    @LogPrint(value = "根据id删除角色-菜单关联")
-    @ApiOperation(value = "根据id删除角色-菜单关联")
-    @ApiImplicitParam(value = "角色-菜单关联id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
-        Boolean code = roleMenuService.removeById(id);
         return ResponseEntity.ok(code);
     }
 }

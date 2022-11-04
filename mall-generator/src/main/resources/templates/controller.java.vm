@@ -3,8 +3,8 @@ package ${package.Controller};
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import ${package.Entity}.${entity};
 import ${package.Service}.${table.serviceName};
 import io.swagger.annotations.Api;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -171,60 +170,6 @@ public class ${table.controllerName} {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.removeByIds(ids);
-        return ResponseEntity.ok(code);
-    }
-
-    @LogPrint(value = "分页查询${table.comment}列表")
-    @ApiOperation(value = "分页查询${table.comment}列表")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
-    })
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<${entity}>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size
-    ) {
-        Page<${entity}> page = new Page<${entity}>().setCurrent(current).setSize(size);
-        Page<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.page(page);
-        return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
-    }
-
-    @LogPrint(value = "根据条件分页查询${table.comment}")
-    @ApiOperation(value = "根据条件分页查询${table.comment}")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "${table.comment}Model", name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", dataType = "${entity}", paramType = "body", required = true)
-    })
-    @PostMapping(value = "/page")
-    public ResponseEntity<Page<${entity}>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size,
-        @RequestBody ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}
-    ) {
-        Page<${entity}> page = new Page<${entity}>().setCurrent(current).setSize(size);
-        Wrapper<${entity}> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
-        Page<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.page(page, wrapper);
-        return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
-    }
-
-    @LogPrint(value = "根据id查询单个${table.comment}")
-    @ApiOperation(value = "根据id查询单个${table.comment}")
-    @ApiImplicitParam(value = "${table.comment}id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @GetMapping(value = "/one")
-    public ResponseEntity<${entity}> soapOne(@RequestParam(value = "id") Long id) {
-        LambdaQueryWrapper<${entity}> wrapper = new LambdaQueryWrapper<${entity}>().eq(${entity}::getId, id);
-        ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.getOne(wrapper);
-        return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
-    }
-
-    @LogPrint(value = "根据id删除${table.comment}")
-    @ApiOperation(value = "根据id删除${table.comment}")
-    @ApiImplicitParam(value = "${table.comment}id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
-        Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.removeById(id);
         return ResponseEntity.ok(code);
     }
 }
