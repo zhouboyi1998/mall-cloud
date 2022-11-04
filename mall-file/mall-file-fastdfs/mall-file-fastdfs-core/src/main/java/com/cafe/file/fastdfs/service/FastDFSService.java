@@ -13,7 +13,7 @@ import java.io.InputStream;
  * @Date: 2022/7/23 20:03
  * @Description:
  */
-public interface FastdfsService {
+public interface FastDFSService {
 
     /**
      * 文件上传

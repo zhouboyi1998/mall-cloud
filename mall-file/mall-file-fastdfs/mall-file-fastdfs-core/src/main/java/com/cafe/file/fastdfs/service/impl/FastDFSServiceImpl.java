@@ -1,7 +1,7 @@
 package com.cafe.file.fastdfs.service.impl;
 
-import com.cafe.file.fastdfs.model.FastdfsFile;
-import com.cafe.file.fastdfs.service.FastdfsService;
+import com.cafe.file.fastdfs.model.FastDFSFile;
+import com.cafe.file.fastdfs.service.FastDFSService;
 import org.csource.fastdfs.ClientGlobal;
 import org.csource.fastdfs.FileInfo;
 import org.csource.fastdfs.StorageClient;
@@ -26,9 +26,9 @@ import java.io.InputStream;
  * @Description:
  */
 @Service
-public class FastdfsServiceImpl implements FastdfsService {
+public class FastDFSServiceImpl implements FastDFSService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(FastdfsServiceImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FastDFSServiceImpl.class);
 
     static {
         try {
@@ -49,12 +49,12 @@ public class FastdfsServiceImpl implements FastdfsService {
         StorageClient storageClient = new StorageClient(trackerServer, null);
 
         // 封装文件上传信息
-        FastdfsFile fastdfsFile = new FastdfsFile(
+        FastDFSFile fastDFSFile = new FastDFSFile(
             file.getOriginalFilename(),
             StringUtils.getFilenameExtension(file.getOriginalFilename()),
             file.getBytes()
         );
-        String[] values = storageClient.upload_file(fastdfsFile.getContent(), fastdfsFile.getExtension(), null);
+        String[] values = storageClient.upload_file(fastDFSFile.getContent(), fastDFSFile.getExtension(), null);
         return values;
     }
 
