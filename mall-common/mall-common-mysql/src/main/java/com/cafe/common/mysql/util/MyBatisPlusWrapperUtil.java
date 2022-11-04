@@ -8,7 +8,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -24,6 +26,13 @@ public class MyBatisPlusWrapperUtil {
      * Wrapper 类型枚举
      */
     private enum WrapperType {QUERY, UPDATE}
+
+    /**
+     * Wrapper 条件构造时忽略的属性
+     */
+    private static final List<String> IGNORE_FIELD_LIST = new ArrayList<String>() {{
+        add("serialVersionUID");
+    }};
 
     /**
      * 构造 QueryWrapper 条件
@@ -58,20 +67,25 @@ public class MyBatisPlusWrapperUtil {
     private static <T> AbstractWrapper buildWrapperByModel(T model, WrapperType wrapperType) {
         // 构造 QueryWrapper / UpdateWrapper
         AbstractWrapper wrapper;
-        if (ObjectUtil.equal(wrapperType, WrapperType.QUERY)) {
-            wrapper = new QueryWrapper<T>();
-        } else {
-            wrapper = new UpdateWrapper<T>();
+        switch (wrapperType) {
+            case QUERY:
+                wrapper = new QueryWrapper<T>();
+                break;
+            case UPDATE:
+                wrapper = new UpdateWrapper<T>();
+                break;
+            default:
+                throw new RuntimeException(String.format("Build MyBatis-Plus wrapper failed, wrapper type -> %d", wrapperType));
         }
 
         // 获取所有属性
         Map<String, Field> fieldMap = ReflectUtil.getFieldMap(model.getClass());
-        // 迭代器循环
+        // 迭代器遍历所有属性
         Iterator iterator = fieldMap.entrySet().iterator();
         while (iterator.hasNext()) {
             Map.Entry entry = (Map.Entry) iterator.next();
-            // 跳过 serialVersionUID 属性
-            if ("serialVersionUID".equals(entry.getKey())) {
+            // 跳过条件构造时忽略的属性
+            if (IGNORE_FIELD_LIST.contains(entry.getKey())) {
                 continue;
             }
             // 获取属性
