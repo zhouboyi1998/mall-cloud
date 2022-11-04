@@ -5,8 +5,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.admin.model.AdminRole;
 import com.cafe.admin.service.AdminRoleService;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -152,60 +151,6 @@ public class AdminRoleController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = adminRoleService.removeByIds(ids);
-        return ResponseEntity.ok(code);
-    }
-
-    @LogPrint(value = "分页查询用户-角色关联列表")
-    @ApiOperation(value = "分页查询用户-角色关联列表")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
-    })
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<AdminRole>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size
-    ) {
-        Page<AdminRole> page = new Page<AdminRole>().setCurrent(current).setSize(size);
-        Page<AdminRole> adminRolePage = adminRoleService.page(page);
-        return ResponseEntity.ok(adminRolePage);
-    }
-
-    @LogPrint(value = "根据条件分页查询用户-角色关联")
-    @ApiOperation(value = "根据条件分页查询用户-角色关联")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "用户-角色关联Model", name = "adminRole", dataType = "AdminRole", paramType = "body", required = true)
-    })
-    @PostMapping(value = "/page")
-    public ResponseEntity<Page<AdminRole>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size,
-        @RequestBody AdminRole adminRole
-    ) {
-        Page<AdminRole> page = new Page<AdminRole>().setCurrent(current).setSize(size);
-        Wrapper<AdminRole> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(adminRole);
-        Page<AdminRole> adminRolePage = adminRoleService.page(page, wrapper);
-        return ResponseEntity.ok(adminRolePage);
-    }
-
-    @LogPrint(value = "根据id查询单个用户-角色关联")
-    @ApiOperation(value = "根据id查询单个用户-角色关联")
-    @ApiImplicitParam(value = "用户-角色关联id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @GetMapping(value = "/one")
-    public ResponseEntity<AdminRole> soapOne(@RequestParam(value = "id") Long id) {
-        LambdaQueryWrapper<AdminRole> wrapper = new LambdaQueryWrapper<AdminRole>().eq(AdminRole::getId, id);
-        AdminRole adminRole = adminRoleService.getOne(wrapper);
-        return ResponseEntity.ok(adminRole);
-    }
-
-    @LogPrint(value = "根据id删除用户-角色关联")
-    @ApiOperation(value = "根据id删除用户-角色关联")
-    @ApiImplicitParam(value = "用户-角色关联id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
-        Boolean code = adminRoleService.removeById(id);
         return ResponseEntity.ok(code);
     }
 }

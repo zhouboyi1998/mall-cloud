@@ -18,17 +18,10 @@ import java.util.List;
 public interface RoleMapper extends BaseMapper<Role> {
 
     /**
-     * 查询所有角色名称列表
-     *
-     * @return
-     */
-    List<String> listRoleName();
-
-    /**
-     * 根据管理员id查询角色名称列表
+     * 查询角色名称列表
      *
      * @param adminId 管理员id
      * @return
      */
-    List<String> listRoleNameByAdminId(@Param(value = "adminId") Long adminId);
+    List<String> listRoleName(@Param(value = "adminId") Long adminId);
 }

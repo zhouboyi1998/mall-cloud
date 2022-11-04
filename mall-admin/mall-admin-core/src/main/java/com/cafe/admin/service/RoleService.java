@@ -15,19 +15,12 @@ import java.util.List;
 public interface RoleService extends IService<Role> {
 
     /**
-     * 查询所有角色名称列表
-     *
-     * @return
-     */
-    List<String> listRoleName();
-
-    /**
-     * 根据管理员id查询角色名称列表
+     * 查询角色名称列表
      *
      * @param adminId 管理员id
      * @return
      */
-    List<String> listRoleNameByAdminId(Long adminId);
+    List<String> listRoleName(Long adminId);
 
     /**
      * 初始化角色名称列表到 Redis 中

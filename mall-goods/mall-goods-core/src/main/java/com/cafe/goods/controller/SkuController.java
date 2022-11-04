@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -152,60 +151,6 @@ public class SkuController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = skuService.removeByIds(ids);
-        return ResponseEntity.ok(code);
-    }
-
-    @LogPrint(value = "分页查询库存量单位列表")
-    @ApiOperation(value = "分页查询库存量单位列表")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
-    })
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<Sku>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size
-    ) {
-        Page<Sku> page = new Page<Sku>().setCurrent(current).setSize(size);
-        Page<Sku> skuPage = skuService.page(page);
-        return ResponseEntity.ok(skuPage);
-    }
-
-    @LogPrint(value = "根据条件分页查询库存量单位")
-    @ApiOperation(value = "根据条件分页查询库存量单位")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "库存量单位Model", name = "sku", dataType = "Sku", paramType = "body", required = true)
-    })
-    @PostMapping(value = "/page")
-    public ResponseEntity<Page<Sku>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size,
-        @RequestBody Sku sku
-    ) {
-        Page<Sku> page = new Page<Sku>().setCurrent(current).setSize(size);
-        Wrapper<Sku> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(sku);
-        Page<Sku> skuPage = skuService.page(page, wrapper);
-        return ResponseEntity.ok(skuPage);
-    }
-
-    @LogPrint(value = "根据id查询单个库存量单位")
-    @ApiOperation(value = "根据id查询单个库存量单位")
-    @ApiImplicitParam(value = "库存量单位id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @GetMapping(value = "/one")
-    public ResponseEntity<Sku> soapOne(@RequestParam(value = "id") Long id) {
-        LambdaQueryWrapper<Sku> wrapper = new LambdaQueryWrapper<Sku>().eq(Sku::getId, id);
-        Sku sku = skuService.getOne(wrapper);
-        return ResponseEntity.ok(sku);
-    }
-
-    @LogPrint(value = "根据id删除库存量单位")
-    @ApiOperation(value = "根据id删除库存量单位")
-    @ApiImplicitParam(value = "库存量单位id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
-        Boolean code = skuService.removeById(id);
         return ResponseEntity.ok(code);
     }
 }

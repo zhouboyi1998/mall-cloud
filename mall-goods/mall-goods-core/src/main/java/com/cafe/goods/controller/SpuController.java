@@ -3,8 +3,8 @@ package com.cafe.goods.controller;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.goods.model.Spu;
 import com.cafe.goods.service.SpuService;
 import io.swagger.annotations.Api;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -152,60 +151,6 @@ public class SpuController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = spuService.removeByIds(ids);
-        return ResponseEntity.ok(code);
-    }
-
-    @LogPrint(value = "分页查询标准化产品单元列表")
-    @ApiOperation(value = "分页查询标准化产品单元列表")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
-    })
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<Spu>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size
-    ) {
-        Page<Spu> page = new Page<Spu>().setCurrent(current).setSize(size);
-        Page<Spu> spuPage = spuService.page(page);
-        return ResponseEntity.ok(spuPage);
-    }
-
-    @LogPrint(value = "根据条件分页查询标准化产品单元")
-    @ApiOperation(value = "根据条件分页查询标准化产品单元")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
-    })
-    @PostMapping(value = "/page")
-    public ResponseEntity<Page<Spu>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size,
-        @RequestBody Spu spu
-    ) {
-        Page<Spu> page = new Page<Spu>().setCurrent(current).setSize(size);
-        Wrapper<Spu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(spu);
-        Page<Spu> spuPage = spuService.page(page, wrapper);
-        return ResponseEntity.ok(spuPage);
-    }
-
-    @LogPrint(value = "根据id查询单个标准化产品单元")
-    @ApiOperation(value = "根据id查询单个标准化产品单元")
-    @ApiImplicitParam(value = "标准化产品单元id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @GetMapping(value = "/one")
-    public ResponseEntity<Spu> soapOne(@RequestParam(value = "id") Long id) {
-        LambdaQueryWrapper<Spu> wrapper = new LambdaQueryWrapper<Spu>().eq(Spu::getId, id);
-        Spu spu = spuService.getOne(wrapper);
-        return ResponseEntity.ok(spu);
-    }
-
-    @LogPrint(value = "根据id删除标准化产品单元")
-    @ApiOperation(value = "根据id删除标准化产品单元")
-    @ApiImplicitParam(value = "标准化产品单元id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
-        Boolean code = spuService.removeById(id);
         return ResponseEntity.ok(code);
     }
 }

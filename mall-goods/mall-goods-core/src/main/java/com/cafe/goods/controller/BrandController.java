@@ -3,8 +3,8 @@ package com.cafe.goods.controller;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.goods.model.Brand;
 import com.cafe.goods.service.BrandService;
 import io.swagger.annotations.Api;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -152,60 +151,6 @@ public class BrandController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = brandService.removeByIds(ids);
-        return ResponseEntity.ok(code);
-    }
-
-    @LogPrint(value = "分页查询品牌列表")
-    @ApiOperation(value = "分页查询品牌列表")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
-    })
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<Brand>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size
-    ) {
-        Page<Brand> page = new Page<Brand>().setCurrent(current).setSize(size);
-        Page<Brand> brandPage = brandService.page(page);
-        return ResponseEntity.ok(brandPage);
-    }
-
-    @LogPrint(value = "根据条件分页查询品牌")
-    @ApiOperation(value = "根据条件分页查询品牌")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "品牌Model", name = "brand", dataType = "Brand", paramType = "body", required = true)
-    })
-    @PostMapping(value = "/page")
-    public ResponseEntity<Page<Brand>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size,
-        @RequestBody Brand brand
-    ) {
-        Page<Brand> page = new Page<Brand>().setCurrent(current).setSize(size);
-        Wrapper<Brand> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(brand);
-        Page<Brand> brandPage = brandService.page(page, wrapper);
-        return ResponseEntity.ok(brandPage);
-    }
-
-    @LogPrint(value = "根据id查询单个品牌")
-    @ApiOperation(value = "根据id查询单个品牌")
-    @ApiImplicitParam(value = "品牌id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @GetMapping(value = "/one")
-    public ResponseEntity<Brand> soapOne(@RequestParam(value = "id") Long id) {
-        LambdaQueryWrapper<Brand> wrapper = new LambdaQueryWrapper<Brand>().eq(Brand::getId, id);
-        Brand brand = brandService.getOne(wrapper);
-        return ResponseEntity.ok(brand);
-    }
-
-    @LogPrint(value = "根据id删除品牌")
-    @ApiOperation(value = "根据id删除品牌")
-    @ApiImplicitParam(value = "品牌id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
-        Boolean code = brandService.removeById(id);
         return ResponseEntity.ok(code);
     }
 }

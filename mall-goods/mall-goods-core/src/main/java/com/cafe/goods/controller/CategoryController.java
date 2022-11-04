@@ -3,8 +3,8 @@ package com.cafe.goods.controller;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.goods.model.Category;
 import com.cafe.goods.service.CategoryService;
 import io.swagger.annotations.Api;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -152,60 +151,6 @@ public class CategoryController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = categoryService.removeByIds(ids);
-        return ResponseEntity.ok(code);
-    }
-
-    @LogPrint(value = "分页查询分类列表")
-    @ApiOperation(value = "分页查询分类列表")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true)
-    })
-    @GetMapping(value = "/page")
-    public ResponseEntity<Page<Category>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size
-    ) {
-        Page<Category> page = new Page<Category>().setCurrent(current).setSize(size);
-        Page<Category> categoryPage = categoryService.page(page);
-        return ResponseEntity.ok(categoryPage);
-    }
-
-    @LogPrint(value = "根据条件分页查询分类")
-    @ApiOperation(value = "根据条件分页查询分类")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "query", required = true),
-        @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
-    })
-    @PostMapping(value = "/page")
-    public ResponseEntity<Page<Category>> soapPage(
-        @RequestParam(value = "current") Long current,
-        @RequestParam(value = "size") Long size,
-        @RequestBody Category category
-    ) {
-        Page<Category> page = new Page<Category>().setCurrent(current).setSize(size);
-        Wrapper<Category> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(category);
-        Page<Category> categoryPage = categoryService.page(page, wrapper);
-        return ResponseEntity.ok(categoryPage);
-    }
-
-    @LogPrint(value = "根据id查询单个分类")
-    @ApiOperation(value = "根据id查询单个分类")
-    @ApiImplicitParam(value = "分类id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @GetMapping(value = "/one")
-    public ResponseEntity<Category> soapOne(@RequestParam(value = "id") Long id) {
-        LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<Category>().eq(Category::getId, id);
-        Category category = categoryService.getOne(wrapper);
-        return ResponseEntity.ok(category);
-    }
-
-    @LogPrint(value = "根据id删除分类")
-    @ApiOperation(value = "根据id删除分类")
-    @ApiImplicitParam(value = "分类id", name = "id", dataType = "Long", paramType = "query", required = true)
-    @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> soapDelete(@RequestParam(value = "id") Long id) {
-        Boolean code = categoryService.removeById(id);
         return ResponseEntity.ok(code);
     }
 }

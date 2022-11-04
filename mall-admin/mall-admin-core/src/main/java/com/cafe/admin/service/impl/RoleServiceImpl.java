@@ -36,20 +36,15 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
-    public List<String> listRoleName() {
-        return roleMapper.listRoleName();
-    }
-
-    @Override
-    public List<String> listRoleNameByAdminId(Long adminId) {
-        return roleMapper.listRoleNameByAdminId(adminId);
+    public List<String> listRoleName(Long adminId) {
+        return roleMapper.listRoleName(adminId);
     }
 
     @PostConstruct
     @Override
     public void initRoleNameList() {
         // 获取所有角色名称
-        List<String> roleNameList = roleMapper.listRoleName();
+        List<String> roleNameList = roleMapper.listRoleName(null);
         // 清空 Redis 中原来的 List
         redisTemplate.opsForList().trim(RedisConstant.ROLE_NAME_LIST, 0, 0);
         redisTemplate.opsForList().leftPop(RedisConstant.ROLE_NAME_LIST);

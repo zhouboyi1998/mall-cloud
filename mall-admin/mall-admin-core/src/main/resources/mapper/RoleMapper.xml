@@ -19,13 +19,13 @@
     </sql>
 
     <select id="listRoleName" resultType="java.lang.String">
-        SELECT role_name FROM mall_role
-    </select>
-
-    <select id="listRoleNameByAdminId" resultType="java.lang.String">
         SELECT role_name
         FROM mall_role AS r
         LEFT JOIN mall_admin_role AS ar ON ar.role_id = r.id
-        WHERE ar.admin_id = ${adminId}
+        <where>
+            <if test="adminId != null">
+                AND ar.admin_id = ${adminId}
+            </if>
+        </where>
     </select>
 </mapper>
