@@ -1,0 +1,9 @@
+server:
+  port: 18063
+
+spring:
+  application:
+    name: mall-user
+
+swagger:
+  description: 商品微服务
