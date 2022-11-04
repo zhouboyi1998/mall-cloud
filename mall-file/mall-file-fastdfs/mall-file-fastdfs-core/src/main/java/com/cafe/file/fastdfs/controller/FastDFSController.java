@@ -1,7 +1,7 @@
 package com.cafe.file.fastdfs.controller;
 
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.file.fastdfs.service.FastdfsService;
+import com.cafe.file.fastdfs.service.FastDFSService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -23,13 +23,13 @@ import org.springframework.web.multipart.MultipartFile;
 @Api(value = "FastDFS 文件接口")
 @RestController
 @RequestMapping(value = "/fastdfs")
-public class FastdfsController {
+public class FastDFSController {
 
-    private FastdfsService fastdfsService;
+    private FastDFSService fastDFSService;
 
     @Autowired
-    public FastdfsController(FastdfsService fastdfsService) {
-        this.fastdfsService = fastdfsService;
+    public FastDFSController(FastDFSService fastDFSService) {
+        this.fastDFSService = fastDFSService;
     }
 
     @LogPrint(value = "文件上传")
@@ -38,8 +38,8 @@ public class FastdfsController {
     @PostMapping(value = "/upload")
     public ResponseEntity<String> upload(@RequestParam(value = "file") MultipartFile file) throws Exception {
         // 将文件上传到 FastDFS 中
-        String[] values = fastdfsService.upload(file);
-        String url = fastdfsService.getTrackerUrl() + "/" + values[0] + "/" + values[1];
+        String[] values = fastDFSService.upload(file);
+        String url = fastDFSService.getTrackerUrl() + "/" + values[0] + "/" + values[1];
         return ResponseEntity.ok(url);
     }
 }

@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @Date: 2022/7/23 19:32
  * @Description:
  */
-public class FastdfsFile implements Serializable {
+public class FastDFSFile implements Serializable {
 
     /**
      * 文件名
@@ -21,7 +21,7 @@ public class FastdfsFile implements Serializable {
      */
     private String extension;
 
-    public FastdfsFile(String name, String extension, byte[] content) {
+    public FastDFSFile(String name, String extension, byte[] content) {
         this.name = name;
         this.extension = extension;
         this.content = content;
