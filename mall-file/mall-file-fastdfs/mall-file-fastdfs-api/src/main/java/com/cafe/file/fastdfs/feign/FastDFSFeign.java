@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @FeignClient(value = "mall-file-fastdfs")
 @RequestMapping(value = "/fastdfs")
-public interface FastdfsFeign {
+public interface FastDFSFeign {
 
     /**
      * 文件上传
