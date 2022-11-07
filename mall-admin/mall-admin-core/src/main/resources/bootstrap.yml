@@ -6,4 +6,4 @@ spring:
     name: mall-admin
 
 swagger:
-  description: 后台管理微服务
+  description: 后台管理模块

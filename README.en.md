@@ -37,10 +37,12 @@ mall-cloud
     |-- mall-gateway
     |-- mall-generator
     |-- mall-goods
+    |-- mall-id
     |-- mall-monitor
     |-- mall-order
     |-- mall-search
     |-- mall-security
+    |-- mall-user
 ```
 
 ### 📜 Licence

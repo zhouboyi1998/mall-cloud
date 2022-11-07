@@ -280,6 +280,11 @@
             <!-- 远程调用接口 -->
             <dependency>
                 <groupId>com.cafe</groupId>
+                <artifactId>mall-security-api</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-admin-api</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
@@ -301,11 +306,6 @@
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-order-api</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
-                <artifactId>mall-security-manage-api</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>

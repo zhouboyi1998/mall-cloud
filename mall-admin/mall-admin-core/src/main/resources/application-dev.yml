@@ -17,18 +17,6 @@ spring:
       # Sentinel 控制台
       transport:
         dashboard: 127.0.0.1:8858
-  # Redis 配置
-  redis:
-    host: 127.0.0.1
-    port: 6379
-    password: 123456
-    database: 0
-  # RabbitMQ 配置
-  rabbitmq:
-    host: 127.0.0.1
-    port: 5672
-    username: binlog
-    password: binlog
 
 # MyBatis-Plus 配置
 mybatis-plus:

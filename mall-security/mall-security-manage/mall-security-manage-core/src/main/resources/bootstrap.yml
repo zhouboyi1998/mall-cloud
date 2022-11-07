@@ -1,9 +1,0 @@
-server:
-  port: 18072
-
-spring:
-  application:
-    name: mall-security-manage
-
-swagger:
-  description: Spring Security OAuth2 认证授权微服务

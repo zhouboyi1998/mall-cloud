@@ -12,7 +12,7 @@
 
     <artifactId>mall-admin-api</artifactId>
     <version>${mall-cloud.version}</version>
-    <description>后台管理模块远程调用接口</description>
+    <description>管理员模块远程调用接口</description>
 
     <dependencies>
         <dependency>
@@ -22,10 +22,6 @@
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-mysql</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-common-rabbitmq</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
