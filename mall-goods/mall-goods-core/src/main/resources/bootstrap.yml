@@ -6,4 +6,4 @@ spring:
     name: mall-goods
 
 swagger:
-  description: 商品微服务
+  description: 商品模块

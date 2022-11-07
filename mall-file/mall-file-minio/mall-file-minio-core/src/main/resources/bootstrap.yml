@@ -6,4 +6,4 @@ spring:
     name: mall-file-minio
 
 swagger:
-  description: MinIO 文件微服务
+  description: MinIO 文件模块

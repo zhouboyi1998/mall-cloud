@@ -25,6 +25,10 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-common-rabbitmq</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-common-swagger</artifactId>
         </dependency>
     </dependencies>

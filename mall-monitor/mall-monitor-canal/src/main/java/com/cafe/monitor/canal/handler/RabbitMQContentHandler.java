@@ -2,9 +2,9 @@ package com.cafe.monitor.canal.handler;
 
 import cn.hutool.json.JSONUtil;
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.cafe.admin.constant.AdminRoutingKeyMap;
 import com.cafe.common.message.rabbitmq.constant.RabbitMQExchange;
 import com.cafe.common.message.rabbitmq.producer.RabbitMQProducer;
+import com.cafe.user.constant.UserRoutingKeyMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class RabbitMQContentHandler {
         // 发送消息到 RabbitMQ
         rabbitMQProducer.convertAndSend(
             RabbitMQExchange.CANAL,
-            AdminRoutingKeyMap.ROUTING_KEY_MAP.get(RabbitMQExchange.CANAL, tableName),
+            UserRoutingKeyMap.ROUTING_KEY_MAP.get(RabbitMQExchange.CANAL, tableName),
             content
         );
 

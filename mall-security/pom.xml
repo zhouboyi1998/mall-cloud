@@ -12,11 +12,12 @@
 
     <artifactId>mall-security</artifactId>
     <version>${mall-cloud.version}</version>
-    <description>Spring Security 安全模块</description>
+    <description>SpringSecurity 安全模块</description>
 
     <packaging>pom</packaging>
     <modules>
-        <module>mall-security-manage</module>
+        <module>mall-security-api</module>
+        <module>mall-security-core</module>
     </modules>
 
 </project>
