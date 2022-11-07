@@ -1,11 +1,11 @@
 package com.cafe.monitor.binlog.handler;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.cafe.admin.constant.AdminTableBeanMap;
 import com.cafe.common.constant.MonitorConstant;
 import com.cafe.common.message.rabbitmq.constant.RabbitMQExchange;
-import com.cafe.admin.constant.AdminRoutingKeyMap;
 import com.cafe.common.message.rabbitmq.producer.RabbitMQProducer;
+import com.cafe.user.constant.UserRoutingKeyMap;
+import com.cafe.user.constant.UserTableBeanMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -82,9 +82,9 @@ public class MessageContentHandler {
 
         // 发送消息到 RabbitMQ
         rabbitMQProducer.convertAndSend(
-            RabbitMQExchange.BINLOG,
-            AdminRoutingKeyMap.ROUTING_KEY_MAP.get(RabbitMQExchange.BINLOG, tableName),
-            content
+                RabbitMQExchange.BINLOG,
+                UserRoutingKeyMap.ROUTING_KEY_MAP.get(RabbitMQExchange.BINLOG, tableName),
+                content
         );
     }
 
@@ -98,7 +98,7 @@ public class MessageContentHandler {
         // 存储列名的字符串集合
         List<String> fieldNameList = new ArrayList<String>();
         // 根据表名获取对应的 JavaBean 属性数组
-        Field[] fields = AdminTableBeanMap.TABLE_BEAN_MAP.get(tableName).getDeclaredFields();
+        Field[] fields = UserTableBeanMap.TABLE_BEAN_MAP.get(tableName).getDeclaredFields();
         for (Field field : fields) {
             // 获取列名的最后一段 (去除列名的修饰符、类名前缀)
             fieldNameList.add(field.toString().substring(field.toString().lastIndexOf(".") + 1));

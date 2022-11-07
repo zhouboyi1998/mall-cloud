@@ -123,6 +123,8 @@ public class MyBatisPlusGenerator {
         strategyConfig.setEntityBooleanColumnRemoveIsPrefix(true);
         // REST API 风格
         strategyConfig.setRestControllerStyle(true);
+        // @RequestMapping 请求路径使用连字符格式
+        strategyConfig.setControllerMappingHyphenStyle(true);
 
         // 5. 模板配置
         TemplateConfig templateConfig = new TemplateConfig();

@@ -1,0 +1,9 @@
+server:
+  port: 18072
+
+spring:
+  application:
+    name: mall-security
+
+swagger:
+  description: SpringSecurity 安全模块

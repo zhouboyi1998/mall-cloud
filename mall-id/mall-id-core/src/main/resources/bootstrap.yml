@@ -6,4 +6,4 @@ spring:
     name: mall-id
 
 swagger:
-  description: 分布式ID生成微服务
+  description: 分布式ID生成模块

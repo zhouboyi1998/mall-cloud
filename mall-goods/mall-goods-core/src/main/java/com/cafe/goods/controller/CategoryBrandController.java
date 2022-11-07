@@ -34,7 +34,7 @@ import java.util.List;
  */
 @Api(value = "分类-品牌关联接口")
 @RestController
-@RequestMapping(value = "/categoryBrand")
+@RequestMapping(value = "/category-brand")
 public class CategoryBrandController {
 
     private CategoryBrandService categoryBrandService;

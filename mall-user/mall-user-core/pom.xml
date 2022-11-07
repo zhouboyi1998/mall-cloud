@@ -21,6 +21,10 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-common-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-user-api</artifactId>
         </dependency>
     </dependencies>

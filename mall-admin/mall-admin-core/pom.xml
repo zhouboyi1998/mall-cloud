@@ -12,16 +12,12 @@
 
     <artifactId>mall-admin-core</artifactId>
     <version>${mall-cloud.version}</version>
-    <description>后台管理模块核心业务</description>
+    <description>管理员模块核心业务</description>
 
     <dependencies>
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-log</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-common-redis</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>

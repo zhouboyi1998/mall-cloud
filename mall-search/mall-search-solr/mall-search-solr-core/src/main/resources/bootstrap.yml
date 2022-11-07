@@ -6,4 +6,4 @@ spring:
     name: mall-search-solr
 
 swagger:
-  description: Solr 搜索微服务
+  description: Solr 搜索模块
