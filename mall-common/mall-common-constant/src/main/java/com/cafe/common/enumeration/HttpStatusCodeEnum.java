@@ -35,6 +35,11 @@ public enum HttpStatusCodeEnum {
     CREDENTIALS_EXPIRED(4005, "Credentials Expired"),
 
     /**
+     * 角色不存在
+     */
+    ROLE_NOT_FOUND(4006, "Role Not Found"),
+
+    /**
      * 商城内部服务错误
      */
     MALL_INTERNAL_SERVER_ERROR(5000, "Mall Internal Server Error");
