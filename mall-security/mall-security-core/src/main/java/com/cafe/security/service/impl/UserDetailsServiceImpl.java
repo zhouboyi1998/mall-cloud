@@ -43,12 +43,15 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 查询用户信息
         UserDTO userDTO = userFeign.oneDTO(username).getBody();
-        // 根据用户id查询角色名称列表
-        List<String> roleNameList = roleFeign.listRoleName(userDTO.getId()).getBody();
-        // 角色名称列表转换为数组形式
-        String[] roleNameArray = roleNameList.toArray(new String[roleNameList.size()]);
 
         if (ObjectUtil.isNotNull(userDTO)) {
+            // 根据用户id查询角色名称列表
+            List<String> roleNameList = roleFeign.listRoleName(userDTO.getId()).getBody();
+            if (ObjectUtil.isNull(roleNameList)) {
+                throw new UsernameNotFoundException(HttpStatusCodeEnum.ROLE_NOT_FOUND.getMessage());
+            }
+            // 角色名称列表转换为数组形式
+            String[] roleNameArray = roleNameList.toArray(new String[roleNameList.size()]);
             User userDetails = new User(userDTO.getUsername(), userDTO.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
             if (!userDetails.isEnabled()) {
                 throw new DisabledException(HttpStatusCodeEnum.ACCOUNT_DISABLED.getMessage());

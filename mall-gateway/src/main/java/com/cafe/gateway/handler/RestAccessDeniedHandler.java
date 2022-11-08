@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @Project: mall-cloud
@@ -39,7 +39,7 @@ public class RestAccessDeniedHandler implements ServerAccessDeniedHandler {
         // 缓存控制: 无缓存
         response.getHeaders().set(HttpHeaders.CACHE_CONTROL, HttpHeaderValueEnum.NO_CACHE.getValue());
         String body = JSONUtil.toJsonStr(ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(denied.getMessage()));
-        DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(Charset.forName("UTF-8")));
+        DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(StandardCharsets.UTF_8));
         return response.writeWith(Mono.just(buffer));
     }
 }
