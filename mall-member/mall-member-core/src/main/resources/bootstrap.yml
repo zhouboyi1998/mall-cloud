@@ -1,0 +1,9 @@
+server:
+  port: 18076
+
+spring:
+  application:
+    name: mall-member
+
+swagger:
+  description: 会员模块

@@ -26,6 +26,7 @@
         <module>mall-generator</module>
         <module>mall-goods</module>
         <module>mall-id</module>
+        <module>mall-member</module>
         <module>mall-monitor</module>
         <module>mall-order</module>
         <module>mall-search</module>
@@ -285,7 +286,7 @@
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
-                <artifactId>mall-admin-api</artifactId>
+                <artifactId>mall-user-api</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
@@ -295,7 +296,12 @@
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
-                <artifactId>mall-user-api</artifactId>
+                <artifactId>mall-admin-api</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-member-api</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>

@@ -1,9 +1,9 @@
 server:
-  port: 18073
+  port: 18075
 
 spring:
   application:
     name: mall-admin
 
 swagger:
-  description: 后台管理模块
+  description: 管理员模块

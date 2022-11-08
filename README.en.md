@@ -38,6 +38,7 @@ mall-cloud
     |-- mall-generator
     |-- mall-goods
     |-- mall-id
+    |-- mall-member
     |-- mall-monitor
     |-- mall-order
     |-- mall-search
