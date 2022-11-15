@@ -19,7 +19,7 @@ public class RabbitMQProducer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQProducer.class);
 
-    private RabbitTemplate rabbitTemplate;
+    private final RabbitTemplate rabbitTemplate;
 
     @Autowired
     public RabbitMQProducer(RabbitTemplate rabbitTemplate) {

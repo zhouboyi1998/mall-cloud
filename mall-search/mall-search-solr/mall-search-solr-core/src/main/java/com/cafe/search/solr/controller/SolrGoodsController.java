@@ -30,7 +30,7 @@ import java.util.List;
 @RequestMapping(value = "/solr/goods")
 public class SolrGoodsController {
 
-    private SolrGoodsService solrGoodsService;
+    private final SolrGoodsService solrGoodsService;
 
     @Autowired
     public SolrGoodsController(SolrGoodsService solrGoodsService) {

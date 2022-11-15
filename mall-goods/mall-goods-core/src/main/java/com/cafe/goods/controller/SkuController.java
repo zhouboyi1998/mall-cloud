@@ -37,7 +37,7 @@ import java.util.List;
 @RequestMapping(value = "/sku")
 public class SkuController {
 
-    private SkuService skuService;
+    private final SkuService skuService;
 
     @Autowired
     public SkuController(SkuService skuService) {

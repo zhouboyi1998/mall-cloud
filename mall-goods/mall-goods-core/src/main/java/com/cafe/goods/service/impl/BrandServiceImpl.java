@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements BrandService {
 
-    private BrandMapper brandMapper;
+    private final BrandMapper brandMapper;
 
     @Autowired
     public BrandServiceImpl(BrandMapper brandMapper) {

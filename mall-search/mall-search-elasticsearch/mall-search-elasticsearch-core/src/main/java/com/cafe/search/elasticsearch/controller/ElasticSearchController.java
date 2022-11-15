@@ -26,7 +26,7 @@ import java.io.IOException;
 @RequestMapping(value = "/server")
 public class ElasticSearchController {
 
-    private ElasticSearchService elasticSearchService;
+    private final ElasticSearchService elasticSearchService;
 
     @Autowired
     public ElasticSearchController(ElasticSearchService elasticSearchService) {

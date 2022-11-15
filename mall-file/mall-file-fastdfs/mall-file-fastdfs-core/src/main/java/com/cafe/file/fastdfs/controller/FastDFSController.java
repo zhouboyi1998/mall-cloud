@@ -25,7 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping(value = "/fastdfs")
 public class FastDFSController {
 
-    private FastDFSService fastDFSService;
+    private final FastDFSService fastDFSService;
 
     @Autowired
     public FastDFSController(FastDFSService fastDFSService) {

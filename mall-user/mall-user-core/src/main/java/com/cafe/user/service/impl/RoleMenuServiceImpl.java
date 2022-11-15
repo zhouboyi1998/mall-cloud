@@ -28,9 +28,9 @@ import java.util.stream.Collectors;
 @Service
 public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> implements RoleMenuService {
 
-    private RoleMenuMapper roleMenuMapper;
+    private final RoleMenuMapper roleMenuMapper;
 
-    private RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
     public RoleMenuServiceImpl(

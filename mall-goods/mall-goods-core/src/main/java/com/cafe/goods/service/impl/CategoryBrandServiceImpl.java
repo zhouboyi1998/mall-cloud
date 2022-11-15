@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoryBrandServiceImpl extends ServiceImpl<CategoryBrandMapper, CategoryBrand> implements CategoryBrandService {
 
-    private CategoryBrandMapper categoryBrandMapper;
+    private final CategoryBrandMapper categoryBrandMapper;
 
     @Autowired
     public CategoryBrandServiceImpl(CategoryBrandMapper categoryBrandMapper) {

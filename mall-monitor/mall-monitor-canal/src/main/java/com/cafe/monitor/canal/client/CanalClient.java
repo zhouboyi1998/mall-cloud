@@ -22,9 +22,9 @@ import java.net.InetSocketAddress;
 @Component
 public class CanalClient implements InitializingBean {
 
-    private CanalProperties canalProperties;
+    private final CanalProperties canalProperties;
 
-    private CanalEntryHandler canalEntryHandler;
+    private final CanalEntryHandler canalEntryHandler;
 
     @Autowired
     public CanalClient(

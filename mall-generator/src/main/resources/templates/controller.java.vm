@@ -56,7 +56,7 @@ public class ${table.controllerName} extends ${superControllerClass} {
 public class ${table.controllerName} {
 #end
 
-    private ${table.serviceName} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service;
+    private final ${table.serviceName} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service;
 
     @Autowired
     public ${table.controllerName}(${table.serviceName} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service) {

@@ -31,7 +31,7 @@ public class RocketMQCategoryConsumer implements RocketMQListener<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RocketMQCategoryConsumer.class);
 
-    private ElasticSearchGoodsService elasticSearchGoodsService;
+    private final ElasticSearchGoodsService elasticSearchGoodsService;
 
     @Autowired
     public RocketMQCategoryConsumer(ElasticSearchGoodsService elasticSearchGoodsService) {

@@ -40,7 +40,7 @@ import java.util.List;
 @RequestMapping(value = "/menu")
 public class MenuController {
 
-    private MenuService menuService;
+    private final MenuService menuService;
 
     @Autowired
     public MenuController(MenuService menuService) {

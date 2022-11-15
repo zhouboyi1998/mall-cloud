@@ -28,7 +28,7 @@ import java.util.List;
 @RequestMapping(value = "/goods")
 public class GoodsController {
 
-    private GoodsService goodsService;
+    private final GoodsService goodsService;
 
     @Autowired
     public GoodsController(GoodsService goodsService) {

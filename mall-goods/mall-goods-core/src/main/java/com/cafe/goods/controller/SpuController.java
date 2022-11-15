@@ -37,7 +37,7 @@ import java.util.List;
 @RequestMapping(value = "/spu")
 public class SpuController {
 
-    private SpuService spuService;
+    private final SpuService spuService;
 
     @Autowired
     public SpuController(SpuService spuService) {

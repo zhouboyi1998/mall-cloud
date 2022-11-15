@@ -33,9 +33,9 @@ import java.util.Map;
 @Component
 public class RabbitMQConsumer {
 
-    private RoleService roleService;
+    private final RoleService roleService;
 
-    private RoleMenuService roleMenuService;
+    private final RoleMenuService roleMenuService;
 
     @Autowired
     public RabbitMQConsumer(

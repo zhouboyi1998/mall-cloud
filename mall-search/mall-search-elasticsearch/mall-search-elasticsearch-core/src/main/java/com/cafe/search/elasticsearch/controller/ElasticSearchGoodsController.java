@@ -41,7 +41,7 @@ import java.util.List;
 @RequestMapping(value = "/search/goods")
 public class ElasticSearchGoodsController {
 
-    private ElasticSearchGoodsService elasticSearchGoodsService;
+    private final ElasticSearchGoodsService elasticSearchGoodsService;
 
     @Autowired
     public ElasticSearchGoodsController(ElasticSearchGoodsService elasticSearchGoodsService) {

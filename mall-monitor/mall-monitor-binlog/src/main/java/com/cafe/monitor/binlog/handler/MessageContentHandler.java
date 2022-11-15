@@ -26,7 +26,7 @@ import java.util.Map;
 @Component
 public class MessageContentHandler {
 
-    private RabbitMQProducer rabbitMQProducer;
+    private final RabbitMQProducer rabbitMQProducer;
 
     @Autowired
     public MessageContentHandler(RabbitMQProducer rabbitMQProducer) {

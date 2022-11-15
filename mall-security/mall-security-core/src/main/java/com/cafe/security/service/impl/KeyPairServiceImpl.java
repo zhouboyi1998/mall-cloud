@@ -20,7 +20,7 @@ import java.util.Map;
 @Service
 public class KeyPairServiceImpl implements KeyPairService {
 
-    private KeyPair keyPair;
+    private final KeyPair keyPair;
 
     @Autowired
     public KeyPairServiceImpl(KeyPair keyPair) {

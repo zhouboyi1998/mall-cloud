@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuService {
 
-    private SkuMapper skuMapper;
+    private final SkuMapper skuMapper;
 
     @Autowired
     public SkuServiceImpl(SkuMapper skuMapper) {

@@ -29,7 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/minio")
 public class MinioController {
 
-    private MinioService minioService;
+    private final MinioService minioService;
 
     @Autowired
     public MinioController(MinioService minioService) {

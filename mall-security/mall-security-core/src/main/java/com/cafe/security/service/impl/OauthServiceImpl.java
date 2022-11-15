@@ -22,7 +22,7 @@ import java.util.Map;
 @Service
 public class OauthServiceImpl implements OauthService {
 
-    private TokenEndpoint tokenEndpoint;
+    private final TokenEndpoint tokenEndpoint;
 
     @Autowired
     public OauthServiceImpl(TokenEndpoint tokenEndpoint) {

@@ -27,7 +27,7 @@ import java.util.Map;
 @RequestMapping(value = "/oauth")
 public class OauthController {
 
-    private OauthService oauthService;
+    private final OauthService oauthService;
 
     @Autowired
     public OauthController(OauthService oauthService) {

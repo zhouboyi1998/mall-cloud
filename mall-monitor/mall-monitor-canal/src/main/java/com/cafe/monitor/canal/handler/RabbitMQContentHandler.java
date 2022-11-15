@@ -25,9 +25,9 @@ public class RabbitMQContentHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQContentHandler.class);
 
-    private MessageContentHandler messageContentHandler;
+    private final MessageContentHandler messageContentHandler;
 
-    private RabbitMQProducer rabbitMQProducer;
+    private final RabbitMQProducer rabbitMQProducer;
 
     @Autowired
     public RabbitMQContentHandler(

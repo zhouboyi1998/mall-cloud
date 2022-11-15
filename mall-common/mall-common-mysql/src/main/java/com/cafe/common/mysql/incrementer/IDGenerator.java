@@ -19,7 +19,7 @@ public class IDGenerator implements IdentifierGenerator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(IDGenerator.class);
 
-    private IDFeign idFeign;
+    private final IDFeign idFeign;
 
     @Autowired
     public IDGenerator(IDFeign idFeign) {

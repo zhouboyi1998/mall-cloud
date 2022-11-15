@@ -29,9 +29,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GoodsServiceImpl.class);
 
-    private GoodsMapper goodsMapper;
+    private final GoodsMapper goodsMapper;
 
-    private RocketMQTemplate rocketMQTemplate;
+    private final RocketMQTemplate rocketMQTemplate;
 
     @Autowired
     public GoodsServiceImpl(GoodsMapper goodsMapper, RocketMQTemplate rocketMQTemplate) {
