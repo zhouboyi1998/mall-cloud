@@ -36,32 +36,32 @@ public class ResourceSecurityConfig {
     /**
      * 全局跨域配置
      */
-    private GlobalCorsConfig globalCorsConfig;
+    private final GlobalCorsConfig globalCorsConfig;
 
     /**
      * 白名单 URL 过滤器
      */
-    private IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter;
+    private final IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter;
 
     /**
      * 白名单 URL 配置
      */
-    private IgnoreUrlsProperties ignoreUrlsProperties;
+    private final IgnoreUrlsProperties ignoreUrlsProperties;
 
     /**
      * 授权管理器
      */
-    private AuthorizationManager authorizationManager;
+    private final AuthorizationManager authorizationManager;
 
     /**
      * 未授权处理类
      */
-    private RestAccessDeniedHandler restAccessDeniedHandler;
+    private final RestAccessDeniedHandler restAccessDeniedHandler;
 
     /**
      * 未认证处理类
      */
-    private RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+    private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
     @Autowired
     public ResourceSecurityConfig(

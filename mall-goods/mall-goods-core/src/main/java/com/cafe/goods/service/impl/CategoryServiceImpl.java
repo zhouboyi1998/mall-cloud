@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
 
-    private CategoryMapper categoryMapper;
+    private final CategoryMapper categoryMapper;
 
     @Autowired
     public CategoryServiceImpl(CategoryMapper categoryMapper) {

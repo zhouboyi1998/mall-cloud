@@ -19,7 +19,7 @@ import java.util.List;
 @Service
 public class SolrGoodsServiceImpl implements SolrGoodsService {
 
-    private SolrTemplate solrTemplate;
+    private final SolrTemplate solrTemplate;
 
     @Autowired
     public SolrGoodsServiceImpl(SolrTemplate solrTemplate) {

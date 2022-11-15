@@ -29,11 +29,7 @@ public class GlobalCorsConfig {
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        /**
-         * 请求拦截配置
-         * "/**" 表示拦截所有请求
-         * 并使用上面 CorsConfiguration 中的配置, 对拦截的请求进行跨域处理
-         */
+        // 请求拦截配置, "/**" 表示拦截所有请求, 并使用上面 CorsConfiguration 中的配置, 对拦截的请求进行跨域处理
         source.registerCorsConfiguration("/**", config);
 
         return new CorsWebFilter(source);

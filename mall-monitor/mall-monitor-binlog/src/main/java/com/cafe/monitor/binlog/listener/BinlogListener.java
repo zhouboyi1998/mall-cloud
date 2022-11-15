@@ -31,9 +31,9 @@ public class BinlogListener implements CommandLineRunner {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(BinlogListener.class);
 
-    private BinlogProperties binlogProperties;
+    private final BinlogProperties binlogProperties;
 
-    private MessageContentHandler messageContentHandler;
+    private final MessageContentHandler messageContentHandler;
 
     @Autowired
     public BinlogListener(

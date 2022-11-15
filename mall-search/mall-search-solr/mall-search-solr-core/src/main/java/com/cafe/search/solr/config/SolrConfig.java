@@ -16,7 +16,7 @@ import org.springframework.data.solr.core.SolrTemplate;
 @Configuration
 public class SolrConfig {
 
-    private SolrClient solrClient;
+    private final SolrClient solrClient;
 
     @Autowired
     public SolrConfig(SolrClient solrClient) {

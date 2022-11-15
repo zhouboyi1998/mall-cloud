@@ -25,9 +25,9 @@ public class RocketMQContentHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RocketMQContentHandler.class);
 
-    private MessageContentHandler messageContentHandler;
+    private final MessageContentHandler messageContentHandler;
 
-    private RocketMQTemplate rocketMQTemplate;
+    private final RocketMQTemplate rocketMQTemplate;
 
     @Autowired
     public RocketMQContentHandler(

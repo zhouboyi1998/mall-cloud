@@ -45,37 +45,37 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      * 使用 SCrypt 加密
      */
     @Qualifier("sCryptPasswordEncoder")
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
 
     /**
      * 认证管理器
      */
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
 
     /**
      * 自定义令牌增强器
      */
-    private JwtTokenEnhancer jwtTokenEnhancer;
+    private final JwtTokenEnhancer jwtTokenEnhancer;
 
     /**
      * 用户详细信息加载类
      */
-    private UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
     /**
      * RSA 证书配置
      */
-    private RsaCredentialProperties rsaCredentialProperties;
+    private final RsaCredentialProperties rsaCredentialProperties;
 
     /**
      * 客户端详细信息配置
      */
-    private ClientDetailsProperties clientDetailsProperties;
+    private final ClientDetailsProperties clientDetailsProperties;
 
     /**
      * Redis 连接工厂
      */
-    private RedisConnectionFactory redisConnectionFactory;
+    private final RedisConnectionFactory redisConnectionFactory;
 
     @Autowired
     public Oauth2ServerConfig(

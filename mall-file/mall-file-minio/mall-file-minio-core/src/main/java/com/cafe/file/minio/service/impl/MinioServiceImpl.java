@@ -23,9 +23,9 @@ import javax.servlet.http.HttpServletResponse;
 @Service
 public class MinioServiceImpl implements MinioService {
 
-    private MinioProperties minioProperties;
+    private final MinioProperties minioProperties;
 
-    private MinioClient minioClient;
+    private final MinioClient minioClient;
 
     @Autowired
     public MinioServiceImpl(

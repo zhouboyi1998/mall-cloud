@@ -26,7 +26,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @EnableSwagger2WebMvc
 public class SwaggerConfig {
 
-    private SwaggerProperties swaggerProperties;
+    private final SwaggerProperties swaggerProperties;
 
     @Autowired
     public SwaggerConfig(SwaggerProperties swaggerProperties) {

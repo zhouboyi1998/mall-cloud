@@ -29,9 +29,9 @@ import java.util.List;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-    private UserFeign userFeign;
+    private final UserFeign userFeign;
 
-    private RoleFeign roleFeign;
+    private final RoleFeign roleFeign;
 
     @Autowired
     public UserDetailsServiceImpl(UserFeign userFeign, RoleFeign roleFeign) {

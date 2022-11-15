@@ -21,11 +21,11 @@ public class CanalEntryHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CanalEntryHandler.class);
 
-    private CanalProperties canalProperties;
+    private final CanalProperties canalProperties;
 
-    private RabbitMQContentHandler rabbitMQContentHandler;
+    private final RabbitMQContentHandler rabbitMQContentHandler;
 
-    private RocketMQContentHandler rocketMQContentHandler;
+    private final RocketMQContentHandler rocketMQContentHandler;
 
     @Autowired
     public CanalEntryHandler(

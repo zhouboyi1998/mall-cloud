@@ -22,7 +22,7 @@ import java.util.Map;
 @RequestMapping(value = "/key-pair")
 public class KeyPairController {
 
-    private KeyPairService keyPairService;
+    private final KeyPairService keyPairService;
 
     @Autowired
     public KeyPairController(KeyPairService keyPairService) {

@@ -17,7 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuService {
 
-    private SpuMapper spuMapper;
+    private final SpuMapper spuMapper;
 
     @Autowired
     public SpuServiceImpl(SpuMapper spuMapper) {

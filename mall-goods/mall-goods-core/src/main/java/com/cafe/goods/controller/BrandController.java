@@ -37,7 +37,7 @@ import java.util.List;
 @RequestMapping(value = "/brand")
 public class BrandController {
 
-    private BrandService brandService;
+    private final BrandService brandService;
 
     @Autowired
     public BrandController(BrandService brandService) {
