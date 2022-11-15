@@ -37,7 +37,7 @@ import java.util.List;
 @RequestMapping(value = "/user-role")
 public class UserRoleController {
 
-    private UserRoleService userRoleService;
+    private final UserRoleService userRoleService;
 
     @Autowired
     public UserRoleController(UserRoleService userRoleService) {

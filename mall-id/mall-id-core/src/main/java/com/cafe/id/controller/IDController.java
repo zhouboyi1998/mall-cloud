@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/id")
 public class IDController {
 
-    private IDService idService;
+    private final IDService idService;
 
     @Autowired
     public IDController(@Qualifier(value = "SnowflakeIDServiceImpl") IDService idService) {

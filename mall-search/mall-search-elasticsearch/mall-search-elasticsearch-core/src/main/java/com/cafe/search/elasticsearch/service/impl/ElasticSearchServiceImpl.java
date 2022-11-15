@@ -26,7 +26,7 @@ import java.io.IOException;
 @Service
 public class ElasticSearchServiceImpl implements ElasticSearchService {
 
-    private RestHighLevelClient restHighLevelClient;
+    private final RestHighLevelClient restHighLevelClient;
 
     @Autowired
     public ElasticSearchServiceImpl(RestHighLevelClient restHighLevelClient) {

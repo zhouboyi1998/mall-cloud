@@ -22,9 +22,9 @@ import java.util.List;
 @Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements RoleService {
 
-    private RoleMapper roleMapper;
+    private final RoleMapper roleMapper;
 
-    private RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
     public RoleServiceImpl(

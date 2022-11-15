@@ -16,7 +16,7 @@ import org.springframework.stereotype.Service;
 @Service(value = "SnowflakeIDServiceImpl")
 public class SnowflakeIDServiceImpl implements IDService {
 
-    private Snowflake snowflake;
+    private final Snowflake snowflake;
 
     @Autowired
     public SnowflakeIDServiceImpl(SnowflakeProperties snowflakeProperties) {

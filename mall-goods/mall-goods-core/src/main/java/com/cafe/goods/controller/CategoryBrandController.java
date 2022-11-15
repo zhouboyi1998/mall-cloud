@@ -37,7 +37,7 @@ import java.util.List;
 @RequestMapping(value = "/category-brand")
 public class CategoryBrandController {
 
-    private CategoryBrandService categoryBrandService;
+    private final CategoryBrandService categoryBrandService;
 
     @Autowired
     public CategoryBrandController(CategoryBrandService categoryBrandService) {

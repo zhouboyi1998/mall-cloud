@@ -45,7 +45,7 @@ import java.util.List;
 @Service
 public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService {
 
-    private RestHighLevelClient restHighLevelClient;
+    private final RestHighLevelClient restHighLevelClient;
 
     @Autowired
     public ElasticSearchGoodsServiceImpl(RestHighLevelClient restHighLevelClient) {

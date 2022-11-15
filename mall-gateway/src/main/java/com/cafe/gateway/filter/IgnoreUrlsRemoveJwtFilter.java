@@ -24,7 +24,7 @@ import java.util.List;
 @Component
 public class IgnoreUrlsRemoveJwtFilter implements WebFilter {
 
-    private IgnoreUrlsProperties ignoreUrlsProperties;
+    private final IgnoreUrlsProperties ignoreUrlsProperties;
 
     @Autowired
     public IgnoreUrlsRemoveJwtFilter(IgnoreUrlsProperties ignoreUrlsProperties) {

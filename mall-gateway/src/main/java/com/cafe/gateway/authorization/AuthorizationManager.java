@@ -29,7 +29,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizationManager.class);
 
-    private RedisTemplate<String, Object> redisTemplate;
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
     public AuthorizationManager(RedisTemplate<String, Object> redisTemplate) {

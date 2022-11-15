@@ -37,7 +37,7 @@ import java.util.List;
 @RequestMapping(value = "/role-menu")
 public class RoleMenuController {
 
-    private RoleMenuService roleMenuService;
+    private final RoleMenuService roleMenuService;
 
     @Autowired
     public RoleMenuController(RoleMenuService roleMenuService) {
