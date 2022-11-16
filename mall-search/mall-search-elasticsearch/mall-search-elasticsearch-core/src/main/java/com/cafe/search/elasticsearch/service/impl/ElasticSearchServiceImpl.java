@@ -37,30 +37,24 @@ public class ElasticSearchServiceImpl implements ElasticSearchService {
     public SearchResponse info() throws IOException {
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
         SearchRequest searchRequest = new SearchRequest().source(searchSourceBuilder);
-        SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
-        return searchResponse;
+        return restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
     }
 
     @Override
     public Boolean existsIndex(String name) throws IOException {
         GetIndexRequest getIndexRequest = new GetIndexRequest(name);
-        Boolean exists = restHighLevelClient.indices().exists(getIndexRequest, RequestOptions.DEFAULT);
-        return exists;
+        return restHighLevelClient.indices().exists(getIndexRequest, RequestOptions.DEFAULT);
     }
 
     @Override
     public CreateIndexResponse createIndex(String name) throws IOException {
         CreateIndexRequest createIndexRequest = new CreateIndexRequest(name);
-        CreateIndexResponse createIndexResponse
-            = restHighLevelClient.indices().create(createIndexRequest, RequestOptions.DEFAULT);
-        return createIndexResponse;
+        return restHighLevelClient.indices().create(createIndexRequest, RequestOptions.DEFAULT);
     }
 
     @Override
     public AcknowledgedResponse deleteIndex(String name) throws IOException {
         DeleteIndexRequest deleteIndexRequest = new DeleteIndexRequest(name);
-        AcknowledgedResponse acknowledgedResponse
-            = restHighLevelClient.indices().delete(deleteIndexRequest, RequestOptions.DEFAULT);
-        return acknowledgedResponse;
+        return restHighLevelClient.indices().delete(deleteIndexRequest, RequestOptions.DEFAULT);
     }
 }

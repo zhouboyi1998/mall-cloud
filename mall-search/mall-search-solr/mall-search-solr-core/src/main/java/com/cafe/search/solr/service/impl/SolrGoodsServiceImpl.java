@@ -1,6 +1,6 @@
 package com.cafe.search.solr.service.impl;
 
-import com.cafe.search.solr.constant.SolrConstant;
+import com.cafe.common.constant.SolrConstant;
 import com.cafe.search.solr.model.Goods;
 import com.cafe.search.solr.service.SolrGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;

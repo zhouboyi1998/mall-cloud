@@ -2,6 +2,7 @@ package com.cafe.gateway.filter;
 
 import cn.hutool.core.util.StrUtil;
 import com.cafe.common.constant.AuthenticationConstant;
+import com.cafe.common.constant.StringConstant;
 import com.nimbusds.jose.JWSObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,37 +37,38 @@ public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
      */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        // 获取 Request
+        ServerHttpRequest request = exchange.getRequest();
         // 获取 Request 中的 Token
-        String token = exchange.getRequest().getHeaders().getFirst(AuthenticationConstant.JWT_TOKEN_HEADER);
+        String token = request.getHeaders().getFirst(AuthenticationConstant.JWT_TOKEN_HEADER);
         // 如果 Token 为空, 直接返回
         if (StrUtil.isEmpty(token)) {
             return chain.filter(exchange);
         }
         try {
-            // 从 Token 中解析用户信息并设置到 Request Header 中
+            // 移除 Token 中的令牌头
+            String realToken = token.replace(AuthenticationConstant.JWT_TOKEN_PREFIX, StringConstant.EMPTY);
             // 解析 Token
-            String realToken = token.replace(AuthenticationConstant.JWT_TOKEN_PREFIX, "");
             JWSObject jwsObject = JWSObject.parse(realToken);
-            // 获取用户信息
-            String userStr = jwsObject.getPayload().toString();
+            // 从解析后的 Token 中获取用户信息
+            String userDetails = jwsObject.getPayload().toString();
             // 打印日志
-            LOGGER.info("AuthenticationGlobalFilter.filter(): user-details -> {}", userStr);
-            // 将用户信息设置到 Request Header 中
-            ServerHttpRequest request = exchange
-                .getRequest()
-                .mutate()
-                .header(AuthenticationConstant.USER_DETAILS_HEADER, userStr)
-                .build();
-            exchange = exchange
-                .mutate()
-                .request(request)
-                .build();
+            LOGGER.info("AuthenticationGlobalFilter.filter(): user-details -> {}", userDetails);
+            // 将用户信息设置到 Request 请求头中
+            request.mutate().header(AuthenticationConstant.USER_DETAILS_HEADER, userDetails).build();
+            // 使用改变后的 Request 重新生成 ServerWebExchange
+            exchange = exchange.mutate().request(request).build();
         } catch (ParseException e) {
             LOGGER.error("AuthenticationGlobalFilter.filter(): failed to parse token -> {}", e.getMessage());
         }
         return chain.filter(exchange);
     }
 
+    /**
+     * 设置过滤器优先级
+     *
+     * @return
+     */
     @Override
     public int getOrder() {
         return 0;

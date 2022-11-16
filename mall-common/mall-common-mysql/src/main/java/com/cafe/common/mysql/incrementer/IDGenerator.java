@@ -29,7 +29,7 @@ public class IDGenerator implements IdentifierGenerator {
     @Override
     public Number nextId(Object entity) {
         String name = entity.getClass().getName();
-        long id = idFeign.nextId().getBody();
+        Long id = idFeign.nextId().getBody();
         LOGGER.info("IDGenerator.nextId(): Generate <{}> primary key -> {}", name, id);
         return id;
     }

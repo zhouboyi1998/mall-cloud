@@ -1,5 +1,7 @@
 package com.cafe.gateway.config;
 
+import com.cafe.common.constant.AuthenticationConstant;
+import com.cafe.common.constant.StringConstant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;
@@ -18,19 +20,20 @@ public class GlobalCorsConfig {
 
     @Bean
     public CorsWebFilter corsWebFilter() {
-        CorsConfiguration config = new CorsConfiguration();
+        // 跨域配置
+        CorsConfiguration configuration = new CorsConfiguration();
         // 允许跨域的来源
-        config.addAllowedOrigin("*");
+        configuration.addAllowedOrigin(StringConstant.ASTERISK);
         // 允许跨域的头信息
-        config.addAllowedHeader("*");
+        configuration.addAllowedHeader(StringConstant.ASTERISK);
         // 允许跨域的请求方式
-        config.addAllowedMethod("*");
+        configuration.addAllowedMethod(StringConstant.ASTERISK);
         // 是否允许携带 Cookie
-        config.setAllowCredentials(true);
+        configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        // 请求拦截配置, "/**" 表示拦截所有请求, 并使用上面 CorsConfiguration 中的配置, 对拦截的请求进行跨域处理
-        source.registerCorsConfiguration("/**", config);
+        // 请求拦截配置: 拦截所有请求, 对拦截的请求进行跨域处理
+        source.registerCorsConfiguration(AuthenticationConstant.ALL_REQUEST, configuration);
 
         return new CorsWebFilter(source);
     }

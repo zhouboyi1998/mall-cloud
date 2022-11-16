@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.user.model
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 用户-角色关联 (实体类)
+ * @Description: 用户-角色关联关系 (实体类)
  */
 @ApiModel(value = "UserRole对象", description = "用户-角色关联关系")
 @TableName("mall_user_role")

@@ -2,8 +2,8 @@ package com.cafe.monitor.canal.handler;
 
 import cn.hutool.json.JSONUtil;
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.cafe.common.message.rocketmq.constant.RocketMQProducer;
-import com.cafe.goods.constant.GoodsTopicMap;
+import com.cafe.common.constant.rocketmq.RocketMQProducer;
+import com.cafe.common.constant.rocketmq.RocketMQTopicMap;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +43,7 @@ public class RocketMQContentHandler {
         Map<String, Object> content = messageContentHandler.handle(tableName, rowDataList, eventType);
 
         // 发送消息到 RocketMQ
-        rocketMQTemplate.convertAndSend(GoodsTopicMap.TOPIC_MAP.get(RocketMQProducer.CANAL, tableName), content);
+        rocketMQTemplate.convertAndSend(RocketMQTopicMap.TOPIC_MAP.get(RocketMQProducer.CANAL, tableName), content);
 
         // 打印日志
         LOGGER.info("RocketMQContentHandler.handle(): Send RocketMQ Message -> {}", JSONUtil.toJsonStr(content));

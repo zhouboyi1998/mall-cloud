@@ -47,12 +47,12 @@ public enum HttpStatusCodeEnum {
     /**
      * 状态码
      */
-    private Integer code;
+    private final Integer code;
 
     /**
      * 状态信息
      */
-    private String message;
+    private final String message;
 
     HttpStatusCodeEnum(Integer code, String message) {
         this.code = code;

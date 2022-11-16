@@ -42,15 +42,14 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         // 根据角色列表获取对应的菜单列表树形格式 VO
         List<MenuTreeVO> menuList = menuMapper.listMenuTree(roleNameList);
         // 组装成树形格式, 设置 children 字段
-        List<MenuTreeVO> menuTreeList = menuList
-            .stream()
+
+        return menuList.stream()
             // 筛选出所有一级菜单
             .filter(menuTreeVO -> menuTreeVO.getParentId().equals(0L))
             // 调用 getChildren() 方法, 为每个一级菜单获取子菜单
             .map((menuTreeVO) -> menuTreeVO.setChildren(getChildren(menuTreeVO, menuList)))
+            // 重新组装成 List
             .collect(Collectors.toList());
-
-        return menuTreeList;
     }
 
     /**
@@ -61,13 +60,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
      * @return
      */
     private List<MenuTreeVO> getChildren(MenuTreeVO node, List<MenuTreeVO> menuList) {
-        List<MenuTreeVO> children = menuList
-            .stream()
+        return menuList.stream()
             // 筛选出当前节点的所有子节点
             .filter(menuTreeVO -> menuTreeVO.getParentId().equals(node.getId()))
             // 递归调用组装树形结构
             .map(menuTreeVO -> menuTreeVO.setChildren(getChildren(menuTreeVO, menuList)))
+            // 重新组装成 List
             .collect(Collectors.toList());
-        return children;
     }
 }

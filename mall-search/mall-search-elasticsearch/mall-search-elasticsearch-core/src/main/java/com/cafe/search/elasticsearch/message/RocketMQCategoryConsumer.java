@@ -1,10 +1,10 @@
 package com.cafe.search.elasticsearch.message;
 
 import cn.hutool.json.JSONUtil;
+import com.cafe.common.constant.FieldConstant;
 import com.cafe.common.constant.MonitorConstant;
-import com.cafe.common.message.rocketmq.constant.RocketMQConsumerGroup;
-import com.cafe.common.message.rocketmq.constant.RocketMQTopic;
-import com.cafe.search.elasticsearch.constant.GoodsField;
+import com.cafe.common.constant.rocketmq.RocketMQConsumerGroup;
+import com.cafe.common.constant.rocketmq.RocketMQTopic;
 import com.cafe.search.elasticsearch.model.Category;
 import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
@@ -51,7 +51,7 @@ public class RocketMQCategoryConsumer implements RocketMQListener<String> {
         for (Category category : afterDataList) {
             try {
                 // 批量更新商品
-                elasticSearchGoodsService.updateBatch(GoodsField.CATEGORY_ID, category.getId(), GoodsField.CATEGORY_NAME, category.getCategoryName());
+                elasticSearchGoodsService.updateBatch(FieldConstant.CATEGORY_ID, category.getId(), FieldConstant.CATEGORY_NAME, category.getCategoryName());
                 // 打印成功更新分类名称的日志
                 LOGGER.info("RocketMQCategoryConsumer.onMessage(): Update category name success -> {}", message);
             } catch (IOException e) {

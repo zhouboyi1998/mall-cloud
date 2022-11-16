@@ -33,9 +33,7 @@ public class KeyPairServiceImpl implements KeyPairService {
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
         // 使用 RSA 公钥生成 Nimbus JOSE + JWT 提供的 RSA 密钥对 (密钥中只存储公钥)
         RSAKey key = new RSAKey.Builder(publicKey).build();
-        // 将密钥转换为 Map 格式
-        Map<String, Object> map = new JWKSet(key).toJSONObject();
-
-        return map;
+        // 将密钥以 Map 格式返回
+        return new JWKSet(key).toJSONObject();
     }
 }

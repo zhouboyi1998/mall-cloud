@@ -30,13 +30,12 @@ public class OauthServiceImpl implements OauthService {
     }
 
     @Override
-    public Oauth2TokenDetails postAccessToken(
-        Principal principal, Map<String, String> parameters
-    ) throws HttpRequestMethodNotSupportedException {
+    public Oauth2TokenDetails postAccessToken(Principal principal, Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
         // 使用 TokenEndpoint 生成访问令牌
         OAuth2AccessToken oAuth2AccessToken = tokenEndpoint.postAccessToken(principal, parameters).getBody();
 
         // 将访问令牌信息封装到自定义令牌信息封装类中返回
+        assert oAuth2AccessToken != null : "OAuth2AccessToken is null.";
         Oauth2TokenDetails oauth2TokenDetails = new Oauth2TokenDetails();
         oauth2TokenDetails.setAccessToken(oAuth2AccessToken.getValue());
         oauth2TokenDetails.setRefreshToken(oAuth2AccessToken.getRefreshToken().getValue());

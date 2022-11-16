@@ -5,7 +5,7 @@ package com.cafe.common.constant;
  * @Package: com.cafe.common.constant
  * @Author: zhouboyi
  * @Date: 2022/5/10 23:09
- * @Description: Redis 缓存相关常量
+ * @Description: Redis 相关常量
  */
 public class RedisConstant {
 

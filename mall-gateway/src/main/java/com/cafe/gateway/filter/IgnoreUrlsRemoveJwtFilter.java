@@ -1,5 +1,7 @@
 package com.cafe.gateway.filter;
 
+import com.cafe.common.constant.AuthenticationConstant;
+import com.cafe.common.constant.StringConstant;
 import com.cafe.gateway.property.IgnoreUrlsProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -40,16 +42,22 @@ public class IgnoreUrlsRemoveJwtFilter implements WebFilter {
      */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
+        // 获取 Request
         ServerHttpRequest request = exchange.getRequest();
+        // 获取 URI
         URI uri = request.getURI();
+        // 新建 URI 路径匹配器
         PathMatcher pathMatcher = new AntPathMatcher();
-        // 移除白名单 URL 的 JWT 请求头
+        // 获取所有白名单 URL
         List<String> ignoreUrls = ignoreUrlsProperties.getUrls();
+        // 遍历所有白名单 URL
         for (String ignoreUrl : ignoreUrls) {
             if (pathMatcher.match(ignoreUrl, uri.getPath())) {
-                request = exchange.getRequest().mutate().header("Authorization", "").build();
+                // 移除 Request 中的认证信息请求头
+                request.mutate().header(AuthenticationConstant.JWT_TOKEN_HEADER, StringConstant.EMPTY).build();
+                // 使用改变后的 Request 重新生成 ServerWebExchange
                 exchange = exchange.mutate().request(request).build();
-                return chain.filter(exchange);
+                break;
             }
         }
         return chain.filter(exchange);

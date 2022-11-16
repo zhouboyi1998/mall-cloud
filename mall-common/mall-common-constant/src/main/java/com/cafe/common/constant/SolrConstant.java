@@ -1,11 +1,11 @@
-package com.cafe.search.solr.constant;
+package com.cafe.common.constant;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.search.solr.constant
+ * @Package: com.cafe.common.constant
  * @Author: zhouboyi
  * @Date: 2022/10/26 17:23
- * @Description:
+ * @Description: Solr 相关常量
  */
 public class SolrConstant {
 

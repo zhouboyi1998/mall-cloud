@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.user.model
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 角色-菜单关联 (实体类)
+ * @Description: 角色-菜单关联关系 (实体类)
  */
 @ApiModel(value = "RoleMenu对象", description = "角色-菜单关联关系")
 @TableName("mall_role_menu")

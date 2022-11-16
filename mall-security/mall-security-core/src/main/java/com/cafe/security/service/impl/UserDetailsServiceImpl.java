@@ -51,7 +51,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 throw new UsernameNotFoundException(HttpStatusCodeEnum.ROLE_NOT_FOUND.getMessage());
             }
             // 角色名称列表转换为数组形式
-            String[] roleNameArray = roleNameList.toArray(new String[roleNameList.size()]);
+            String[] roleNameArray = roleNameList.toArray(new String[0]);
             User userDetails = new User(userDTO.getUsername(), userDTO.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
             if (!userDetails.isEnabled()) {
                 throw new DisabledException(HttpStatusCodeEnum.ACCOUNT_DISABLED.getMessage());
