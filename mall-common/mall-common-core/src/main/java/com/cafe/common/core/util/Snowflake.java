@@ -145,7 +145,7 @@ public class Snowflake {
                     }
                 } catch (InterruptedException e) {
                     // 线程等待中断
-                    throw new RuntimeException(String.format("Thead wait interrupted. InterruptedException message -> %d", e.getMessage()));
+                    throw new RuntimeException(String.format("Thead wait interrupted. InterruptedException message -> %s", e.getMessage()));
                 }
             } else {
                 // 超出容忍的最大时间回拨幅度

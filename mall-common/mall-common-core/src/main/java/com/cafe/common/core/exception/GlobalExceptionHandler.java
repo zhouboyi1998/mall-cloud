@@ -22,7 +22,7 @@ public class GlobalExceptionHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity handler(Exception e) {
+    public ResponseEntity<String> handler(Exception e) {
         LOGGER.error("GlobalExceptionHandler.handler(): catch exception -> {}", e.getMessage());
         return ResponseEntity
             .status(HttpStatus.INTERNAL_SERVER_ERROR)

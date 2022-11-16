@@ -1,10 +1,10 @@
 package com.cafe.search.elasticsearch.message;
 
 import cn.hutool.json.JSONUtil;
+import com.cafe.common.constant.FieldConstant;
 import com.cafe.common.constant.MonitorConstant;
-import com.cafe.common.message.rocketmq.constant.RocketMQConsumerGroup;
-import com.cafe.common.message.rocketmq.constant.RocketMQTopic;
-import com.cafe.search.elasticsearch.constant.GoodsField;
+import com.cafe.common.constant.rocketmq.RocketMQConsumerGroup;
+import com.cafe.common.constant.rocketmq.RocketMQTopic;
 import com.cafe.search.elasticsearch.model.Brand;
 import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
@@ -51,7 +51,7 @@ public class RocketMQBrandConsumer implements RocketMQListener<String> {
         for (Brand brand : afterDataList) {
             try {
                 // 批量更新商品
-                elasticSearchGoodsService.updateBatch(GoodsField.BRAND_ID, brand.getId(), GoodsField.BRAND_NAME, brand.getBrandName());
+                elasticSearchGoodsService.updateBatch(FieldConstant.BRAND_ID, brand.getId(), FieldConstant.BRAND_NAME, brand.getBrandName());
                 // 打印成功更新品牌名称的日志
                 LOGGER.info("RocketMQBrandConsumer.onMessage(): Update brand name success -> {}", message);
             } catch (IOException e) {

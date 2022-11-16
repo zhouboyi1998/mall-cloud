@@ -9,12 +9,15 @@ package com.cafe.common.enumeration;
  */
 public enum HttpHeaderValueEnum {
 
+    /**
+     * 无缓存
+     */
     NO_CACHE("no-cache");
 
     /**
      * 请求头值
      */
-    private String value;
+    private final String value;
 
     HttpHeaderValueEnum(String value) {
         this.value = value;

@@ -2,8 +2,8 @@ package com.cafe.search.elasticsearch.message;
 
 import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.MessageConstant;
-import com.cafe.common.message.rocketmq.constant.RocketMQConsumerGroup;
-import com.cafe.common.message.rocketmq.constant.RocketMQTopic;
+import com.cafe.common.constant.rocketmq.RocketMQConsumerGroup;
+import com.cafe.common.constant.rocketmq.RocketMQTopic;
 import com.cafe.search.elasticsearch.model.Goods;
 import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
