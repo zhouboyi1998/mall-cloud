@@ -14,10 +14,10 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.goods.model
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 分类-品牌关联 (实体类)
+ * @Description: 分类-品牌关联关系 (实体类)
  */
 @ApiModel(value = "CategoryBrand对象", description = "分类-品牌关联关系")
-@TableName("mall_category_brand_")
+@TableName("mall_category_brand")
 public class CategoryBrand implements Serializable {
 
     private static final long serialVersionUID = 1L;

@@ -3,7 +3,7 @@ package com.cafe.goods.service.impl;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.common.constant.MessageConstant;
-import com.cafe.common.message.rocketmq.constant.RocketMQTopic;
+import com.cafe.common.constant.rocketmq.RocketMQTopic;
 import com.cafe.goods.bo.Goods;
 import com.cafe.goods.dao.GoodsMapper;
 import com.cafe.goods.service.GoodsService;

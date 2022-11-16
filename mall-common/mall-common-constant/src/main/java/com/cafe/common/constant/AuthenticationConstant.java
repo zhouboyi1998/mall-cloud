@@ -35,7 +35,17 @@ public class AuthenticationConstant {
     public static final String USER_DETAILS_HEADER = "user-details";
 
     /**
-     * 菜单路径在请求路径中对应的位置 (一级路径: 服务路径, 二级路径: 菜单路径)
+     * 用户名称 Key
+     */
+    public static final String USERNAME = "username";
+
+    /**
+     * 所有请求
+     */
+    public static final String ALL_REQUEST = "/**";
+
+    /**
+     * 菜单路径在请求路径中的位置
      */
     public static final Integer MENU_PATH_INDEX = 2;
 }

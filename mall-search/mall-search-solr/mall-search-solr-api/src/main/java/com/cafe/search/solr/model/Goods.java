@@ -1,6 +1,6 @@
 package com.cafe.search.solr.model;
 
-import com.cafe.search.solr.constant.SolrConstant;
+import com.cafe.common.constant.SolrConstant;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.solr.client.solrj.beans.Field;

@@ -1,11 +1,11 @@
-package com.cafe.search.elasticsearch.constant;
+package com.cafe.common.constant;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.search.elasticsearch.constant
+ * @Package: com.cafe.common.constant
  * @Author: zhouboyi
  * @Date: 2022/7/28 10:03
- * @Description:
+ * @Description: ElasticSearch 相关常量
  */
 public class ElasticSearchConstant {
 
@@ -15,9 +15,14 @@ public class ElasticSearchConstant {
     public static final String GOODS_INDEX = "goods";
 
     /**
-     * 商品搜索匹配字段
+     * 商品搜索关键词匹配字段
      */
-    public static final String[] GOODS_SEARCH_FIELD = {"skuName", "spuName", "brandName", "categoryName"};
+    public static final String[] GOODS_SEARCH_FIELD = {
+        FieldConstant.BRAND_NAME,
+        FieldConstant.CATEGORY_NAME,
+        FieldConstant.SPU_NAME,
+        FieldConstant.SKU_NAME
+    };
 
     /**
      * 商品默认排序字段
