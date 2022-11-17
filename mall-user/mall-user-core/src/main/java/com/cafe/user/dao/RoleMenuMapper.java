@@ -19,9 +19,9 @@ import java.util.List;
 public interface RoleMenuMapper extends BaseMapper<RoleMenu> {
 
     /**
-     * 获取菜单路径和角色名称对应关系
+     * 按菜单ids获取菜单路径-角色名称对应关系
      *
-     * @param menuIds
+     * @param menuIds 菜单ids
      * @return
      */
     List<MenuRoleBO> listMenuRoleBO(@Param(value = "menuIds") List<Long> menuIds);
