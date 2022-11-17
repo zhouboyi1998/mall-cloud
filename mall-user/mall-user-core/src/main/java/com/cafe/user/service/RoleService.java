@@ -21,23 +21,4 @@ public interface RoleService extends IService<Role> {
      * @return
      */
     List<String> listRoleName(Long userId);
-
-    /**
-     * 初始化角色名称列表到 Redis 中
-     */
-    void initRoleNameList();
-
-    /**
-     * 新增指定的角色名称到 Redis 的角色名称列表中
-     *
-     * @param roleName
-     */
-    void saveRoleNameList(String roleName);
-
-    /**
-     * 从 Redis 的角色名称列表中删除指定的角色名称
-     *
-     * @param roleName
-     */
-    void removeRoleNameList(String roleName);
 }

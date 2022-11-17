@@ -44,17 +44,16 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
     @PostConstruct
     @Override
     public void initMenuRoleBO() {
-        List<Long> menuIds = new ArrayList<Long>();
         // 获取所有 <菜单路径-角色名称> 的对应关系
-        List<MenuRoleBO> boList = roleMenuMapper.listMenuRoleBO(menuIds);
+        List<MenuRoleBO> menuRoleBOList = roleMenuMapper.listMenuRoleBO(new ArrayList<Long>(0));
         // 将对应关系组装成 Map 格式
         Map<String, List<String>> relationMap = new TreeMap<String, List<String>>();
-        for (MenuRoleBO bo : boList) {
+        for (MenuRoleBO menuRoleBO : menuRoleBOList) {
             // 添加权限前缀
-            List<String> roleNameList = bo.getRoleNameList().stream()
+            List<String> roleNameList = menuRoleBO.getRoleNameList().stream()
                 .map(i -> i = AuthenticationConstant.AUTHORITY_PREFIX + i)
                 .collect(Collectors.toList());
-            relationMap.put(bo.getMenuPath(), roleNameList);
+            relationMap.put(menuRoleBO.getMenuPath(), roleNameList);
         }
         // 初始化之前先删除对应的 key, 清空旧的数据
         redisTemplate.delete(RedisConstant.MENU_ROLE_MAP);
@@ -65,15 +64,15 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
     @Override
     public void refreshMenuRoleBO(List<Long> menuIds) {
         // 按菜单ids获取 <菜单路径-角色名称> 对应关系列表
-        List<MenuRoleBO> boList = roleMenuMapper.listMenuRoleBO(menuIds);
+        List<MenuRoleBO> menuRoleBOList = roleMenuMapper.listMenuRoleBO(menuIds);
         // 更新 Redis 中的对应关系
-        for (MenuRoleBO bo : boList) {
+        for (MenuRoleBO menuRoleBO : menuRoleBOList) {
             // 添加权限前缀
-            List<String> roleList = bo.getRoleNameList().stream()
+            List<String> roleNameList = menuRoleBO.getRoleNameList().stream()
                 .map(i -> i = AuthenticationConstant.AUTHORITY_PREFIX + i)
                 .collect(Collectors.toList());
             // 将对应关系保存到 Redis 中
-            redisTemplate.opsForHash().put(RedisConstant.MENU_ROLE_MAP, bo.getMenuPath(), bo.getRoleNameList());
+            redisTemplate.opsForHash().put(RedisConstant.MENU_ROLE_MAP, menuRoleBO.getMenuPath(), roleNameList);
         }
     }
 }
