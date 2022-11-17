@@ -154,14 +154,6 @@ public class RoleController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "查询所有角色名称列表")
-    @ApiOperation(value = "查询所有角色名称列表")
-    @GetMapping(value = "/list/name")
-    public ResponseEntity<List<String>> listRoleName() {
-        List<String> roleNameList = roleService.listRoleName(null);
-        return ResponseEntity.ok(roleNameList);
-    }
-
     @LogPrint(value = "根据用户id查询角色名称列表")
     @ApiOperation(value = "根据用户id查询角色名称列表")
     @ApiImplicitParam(value = "用户id", name = "userId", dataType = "Long", paramType = "path", required = true)

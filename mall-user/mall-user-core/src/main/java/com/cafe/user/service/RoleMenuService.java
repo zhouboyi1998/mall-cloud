@@ -15,14 +15,14 @@ import java.util.List;
 public interface RoleMenuService extends IService<RoleMenu> {
 
     /**
-     * 初始化 菜单路径-角色名称 对应关系到 Redis 中
+     * 初始化菜单路径-角色名称对应关系到 Redis 中
      */
     void initMenuRoleBO();
 
     /**
-     * 更新 Redis 中的 菜单路径-角色名称 对应关系
+     * 更新 Redis 中的菜单路径-角色名称对应关系
      *
-     * @param menuIds 对应关系发生变更的菜单id列表
+     * @param menuIds 对应关系发生变更的菜单ids
      */
     void refreshMenuRoleBO(List<Long> menuIds);
 }
