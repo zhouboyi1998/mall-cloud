@@ -1,12 +1,17 @@
 package com.cafe.gateway.authorization;
 
 import cn.hutool.core.convert.Convert;
+import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.AuthenticationConstant;
+import com.cafe.common.constant.NumberConstant;
 import com.cafe.common.constant.RedisConstant;
+import com.cafe.common.constant.StringConstant;
+import com.nimbusds.jose.JWSObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.ReactiveAuthorizationManager;
 import org.springframework.security.core.Authentication;
@@ -15,6 +20,7 @@ import org.springframework.security.web.server.authorization.AuthorizationContex
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.text.ParseException;
 import java.util.List;
 
 /**
@@ -38,16 +44,29 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
 
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {
-        // 获取当前请求路径, 切割成数组
-        String[] array = authorizationContext.getExchange().getRequest().getPath().toString().split("/");
-        // 获取当前菜单路径
-        StringBuilder path = new StringBuilder("/");
-        if (array.length > AuthenticationConstant.MENU_PATH_INDEX) {
-            path.append(array[AuthenticationConstant.MENU_PATH_INDEX]);
-            LOGGER.info("AuthorizationManager.check(): menu-path -> {}", path);
+        // 获取 Request
+        ServerHttpRequest request = authorizationContext.getExchange().getRequest();
+        // 获取 Request Path 中的菜单路径
+        String menuPath = request.getPath().subPath(NumberConstant.ZERO, NumberConstant.FOUR).toString();
+        // 获取 Request Header 中的 Token
+        String token = request.getHeaders().getFirst(AuthenticationConstant.JWT_TOKEN_HEADER);
+        // 移除 Token 中的令牌头, 获取 Access Token
+        assert token != null;
+        String accessToken = token.replace(AuthenticationConstant.JWT_TOKEN_PREFIX, StringConstant.EMPTY);
+        try {
+            // 解析 Access Token
+            JWSObject jwsObject = JWSObject.parse(accessToken);
+            // 从解析后的 Access Token 中获取用户详细信息
+            String userDetails = jwsObject.getPayload().toString();
+            // 获取用户详细信息中的客户端id
+            String clientId = (String) JSONUtil.parseObj(userDetails).get(AuthenticationConstant.CLIENT_ID_PARAMETER);
+            LOGGER.info("AuthorizationManager.check(): clientId -> {}, menuPath -> {}", clientId, menuPath);
+        } catch (ParseException e) {
+            LOGGER.error("AuthorizationManager.check(): could not parse accessToken -> {}, message -> {}", accessToken, e.getMessage());
         }
+
         // 获取可以访问当前菜单的角色列表
-        Object list = redisTemplate.opsForHash().get(RedisConstant.MENU_ROLE_MAP, path.toString());
+        Object list = redisTemplate.opsForHash().get(RedisConstant.MENU_ROLE_MAP, menuPath);
         List<String> roleNameList = Convert.toList(String.class, list);
 
         // 当用户认证通过, 且用户的角色可以访问当前菜单, 当前用户可以访问当前请求
