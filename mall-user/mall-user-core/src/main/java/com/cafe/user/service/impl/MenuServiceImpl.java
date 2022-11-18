@@ -34,9 +34,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Override
     public List<MenuTreeVO> listMenuTree(String userDetails) {
         // 将用户详细信息转换为 JSON 对象, 从用户详细信息中获取角色列表
-        List<String> roleNameList = ((JSONArray) JSONUtil
-            .parseObj(userDetails)
-            .get(AuthenticationConstant.AUTHORITY_CLAIM_NAME))
+        List<String> roleNameList = ((JSONArray) JSONUtil.parseObj(userDetails).get(AuthenticationConstant.AUTHORITY_CLAIM_NAME))
             .toList(String.class);
 
         // 根据角色列表获取对应的菜单列表树形格式 VO

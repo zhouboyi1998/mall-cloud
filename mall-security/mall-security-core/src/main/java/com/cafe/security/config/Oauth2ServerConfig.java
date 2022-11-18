@@ -2,7 +2,8 @@ package com.cafe.security.config;
 
 import com.cafe.common.constant.RedisConstant;
 import com.cafe.security.enhancer.JwtTokenEnhancer;
-import com.cafe.security.property.ClientDetailsProperties;
+import com.cafe.security.property.ClientDetail;
+import com.cafe.security.property.ClientConfigProperties;
 import com.cafe.security.property.RsaCredentialProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -70,7 +71,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     /**
      * 客户端详细信息配置
      */
-    private final ClientDetailsProperties clientDetailsProperties;
+    private final ClientConfigProperties clientConfigProperties;
 
     /**
      * Redis 连接工厂
@@ -84,7 +85,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         JwtTokenEnhancer jwtTokenEnhancer,
         UserDetailsService userDetailsService,
         RsaCredentialProperties rsaCredentialProperties,
-        ClientDetailsProperties clientDetailsProperties,
+        ClientConfigProperties clientConfigProperties,
         RedisConnectionFactory redisConnectionFactory
     ) {
         this.passwordEncoder = passwordEncoder;
@@ -92,7 +93,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         this.jwtTokenEnhancer = jwtTokenEnhancer;
         this.userDetailsService = userDetailsService;
         this.rsaCredentialProperties = rsaCredentialProperties;
-        this.clientDetailsProperties = clientDetailsProperties;
+        this.clientConfigProperties = clientConfigProperties;
         this.redisConnectionFactory = redisConnectionFactory;
     }
 
@@ -147,21 +148,26 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients
-            // 使用内存
-            .inMemory()
-            // 客户端id
-            .withClient(clientDetailsProperties.getClientId())
-            // 客户端密钥: 生成 RSA 证书文件 (jwt.jks) 时设置的密钥口令 (-keypass)
-            .secret(passwordEncoder.encode(rsaCredentialProperties.getKeypass()))
-            // 授权模式: 目前使用 password 密码, refresh_token 刷新令牌
-            .authorizedGrantTypes(clientDetailsProperties.getAuthorizedGrantTypes())
-            // 授权范围
-            .scopes(clientDetailsProperties.getScopes())
-            // 访问令牌 access_token 过期时间
-            .accessTokenValiditySeconds(clientDetailsProperties.getAccessTokenValiditySeconds())
-            // 刷新令牌 refresh_token 过期时间
-            .refreshTokenValiditySeconds(clientDetailsProperties.getRefreshTokenValiditySeconds());
+        // 获取所有客户端详细信息配置
+        List<ClientDetail> clientDetails = clientConfigProperties.getClientDetails();
+        // 使用内存
+        clients.inMemory();
+        // 配置所有客户端的详细信息
+        for (ClientDetail clientDetail : clientDetails) {
+            clients.and()
+                // 客户端id
+                .withClient(clientDetail.getClientId())
+                // 客户端密钥: 生成 RSA 证书文件 (jwt.jks) 时设置的密钥口令 (-keypass)
+                .secret(passwordEncoder.encode(rsaCredentialProperties.getKeypass()))
+                // 授权模式
+                .authorizedGrantTypes(clientDetail.getAuthorizedGrantTypes())
+                // 授权范围
+                .scopes(clientDetail.getScopes())
+                // 访问令牌 access_token 过期时间
+                .accessTokenValiditySeconds(clientDetail.getAccessTokenValiditySeconds())
+                // 刷新令牌 refresh_token 过期时间
+                .refreshTokenValiditySeconds(clientDetail.getRefreshTokenValiditySeconds());
+        }
     }
 
     /**

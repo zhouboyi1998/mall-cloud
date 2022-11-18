@@ -39,27 +39,27 @@ public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         // 获取 Request
         ServerHttpRequest request = exchange.getRequest();
-        // 获取 Request 中的 Token
+        // 获取 Request Header 中的 Token
         String token = request.getHeaders().getFirst(AuthenticationConstant.JWT_TOKEN_HEADER);
         // 如果 Token 为空, 直接返回
         if (StrUtil.isEmpty(token)) {
             return chain.filter(exchange);
         }
+        // 移除 Token 中的令牌头, 获取 Access Token
+        String accessToken = token.replace(AuthenticationConstant.JWT_TOKEN_PREFIX, StringConstant.EMPTY);
         try {
-            // 移除 Token 中的令牌头
-            String realToken = token.replace(AuthenticationConstant.JWT_TOKEN_PREFIX, StringConstant.EMPTY);
-            // 解析 Token
-            JWSObject jwsObject = JWSObject.parse(realToken);
-            // 从解析后的 Token 中获取用户信息
+            // 解析 Access Token
+            JWSObject jwsObject = JWSObject.parse(accessToken);
+            // 从解析后的 Access Token 中获取用户详细信息
             String userDetails = jwsObject.getPayload().toString();
             // 打印日志
-            LOGGER.info("AuthenticationGlobalFilter.filter(): user-details -> {}", userDetails);
+            LOGGER.info("AuthenticationGlobalFilter.filter(): userDetails -> {}", userDetails);
             // 将用户信息设置到 Request 请求头中
             request.mutate().header(AuthenticationConstant.USER_DETAILS_HEADER, userDetails).build();
             // 使用改变后的 Request 重新生成 ServerWebExchange
             exchange = exchange.mutate().request(request).build();
         } catch (ParseException e) {
-            LOGGER.error("AuthenticationGlobalFilter.filter(): failed to parse token -> {}", e.getMessage());
+            LOGGER.error("AuthenticationGlobalFilter.filter(): could not parse accessToken -> {}, message -> {}", accessToken, e.getMessage());
         }
         return chain.filter(exchange);
     }

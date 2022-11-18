@@ -32,20 +32,15 @@ public class AuthenticationConstant {
     /**
      * 用户信息请求头
      */
-    public static final String USER_DETAILS_HEADER = "user-details";
+    public static final String USER_DETAILS_HEADER = "user_details";
 
     /**
-     * 用户名称 Key
+     * 客户端id请求参数
      */
-    public static final String USERNAME = "username";
+    public static final String CLIENT_ID_PARAMETER = "client_id";
 
     /**
      * 所有请求
      */
     public static final String ALL_REQUEST = "/**";
-
-    /**
-     * 菜单路径在请求路径中的位置
-     */
-    public static final Integer MENU_PATH_INDEX = 2;
 }

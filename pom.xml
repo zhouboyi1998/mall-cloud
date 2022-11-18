@@ -268,11 +268,6 @@
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
-                <artifactId>mall-common-security</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
                 <artifactId>mall-common-swagger</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
