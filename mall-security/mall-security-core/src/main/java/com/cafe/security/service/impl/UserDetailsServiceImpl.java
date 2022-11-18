@@ -1,10 +1,13 @@
 package com.cafe.security.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.cafe.common.constant.AuthenticationConstant;
 import com.cafe.common.enumeration.HttpStatusCodeEnum;
 import com.cafe.user.dto.UserDTO;
 import com.cafe.user.feign.RoleFeign;
 import com.cafe.user.feign.UserFeign;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.CredentialsExpiredException;
@@ -17,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -29,18 +33,26 @@ import java.util.List;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
+
+    private final HttpServletRequest request;
+
     private final UserFeign userFeign;
 
     private final RoleFeign roleFeign;
 
     @Autowired
-    public UserDetailsServiceImpl(UserFeign userFeign, RoleFeign roleFeign) {
+    public UserDetailsServiceImpl(HttpServletRequest request, UserFeign userFeign, RoleFeign roleFeign) {
+        this.request = request;
         this.userFeign = userFeign;
         this.roleFeign = roleFeign;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // 从 Request Parameter 中获取客户端id
+        String clientId = request.getParameter(AuthenticationConstant.CLIENT_ID_PARAMETER);
+
         // 查询用户信息
         UserDTO userDTO = userFeign.oneDTO(username).getBody();
 
@@ -62,6 +74,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             } else if (!userDetails.isCredentialsNonExpired()) {
                 throw new CredentialsExpiredException(HttpStatusCodeEnum.CREDENTIALS_EXPIRED.getMessage());
             }
+            LOGGER.info("UserDetailsServiceImpl.loadUserByUsername(): username -> {}, client_id -> {}", username, clientId);
             return userDetails;
         } else {
             throw new UsernameNotFoundException(HttpStatusCodeEnum.USERNAME_NOT_FOUND.getMessage());
