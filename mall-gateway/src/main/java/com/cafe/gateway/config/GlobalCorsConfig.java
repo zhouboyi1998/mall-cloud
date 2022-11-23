@@ -1,6 +1,6 @@
 package com.cafe.gateway.config;
 
-import com.cafe.common.constant.AuthenticationConstant;
+import com.cafe.common.constant.AuthorizationConstant;
 import com.cafe.common.constant.StringConstant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -33,7 +33,7 @@ public class GlobalCorsConfig {
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         // 请求拦截配置: 拦截所有请求, 对拦截的请求进行跨域处理
-        source.registerCorsConfiguration(AuthenticationConstant.ALL_REQUEST, configuration);
+        source.registerCorsConfiguration(AuthorizationConstant.ALL_REQUEST, configuration);
 
         return new CorsWebFilter(source);
     }

@@ -1,7 +1,7 @@
 package com.cafe.gateway.filter;
 
 import cn.hutool.core.util.StrUtil;
-import com.cafe.common.constant.AuthenticationConstant;
+import com.cafe.common.constant.HttpHeaderConstant;
 import com.cafe.common.constant.StringConstant;
 import com.nimbusds.jose.JWSObject;
 import org.slf4j.Logger;
@@ -40,13 +40,13 @@ public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
         // 获取 Request
         ServerHttpRequest request = exchange.getRequest();
         // 获取 Request Header 中的 Token
-        String token = request.getHeaders().getFirst(AuthenticationConstant.JWT_TOKEN_HEADER);
+        String token = request.getHeaders().getFirst(HttpHeaderConstant.AUTHORIZATION_HEADER);
         // 如果 Token 为空, 直接返回
         if (StrUtil.isEmpty(token)) {
             return chain.filter(exchange);
         }
         // 移除 Token 中的令牌头, 获取 Access Token
-        String accessToken = token.replace(AuthenticationConstant.JWT_TOKEN_PREFIX, StringConstant.EMPTY);
+        String accessToken = token.replace(HttpHeaderConstant.AUTHORIZATION_HEADER_PREFIX, StringConstant.EMPTY);
         try {
             // 解析 Access Token
             JWSObject jwsObject = JWSObject.parse(accessToken);
@@ -55,7 +55,7 @@ public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
             // 打印日志
             LOGGER.info("AuthenticationGlobalFilter.filter(): userDetails -> {}", userDetails);
             // 将用户信息设置到 Request 请求头中
-            request.mutate().header(AuthenticationConstant.USER_DETAILS_HEADER, userDetails).build();
+            request.mutate().header(HttpHeaderConstant.USER_DETAILS_HEADER, userDetails).build();
             // 使用改变后的 Request 重新生成 ServerWebExchange
             exchange = exchange.mutate().request(request).build();
         } catch (ParseException e) {

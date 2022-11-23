@@ -5,6 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cafe.user.model.Menu">
         <id column="id" property="id" />
+        <result column="platform_id" property="platformId" />
         <result column="menu_name" property="menuName" />
         <result column="menu_title" property="menuTitle" />
         <result column="menu_icon" property="menuIcon" />
@@ -20,7 +21,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, menu_name, menu_title, menu_icon, menu_path, parent_id, menu_level, sort, status, create_time, update_time, is_deleted
+        id, platform_id, menu_name, menu_title, menu_icon, menu_path, parent_id, menu_level, sort, status, create_time, update_time, is_deleted
     </sql>
 
     <select id="listMenuTree" resultType="com.cafe.user.vo.MenuTreeVO">

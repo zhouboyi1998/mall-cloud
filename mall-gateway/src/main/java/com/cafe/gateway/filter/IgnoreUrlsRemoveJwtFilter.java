@@ -1,6 +1,6 @@
 package com.cafe.gateway.filter;
 
-import com.cafe.common.constant.AuthenticationConstant;
+import com.cafe.common.constant.HttpHeaderConstant;
 import com.cafe.common.constant.StringConstant;
 import com.cafe.gateway.property.IgnoreUrlsProperties;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +53,8 @@ public class IgnoreUrlsRemoveJwtFilter implements WebFilter {
         // 遍历所有白名单 URL
         for (String ignoreUrl : ignoreUrls) {
             if (pathMatcher.match(ignoreUrl, uri.getPath())) {
-                // 移除 Request 中的认证信息请求头
-                request.mutate().header(AuthenticationConstant.JWT_TOKEN_HEADER, StringConstant.EMPTY).build();
+                // 移除 Request Header 中的访问令牌
+                request.mutate().header(HttpHeaderConstant.AUTHORIZATION_HEADER, StringConstant.EMPTY).build();
                 // 使用改变后的 Request 重新生成 ServerWebExchange
                 exchange = exchange.mutate().request(request).build();
                 break;

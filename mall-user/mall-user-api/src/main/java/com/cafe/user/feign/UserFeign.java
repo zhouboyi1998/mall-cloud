@@ -1,6 +1,5 @@
 package com.cafe.user.feign;
 
-import com.cafe.user.dto.UserDTO;
 import com.cafe.user.model.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -20,20 +19,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface UserFeign {
 
     /**
-     * 根据用户名查询单个管理员
+     * 根据用户名和客户端id查询单个用户
      *
      * @param username
+     * @param clientId
      * @return
      */
-    @GetMapping(value = "/one/name/{username}")
-    ResponseEntity<User> one(@PathVariable(value = "username") String username);
-
-    /**
-     * 根据用户名查询单个用户DTO
-     *
-     * @param username
-     * @return
-     */
-    @GetMapping(value = "/one/dto/name/{username}")
-    ResponseEntity<UserDTO> oneDTO(@PathVariable(value = "username") String username);
+    @GetMapping(value = "/detail/{username}/{clientId}")
+    ResponseEntity<User> detail(
+        @PathVariable(value = "username") String username,
+        @PathVariable(value = "clientId") String clientId
+    );
 }

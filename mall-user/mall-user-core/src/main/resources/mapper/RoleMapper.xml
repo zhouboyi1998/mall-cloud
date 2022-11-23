@@ -5,6 +5,7 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cafe.user.model.Role">
         <id column="id" property="id"/>
+        <result column="platform_id" property="platformId"/>
         <result column="role_name" property="roleName"/>
         <result column="description" property="description"/>
         <result column="status" property="status"/>
@@ -15,7 +16,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, role_name, description, status, create_time, update_time, is_deleted
+        id, platform_id, role_name, description, status, create_time, update_time, is_deleted
     </sql>
 
     <select id="listRoleName" resultType="java.lang.String">

@@ -1,5 +1,7 @@
 package com.cafe.security.enhancer;
 
+import com.cafe.common.constant.HttpParameterConstant;
+import com.cafe.security.model.UserInfo;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -21,8 +23,11 @@ public class JwtTokenEnhancer implements TokenEnhancer {
 
     @Override
     public OAuth2AccessToken enhance(OAuth2AccessToken oAuth2AccessToken, OAuth2Authentication oAuth2Authentication) {
+        // 从 OAuth2Authentication 中获取用户详细信息
+        UserInfo userDetails = (UserInfo) oAuth2Authentication.getPrincipal();
         Map<String, Object> info = new HashMap<String, Object>(16);
-        // info 中添加额外的内容 ...
+        // 为 JWT 令牌增加额外的内容 ...
+        info.put(HttpParameterConstant.USER_ID_PARAMETER, userDetails.getId());
         ((DefaultOAuth2AccessToken) oAuth2AccessToken).setAdditionalInformation(info);
         return oAuth2AccessToken;
     }

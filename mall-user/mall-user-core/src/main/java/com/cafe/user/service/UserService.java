@@ -1,7 +1,6 @@
 package com.cafe.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cafe.user.dto.UserDTO;
 import com.cafe.user.model.User;
 
 /**
@@ -14,10 +13,11 @@ import com.cafe.user.model.User;
 public interface UserService extends IService<User> {
 
     /**
-     * 根据用户名查询单个用户DTO
+     * 根据用户名和客户端id查询单个用户
      *
      * @param username
+     * @param clientId
      * @return
      */
-    UserDTO oneDTO(String username);
+    User detail(String username, String clientId);
 }

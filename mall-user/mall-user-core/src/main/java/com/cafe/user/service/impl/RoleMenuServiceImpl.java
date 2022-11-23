@@ -5,7 +5,7 @@ import com.cafe.user.bo.MenuRoleBO;
 import com.cafe.user.dao.RoleMenuMapper;
 import com.cafe.user.model.RoleMenu;
 import com.cafe.user.service.RoleMenuService;
-import com.cafe.common.constant.AuthenticationConstant;
+import com.cafe.common.constant.AuthorizationConstant;
 import com.cafe.common.constant.RedisConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -51,7 +51,7 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
         for (MenuRoleBO menuRoleBO : menuRoleBOList) {
             // 添加权限前缀
             List<String> roleNameList = menuRoleBO.getRoleNameList().stream()
-                .map(i -> i = AuthenticationConstant.AUTHORITY_PREFIX + i)
+                .map(i -> i = AuthorizationConstant.AUTHORITY_PREFIX + i)
                 .collect(Collectors.toList());
             relationMap.put(menuRoleBO.getMenuPath(), roleNameList);
         }
@@ -69,7 +69,7 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
         for (MenuRoleBO menuRoleBO : menuRoleBOList) {
             // 添加权限前缀
             List<String> roleNameList = menuRoleBO.getRoleNameList().stream()
-                .map(i -> i = AuthenticationConstant.AUTHORITY_PREFIX + i)
+                .map(i -> i = AuthorizationConstant.AUTHORITY_PREFIX + i)
                 .collect(Collectors.toList());
             // 将对应关系保存到 Redis 中
             redisTemplate.opsForHash().put(RedisConstant.MENU_ROLE_MAP, menuRoleBO.getMenuPath(), roleNameList);

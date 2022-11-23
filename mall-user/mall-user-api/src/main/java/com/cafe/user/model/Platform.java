@@ -1,9 +1,10 @@
-package com.cafe.user.dto;
+package com.cafe.user.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -12,26 +13,26 @@ import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.user.dto
+ * @Package: com.cafe.user.model
  * @Author: zhouboyi
- * @Date: 2022/11/8 17:34
- * @Description:
+ * @Date: 2022-11-23
+ * @Description: 平台实体类
  */
-@ApiModel(value = "UserDTO对象", description = "用户数据传输对象")
-public class UserDTO implements Serializable {
+@TableName("mall_platform")
+@ApiModel(value = "Platform对象", description = "平台")
+public class Platform implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "用户ID")
+    @ApiModelProperty(value = "平台ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty(value = "用户名")
-    private String username;
+    @ApiModelProperty(value = "客户端ID")
+    private String clientId;
 
-    @ApiModelProperty(value = "密码")
-    @TableField(select = false)
-    private String password;
+    @ApiModelProperty(value = "平台名称")
+    private String platformName;
 
     @ApiModelProperty(value = "状态: 0 禁用, 1 正常")
     private Integer status;
@@ -47,6 +48,7 @@ public class UserDTO implements Serializable {
     @TableLogic
     private Boolean deleted;
 
+
     public Long getId() {
         return id;
     }
@@ -55,20 +57,20 @@ public class UserDTO implements Serializable {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getClientId() {
+        return clientId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setClientId(String clientId) {
+        this.clientId = clientId;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPlatformName() {
+        return platformName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPlatformName(String platformName) {
+        this.platformName = platformName;
     }
 
     public Integer getStatus() {
@@ -105,14 +107,14 @@ public class UserDTO implements Serializable {
 
     @Override
     public String toString() {
-        return "UserDTO{" +
-            "id=" + id +
-            ", username=" + username +
-            ", password=" + password +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", deleted=" + deleted +
-            "}";
+        return "Platform{" +
+        "id=" + id +
+        ", clientId=" + clientId +
+        ", platformName=" + platformName +
+        ", status=" + status +
+        ", createTime=" + createTime +
+        ", updateTime=" + updateTime +
+        ", deleted=" + deleted +
+        "}";
     }
 }

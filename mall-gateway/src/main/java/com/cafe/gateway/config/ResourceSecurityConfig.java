@@ -1,7 +1,7 @@
 package com.cafe.gateway.config;
 
 import cn.hutool.core.util.ArrayUtil;
-import com.cafe.common.constant.AuthenticationConstant;
+import com.cafe.common.constant.AuthorizationConstant;
 import com.cafe.gateway.authorization.AuthorizationManager;
 import com.cafe.gateway.filter.IgnoreUrlsRemoveJwtFilter;
 import com.cafe.gateway.handler.RestAccessDeniedHandler;
@@ -115,8 +115,8 @@ public class ResourceSecurityConfig {
     @Bean
     public Converter<Jwt, ? extends Mono<? extends AbstractAuthenticationToken>> jwtAuthenticationConverter() {
         JwtGrantedAuthoritiesConverter jwtGrantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-        jwtGrantedAuthoritiesConverter.setAuthorityPrefix(AuthenticationConstant.AUTHORITY_PREFIX);
-        jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName(AuthenticationConstant.AUTHORITY_CLAIM_NAME);
+        jwtGrantedAuthoritiesConverter.setAuthorityPrefix(AuthorizationConstant.AUTHORITY_PREFIX);
+        jwtGrantedAuthoritiesConverter.setAuthoritiesClaimName(AuthorizationConstant.AUTHORITIES_CLAIM_NAME);
         JwtAuthenticationConverter jwtAuthenticationConverter = new JwtAuthenticationConverter();
         jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(jwtGrantedAuthoritiesConverter);
         return new ReactiveJwtAuthenticationConverterAdapter(jwtAuthenticationConverter);
