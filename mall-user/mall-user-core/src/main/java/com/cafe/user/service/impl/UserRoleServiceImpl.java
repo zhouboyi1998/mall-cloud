@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @Package: com.cafe.user.service.impl
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 用户-角色关联业务实现类
+ * @Description: 用户-角色关联关系业务实现类
  */
 @Service
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements UserRoleService {

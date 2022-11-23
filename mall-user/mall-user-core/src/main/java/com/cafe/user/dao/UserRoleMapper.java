@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Package: com.cafe.user.dao
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 用户-角色关联数据访问接口
+ * @Description: 用户-角色关联关系数据访问接口
  */
 @Mapper
 public interface UserRoleMapper extends BaseMapper<UserRole> {
