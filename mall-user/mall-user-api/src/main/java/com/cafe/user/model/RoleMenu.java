@@ -22,7 +22,7 @@ public class RoleMenu implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "角色-菜单关联ID")
+    @ApiModelProperty(value = "角色-菜单关联关系ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 

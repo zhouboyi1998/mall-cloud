@@ -30,9 +30,9 @@ import java.util.List;
  * @Package: com.cafe.user.controller
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 角色-菜单关联接口
+ * @Description: 角色-菜单关联关系接口
  */
-@Api(value = "角色-菜单关联接口")
+@Api(value = "角色-菜单关联关系接口")
 @RestController
 @RequestMapping(value = "/role-menu")
 public class RoleMenuController {
@@ -44,17 +44,17 @@ public class RoleMenuController {
         this.roleMenuService = roleMenuService;
     }
 
-    @LogPrint(value = "查询角色-菜单关联列表")
-    @ApiOperation(value = "查询角色-菜单关联列表")
+    @LogPrint(value = "查询角色-菜单关联关系列表")
+    @ApiOperation(value = "查询角色-菜单关联关系列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<RoleMenu>> list() {
         List<RoleMenu> roleMenuList = roleMenuService.list();
         return ResponseEntity.ok(roleMenuList);
     }
 
-    @LogPrint(value = "根据条件查询角色-菜单关联列表")
-    @ApiOperation(value = "根据条件查询角色-菜单关联列表")
-    @ApiImplicitParam(value = "角色-菜单关联Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
+    @LogPrint(value = "根据条件查询角色-菜单关联关系列表")
+    @ApiOperation(value = "根据条件查询角色-菜单关联关系列表")
+    @ApiImplicitParam(value = "角色-菜单关联关系Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<RoleMenu>> list(@RequestBody RoleMenu roleMenu) {
         Wrapper<RoleMenu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(roleMenu);
@@ -62,8 +62,8 @@ public class RoleMenuController {
         return ResponseEntity.ok(roleMenuList);
     }
 
-    @LogPrint(value = "分页查询角色-菜单关联列表")
-    @ApiOperation(value = "分页查询角色-菜单关联列表")
+    @LogPrint(value = "分页查询角色-菜单关联关系列表")
+    @ApiOperation(value = "分页查询角色-菜单关联关系列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
         @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true)
@@ -78,12 +78,12 @@ public class RoleMenuController {
         return ResponseEntity.ok(roleMenuPage);
     }
 
-    @LogPrint(value = "根据条件分页查询角色-菜单关联")
-    @ApiOperation(value = "根据条件分页查询角色-菜单关联")
+    @LogPrint(value = "根据条件分页查询角色-菜单关联关系")
+    @ApiOperation(value = "根据条件分页查询角色-菜单关联关系")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
         @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true),
-        @ApiImplicitParam(value = "角色-菜单关联Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
+        @ApiImplicitParam(value = "角色-菜单关联关系Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
     })
     @PostMapping(value = "/page/{current}/{size}")
     public ResponseEntity<Page<RoleMenu>> page(
@@ -97,9 +97,9 @@ public class RoleMenuController {
         return ResponseEntity.ok(roleMenuPage);
     }
 
-    @LogPrint(value = "根据id查询单个角色-菜单关联")
-    @ApiOperation(value = "根据id查询单个角色-菜单关联")
-    @ApiImplicitParam(value = "角色-菜单关联id", name = "id", dataType = "Long", paramType = "path", required = true)
+    @LogPrint(value = "根据id查询单个角色-菜单关联关系")
+    @ApiOperation(value = "根据id查询单个角色-菜单关联关系")
+    @ApiImplicitParam(value = "角色-菜单关联关系id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<RoleMenu> one(@PathVariable(value = "id") Long id) {
         LambdaQueryWrapper<RoleMenu> wrapper = new LambdaQueryWrapper<RoleMenu>().eq(RoleMenu::getId, id);
@@ -107,9 +107,9 @@ public class RoleMenuController {
         return ResponseEntity.ok(roleMenu);
     }
 
-    @LogPrint(value = "新增角色-菜单关联")
-    @ApiOperation(value = "新增角色-菜单关联")
-    @ApiImplicitParam(value = "角色-菜单关联Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
+    @LogPrint(value = "新增角色-菜单关联关系")
+    @ApiOperation(value = "新增角色-菜单关联关系")
+    @ApiImplicitParam(value = "角色-菜单关联关系Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody RoleMenu roleMenu) {
         roleMenu.setCreateTime(LocalDateTime.now());
@@ -118,36 +118,36 @@ public class RoleMenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id修改角色-菜单关联")
-    @ApiOperation(value = "根据id修改角色-菜单关联")
-    @ApiImplicitParam(value = "角色-菜单关联Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
+    @LogPrint(value = "根据id修改角色-菜单关联关系")
+    @ApiOperation(value = "根据id修改角色-菜单关联关系")
+    @ApiImplicitParam(value = "角色-菜单关联关系Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
     @PutMapping(value = "/update")
     public ResponseEntity<Boolean> update(@RequestBody RoleMenu roleMenu) {
         Boolean code = roleMenuService.updateById(roleMenu);
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量修改角色-菜单关联")
-    @ApiOperation(value = "根据ids批量修改角色-菜单关联")
-    @ApiImplicitParam(value = "角色-菜单关联列表", name = "roleMenuList", dataType = "List<RoleMenu>", paramType = "body", required = true)
+    @LogPrint(value = "根据ids批量修改角色-菜单关联关系")
+    @ApiOperation(value = "根据ids批量修改角色-菜单关联关系")
+    @ApiImplicitParam(value = "角色-菜单关联关系列表", name = "roleMenuList", dataType = "List<RoleMenu>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<RoleMenu> roleMenuList) {
         Boolean code = roleMenuService.updateBatchById(roleMenuList);
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id删除角色-菜单关联")
-    @ApiOperation(value = "根据id删除角色-菜单关联")
-    @ApiImplicitParam(value = "角色-菜单关联id", name = "id", dataType = "Long", paramType = "path", required = true)
+    @LogPrint(value = "根据id删除角色-菜单关联关系")
+    @ApiOperation(value = "根据id删除角色-菜单关联关系")
+    @ApiImplicitParam(value = "角色-菜单关联关系id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
         Boolean code = roleMenuService.removeById(id);
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量删除角色-菜单关联")
-    @ApiOperation(value = "根据ids批量删除角色-菜单关联")
-    @ApiImplicitParam(value = "角色-菜单关联id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
+    @LogPrint(value = "根据ids批量删除角色-菜单关联关系")
+    @ApiOperation(value = "根据ids批量删除角色-菜单关联关系")
+    @ApiImplicitParam(value = "角色-菜单关联关系id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = roleMenuService.removeByIds(ids);

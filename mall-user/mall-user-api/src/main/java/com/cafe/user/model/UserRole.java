@@ -22,7 +22,7 @@ public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "用户-角色关联ID")
+    @ApiModelProperty(value = "用户-角色关联关系ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 

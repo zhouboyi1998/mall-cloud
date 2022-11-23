@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @Package: com.cafe.goods.service.impl
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 分类-品牌关联业务实现类
+ * @Description: 分类-品牌关联关系业务实现类
  */
 @Service
 public class CategoryBrandServiceImpl extends ServiceImpl<CategoryBrandMapper, CategoryBrand> implements CategoryBrandService {
