@@ -1,11 +1,12 @@
 package com.cafe.security.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.cafe.common.constant.AuthenticationConstant;
+import com.cafe.common.constant.HttpParameterConstant;
 import com.cafe.common.enumeration.HttpStatusCodeEnum;
-import com.cafe.user.dto.UserDTO;
+import com.cafe.security.model.UserInfo;
 import com.cafe.user.feign.RoleFeign;
 import com.cafe.user.feign.UserFeign;
+import com.cafe.user.model.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +15,6 @@ import org.springframework.security.authentication.CredentialsExpiredException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -51,20 +51,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 从 Request Parameter 中获取客户端id
-        String clientId = request.getParameter(AuthenticationConstant.CLIENT_ID_PARAMETER);
+        String clientId = request.getParameter(HttpParameterConstant.CLIENT_ID_PARAMETER);
 
         // 查询用户信息
-        UserDTO userDTO = userFeign.oneDTO(username).getBody();
+        User user = userFeign.detail(username, clientId).getBody();
 
-        if (ObjectUtil.isNotNull(userDTO)) {
+        if (ObjectUtil.isNotNull(user)) {
             // 根据用户id查询角色名称列表
-            List<String> roleNameList = roleFeign.listRoleName(userDTO.getId()).getBody();
+            List<String> roleNameList = roleFeign.listRoleName(user.getId()).getBody();
             if (ObjectUtil.isNull(roleNameList)) {
                 throw new UsernameNotFoundException(HttpStatusCodeEnum.ROLE_NOT_FOUND.getMessage());
             }
             // 角色名称列表转换为数组形式
             String[] roleNameArray = roleNameList.toArray(new String[0]);
-            User userDetails = new User(userDTO.getUsername(), userDTO.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
+            UserInfo userDetails = new UserInfo(user.getUsername(), user.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray), user.getId());
             if (!userDetails.isEnabled()) {
                 throw new DisabledException(HttpStatusCodeEnum.ACCOUNT_DISABLED.getMessage());
             } else if (!userDetails.isAccountNonLocked()) {

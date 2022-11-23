@@ -28,6 +28,9 @@ public class Role implements Serializable {
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
+    @ApiModelProperty(value = "平台ID")
+    private Long platformId;
+
     @ApiModelProperty(value = "角色名称")
     private String roleName;
 
@@ -54,6 +57,14 @@ public class Role implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getPlatformId() {
+        return platformId;
+    }
+
+    public void setPlatformId(Long platformId) {
+        this.platformId = platformId;
     }
 
     public String getRoleName() {
@@ -108,6 +119,7 @@ public class Role implements Serializable {
     public String toString() {
         return "Role{" +
             "id=" + id +
+            ", platformId=" + platformId +
             ", roleName=" + roleName +
             ", description=" + description +
             ", status=" + status +

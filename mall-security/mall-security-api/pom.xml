@@ -15,6 +15,12 @@
     <description>SpringSecurity 安全模块远程调用接口</description>
 
     <dependencies>
+        <!-- Spring Security 安全框架 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-security</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-core</artifactId>

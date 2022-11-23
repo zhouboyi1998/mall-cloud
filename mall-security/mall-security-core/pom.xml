@@ -15,11 +15,6 @@
     <description>SpringSecurity 安全模块核心业务</description>
 
     <dependencies>
-        <!-- Spring Security 安全框架 -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-security</artifactId>
-        </dependency>
         <!-- Oauth2 单点登录 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
