@@ -30,22 +30,16 @@ public class MyBatisPlusGenerator {
      */
     private static Properties properties;
 
-    /**
-     * MySQL 类型枚举
-     */
-    private enum MySqlType {DECIMAL, DATETIME}
-
     static {
         try {
             // 创建 properties 对象
             properties = new Properties();
             // 获取配置文件
-            InputStream inputStream = MyBatisPlusGenerator.class
-                .getClassLoader()
-                .getResourceAsStream("generator.properties");
+            InputStream inputStream = MyBatisPlusGenerator.class.getClassLoader().getResourceAsStream("generator.properties");
             // 将配置文件加载到 properties 对象中
             properties.load(inputStream);
             // 关闭输入流
+            assert inputStream != null;
             inputStream.close();
         } catch (Exception e) {
             LOGGER.error("MyBatisPlusGenerator: failed to create properties -> {}", e.getMessage());
@@ -53,7 +47,6 @@ public class MyBatisPlusGenerator {
     }
 
     public static void generate() {
-
         // 1. 全局配置
         GlobalConfig globalConfig = new GlobalConfig();
         // 项目路径
@@ -86,9 +79,9 @@ public class MyBatisPlusGenerator {
         dataSourceConfig.setTypeConvert(new MySqlTypeConvert() {
             @Override
             public IColumnType processTypeConvert(GlobalConfig config, String fieldType) {
-                if (fieldType.toUpperCase().contains(MySqlType.DECIMAL.toString())) {
+                if (fieldType.toUpperCase().contains(MySQLTypeEnum.DECIMAL.toString())) {
                     return DbColumnType.DOUBLE;
-                } else if (fieldType.toUpperCase().contains(MySqlType.DATETIME.toString())) {
+                } else if (fieldType.toUpperCase().contains(MySQLTypeEnum.DATETIME.toString())) {
                     return DbColumnType.LOCAL_DATE_TIME;
                 }
                 return (DbColumnType) super.processTypeConvert(config, fieldType);
@@ -128,7 +121,7 @@ public class MyBatisPlusGenerator {
 
         // 5. 模板配置
         TemplateConfig templateConfig = new TemplateConfig();
-        // 使用自定义模板
+        // 使用自定义的 Velocity 模板
         templateConfig.setEntity("/templates/entity.java.vm");
         templateConfig.setMapper("/templates/mapper.java.vm");
         templateConfig.setXml("/templates/mapper.xml.vm");
