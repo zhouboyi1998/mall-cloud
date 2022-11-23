@@ -22,7 +22,7 @@ public class CategoryBrand implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "分类-品牌关联ID")
+    @ApiModelProperty(value = "分类-品牌关联关系ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 

@@ -13,7 +13,7 @@ import java.util.List;
  * @Package: com.cafe.user.dao
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 角色-菜单关联数据访问接口
+ * @Description: 角色-菜单关联关系数据访问接口
  */
 @Mapper
 public interface RoleMenuMapper extends BaseMapper<RoleMenu> {

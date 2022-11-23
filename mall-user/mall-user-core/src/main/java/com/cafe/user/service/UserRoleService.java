@@ -8,7 +8,7 @@ import com.cafe.user.model.UserRole;
  * @Package: com.cafe.user.service
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 用户-角色关联业务接口
+ * @Description: 用户-角色关联关系业务接口
  */
 public interface UserRoleService extends IService<UserRole> {
 

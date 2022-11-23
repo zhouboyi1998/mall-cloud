@@ -30,9 +30,9 @@ import java.util.List;
  * @Package: com.cafe.user.controller
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 用户-角色关联接口
+ * @Description: 用户-角色关联关系接口
  */
-@Api(value = "用户-角色关联接口")
+@Api(value = "用户-角色关联关系接口")
 @RestController
 @RequestMapping(value = "/user-role")
 public class UserRoleController {
@@ -44,17 +44,17 @@ public class UserRoleController {
         this.userRoleService = userRoleService;
     }
 
-    @LogPrint(value = "查询用户-角色关联列表")
-    @ApiOperation(value = "查询用户-角色关联列表")
+    @LogPrint(value = "查询用户-角色关联关系列表")
+    @ApiOperation(value = "查询用户-角色关联关系列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<UserRole>> list() {
         List<UserRole> userRoleList = userRoleService.list();
         return ResponseEntity.ok(userRoleList);
     }
 
-    @LogPrint(value = "根据条件查询用户-角色关联列表")
-    @ApiOperation(value = "根据条件查询用户-角色关联列表")
-    @ApiImplicitParam(value = "用户-角色关联Model", name = "userRole", dataType = "UserRole", paramType = "body", required = true)
+    @LogPrint(value = "根据条件查询用户-角色关联关系列表")
+    @ApiOperation(value = "根据条件查询用户-角色关联关系列表")
+    @ApiImplicitParam(value = "用户-角色关联关系Model", name = "userRole", dataType = "UserRole", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<UserRole>> list(@RequestBody UserRole userRole) {
         Wrapper<UserRole> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(userRole);
@@ -62,8 +62,8 @@ public class UserRoleController {
         return ResponseEntity.ok(userRoleList);
     }
 
-    @LogPrint(value = "分页查询用户-角色关联列表")
-    @ApiOperation(value = "分页查询用户-角色关联列表")
+    @LogPrint(value = "分页查询用户-角色关联关系列表")
+    @ApiOperation(value = "分页查询用户-角色关联关系列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
         @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true)
@@ -78,12 +78,12 @@ public class UserRoleController {
         return ResponseEntity.ok(userRolePage);
     }
 
-    @LogPrint(value = "根据条件分页查询用户-角色关联")
-    @ApiOperation(value = "根据条件分页查询用户-角色关联")
+    @LogPrint(value = "根据条件分页查询用户-角色关联关系")
+    @ApiOperation(value = "根据条件分页查询用户-角色关联关系")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
         @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true),
-        @ApiImplicitParam(value = "用户-角色关联Model", name = "userRole", dataType = "UserRole", paramType = "body", required = true)
+        @ApiImplicitParam(value = "用户-角色关联关系Model", name = "userRole", dataType = "UserRole", paramType = "body", required = true)
     })
     @PostMapping(value = "/page/{current}/{size}")
     public ResponseEntity<Page<UserRole>> page(
@@ -97,9 +97,9 @@ public class UserRoleController {
         return ResponseEntity.ok(userRolePage);
     }
 
-    @LogPrint(value = "根据id查询单个用户-角色关联")
-    @ApiOperation(value = "根据id查询单个用户-角色关联")
-    @ApiImplicitParam(value = "用户-角色关联id", name = "id", dataType = "Long", paramType = "path", required = true)
+    @LogPrint(value = "根据id查询单个用户-角色关联关系")
+    @ApiOperation(value = "根据id查询单个用户-角色关联关系")
+    @ApiImplicitParam(value = "用户-角色关联关系id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<UserRole> one(@PathVariable(value = "id") Long id) {
         LambdaQueryWrapper<UserRole> wrapper = new LambdaQueryWrapper<UserRole>().eq(UserRole::getId, id);
@@ -107,9 +107,9 @@ public class UserRoleController {
         return ResponseEntity.ok(userRole);
     }
 
-    @LogPrint(value = "新增用户-角色关联")
-    @ApiOperation(value = "新增用户-角色关联")
-    @ApiImplicitParam(value = "用户-角色关联Model", name = "userRole", dataType = "UserRole", paramType = "body", required = true)
+    @LogPrint(value = "新增用户-角色关联关系")
+    @ApiOperation(value = "新增用户-角色关联关系")
+    @ApiImplicitParam(value = "用户-角色关联关系Model", name = "userRole", dataType = "UserRole", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody UserRole userRole) {
         userRole.setCreateTime(LocalDateTime.now());
@@ -118,36 +118,36 @@ public class UserRoleController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id修改用户-角色关联")
-    @ApiOperation(value = "根据id修改用户-角色关联")
-    @ApiImplicitParam(value = "用户-角色关联Model", name = "userRole", dataType = "UserRole", paramType = "body", required = true)
+    @LogPrint(value = "根据id修改用户-角色关联关系")
+    @ApiOperation(value = "根据id修改用户-角色关联关系")
+    @ApiImplicitParam(value = "用户-角色关联关系Model", name = "userRole", dataType = "UserRole", paramType = "body", required = true)
     @PutMapping(value = "/update")
     public ResponseEntity<Boolean> update(@RequestBody UserRole userRole) {
         Boolean code = userRoleService.updateById(userRole);
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量修改用户-角色关联")
-    @ApiOperation(value = "根据ids批量修改用户-角色关联")
-    @ApiImplicitParam(value = "用户-角色关联列表", name = "userRoleList", dataType = "List<UserRole>", paramType = "body", required = true)
+    @LogPrint(value = "根据ids批量修改用户-角色关联关系")
+    @ApiOperation(value = "根据ids批量修改用户-角色关联关系")
+    @ApiImplicitParam(value = "用户-角色关联关系列表", name = "userRoleList", dataType = "List<UserRole>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
     public ResponseEntity<Boolean> updateBatch(@RequestBody List<UserRole> userRoleList) {
         Boolean code = userRoleService.updateBatchById(userRoleList);
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id删除用户-角色关联")
-    @ApiOperation(value = "根据id删除用户-角色关联")
-    @ApiImplicitParam(value = "用户-角色关联id", name = "id", dataType = "Long", paramType = "path", required = true)
+    @LogPrint(value = "根据id删除用户-角色关联关系")
+    @ApiOperation(value = "根据id删除用户-角色关联关系")
+    @ApiImplicitParam(value = "用户-角色关联关系id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
         Boolean code = userRoleService.removeById(id);
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量删除用户-角色关联")
-    @ApiOperation(value = "根据ids批量删除用户-角色关联")
-    @ApiImplicitParam(value = "用户-角色关联id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
+    @LogPrint(value = "根据ids批量删除用户-角色关联关系")
+    @ApiOperation(value = "根据ids批量删除用户-角色关联关系")
+    @ApiImplicitParam(value = "用户-角色关联关系id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = userRoleService.removeByIds(ids);
