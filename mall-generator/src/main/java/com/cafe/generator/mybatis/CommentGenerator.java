@@ -33,8 +33,7 @@ public class CommentGenerator extends DefaultCommentGenerator {
     @Override
     public void addConfigurationProperties(Properties properties) {
         super.addConfigurationProperties(properties);
-        this.addRemarkComments
-            = StringUtility.isTrue(properties.getProperty("addRemarkComments"));
+        this.addRemarkComments = StringUtility.isTrue(properties.getProperty("addRemarkComments"));
     }
 
     /**
