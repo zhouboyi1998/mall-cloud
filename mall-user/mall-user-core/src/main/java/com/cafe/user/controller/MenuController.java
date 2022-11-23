@@ -3,12 +3,12 @@ package com.cafe.user.controller;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cafe.common.constant.HttpHeaderConstant;
+import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import com.cafe.user.model.Menu;
 import com.cafe.user.service.MenuService;
 import com.cafe.user.vo.MenuTreeVO;
-import com.cafe.common.constant.AuthenticationConstant;
-import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -159,10 +159,10 @@ public class MenuController {
 
     @LogPrint(value = "根据角色列表获取树形格式的菜单列表")
     @ApiOperation(value = "根据角色列表获取树形格式的菜单列表")
-    @ApiImplicitParam(value = "用户详细信息", name = AuthenticationConstant.USER_DETAILS_HEADER, dataType = "String", paramType = "header", required = true)
+    @ApiImplicitParam(value = "用户详细信息", name = HttpHeaderConstant.USER_DETAILS_HEADER, dataType = "String", paramType = "header", required = true)
     @GetMapping(value = "/listMenuTree")
     public ResponseEntity<List<MenuTreeVO>> listMenuTree(
-        @RequestHeader(value = AuthenticationConstant.USER_DETAILS_HEADER) String userDetails
+        @RequestHeader(value = HttpHeaderConstant.USER_DETAILS_HEADER) String userDetails
     ) {
         List<MenuTreeVO> menuTreeVOList = menuService.listMenuTree(userDetails);
         return ResponseEntity.ok(menuTreeVOList);

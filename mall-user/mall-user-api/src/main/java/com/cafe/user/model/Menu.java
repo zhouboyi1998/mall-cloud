@@ -28,10 +28,13 @@ public class Menu implements Serializable {
     @TableId(value = "id", type = IdType.INPUT)
     private Long id;
 
+    @ApiModelProperty(value = "平台ID")
+    private Long platformId;
+
     @ApiModelProperty(value = "菜单名称")
     private String menuName;
 
-    @ApiModelProperty(value = "菜单显示标题")
+    @ApiModelProperty(value = "菜单标题")
     private String menuTitle;
 
     @ApiModelProperty(value = "菜单图标")
@@ -69,6 +72,14 @@ public class Menu implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getPlatformId() {
+        return platformId;
+    }
+
+    public void setPlatformId(Long platformId) {
+        this.platformId = platformId;
     }
 
     public String getMenuName() {
@@ -163,6 +174,7 @@ public class Menu implements Serializable {
     public String toString() {
         return "Menu{" +
             "id=" + id +
+            ", platformId=" + platformId +
             ", menuName=" + menuName +
             ", menuTitle=" + menuTitle +
             ", description=" + menuIcon +

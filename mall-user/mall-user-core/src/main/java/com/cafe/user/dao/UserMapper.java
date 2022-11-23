@@ -1,7 +1,6 @@
 package com.cafe.user.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.user.dto.UserDTO;
 import com.cafe.user.model.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,10 +16,11 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper extends BaseMapper<User> {
 
     /**
-     * 根据用户名查询单个用户DTO
+     * 根据用户名和客户端id查询单个用户
      *
      * @param username
+     * @param clientId
      * @return
      */
-    UserDTO oneDTO(@Param(value = "username") String username);
+    User detail(@Param(value = "username") String username, @Param(value = "clientId") String clientId);
 }

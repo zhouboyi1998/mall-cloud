@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
-import com.cafe.user.dto.UserDTO;
 import com.cafe.user.model.User;
 import com.cafe.user.service.UserService;
 import io.swagger.annotations.Api;
@@ -155,24 +154,18 @@ public class UserController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据用户名查询单个用户")
-    @ApiOperation(value = "根据用户名查询单个用户")
-    @ApiImplicitParam(value = "用户名", name = "username", dataType = "String", paramType = "path", required = true)
-    @GetMapping(value = "/one/name/{username}")
-    public ResponseEntity<User> one(@PathVariable(value = "username") String username) {
-        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<User>()
-            .select(User.class, tableFieldInfo -> true)
-            .eq(User::getUsername, username);
-        User user = userService.getOne(wrapper);
+    @LogPrint(value = "根据用户名和客户端id查询单个用户")
+    @ApiOperation(value = "根据用户名和客户端id查询单个用户")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(value = "用户名", name = "username", dataType = "String", paramType = "path", required = true),
+        @ApiImplicitParam(value = "客户端id", name = "clientId", dataType = "String", paramType = "path", required = true)
+    })
+    @GetMapping(value = "/detail/{username}/{clientId}")
+    public ResponseEntity<User> detail(
+        @PathVariable(value = "username") String username,
+        @PathVariable(value = "clientId") String clientId
+    ) {
+        User user = userService.detail(username, clientId);
         return ResponseEntity.ok(user);
-    }
-
-    @LogPrint(value = "根据用户名查询单个用户DTO")
-    @ApiOperation(value = "根据用户名查询单个用户DTO")
-    @ApiImplicitParam(value = "用户名", name = "username", dataType = "String", paramType = "path", required = true)
-    @GetMapping(value = "/one/dto/name/{username}")
-    public ResponseEntity<UserDTO> oneDTO(@PathVariable(value = "username") String username) {
-        UserDTO userDTO = userService.oneDTO(username);
-        return ResponseEntity.ok(userDTO);
     }
 }
