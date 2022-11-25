@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -16,9 +18,9 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.goods.model
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 品牌 (实体类)
+ * @Description: 品牌实体模型
  */
-@ApiModel(value = "Brand对象", description = "品牌")
+@ApiModel(value = "Brand", description = "品牌实体模型")
 @TableName("mall_brand")
 public class Brand implements Serializable {
 
@@ -26,6 +28,7 @@ public class Brand implements Serializable {
 
     @ApiModelProperty(value = "品牌ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "品牌名称")
@@ -58,72 +61,81 @@ public class Brand implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public Brand setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getBrandName() {
         return brandName;
     }
 
-    public void setBrandName(String brandName) {
+    public Brand setBrandName(String brandName) {
         this.brandName = brandName;
+        return this;
     }
 
     public String getLetter() {
         return letter;
     }
 
-    public void setLetter(String letter) {
+    public Brand setLetter(String letter) {
         this.letter = letter;
+        return this;
     }
 
     public String getBrandImage() {
         return brandImage;
     }
 
-    public void setBrandImage(String brandImage) {
+    public Brand setBrandImage(String brandImage) {
         this.brandImage = brandImage;
+        return this;
     }
 
     public Integer getSort() {
         return sort;
     }
 
-    public void setSort(Integer sort) {
+    public Brand setSort(Integer sort) {
         this.sort = sort;
+        return this;
     }
 
     public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public Brand setStatus(Integer status) {
         this.status = status;
+        return this;
     }
 
     public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public Brand setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+        return this;
     }
 
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(LocalDateTime updateTime) {
+    public Brand setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+        return this;
     }
 
     public Boolean getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public Brand setDeleted(Boolean deleted) {
         this.deleted = deleted;
+        return this;
     }
 
     @Override

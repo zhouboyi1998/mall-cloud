@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -112,9 +113,22 @@ public class SpuController {
     @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Spu spu) {
-        spu.setCreateTime(LocalDateTime.now());
-        spu.setUpdateTime(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        spu.setCreateTime(now).setUpdateTime(now);
         Boolean code = spuService.save(spu);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "批量新增标准化产品单元")
+    @ApiOperation(value = "批量新增标准化产品单元")
+    @ApiImplicitParam(value = "标准化产品单元列表", name = "spuList", dataType = "List<Spu>", paramType = "body", required = true)
+    @PostMapping(value = "/insert/batch")
+    public ResponseEntity<Boolean> insertBatch(@RequestBody List<Spu> spuList) {
+        LocalDateTime now = LocalDateTime.now();
+        spuList = spuList.stream()
+            .map(spu -> spu.setCreateTime(now).setUpdateTime(now))
+            .collect(Collectors.toList());
+        Boolean code = spuService.saveBatch(spuList);
         return ResponseEntity.ok(code);
     }
 

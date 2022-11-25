@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -112,9 +113,22 @@ public class UserController {
     @ApiImplicitParam(value = "用户Model", name = "user", dataType = "User", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody User user) {
-        user.setCreateTime(LocalDateTime.now());
-        user.setUpdateTime(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        user.setCreateTime(now).setUpdateTime(now);
         Boolean code = userService.save(user);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "批量新增用户")
+    @ApiOperation(value = "批量新增用户")
+    @ApiImplicitParam(value = "用户列表", name = "userList", dataType = "List<User>", paramType = "body", required = true)
+    @PostMapping(value = "/insert/batch")
+    public ResponseEntity<Boolean> insertBatch(@RequestBody List<User> userList) {
+        LocalDateTime now = LocalDateTime.now();
+        userList = userList.stream()
+            .map(user -> user.setCreateTime(now).setUpdateTime(now))
+            .collect(Collectors.toList());
+        Boolean code = userService.saveBatch(userList);
         return ResponseEntity.ok(code);
     }
 

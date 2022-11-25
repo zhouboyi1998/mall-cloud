@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -16,9 +18,9 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.goods.model
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 库存量单位 (实体类)
+ * @Description: 库存量单位实体模型
  */
-@ApiModel(value = "Sku对象", description = "库存量单位")
+@ApiModel(value = "Sku", description = "库存量单位实体模型")
 @TableName("mall_sku")
 public class Sku implements Serializable {
 
@@ -26,12 +28,14 @@ public class Sku implements Serializable {
 
     @ApiModelProperty(value = "SKU ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "SKU 名称")
     private String skuName;
 
     @ApiModelProperty(value = "SPU ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long spuId;
 
     @ApiModelProperty(value = "SKU 原价")
@@ -85,144 +89,162 @@ public class Sku implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public Sku setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getSkuName() {
         return skuName;
     }
 
-    public void setSkuName(String skuName) {
+    public Sku setSkuName(String skuName) {
         this.skuName = skuName;
+        return this;
     }
 
     public Long getSpuId() {
         return spuId;
     }
 
-    public void setSpuId(Long spuId) {
+    public Sku setSpuId(Long spuId) {
         this.spuId = spuId;
+        return this;
     }
 
     public Double getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(Double originalPrice) {
+    public Sku setOriginalPrice(Double originalPrice) {
         this.originalPrice = originalPrice;
+        return this;
     }
 
     public Double getDiscountPrice() {
         return discountPrice;
     }
 
-    public void setDiscountPrice(Double discountPrice) {
+    public Sku setDiscountPrice(Double discountPrice) {
         this.discountPrice = discountPrice;
+        return this;
     }
 
     public Double getSeckillPrice() {
         return seckillPrice;
     }
 
-    public void setSeckillPrice(Double seckillPrice) {
+    public Sku setSeckillPrice(Double seckillPrice) {
         this.seckillPrice = seckillPrice;
+        return this;
     }
 
     public Integer getStock() {
         return stock;
     }
 
-    public void setStock(Integer stock) {
+    public Sku setStock(Integer stock) {
         this.stock = stock;
+        return this;
     }
 
     public Integer getSaleCount() {
         return saleCount;
     }
 
-    public void setSaleCount(Integer saleCount) {
+    public Sku setSaleCount(Integer saleCount) {
         this.saleCount = saleCount;
+        return this;
     }
 
     public String getSkuImage() {
         return skuImage;
     }
 
-    public void setSkuImage(String skuImage) {
+    public Sku setSkuImage(String skuImage) {
         this.skuImage = skuImage;
+        return this;
     }
 
     public String getSkuImageList() {
         return skuImageList;
     }
 
-    public void setSkuImageList(String skuImageList) {
+    public Sku setSkuImageList(String skuImageList) {
         this.skuImageList = skuImageList;
+        return this;
     }
 
     public String getSpecification() {
         return specification;
     }
 
-    public void setSpecification(String specification) {
+    public Sku setSpecification(String specification) {
         this.specification = specification;
+        return this;
     }
 
     public Integer getSort() {
         return sort;
     }
 
-    public void setSort(Integer sort) {
+    public Sku setSort(Integer sort) {
         this.sort = sort;
+        return this;
     }
 
     public Integer getCheckStatus() {
         return checkStatus;
     }
 
-    public void setCheckStatus(Integer checkStatus) {
+    public Sku setCheckStatus(Integer checkStatus) {
         this.checkStatus = checkStatus;
+        return this;
     }
 
     public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public Sku setStatus(Integer status) {
         this.status = status;
+        return this;
     }
 
     public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public Sku setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+        return this;
     }
 
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(LocalDateTime updateTime) {
+    public Sku setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+        return this;
     }
 
     public LocalDateTime getLaunchTime() {
         return launchTime;
     }
 
-    public void setLaunchTime(LocalDateTime launchTime) {
+    public Sku setLaunchTime(LocalDateTime launchTime) {
         this.launchTime = launchTime;
+        return this;
     }
 
     public Boolean getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public Sku setDeleted(Boolean deleted) {
         this.deleted = deleted;
+        return this;
     }
 
     @Override

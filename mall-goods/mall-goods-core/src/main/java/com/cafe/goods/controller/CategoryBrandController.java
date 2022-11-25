@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -112,9 +113,22 @@ public class CategoryBrandController {
     @ApiImplicitParam(value = "分类-品牌关联关系Model", name = "categoryBrand", dataType = "CategoryBrand", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody CategoryBrand categoryBrand) {
-        categoryBrand.setCreateTime(LocalDateTime.now());
-        categoryBrand.setUpdateTime(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        categoryBrand.setCreateTime(now).setUpdateTime(now);
         Boolean code = categoryBrandService.save(categoryBrand);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "批量新增分类-品牌关联关系")
+    @ApiOperation(value = "批量新增分类-品牌关联关系")
+    @ApiImplicitParam(value = "分类-品牌关联关系列表", name = "categoryBrandList", dataType = "List<CategoryBrand>", paramType = "body", required = true)
+    @PostMapping(value = "/insert/batch")
+    public ResponseEntity<Boolean> insertBatch(@RequestBody List<CategoryBrand> categoryBrandList) {
+        LocalDateTime now = LocalDateTime.now();
+        categoryBrandList = categoryBrandList.stream()
+            .map(categoryBrand -> categoryBrand.setCreateTime(now).setUpdateTime(now))
+            .collect(Collectors.toList());
+        Boolean code = categoryBrandService.saveBatch(categoryBrandList);
         return ResponseEntity.ok(code);
     }
 

@@ -40,7 +40,7 @@
             <property name="forceBigDecimals" value="false" />
         </javaTypeResolver>
 
-        <!-- Model 实体类生成路径 -->
+        <!-- Model 实体模型生成路径 -->
         <javaModelGenerator targetPackage="${project-package}.${module}.${model-package}"
                             targetProject="mall-generator\src\main\java"/>
 

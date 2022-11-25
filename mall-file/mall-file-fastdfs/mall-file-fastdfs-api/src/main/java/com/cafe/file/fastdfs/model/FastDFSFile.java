@@ -1,5 +1,8 @@
 package com.cafe.file.fastdfs.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
 /**
@@ -7,52 +10,44 @@ import java.io.Serializable;
  * @Package: com.cafe.file.fastdfs.model
  * @Author: zhouboyi
  * @Date: 2022/7/23 19:32
- * @Description:
+ * @Description: FastDFS 文件模型
  */
+@ApiModel(value = "FastDFSFile", description = "FastDFS 文件模型")
 public class FastDFSFile implements Serializable {
 
-    /**
-     * 文件名
-     */
+    @ApiModelProperty(value = "文件名")
     private String name;
 
-    /**
-     * 文件扩展名
-     */
+    @ApiModelProperty(value = "文件扩展名")
     private String extension;
 
-    public FastDFSFile(String name, String extension, byte[] content) {
-        this.name = name;
-        this.extension = extension;
-        this.content = content;
-    }
-
-    /**
-     * 文件内容
-     */
+    @ApiModelProperty(value = "文件内容")
     private byte[] content;
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public FastDFSFile setName(String name) {
         this.name = name;
+        return this;
     }
 
     public String getExtension() {
         return extension;
     }
 
-    public void setExtension(String extension) {
+    public FastDFSFile setExtension(String extension) {
         this.extension = extension;
+        return this;
     }
 
     public byte[] getContent() {
         return content;
     }
 
-    public void setContent(byte[] content) {
+    public FastDFSFile setContent(byte[] content) {
         this.content = content;
+        return this;
     }
 }

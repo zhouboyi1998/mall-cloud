@@ -3,6 +3,8 @@ package com.cafe.user.model;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -14,9 +16,9 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.user.model
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 用户-角色关联关系 (实体类)
+ * @Description: 用户-角色关联关系实体模型
  */
-@ApiModel(value = "UserRole对象", description = "用户-角色关联关系")
+@ApiModel(value = "UserRole", description = "用户-角色关联关系实体模型")
 @TableName("mall_user_role")
 public class UserRole implements Serializable {
 
@@ -24,12 +26,15 @@ public class UserRole implements Serializable {
 
     @ApiModelProperty(value = "用户-角色关联关系ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "用户ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long userId;
 
     @ApiModelProperty(value = "角色ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long roleId;
 
     @ApiModelProperty(value = "创建时间")
@@ -42,40 +47,45 @@ public class UserRole implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public UserRole setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public UserRole setUserId(Long userId) {
         this.userId = userId;
+        return this;
     }
 
     public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(Long roleId) {
+    public UserRole setRoleId(Long roleId) {
         this.roleId = roleId;
+        return this;
     }
 
     public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public UserRole setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+        return this;
     }
 
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(LocalDateTime updateTime) {
+    public UserRole setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+        return this;
     }
 
     @Override

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 #if(${restControllerStyle})
 #else
@@ -131,9 +132,22 @@ public class ${table.controllerName} {
     @ApiImplicitParam(value = "${table.comment}Model", name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", dataType = "${entity}", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}) {
-        ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}.setCreateTime(LocalDateTime.now());
-        ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}.setUpdateTime(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}.setCreateTime(now).setUpdateTime(now);
         Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.save(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "批量新增${table.comment}")
+    @ApiOperation(value = "批量新增${table.comment}")
+    @ApiImplicitParam(value = "${table.comment}列表", name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List", dataType = "List<${entity}>", paramType = "body", required = true)
+    @PostMapping(value = "/insert/batch")
+    public ResponseEntity<Boolean> insertBatch(@RequestBody List<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List) {
+        LocalDateTime now = LocalDateTime.now();
+        ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List.stream()
+            .map(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} -> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}.setCreateTime(now).setUpdateTime(now))
+            .collect(Collectors.toList());
+        Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.saveBatch(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List);
         return ResponseEntity.ok(code);
     }
 
