@@ -1,5 +1,6 @@
 package com.cafe.file.minio.controller;
 
+import com.cafe.common.enumeration.HttpStatusCodeEnum;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.file.minio.service.MinioService;
 import io.swagger.annotations.Api;
@@ -64,7 +65,7 @@ public class MinioController {
         HttpServletResponse httpResponse
     ) throws Exception {
         minioService.download(bucket, fileName, httpResponse);
-        return ResponseEntity.ok("success");
+        return ResponseEntity.ok(HttpStatusCodeEnum.SUCCESS.getMessage());
     }
 
     @LogPrint(value = "获取文件外链 (永久)")

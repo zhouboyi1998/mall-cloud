@@ -1,5 +1,7 @@
 package com.cafe.user.vo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -11,14 +13,15 @@ import java.util.List;
  * @Package: com.cafe.user.vo
  * @Author: zhouboyi
  * @Date: 2022/7/7 17:25
- * @Description:
+ * @Description: 菜单树视图模型
  */
-@ApiModel(value = "MenuTreeVO对象", description = "二级菜单树视图对象")
+@ApiModel(value = "MenuTreeVO", description = "菜单树视图模型")
 public class MenuTreeVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "菜单ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "菜单名称")
@@ -34,6 +37,7 @@ public class MenuTreeVO implements Serializable {
     private String menuPath;
 
     @ApiModelProperty(value = "上级菜单ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long parentId;
 
     @ApiModelProperty(value = "排序号")

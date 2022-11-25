@@ -23,4 +23,9 @@ public class HttpHeaderConstant {
      * 用户详细信息请求头
      */
     public static final String USER_DETAILS_HEADER = "User-Details";
+
+    /**
+     * Cache-Control 请求头值: 无缓存
+     */
+    public static final String NO_CACHE = "no-cache";
 }

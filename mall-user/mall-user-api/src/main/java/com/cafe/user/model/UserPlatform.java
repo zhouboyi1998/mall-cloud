@@ -3,6 +3,8 @@ package com.cafe.user.model;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -14,22 +16,25 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.user.model
  * @Author: zhouboyi
  * @Date: 2022-11-23
- * @Description: 用户-平台关联关系实体类
+ * @Description: 用户-平台关联关系实体模型
  */
+@ApiModel(value = "UserPlatform", description = "用户-平台关联关系实体模型")
 @TableName("mall_user_platform")
-@ApiModel(value = "UserPlatform对象", description = "用户-平台关联关系")
 public class UserPlatform implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "用户-平台关联关系ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "用户ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long userId;
 
     @ApiModelProperty(value = "平台ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long platformId;
 
     @ApiModelProperty(value = "创建时间")
@@ -38,55 +43,59 @@ public class UserPlatform implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
 
-
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public UserPlatform setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public UserPlatform setUserId(Long userId) {
         this.userId = userId;
+        return this;
     }
 
     public Long getPlatformId() {
         return platformId;
     }
 
-    public void setPlatformId(Long platformId) {
+    public UserPlatform setPlatformId(Long platformId) {
         this.platformId = platformId;
+        return this;
     }
 
     public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public UserPlatform setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+        return this;
     }
 
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(LocalDateTime updateTime) {
+    public UserPlatform setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+        return this;
     }
 
     @Override
     public String toString() {
         return "UserPlatform{" +
-        "id=" + id +
-        ", userId=" + userId +
-        ", platformId=" + platformId +
-        ", createTime=" + createTime +
-        ", updateTime=" + updateTime +
-        "}";
+            "id=" + id +
+            ", userId=" + userId +
+            ", platformId=" + platformId +
+            ", createTime=" + createTime +
+            ", updateTime=" + updateTime +
+            "}";
     }
 }

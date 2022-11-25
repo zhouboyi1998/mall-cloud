@@ -3,6 +3,8 @@ package ${package.Entity};
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
 #end
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 #if(${swagger2})
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -20,7 +22,7 @@ import lombok.experimental.Accessors;
  * @Package: ${package.Entity}
  * @Author: ${author}
  * @Date: ${date}
- * @Description: ${table.comment}实体类
+ * @Description: ${table.comment}实体模型
  */
 #if(${entityLombokModel})
 @Data
@@ -33,11 +35,11 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
   #end
 #end
+#if(${swagger2})
+@ApiModel(value = "${entity}", description = "$!{table.comment}实体模型")
+#end
 #if(${table.convert})
 @TableName("${table.name}")
-#end
-#if(${swagger2})
-@ApiModel(value = "${entity}对象", description = "$!{table.comment}")
 #end
 #if(${superEntityClass})
 public class ${entity} extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {
@@ -93,10 +95,13 @@ public class ${entity} implements Serializable {
 #if(${logicDeleteFieldName} == ${field.name})
     @TableLogic
 #end
+## Long 类型字段的 JSON 序列化注解
+#if(${field.columnType} == "LONG")
+    @JsonSerialize(using = ToStringSerializer.class)
+#end
     private ${field.propertyType} ${field.propertyName};
 #end
 ## ----------  END 字段循环遍历  ----------
-
 #if(!${entityLombokModel})
 #foreach($field in ${table.fields})
   #if(${field.propertyType.equals("boolean")})
@@ -147,12 +152,12 @@ public class ${entity} implements Serializable {
         return "${entity}{" +
   #foreach($field in ${table.fields})
     #if($!{foreach.index} == 0)
-        "${field.propertyName}=" + ${field.propertyName} +
+            "${field.propertyName}=" + ${field.propertyName} +
     #else
-        ", ${field.propertyName}=" + ${field.propertyName} +
+            ", ${field.propertyName}=" + ${field.propertyName} +
     #end
   #end
-        "}";
+            "}";
     }
 #end
 }

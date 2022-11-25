@@ -46,9 +46,9 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
         // 组装 RocketMQ 消息内容
         Map<String, Object> content = new HashMap<String, Object>(2);
-        // 标识消息是上架通知还是下架通知
+        // 消息标识: 标识消息是上架通知还是下架通知
         content.put(MessageConstant.STATUS, status);
-
+        // 消息内容
         if (MessageConstant.LAUNCH.equals(status)) {
             // 查询上架商品的信息
             List<Goods> goodsList = goodsMapper.list(ids);
@@ -61,7 +61,6 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
 
         // 发送消息到 RocketMQ, 通知 ElasticSearch 上下架商品
         rocketMQTemplate.convertAndSend(RocketMQTopic.CANAL_TO_ES_GOODS, content);
-
         // 打印日志
         LOGGER.info("GoodsServiceImpl.launch(): Send RocketMQ Message -> {}", JSONUtil.toJsonStr(content));
     }

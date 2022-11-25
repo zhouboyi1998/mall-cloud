@@ -11,9 +11,9 @@ import java.util.ArrayList;
  * @Package: com.cafe.user.bo
  * @Author: zhouboyi
  * @Date: 2022/9/48 09:47
- * @Description:
+ * @Description: 菜单-角色关联关系业务对象
  */
-@ApiModel(value = "MenuRoleBO对象", description = "菜单路径-角色名称关联关系业务对象")
+@ApiModel(value = "MenuRoleBO", description = "菜单-角色关联关系业务对象")
 public class MenuRoleBO implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,16 +28,18 @@ public class MenuRoleBO implements Serializable {
         return menuPath;
     }
 
-    public void setMenuPath(String menuPath) {
+    public MenuRoleBO setMenuPath(String menuPath) {
         this.menuPath = menuPath;
+        return this;
     }
 
     public ArrayList<String> getRoleNameList() {
         return roleNameList;
     }
 
-    public void setRoleNameList(ArrayList<String> roleNameList) {
+    public MenuRoleBO setRoleNameList(ArrayList<String> roleNameList) {
         this.roleNameList = roleNameList;
+        return this;
     }
 
     @Override
