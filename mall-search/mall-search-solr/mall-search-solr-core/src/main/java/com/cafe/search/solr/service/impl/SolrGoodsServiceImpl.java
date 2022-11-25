@@ -28,9 +28,9 @@ public class SolrGoodsServiceImpl implements SolrGoodsService {
 
     @Override
     public Goods one(String id) {
-        Goods solrGoods = solrTemplate.getById(SolrConstant.GOODS_INDEX, id, Goods.class).get();
+        Goods goods = solrTemplate.getById(SolrConstant.GOODS_INDEX, id, Goods.class).orElse(null);
         solrTemplate.commit(SolrConstant.GOODS_INDEX);
-        return solrGoods;
+        return goods;
     }
 
     @Override

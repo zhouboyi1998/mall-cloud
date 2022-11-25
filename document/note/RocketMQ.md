@@ -5,9 +5,7 @@
 #### RocketMQ 4.9.3
 
 * 解压 `rocketmq-all-4.9.3-bin-release.zip`
-
 * 命令行进入 `/bin` 目录
-
 * 启动 `NameServer`
 
 ```bash
@@ -23,9 +21,7 @@ start mqbroker.cmd -n 127.0.0.1:9876 autoCreateTopicEnable=true
 #### RocketMQ Dashboard
 
 * 解压 `rocketmq-dashboard-rocketmq-dashboard-1.0.0.zip`
-
 * 进入 `/src/main/resources` 目录
-
 * 修改 `application.properties` 配置文件
 
 ```properties
@@ -35,9 +31,7 @@ server.port=8085
 rocketmq.config.namesrvAddr=127.0.0.1:9876
 ```
 
-* 命令行进入根目录
-
-* 打包
+* 根目录中打包
 
 ```bash
 mvn clean package -Dmaven.test.skip=true
@@ -51,7 +45,7 @@ java -jar rocketmq-dashboard-1.0.0.jar
 
 #### 批处理文件启动
 
-* 在 `RocketMQ 4.9.3` 和 `RocketMQ Dashboard` 安装目录的同级目录下新建批处理文件
+* 新建 `.bat` 批处理文件，输入以下内容并保存
 
 ```bat
 @echo off

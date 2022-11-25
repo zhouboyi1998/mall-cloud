@@ -2,39 +2,36 @@
 
 ### 📝 SQL 规范
 
-* 禁止使用 `SELECT *`，需要哪些字段必须明确指出
-    1. 增加查询分析器成本
-    2. 增减字段容易与 `resultMap` 配置不一致
-    3. 无用字段增加网络消耗，尤其是 `text` 类型的字段
-
-<br/>
-
-* 避免使用 `IS NULL` / `IS NOT NULL` 关键字
-* 如果需要判空：使用 `ISNULL()` / `!ISNULL()` 函数
+1. 禁止使用 `SELECT *`，需要哪些字段必须明确指出
+    * 增加查询分析器成本
+    * 增减字段容易与 `resultMap` 配置不一致
+    * 无用字段增加网络消耗，尤其是 `text` 类型的字段
 
 
-* 禁止使用 `NULL` 关键字来判断是否等于 `NULL` 值
-* 如果需要判断是否等于 `NULL` 值：使用 `ISNULL()` 函数
-    1. `NULL = NULL` 的返回结果是 `NULL` 而不是 `true`
-    2. `NULL <> NULL` 的返回结果是 `NULL` 而不是 `false`
-    3. `NULL <> 1` 的返回结果是 `NULL` 而不是 `true`
+2. 避免使用 `IS NULL` / `IS NOT NULL` 关键字
+    * 如果需要判空：使用 `ISNULL()` / `!ISNULL()` 函数
 
-<br/>
 
-* 禁止使用级联更新和外键
-    1. 级联更新是强阻塞，存在数据库更新风暴的风险
-    2. 如果使用外键：
+3. 禁止使用 `NULL` 关键字来判断是否等于 `NULL` 值
+    * 如果需要判断是否等于 `NULL` 值：使用 `ISNULL()` 函数
+    * `NULL = NULL` 的返回结果是 `NULL` 而不是 `true`
+    * `NULL <> NULL` 的返回结果是 `NULL` 而不是 `false`
+    * `NULL <> 1` 的返回结果是 `NULL` 而不是 `true`
+
+
+4. 禁止使用级联更新和外键
+    * 级联更新是强阻塞，存在数据库更新风暴的风险
+    * 如果使用外键：
         * `tb_student` 中的 `student_id` 是主键
         * `tb_score` 中的 `student_id` 是外键
         * 如果更新 `tb_student` 中的 `student_id`
         * 会同时触发 `tb_score` 中的 `student_id` 更新
         * 即触发了级联更新
-    3. 外键影响数据库的插入速度
+    * 外键影响数据库的插入速度
 
-<br/>
 
-* 禁止使用 `COUNT(列名)` 代替 `COUNT(*)`
-* `COUNT(列名)` 不会统计该列中为空的行
+5. 禁止使用 `COUNT(列名)` 代替 `COUNT(*)`
+    * `COUNT(列名)` 不会统计该列中为空的行
 
 ---
 
@@ -43,7 +40,6 @@
 * `Binlog` 是一个二进制日志文件，记录 `MySQL` 数据库表的变更历史
 * `MySQL` 使用该日志文件进行主从复制、增量备份、数据库还原
 
-<br/>
 
 * 数据库监听需要启用 `Binlog`，开启 `MySQL` 主从模式
 
@@ -58,7 +54,7 @@ SHOW MASTER STATUS;
 RESET MASTER;
 ```
 
-* `ON` 表示启用，`OFF` 表示未启用
+* `ON` 启用，`OFF` 禁用
 * 如果没有启用，修改 `MySQL` 配置文件 `my.ini` / `my.cnf`
 * 配置文件中添加以下三行
 
@@ -66,14 +62,12 @@ RESET MASTER;
 # 打开 Binlog
 log_bin=mysql-bin
 
-# 选择 ROW(行) 模式
+# 选择行模式
 binlog-format=ROW
 
-# 配置 MySQL server_id, 不要和 Canal slave_id 重复
+# 配置 MySQL server id, 不要和 Canal slave id 重复
 server-id=1
 ```
-
----
 
 #### Canal Server 配置
 
@@ -94,17 +88,18 @@ canal.instance.defaultDatabaseName=
 canal.instance.filter.regex=.*\\..*
 ```
 
-<br/>
-
 * MySQL 创建一个专门给 Canal 使用的用户
 
 ```mysql
--- 创建 canal 用户, @'%' 表示远程登录用户, @'localhost' 表示本地登录用户 
+-- 创建 canal 用户, @'%' 远程登录用户, @'localhost' 本地登录用户 
 CREATE USER 'canal'@'%' IDENTIFIED BY 'canal';
--- MySQL 5.7 授权, *.* 表示所有库、所有表
+
+-- MySQL 5.7 授权, *.* 所有库、所有表
 GRANT ALL PRIVILEGES ON *.* TO 'canal'@'%' IDENTIFIED BY 'canal';
+
 -- MySQL 8.0 授权
 GRANT ALL PRIVILEGES ON *.* TO 'canal'@'%' WITH GRANT OPTION;
+
 -- 刷新使授权生效
 FLUSH PRIVILEGES;
 
@@ -112,10 +107,10 @@ FLUSH PRIVILEGES;
 ALTER USER 'canal'@'%' IDENTIFIED WITH mysql_native_password BY 'canal';
 ```
 
-* Windows 环境使用 `/bin/startup.bat` 启动 Canal Server
-* Linux 环境使用 `/bin/startup.sh` 启动 Canal Server
+* 启动 `Canal Server`
+    * Windows 环境 `/bin/startup.bat`
+    * Linux 环境 `/bin/startup.sh`
 
-<br/>
 
 * 如果 `Canal` 停止工作
 * 可以查看安装目录下的 `/logs/example/example.log` 日志文件

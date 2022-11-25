@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -112,9 +113,22 @@ public class UserPlatformController {
     @ApiImplicitParam(value = "用户-平台关联关系Model", name = "userPlatform", dataType = "UserPlatform", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody UserPlatform userPlatform) {
-        userPlatform.setCreateTime(LocalDateTime.now());
-        userPlatform.setUpdateTime(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        userPlatform.setCreateTime(now).setUpdateTime(now);
         Boolean code = userPlatformService.save(userPlatform);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "批量新增用户-平台关联关系")
+    @ApiOperation(value = "批量新增用户-平台关联关系")
+    @ApiImplicitParam(value = "用户-平台关联关系列表", name = "userPlatformList", dataType = "List<UserPlatform>", paramType = "body", required = true)
+    @PostMapping(value = "/insert/batch")
+    public ResponseEntity<Boolean> insertBatch(@RequestBody List<UserPlatform> userPlatformList) {
+        LocalDateTime now = LocalDateTime.now();
+        userPlatformList = userPlatformList.stream()
+            .map(userPlatform -> userPlatform.setCreateTime(now).setUpdateTime(now))
+            .collect(Collectors.toList());
+        Boolean code = userPlatformService.saveBatch(userPlatformList);
         return ResponseEntity.ok(code);
     }
 

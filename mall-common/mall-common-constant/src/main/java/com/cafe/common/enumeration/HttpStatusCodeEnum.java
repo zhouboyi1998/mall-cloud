@@ -10,6 +10,11 @@ package com.cafe.common.enumeration;
 public enum HttpStatusCodeEnum {
 
     /**
+     * 请求成功
+     */
+    SUCCESS(2000, "Success"),
+
+    /**
      * 用户不存在
      */
     USERNAME_NOT_FOUND(4001, "Username Not Found"),

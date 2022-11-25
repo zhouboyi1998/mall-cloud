@@ -3,6 +3,8 @@ package com.cafe.goods.model;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -14,9 +16,9 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.goods.model
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 分类-品牌关联关系 (实体类)
+ * @Description: 分类-品牌关联关系实体模型
  */
-@ApiModel(value = "CategoryBrand对象", description = "分类-品牌关联关系")
+@ApiModel(value = "CategoryBrand", description = "分类-品牌关联关系实体模型")
 @TableName("mall_category_brand")
 public class CategoryBrand implements Serializable {
 
@@ -24,12 +26,15 @@ public class CategoryBrand implements Serializable {
 
     @ApiModelProperty(value = "分类-品牌关联关系ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "分类ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long categoryId;
 
     @ApiModelProperty(value = "品牌ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long brandId;
 
     @ApiModelProperty(value = "创建时间")
@@ -42,40 +47,45 @@ public class CategoryBrand implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public CategoryBrand setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public CategoryBrand setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+        return this;
     }
 
     public Long getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(Long brandId) {
+    public CategoryBrand setBrandId(Long brandId) {
         this.brandId = brandId;
+        return this;
     }
 
     public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public CategoryBrand setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+        return this;
     }
 
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(LocalDateTime updateTime) {
+    public CategoryBrand setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+        return this;
     }
 
     @Override

@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -16,9 +18,9 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.goods.model
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 标准化产品单元 (实体类)
+ * @Description: 标准化产品单元实体模型
  */
-@ApiModel(value = "Spu对象", description = "标准化产品单元")
+@ApiModel(value = "Spu", description = "标准化产品单元实体模型")
 @TableName("mall_spu")
 public class Spu implements Serializable {
 
@@ -26,15 +28,18 @@ public class Spu implements Serializable {
 
     @ApiModelProperty(value = "SPU ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "SPU 名称")
     private String spuName;
 
     @ApiModelProperty(value = "品牌 ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long brandId;
 
     @ApiModelProperty(value = "三级分类 ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long categoryId;
 
     @ApiModelProperty(value = "SPU 原价")
@@ -50,7 +55,7 @@ public class Spu implements Serializable {
     private String spuImage;
 
     @ApiModelProperty(value = "SPU 评论数量")
-    private Long commentCount;
+    private Integer commentCount;
 
     @ApiModelProperty(value = "SPU 说明")
     private String caption;
@@ -85,144 +90,162 @@ public class Spu implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public Spu setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getSpuName() {
         return spuName;
     }
 
-    public void setSpuName(String spuName) {
+    public Spu setSpuName(String spuName) {
         this.spuName = spuName;
+        return this;
     }
 
     public Long getBrandId() {
         return brandId;
     }
 
-    public void setBrandId(Long brandId) {
+    public Spu setBrandId(Long brandId) {
         this.brandId = brandId;
+        return this;
     }
 
     public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategoryId(Long categoryId) {
+    public Spu setCategoryId(Long categoryId) {
         this.categoryId = categoryId;
+        return this;
     }
 
     public Double getOriginalPrice() {
         return originalPrice;
     }
 
-    public void setOriginalPrice(Double originalPrice) {
+    public Spu setOriginalPrice(Double originalPrice) {
         this.originalPrice = originalPrice;
+        return this;
     }
 
     public Double getDiscountPrice() {
         return discountPrice;
     }
 
-    public void setDiscountPrice(Double discountPrice) {
+    public Spu setDiscountPrice(Double discountPrice) {
         this.discountPrice = discountPrice;
+        return this;
     }
 
     public Double getSeckillPrice() {
         return seckillPrice;
     }
 
-    public void setSeckillPrice(Double seckillPrice) {
+    public Spu setSeckillPrice(Double seckillPrice) {
         this.seckillPrice = seckillPrice;
+        return this;
     }
 
     public String getSpuImage() {
         return spuImage;
     }
 
-    public void setSpuImage(String spuImage) {
+    public Spu setSpuImage(String spuImage) {
         this.spuImage = spuImage;
+        return this;
     }
 
-    public Long getCommentCount() {
+    public Integer getCommentCount() {
         return commentCount;
     }
 
-    public void setCommentCount(Long commentCount) {
+    public Spu setCommentCount(Integer commentCount) {
         this.commentCount = commentCount;
+        return this;
     }
 
     public String getCaption() {
         return caption;
     }
 
-    public void setCaption(String caption) {
+    public Spu setCaption(String caption) {
         this.caption = caption;
+        return this;
     }
 
     public String getIntro() {
         return intro;
     }
 
-    public void setIntro(String intro) {
+    public Spu setIntro(String intro) {
         this.intro = intro;
+        return this;
     }
 
     public Integer getSort() {
         return sort;
     }
 
-    public void setSort(Integer sort) {
+    public Spu setSort(Integer sort) {
         this.sort = sort;
+        return this;
     }
 
     public Integer getCheckStatus() {
         return checkStatus;
     }
 
-    public void setCheckStatus(Integer checkStatus) {
+    public Spu setCheckStatus(Integer checkStatus) {
         this.checkStatus = checkStatus;
+        return this;
     }
 
     public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public Spu setStatus(Integer status) {
         this.status = status;
+        return this;
     }
 
     public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public Spu setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+        return this;
     }
 
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(LocalDateTime updateTime) {
+    public Spu setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+        return this;
     }
 
     public LocalDateTime getLaunchTime() {
         return launchTime;
     }
 
-    public void setLaunchTime(LocalDateTime launchTime) {
+    public Spu setLaunchTime(LocalDateTime launchTime) {
         this.launchTime = launchTime;
+        return this;
     }
 
     public Boolean getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public Spu setDeleted(Boolean deleted) {
         this.deleted = deleted;
+        return this;
     }
 
     @Override

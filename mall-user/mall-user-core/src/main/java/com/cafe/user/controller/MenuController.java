@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -115,9 +116,22 @@ public class MenuController {
     @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Menu menu) {
-        menu.setCreateTime(LocalDateTime.now());
-        menu.setUpdateTime(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        menu.setCreateTime(now).setUpdateTime(now);
         Boolean code = menuService.save(menu);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "批量新增菜单")
+    @ApiOperation(value = "批量新增菜单")
+    @ApiImplicitParam(value = "菜单列表", name = "menuList", dataType = "List<Menu>", paramType = "body", required = true)
+    @PostMapping(value = "/insert/batch")
+    public ResponseEntity<Boolean> insertBatch(@RequestBody List<Menu> menuList) {
+        LocalDateTime now = LocalDateTime.now();
+        menuList = menuList.stream()
+            .map(menu -> menu.setCreateTime(now).setUpdateTime(now))
+            .collect(Collectors.toList());
+        Boolean code = menuService.saveBatch(menuList);
         return ResponseEntity.ok(code);
     }
 

@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -112,9 +113,22 @@ public class PlatformController {
     @ApiImplicitParam(value = "平台Model", name = "platform", dataType = "Platform", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Platform platform) {
-        platform.setCreateTime(LocalDateTime.now());
-        platform.setUpdateTime(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        platform.setCreateTime(now).setUpdateTime(now);
         Boolean code = platformService.save(platform);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "批量新增平台")
+    @ApiOperation(value = "批量新增平台")
+    @ApiImplicitParam(value = "平台列表", name = "platformList", dataType = "List<Platform>", paramType = "body", required = true)
+    @PostMapping(value = "/insert/batch")
+    public ResponseEntity<Boolean> insertBatch(@RequestBody List<Platform> platformList) {
+        LocalDateTime now = LocalDateTime.now();
+        platformList = platformList.stream()
+            .map(platform -> platform.setCreateTime(now).setUpdateTime(now))
+            .collect(Collectors.toList());
+        Boolean code = platformService.saveBatch(platformList);
         return ResponseEntity.ok(code);
     }
 

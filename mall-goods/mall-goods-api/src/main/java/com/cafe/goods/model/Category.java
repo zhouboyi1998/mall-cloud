@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -16,9 +18,9 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.goods.model
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 分类 (实体类)
+ * @Description: 分类实体模型
  */
-@ApiModel(value = "Category对象", description = "分类")
+@ApiModel(value = "Category", description = "分类实体模型")
 @TableName("mall_category")
 public class Category implements Serializable {
 
@@ -26,13 +28,15 @@ public class Category implements Serializable {
 
     @ApiModelProperty(value = "分类ID")
     @TableId(value = "id", type = IdType.INPUT)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "分类名称")
     private String categoryName;
 
     @ApiModelProperty(value = "上级分类ID")
-    private Integer parentId;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long parentId;
 
     @ApiModelProperty(value = "分类等级: 1 一级分类, 2 二级分类, 3 三级分类")
     private Integer categoryLevel;
@@ -58,72 +62,81 @@ public class Category implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public Category setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getCategoryName() {
         return categoryName;
     }
 
-    public void setCategoryName(String categoryName) {
+    public Category setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+        return this;
     }
 
-    public Integer getParentId() {
+    public Long getParentId() {
         return parentId;
     }
 
-    public void setParentId(Integer parentId) {
+    public Category setParentId(Long parentId) {
         this.parentId = parentId;
+        return this;
     }
 
     public Integer getCategoryLevel() {
         return categoryLevel;
     }
 
-    public void setCategoryLevel(Integer categoryLevel) {
+    public Category setCategoryLevel(Integer categoryLevel) {
         this.categoryLevel = categoryLevel;
+        return this;
     }
 
     public Integer getSort() {
         return sort;
     }
 
-    public void setSort(Integer sort) {
+    public Category setSort(Integer sort) {
         this.sort = sort;
+        return this;
     }
 
     public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public Category setStatus(Integer status) {
         this.status = status;
+        return this;
     }
 
     public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public Category setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+        return this;
     }
 
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(LocalDateTime updateTime) {
+    public Category setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+        return this;
     }
 
     public Boolean getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public Category setDeleted(Boolean deleted) {
         this.deleted = deleted;
+        return this;
     }
 
     @Override

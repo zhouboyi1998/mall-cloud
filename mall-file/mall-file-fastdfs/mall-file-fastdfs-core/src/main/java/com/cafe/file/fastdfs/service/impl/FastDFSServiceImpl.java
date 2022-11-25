@@ -48,14 +48,15 @@ public class FastDFSServiceImpl implements FastDFSService {
         TrackerServer trackerServer = trackerClient.getConnection();
         StorageClient storageClient = new StorageClient(trackerServer, null);
 
+        // 获取文件原始名称
+        String originalFilename = file.getOriginalFilename();
+
         // 封装文件上传信息
-        FastDFSFile fastDFSFile = new FastDFSFile(
-            file.getOriginalFilename(),
-            StringUtils.getFilenameExtension(file.getOriginalFilename()),
-            file.getBytes()
-        );
-        String[] values = storageClient.upload_file(fastDFSFile.getContent(), fastDFSFile.getExtension(), null);
-        return values;
+        FastDFSFile fastDFSFile = new FastDFSFile()
+            .setName(originalFilename)
+            .setExtension(StringUtils.getFilenameExtension(originalFilename))
+            .setContent(file.getBytes());
+        return storageClient.upload_file(fastDFSFile.getContent(), fastDFSFile.getExtension(), null);
     }
 
     @Override
@@ -64,8 +65,7 @@ public class FastDFSServiceImpl implements FastDFSService {
         TrackerServer trackerServer = trackerClient.getConnection();
         StorageClient storageClient = new StorageClient(trackerServer, null);
         byte[] bytes = storageClient.download_file(groupName, remoteFileName);
-        ByteArrayInputStream inputStream = new ByteArrayInputStream(bytes);
-        return inputStream;
+        return new ByteArrayInputStream(bytes);
     }
 
     @Override
@@ -73,8 +73,7 @@ public class FastDFSServiceImpl implements FastDFSService {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
         StorageClient storageClient = new StorageClient(trackerServer, null);
-        Integer status = storageClient.delete_file(groupName, remoteFileName);
-        return status;
+        return storageClient.delete_file(groupName, remoteFileName);
     }
 
     @Override
@@ -82,8 +81,7 @@ public class FastDFSServiceImpl implements FastDFSService {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
         StorageClient storageClient = new StorageClient(trackerServer, null);
-        FileInfo fileInfo = storageClient.get_file_info(groupName, remoteFileName);
-        return fileInfo;
+        return storageClient.get_file_info(groupName, remoteFileName);
     }
 
     @Override
@@ -92,23 +90,20 @@ public class FastDFSServiceImpl implements FastDFSService {
         TrackerServer trackerServer = trackerClient.getConnection();
         String ip = trackerServer.getInetSocketAddress().getHostString();
         Integer trackerPort = ClientGlobal.getG_tracker_http_port();
-        String url = ip + ":" + trackerPort;
-        return url;
+        return ip + ":" + trackerPort;
     }
 
     @Override
     public StorageServer getStorageInfo() throws Exception {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
-        StorageServer storeStorage = trackerClient.getStoreStorage(trackerServer);
-        return storeStorage;
+        return trackerClient.getStoreStorage(trackerServer);
     }
 
     @Override
     public StorageServer getStorageServerInfo(String groupName, String remoteFileName) throws Exception {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
-        StorageServer storageServer = trackerClient.getFetchStorage(trackerServer, groupName, remoteFileName);
-        return storageServer;
+        return trackerClient.getFetchStorage(trackerServer, groupName, remoteFileName);
     }
 }

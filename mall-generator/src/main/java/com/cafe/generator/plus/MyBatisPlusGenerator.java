@@ -3,8 +3,13 @@ package com.cafe.generator.plus;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
-import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
+import com.baomidou.mybatisplus.generator.config.GlobalConfig;
+import com.baomidou.mybatisplus.generator.config.PackageConfig;
+import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
+import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
@@ -48,86 +53,118 @@ public class MyBatisPlusGenerator {
 
     public static void generate() {
         // 1. 全局配置
-        GlobalConfig globalConfig = new GlobalConfig();
-        // 项目路径
-        globalConfig.setOutputDir("mall-generator/src/main/java");
-        // 作者
-        globalConfig.setAuthor("zhouboyi");
-        // 去掉 Service 接口的前缀 "I"
-        globalConfig.setServiceName("%sService");
-        // 主键策略: ID生成器分配主键
-        globalConfig.setIdType(IdType.ASSIGN_ID);
-        // 生成 BaseResultMap
-        globalConfig.setBaseResultMap(true);
-        // 生成通用查询结果列
-        globalConfig.setBaseColumnList(true);
-        // 开启 Swagger 模式
-        globalConfig.setSwagger2(true);
-        // 生成后是否打开资源管理器
-        globalConfig.setOpen(false);
+        GlobalConfig globalConfig = new GlobalConfig()
+            // 生成文件的输出目录
+            .setOutputDir("mall-generator/src/main/java")
+            // 是否覆盖已有文件
+            .setFileOverride(false)
+            // 生成后是否打开输出目录
+            .setOpen(false)
+            // 是否在 Mapper XML 中添加二级缓存配置
+            .setEnableCache(false)
+            // 开发人员
+            .setAuthor("zhouboyi")
+            // 是否开启 Kotlin 模式
+            .setKotlin(false)
+            // 是否开启 Swagger2 模式
+            .setSwagger2(true)
+            // 是否开启 ActiveRecord 模式
+            .setActiveRecord(false)
+            // 是否在 Mapper XML 中生成通用查询映射结果
+            .setBaseResultMap(true)
+            // 是否在 Mapper XML 中生成通用查询结果列
+            .setBaseColumnList(true)
+            // 主键生成策略 (ID 生成器分配主键)
+            .setIdType(IdType.ASSIGN_ID)
+            // 时间类型对应策略
+            .setDateType(DateType.TIME_PACK)
+            // Model 命名方式
+            .setEntityName("%s")
+            // Mapper 命名方式
+            .setMapperName("%sMapper")
+            // Mapper XML 命名方式
+            .setXmlName("%sMapper")
+            // Service 命名方式
+            .setServiceName("%sService")
+            // Service Impl 命名方式
+            .setServiceImplName("%sServiceImpl")
+            // Controller 命名方式
+            .setControllerName("%sController");
 
         // 2. 数据源配置
-        DataSourceConfig dataSourceConfig = new DataSourceConfig();
-        // 数据库类型
-        dataSourceConfig.setDbType(DbType.MYSQL);
-        // 数据库信息
-        dataSourceConfig.setDriverName(properties.getProperty("driver"));
-        dataSourceConfig.setUrl(properties.getProperty("url-prefix") + properties.getProperty("module") + properties.getProperty("url-suffix"));
-        dataSourceConfig.setUsername(properties.getProperty("username"));
-        dataSourceConfig.setPassword(properties.getProperty("password"));
-        // 指定 MySQL 类型和 Java 类型的映射
-        dataSourceConfig.setTypeConvert(new MySqlTypeConvert() {
-            @Override
-            public IColumnType processTypeConvert(GlobalConfig config, String fieldType) {
-                if (fieldType.toUpperCase().contains(MySQLTypeEnum.DECIMAL.toString())) {
-                    return DbColumnType.DOUBLE;
-                } else if (fieldType.toUpperCase().contains(MySQLTypeEnum.DATETIME.toString())) {
-                    return DbColumnType.LOCAL_DATE_TIME;
+        DataSourceConfig dataSourceConfig = new DataSourceConfig()
+            // 数据库类型
+            .setDbType(DbType.MYSQL)
+            // 数据库连接配置
+            .setUrl(properties.getProperty("url-prefix") + properties.getProperty("module") + properties.getProperty("url-suffix"))
+            .setDriverName(properties.getProperty("driver"))
+            .setUsername(properties.getProperty("username"))
+            .setPassword(properties.getProperty("password"))
+            // 指定 MySQL 数据类型和 Java 数据类型的映射
+            .setTypeConvert(new MySqlTypeConvert() {
+                @Override
+                public IColumnType processTypeConvert(GlobalConfig config, String fieldType) {
+                    if (fieldType.toUpperCase().contains(MySQLTypeEnum.DECIMAL.toString())) {
+                        return DbColumnType.DOUBLE;
+                    } else if (fieldType.toUpperCase().contains(MySQLTypeEnum.DATETIME.toString())) {
+                        return DbColumnType.LOCAL_DATE_TIME;
+                    }
+                    return (DbColumnType) super.processTypeConvert(config, fieldType);
                 }
-                return (DbColumnType) super.processTypeConvert(config, fieldType);
-            }
-        });
+            });
 
-        // 3. 生成路径配置
-        PackageConfig packageConfig = new PackageConfig();
-        // 父路径
-        packageConfig.setParent(properties.getProperty("/"));
-        // 路径前缀拼接
+        // 代码生成路径前缀拼接
         String prefix = properties.getProperty("project-package") + "." + properties.getProperty("module") + ".";
-        // 代码生成路径
-        packageConfig.setEntity(prefix + properties.getProperty("model-package"));
-        packageConfig.setMapper(prefix + properties.getProperty("dao-package"));
-        packageConfig.setXml(prefix + properties.getProperty("mapper-package"));
-        packageConfig.setService(prefix + properties.getProperty("service-package"));
-        packageConfig.setServiceImpl(prefix + properties.getProperty("service-impl-package"));
-        packageConfig.setController(prefix + properties.getProperty("controller-package"));
+        // 3. 生成路径配置
+        PackageConfig packageConfig = new PackageConfig()
+            // 父路径
+            .setParent(properties.getProperty("com.cafe"))
+            // 代码生成路径
+            .setEntity(prefix + properties.getProperty("model-package"))
+            .setMapper(prefix + properties.getProperty("dao-package"))
+            .setXml(prefix + properties.getProperty("mapper-package"))
+            .setService(prefix + properties.getProperty("service-package"))
+            .setServiceImpl(prefix + properties.getProperty("service-impl-package"))
+            .setController(prefix + properties.getProperty("controller-package"));
 
         // 4. 策略配置
-        StrategyConfig strategyConfig = new StrategyConfig();
-        // 类命名规则: 下划线转驼峰
-        strategyConfig.setNaming(NamingStrategy.underline_to_camel);
-        // 字段命名规则: 下划线转驼峰
-        strategyConfig.setColumnNaming(NamingStrategy.underline_to_camel);
-        // 去除表名前缀
-        strategyConfig.setTablePrefix("mall_");
-        // 逻辑删除字段名
-        strategyConfig.setLogicDeleteFieldName("is_deleted");
-        // 去除布尔类型的 is 前缀, 类型为 tinyint(1) 才能成功去除
-        strategyConfig.setEntityBooleanColumnRemoveIsPrefix(true);
-        // REST API 风格
-        strategyConfig.setRestControllerStyle(true);
-        // @RequestMapping 请求路径使用连字符格式
-        strategyConfig.setControllerMappingHyphenStyle(true);
+        StrategyConfig strategyConfig = new StrategyConfig()
+            // 数据库表是否大写命名
+            .setCapitalMode(false)
+            // 是否跳过视图
+            .setSkipView(false)
+            // 数据库表映射到实体的命名策略 (下划线转驼峰)
+            .setNaming(NamingStrategy.underline_to_camel)
+            // 数据库表字段映射到实体属性的命名策略 (下划线转驼峰)
+            .setColumnNaming(NamingStrategy.underline_to_camel)
+            // 表前缀
+            .setTablePrefix("mall_")
+            // 逻辑删除属性名称
+            .setLogicDeleteFieldName("is_deleted")
+            // Boolean 类型字段是否移除 is 前缀
+            .setEntityBooleanColumnRemoveIsPrefix(true)
+            // 是否生成序列化ID
+            .setEntitySerialVersionUID(true)
+            // 是否生成字段常量
+            .setEntityColumnConstant(false)
+            // 是否生成链式 Model
+            .setChainModel(true)
+            // 是否生成 Lombok Model
+            .setEntityLombokModel(false)
+            // 是否生成 RESTful 风格 Controller
+            .setRestControllerStyle(true)
+            // 请求路径格式 (true: 连字符, false: 驼峰)
+            .setControllerMappingHyphenStyle(true);
 
         // 5. 模板配置
-        TemplateConfig templateConfig = new TemplateConfig();
-        // 使用自定义的 Velocity 模板
-        templateConfig.setEntity("/templates/entity.java.vm");
-        templateConfig.setMapper("/templates/mapper.java.vm");
-        templateConfig.setXml("/templates/mapper.xml.vm");
-        templateConfig.setService("/templates/service.java.vm");
-        templateConfig.setServiceImpl("/templates/serviceImpl.java.vm");
-        templateConfig.setController("/templates/controller.java.vm");
+        TemplateConfig templateConfig = new TemplateConfig()
+            // 使用自定义的 Velocity 模板
+            .setEntity("/templates/entity.java.vm")
+            .setMapper("/templates/mapper.java.vm")
+            .setXml("/templates/mapper.xml.vm")
+            .setService("/templates/service.java.vm")
+            .setServiceImpl("/templates/serviceImpl.java.vm")
+            .setController("/templates/controller.java.vm");
 
         // 6. 创建代码生成器, 加载配置, 执行生成代码
         new AutoGenerator()
@@ -135,6 +172,7 @@ public class MyBatisPlusGenerator {
             .setDataSource(dataSourceConfig)
             .setPackageInfo(packageConfig)
             .setStrategy(strategyConfig)
+            .setTemplate(templateConfig)
             .execute();
     }
 

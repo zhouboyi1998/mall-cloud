@@ -5,6 +5,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -16,9 +18,9 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.user.model
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 角色 (实体类)
+ * @Description: 角色实体模型
  */
-@ApiModel(value = "Role对象", description = "角色")
+@ApiModel(value = "Role", description = "角色实体模型")
 @TableName("mall_role")
 public class Role implements Serializable {
 
@@ -26,9 +28,11 @@ public class Role implements Serializable {
 
     @ApiModelProperty(value = "角色ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "平台ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long platformId;
 
     @ApiModelProperty(value = "角色名称")
@@ -55,64 +59,72 @@ public class Role implements Serializable {
         return id;
     }
 
-    public void setId(Long id) {
+    public Role setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Long getPlatformId() {
         return platformId;
     }
 
-    public void setPlatformId(Long platformId) {
+    public Role setPlatformId(Long platformId) {
         this.platformId = platformId;
+        return this;
     }
 
     public String getRoleName() {
         return roleName;
     }
 
-    public void setRoleName(String roleName) {
+    public Role setRoleName(String roleName) {
         this.roleName = roleName;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public Role setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public Role setStatus(Integer status) {
         this.status = status;
+        return this;
     }
 
     public LocalDateTime getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(LocalDateTime createTime) {
+    public Role setCreateTime(LocalDateTime createTime) {
         this.createTime = createTime;
+        return this;
     }
 
     public LocalDateTime getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(LocalDateTime updateTime) {
+    public Role setUpdateTime(LocalDateTime updateTime) {
         this.updateTime = updateTime;
+        return this;
     }
 
     public Boolean getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public Role setDeleted(Boolean deleted) {
         this.deleted = deleted;
+        return this;
     }
 
     @Override

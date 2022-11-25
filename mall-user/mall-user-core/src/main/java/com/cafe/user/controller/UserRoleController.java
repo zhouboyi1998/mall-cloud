@@ -3,10 +3,10 @@ package com.cafe.user.controller;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.user.model.UserRole;
-import com.cafe.user.service.UserRoleService;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.user.model.UserRole;
+import com.cafe.user.service.UserRoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -112,9 +113,22 @@ public class UserRoleController {
     @ApiImplicitParam(value = "用户-角色关联关系Model", name = "userRole", dataType = "UserRole", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody UserRole userRole) {
-        userRole.setCreateTime(LocalDateTime.now());
-        userRole.setUpdateTime(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        userRole.setCreateTime(now).setUpdateTime(now);
         Boolean code = userRoleService.save(userRole);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "批量新增用户-角色关联关系")
+    @ApiOperation(value = "批量新增用户-角色关联关系")
+    @ApiImplicitParam(value = "用户-角色关联关系列表", name = "userRoleList", dataType = "List<UserRole>", paramType = "body", required = true)
+    @PostMapping(value = "/insert/batch")
+    public ResponseEntity<Boolean> insertBatch(@RequestBody List<UserRole> userRoleList) {
+        LocalDateTime now = LocalDateTime.now();
+        userRoleList = userRoleList.stream()
+            .map(userRole -> userRole.setCreateTime(now).setUpdateTime(now))
+            .collect(Collectors.toList());
+        Boolean code = userRoleService.saveBatch(userRoleList);
         return ResponseEntity.ok(code);
     }
 

@@ -3,10 +3,10 @@ package com.cafe.user.controller;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.user.model.RoleMenu;
-import com.cafe.user.service.RoleMenuService;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.user.model.RoleMenu;
+import com.cafe.user.service.RoleMenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -112,9 +113,22 @@ public class RoleMenuController {
     @ApiImplicitParam(value = "角色-菜单关联关系Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody RoleMenu roleMenu) {
-        roleMenu.setCreateTime(LocalDateTime.now());
-        roleMenu.setUpdateTime(LocalDateTime.now());
+        LocalDateTime now = LocalDateTime.now();
+        roleMenu.setCreateTime(now).setUpdateTime(now);
         Boolean code = roleMenuService.save(roleMenu);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "批量新增角色-菜单关联关系")
+    @ApiOperation(value = "批量新增角色-菜单关联关系")
+    @ApiImplicitParam(value = "角色-菜单关联关系列表", name = "roleMenuList", dataType = "List<RoleMenu>", paramType = "body", required = true)
+    @PostMapping(value = "/insert/batch")
+    public ResponseEntity<Boolean> insertBatch(@RequestBody List<RoleMenu> roleMenuList) {
+        LocalDateTime now = LocalDateTime.now();
+        roleMenuList = roleMenuList.stream()
+            .map(roleMenu -> roleMenu.setCreateTime(now).setUpdateTime(now))
+            .collect(Collectors.toList());
+        Boolean code = roleMenuService.saveBatch(roleMenuList);
         return ResponseEntity.ok(code);
     }
 
