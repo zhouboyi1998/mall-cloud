@@ -1,6 +1,7 @@
 package com.cafe.goods.controller;
 
 import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.goods.bo.Goods;
 import com.cafe.goods.service.GoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -8,6 +9,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +35,14 @@ public class GoodsController {
     @Autowired
     public GoodsController(GoodsService goodsService) {
         this.goodsService = goodsService;
+    }
+
+    @LogPrint(value = "查询商品列表")
+    @ApiOperation(value = "查询商品列表")
+    @GetMapping(value = "/list")
+    public ResponseEntity<List<Goods>> list() {
+        List<Goods> goodsList = goodsService.list();
+        return ResponseEntity.ok(goodsList);
     }
 
     @LogPrint(value = "批量上下架商品")

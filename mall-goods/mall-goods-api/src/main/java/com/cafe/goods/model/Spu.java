@@ -34,40 +34,32 @@ public class Spu implements Serializable {
     @ApiModelProperty(value = "SPU 名称")
     private String spuName;
 
-    @ApiModelProperty(value = "品牌 ID")
+    @ApiModelProperty(value = "品牌ID")
     @JsonSerialize(using = ToStringSerializer.class)
     private Long brandId;
 
-    @ApiModelProperty(value = "三级分类 ID")
+    @ApiModelProperty(value = "分类ID")
     @JsonSerialize(using = ToStringSerializer.class)
     private Long categoryId;
 
-    @ApiModelProperty(value = "SPU 原价")
-    private Double originalPrice;
-
-    @ApiModelProperty(value = "SPU 折扣价")
-    private Double discountPrice;
-
-    @ApiModelProperty(value = "SPU 秒杀价")
-    private Double seckillPrice;
-
-    @ApiModelProperty(value = "SPU 主图")
-    private String spuImage;
-
-    @ApiModelProperty(value = "SPU 评论数量")
-    private Integer commentCount;
+    @ApiModelProperty(value = "店铺ID")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long shopId;
 
     @ApiModelProperty(value = "SPU 说明")
     private String caption;
 
-    @ApiModelProperty(value = "SPU 详情介绍")
+    @ApiModelProperty(value = "SPU 详细介绍")
     private String intro;
+
+    @ApiModelProperty(value = "评论数")
+    private Integer commentVolume;
 
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
-    @ApiModelProperty(value = "审核状态: 0 未审核, -1 审核未通过, 1 审核通过")
-    private Integer checkStatus;
+    @ApiModelProperty(value = "审核: 0 未审核, 1 驳回, 2 通过")
+    private Integer audit;
 
     @ApiModelProperty(value = "状态: 0 下架, 1 上架")
     private Integer status;
@@ -77,6 +69,9 @@ public class Spu implements Serializable {
 
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
+
+    @ApiModelProperty(value = "审核时间")
+    private LocalDateTime auditTime;
 
     @ApiModelProperty(value = "上架时间")
     private LocalDateTime launchTime;
@@ -122,48 +117,12 @@ public class Spu implements Serializable {
         return this;
     }
 
-    public Double getOriginalPrice() {
-        return originalPrice;
+    public Long getShopId() {
+        return shopId;
     }
 
-    public Spu setOriginalPrice(Double originalPrice) {
-        this.originalPrice = originalPrice;
-        return this;
-    }
-
-    public Double getDiscountPrice() {
-        return discountPrice;
-    }
-
-    public Spu setDiscountPrice(Double discountPrice) {
-        this.discountPrice = discountPrice;
-        return this;
-    }
-
-    public Double getSeckillPrice() {
-        return seckillPrice;
-    }
-
-    public Spu setSeckillPrice(Double seckillPrice) {
-        this.seckillPrice = seckillPrice;
-        return this;
-    }
-
-    public String getSpuImage() {
-        return spuImage;
-    }
-
-    public Spu setSpuImage(String spuImage) {
-        this.spuImage = spuImage;
-        return this;
-    }
-
-    public Integer getCommentCount() {
-        return commentCount;
-    }
-
-    public Spu setCommentCount(Integer commentCount) {
-        this.commentCount = commentCount;
+    public Spu setShopId(Long shopId) {
+        this.shopId = shopId;
         return this;
     }
 
@@ -185,6 +144,15 @@ public class Spu implements Serializable {
         return this;
     }
 
+    public Integer getCommentVolume() {
+        return commentVolume;
+    }
+
+    public Spu setCommentVolume(Integer commentVolume) {
+        this.commentVolume = commentVolume;
+        return this;
+    }
+
     public Integer getSort() {
         return sort;
     }
@@ -194,12 +162,12 @@ public class Spu implements Serializable {
         return this;
     }
 
-    public Integer getCheckStatus() {
-        return checkStatus;
+    public Integer getAudit() {
+        return audit;
     }
 
-    public Spu setCheckStatus(Integer checkStatus) {
-        this.checkStatus = checkStatus;
+    public Spu setAudit(Integer audit) {
+        this.audit = audit;
         return this;
     }
 
@@ -230,6 +198,15 @@ public class Spu implements Serializable {
         return this;
     }
 
+    public LocalDateTime getAuditTime() {
+        return auditTime;
+    }
+
+    public Spu setAuditTime(LocalDateTime auditTime) {
+        this.auditTime = auditTime;
+        return this;
+    }
+
     public LocalDateTime getLaunchTime() {
         return launchTime;
     }
@@ -255,18 +232,16 @@ public class Spu implements Serializable {
             ", spuName=" + spuName +
             ", brandId=" + brandId +
             ", categoryId=" + categoryId +
-            ", originalPrice=" + originalPrice +
-            ", discountPrice=" + discountPrice +
-            ", seckillPrice=" + seckillPrice +
-            ", spuImage=" + spuImage +
-            ", commentCount=" + commentCount +
+            ", shopId=" + shopId +
             ", caption=" + caption +
             ", intro=" + intro +
+            ", commentVolume=" + commentVolume +
             ", sort=" + sort +
-            ", checkStatus=" + checkStatus +
+            ", audit=" + audit +
             ", status=" + status +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +
+            ", auditTime=" + auditTime +
             ", launchTime=" + launchTime +
             ", deleted=" + deleted +
             "}";

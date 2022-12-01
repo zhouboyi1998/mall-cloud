@@ -11,3 +11,8 @@ spring:
       # Sentinel 控制台
       transport:
         dashboard: 127.0.0.1:8858
+
+# 雪花分布式ID生成器配置
+snowflake:
+  worker-id: 1
+  datacenter-id: 1
