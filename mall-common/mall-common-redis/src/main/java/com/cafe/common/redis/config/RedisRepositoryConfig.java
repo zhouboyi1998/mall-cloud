@@ -5,8 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
-import org.springframework.data.redis.serializer.StringRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
 
 /**
  * @Project: mall-cloud
@@ -20,15 +19,14 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 public class RedisRepositoryConfig {
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setConnectionFactory(connectionFactory);
-        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-        redisTemplate.setKeySerializer(stringRedisSerializer);
-        redisTemplate.setHashKeySerializer(stringRedisSerializer);
-        Jackson2JsonRedisSerializer<?> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
-        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
-        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
+        // 指定序列化规则
+        redisTemplate.setKeySerializer(RedisSerializer.string());
+        redisTemplate.setValueSerializer(RedisSerializer.json());
+        redisTemplate.setHashKeySerializer(RedisSerializer.string());
+        redisTemplate.setHashValueSerializer(RedisSerializer.json());
         redisTemplate.afterPropertiesSet();
         return redisTemplate;
     }

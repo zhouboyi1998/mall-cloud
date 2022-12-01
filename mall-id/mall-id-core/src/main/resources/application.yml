@@ -11,8 +11,3 @@ feign:
 # LogBack 配置
 logging:
   config: classpath:logback/logback-${spring.profiles.active}.xml
-
-# 雪花分布式ID生成器配置
-snowflake:
-  worker-id: 1
-  datacenter-id: 1

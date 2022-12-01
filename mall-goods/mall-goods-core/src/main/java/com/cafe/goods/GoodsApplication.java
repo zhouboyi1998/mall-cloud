@@ -9,7 +9,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe
+ * @Package: com.cafe.goods
  * @Author: zhouboyi
  * @Date: 2022/4/25 14:16
  * @Description: 商品模块启动类

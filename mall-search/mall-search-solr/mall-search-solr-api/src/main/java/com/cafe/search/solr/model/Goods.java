@@ -19,16 +19,16 @@ import java.time.LocalDateTime;
  * @Date: 2022/10/11 11:42
  * @Description: Solr 商品实体模型
  */
-@ApiModel(value = "SolrGoods", description = "Solr 商品实体模型")
+@ApiModel(value = "Goods", description = "Solr 商品实体模型")
 @SolrDocument(collection = SolrConstant.GOODS_INDEX)
 public class Goods implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "SKU ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     @Id
     @Field
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "SKU 名称")
@@ -36,8 +36,8 @@ public class Goods implements Serializable {
     private String skuName;
 
     @ApiModelProperty(value = "SPU ID")
-    @Field
     @JsonSerialize(using = ToStringSerializer.class)
+    @Field
     private Long spuId;
 
     @ApiModelProperty(value = "SKU 原价")
@@ -52,21 +52,29 @@ public class Goods implements Serializable {
     @Field
     private Double seckillPrice;
 
-    @ApiModelProperty(value = "库存数量")
+    @ApiModelProperty(value = "库存量")
     @Field
     private Integer stock;
 
-    @ApiModelProperty(value = "销售数量")
+    @ApiModelProperty(value = "库存单位")
     @Field
-    private Integer saleCount;
+    private String unit;
 
-    @ApiModelProperty(value = "SKU 主图")
+    @ApiModelProperty(value = "销量")
     @Field
-    private String skuImage;
+    private Integer saleVolume;
+
+    @ApiModelProperty(value = "SKU 图片")
+    @Field
+    private String image;
 
     @ApiModelProperty(value = "SKU 图片列表")
     @Field
-    private String skuImageList;
+    private String imageList;
+
+    @ApiModelProperty(value = "SKU 视频")
+    @Field
+    private String video;
 
     @ApiModelProperty(value = "SKU 规格")
     @Field
@@ -76,27 +84,32 @@ public class Goods implements Serializable {
     @Field
     private LocalDateTime launchTime;
 
-    @ApiModelProperty(value = "品牌 ID")
-    @Field
+    @ApiModelProperty(value = "品牌ID")
     @JsonSerialize(using = ToStringSerializer.class)
+    @Field
     private Long brandId;
 
-    @ApiModelProperty(value = "分类 ID")
-    @Field
+    @ApiModelProperty(value = "分类ID")
     @JsonSerialize(using = ToStringSerializer.class)
+    @Field
     private Long categoryId;
 
-    @ApiModelProperty(value = "SPU 名称")
+    @ApiModelProperty(value = "店铺ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     @Field
-    private String spuName;
+    private Long shopId;
 
-    @ApiModelProperty(value = "品牌名称")
+    @ApiModelProperty(value = "SPU 说明")
     @Field
-    private String brandName;
+    private String caption;
 
-    @ApiModelProperty(value = "分类名称")
+    @ApiModelProperty(value = "SPU 详细介绍")
     @Field
-    private String categoryName;
+    private String intro;
+
+    @ApiModelProperty(value = "评论数")
+    @Field
+    private Integer commentVolume;
 
     public Long getId() {
         return id;
@@ -161,30 +174,48 @@ public class Goods implements Serializable {
         return this;
     }
 
-    public Integer getSaleCount() {
-        return saleCount;
+    public String getUnit() {
+        return unit;
     }
 
-    public Goods setSaleCount(Integer saleCount) {
-        this.saleCount = saleCount;
+    public Goods setUnit(String unit) {
+        this.unit = unit;
         return this;
     }
 
-    public String getSkuImage() {
-        return skuImage;
+    public Integer getSaleVolume() {
+        return saleVolume;
     }
 
-    public Goods setSkuImage(String skuImage) {
-        this.skuImage = skuImage;
+    public Goods setSaleVolume(Integer saleVolume) {
+        this.saleVolume = saleVolume;
         return this;
     }
 
-    public String getSkuImageList() {
-        return skuImageList;
+    public String getImage() {
+        return image;
     }
 
-    public Goods setSkuImageList(String skuImageList) {
-        this.skuImageList = skuImageList;
+    public Goods setImage(String image) {
+        this.image = image;
+        return this;
+    }
+
+    public String getImageList() {
+        return imageList;
+    }
+
+    public Goods setImageList(String imageList) {
+        this.imageList = imageList;
+        return this;
+    }
+
+    public String getVideo() {
+        return video;
+    }
+
+    public Goods setVideo(String video) {
+        this.video = video;
         return this;
     }
 
@@ -224,30 +255,39 @@ public class Goods implements Serializable {
         return this;
     }
 
-    public String getSpuName() {
-        return spuName;
+    public Long getShopId() {
+        return shopId;
     }
 
-    public Goods setSpuName(String spuName) {
-        this.spuName = spuName;
+    public Goods setShopId(Long shopId) {
+        this.shopId = shopId;
         return this;
     }
 
-    public String getBrandName() {
-        return brandName;
+    public String getCaption() {
+        return caption;
     }
 
-    public Goods setBrandName(String brandName) {
-        this.brandName = brandName;
+    public Goods setCaption(String caption) {
+        this.caption = caption;
         return this;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getIntro() {
+        return intro;
     }
 
-    public Goods setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public Goods setIntro(String intro) {
+        this.intro = intro;
+        return this;
+    }
+
+    public Integer getCommentVolume() {
+        return commentVolume;
+    }
+
+    public Goods setCommentVolume(Integer commentVolume) {
+        this.commentVolume = commentVolume;
         return this;
     }
 
@@ -255,22 +295,25 @@ public class Goods implements Serializable {
     public String toString() {
         return "Goods{" +
             "id=" + id +
-            ", skuName='" + skuName + '\'' +
+            ", skuName='" + skuName +
             ", spuId=" + spuId +
             ", originalPrice=" + originalPrice +
             ", discountPrice=" + discountPrice +
             ", seckillPrice=" + seckillPrice +
             ", stock=" + stock +
-            ", saleCount=" + saleCount +
-            ", skuImage='" + skuImage + '\'' +
-            ", skuImageList='" + skuImageList + '\'' +
-            ", specification='" + specification + '\'' +
+            ", unit=" + unit +
+            ", saleVolume=" + saleVolume +
+            ", image='" + image +
+            ", imageList='" + imageList +
+            ", video='" + video +
+            ", specification='" + specification +
             ", launchTime=" + launchTime +
             ", brandId=" + brandId +
             ", categoryId=" + categoryId +
-            ", spuName='" + spuName + '\'' +
-            ", brandName='" + brandName + '\'' +
-            ", categoryName='" + categoryName + '\'' +
+            ", shopId=" + shopId +
+            ", caption='" + caption +
+            ", intro='" + intro +
+            ", commentVolume=" + commentVolume +
             '}';
     }
 }

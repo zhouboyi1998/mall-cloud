@@ -1,7 +1,6 @@
 package com.cafe.goods.service.impl;
 
 import cn.hutool.json.JSONUtil;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.common.constant.MessageConstant;
 import com.cafe.common.constant.rocketmq.RocketMQTopic;
 import com.cafe.goods.bo.Goods;
@@ -25,7 +24,7 @@ import java.util.Map;
  * @Description:
  */
 @Service
-public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements GoodsService {
+public class GoodsServiceImpl implements GoodsService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GoodsServiceImpl.class);
 
@@ -37,6 +36,11 @@ public class GoodsServiceImpl extends ServiceImpl<GoodsMapper, Goods> implements
     public GoodsServiceImpl(GoodsMapper goodsMapper, RocketMQTemplate rocketMQTemplate) {
         this.goodsMapper = goodsMapper;
         this.rocketMQTemplate = rocketMQTemplate;
+    }
+
+    @Override
+    public List<Goods> list() {
+        return goodsMapper.list(null);
     }
 
     @Override

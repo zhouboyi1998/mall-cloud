@@ -7,7 +7,6 @@ import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateResponse;
-import org.elasticsearch.index.reindex.BulkByScrollResponse;
 
 import java.io.IOException;
 import java.util.List;
@@ -96,16 +95,4 @@ public interface ElasticSearchGoodsService {
      * @throws IOException
      */
     SearchResponse page(Integer current, Integer size, String keyword, String sort, String rule) throws IOException;
-
-    /**
-     * 批量更新商品 (根据筛选字段更新操作字段的值)
-     *
-     * @param screenField    筛选字段名
-     * @param screenValue    筛选字段值
-     * @param operationField 操作字段名
-     * @param operationValue 操作字段值
-     * @return
-     * @throws IOException
-     */
-    BulkByScrollResponse updateBatch(String screenField, Long screenValue, String operationField, String operationValue) throws IOException;
 }
