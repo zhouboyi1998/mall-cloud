@@ -47,26 +47,32 @@ public class Sku implements Serializable {
     @ApiModelProperty(value = "SKU 秒杀价")
     private Double seckillPrice;
 
-    @ApiModelProperty(value = "库存数量")
-    private Integer stock;
-
-    @ApiModelProperty(value = "销售数量")
-    private Integer saleCount;
-
-    @ApiModelProperty(value = "SKU 主图")
-    private String skuImage;
+    @ApiModelProperty(value = "SKU 图片")
+    private String image;
 
     @ApiModelProperty(value = "SKU 图片列表")
-    private String skuImageList;
+    private String imageList;
+
+    @ApiModelProperty(value = "SKU 视频")
+    private String video;
 
     @ApiModelProperty(value = "SKU 规格")
     private String specification;
 
+    @ApiModelProperty(value = "库存量")
+    private Integer stock;
+
+    @ApiModelProperty(value = "库存单位")
+    private String unit;
+
+    @ApiModelProperty(value = "销量")
+    private Integer saleVolume;
+
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
-    @ApiModelProperty(value = "审核状态: 0 未审核, -1 审核未通过, 1 审核通过")
-    private Integer checkStatus;
+    @ApiModelProperty(value = "审核: 0 未审核, 1 驳回, 2 通过")
+    private Integer audit;
 
     @ApiModelProperty(value = "状态: 0 下架, 1 上架")
     private Integer status;
@@ -76,6 +82,9 @@ public class Sku implements Serializable {
 
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
+
+    @ApiModelProperty(value = "审核时间")
+    private LocalDateTime auditTime;
 
     @ApiModelProperty(value = "上架时间")
     private LocalDateTime launchTime;
@@ -139,39 +148,30 @@ public class Sku implements Serializable {
         return this;
     }
 
-    public Integer getStock() {
-        return stock;
+    public String getImage() {
+        return image;
     }
 
-    public Sku setStock(Integer stock) {
-        this.stock = stock;
+    public Sku setImage(String image) {
+        this.image = image;
         return this;
     }
 
-    public Integer getSaleCount() {
-        return saleCount;
+    public String getImageList() {
+        return imageList;
     }
 
-    public Sku setSaleCount(Integer saleCount) {
-        this.saleCount = saleCount;
+    public Sku setImageList(String imageList) {
+        this.imageList = imageList;
         return this;
     }
 
-    public String getSkuImage() {
-        return skuImage;
+    public String getVideo() {
+        return video;
     }
 
-    public Sku setSkuImage(String skuImage) {
-        this.skuImage = skuImage;
-        return this;
-    }
-
-    public String getSkuImageList() {
-        return skuImageList;
-    }
-
-    public Sku setSkuImageList(String skuImageList) {
-        this.skuImageList = skuImageList;
+    public Sku setVideo(String video) {
+        this.video = video;
         return this;
     }
 
@@ -184,6 +184,33 @@ public class Sku implements Serializable {
         return this;
     }
 
+    public Integer getStock() {
+        return stock;
+    }
+
+    public Sku setStock(Integer stock) {
+        this.stock = stock;
+        return this;
+    }
+
+    public String getUnit() {
+        return unit;
+    }
+
+    public Sku setUnit(String unit) {
+        this.unit = unit;
+        return this;
+    }
+
+    public Integer getSaleVolume() {
+        return saleVolume;
+    }
+
+    public Sku setSaleVolume(Integer saleVolume) {
+        this.saleVolume = saleVolume;
+        return this;
+    }
+
     public Integer getSort() {
         return sort;
     }
@@ -193,12 +220,12 @@ public class Sku implements Serializable {
         return this;
     }
 
-    public Integer getCheckStatus() {
-        return checkStatus;
+    public Integer getAudit() {
+        return audit;
     }
 
-    public Sku setCheckStatus(Integer checkStatus) {
-        this.checkStatus = checkStatus;
+    public Sku setAudit(Integer audit) {
+        this.audit = audit;
         return this;
     }
 
@@ -229,6 +256,15 @@ public class Sku implements Serializable {
         return this;
     }
 
+    public LocalDateTime getAuditTime() {
+        return auditTime;
+    }
+
+    public Sku setAuditTime(LocalDateTime auditTime) {
+        this.auditTime = auditTime;
+        return this;
+    }
+
     public LocalDateTime getLaunchTime() {
         return launchTime;
     }
@@ -256,16 +292,19 @@ public class Sku implements Serializable {
             ", originalPrice=" + originalPrice +
             ", discountPrice=" + discountPrice +
             ", seckillPrice=" + seckillPrice +
-            ", stock=" + stock +
-            ", saleCount=" + saleCount +
-            ", skuImage=" + skuImage +
-            ", skuImageList=" + skuImageList +
+            ", image=" + image +
+            ", imageList=" + imageList +
+            ", video=" + video +
             ", specification=" + specification +
+            ", stock=" + stock +
+            ", unit=" + unit +
+            ", saleVolume=" + saleVolume +
             ", sort=" + sort +
-            ", checkStatus=" + checkStatus +
+            ", audit=" + audit +
             ", status=" + status +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +
+            ", auditTime=" + auditTime +
             ", launchTime=" + launchTime +
             ", deleted=" + deleted +
             "}";

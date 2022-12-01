@@ -152,18 +152,4 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
         // 搜索获取返回值
         return restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
     }
-
-    @Override
-    public BulkByScrollResponse updateBatch(String screenField, Long screenValue, String operationField, String operationValue) throws IOException {
-        // 筛选条件 (筛选出符合条件的 document, 条件为 screenField 字段的值等于 screenValue)
-        TermQueryBuilder termQueryBuilder = new TermQueryBuilder(screenField, screenValue);
-        // 更新脚本 (更新符合条件的 document, 将 operationField 字段的值更新为 operationValue)
-        Script script = new Script("ctx._source['" + operationField + "'] = '" + operationValue + "';");
-        // 组装批量更新请求
-        UpdateByQueryRequest updateByQueryRequest = new UpdateByQueryRequest(ElasticSearchConstant.GOODS_INDEX)
-            .setQuery(termQueryBuilder)
-            .setScript(script);
-        // 批量更新数据
-        return restHighLevelClient.updateByQuery(updateByQueryRequest, RequestOptions.DEFAULT);
-    }
 }

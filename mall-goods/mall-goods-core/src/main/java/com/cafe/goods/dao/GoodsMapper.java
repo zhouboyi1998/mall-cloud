@@ -1,6 +1,5 @@
 package com.cafe.goods.dao;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cafe.goods.bo.Goods;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,15 +14,7 @@ import java.util.List;
  * @Description:
  */
 @Mapper
-public interface GoodsMapper extends BaseMapper<Goods> {
-
-    /**
-     * 根据 SKU ids 更新 SKU 状态
-     *
-     * @param ids
-     * @param status
-     */
-    void updateStatus(@Param(value = "ids") List<Long> ids, @Param(value = "status") Integer status);
+public interface GoodsMapper {
 
     /**
      * 根据 SKU ids 查询商品列表
@@ -32,4 +23,12 @@ public interface GoodsMapper extends BaseMapper<Goods> {
      * @return
      */
     List<Goods> list(@Param(value = "ids") List<Long> ids);
+
+    /**
+     * 根据 SKU ids 更新 SKU 状态
+     *
+     * @param ids
+     * @param status
+     */
+    void updateStatus(@Param(value = "ids") List<Long> ids, @Param(value = "status") Integer status);
 }

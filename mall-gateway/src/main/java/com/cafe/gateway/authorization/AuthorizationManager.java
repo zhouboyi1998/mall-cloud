@@ -68,8 +68,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         }
 
         // 获取可以访问当前菜单的角色列表
-        Object list = redisTemplate.opsForHash().get(RedisConstant.MENU_ROLE_MAP, menuPath);
-        List<String> roleNameList = Convert.toList(String.class, list);
+        List<String> roleNameList = Convert.toList(String.class, redisTemplate.opsForHash().get(RedisConstant.MENU_ROLE_MAP, menuPath));
 
         // 当用户认证通过, 且用户的角色可以访问当前菜单, 当前用户可以访问当前请求
         return mono
