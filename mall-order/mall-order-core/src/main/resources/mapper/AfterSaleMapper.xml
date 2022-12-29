@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe.order.dao.AfterSaleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cafe.order.model.AfterSale">
+        <id column="id" property="id"/>
+        <result column="member_id" property="memberId"/>
+        <result column="detail_id" property="detailId"/>
+        <result column="after_sale_type" property="afterSaleType"/>
+        <result column="reason" property="reason"/>
+        <result column="proof_list" property="proofList"/>
+        <result column="refund_amount" property="refundAmount"/>
+        <result column="refund_channel" property="refundChannel"/>
+        <result column="audit" property="audit"/>
+        <result column="status" property="status"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="audit_time" property="auditTime"/>
+        <result column="completion_time" property="completionTime"/>
+        <result column="is_deleted" property="deleted"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, member_id, detail_id, after_sale_type, reason, proof_list, refund_amount, refund_channel, audit, status, create_time, update_time, audit_time, completion_time, is_deleted
+    </sql>
+
+</mapper>

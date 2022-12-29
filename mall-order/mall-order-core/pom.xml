@@ -17,11 +17,11 @@
     <dependencies>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-order-api</artifactId>
+            <artifactId>mall-common-log</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-goods-api</artifactId>
+            <artifactId>mall-order-api</artifactId>
         </dependency>
     </dependencies>
 
