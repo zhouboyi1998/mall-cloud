@@ -1,0 +1,9 @@
+server:
+  port: 18078
+
+spring:
+  application:
+    name: mall-merchant
+
+swagger:
+  description: 商家模块
