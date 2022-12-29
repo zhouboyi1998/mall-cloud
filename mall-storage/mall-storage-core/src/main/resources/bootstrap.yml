@@ -1,0 +1,9 @@
+server:
+  port: 18083
+
+spring:
+  application:
+    name: mall-storage
+
+swagger:
+  description: 仓库模块
