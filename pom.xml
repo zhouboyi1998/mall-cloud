@@ -30,6 +30,7 @@
         <module>mall-order</module>
         <module>mall-search</module>
         <module>mall-security</module>
+        <module>mall-system</module>
         <module>mall-user</module>
     </modules>
 
@@ -296,6 +297,11 @@
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-member-api</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-system-api</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
