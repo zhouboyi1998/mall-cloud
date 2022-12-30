@@ -1,10 +1,9 @@
 package com.cafe.goods.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.goods.model.Sku;
 import com.cafe.goods.service.SkuService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class SkuController {
         this.skuService = skuService;
     }
 
+    @LogPrint(value = "查询库存量单位数量")
+    @ApiOperation(value = "查询库存量单位数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = skuService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询库存量单位数量")
+    @ApiOperation(value = "根据条件查询库存量单位数量")
+    @ApiImplicitParam(value = "库存量单位Model", name = "sku", dataType = "Sku", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody Sku sku) {
+        QueryWrapper<Sku> wrapper = WrapperUtil.createQueryWrapper(sku);
+        Integer count = skuService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询库存量单位列表")
     @ApiOperation(value = "查询库存量单位列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class SkuController {
     @ApiImplicitParam(value = "库存量单位Model", name = "sku", dataType = "Sku", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Sku>> list(@RequestBody Sku sku) {
-        Wrapper<Sku> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(sku);
+        QueryWrapper<Sku> wrapper = WrapperUtil.createQueryWrapper(sku);
         List<Sku> skuList = skuService.list(wrapper);
         return ResponseEntity.ok(skuList);
     }
@@ -93,7 +110,7 @@ public class SkuController {
         @RequestBody Sku sku
     ) {
         Page<Sku> page = new Page<Sku>().setCurrent(current).setSize(size);
-        Wrapper<Sku> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(sku);
+        QueryWrapper<Sku> wrapper = WrapperUtil.createQueryWrapper(sku);
         Page<Sku> skuPage = skuService.page(page, wrapper);
         return ResponseEntity.ok(skuPage);
     }
@@ -103,9 +120,18 @@ public class SkuController {
     @ApiImplicitParam(value = "库存量单位id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Sku> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Sku> wrapper = new LambdaQueryWrapper<Sku>().eq(Sku::getId, id);
-        Sku sku = skuService.getOne(wrapper);
+        Sku sku = skuService.getById(id);
         return ResponseEntity.ok(sku);
+    }
+
+    @LogPrint(value = "根据条件查询单个库存量单位")
+    @ApiOperation(value = "根据条件查询单个库存量单位")
+    @ApiImplicitParam(value = "库存量单位Model", name = "sku", dataType = "Sku", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<Sku> one(@RequestBody Sku sku) {
+        QueryWrapper<Sku> wrapper = WrapperUtil.createQueryWrapper(sku);
+        Sku one = skuService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增库存量单位")
@@ -165,6 +191,16 @@ public class SkuController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = skuService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除库存量单位")
+    @ApiOperation(value = "根据条件批量删除库存量单位")
+    @ApiImplicitParam(value = "库存量单位Model", name = "sku", dataType = "Sku", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody Sku sku) {
+        QueryWrapper<Sku> wrapper = WrapperUtil.createQueryWrapper(sku);
+        Boolean code = skuService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

@@ -1,10 +1,9 @@
 package com.cafe.storage.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.storage.model.Stock;
 import com.cafe.storage.service.StockService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class StockController {
         this.stockService = stockService;
     }
 
+    @LogPrint(value = "查询库存数量")
+    @ApiOperation(value = "查询库存数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = stockService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询库存数量")
+    @ApiOperation(value = "根据条件查询库存数量")
+    @ApiImplicitParam(value = "库存Model", name = "stock", dataType = "Stock", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody Stock stock) {
+        QueryWrapper<Stock> wrapper = WrapperUtil.createQueryWrapper(stock);
+        Integer count = stockService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询库存列表")
     @ApiOperation(value = "查询库存列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class StockController {
     @ApiImplicitParam(value = "库存Model", name = "stock", dataType = "Stock", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Stock>> list(@RequestBody Stock stock) {
-        Wrapper<Stock> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(stock);
+        QueryWrapper<Stock> wrapper = WrapperUtil.createQueryWrapper(stock);
         List<Stock> stockList = stockService.list(wrapper);
         return ResponseEntity.ok(stockList);
     }
@@ -93,7 +110,7 @@ public class StockController {
         @RequestBody Stock stock
     ) {
         Page<Stock> page = new Page<Stock>().setCurrent(current).setSize(size);
-        Wrapper<Stock> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(stock);
+        QueryWrapper<Stock> wrapper = WrapperUtil.createQueryWrapper(stock);
         Page<Stock> stockPage = stockService.page(page, wrapper);
         return ResponseEntity.ok(stockPage);
     }
@@ -103,9 +120,18 @@ public class StockController {
     @ApiImplicitParam(value = "库存id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Stock> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Stock> wrapper = new LambdaQueryWrapper<Stock>().eq(Stock::getId, id);
-        Stock stock = stockService.getOne(wrapper);
+        Stock stock = stockService.getById(id);
         return ResponseEntity.ok(stock);
+    }
+
+    @LogPrint(value = "根据条件查询单个库存")
+    @ApiOperation(value = "根据条件查询单个库存")
+    @ApiImplicitParam(value = "库存Model", name = "stock", dataType = "Stock", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<Stock> one(@RequestBody Stock stock) {
+        QueryWrapper<Stock> wrapper = WrapperUtil.createQueryWrapper(stock);
+        Stock one = stockService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增库存")
@@ -165,6 +191,16 @@ public class StockController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = stockService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除库存")
+    @ApiOperation(value = "根据条件批量删除库存")
+    @ApiImplicitParam(value = "库存Model", name = "stock", dataType = "Stock", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody Stock stock) {
+        QueryWrapper<Stock> wrapper = WrapperUtil.createQueryWrapper(stock);
+        Boolean code = stockService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

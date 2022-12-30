@@ -1,10 +1,9 @@
 package com.cafe.system.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.system.model.Area;
 import com.cafe.system.service.AreaService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class AreaController {
         this.areaService = areaService;
     }
 
+    @LogPrint(value = "查询地址数量")
+    @ApiOperation(value = "查询地址数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = areaService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询地址数量")
+    @ApiOperation(value = "根据条件查询地址数量")
+    @ApiImplicitParam(value = "地址Model", name = "area", dataType = "Area", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody Area area) {
+        QueryWrapper<Area> wrapper = WrapperUtil.createQueryWrapper(area);
+        Integer count = areaService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询地址列表")
     @ApiOperation(value = "查询地址列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class AreaController {
     @ApiImplicitParam(value = "地址Model", name = "area", dataType = "Area", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Area>> list(@RequestBody Area area) {
-        Wrapper<Area> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(area);
+        QueryWrapper<Area> wrapper = WrapperUtil.createQueryWrapper(area);
         List<Area> areaList = areaService.list(wrapper);
         return ResponseEntity.ok(areaList);
     }
@@ -93,7 +110,7 @@ public class AreaController {
         @RequestBody Area area
     ) {
         Page<Area> page = new Page<Area>().setCurrent(current).setSize(size);
-        Wrapper<Area> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(area);
+        QueryWrapper<Area> wrapper = WrapperUtil.createQueryWrapper(area);
         Page<Area> areaPage = areaService.page(page, wrapper);
         return ResponseEntity.ok(areaPage);
     }
@@ -103,9 +120,18 @@ public class AreaController {
     @ApiImplicitParam(value = "地址id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Area> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Area> wrapper = new LambdaQueryWrapper<Area>().eq(Area::getId, id);
-        Area area = areaService.getOne(wrapper);
+        Area area = areaService.getById(id);
         return ResponseEntity.ok(area);
+    }
+
+    @LogPrint(value = "根据条件查询单个地址")
+    @ApiOperation(value = "根据条件查询单个地址")
+    @ApiImplicitParam(value = "地址Model", name = "area", dataType = "Area", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<Area> one(@RequestBody Area area) {
+        QueryWrapper<Area> wrapper = WrapperUtil.createQueryWrapper(area);
+        Area one = areaService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增地址")
@@ -165,6 +191,16 @@ public class AreaController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = areaService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除地址")
+    @ApiOperation(value = "根据条件批量删除地址")
+    @ApiImplicitParam(value = "地址Model", name = "area", dataType = "Area", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody Area area) {
+        QueryWrapper<Area> wrapper = WrapperUtil.createQueryWrapper(area);
+        Boolean code = areaService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

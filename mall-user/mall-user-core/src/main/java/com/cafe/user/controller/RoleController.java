@@ -1,12 +1,11 @@
 package com.cafe.user.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.user.model.Role;
 import com.cafe.user.service.RoleService;
-import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -45,6 +44,24 @@ public class RoleController {
         this.roleService = roleService;
     }
 
+    @LogPrint(value = "查询角色数量")
+    @ApiOperation(value = "查询角色数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = roleService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询角色数量")
+    @ApiOperation(value = "根据条件查询角色数量")
+    @ApiImplicitParam(value = "角色Model", name = "role", dataType = "Role", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody Role role) {
+        QueryWrapper<Role> wrapper = WrapperUtil.createQueryWrapper(role);
+        Integer count = roleService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询角色列表")
     @ApiOperation(value = "查询角色列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class RoleController {
     @ApiImplicitParam(value = "角色Model", name = "role", dataType = "Role", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Role>> list(@RequestBody Role role) {
-        Wrapper<Role> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(role);
+        QueryWrapper<Role> wrapper = WrapperUtil.createQueryWrapper(role);
         List<Role> roleList = roleService.list(wrapper);
         return ResponseEntity.ok(roleList);
     }
@@ -93,7 +110,7 @@ public class RoleController {
         @RequestBody Role role
     ) {
         Page<Role> page = new Page<Role>().setCurrent(current).setSize(size);
-        Wrapper<Role> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(role);
+        QueryWrapper<Role> wrapper = WrapperUtil.createQueryWrapper(role);
         Page<Role> rolePage = roleService.page(page, wrapper);
         return ResponseEntity.ok(rolePage);
     }
@@ -103,9 +120,18 @@ public class RoleController {
     @ApiImplicitParam(value = "角色id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Role> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<Role>().eq(Role::getId, id);
-        Role role = roleService.getOne(wrapper);
+        Role role = roleService.getById(id);
         return ResponseEntity.ok(role);
+    }
+
+    @LogPrint(value = "根据条件查询单个角色")
+    @ApiOperation(value = "根据条件查询单个角色")
+    @ApiImplicitParam(value = "角色Model", name = "role", dataType = "Role", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<Role> one(@RequestBody Role role) {
+        QueryWrapper<Role> wrapper = WrapperUtil.createQueryWrapper(role);
+        Role one = roleService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增角色")
@@ -165,6 +191,16 @@ public class RoleController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = roleService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除角色")
+    @ApiOperation(value = "根据条件批量删除角色")
+    @ApiImplicitParam(value = "角色Model", name = "role", dataType = "Role", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody Role role) {
+        QueryWrapper<Role> wrapper = WrapperUtil.createQueryWrapper(role);
+        Boolean code = roleService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 

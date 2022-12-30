@@ -1,10 +1,9 @@
 package com.cafe.goods.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.goods.model.Category;
 import com.cafe.goods.service.CategoryService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    @LogPrint(value = "查询分类数量")
+    @ApiOperation(value = "查询分类数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = categoryService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询分类数量")
+    @ApiOperation(value = "根据条件查询分类数量")
+    @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody Category category) {
+        QueryWrapper<Category> wrapper = WrapperUtil.createQueryWrapper(category);
+        Integer count = categoryService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询分类列表")
     @ApiOperation(value = "查询分类列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class CategoryController {
     @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Category>> list(@RequestBody Category category) {
-        Wrapper<Category> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(category);
+        QueryWrapper<Category> wrapper = WrapperUtil.createQueryWrapper(category);
         List<Category> categoryList = categoryService.list(wrapper);
         return ResponseEntity.ok(categoryList);
     }
@@ -93,7 +110,7 @@ public class CategoryController {
         @RequestBody Category category
     ) {
         Page<Category> page = new Page<Category>().setCurrent(current).setSize(size);
-        Wrapper<Category> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(category);
+        QueryWrapper<Category> wrapper = WrapperUtil.createQueryWrapper(category);
         Page<Category> categoryPage = categoryService.page(page, wrapper);
         return ResponseEntity.ok(categoryPage);
     }
@@ -103,9 +120,18 @@ public class CategoryController {
     @ApiImplicitParam(value = "分类id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Category> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Category> wrapper = new LambdaQueryWrapper<Category>().eq(Category::getId, id);
-        Category category = categoryService.getOne(wrapper);
+        Category category = categoryService.getById(id);
         return ResponseEntity.ok(category);
+    }
+
+    @LogPrint(value = "根据条件查询单个分类")
+    @ApiOperation(value = "根据条件查询单个分类")
+    @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<Category> one(@RequestBody Category category) {
+        QueryWrapper<Category> wrapper = WrapperUtil.createQueryWrapper(category);
+        Category one = categoryService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增分类")
@@ -165,6 +191,16 @@ public class CategoryController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = categoryService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除分类")
+    @ApiOperation(value = "根据条件批量删除分类")
+    @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody Category category) {
+        QueryWrapper<Category> wrapper = WrapperUtil.createQueryWrapper(category);
+        Boolean code = categoryService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

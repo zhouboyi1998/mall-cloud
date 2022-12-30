@@ -1,10 +1,9 @@
 package com.cafe.merchant.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.merchant.model.ShopStorage;
 import com.cafe.merchant.service.ShopStorageService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class ShopStorageController {
         this.shopStorageService = shopStorageService;
     }
 
+    @LogPrint(value = "查询店铺-仓库关联关系数量")
+    @ApiOperation(value = "查询店铺-仓库关联关系数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = shopStorageService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询店铺-仓库关联关系数量")
+    @ApiOperation(value = "根据条件查询店铺-仓库关联关系数量")
+    @ApiImplicitParam(value = "店铺-仓库关联关系Model", name = "shopStorage", dataType = "ShopStorage", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody ShopStorage shopStorage) {
+        QueryWrapper<ShopStorage> wrapper = WrapperUtil.createQueryWrapper(shopStorage);
+        Integer count = shopStorageService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询店铺-仓库关联关系列表")
     @ApiOperation(value = "查询店铺-仓库关联关系列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class ShopStorageController {
     @ApiImplicitParam(value = "店铺-仓库关联关系Model", name = "shopStorage", dataType = "ShopStorage", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<ShopStorage>> list(@RequestBody ShopStorage shopStorage) {
-        Wrapper<ShopStorage> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(shopStorage);
+        QueryWrapper<ShopStorage> wrapper = WrapperUtil.createQueryWrapper(shopStorage);
         List<ShopStorage> shopStorageList = shopStorageService.list(wrapper);
         return ResponseEntity.ok(shopStorageList);
     }
@@ -93,7 +110,7 @@ public class ShopStorageController {
         @RequestBody ShopStorage shopStorage
     ) {
         Page<ShopStorage> page = new Page<ShopStorage>().setCurrent(current).setSize(size);
-        Wrapper<ShopStorage> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(shopStorage);
+        QueryWrapper<ShopStorage> wrapper = WrapperUtil.createQueryWrapper(shopStorage);
         Page<ShopStorage> shopStoragePage = shopStorageService.page(page, wrapper);
         return ResponseEntity.ok(shopStoragePage);
     }
@@ -103,9 +120,18 @@ public class ShopStorageController {
     @ApiImplicitParam(value = "店铺-仓库关联关系id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<ShopStorage> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<ShopStorage> wrapper = new LambdaQueryWrapper<ShopStorage>().eq(ShopStorage::getId, id);
-        ShopStorage shopStorage = shopStorageService.getOne(wrapper);
+        ShopStorage shopStorage = shopStorageService.getById(id);
         return ResponseEntity.ok(shopStorage);
+    }
+
+    @LogPrint(value = "根据条件查询单个店铺-仓库关联关系")
+    @ApiOperation(value = "根据条件查询单个店铺-仓库关联关系")
+    @ApiImplicitParam(value = "店铺-仓库关联关系Model", name = "shopStorage", dataType = "ShopStorage", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<ShopStorage> one(@RequestBody ShopStorage shopStorage) {
+        QueryWrapper<ShopStorage> wrapper = WrapperUtil.createQueryWrapper(shopStorage);
+        ShopStorage one = shopStorageService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增店铺-仓库关联关系")
@@ -165,6 +191,16 @@ public class ShopStorageController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = shopStorageService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除店铺-仓库关联关系")
+    @ApiOperation(value = "根据条件批量删除店铺-仓库关联关系")
+    @ApiImplicitParam(value = "店铺-仓库关联关系Model", name = "shopStorage", dataType = "ShopStorage", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody ShopStorage shopStorage) {
+        QueryWrapper<ShopStorage> wrapper = WrapperUtil.createQueryWrapper(shopStorage);
+        Boolean code = shopStorageService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

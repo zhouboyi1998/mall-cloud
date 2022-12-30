@@ -1,10 +1,9 @@
 package com.cafe.order.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.order.model.DetailGuarantee;
 import com.cafe.order.service.DetailGuaranteeService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class DetailGuaranteeController {
         this.detailGuaranteeService = detailGuaranteeService;
     }
 
+    @LogPrint(value = "查询订单明细-保障关联关系数量")
+    @ApiOperation(value = "查询订单明细-保障关联关系数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = detailGuaranteeService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询订单明细-保障关联关系数量")
+    @ApiOperation(value = "根据条件查询订单明细-保障关联关系数量")
+    @ApiImplicitParam(value = "订单明细-保障关联关系Model", name = "detailGuarantee", dataType = "DetailGuarantee", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody DetailGuarantee detailGuarantee) {
+        QueryWrapper<DetailGuarantee> wrapper = WrapperUtil.createQueryWrapper(detailGuarantee);
+        Integer count = detailGuaranteeService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询订单明细-保障关联关系列表")
     @ApiOperation(value = "查询订单明细-保障关联关系列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class DetailGuaranteeController {
     @ApiImplicitParam(value = "订单明细-保障关联关系Model", name = "detailGuarantee", dataType = "DetailGuarantee", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<DetailGuarantee>> list(@RequestBody DetailGuarantee detailGuarantee) {
-        Wrapper<DetailGuarantee> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(detailGuarantee);
+        QueryWrapper<DetailGuarantee> wrapper = WrapperUtil.createQueryWrapper(detailGuarantee);
         List<DetailGuarantee> detailGuaranteeList = detailGuaranteeService.list(wrapper);
         return ResponseEntity.ok(detailGuaranteeList);
     }
@@ -93,7 +110,7 @@ public class DetailGuaranteeController {
         @RequestBody DetailGuarantee detailGuarantee
     ) {
         Page<DetailGuarantee> page = new Page<DetailGuarantee>().setCurrent(current).setSize(size);
-        Wrapper<DetailGuarantee> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(detailGuarantee);
+        QueryWrapper<DetailGuarantee> wrapper = WrapperUtil.createQueryWrapper(detailGuarantee);
         Page<DetailGuarantee> detailGuaranteePage = detailGuaranteeService.page(page, wrapper);
         return ResponseEntity.ok(detailGuaranteePage);
     }
@@ -103,9 +120,18 @@ public class DetailGuaranteeController {
     @ApiImplicitParam(value = "订单明细-保障关联关系id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<DetailGuarantee> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<DetailGuarantee> wrapper = new LambdaQueryWrapper<DetailGuarantee>().eq(DetailGuarantee::getId, id);
-        DetailGuarantee detailGuarantee = detailGuaranteeService.getOne(wrapper);
+        DetailGuarantee detailGuarantee = detailGuaranteeService.getById(id);
         return ResponseEntity.ok(detailGuarantee);
+    }
+
+    @LogPrint(value = "根据条件查询单个订单明细-保障关联关系")
+    @ApiOperation(value = "根据条件查询单个订单明细-保障关联关系")
+    @ApiImplicitParam(value = "订单明细-保障关联关系Model", name = "detailGuarantee", dataType = "DetailGuarantee", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<DetailGuarantee> one(@RequestBody DetailGuarantee detailGuarantee) {
+        QueryWrapper<DetailGuarantee> wrapper = WrapperUtil.createQueryWrapper(detailGuarantee);
+        DetailGuarantee one = detailGuaranteeService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增订单明细-保障关联关系")
@@ -165,6 +191,16 @@ public class DetailGuaranteeController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = detailGuaranteeService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除订单明细-保障关联关系")
+    @ApiOperation(value = "根据条件批量删除订单明细-保障关联关系")
+    @ApiImplicitParam(value = "订单明细-保障关联关系Model", name = "detailGuarantee", dataType = "DetailGuarantee", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody DetailGuarantee detailGuarantee) {
+        QueryWrapper<DetailGuarantee> wrapper = WrapperUtil.createQueryWrapper(detailGuarantee);
+        Boolean code = detailGuaranteeService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

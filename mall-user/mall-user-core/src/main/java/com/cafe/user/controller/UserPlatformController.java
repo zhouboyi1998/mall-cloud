@@ -1,10 +1,9 @@
 package com.cafe.user.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.user.model.UserPlatform;
 import com.cafe.user.service.UserPlatformService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class UserPlatformController {
         this.userPlatformService = userPlatformService;
     }
 
+    @LogPrint(value = "查询用户-平台关联关系数量")
+    @ApiOperation(value = "查询用户-平台关联关系数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = userPlatformService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询用户-平台关联关系数量")
+    @ApiOperation(value = "根据条件查询用户-平台关联关系数量")
+    @ApiImplicitParam(value = "用户-平台关联关系Model", name = "userPlatform", dataType = "UserPlatform", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody UserPlatform userPlatform) {
+        QueryWrapper<UserPlatform> wrapper = WrapperUtil.createQueryWrapper(userPlatform);
+        Integer count = userPlatformService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询用户-平台关联关系列表")
     @ApiOperation(value = "查询用户-平台关联关系列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class UserPlatformController {
     @ApiImplicitParam(value = "用户-平台关联关系Model", name = "userPlatform", dataType = "UserPlatform", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<UserPlatform>> list(@RequestBody UserPlatform userPlatform) {
-        Wrapper<UserPlatform> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(userPlatform);
+        QueryWrapper<UserPlatform> wrapper = WrapperUtil.createQueryWrapper(userPlatform);
         List<UserPlatform> userPlatformList = userPlatformService.list(wrapper);
         return ResponseEntity.ok(userPlatformList);
     }
@@ -93,7 +110,7 @@ public class UserPlatformController {
         @RequestBody UserPlatform userPlatform
     ) {
         Page<UserPlatform> page = new Page<UserPlatform>().setCurrent(current).setSize(size);
-        Wrapper<UserPlatform> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(userPlatform);
+        QueryWrapper<UserPlatform> wrapper = WrapperUtil.createQueryWrapper(userPlatform);
         Page<UserPlatform> userPlatformPage = userPlatformService.page(page, wrapper);
         return ResponseEntity.ok(userPlatformPage);
     }
@@ -103,9 +120,18 @@ public class UserPlatformController {
     @ApiImplicitParam(value = "用户-平台关联关系id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<UserPlatform> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<UserPlatform> wrapper = new LambdaQueryWrapper<UserPlatform>().eq(UserPlatform::getId, id);
-        UserPlatform userPlatform = userPlatformService.getOne(wrapper);
+        UserPlatform userPlatform = userPlatformService.getById(id);
         return ResponseEntity.ok(userPlatform);
+    }
+
+    @LogPrint(value = "根据条件查询单个用户-平台关联关系")
+    @ApiOperation(value = "根据条件查询单个用户-平台关联关系")
+    @ApiImplicitParam(value = "用户-平台关联关系Model", name = "userPlatform", dataType = "UserPlatform", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<UserPlatform> one(@RequestBody UserPlatform userPlatform) {
+        QueryWrapper<UserPlatform> wrapper = WrapperUtil.createQueryWrapper(userPlatform);
+        UserPlatform one = userPlatformService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增用户-平台关联关系")
@@ -165,6 +191,16 @@ public class UserPlatformController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = userPlatformService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除用户-平台关联关系")
+    @ApiOperation(value = "根据条件批量删除用户-平台关联关系")
+    @ApiImplicitParam(value = "用户-平台关联关系Model", name = "userPlatform", dataType = "UserPlatform", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody UserPlatform userPlatform) {
+        QueryWrapper<UserPlatform> wrapper = WrapperUtil.createQueryWrapper(userPlatform);
+        Boolean code = userPlatformService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

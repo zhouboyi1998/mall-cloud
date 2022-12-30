@@ -1,10 +1,9 @@
 package com.cafe.goods.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.goods.model.Spu;
 import com.cafe.goods.service.SpuService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class SpuController {
         this.spuService = spuService;
     }
 
+    @LogPrint(value = "查询标准化产品单元数量")
+    @ApiOperation(value = "查询标准化产品单元数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = spuService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询标准化产品单元数量")
+    @ApiOperation(value = "根据条件查询标准化产品单元数量")
+    @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody Spu spu) {
+        QueryWrapper<Spu> wrapper = WrapperUtil.createQueryWrapper(spu);
+        Integer count = spuService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询标准化产品单元列表")
     @ApiOperation(value = "查询标准化产品单元列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class SpuController {
     @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Spu>> list(@RequestBody Spu spu) {
-        Wrapper<Spu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(spu);
+        QueryWrapper<Spu> wrapper = WrapperUtil.createQueryWrapper(spu);
         List<Spu> spuList = spuService.list(wrapper);
         return ResponseEntity.ok(spuList);
     }
@@ -93,7 +110,7 @@ public class SpuController {
         @RequestBody Spu spu
     ) {
         Page<Spu> page = new Page<Spu>().setCurrent(current).setSize(size);
-        Wrapper<Spu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(spu);
+        QueryWrapper<Spu> wrapper = WrapperUtil.createQueryWrapper(spu);
         Page<Spu> spuPage = spuService.page(page, wrapper);
         return ResponseEntity.ok(spuPage);
     }
@@ -103,9 +120,18 @@ public class SpuController {
     @ApiImplicitParam(value = "标准化产品单元id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Spu> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Spu> wrapper = new LambdaQueryWrapper<Spu>().eq(Spu::getId, id);
-        Spu spu = spuService.getOne(wrapper);
+        Spu spu = spuService.getById(id);
         return ResponseEntity.ok(spu);
+    }
+
+    @LogPrint(value = "根据条件查询单个标准化产品单元")
+    @ApiOperation(value = "根据条件查询单个标准化产品单元")
+    @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<Spu> one(@RequestBody Spu spu) {
+        QueryWrapper<Spu> wrapper = WrapperUtil.createQueryWrapper(spu);
+        Spu one = spuService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增标准化产品单元")
@@ -165,6 +191,16 @@ public class SpuController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = spuService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除标准化产品单元")
+    @ApiOperation(value = "根据条件批量删除标准化产品单元")
+    @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody Spu spu) {
+        QueryWrapper<Spu> wrapper = WrapperUtil.createQueryWrapper(spu);
+        Boolean code = spuService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }
