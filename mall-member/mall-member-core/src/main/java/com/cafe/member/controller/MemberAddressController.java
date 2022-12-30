@@ -1,10 +1,9 @@
 package com.cafe.member.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.member.model.MemberAddress;
 import com.cafe.member.service.MemberAddressService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class MemberAddressController {
         this.memberAddressService = memberAddressService;
     }
 
+    @LogPrint(value = "查询会员收货地址数量")
+    @ApiOperation(value = "查询会员收货地址数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = memberAddressService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询会员收货地址数量")
+    @ApiOperation(value = "根据条件查询会员收货地址数量")
+    @ApiImplicitParam(value = "会员收货地址Model", name = "memberAddress", dataType = "MemberAddress", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody MemberAddress memberAddress) {
+        QueryWrapper<MemberAddress> wrapper = WrapperUtil.createQueryWrapper(memberAddress);
+        Integer count = memberAddressService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询会员收货地址列表")
     @ApiOperation(value = "查询会员收货地址列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class MemberAddressController {
     @ApiImplicitParam(value = "会员收货地址Model", name = "memberAddress", dataType = "MemberAddress", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<MemberAddress>> list(@RequestBody MemberAddress memberAddress) {
-        Wrapper<MemberAddress> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(memberAddress);
+        QueryWrapper<MemberAddress> wrapper = WrapperUtil.createQueryWrapper(memberAddress);
         List<MemberAddress> memberAddressList = memberAddressService.list(wrapper);
         return ResponseEntity.ok(memberAddressList);
     }
@@ -93,7 +110,7 @@ public class MemberAddressController {
         @RequestBody MemberAddress memberAddress
     ) {
         Page<MemberAddress> page = new Page<MemberAddress>().setCurrent(current).setSize(size);
-        Wrapper<MemberAddress> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(memberAddress);
+        QueryWrapper<MemberAddress> wrapper = WrapperUtil.createQueryWrapper(memberAddress);
         Page<MemberAddress> memberAddressPage = memberAddressService.page(page, wrapper);
         return ResponseEntity.ok(memberAddressPage);
     }
@@ -103,9 +120,18 @@ public class MemberAddressController {
     @ApiImplicitParam(value = "会员收货地址id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<MemberAddress> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<MemberAddress> wrapper = new LambdaQueryWrapper<MemberAddress>().eq(MemberAddress::getId, id);
-        MemberAddress memberAddress = memberAddressService.getOne(wrapper);
+        MemberAddress memberAddress = memberAddressService.getById(id);
         return ResponseEntity.ok(memberAddress);
+    }
+
+    @LogPrint(value = "根据条件查询单个会员收货地址")
+    @ApiOperation(value = "根据条件查询单个会员收货地址")
+    @ApiImplicitParam(value = "会员收货地址Model", name = "memberAddress", dataType = "MemberAddress", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<MemberAddress> one(@RequestBody MemberAddress memberAddress) {
+        QueryWrapper<MemberAddress> wrapper = WrapperUtil.createQueryWrapper(memberAddress);
+        MemberAddress one = memberAddressService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增会员收货地址")
@@ -165,6 +191,16 @@ public class MemberAddressController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = memberAddressService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除会员收货地址")
+    @ApiOperation(value = "根据条件批量删除会员收货地址")
+    @ApiImplicitParam(value = "会员收货地址Model", name = "memberAddress", dataType = "MemberAddress", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody MemberAddress memberAddress) {
+        QueryWrapper<MemberAddress> wrapper = WrapperUtil.createQueryWrapper(memberAddress);
+        Boolean code = memberAddressService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

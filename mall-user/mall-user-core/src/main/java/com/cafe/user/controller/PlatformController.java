@@ -1,10 +1,9 @@
 package com.cafe.user.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.user.model.Platform;
 import com.cafe.user.service.PlatformService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class PlatformController {
         this.platformService = platformService;
     }
 
+    @LogPrint(value = "查询平台数量")
+    @ApiOperation(value = "查询平台数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = platformService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询平台数量")
+    @ApiOperation(value = "根据条件查询平台数量")
+    @ApiImplicitParam(value = "平台Model", name = "platform", dataType = "Platform", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody Platform platform) {
+        QueryWrapper<Platform> wrapper = WrapperUtil.createQueryWrapper(platform);
+        Integer count = platformService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询平台列表")
     @ApiOperation(value = "查询平台列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class PlatformController {
     @ApiImplicitParam(value = "平台Model", name = "platform", dataType = "Platform", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Platform>> list(@RequestBody Platform platform) {
-        Wrapper<Platform> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(platform);
+        QueryWrapper<Platform> wrapper = WrapperUtil.createQueryWrapper(platform);
         List<Platform> platformList = platformService.list(wrapper);
         return ResponseEntity.ok(platformList);
     }
@@ -93,7 +110,7 @@ public class PlatformController {
         @RequestBody Platform platform
     ) {
         Page<Platform> page = new Page<Platform>().setCurrent(current).setSize(size);
-        Wrapper<Platform> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(platform);
+        QueryWrapper<Platform> wrapper = WrapperUtil.createQueryWrapper(platform);
         Page<Platform> platformPage = platformService.page(page, wrapper);
         return ResponseEntity.ok(platformPage);
     }
@@ -103,9 +120,18 @@ public class PlatformController {
     @ApiImplicitParam(value = "平台id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Platform> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Platform> wrapper = new LambdaQueryWrapper<Platform>().eq(Platform::getId, id);
-        Platform platform = platformService.getOne(wrapper);
+        Platform platform = platformService.getById(id);
         return ResponseEntity.ok(platform);
+    }
+
+    @LogPrint(value = "根据条件查询单个平台")
+    @ApiOperation(value = "根据条件查询单个平台")
+    @ApiImplicitParam(value = "平台Model", name = "platform", dataType = "Platform", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<Platform> one(@RequestBody Platform platform) {
+        QueryWrapper<Platform> wrapper = WrapperUtil.createQueryWrapper(platform);
+        Platform one = platformService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增平台")
@@ -165,6 +191,16 @@ public class PlatformController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = platformService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除平台")
+    @ApiOperation(value = "根据条件批量删除平台")
+    @ApiImplicitParam(value = "平台Model", name = "platform", dataType = "Platform", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody Platform platform) {
+        QueryWrapper<Platform> wrapper = WrapperUtil.createQueryWrapper(platform);
+        Boolean code = platformService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

@@ -20,7 +20,7 @@ import java.util.Map;
  * @Date: 2022/5/1 20:21
  * @Description: MyBatis-Plus 条件构造工具类
  */
-public class MyBatisPlusWrapperUtil {
+public class WrapperUtil {
 
     /**
      * Wrapper 条件构造时忽略的属性
@@ -36,8 +36,8 @@ public class MyBatisPlusWrapperUtil {
      * @param <T>
      * @return
      */
-    public static <T> QueryWrapper<T> createQueryWrapperByModel(T model) {
-        return (QueryWrapper<T>) createWrapperByModel(model, new QueryWrapper<T>());
+    public static <T> QueryWrapper<T> createQueryWrapper(T model) {
+        return (QueryWrapper<T>) createWrapper(model, new QueryWrapper<T>());
     }
 
     /**
@@ -47,8 +47,8 @@ public class MyBatisPlusWrapperUtil {
      * @param <T>
      * @return
      */
-    public static <T> UpdateWrapper<T> createUpdateWrapperByModel(T model) {
-        return (UpdateWrapper<T>) createWrapperByModel(model, new UpdateWrapper<T>());
+    public static <T> UpdateWrapper<T> createUpdateWrapper(T model) {
+        return (UpdateWrapper<T>) createWrapper(model, new UpdateWrapper<T>());
     }
 
     /**
@@ -59,7 +59,7 @@ public class MyBatisPlusWrapperUtil {
      * @param <T>
      * @return
      */
-    public static <T, R, Children extends AbstractWrapper<T, R, Children>> AbstractWrapper<T, R, Children> createWrapperByModel(T model, AbstractWrapper<T, R, Children> wrapper) {
+    public static <T, R, Children extends AbstractWrapper<T, R, Children>> AbstractWrapper<T, R, Children> createWrapper(T model, AbstractWrapper<T, R, Children> wrapper) {
         // 获取所有属性
         Map<String, Field> fieldMap = ReflectUtil.getFieldMap(model.getClass());
         // 迭代器遍历所有属性

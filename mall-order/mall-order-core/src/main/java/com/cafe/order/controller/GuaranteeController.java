@@ -1,10 +1,9 @@
 package com.cafe.order.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.order.model.Guarantee;
 import com.cafe.order.service.GuaranteeService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class GuaranteeController {
         this.guaranteeService = guaranteeService;
     }
 
+    @LogPrint(value = "查询保障数量")
+    @ApiOperation(value = "查询保障数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = guaranteeService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询保障数量")
+    @ApiOperation(value = "根据条件查询保障数量")
+    @ApiImplicitParam(value = "保障Model", name = "guarantee", dataType = "Guarantee", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody Guarantee guarantee) {
+        QueryWrapper<Guarantee> wrapper = WrapperUtil.createQueryWrapper(guarantee);
+        Integer count = guaranteeService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询保障列表")
     @ApiOperation(value = "查询保障列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class GuaranteeController {
     @ApiImplicitParam(value = "保障Model", name = "guarantee", dataType = "Guarantee", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Guarantee>> list(@RequestBody Guarantee guarantee) {
-        Wrapper<Guarantee> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(guarantee);
+        QueryWrapper<Guarantee> wrapper = WrapperUtil.createQueryWrapper(guarantee);
         List<Guarantee> guaranteeList = guaranteeService.list(wrapper);
         return ResponseEntity.ok(guaranteeList);
     }
@@ -93,7 +110,7 @@ public class GuaranteeController {
         @RequestBody Guarantee guarantee
     ) {
         Page<Guarantee> page = new Page<Guarantee>().setCurrent(current).setSize(size);
-        Wrapper<Guarantee> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(guarantee);
+        QueryWrapper<Guarantee> wrapper = WrapperUtil.createQueryWrapper(guarantee);
         Page<Guarantee> guaranteePage = guaranteeService.page(page, wrapper);
         return ResponseEntity.ok(guaranteePage);
     }
@@ -103,9 +120,18 @@ public class GuaranteeController {
     @ApiImplicitParam(value = "保障id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Guarantee> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Guarantee> wrapper = new LambdaQueryWrapper<Guarantee>().eq(Guarantee::getId, id);
-        Guarantee guarantee = guaranteeService.getOne(wrapper);
+        Guarantee guarantee = guaranteeService.getById(id);
         return ResponseEntity.ok(guarantee);
+    }
+
+    @LogPrint(value = "根据条件查询单个保障")
+    @ApiOperation(value = "根据条件查询单个保障")
+    @ApiImplicitParam(value = "保障Model", name = "guarantee", dataType = "Guarantee", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<Guarantee> one(@RequestBody Guarantee guarantee) {
+        QueryWrapper<Guarantee> wrapper = WrapperUtil.createQueryWrapper(guarantee);
+        Guarantee one = guaranteeService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增保障")
@@ -165,6 +191,16 @@ public class GuaranteeController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = guaranteeService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除保障")
+    @ApiOperation(value = "根据条件批量删除保障")
+    @ApiImplicitParam(value = "保障Model", name = "guarantee", dataType = "Guarantee", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody Guarantee guarantee) {
+        QueryWrapper<Guarantee> wrapper = WrapperUtil.createQueryWrapper(guarantee);
+        Boolean code = guaranteeService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

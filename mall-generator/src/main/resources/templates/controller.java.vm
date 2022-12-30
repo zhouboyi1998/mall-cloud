@@ -1,10 +1,9 @@
 package ${package.Controller};
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import ${package.Entity}.${entity};
 import ${package.Service}.${table.serviceName};
 import io.swagger.annotations.Api;
@@ -64,6 +63,24 @@ public class ${table.controllerName} {
         this.${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service;
     }
 
+    @LogPrint(value = "查询${table.comment}数量")
+    @ApiOperation(value = "查询${table.comment}数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询${table.comment}数量")
+    @ApiOperation(value = "根据条件查询${table.comment}数量")
+    @ApiImplicitParam(value = "${table.comment}Model", name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", dataType = "${entity}", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}) {
+        QueryWrapper<${entity}> wrapper = WrapperUtil.createQueryWrapper(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
+        Integer count = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询${table.comment}列表")
     @ApiOperation(value = "查询${table.comment}列表")
     @GetMapping(value = "/list")
@@ -77,7 +94,7 @@ public class ${table.controllerName} {
     @ApiImplicitParam(value = "${table.comment}Model", name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", dataType = "${entity}", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<${entity}>> list(@RequestBody ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}) {
-        Wrapper<${entity}> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
+        QueryWrapper<${entity}> wrapper = WrapperUtil.createQueryWrapper(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
         List<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.list(wrapper);
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}List);
     }
@@ -112,7 +129,7 @@ public class ${table.controllerName} {
         @RequestBody ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}
     ) {
         Page<${entity}> page = new Page<${entity}>().setCurrent(current).setSize(size);
-        Wrapper<${entity}> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
+        QueryWrapper<${entity}> wrapper = WrapperUtil.createQueryWrapper(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
         Page<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.page(page, wrapper);
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
     }
@@ -122,9 +139,18 @@ public class ${table.controllerName} {
     @ApiImplicitParam(value = "${table.comment}id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<${entity}> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<${entity}> wrapper = new LambdaQueryWrapper<${entity}>().eq(${entity}::getId, id);
-        ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.getOne(wrapper);
+        ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)} = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.getById(id);
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
+    }
+
+    @LogPrint(value = "根据条件查询单个${table.comment}")
+    @ApiOperation(value = "根据条件查询单个${table.comment}")
+    @ApiImplicitParam(value = "${table.comment}Model", name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", dataType = "${entity}", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<${entity}> one(@RequestBody ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}) {
+        QueryWrapper<${entity}> wrapper = WrapperUtil.createQueryWrapper(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
+        ${entity} one = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增${table.comment}")
@@ -184,6 +210,16 @@ public class ${table.controllerName} {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除${table.comment}")
+    @ApiOperation(value = "根据条件批量删除${table.comment}")
+    @ApiImplicitParam(value = "${table.comment}Model", name = "${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}", dataType = "${entity}", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}) {
+        QueryWrapper<${entity}> wrapper = WrapperUtil.createQueryWrapper(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
+        Boolean code = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

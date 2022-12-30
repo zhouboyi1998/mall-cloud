@@ -1,10 +1,9 @@
 package com.cafe.goods.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.goods.model.Brand;
 import com.cafe.goods.service.BrandService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class BrandController {
         this.brandService = brandService;
     }
 
+    @LogPrint(value = "查询品牌数量")
+    @ApiOperation(value = "查询品牌数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = brandService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询品牌数量")
+    @ApiOperation(value = "根据条件查询品牌数量")
+    @ApiImplicitParam(value = "品牌Model", name = "brand", dataType = "Brand", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody Brand brand) {
+        QueryWrapper<Brand> wrapper = WrapperUtil.createQueryWrapper(brand);
+        Integer count = brandService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询品牌列表")
     @ApiOperation(value = "查询品牌列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class BrandController {
     @ApiImplicitParam(value = "品牌Model", name = "brand", dataType = "Brand", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Brand>> list(@RequestBody Brand brand) {
-        Wrapper<Brand> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(brand);
+        QueryWrapper<Brand> wrapper = WrapperUtil.createQueryWrapper(brand);
         List<Brand> brandList = brandService.list(wrapper);
         return ResponseEntity.ok(brandList);
     }
@@ -93,7 +110,7 @@ public class BrandController {
         @RequestBody Brand brand
     ) {
         Page<Brand> page = new Page<Brand>().setCurrent(current).setSize(size);
-        Wrapper<Brand> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(brand);
+        QueryWrapper<Brand> wrapper = WrapperUtil.createQueryWrapper(brand);
         Page<Brand> brandPage = brandService.page(page, wrapper);
         return ResponseEntity.ok(brandPage);
     }
@@ -103,9 +120,18 @@ public class BrandController {
     @ApiImplicitParam(value = "品牌id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Brand> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Brand> wrapper = new LambdaQueryWrapper<Brand>().eq(Brand::getId, id);
-        Brand brand = brandService.getOne(wrapper);
+        Brand brand = brandService.getById(id);
         return ResponseEntity.ok(brand);
+    }
+
+    @LogPrint(value = "根据条件查询单个品牌")
+    @ApiOperation(value = "根据条件查询单个品牌")
+    @ApiImplicitParam(value = "品牌Model", name = "brand", dataType = "Brand", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<Brand> one(@RequestBody Brand brand) {
+        QueryWrapper<Brand> wrapper = WrapperUtil.createQueryWrapper(brand);
+        Brand one = brandService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增品牌")
@@ -165,6 +191,16 @@ public class BrandController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = brandService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除品牌")
+    @ApiOperation(value = "根据条件批量删除品牌")
+    @ApiImplicitParam(value = "品牌Model", name = "brand", dataType = "Brand", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody Brand brand) {
+        QueryWrapper<Brand> wrapper = WrapperUtil.createQueryWrapper(brand);
+        Boolean code = brandService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

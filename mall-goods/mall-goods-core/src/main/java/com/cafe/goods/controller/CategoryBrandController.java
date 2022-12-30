@@ -1,10 +1,9 @@
 package com.cafe.goods.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.goods.model.CategoryBrand;
 import com.cafe.goods.service.CategoryBrandService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class CategoryBrandController {
         this.categoryBrandService = categoryBrandService;
     }
 
+    @LogPrint(value = "查询分类-品牌关联关系数量")
+    @ApiOperation(value = "查询分类-品牌关联关系数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = categoryBrandService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询分类-品牌关联关系数量")
+    @ApiOperation(value = "根据条件查询分类-品牌关联关系数量")
+    @ApiImplicitParam(value = "分类-品牌关联关系Model", name = "categoryBrand", dataType = "CategoryBrand", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody CategoryBrand categoryBrand) {
+        QueryWrapper<CategoryBrand> wrapper = WrapperUtil.createQueryWrapper(categoryBrand);
+        Integer count = categoryBrandService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询分类-品牌关联关系列表")
     @ApiOperation(value = "查询分类-品牌关联关系列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class CategoryBrandController {
     @ApiImplicitParam(value = "分类-品牌关联关系Model", name = "categoryBrand", dataType = "CategoryBrand", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<CategoryBrand>> list(@RequestBody CategoryBrand categoryBrand) {
-        Wrapper<CategoryBrand> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(categoryBrand);
+        QueryWrapper<CategoryBrand> wrapper = WrapperUtil.createQueryWrapper(categoryBrand);
         List<CategoryBrand> categoryBrandList = categoryBrandService.list(wrapper);
         return ResponseEntity.ok(categoryBrandList);
     }
@@ -93,7 +110,7 @@ public class CategoryBrandController {
         @RequestBody CategoryBrand categoryBrand
     ) {
         Page<CategoryBrand> page = new Page<CategoryBrand>().setCurrent(current).setSize(size);
-        Wrapper<CategoryBrand> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(categoryBrand);
+        QueryWrapper<CategoryBrand> wrapper = WrapperUtil.createQueryWrapper(categoryBrand);
         Page<CategoryBrand> categoryBrandPage = categoryBrandService.page(page, wrapper);
         return ResponseEntity.ok(categoryBrandPage);
     }
@@ -103,9 +120,18 @@ public class CategoryBrandController {
     @ApiImplicitParam(value = "分类-品牌关联关系id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<CategoryBrand> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<CategoryBrand> wrapper = new LambdaQueryWrapper<CategoryBrand>().eq(CategoryBrand::getId, id);
-        CategoryBrand categoryBrand = categoryBrandService.getOne(wrapper);
+        CategoryBrand categoryBrand = categoryBrandService.getById(id);
         return ResponseEntity.ok(categoryBrand);
+    }
+
+    @LogPrint(value = "根据条件查询单个分类-品牌关联关系")
+    @ApiOperation(value = "根据条件查询单个分类-品牌关联关系")
+    @ApiImplicitParam(value = "分类-品牌关联关系Model", name = "categoryBrand", dataType = "CategoryBrand", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<CategoryBrand> one(@RequestBody CategoryBrand categoryBrand) {
+        QueryWrapper<CategoryBrand> wrapper = WrapperUtil.createQueryWrapper(categoryBrand);
+        CategoryBrand one = categoryBrandService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增分类-品牌关联关系")
@@ -165,6 +191,16 @@ public class CategoryBrandController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = categoryBrandService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除分类-品牌关联关系")
+    @ApiOperation(value = "根据条件批量删除分类-品牌关联关系")
+    @ApiImplicitParam(value = "分类-品牌关联关系Model", name = "categoryBrand", dataType = "CategoryBrand", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody CategoryBrand categoryBrand) {
+        QueryWrapper<CategoryBrand> wrapper = WrapperUtil.createQueryWrapper(categoryBrand);
+        Boolean code = categoryBrandService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

@@ -1,10 +1,9 @@
 package com.cafe.storage.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.storage.model.Storage;
 import com.cafe.storage.service.StorageService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class StorageController {
         this.storageService = storageService;
     }
 
+    @LogPrint(value = "查询仓库数量")
+    @ApiOperation(value = "查询仓库数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = storageService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询仓库数量")
+    @ApiOperation(value = "根据条件查询仓库数量")
+    @ApiImplicitParam(value = "仓库Model", name = "storage", dataType = "Storage", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody Storage storage) {
+        QueryWrapper<Storage> wrapper = WrapperUtil.createQueryWrapper(storage);
+        Integer count = storageService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询仓库列表")
     @ApiOperation(value = "查询仓库列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class StorageController {
     @ApiImplicitParam(value = "仓库Model", name = "storage", dataType = "Storage", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Storage>> list(@RequestBody Storage storage) {
-        Wrapper<Storage> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(storage);
+        QueryWrapper<Storage> wrapper = WrapperUtil.createQueryWrapper(storage);
         List<Storage> storageList = storageService.list(wrapper);
         return ResponseEntity.ok(storageList);
     }
@@ -93,7 +110,7 @@ public class StorageController {
         @RequestBody Storage storage
     ) {
         Page<Storage> page = new Page<Storage>().setCurrent(current).setSize(size);
-        Wrapper<Storage> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(storage);
+        QueryWrapper<Storage> wrapper = WrapperUtil.createQueryWrapper(storage);
         Page<Storage> storagePage = storageService.page(page, wrapper);
         return ResponseEntity.ok(storagePage);
     }
@@ -103,9 +120,18 @@ public class StorageController {
     @ApiImplicitParam(value = "仓库id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Storage> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Storage> wrapper = new LambdaQueryWrapper<Storage>().eq(Storage::getId, id);
-        Storage storage = storageService.getOne(wrapper);
+        Storage storage = storageService.getById(id);
         return ResponseEntity.ok(storage);
+    }
+
+    @LogPrint(value = "根据条件查询单个仓库")
+    @ApiOperation(value = "根据条件查询单个仓库")
+    @ApiImplicitParam(value = "仓库Model", name = "storage", dataType = "Storage", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<Storage> one(@RequestBody Storage storage) {
+        QueryWrapper<Storage> wrapper = WrapperUtil.createQueryWrapper(storage);
+        Storage one = storageService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增仓库")
@@ -165,6 +191,16 @@ public class StorageController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = storageService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除仓库")
+    @ApiOperation(value = "根据条件批量删除仓库")
+    @ApiImplicitParam(value = "仓库Model", name = "storage", dataType = "Storage", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody Storage storage) {
+        QueryWrapper<Storage> wrapper = WrapperUtil.createQueryWrapper(storage);
+        Boolean code = storageService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

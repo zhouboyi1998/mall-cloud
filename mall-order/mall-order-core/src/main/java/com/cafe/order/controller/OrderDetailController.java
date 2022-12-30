@@ -1,10 +1,9 @@
 package com.cafe.order.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.order.model.OrderDetail;
 import com.cafe.order.service.OrderDetailService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class OrderDetailController {
         this.orderDetailService = orderDetailService;
     }
 
+    @LogPrint(value = "查询订单明细表数量")
+    @ApiOperation(value = "查询订单明细表数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = orderDetailService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询订单明细表数量")
+    @ApiOperation(value = "根据条件查询订单明细表数量")
+    @ApiImplicitParam(value = "订单明细表Model", name = "orderDetail", dataType = "OrderDetail", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody OrderDetail orderDetail) {
+        QueryWrapper<OrderDetail> wrapper = WrapperUtil.createQueryWrapper(orderDetail);
+        Integer count = orderDetailService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询订单明细表列表")
     @ApiOperation(value = "查询订单明细表列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class OrderDetailController {
     @ApiImplicitParam(value = "订单明细表Model", name = "orderDetail", dataType = "OrderDetail", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<OrderDetail>> list(@RequestBody OrderDetail orderDetail) {
-        Wrapper<OrderDetail> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(orderDetail);
+        QueryWrapper<OrderDetail> wrapper = WrapperUtil.createQueryWrapper(orderDetail);
         List<OrderDetail> orderDetailList = orderDetailService.list(wrapper);
         return ResponseEntity.ok(orderDetailList);
     }
@@ -93,7 +110,7 @@ public class OrderDetailController {
         @RequestBody OrderDetail orderDetail
     ) {
         Page<OrderDetail> page = new Page<OrderDetail>().setCurrent(current).setSize(size);
-        Wrapper<OrderDetail> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(orderDetail);
+        QueryWrapper<OrderDetail> wrapper = WrapperUtil.createQueryWrapper(orderDetail);
         Page<OrderDetail> orderDetailPage = orderDetailService.page(page, wrapper);
         return ResponseEntity.ok(orderDetailPage);
     }
@@ -103,9 +120,18 @@ public class OrderDetailController {
     @ApiImplicitParam(value = "订单明细表id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<OrderDetail> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<OrderDetail> wrapper = new LambdaQueryWrapper<OrderDetail>().eq(OrderDetail::getId, id);
-        OrderDetail orderDetail = orderDetailService.getOne(wrapper);
+        OrderDetail orderDetail = orderDetailService.getById(id);
         return ResponseEntity.ok(orderDetail);
+    }
+
+    @LogPrint(value = "根据条件查询单个订单明细表")
+    @ApiOperation(value = "根据条件查询单个订单明细表")
+    @ApiImplicitParam(value = "订单明细表Model", name = "orderDetail", dataType = "OrderDetail", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<OrderDetail> one(@RequestBody OrderDetail orderDetail) {
+        QueryWrapper<OrderDetail> wrapper = WrapperUtil.createQueryWrapper(orderDetail);
+        OrderDetail one = orderDetailService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增订单明细表")
@@ -165,6 +191,16 @@ public class OrderDetailController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = orderDetailService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除订单明细表")
+    @ApiOperation(value = "根据条件批量删除订单明细表")
+    @ApiImplicitParam(value = "订单明细表Model", name = "orderDetail", dataType = "OrderDetail", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody OrderDetail orderDetail) {
+        QueryWrapper<OrderDetail> wrapper = WrapperUtil.createQueryWrapper(orderDetail);
+        Boolean code = orderDetailService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

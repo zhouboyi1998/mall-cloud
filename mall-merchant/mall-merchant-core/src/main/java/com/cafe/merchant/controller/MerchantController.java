@@ -1,10 +1,9 @@
 package com.cafe.merchant.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.merchant.model.Merchant;
 import com.cafe.merchant.service.MerchantService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class MerchantController {
         this.merchantService = merchantService;
     }
 
+    @LogPrint(value = "查询商家数量")
+    @ApiOperation(value = "查询商家数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = merchantService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询商家数量")
+    @ApiOperation(value = "根据条件查询商家数量")
+    @ApiImplicitParam(value = "商家Model", name = "merchant", dataType = "Merchant", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody Merchant merchant) {
+        QueryWrapper<Merchant> wrapper = WrapperUtil.createQueryWrapper(merchant);
+        Integer count = merchantService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询商家列表")
     @ApiOperation(value = "查询商家列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class MerchantController {
     @ApiImplicitParam(value = "商家Model", name = "merchant", dataType = "Merchant", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Merchant>> list(@RequestBody Merchant merchant) {
-        Wrapper<Merchant> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(merchant);
+        QueryWrapper<Merchant> wrapper = WrapperUtil.createQueryWrapper(merchant);
         List<Merchant> merchantList = merchantService.list(wrapper);
         return ResponseEntity.ok(merchantList);
     }
@@ -93,7 +110,7 @@ public class MerchantController {
         @RequestBody Merchant merchant
     ) {
         Page<Merchant> page = new Page<Merchant>().setCurrent(current).setSize(size);
-        Wrapper<Merchant> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(merchant);
+        QueryWrapper<Merchant> wrapper = WrapperUtil.createQueryWrapper(merchant);
         Page<Merchant> merchantPage = merchantService.page(page, wrapper);
         return ResponseEntity.ok(merchantPage);
     }
@@ -103,9 +120,18 @@ public class MerchantController {
     @ApiImplicitParam(value = "商家id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Merchant> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Merchant> wrapper = new LambdaQueryWrapper<Merchant>().eq(Merchant::getId, id);
-        Merchant merchant = merchantService.getOne(wrapper);
+        Merchant merchant = merchantService.getById(id);
         return ResponseEntity.ok(merchant);
+    }
+
+    @LogPrint(value = "根据条件查询单个商家")
+    @ApiOperation(value = "根据条件查询单个商家")
+    @ApiImplicitParam(value = "商家Model", name = "merchant", dataType = "Merchant", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<Merchant> one(@RequestBody Merchant merchant) {
+        QueryWrapper<Merchant> wrapper = WrapperUtil.createQueryWrapper(merchant);
+        Merchant one = merchantService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增商家")
@@ -165,6 +191,16 @@ public class MerchantController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = merchantService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除商家")
+    @ApiOperation(value = "根据条件批量删除商家")
+    @ApiImplicitParam(value = "商家Model", name = "merchant", dataType = "Merchant", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody Merchant merchant) {
+        QueryWrapper<Merchant> wrapper = WrapperUtil.createQueryWrapper(merchant);
+        Boolean code = merchantService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }
