@@ -1,11 +1,10 @@
 package com.cafe.user.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.constant.HttpHeaderConstant;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.user.model.Menu;
 import com.cafe.user.service.MenuService;
 import com.cafe.user.vo.MenuTreeVO;
@@ -48,6 +47,24 @@ public class MenuController {
         this.menuService = menuService;
     }
 
+    @LogPrint(value = "查询菜单数量")
+    @ApiOperation(value = "查询菜单数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = menuService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询菜单数量")
+    @ApiOperation(value = "根据条件查询菜单数量")
+    @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody Menu menu) {
+        QueryWrapper<Menu> wrapper = WrapperUtil.createQueryWrapper(menu);
+        Integer count = menuService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询菜单列表")
     @ApiOperation(value = "查询菜单列表")
     @GetMapping(value = "/list")
@@ -61,7 +78,7 @@ public class MenuController {
     @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Menu>> list(@RequestBody Menu menu) {
-        Wrapper<Menu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(menu);
+        QueryWrapper<Menu> wrapper = WrapperUtil.createQueryWrapper(menu);
         List<Menu> menuList = menuService.list(wrapper);
         return ResponseEntity.ok(menuList);
     }
@@ -96,7 +113,7 @@ public class MenuController {
         @RequestBody Menu menu
     ) {
         Page<Menu> page = new Page<Menu>().setCurrent(current).setSize(size);
-        Wrapper<Menu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(menu);
+        QueryWrapper<Menu> wrapper = WrapperUtil.createQueryWrapper(menu);
         Page<Menu> menuPage = menuService.page(page, wrapper);
         return ResponseEntity.ok(menuPage);
     }
@@ -106,9 +123,18 @@ public class MenuController {
     @ApiImplicitParam(value = "菜单id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Menu> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Menu> wrapper = new LambdaQueryWrapper<Menu>().eq(Menu::getId, id);
-        Menu menu = menuService.getOne(wrapper);
+        Menu menu = menuService.getById(id);
         return ResponseEntity.ok(menu);
+    }
+
+    @LogPrint(value = "根据条件查询单个菜单")
+    @ApiOperation(value = "根据条件查询单个菜单")
+    @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<Menu> one(@RequestBody Menu menu) {
+        QueryWrapper<Menu> wrapper = WrapperUtil.createQueryWrapper(menu);
+        Menu one = menuService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增菜单")
@@ -168,6 +194,16 @@ public class MenuController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = menuService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除菜单")
+    @ApiOperation(value = "根据条件批量删除菜单")
+    @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody Menu menu) {
+        QueryWrapper<Menu> wrapper = WrapperUtil.createQueryWrapper(menu);
+        Boolean code = menuService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 

@@ -1,10 +1,9 @@
 package com.cafe.order.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.order.model.AfterSale;
 import com.cafe.order.service.AfterSaleService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class AfterSaleController {
         this.afterSaleService = afterSaleService;
     }
 
+    @LogPrint(value = "查询售后数量")
+    @ApiOperation(value = "查询售后数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = afterSaleService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询售后数量")
+    @ApiOperation(value = "根据条件查询售后数量")
+    @ApiImplicitParam(value = "售后Model", name = "afterSale", dataType = "AfterSale", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody AfterSale afterSale) {
+        QueryWrapper<AfterSale> wrapper = WrapperUtil.createQueryWrapper(afterSale);
+        Integer count = afterSaleService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询售后列表")
     @ApiOperation(value = "查询售后列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class AfterSaleController {
     @ApiImplicitParam(value = "售后Model", name = "afterSale", dataType = "AfterSale", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<AfterSale>> list(@RequestBody AfterSale afterSale) {
-        Wrapper<AfterSale> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(afterSale);
+        QueryWrapper<AfterSale> wrapper = WrapperUtil.createQueryWrapper(afterSale);
         List<AfterSale> afterSaleList = afterSaleService.list(wrapper);
         return ResponseEntity.ok(afterSaleList);
     }
@@ -93,7 +110,7 @@ public class AfterSaleController {
         @RequestBody AfterSale afterSale
     ) {
         Page<AfterSale> page = new Page<AfterSale>().setCurrent(current).setSize(size);
-        Wrapper<AfterSale> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(afterSale);
+        QueryWrapper<AfterSale> wrapper = WrapperUtil.createQueryWrapper(afterSale);
         Page<AfterSale> afterSalePage = afterSaleService.page(page, wrapper);
         return ResponseEntity.ok(afterSalePage);
     }
@@ -103,9 +120,18 @@ public class AfterSaleController {
     @ApiImplicitParam(value = "售后id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<AfterSale> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<AfterSale> wrapper = new LambdaQueryWrapper<AfterSale>().eq(AfterSale::getId, id);
-        AfterSale afterSale = afterSaleService.getOne(wrapper);
+        AfterSale afterSale = afterSaleService.getById(id);
         return ResponseEntity.ok(afterSale);
+    }
+
+    @LogPrint(value = "根据条件查询单个售后")
+    @ApiOperation(value = "根据条件查询单个售后")
+    @ApiImplicitParam(value = "售后Model", name = "afterSale", dataType = "AfterSale", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<AfterSale> one(@RequestBody AfterSale afterSale) {
+        QueryWrapper<AfterSale> wrapper = WrapperUtil.createQueryWrapper(afterSale);
+        AfterSale one = afterSaleService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增售后")
@@ -165,6 +191,16 @@ public class AfterSaleController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = afterSaleService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除售后")
+    @ApiOperation(value = "根据条件批量删除售后")
+    @ApiImplicitParam(value = "售后Model", name = "afterSale", dataType = "AfterSale", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody AfterSale afterSale) {
+        QueryWrapper<AfterSale> wrapper = WrapperUtil.createQueryWrapper(afterSale);
+        Boolean code = afterSaleService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

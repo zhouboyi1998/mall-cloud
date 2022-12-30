@@ -1,6 +1,6 @@
 package com.cafe.common.constant.rocketmq;
 
-import com.cafe.common.constant.MySQLConstant;
+import com.cafe.common.constant.mysql.TableConstant;
 import org.apache.commons.collections4.map.MultiKeyMap;
 
 /**
@@ -16,7 +16,7 @@ public class RocketMQTopicMap {
      * 使用 RocketMQ 生产者、消息标识(数据库表名称) 作为组合Key, 获取 RocketMQ 主题
      */
     public static final MultiKeyMap<String, String> TOPIC_MAP = new MultiKeyMap<String, String>() {{
-        put(RocketMQProducer.CANAL, MySQLConstant.BRAND, RocketMQTopic.CANAL_TO_ES_BRAND);
-        put(RocketMQProducer.CANAL, MySQLConstant.CATEGORY, RocketMQTopic.CANAL_TO_ES_CATEGORY);
+        put(RocketMQProducer.CANAL, TableConstant.BRAND, RocketMQTopic.CANAL_TO_ES_BRAND);
+        put(RocketMQProducer.CANAL, TableConstant.CATEGORY, RocketMQTopic.CANAL_TO_ES_CATEGORY);
     }};
 }

@@ -1,6 +1,6 @@
 package com.cafe.monitor.binlog.bean;
 
-import com.cafe.common.constant.MySQLConstant;
+import com.cafe.common.constant.mysql.TableConstant;
 import com.cafe.user.model.Role;
 import com.cafe.user.model.RoleMenu;
 
@@ -20,7 +20,7 @@ public class TableBeanMap {
      * 通过数据库表名称获取对应的 Java 模型
      */
     public static final Map<String, Class<?>> TABLE_BEAN_MAP = new HashMap<String, Class<?>>() {{
-        put(MySQLConstant.ROLE, Role.class);
-        put(MySQLConstant.ROLE_MENU, RoleMenu.class);
+        put(TableConstant.ROLE, Role.class);
+        put(TableConstant.ROLE_MENU, RoleMenu.class);
     }};
 }

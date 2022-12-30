@@ -1,10 +1,9 @@
 package com.cafe.merchant.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.merchant.model.Shop;
 import com.cafe.merchant.service.ShopService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class ShopController {
         this.shopService = shopService;
     }
 
+    @LogPrint(value = "查询店铺数量")
+    @ApiOperation(value = "查询店铺数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = shopService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询店铺数量")
+    @ApiOperation(value = "根据条件查询店铺数量")
+    @ApiImplicitParam(value = "店铺Model", name = "shop", dataType = "Shop", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody Shop shop) {
+        QueryWrapper<Shop> wrapper = WrapperUtil.createQueryWrapper(shop);
+        Integer count = shopService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询店铺列表")
     @ApiOperation(value = "查询店铺列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class ShopController {
     @ApiImplicitParam(value = "店铺Model", name = "shop", dataType = "Shop", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Shop>> list(@RequestBody Shop shop) {
-        Wrapper<Shop> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(shop);
+        QueryWrapper<Shop> wrapper = WrapperUtil.createQueryWrapper(shop);
         List<Shop> shopList = shopService.list(wrapper);
         return ResponseEntity.ok(shopList);
     }
@@ -93,7 +110,7 @@ public class ShopController {
         @RequestBody Shop shop
     ) {
         Page<Shop> page = new Page<Shop>().setCurrent(current).setSize(size);
-        Wrapper<Shop> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(shop);
+        QueryWrapper<Shop> wrapper = WrapperUtil.createQueryWrapper(shop);
         Page<Shop> shopPage = shopService.page(page, wrapper);
         return ResponseEntity.ok(shopPage);
     }
@@ -103,9 +120,18 @@ public class ShopController {
     @ApiImplicitParam(value = "店铺id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Shop> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Shop> wrapper = new LambdaQueryWrapper<Shop>().eq(Shop::getId, id);
-        Shop shop = shopService.getOne(wrapper);
+        Shop shop = shopService.getById(id);
         return ResponseEntity.ok(shop);
+    }
+
+    @LogPrint(value = "根据条件查询单个店铺")
+    @ApiOperation(value = "根据条件查询单个店铺")
+    @ApiImplicitParam(value = "店铺Model", name = "shop", dataType = "Shop", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<Shop> one(@RequestBody Shop shop) {
+        QueryWrapper<Shop> wrapper = WrapperUtil.createQueryWrapper(shop);
+        Shop one = shopService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增店铺")
@@ -165,6 +191,16 @@ public class ShopController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = shopService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除店铺")
+    @ApiOperation(value = "根据条件批量删除店铺")
+    @ApiImplicitParam(value = "店铺Model", name = "shop", dataType = "Shop", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody Shop shop) {
+        QueryWrapper<Shop> wrapper = WrapperUtil.createQueryWrapper(shop);
+        Boolean code = shopService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

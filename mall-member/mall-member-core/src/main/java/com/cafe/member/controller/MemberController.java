@@ -1,10 +1,9 @@
 package com.cafe.member.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.member.model.Member;
 import com.cafe.member.service.MemberService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class MemberController {
         this.memberService = memberService;
     }
 
+    @LogPrint(value = "查询会员数量")
+    @ApiOperation(value = "查询会员数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = memberService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询会员数量")
+    @ApiOperation(value = "根据条件查询会员数量")
+    @ApiImplicitParam(value = "会员Model", name = "member", dataType = "Member", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody Member member) {
+        QueryWrapper<Member> wrapper = WrapperUtil.createQueryWrapper(member);
+        Integer count = memberService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询会员列表")
     @ApiOperation(value = "查询会员列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class MemberController {
     @ApiImplicitParam(value = "会员Model", name = "member", dataType = "Member", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<Member>> list(@RequestBody Member member) {
-        Wrapper<Member> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(member);
+        QueryWrapper<Member> wrapper = WrapperUtil.createQueryWrapper(member);
         List<Member> memberList = memberService.list(wrapper);
         return ResponseEntity.ok(memberList);
     }
@@ -93,7 +110,7 @@ public class MemberController {
         @RequestBody Member member
     ) {
         Page<Member> page = new Page<Member>().setCurrent(current).setSize(size);
-        Wrapper<Member> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(member);
+        QueryWrapper<Member> wrapper = WrapperUtil.createQueryWrapper(member);
         Page<Member> memberPage = memberService.page(page, wrapper);
         return ResponseEntity.ok(memberPage);
     }
@@ -103,9 +120,18 @@ public class MemberController {
     @ApiImplicitParam(value = "会员id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<Member> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<Member> wrapper = new LambdaQueryWrapper<Member>().eq(Member::getId, id);
-        Member member = memberService.getOne(wrapper);
+        Member member = memberService.getById(id);
         return ResponseEntity.ok(member);
+    }
+
+    @LogPrint(value = "根据条件查询单个会员")
+    @ApiOperation(value = "根据条件查询单个会员")
+    @ApiImplicitParam(value = "会员Model", name = "member", dataType = "Member", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<Member> one(@RequestBody Member member) {
+        QueryWrapper<Member> wrapper = WrapperUtil.createQueryWrapper(member);
+        Member one = memberService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增会员")
@@ -165,6 +191,16 @@ public class MemberController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = memberService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除会员")
+    @ApiOperation(value = "根据条件批量删除会员")
+    @ApiImplicitParam(value = "会员Model", name = "member", dataType = "Member", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody Member member) {
+        QueryWrapper<Member> wrapper = WrapperUtil.createQueryWrapper(member);
+        Boolean code = memberService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

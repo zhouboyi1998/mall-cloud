@@ -1,10 +1,9 @@
 package com.cafe.user.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.user.model.User;
 import com.cafe.user.service.UserService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class UserController {
         this.userService = userService;
     }
 
+    @LogPrint(value = "查询用户数量")
+    @ApiOperation(value = "查询用户数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = userService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询用户数量")
+    @ApiOperation(value = "根据条件查询用户数量")
+    @ApiImplicitParam(value = "用户Model", name = "user", dataType = "User", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody User user) {
+        QueryWrapper<User> wrapper = WrapperUtil.createQueryWrapper(user);
+        Integer count = userService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询用户列表")
     @ApiOperation(value = "查询用户列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class UserController {
     @ApiImplicitParam(value = "用户Model", name = "user", dataType = "User", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<User>> list(@RequestBody User user) {
-        Wrapper<User> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(user);
+        QueryWrapper<User> wrapper = WrapperUtil.createQueryWrapper(user);
         List<User> userList = userService.list(wrapper);
         return ResponseEntity.ok(userList);
     }
@@ -93,7 +110,7 @@ public class UserController {
         @RequestBody User user
     ) {
         Page<User> page = new Page<User>().setCurrent(current).setSize(size);
-        Wrapper<User> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(user);
+        QueryWrapper<User> wrapper = WrapperUtil.createQueryWrapper(user);
         Page<User> userPage = userService.page(page, wrapper);
         return ResponseEntity.ok(userPage);
     }
@@ -103,9 +120,18 @@ public class UserController {
     @ApiImplicitParam(value = "用户id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<User> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<User> wrapper = new LambdaQueryWrapper<User>().eq(User::getId, id);
-        User user = userService.getOne(wrapper);
+        User user = userService.getById(id);
         return ResponseEntity.ok(user);
+    }
+
+    @LogPrint(value = "根据条件查询单个用户")
+    @ApiOperation(value = "根据条件查询单个用户")
+    @ApiImplicitParam(value = "用户Model", name = "user", dataType = "User", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<User> one(@RequestBody User user) {
+        QueryWrapper<User> wrapper = WrapperUtil.createQueryWrapper(user);
+        User one = userService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增用户")
@@ -165,6 +191,16 @@ public class UserController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = userService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除用户")
+    @ApiOperation(value = "根据条件批量删除用户")
+    @ApiImplicitParam(value = "用户Model", name = "user", dataType = "User", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody User user) {
+        QueryWrapper<User> wrapper = WrapperUtil.createQueryWrapper(user);
+        Boolean code = userService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 

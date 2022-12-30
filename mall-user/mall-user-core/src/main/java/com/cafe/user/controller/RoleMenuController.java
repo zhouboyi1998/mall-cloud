@@ -1,10 +1,9 @@
 package com.cafe.user.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.user.model.RoleMenu;
 import com.cafe.user.service.RoleMenuService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class RoleMenuController {
         this.roleMenuService = roleMenuService;
     }
 
+    @LogPrint(value = "查询角色-菜单关联关系数量")
+    @ApiOperation(value = "查询角色-菜单关联关系数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = roleMenuService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询角色-菜单关联关系数量")
+    @ApiOperation(value = "根据条件查询角色-菜单关联关系数量")
+    @ApiImplicitParam(value = "角色-菜单关联关系Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody RoleMenu roleMenu) {
+        QueryWrapper<RoleMenu> wrapper = WrapperUtil.createQueryWrapper(roleMenu);
+        Integer count = roleMenuService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询角色-菜单关联关系列表")
     @ApiOperation(value = "查询角色-菜单关联关系列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class RoleMenuController {
     @ApiImplicitParam(value = "角色-菜单关联关系Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<RoleMenu>> list(@RequestBody RoleMenu roleMenu) {
-        Wrapper<RoleMenu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(roleMenu);
+        QueryWrapper<RoleMenu> wrapper = WrapperUtil.createQueryWrapper(roleMenu);
         List<RoleMenu> roleMenuList = roleMenuService.list(wrapper);
         return ResponseEntity.ok(roleMenuList);
     }
@@ -93,7 +110,7 @@ public class RoleMenuController {
         @RequestBody RoleMenu roleMenu
     ) {
         Page<RoleMenu> page = new Page<RoleMenu>().setCurrent(current).setSize(size);
-        Wrapper<RoleMenu> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(roleMenu);
+        QueryWrapper<RoleMenu> wrapper = WrapperUtil.createQueryWrapper(roleMenu);
         Page<RoleMenu> roleMenuPage = roleMenuService.page(page, wrapper);
         return ResponseEntity.ok(roleMenuPage);
     }
@@ -103,9 +120,18 @@ public class RoleMenuController {
     @ApiImplicitParam(value = "角色-菜单关联关系id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<RoleMenu> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<RoleMenu> wrapper = new LambdaQueryWrapper<RoleMenu>().eq(RoleMenu::getId, id);
-        RoleMenu roleMenu = roleMenuService.getOne(wrapper);
+        RoleMenu roleMenu = roleMenuService.getById(id);
         return ResponseEntity.ok(roleMenu);
+    }
+
+    @LogPrint(value = "根据条件查询单个角色-菜单关联关系")
+    @ApiOperation(value = "根据条件查询单个角色-菜单关联关系")
+    @ApiImplicitParam(value = "角色-菜单关联关系Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<RoleMenu> one(@RequestBody RoleMenu roleMenu) {
+        QueryWrapper<RoleMenu> wrapper = WrapperUtil.createQueryWrapper(roleMenu);
+        RoleMenu one = roleMenuService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增角色-菜单关联关系")
@@ -165,6 +191,16 @@ public class RoleMenuController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = roleMenuService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除角色-菜单关联关系")
+    @ApiOperation(value = "根据条件批量删除角色-菜单关联关系")
+    @ApiImplicitParam(value = "角色-菜单关联关系Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody RoleMenu roleMenu) {
+        QueryWrapper<RoleMenu> wrapper = WrapperUtil.createQueryWrapper(roleMenu);
+        Boolean code = roleMenuService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

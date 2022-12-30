@@ -1,13 +1,13 @@
-package com.cafe.common.constant;
+package com.cafe.common.constant.mysql;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.constant
+ * @Package: com.cafe.common.constant.mysql
  * @Author: zhouboyi
  * @Date: 2022/5/6 14:42
- * @Description: MySQL 相关常量
+ * @Description: 数据库表相关常量
  */
-public class MySQLConstant {
+public class TableConstant {
 
     /**
      * 用户数据库.角色表

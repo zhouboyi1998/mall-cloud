@@ -1,10 +1,9 @@
 package com.cafe.merchant.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.MyBatisPlusWrapperUtil;
+import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.merchant.model.MerchantShop;
 import com.cafe.merchant.service.MerchantShopService;
 import io.swagger.annotations.Api;
@@ -45,6 +44,24 @@ public class MerchantShopController {
         this.merchantShopService = merchantShopService;
     }
 
+    @LogPrint(value = "查询商家-店铺关联关系数量")
+    @ApiOperation(value = "查询商家-店铺关联关系数量")
+    @GetMapping(value = "/count")
+    public ResponseEntity<Integer> count() {
+        Integer count = merchantShopService.count();
+        return ResponseEntity.ok(count);
+    }
+
+    @LogPrint(value = "根据条件查询查询商家-店铺关联关系数量")
+    @ApiOperation(value = "根据条件查询商家-店铺关联关系数量")
+    @ApiImplicitParam(value = "商家-店铺关联关系Model", name = "merchantShop", dataType = "MerchantShop", paramType = "body", required = true)
+    @PostMapping(value = "/count")
+    public ResponseEntity<Integer> count(@RequestBody MerchantShop merchantShop) {
+        QueryWrapper<MerchantShop> wrapper = WrapperUtil.createQueryWrapper(merchantShop);
+        Integer count = merchantShopService.count(wrapper);
+        return ResponseEntity.ok(count);
+    }
+
     @LogPrint(value = "查询商家-店铺关联关系列表")
     @ApiOperation(value = "查询商家-店铺关联关系列表")
     @GetMapping(value = "/list")
@@ -58,7 +75,7 @@ public class MerchantShopController {
     @ApiImplicitParam(value = "商家-店铺关联关系Model", name = "merchantShop", dataType = "MerchantShop", paramType = "body", required = true)
     @PostMapping(value = "/list")
     public ResponseEntity<List<MerchantShop>> list(@RequestBody MerchantShop merchantShop) {
-        Wrapper<MerchantShop> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(merchantShop);
+        QueryWrapper<MerchantShop> wrapper = WrapperUtil.createQueryWrapper(merchantShop);
         List<MerchantShop> merchantShopList = merchantShopService.list(wrapper);
         return ResponseEntity.ok(merchantShopList);
     }
@@ -93,7 +110,7 @@ public class MerchantShopController {
         @RequestBody MerchantShop merchantShop
     ) {
         Page<MerchantShop> page = new Page<MerchantShop>().setCurrent(current).setSize(size);
-        Wrapper<MerchantShop> wrapper = MyBatisPlusWrapperUtil.createQueryWrapperByModel(merchantShop);
+        QueryWrapper<MerchantShop> wrapper = WrapperUtil.createQueryWrapper(merchantShop);
         Page<MerchantShop> merchantShopPage = merchantShopService.page(page, wrapper);
         return ResponseEntity.ok(merchantShopPage);
     }
@@ -103,9 +120,18 @@ public class MerchantShopController {
     @ApiImplicitParam(value = "商家-店铺关联关系id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
     public ResponseEntity<MerchantShop> one(@PathVariable(value = "id") Long id) {
-        LambdaQueryWrapper<MerchantShop> wrapper = new LambdaQueryWrapper<MerchantShop>().eq(MerchantShop::getId, id);
-        MerchantShop merchantShop = merchantShopService.getOne(wrapper);
+        MerchantShop merchantShop = merchantShopService.getById(id);
         return ResponseEntity.ok(merchantShop);
+    }
+
+    @LogPrint(value = "根据条件查询单个商家-店铺关联关系")
+    @ApiOperation(value = "根据条件查询单个商家-店铺关联关系")
+    @ApiImplicitParam(value = "商家-店铺关联关系Model", name = "merchantShop", dataType = "MerchantShop", paramType = "body", required = true)
+    @PostMapping(value = "/one")
+    public ResponseEntity<MerchantShop> one(@RequestBody MerchantShop merchantShop) {
+        QueryWrapper<MerchantShop> wrapper = WrapperUtil.createQueryWrapper(merchantShop);
+        MerchantShop one = merchantShopService.getOne(wrapper);
+        return ResponseEntity.ok(one);
     }
 
     @LogPrint(value = "新增商家-店铺关联关系")
@@ -165,6 +191,16 @@ public class MerchantShopController {
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
         Boolean code = merchantShopService.removeByIds(ids);
+        return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "根据条件批量删除商家-店铺关联关系")
+    @ApiOperation(value = "根据条件批量删除商家-店铺关联关系")
+    @ApiImplicitParam(value = "商家-店铺关联关系Model", name = "merchantShop", dataType = "MerchantShop", paramType = "body", required = true)
+    @DeleteMapping(value = "/delete")
+    public ResponseEntity<Boolean> delete(@RequestBody MerchantShop merchantShop) {
+        QueryWrapper<MerchantShop> wrapper = WrapperUtil.createQueryWrapper(merchantShop);
+        Boolean code = merchantShopService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }
