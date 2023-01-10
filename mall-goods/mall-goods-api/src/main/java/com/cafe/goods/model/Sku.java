@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -39,13 +40,13 @@ public class Sku implements Serializable {
     private Long spuId;
 
     @ApiModelProperty(value = "SKU 原价")
-    private Double originalPrice;
+    private BigDecimal originalPrice;
 
     @ApiModelProperty(value = "SKU 折扣价")
-    private Double discountPrice;
+    private BigDecimal discountPrice;
 
     @ApiModelProperty(value = "SKU 秒杀价")
-    private Double seckillPrice;
+    private BigDecimal seckillPrice;
 
     @ApiModelProperty(value = "SKU 图片")
     private String image;
@@ -121,29 +122,29 @@ public class Sku implements Serializable {
         return this;
     }
 
-    public Double getOriginalPrice() {
+    public BigDecimal getOriginalPrice() {
         return originalPrice;
     }
 
-    public Sku setOriginalPrice(Double originalPrice) {
+    public Sku setOriginalPrice(BigDecimal originalPrice) {
         this.originalPrice = originalPrice;
         return this;
     }
 
-    public Double getDiscountPrice() {
+    public BigDecimal getDiscountPrice() {
         return discountPrice;
     }
 
-    public Sku setDiscountPrice(Double discountPrice) {
+    public Sku setDiscountPrice(BigDecimal discountPrice) {
         this.discountPrice = discountPrice;
         return this;
     }
 
-    public Double getSeckillPrice() {
+    public BigDecimal getSeckillPrice() {
         return seckillPrice;
     }
 
-    public Sku setSeckillPrice(Double seckillPrice) {
+    public Sku setSeckillPrice(BigDecimal seckillPrice) {
         this.seckillPrice = seckillPrice;
         return this;
     }

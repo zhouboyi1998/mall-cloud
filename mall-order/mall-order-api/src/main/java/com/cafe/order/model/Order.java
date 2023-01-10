@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -49,19 +50,19 @@ public class Order implements Serializable {
     private String mobile;
 
     @ApiModelProperty(value = "商品总金额")
-    private Double amount;
+    private BigDecimal amount;
 
     @ApiModelProperty(value = "折扣/满减金额")
-    private Double discount;
+    private BigDecimal discount;
 
     @ApiModelProperty(value = "优惠券金额")
-    private Double coupon;
+    private BigDecimal coupon;
 
     @ApiModelProperty(value = "邮费")
-    private Double postage;
+    private BigDecimal postage;
 
     @ApiModelProperty(value = "实际支付金额")
-    private Double payment;
+    private BigDecimal payment;
 
     @ApiModelProperty(value = "支付渠道: 0 银行卡, 1 支付宝, 2 微信")
     private Integer paymentChannel;
@@ -146,47 +147,47 @@ public class Order implements Serializable {
         return this;
     }
 
-    public Double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public Order setAmount(Double amount) {
+    public Order setAmount(BigDecimal amount) {
         this.amount = amount;
         return this;
     }
 
-    public Double getDiscount() {
+    public BigDecimal getDiscount() {
         return discount;
     }
 
-    public Order setDiscount(Double discount) {
+    public Order setDiscount(BigDecimal discount) {
         this.discount = discount;
         return this;
     }
 
-    public Double getCoupon() {
+    public BigDecimal getCoupon() {
         return coupon;
     }
 
-    public Order setCoupon(Double coupon) {
+    public Order setCoupon(BigDecimal coupon) {
         this.coupon = coupon;
         return this;
     }
 
-    public Double getPostage() {
+    public BigDecimal getPostage() {
         return postage;
     }
 
-    public Order setPostage(Double postage) {
+    public Order setPostage(BigDecimal postage) {
         this.postage = postage;
         return this;
     }
 
-    public Double getPayment() {
+    public BigDecimal getPayment() {
         return payment;
     }
 
-    public Order setPayment(Double payment) {
+    public Order setPayment(BigDecimal payment) {
         this.payment = payment;
         return this;
     }
