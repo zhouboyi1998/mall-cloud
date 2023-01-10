@@ -37,6 +37,7 @@
     </modules>
 
     <properties>
+        <mall-cloud.version>1.0-SNAPSHOT</mall-cloud.version>
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.7.RELEASE</spring-cloud-alibaba.version>
         <hutool.version>5.4.0</hutool.version>
@@ -60,8 +61,6 @@
         <canal.version>1.1.5</canal.version>
         <tomcat-embed.version>9.0.46</tomcat-embed.version>
         <commons-collections4.version>4.4</commons-collections4.version>
-
-        <mall-cloud.version>1.0-SNAPSHOT</mall-cloud.version>
     </properties>
 
     <dependencies>
