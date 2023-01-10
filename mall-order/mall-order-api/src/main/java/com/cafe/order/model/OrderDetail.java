@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -50,13 +51,13 @@ public class OrderDetail implements Serializable {
     private String skuImage;
 
     @ApiModelProperty(value = "SKU 价格快照")
-    private Double skuPrice;
+    private BigDecimal skuPrice;
 
     @ApiModelProperty(value = "SKU 购买数量")
     private Integer skuCount;
 
     @ApiModelProperty(value = "订单明细实际支付金额")
-    private Double detailAmount;
+    private BigDecimal detailAmount;
 
     @ApiModelProperty(value = "状态: 0 未完成, 1 已完成")
     private Integer status;
@@ -126,11 +127,11 @@ public class OrderDetail implements Serializable {
         return this;
     }
 
-    public Double getSkuPrice() {
+    public BigDecimal getSkuPrice() {
         return skuPrice;
     }
 
-    public OrderDetail setSkuPrice(Double skuPrice) {
+    public OrderDetail setSkuPrice(BigDecimal skuPrice) {
         this.skuPrice = skuPrice;
         return this;
     }
@@ -144,11 +145,11 @@ public class OrderDetail implements Serializable {
         return this;
     }
 
-    public Double getDetailAmount() {
+    public BigDecimal getDetailAmount() {
         return detailAmount;
     }
 
-    public OrderDetail setDetailAmount(Double detailAmount) {
+    public OrderDetail setDetailAmount(BigDecimal detailAmount) {
         this.detailAmount = detailAmount;
         return this;
     }

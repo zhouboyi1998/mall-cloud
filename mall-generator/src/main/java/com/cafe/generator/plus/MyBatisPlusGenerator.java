@@ -105,11 +105,11 @@ public class MyBatisPlusGenerator {
                 @Override
                 public IColumnType processTypeConvert(GlobalConfig config, String fieldType) {
                     if (fieldType.toUpperCase().contains(MySQLTypeEnum.DECIMAL.toString())) {
-                        return DbColumnType.DOUBLE;
+                        return DbColumnType.BIG_DECIMAL;
                     } else if (fieldType.toUpperCase().contains(MySQLTypeEnum.DATETIME.toString())) {
                         return DbColumnType.LOCAL_DATE_TIME;
                     }
-                    return (DbColumnType) super.processTypeConvert(config, fieldType);
+                    return super.processTypeConvert(config, fieldType);
                 }
             });
 

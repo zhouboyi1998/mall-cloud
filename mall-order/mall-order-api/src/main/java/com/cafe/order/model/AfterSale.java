@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -49,7 +50,7 @@ public class AfterSale implements Serializable {
     private String proofList;
 
     @ApiModelProperty(value = "退款金额")
-    private Double refundAmount;
+    private BigDecimal refundAmount;
 
     @ApiModelProperty(value = "退款渠道: 0 银行卡, 1 支付宝, 2 微信")
     private Integer refundChannel;
@@ -131,11 +132,11 @@ public class AfterSale implements Serializable {
         return this;
     }
 
-    public Double getRefundAmount() {
+    public BigDecimal getRefundAmount() {
         return refundAmount;
     }
 
-    public AfterSale setRefundAmount(Double refundAmount) {
+    public AfterSale setRefundAmount(BigDecimal refundAmount) {
         this.refundAmount = refundAmount;
         return this;
     }

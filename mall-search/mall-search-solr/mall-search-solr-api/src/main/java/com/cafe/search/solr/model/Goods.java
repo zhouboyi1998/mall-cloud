@@ -10,6 +10,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -42,15 +43,15 @@ public class Goods implements Serializable {
 
     @ApiModelProperty(value = "SKU 原价")
     @Field
-    private Double originalPrice;
+    private BigDecimal originalPrice;
 
     @ApiModelProperty(value = "SKU 折扣价")
     @Field
-    private Double discountPrice;
+    private BigDecimal discountPrice;
 
     @ApiModelProperty(value = "SKU 秒杀价")
     @Field
-    private Double seckillPrice;
+    private BigDecimal seckillPrice;
 
     @ApiModelProperty(value = "库存量")
     @Field
@@ -138,29 +139,29 @@ public class Goods implements Serializable {
         return this;
     }
 
-    public Double getOriginalPrice() {
+    public BigDecimal getOriginalPrice() {
         return originalPrice;
     }
 
-    public Goods setOriginalPrice(Double originalPrice) {
+    public Goods setOriginalPrice(BigDecimal originalPrice) {
         this.originalPrice = originalPrice;
         return this;
     }
 
-    public Double getDiscountPrice() {
+    public BigDecimal getDiscountPrice() {
         return discountPrice;
     }
 
-    public Goods setDiscountPrice(Double discountPrice) {
+    public Goods setDiscountPrice(BigDecimal discountPrice) {
         this.discountPrice = discountPrice;
         return this;
     }
 
-    public Double getSeckillPrice() {
+    public BigDecimal getSeckillPrice() {
         return seckillPrice;
     }
 
-    public Goods setSeckillPrice(Double seckillPrice) {
+    public Goods setSeckillPrice(BigDecimal seckillPrice) {
         this.seckillPrice = seckillPrice;
         return this;
     }
