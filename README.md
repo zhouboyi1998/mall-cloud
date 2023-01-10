@@ -39,10 +39,13 @@ mall-cloud
     |-- mall-goods (商品模块)
     |-- mall-id (分布式ID生成模块)
     |-- mall-member (会员模块)
+    |-- mall-merchant (商家模块)
     |-- mall-monitor (数据库监听器)
     |-- mall-order (订单模块)
     |-- mall-search (搜索模块)
     |-- mall-security (安全模块)
+    |-- mall-storage (仓库模块)
+    |-- mall-system (系统模块)
     |-- mall-user (用户模块)
 ```
 

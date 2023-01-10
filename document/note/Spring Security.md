@@ -2,14 +2,16 @@
 
 ### 🧰 模块搭建
 
-* 使用 `JDK` 自带的 `keytool` 生成 `RSA` 证书文件
-    * 在 `JDK` 安装目录下的 `bin` 目录下执行以下命令
-    * 按提示设置密码等信息
-    * 最终会生成一个 `RSA` 证书文件 `jwt.jks`
+#### 使用 JDK 自带的 keytool 生成 RSA 证书文件
+
+* 进入在 `JDK` 安装目录，在 `/bin` 目录下面执行以下命令
 
 ```bash
 keytool -genkey -alias jwt -keyalg RSA -keystore jwt.jks
 ```
+
+* 按提示设置密钥库密码、私钥密码等信息
+* 最终会生成一个 `RSA` 证书文件 `jwt.jks`
 
 ---
 
@@ -44,21 +46,29 @@ RedisTokenStore (保存到 Redis)
 JwkTokenStore (全部信息返回到客户端)
 ```
 
+---
+
+### 🏹 实战
+
 #### 刷新令牌是否复用
 
 ```
-@Override
-public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-    endpoints.reuseRefreshTokens(false);
+@Configuration
+@EnableAuthorizationServer
+public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+        endpoints.reuseRefreshTokens(false);
+    }
 }
 ```
 
-* `true`（复用，默认）
+* `endpoints.reuseRefreshTokens(true)`（复用，默认）
     * `Refresh Token` 不会刷新
     * 如果 `Refresh Token` 同时还设置成只能使用一次
     * 那么 `Access Token` 再次过期时就只能重新登录了
 
-* `false`（不复用）
+* `endpoints.reuseRefreshTokens(false)`（不复用）
     * 使用当前 `Refresh Token` 获取新的 `Access Token` 时
     * 同时获取新的 `Refresh Token`
     * 这样只要在 `Refresh Token` 有效期内不断刷新就可以永远不过期
