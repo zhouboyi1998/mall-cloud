@@ -39,10 +39,13 @@ mall-cloud
     |-- mall-goods
     |-- mall-id
     |-- mall-member
+    |-- mall-merchant
     |-- mall-monitor
     |-- mall-order
     |-- mall-search
     |-- mall-security
+    |-- mall-storage
+    |-- mall-system
     |-- mall-user
 ```
 

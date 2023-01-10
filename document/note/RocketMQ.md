@@ -1,6 +1,6 @@
 <h2 align="center">📔 RocketMQ</h2>
 
-### 🪒 Windows 安装
+### 📦 Windows 安装
 
 #### RocketMQ 4.9.3
 
