@@ -4,25 +4,25 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cafe.goods.bo.Goods">
-        <id column="id" property="id"/>
-        <result column="sku_name" property="skuName"/>
-        <result column="spu_id" property="spuId"/>
-        <result column="original_price" property="originalPrice"/>
-        <result column="discount_price" property="discountPrice"/>
-        <result column="seckill_price" property="seckillPrice"/>
-        <result column="image" property="image"/>
-        <result column="image_list" property="imageList"/>
-        <result column="video" property="video"/>
-        <result column="specification" property="specification"/>
-        <result column="stock" property="stock"/>
-        <result column="sale_volume" property="saleVolume"/>
-        <result column="launch_time" property="launchTime"/>
-        <result column="brand_id" property="brandId"/>
-        <result column="category_id" property="categoryId"/>
-        <result column="shop_id" property="shopId"/>
-        <result column="caption" property="caption"/>
-        <result column="intro" property="intro"/>
-        <result column="comment_volume" property="commentVolume"/>
+        <id column="id" property="id" />
+        <result column="sku_name" property="skuName" />
+        <result column="spu_id" property="spuId" />
+        <result column="original_price" property="originalPrice" />
+        <result column="discount_price" property="discountPrice" />
+        <result column="seckill_price" property="seckillPrice" />
+        <result column="image" property="image" />
+        <result column="image_list" property="imageList" />
+        <result column="video" property="video" />
+        <result column="specification" property="specification" />
+        <result column="stock" property="stock" />
+        <result column="sale_volume" property="saleVolume" />
+        <result column="launch_time" property="launchTime" />
+        <result column="brand_id" property="brandId" />
+        <result column="category_id" property="categoryId" />
+        <result column="shop_id" property="shopId" />
+        <result column="caption" property="caption" />
+        <result column="intro" property="intro" />
+        <result column="comment_volume" property="commentVolume" />
     </resultMap>
 
     <select id="list" resultType="com.cafe.goods.bo.Goods">

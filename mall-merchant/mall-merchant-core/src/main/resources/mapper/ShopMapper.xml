@@ -19,9 +19,4 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, shop_name, shop_type, logo, intro, telephone, business_license, audit, status, create_time, update_time, audit_time, is_deleted
-    </sql>
-
 </mapper>
