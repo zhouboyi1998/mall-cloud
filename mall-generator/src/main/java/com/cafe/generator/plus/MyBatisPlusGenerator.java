@@ -60,8 +60,6 @@ public class MyBatisPlusGenerator {
             .setFileOverride(false)
             // 生成后是否打开输出目录
             .setOpen(false)
-            // 是否在 Mapper XML 中添加二级缓存配置
-            .setEnableCache(false)
             // 开发人员
             .setAuthor("zhouboyi")
             // 是否开启 Kotlin 模式
@@ -70,10 +68,12 @@ public class MyBatisPlusGenerator {
             .setSwagger2(true)
             // 是否开启 ActiveRecord 模式
             .setActiveRecord(false)
+            // 是否在 Mapper XML 中添加二级缓存配置
+            .setEnableCache(false)
             // 是否在 Mapper XML 中生成通用查询映射结果
             .setBaseResultMap(true)
             // 是否在 Mapper XML 中生成通用查询结果列
-            .setBaseColumnList(true)
+            .setBaseColumnList(false)
             // 主键生成策略 (ID 生成器分配主键)
             .setIdType(IdType.ASSIGN_ID)
             // 时间类型对应策略

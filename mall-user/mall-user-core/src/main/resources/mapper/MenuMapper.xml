@@ -19,11 +19,6 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, platform_id, menu_name, menu_title, menu_icon, menu_path, parent_id, menu_level, sort, status, create_time, update_time, is_deleted
-    </sql>
-
     <select id="listMenuTree" resultType="com.cafe.user.vo.MenuTreeVO">
         SELECT DISTINCT m.id, m.menu_name, m.menu_title, m.menu_icon, m.menu_path, m.parent_id, m.sort
         FROM mall_menu AS m

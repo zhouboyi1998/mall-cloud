@@ -20,9 +20,4 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, member_id, province_id, city_id, district_id, address, receiver, receiver_mobile, is_defaulted, sort, status, create_time, update_time, is_deleted
-    </sql>
-
 </mapper>

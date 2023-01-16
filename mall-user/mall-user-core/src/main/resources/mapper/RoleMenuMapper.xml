@@ -4,25 +4,20 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cafe.user.model.RoleMenu">
-        <id column="id" property="id"/>
-        <result column="role_id" property="roleId"/>
-        <result column="menu_id" property="menuId"/>
-        <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime"/>
+        <id column="id" property="id" />
+        <result column="role_id" property="roleId" />
+        <result column="menu_id" property="menuId" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
     </resultMap>
-
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, role_id, menu_id, create_time, update_time
-    </sql>
 
     <!-- 使用两个 resultMap, 将 RoleName 按 MenuPath 组合成 List 类型 -->
     <resultMap id="RoleNameListMap" type="java.lang.String">
         <result column="role_name" />
     </resultMap>
     <resultMap id="MenuRoleBOMap" type="com.cafe.user.bo.MenuRoleBO">
-        <result column="menu_path" property="menuPath"/>
-        <collection property="roleNameList" resultMap="RoleNameListMap" javaType="java.util.List"/>
+        <result column="menu_path" property="menuPath" />
+        <collection property="roleNameList" resultMap="RoleNameListMap" javaType="java.util.List" />
     </resultMap>
 
     <select id="listMenuRoleBO" resultMap="MenuRoleBOMap">
