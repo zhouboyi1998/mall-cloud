@@ -4,17 +4,12 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cafe.order.model.DetailGuarantee">
-        <id column="id" property="id"/>
-        <result column="detail_id" property="detailId"/>
-        <result column="guarantee_id" property="guaranteeId"/>
-        <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime"/>
-        <result column="expiration_time" property="expirationTime"/>
+        <id column="id" property="id" />
+        <result column="detail_id" property="detailId" />
+        <result column="guarantee_id" property="guaranteeId" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="expiration_time" property="expirationTime" />
     </resultMap>
-
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, detail_id, guarantee_id, create_time, update_time, expiration_time
-    </sql>
 
 </mapper>

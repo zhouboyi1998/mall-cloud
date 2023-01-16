@@ -4,31 +4,26 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cafe.goods.model.Sku">
-        <id column="id" property="id"/>
-        <result column="sku_name" property="skuName"/>
-        <result column="spu_id" property="spuId"/>
-        <result column="original_price" property="originalPrice"/>
-        <result column="discount_price" property="discountPrice"/>
-        <result column="seckill_price" property="seckillPrice"/>
-        <result column="image" property="image"/>
-        <result column="image_list" property="imageList"/>
-        <result column="video" property="video"/>
-        <result column="specification" property="specification"/>
-        <result column="stock" property="stock"/>
-        <result column="sale_volume" property="saleVolume"/>
-        <result column="sort" property="sort"/>
-        <result column="audit" property="audit"/>
-        <result column="status" property="status"/>
-        <result column="create_time" property="createTime"/>
-        <result column="update_time" property="updateTime"/>
-        <result column="audit_time" property="auditTime"/>
-        <result column="launch_time" property="launchTime"/>
-        <result column="is_deleted" property="deleted"/>
+        <id column="id" property="id" />
+        <result column="sku_name" property="skuName" />
+        <result column="spu_id" property="spuId" />
+        <result column="original_price" property="originalPrice" />
+        <result column="discount_price" property="discountPrice" />
+        <result column="seckill_price" property="seckillPrice" />
+        <result column="image" property="image" />
+        <result column="image_list" property="imageList" />
+        <result column="video" property="video" />
+        <result column="specification" property="specification" />
+        <result column="stock" property="stock" />
+        <result column="sale_volume" property="saleVolume" />
+        <result column="sort" property="sort" />
+        <result column="audit" property="audit" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="audit_time" property="auditTime" />
+        <result column="launch_time" property="launchTime" />
+        <result column="is_deleted" property="deleted" />
     </resultMap>
-
-    <!-- 通用查询结果列 -->
-    <sql id="Base_Column_List">
-        id, sku_name, spu_id, original_price, discount_price, seckill_price, image, image_list, video, specification, stock, sale_volume, sort, audit, status, create_time, update_time, audit_time, launch_time, is_deleted
-    </sql>
 
 </mapper>
