@@ -48,7 +48,7 @@ public class BinlogListener implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         // 存储 TableId 和 TableName 的对应关系
-        Map<Long, String> tableMap = new HashMap<Long, String>(8);
+        Map<Long, String> tableMap = new HashMap<>(8);
 
         // 创建 BinaryLog 客户端并初始化
         BinaryLogClient binaryLogClient = new BinaryLogClient(
@@ -84,9 +84,9 @@ public class BinlogListener implements CommandLineRunner {
                         // 打印日志
                         LOGGER.info("BinlogListener.run(): Update Operation TableName -> {}", tableName);
                         // 存储监听到的修改前的数据
-                        List<Serializable[]> beforeRowList = new ArrayList<Serializable[]>();
+                        List<Serializable[]> beforeRowList = new ArrayList<>();
                         // 存储监听到的修改后的数据
-                        List<Serializable[]> afterRowList = new ArrayList<Serializable[]>();
+                        List<Serializable[]> afterRowList = new ArrayList<>();
                         // 循环每一行修改的数据
                         for (Map.Entry<Serializable[], Serializable[]> row : updateRowsEventData.getRows()) {
                             beforeRowList.add(row.getKey());

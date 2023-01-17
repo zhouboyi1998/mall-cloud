@@ -47,8 +47,8 @@ public class MessageContentHandler {
         content.put(MonitorConstant.OPERATION, operation);
 
         // 分别存储所有更新前数据和更新后数据
-        List<Map<String, Object>> beforeDataList = new ArrayList<Map<String, Object>>();
-        List<Map<String, Object>> afterDataList = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> beforeDataList = new ArrayList<>();
+        List<Map<String, Object>> afterDataList = new ArrayList<>();
         // 根据表名获取 JavaBean 列名集合
         List<String> fieldNameList = getFieldNameList(tableName);
 
@@ -57,7 +57,7 @@ public class MessageContentHandler {
             // 循环处理每一行更新前的数据
             for (Serializable[] row : beforeRowList) {
                 // 存储属性名与字段值对应关系的 Map
-                Map<String, Object> rowMap = new HashMap<String, Object>(16);
+                Map<String, Object> rowMap = new HashMap<>(16);
                 for (int i = 0; i < row.length; i++) {
                     rowMap.put(fieldNameList.get(i), row[i]);
                 }
@@ -71,7 +71,7 @@ public class MessageContentHandler {
             // 循环处理每一行更新后的数据
             for (Serializable[] row : afterRowList) {
                 // 存储属性名与字段值对应关系的 Map
-                Map<String, Object> rowMap = new HashMap<String, Object>(16);
+                Map<String, Object> rowMap = new HashMap<>(16);
                 for (int i = 0; i < row.length; i++) {
                     rowMap.put(fieldNameList.get(i), row[i]);
                 }
@@ -96,7 +96,7 @@ public class MessageContentHandler {
      */
     private List<String> getFieldNameList(String tableName) {
         // 存储列名的字符串集合
-        List<String> fieldNameList = new ArrayList<String>();
+        List<String> fieldNameList = new ArrayList<>();
         // 根据表名获取对应的 JavaBean 属性数组
         Field[] fields = TableBeanMap.TABLE_BEAN_MAP.get(tableName).getDeclaredFields();
         for (Field field : fields) {

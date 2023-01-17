@@ -56,7 +56,7 @@ public class RabbitMQConsumer {
     })
     public void listenerRoleMenuQueue(String message) {
         // 存储 菜单ids
-        List<Long> menuIds = new ArrayList<Long>();
+        List<Long> menuIds = new ArrayList<>();
         // 获取消息内容
         Map<String, Object> content = JSONUtil.parseObj(message);
         // 获取变更前的数据
