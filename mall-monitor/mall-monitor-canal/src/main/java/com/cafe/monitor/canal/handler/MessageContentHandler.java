@@ -21,8 +21,8 @@ public class MessageContentHandler {
 
     public Map<String, Object> handle(String tableName, List<CanalEntry.RowData> rowDataList, CanalEntry.EventType eventType) {
         // 分别存储所有更新前数据和更新后数据
-        List<Map<String, Object>> beforeDataList = new ArrayList<Map<String, Object>>();
-        List<Map<String, Object>> afterDataList = new ArrayList<Map<String, Object>>();
+        List<Map<String, Object>> beforeDataList = new ArrayList<>();
+        List<Map<String, Object>> afterDataList = new ArrayList<>();
 
         // 循环获取 RowChange 对象里的每一行数据
         for (CanalEntry.RowData rowData : rowDataList) {
@@ -43,7 +43,7 @@ public class MessageContentHandler {
         }
 
         // 组装最终的消息内容
-        Map<String, Object> content = new HashMap<String, Object>(4);
+        Map<String, Object> content = new HashMap<>(4);
         content.put(MonitorConstant.OPERATION, eventType.toString().toLowerCase());
         content.put(MonitorConstant.BEFORE_DATA, beforeDataList);
         content.put(MonitorConstant.AFTER_DATA, afterDataList);
@@ -53,7 +53,7 @@ public class MessageContentHandler {
 
     public Map<String, Object> convertToMap(List<CanalEntry.Column> columnList) {
         // 存储属性名与字段值对应关系的 Map
-        Map<String, Object> rowMap = new HashMap<String, Object>(16);
+        Map<String, Object> rowMap = new HashMap<>(16);
         for (CanalEntry.Column column : columnList) {
             rowMap.put(column.getName(), column.getValue());
         }

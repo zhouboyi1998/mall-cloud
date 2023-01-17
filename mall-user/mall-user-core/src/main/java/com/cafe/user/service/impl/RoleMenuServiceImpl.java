@@ -45,9 +45,9 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
     @Override
     public void initMenuRoleBO() {
         // 获取所有 <菜单路径-角色名称> 的对应关系
-        List<MenuRoleBO> menuRoleBOList = roleMenuMapper.listMenuRoleBO(new ArrayList<Long>(0));
+        List<MenuRoleBO> menuRoleBOList = roleMenuMapper.listMenuRoleBO(new ArrayList<>(0));
         // 将对应关系组装成 Map 格式
-        Map<String, List<String>> relationMap = new TreeMap<String, List<String>>();
+        Map<String, List<String>> relationMap = new TreeMap<>();
         for (MenuRoleBO menuRoleBO : menuRoleBOList) {
             // 添加权限前缀
             List<String> roleNameList = menuRoleBO.getRoleNameList().stream()

@@ -15,10 +15,12 @@ public class RabbitMQRoutingKeyMap {
     /**
      * 使用 RabbitMQ 交换机、消息标识(数据库表名称) 作为组合Key, 获取 RabbitMQ 路由键
      */
-    public static final MultiKeyMap<String, String> ROUTING_KEY_MAP = new MultiKeyMap<String, String>() {{
-        put(RabbitMQExchange.BINLOG, TableConstant.ROLE, RabbitMQRoutingKey.BINLOG_TO_ROLE);
-        put(RabbitMQExchange.BINLOG, TableConstant.ROLE_MENU, RabbitMQRoutingKey.BINLOG_TO_ROLE_MENU);
-        put(RabbitMQExchange.CANAL, TableConstant.ROLE, RabbitMQRoutingKey.CANAL_TO_ROLE);
-        put(RabbitMQExchange.CANAL, TableConstant.ROLE_MENU, RabbitMQRoutingKey.CANAL_TO_ROLE_MENU);
-    }};
+    public static final MultiKeyMap<String, String> ROUTING_KEY_MAP = new MultiKeyMap<>();
+
+    static {
+        ROUTING_KEY_MAP.put(RabbitMQExchange.BINLOG, TableConstant.ROLE, RabbitMQRoutingKey.BINLOG_TO_ROLE);
+        ROUTING_KEY_MAP.put(RabbitMQExchange.BINLOG, TableConstant.ROLE_MENU, RabbitMQRoutingKey.BINLOG_TO_ROLE_MENU);
+        ROUTING_KEY_MAP.put(RabbitMQExchange.CANAL, TableConstant.ROLE, RabbitMQRoutingKey.CANAL_TO_ROLE);
+        ROUTING_KEY_MAP.put(RabbitMQExchange.CANAL, TableConstant.ROLE_MENU, RabbitMQRoutingKey.CANAL_TO_ROLE_MENU);
+    }
 }

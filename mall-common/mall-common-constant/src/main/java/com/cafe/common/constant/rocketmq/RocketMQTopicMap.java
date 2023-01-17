@@ -15,8 +15,10 @@ public class RocketMQTopicMap {
     /**
      * 使用 RocketMQ 生产者、消息标识(数据库表名称) 作为组合Key, 获取 RocketMQ 主题
      */
-    public static final MultiKeyMap<String, String> TOPIC_MAP = new MultiKeyMap<String, String>() {{
-        put(RocketMQProducer.CANAL, TableConstant.BRAND, RocketMQTopic.CANAL_TO_ES_BRAND);
-        put(RocketMQProducer.CANAL, TableConstant.CATEGORY, RocketMQTopic.CANAL_TO_ES_CATEGORY);
-    }};
+    public static final MultiKeyMap<String, String> TOPIC_MAP = new MultiKeyMap<>();
+
+    static {
+        TOPIC_MAP.put(RocketMQProducer.CANAL, TableConstant.BRAND, RocketMQTopic.CANAL_TO_ES_BRAND);
+        TOPIC_MAP.put(RocketMQProducer.CANAL, TableConstant.CATEGORY, RocketMQTopic.CANAL_TO_ES_CATEGORY);
+    }
 }

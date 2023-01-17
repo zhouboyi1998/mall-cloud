@@ -49,7 +49,7 @@ public class GoodsServiceImpl implements GoodsService {
         goodsMapper.updateStatus(ids, status);
 
         // 组装 RocketMQ 消息内容
-        Map<String, Object> content = new HashMap<String, Object>(2);
+        Map<String, Object> content = new HashMap<>(2);
         // 消息标识: 标识消息是上架通知还是下架通知
         content.put(MessageConstant.STATUS, status);
         // 消息内容

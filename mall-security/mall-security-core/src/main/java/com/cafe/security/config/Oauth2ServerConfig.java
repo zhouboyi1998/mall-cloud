@@ -179,7 +179,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         // 存储令牌增强器集合
-        List<TokenEnhancer> tokenEnhancerList = new ArrayList<TokenEnhancer>();
+        List<TokenEnhancer> tokenEnhancerList = new ArrayList<>();
         // 自定义 JWT 访问令牌转换器
         tokenEnhancerList.add(jwtTokenEnhancer);
         // OAuth2 JWT 访问令牌转换器
