@@ -27,7 +27,7 @@ public class MyBatisGenerator {
     public static void generate() {
         try {
             // 存储 MyBatis Generator 执行过程中的报错信息
-            List<String> warns = new ArrayList<String>();
+            List<String> warns = new ArrayList<>();
 
             // 读取 XML 配置文件
             InputStream inputStream = MyBatisGenerator.class.getResourceAsStream("/generator.xml");

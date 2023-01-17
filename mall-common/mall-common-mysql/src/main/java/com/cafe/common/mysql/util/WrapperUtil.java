@@ -25,9 +25,11 @@ public class WrapperUtil {
     /**
      * Wrapper 条件构造时忽略的属性
      */
-    private static final List<String> IGNORE_FIELD_LIST = new ArrayList<String>() {{
-        add(FieldConstant.SERIAL_VERSION_UID);
-    }};
+    private static final List<String> IGNORE_FIELD_LIST = new ArrayList<>();
+
+    static {
+        IGNORE_FIELD_LIST.add(FieldConstant.SERIAL_VERSION_UID);
+    }
 
     /**
      * 构造 QueryWrapper 条件
@@ -37,7 +39,7 @@ public class WrapperUtil {
      * @return
      */
     public static <T> QueryWrapper<T> createQueryWrapper(T model) {
-        return (QueryWrapper<T>) createWrapper(model, new QueryWrapper<T>());
+        return (QueryWrapper<T>) createWrapper(model, new QueryWrapper<>());
     }
 
     /**
@@ -48,7 +50,7 @@ public class WrapperUtil {
      * @return
      */
     public static <T> UpdateWrapper<T> createUpdateWrapper(T model) {
-        return (UpdateWrapper<T>) createWrapper(model, new UpdateWrapper<T>());
+        return (UpdateWrapper<T>) createWrapper(model, new UpdateWrapper<>());
     }
 
     /**

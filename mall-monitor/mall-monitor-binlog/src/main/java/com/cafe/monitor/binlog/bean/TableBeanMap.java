@@ -19,8 +19,10 @@ public class TableBeanMap {
     /**
      * 通过数据库表名称获取对应的 Java 模型
      */
-    public static final Map<String, Class<?>> TABLE_BEAN_MAP = new HashMap<String, Class<?>>() {{
-        put(TableConstant.ROLE, Role.class);
-        put(TableConstant.ROLE_MENU, RoleMenu.class);
-    }};
+    public static final Map<String, Class<?>> TABLE_BEAN_MAP = new HashMap<>();
+
+    static {
+        TABLE_BEAN_MAP.put(TableConstant.ROLE, Role.class);
+        TABLE_BEAN_MAP.put(TableConstant.ROLE_MENU, RoleMenu.class);
+    }
 }
