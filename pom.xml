@@ -12,10 +12,11 @@
 
     <groupId>com.cafe</groupId>
     <artifactId>mall-cloud</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <description>微服务父项目 (管理依赖版本)</description>
-
+    <version>${mall-cloud.version}</version>
     <packaging>pom</packaging>
+    <name>${project.artifactId}</name>
+    <description>微服务商城项目</description>
+
     <modules>
         <module>mall-admin</module>
         <module>mall-common</module>
@@ -37,7 +38,9 @@
     </modules>
 
     <properties>
+        <!-- 项目版本管理 -->
         <mall-cloud.version>1.0-SNAPSHOT</mall-cloud.version>
+        <!-- 依赖版本管理 -->
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.7.RELEASE</spring-cloud-alibaba.version>
         <hutool.version>5.4.0</hutool.version>

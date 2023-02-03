@@ -4,14 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <artifactId>mall-system</artifactId>
         <groupId>com.cafe</groupId>
+        <artifactId>mall-system</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>mall-system-core</artifactId>
     <version>${mall-cloud.version}</version>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
     <description>系统模块核心业务</description>
 
     <dependencies>
