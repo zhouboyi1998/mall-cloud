@@ -9,6 +9,8 @@ package com.cafe.common.constant;
  */
 public class NumberConstant {
 
+    public static final Integer MINUS_ONE = -1;
+
     public static final Integer ZERO = 0;
 
     public static final Integer ONE = 1;

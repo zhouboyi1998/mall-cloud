@@ -3,6 +3,7 @@ package com.cafe.search.solr.service.impl;
 import com.cafe.common.constant.SolrConstant;
 import com.cafe.search.solr.model.Goods;
 import com.cafe.search.solr.service.SolrGoodsService;
+import org.apache.solr.common.SolrException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,8 @@ public class SolrGoodsServiceImpl implements SolrGoodsService {
 
     @Override
     public Goods one(String id) {
-        Goods goods = solrTemplate.getById(SolrConstant.GOODS_INDEX, id, Goods.class).orElse(null);
+        Goods goods = solrTemplate.getById(SolrConstant.GOODS_INDEX, id, Goods.class)
+            .orElseThrow(() -> new SolrException(SolrException.ErrorCode.NOT_FOUND, "Solr Goods ID is not exist!"));
         solrTemplate.commit(SolrConstant.GOODS_INDEX);
         return goods;
     }
