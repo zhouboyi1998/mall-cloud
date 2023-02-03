@@ -1,5 +1,6 @@
 package com.cafe.generator.mybatis;
 
+import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @Project: mall-cloud
@@ -17,9 +19,9 @@ import java.util.List;
  * @Date: 2022/4/22 14:37
  * @Description: MyBatis Generator 代码生成器
  */
-public class MyBatisGenerator {
+public class MyBatisOriginGenerator {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MyBatisGenerator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MyBatisOriginGenerator.class);
 
     /**
      * 生成代码: Model、DAO、Mapper
@@ -30,21 +32,21 @@ public class MyBatisGenerator {
             List<String> warns = new ArrayList<>();
 
             // 读取 XML 配置文件
-            InputStream inputStream = MyBatisGenerator.class.getResourceAsStream("/generator.xml");
+            InputStream inputStream = Optional.ofNullable(MyBatisOriginGenerator.class.getClassLoader().getResourceAsStream("generator.xml"))
+                .orElseThrow(NullPointerException::new);
             // 创建 MyBatis Generator 配置解析器
             ConfigurationParser configurationParser = new ConfigurationParser(warns);
             // 使用 MyBatis Generator 配置解析器解析 XML 配置文件
             Configuration configuration = configurationParser.parseConfiguration(inputStream);
-            assert inputStream != null;
+            // 关闭输入流
             inputStream.close();
 
             // true: 当生成的代码重复时, 覆盖源代码
             DefaultShellCallback callback = new DefaultShellCallback(true);
             // 创建 MyBatis Generator
-            org.mybatis.generator.api.MyBatisGenerator myBatisGenerator
-                = new org.mybatis.generator.api.MyBatisGenerator(configuration, callback, warns);
+            MyBatisGenerator mybatisGenerator = new MyBatisGenerator(configuration, callback, warns);
             // 生成代码
-            myBatisGenerator.generate(null);
+            mybatisGenerator.generate(null);
 
             // 输出警告信息
             for (String warn : warns) {

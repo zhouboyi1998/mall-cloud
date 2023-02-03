@@ -68,7 +68,7 @@ public class MinioServiceImpl implements MinioService {
         // 上传文件
         minioClient.putObject(args);
         // 获取文件存储路径
-        return StringConstant.FORWARD_SLASH + bucket + StringConstant.FORWARD_SLASH + fileName;
+        return StringConstant.SLASH + bucket + StringConstant.SLASH + fileName;
     }
 
     @Override

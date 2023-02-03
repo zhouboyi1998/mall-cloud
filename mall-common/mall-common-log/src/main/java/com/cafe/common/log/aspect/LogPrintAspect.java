@@ -1,6 +1,10 @@
 package com.cafe.common.log.aspect;
 
 import cn.hutool.json.JSONUtil;
+import com.cafe.common.constant.AppConstant;
+import com.cafe.common.constant.FieldConstant;
+import com.cafe.common.constant.NumberConstant;
+import com.cafe.common.constant.StringConstant;
 import com.cafe.common.log.annotation.LogPrint;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -23,6 +27,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -35,7 +41,7 @@ import java.util.stream.Collectors;
  */
 @Aspect
 @Component
-@Profile({"dev", "test"})
+@Profile({AppConstant.DEV, AppConstant.TEST})
 public class LogPrintAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogPrintAspect.class);
@@ -60,7 +66,7 @@ public class LogPrintAspect {
         // 为每一个请求生成 UUID 格式的 Request ID
         String requestId = UUID.randomUUID().toString();
         // 将请求 Request ID 存储到日志上下文 (SLF4J MDC) 中
-        MDC.put("requestId", requestId);
+        MDC.put(FieldConstant.REQUEST_ID, requestId);
         // 开始打印
         LOGGER.info("==================== start ====================");
         // 获取进入连接点之前的时间
@@ -84,16 +90,18 @@ public class LogPrintAspect {
      * @throws Throwable
      */
     @Before("logPrint()")
-    public void deBefore(JoinPoint joinPoint) throws Throwable {
+    public void doBefore(JoinPoint joinPoint) throws Throwable {
         // 获取 HTTP 请求相关信息
-        ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
-        HttpServletRequest request = attributes.getRequest();
+        HttpServletRequest request = Optional.ofNullable(RequestContextHolder.getRequestAttributes())
+            .map(attributes -> (ServletRequestAttributes) attributes)
+            .map(ServletRequestAttributes::getRequest)
+            .orElseThrow(NullPointerException::new);
         // 请求来源 IP
         LOGGER.info("Source IP        : {}", request.getRemoteAddr());
         // 描述信息
         LOGGER.info("Description      : {}", getLogPrintDescription(joinPoint));
         // HTTP 请求 URL
-        LOGGER.info("Request URL      : {}", request.getRequestURL().toString());
+        LOGGER.info("Request URL      : {}", request.getRequestURL());
         // HTTP 请求类型
         LOGGER.info("HTTP Method      : {}", request.getMethod());
         // 控制器类的全路径
@@ -101,7 +109,7 @@ public class LogPrintAspect {
         // 执行方法
         LOGGER.info("Method           : {}", joinPoint.getSignature().getName());
         // 请求参数
-        LOGGER.info("Request Argument : {}", getRequestParams(joinPoint));
+        LOGGER.info("Request Argument : {}", getRequestArguments(joinPoint));
     }
 
     /**
@@ -110,12 +118,11 @@ public class LogPrintAspect {
      * @param joinPoint 连接点
      * @return
      */
-    private String getRequestParams(JoinPoint joinPoint) {
+    private String getRequestArguments(JoinPoint joinPoint) {
         // 存储请求入参
-        StringBuilder params = new StringBuilder();
+        StringBuilder arguments = new StringBuilder();
         // 获取所有入参, 去除 HTTP 相关参数、文件相关参数
-        List<Object> args = Arrays
-            .stream(joinPoint.getArgs())
+        List<Object> args = Arrays.stream(joinPoint.getArgs())
             .filter(arg -> !(arg instanceof HttpServletRequest) && !(arg instanceof HttpServletResponse) &&
                 !(arg instanceof MultipartFile) && !(arg instanceof MultipartFile[]))
             .collect(Collectors.toList());
@@ -123,17 +130,17 @@ public class LogPrintAspect {
         for (Object arg : args) {
             // 直接拼接基本数据类型的参数, 使用 JSON 工具将其它类型的参数转换为字符串再拼接
             if (arg instanceof Number || arg instanceof Character || arg instanceof Boolean) {
-                params.append(arg).append("&");
+                arguments.append(arg).append(StringConstant.AMPERSAND);
             } else {
-                params.append(JSONUtil.toJsonStr(arg)).append("&");
+                arguments.append(JSONUtil.toJsonStr(arg)).append(StringConstant.AMPERSAND);
             }
         }
         // 删除最后一个 & 符号
-        Integer index = params.lastIndexOf("&");
-        if (index > -1) {
-            params.deleteCharAt(index);
+        Integer index = arguments.lastIndexOf(StringConstant.AMPERSAND);
+        if (index > NumberConstant.MINUS_ONE) {
+            arguments.deleteCharAt(index);
         }
-        return params.toString();
+        return arguments.toString();
     }
 
     /**
@@ -155,22 +162,20 @@ public class LogPrintAspect {
         // 获取目标对象的类的所有方法
         Method[] methods = targetClass.getMethods();
         // 存储 @LogPrint 注解上配置的描述信息
-        StringBuilder description = new StringBuilder();
+        String description = StringConstant.EMPTY;
         // 遍历所有方法
         for (Method method : methods) {
+            // 判断方法名是否相同、形参个数和实参个数是否相等 (可能存在重载方法)
             // 如果找到目标方法, 获取方法 @LogPrint 注解上配置的描述信息
-            if (method.getName().equals(methodName)) {
-                // 判断形参个数和实参个数是否相等 (可能存在重载方法)
-                if (method.getParameterCount() == arguments.length) {
-                    // 获取 @LogPrint 注解上配置的描述信息
-                    // 因为配置属性别名的注解 @AliasFor 是 Spring 提供的
-                    // 必须使用 Spring 提供的 AnnotationUtils 获取注解, 才可以解析别名
-                    // 如果直接使用 Method 获取注解, 无法解析别名 (配置了一对别名中的一个, 获取另一个时仍然为空或默认值)
-                    description.append(AnnotationUtils.getAnnotation(method, LogPrint.class).description());
-                    break;
-                }
+            if (Objects.equals(method.getName(), methodName) && Objects.equals(method.getParameterCount(), arguments.length)) {
+                // 获取 @LogPrint 注解上配置的描述信息
+                // 因为使用了 Spring 提供的注解 @AliasFor 配置属性别名, 所以需要使用 Spring 提供的 AnnotationUtils 工具类获取注解
+                // 如果使用 Method 对象获取注解, 无法使用别名获取注解属性
+                description = Optional.ofNullable(AnnotationUtils.getAnnotation(method, LogPrint.class))
+                    .map(LogPrint::description)
+                    .orElse(StringConstant.EMPTY);
             }
         }
-        return description.toString();
+        return description;
     }
 }

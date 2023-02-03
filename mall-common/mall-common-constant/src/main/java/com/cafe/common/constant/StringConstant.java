@@ -15,17 +15,22 @@ public class StringConstant {
     public static final String EMPTY = "";
 
     /**
-     * 点号
+     * 点
      */
     public static final String POINT = ".";
 
     /**
      * 正斜杠
      */
-    public static final String FORWARD_SLASH = "/";
+    public static final String SLASH = "/";
 
     /**
-     * 星号
+     * 星
      */
     public static final String ASTERISK = "*";
+
+    /**
+     * 与
+     */
+    public static final String AMPERSAND = "&";
 }

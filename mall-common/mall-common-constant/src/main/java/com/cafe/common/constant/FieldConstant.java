@@ -10,6 +10,11 @@ package com.cafe.common.constant;
 public class FieldConstant {
 
     /**
+     * 请求ID
+     */
+    public static final String REQUEST_ID = "requestId";
+
+    /**
      * 序列化号
      */
     public static final String SERIAL_VERSION_UID = "serialVersionUID";

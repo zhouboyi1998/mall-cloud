@@ -23,6 +23,7 @@ import reactor.core.publisher.Mono;
 
 import java.text.ParseException;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @Project: mall-cloud
@@ -50,9 +51,9 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         // 获取 Request Path 中的菜单路径
         String menuPath = request.getPath().subPath(NumberConstant.ZERO, NumberConstant.FOUR).toString();
         // 获取 Request Header 中的 Token
-        String token = request.getHeaders().getFirst(HttpHeaderConstant.AUTHORIZATION_HEADER);
+        String token = Optional.ofNullable(request.getHeaders().getFirst(HttpHeaderConstant.AUTHORIZATION_HEADER))
+            .orElseThrow(NullPointerException::new);
         // 移除 Token 中的令牌头, 获取 Access Token
-        assert token != null;
         String accessToken = token.replace(HttpHeaderConstant.AUTHORIZATION_HEADER_PREFIX, StringConstant.EMPTY);
         try {
             // 解析 Access Token
