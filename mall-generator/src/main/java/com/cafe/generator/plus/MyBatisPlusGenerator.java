@@ -17,6 +17,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
+import java.util.Optional;
 import java.util.Properties;
 
 /**
@@ -40,11 +41,11 @@ public class MyBatisPlusGenerator {
             // 创建 properties 对象
             properties = new Properties();
             // 获取配置文件
-            InputStream inputStream = MyBatisPlusGenerator.class.getClassLoader().getResourceAsStream("generator.properties");
+            InputStream inputStream = Optional.ofNullable(MyBatisPlusGenerator.class.getClassLoader().getResourceAsStream("generator.properties"))
+                .orElseThrow(NullPointerException::new);
             // 将配置文件加载到 properties 对象中
             properties.load(inputStream);
             // 关闭输入流
-            assert inputStream != null;
             inputStream.close();
         } catch (Exception e) {
             LOGGER.error("MyBatisPlusGenerator: failed to create properties -> {}", e.getMessage());
@@ -104,9 +105,9 @@ public class MyBatisPlusGenerator {
             .setTypeConvert(new MySqlTypeConvert() {
                 @Override
                 public IColumnType processTypeConvert(GlobalConfig config, String fieldType) {
-                    if (fieldType.toUpperCase().contains(MySQLTypeEnum.DECIMAL.toString())) {
+                    if (fieldType.toUpperCase().contains(DatabaseTypeEnum.DECIMAL.toString())) {
                         return DbColumnType.BIG_DECIMAL;
-                    } else if (fieldType.toUpperCase().contains(MySQLTypeEnum.DATETIME.toString())) {
+                    } else if (fieldType.toUpperCase().contains(DatabaseTypeEnum.DATETIME.toString())) {
                         return DbColumnType.LOCAL_DATE_TIME;
                     }
                     return super.processTypeConvert(config, fieldType);
