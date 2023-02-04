@@ -29,23 +29,39 @@
 ### 💼 项目模块
 
 ```
-mall-cloud
+|-- mall-business (业务模块)
     |-- mall-admin (管理员模块)
-    |-- mall-common (公共代码)
-    |-- mall-eureka (注册中心)
-    |-- mall-file (文件模块)
-    |-- mall-gateway (API网关)
-    |-- mall-generator (代码生成器)
     |-- mall-goods (商品模块)
-    |-- mall-id (分布式ID生成模块)
     |-- mall-member (会员模块)
     |-- mall-merchant (商家模块)
-    |-- mall-monitor (数据库监听器)
     |-- mall-order (订单模块)
-    |-- mall-search (搜索模块)
-    |-- mall-security (安全模块)
     |-- mall-storage (仓库模块)
     |-- mall-system (系统模块)
+
+|-- mall-common (公共包)
+    |-- mall-common-constant (常量公共包)
+    |-- mall-common-core (核心公共包)
+    |-- mall-common-log (日志公共包)
+    |-- mall-common-mysql (MySQL 数据库公共包)
+    |-- mall-common-rabbitmq (RabbitMQ 消息队列公共包)
+    |-- mall-common-redis (Redis 缓存公共包)
+    |-- mall-common-rocketmq (RocketMQ 消息队列公共包)
+    |-- mall-common-swagger (Swagger API 文档公共包)
+
+|-- mall-middleware (中间件模块)
+    |-- mall-binlog (Binlog 数据库监听器)
+    |-- mall-canal (Canal 数据库监听器)
+    |-- mall-elasticsearch (ElasticSearch 搜索引擎)
+    |-- mall-fastdfs (FastDFS 分布式文件存储)
+    |-- mall-minio (MinIO 分布式文件存储)
+    |-- mall-solr (Solr 搜索引擎)
+
+|-- mall-service (基础服务模块)
+    |-- mall-eureka (Eureka 注册中心, 弃用)
+    |-- mall-gateway (Spring Cloud Gateway 网关)
+    |-- mall-generator (代码生成器)
+    |-- mall-id (分布式ID生成器)
+    |-- mall-security (Spring Security 安全模块)
     |-- mall-user (用户模块)
 ```
 
