@@ -14,7 +14,7 @@
     <version>${mall-cloud.version}</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>RocketMQ 公共模块</description>
+    <description>RocketMQ 消息队列公共包</description>
 
     <dependencies>
         <!-- RocketMQ Starter -->

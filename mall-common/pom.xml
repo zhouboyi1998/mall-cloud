@@ -14,7 +14,7 @@
     <version>${mall-cloud.version}</version>
     <packaging>pom</packaging>
     <name>${project.artifactId}</name>
-    <description>公共模块</description>
+    <description>公共包</description>
 
     <modules>
         <module>mall-common-constant</module>

@@ -14,7 +14,7 @@
     <version>${mall-cloud.version}</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>MySQL 数据库公共模块</description>
+    <description>MySQL 数据库公共包</description>
 
     <dependencies>
         <!-- MySQL 连接 -->

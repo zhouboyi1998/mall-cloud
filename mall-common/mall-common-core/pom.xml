@@ -14,7 +14,7 @@
     <version>${mall-cloud.version}</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>核心业务公共模块</description>
+    <description>核心公共包</description>
 
     <dependencies>
         <!-- Spring Boot Web 相关依赖 -->

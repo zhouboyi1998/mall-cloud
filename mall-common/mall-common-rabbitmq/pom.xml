@@ -14,7 +14,7 @@
     <version>${mall-cloud.version}</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>RabbitMQ 消息生产者公共模块</description>
+    <description>RabbitMQ 消息队列公共包</description>
 
     <dependencies>
         <!-- AMQP 协议 -->

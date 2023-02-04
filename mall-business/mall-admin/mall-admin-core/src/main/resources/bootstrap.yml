@@ -1,0 +1,9 @@
+server:
+  port: 18085
+
+spring:
+  application:
+    name: mall-admin
+
+swagger:
+  description: 管理员模块

@@ -1,9 +1,0 @@
-server:
-  port: 18093
-
-spring:
-  application:
-    name: mall-search-elasticsearch
-
-swagger:
-  description: ElasticSearch 搜索模块

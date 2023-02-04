@@ -1,9 +1,0 @@
-server:
-  port: 18075
-
-spring:
-  application:
-    name: mall-system
-
-swagger:
-  description: 系统模块

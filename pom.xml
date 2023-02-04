@@ -18,23 +18,10 @@
     <description>微服务商城项目</description>
 
     <modules>
-        <module>mall-admin</module>
+        <module>mall-business</module>
         <module>mall-common</module>
-        <module>mall-eureka</module>
-        <module>mall-file</module>
-        <module>mall-gateway</module>
-        <module>mall-generator</module>
-        <module>mall-goods</module>
-        <module>mall-id</module>
-        <module>mall-member</module>
-        <module>mall-merchant</module>
-        <module>mall-monitor</module>
-        <module>mall-order</module>
-        <module>mall-search</module>
-        <module>mall-security</module>
-        <module>mall-storage</module>
-        <module>mall-system</module>
-        <module>mall-user</module>
+        <module>mall-middleware</module>
+        <module>mall-service</module>
     </modules>
 
     <properties>
@@ -235,7 +222,7 @@
                 <version>${commons-collections4.version}</version>
             </dependency>
 
-            <!-- 公共模块 -->
+            <!-- 公共包 -->
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-common-constant</artifactId>
@@ -330,22 +317,22 @@
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
-                <artifactId>mall-file-minio-api</artifactId>
+                <artifactId>mall-minio-api</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
-                <artifactId>mall-file-fastdfs-api</artifactId>
+                <artifactId>mall-fastdfs-api</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
-                <artifactId>mall-search-elasticsearch-api</artifactId>
+                <artifactId>mall-elasticsearch-api</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
-                <artifactId>mall-search-solr-api</artifactId>
+                <artifactId>mall-solr-api</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
         </dependencies>
