@@ -1,9 +1,0 @@
-server:
-  port: 18092
-
-spring:
-  application:
-    name: mall-file-fastdfs
-
-swagger:
-  description: FastDFS 文件模块

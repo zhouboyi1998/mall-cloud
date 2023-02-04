@@ -26,29 +26,6 @@
 
 [简体中文](./README.md) | English
 
-### 💼 Project Module
-
-```
-mall-cloud
-    |-- mall-admin
-    |-- mall-common
-    |-- mall-eureka
-    |-- mall-file
-    |-- mall-gateway
-    |-- mall-generator
-    |-- mall-goods
-    |-- mall-id
-    |-- mall-member
-    |-- mall-merchant
-    |-- mall-monitor
-    |-- mall-order
-    |-- mall-search
-    |-- mall-security
-    |-- mall-storage
-    |-- mall-system
-    |-- mall-user
-```
-
 ### 📜 Licence
 
 [MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2022 周博义

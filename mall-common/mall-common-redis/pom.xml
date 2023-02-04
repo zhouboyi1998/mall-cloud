@@ -14,7 +14,7 @@
     <version>${mall-cloud.version}</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>Redis 公共模块</description>
+    <description>Redis 缓存公共包</description>
 
     <dependencies>
         <!-- SpringData Redis -->

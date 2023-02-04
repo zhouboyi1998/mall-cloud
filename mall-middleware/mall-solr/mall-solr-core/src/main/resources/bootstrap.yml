@@ -1,0 +1,9 @@
+server:
+  port: 18094
+
+spring:
+  application:
+    name: mall-solr
+
+swagger:
+  description: Solr 搜索模块
