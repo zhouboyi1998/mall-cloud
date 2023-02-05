@@ -5,7 +5,11 @@ import com.cafe.common.constant.MonitorConstant;
 import com.cafe.monitor.binlog.handler.MessageContentHandler;
 import com.cafe.monitor.binlog.property.BinlogProperties;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
-import com.github.shyiko.mysql.binlog.event.*;
+import com.github.shyiko.mysql.binlog.event.DeleteRowsEventData;
+import com.github.shyiko.mysql.binlog.event.EventData;
+import com.github.shyiko.mysql.binlog.event.TableMapEventData;
+import com.github.shyiko.mysql.binlog.event.UpdateRowsEventData;
+import com.github.shyiko.mysql.binlog.event.WriteRowsEventData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +19,7 @@ import org.springframework.stereotype.Component;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -111,7 +116,7 @@ public class BinlogListener implements CommandLineRunner {
                         LOGGER.info("BinlogListener.run(): Insert Operation TableName -> {}", tableName);
                         // 将监听到的新增数据交给消息内容处理器
                         messageContentHandler.handle(
-                            null, writeRowsEventData.getRows(),
+                            Collections.emptyList(), writeRowsEventData.getRows(),
                             tableName, MonitorConstant.INSERT
                         );
                     }
@@ -128,7 +133,7 @@ public class BinlogListener implements CommandLineRunner {
                         LOGGER.info("BinlogListener.run(): Delete Operation TableName -> {}", tableName);
                         // 将监听到的删除数据交给消息内容处理器
                         messageContentHandler.handle(
-                            deleteRowsEventData.getRows(), null,
+                            deleteRowsEventData.getRows(), Collections.emptyList(),
                             tableName, MonitorConstant.DELETE
                         );
                     }

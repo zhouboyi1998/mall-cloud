@@ -1,10 +1,11 @@
 package com.cafe.monitor.binlog.handler;
 
-import cn.hutool.core.util.ObjectUtil;
+import com.cafe.common.constant.FieldConstant;
 import com.cafe.common.constant.MonitorConstant;
+import com.cafe.common.constant.StringConstant;
 import com.cafe.common.constant.rabbitmq.RabbitMQExchange;
-import com.cafe.common.message.rabbitmq.producer.RabbitMQProducer;
 import com.cafe.common.constant.rabbitmq.RabbitMQRoutingKeyMap;
+import com.cafe.common.message.rabbitmq.producer.RabbitMQProducer;
 import com.cafe.monitor.binlog.bean.TableBeanMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -46,45 +47,22 @@ public class MessageContentHandler {
         Map<String, Object> content = new HashMap<>(4);
         content.put(MonitorConstant.OPERATION, operation);
 
-        // 分别存储所有更新前数据和更新后数据
-        List<Map<String, Object>> beforeDataList = new ArrayList<>();
-        List<Map<String, Object>> afterDataList = new ArrayList<>();
         // 根据表名获取 JavaBean 列名集合
         List<String> fieldNameList = getFieldNameList(tableName);
 
         // 处理更新前的数据
-        if (ObjectUtil.isNotEmpty(beforeRowList)) {
-            // 循环处理每一行更新前的数据
-            for (Serializable[] row : beforeRowList) {
-                // 存储属性名与字段值对应关系的 Map
-                Map<String, Object> rowMap = new HashMap<>(16);
-                for (int i = 0; i < row.length; i++) {
-                    rowMap.put(fieldNameList.get(i), row[i]);
-                }
-                beforeDataList.add(rowMap);
-            }
-            content.put(MonitorConstant.BEFORE_DATA, beforeDataList);
-        }
+        List<Map<String, Object>> beforeDataList = handleRowList(beforeRowList, fieldNameList);
+        content.put(MonitorConstant.BEFORE_DATA, beforeDataList);
 
         // 处理更新后的数据
-        if (ObjectUtil.isNotEmpty(afterRowList)) {
-            // 循环处理每一行更新后的数据
-            for (Serializable[] row : afterRowList) {
-                // 存储属性名与字段值对应关系的 Map
-                Map<String, Object> rowMap = new HashMap<>(16);
-                for (int i = 0; i < row.length; i++) {
-                    rowMap.put(fieldNameList.get(i), row[i]);
-                }
-                afterDataList.add(rowMap);
-            }
-            content.put(MonitorConstant.AFTER_DATA, afterDataList);
-        }
+        List<Map<String, Object>> afterDataList = handleRowList(afterRowList, fieldNameList);
+        content.put(MonitorConstant.AFTER_DATA, afterDataList);
 
         // 发送消息到 RabbitMQ
         rabbitMQProducer.convertAndSend(
-                RabbitMQExchange.BINLOG,
-                RabbitMQRoutingKeyMap.ROUTING_KEY_MAP.get(RabbitMQExchange.BINLOG, tableName),
-                content
+            RabbitMQExchange.BINLOG,
+            RabbitMQRoutingKeyMap.ROUTING_KEY_MAP.get(RabbitMQExchange.BINLOG, tableName),
+            content
         );
     }
 
@@ -101,10 +79,31 @@ public class MessageContentHandler {
         Field[] fields = TableBeanMap.TABLE_BEAN_MAP.get(tableName).getDeclaredFields();
         for (Field field : fields) {
             // 获取列名的最后一段 (去除列名的修饰符、类名前缀)
-            fieldNameList.add(field.toString().substring(field.toString().lastIndexOf(".") + 1));
+            fieldNameList.add(field.toString().substring(field.toString().lastIndexOf(StringConstant.POINT) + 1));
         }
         // 去除属性列表中的序列号属性
-        fieldNameList.remove("serialVersionUID");
+        fieldNameList.remove(FieldConstant.SERIAL_VERSION_UID);
         return fieldNameList;
+    }
+
+    /**
+     * 处理更新的数据
+     *
+     * @param rowList
+     * @return
+     */
+    private List<Map<String, Object>> handleRowList(List<Serializable[]> rowList, List<String> fieldNameList) {
+        // 存储处理后的数据
+        List<Map<String, Object>> dataList = new ArrayList<>();
+        // 循环处理每一行更新的数据
+        for (Serializable[] row : rowList) {
+            // 存储属性名与字段值对应关系的 Map
+            Map<String, Object> rowMap = new HashMap<>(16);
+            for (int i = 0; i < row.length; i++) {
+                rowMap.put(fieldNameList.get(i), row[i]);
+            }
+            dataList.add(rowMap);
+        }
+        return dataList;
     }
 }
