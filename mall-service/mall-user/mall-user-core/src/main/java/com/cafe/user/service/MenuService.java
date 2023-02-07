@@ -16,10 +16,10 @@ import java.util.List;
 public interface MenuService extends IService<Menu> {
 
     /**
-     * 根据角色列表获取树形格式的菜单列表
+     * 根据角色列表获取菜单树
      *
      * @param userDetails 用户详细信息
      * @return
      */
-    List<MenuTreeVO> listMenuTree(String userDetails);
+    List<MenuTreeVO> tree(String userDetails);
 }
