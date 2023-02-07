@@ -19,7 +19,7 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
-    <select id="listMenuTree" resultType="com.cafe.user.vo.MenuTreeVO">
+    <select id="tree" resultType="com.cafe.user.vo.MenuTreeVO">
         SELECT DISTINCT m.id, m.menu_name, m.menu_title, m.menu_icon, m.menu_path, m.parent_id, m.sort
         FROM mall_menu AS m
         LEFT JOIN mall_role_menu AS rm ON rm.menu_id = m.id

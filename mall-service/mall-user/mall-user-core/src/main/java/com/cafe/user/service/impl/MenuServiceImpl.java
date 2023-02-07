@@ -32,11 +32,11 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     }
 
     @Override
-    public List<MenuTreeVO> listMenuTree(String userDetails) {
+    public List<MenuTreeVO> tree(String userDetails) {
         // 从用户详细信息中获取角色列表
         List<String> roleNameList = ((JSONArray) JSONUtil.parseObj(userDetails).get(AuthorizationConstant.AUTHORITIES_CLAIM_NAME)).toList(String.class);
         // 根据角色列表获取对应的菜单列表树形格式 VO
-        List<MenuTreeVO> menuList = menuMapper.listMenuTree(roleNameList);
+        List<MenuTreeVO> menuList = menuMapper.tree(roleNameList);
 
         // 组装成树形格式
         return menuList.stream()

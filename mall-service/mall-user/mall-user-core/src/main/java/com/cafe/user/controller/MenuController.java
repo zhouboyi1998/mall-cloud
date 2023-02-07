@@ -207,14 +207,14 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据角色列表获取树形格式的菜单列表")
-    @ApiOperation(value = "根据角色列表获取树形格式的菜单列表")
+    @LogPrint(value = "根据角色列表获取菜单树")
+    @ApiOperation(value = "根据角色列表获取菜单树")
     @ApiImplicitParam(value = "用户详细信息", name = HttpHeaderConstant.USER_DETAILS_HEADER, dataType = "String", paramType = "header", required = true)
-    @GetMapping(value = "/listMenuTree")
-    public ResponseEntity<List<MenuTreeVO>> listMenuTree(
+    @GetMapping(value = "/tree")
+    public ResponseEntity<List<MenuTreeVO>> tree(
         @RequestHeader(value = HttpHeaderConstant.USER_DETAILS_HEADER) String userDetails
     ) {
-        List<MenuTreeVO> menuTreeVOList = menuService.listMenuTree(userDetails);
+        List<MenuTreeVO> menuTreeVOList = menuService.tree(userDetails);
         return ResponseEntity.ok(menuTreeVOList);
     }
 }
