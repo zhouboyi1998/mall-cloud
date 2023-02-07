@@ -19,10 +19,10 @@ import java.util.List;
 public interface MenuMapper extends BaseMapper<Menu> {
 
     /**
-     * 根据角色列表获取树形格式的菜单列表
+     * 根据角色列表获取菜单树
      *
      * @param roleNameList
      * @return
      */
-    List<MenuTreeVO> listMenuTree(@Param("roleNameList") List<String> roleNameList);
+    List<MenuTreeVO> tree(@Param("roleNameList") List<String> roleNameList);
 }
