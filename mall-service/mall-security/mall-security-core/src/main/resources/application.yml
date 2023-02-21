@@ -19,13 +19,13 @@ feign:
 rsa:
   credential:
     # 密钥库名称
-    keystore: "jwt.jks"
+    key-store: "jwt.jks"
     # 密钥库口令
-    storepass: "123456"
+    store-pass: "123456"
     # 别名
     alias: "jwt"
     # 密钥口令
-    keypass: "123456"
+    key-pass: "123456"
 
 # 客户端配置
 client-config:

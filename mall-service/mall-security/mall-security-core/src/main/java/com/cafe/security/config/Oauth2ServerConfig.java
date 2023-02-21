@@ -117,15 +117,15 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      */
     @Bean
     public KeyPair keyPair() {
-        // 使用 keystore 和 storepass 获取密钥对
+        // 使用 key-store 和 store-pass 获取密钥对
         KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
-            new ClassPathResource(rsaCredentialProperties.getKeystore()),
-            rsaCredentialProperties.getStorepass().toCharArray()
+            new ClassPathResource(rsaCredentialProperties.getKeyStore()),
+            rsaCredentialProperties.getStorePass().toCharArray()
         );
 
         return keyStoreKeyFactory.getKeyPair(
             rsaCredentialProperties.getAlias(),
-            rsaCredentialProperties.getStorepass().toCharArray()
+            rsaCredentialProperties.getStorePass().toCharArray()
         );
     }
 
@@ -157,8 +157,8 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
             clients.and()
                 // 客户端id
                 .withClient(clientDetail.getClientId())
-                // 客户端密钥: 生成 RSA 证书文件 (jwt.jks) 时设置的密钥口令 (-keypass)
-                .secret(passwordEncoder.encode(rsaCredentialProperties.getKeypass()))
+                // 客户端密钥: 生成 RSA 证书文件 (jwt.jks) 时设置的密钥口令 (key-pass)
+                .secret(passwordEncoder.encode(rsaCredentialProperties.getKeyPass()))
                 // 授权模式
                 .authorizedGrantTypes(clientDetail.getAuthorizedGrantTypes())
                 // 授权范围
