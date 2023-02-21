@@ -17,12 +17,12 @@ public class RsaCredentialProperties {
     /**
      * 密钥库名称
      */
-    private String keystore;
+    private String keyStore;
 
     /**
      * 密钥库口令
      */
-    private String storepass;
+    private String storePass;
 
     /**
      * 别名
@@ -32,22 +32,22 @@ public class RsaCredentialProperties {
     /**
      * 密钥口令
      */
-    private String keypass;
+    private String keyPass;
 
-    public String getKeystore() {
-        return keystore;
+    public String getKeyStore() {
+        return keyStore;
     }
 
-    public void setKeystore(String keystore) {
-        this.keystore = keystore;
+    public void setKeyStore(String keyStore) {
+        this.keyStore = keyStore;
     }
 
-    public String getStorepass() {
-        return storepass;
+    public String getStorePass() {
+        return storePass;
     }
 
-    public void setStorepass(String storepass) {
-        this.storepass = storepass;
+    public void setStorePass(String storePass) {
+        this.storePass = storePass;
     }
 
     public String getAlias() {
@@ -58,11 +58,11 @@ public class RsaCredentialProperties {
         this.alias = alias;
     }
 
-    public String getKeypass() {
-        return keypass;
+    public String getKeyPass() {
+        return keyPass;
     }
 
-    public void setKeypass(String keypass) {
-        this.keypass = keypass;
+    public void setKeyPass(String keyPass) {
+        this.keyPass = keyPass;
     }
 }
