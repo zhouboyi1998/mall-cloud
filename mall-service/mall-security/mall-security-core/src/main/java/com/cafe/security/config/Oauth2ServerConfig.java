@@ -2,8 +2,8 @@ package com.cafe.security.config;
 
 import com.cafe.common.constant.RedisConstant;
 import com.cafe.security.enhancer.JwtTokenEnhancer;
-import com.cafe.security.property.ClientDetail;
 import com.cafe.security.property.ClientConfigProperties;
+import com.cafe.security.property.ClientDetail;
 import com.cafe.security.property.RsaCredentialProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -199,7 +199,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
             .userDetailsService(userDetailsService)
             // 配置登录请求限制的 HTTP 类型
             .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
-            // 配置访问令牌转换器, 使用 OAuth2 官方提供的
+            // 配置访问令牌转换器
             .accessTokenConverter(jwtAccessTokenConverter())
             // 配置自定义的令牌增强器链
             .tokenEnhancer(tokenEnhancerChain)

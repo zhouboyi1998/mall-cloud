@@ -1,7 +1,7 @@
 package com.cafe.security.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import com.cafe.common.constant.HttpParameterConstant;
+import com.cafe.common.constant.RequestConstant;
 import com.cafe.common.enumeration.HttpStatusCodeEnum;
 import com.cafe.security.model.UserInfo;
 import com.cafe.user.feign.RoleFeign;
@@ -51,7 +51,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 从 Request Parameter 中获取客户端id
-        String clientId = request.getParameter(HttpParameterConstant.CLIENT_ID_PARAMETER);
+        String clientId = request.getParameter(RequestConstant.CLIENT_ID);
 
         // 查询用户信息
         User user = userFeign.detail(username, clientId).getBody();

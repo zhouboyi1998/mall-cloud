@@ -2,8 +2,7 @@ package com.cafe.gateway.authorization;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSONUtil;
-import com.cafe.common.constant.HttpHeaderConstant;
-import com.cafe.common.constant.HttpParameterConstant;
+import com.cafe.common.constant.RequestConstant;
 import com.cafe.common.constant.NumberConstant;
 import com.cafe.common.constant.RedisConstant;
 import com.cafe.common.constant.StringConstant;
@@ -51,18 +50,18 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         // 获取 Request Path 中的菜单路径
         String menuPath = request.getPath().subPath(NumberConstant.ZERO, NumberConstant.FOUR).toString();
         // 获取 Request Header 中的 Token
-        String token = Optional.ofNullable(request.getHeaders().getFirst(HttpHeaderConstant.AUTHORIZATION_HEADER))
+        String token = Optional.ofNullable(request.getHeaders().getFirst(RequestConstant.AUTHORIZATION))
             .orElseThrow(NullPointerException::new);
         // 移除 Token 中的令牌头, 获取 Access Token
-        String accessToken = token.replace(HttpHeaderConstant.AUTHORIZATION_HEADER_PREFIX, StringConstant.EMPTY);
+        String accessToken = token.replace(RequestConstant.BEARER_PREFIX, StringConstant.EMPTY);
         try {
             // 解析 Access Token
             JWSObject jwsObject = JWSObject.parse(accessToken);
             // 从解析后的 Access Token 中获取用户详细信息
             String userDetails = jwsObject.getPayload().toString();
             // 获取用户详细信息中的用户id和客户端id
-            Long userId = (Long) JSONUtil.parseObj(userDetails).get(HttpParameterConstant.USER_ID_PARAMETER);
-            String clientId = (String) JSONUtil.parseObj(userDetails).get(HttpParameterConstant.CLIENT_ID_PARAMETER);
+            Long userId = (Long) JSONUtil.parseObj(userDetails).get(RequestConstant.USER_ID);
+            String clientId = (String) JSONUtil.parseObj(userDetails).get(RequestConstant.CLIENT_ID);
             LOGGER.info("AuthorizationManager.check(): userId -> {}, clientId -> {}, menuPath -> {}", userId, clientId, menuPath);
         } catch (ParseException e) {
             LOGGER.error("AuthorizationManager.check(): could not parse accessToken -> {}, message -> {}", accessToken, e.getMessage());

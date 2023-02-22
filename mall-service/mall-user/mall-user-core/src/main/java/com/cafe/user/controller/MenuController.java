@@ -2,7 +2,7 @@ package com.cafe.user.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.common.constant.HttpHeaderConstant;
+import com.cafe.common.constant.RequestConstant;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.mysql.util.WrapperUtil;
 import com.cafe.user.model.Menu;
@@ -209,10 +209,10 @@ public class MenuController {
 
     @LogPrint(value = "根据角色列表获取菜单树")
     @ApiOperation(value = "根据角色列表获取菜单树")
-    @ApiImplicitParam(value = "用户详细信息", name = HttpHeaderConstant.USER_DETAILS_HEADER, dataType = "String", paramType = "header", required = true)
+    @ApiImplicitParam(value = "用户详细信息", name = RequestConstant.USER_DETAILS, dataType = "String", paramType = "header", required = true)
     @GetMapping(value = "/tree")
     public ResponseEntity<List<MenuTreeVO>> tree(
-        @RequestHeader(value = HttpHeaderConstant.USER_DETAILS_HEADER) String userDetails
+        @RequestHeader(value = RequestConstant.USER_DETAILS) String userDetails
     ) {
         List<MenuTreeVO> menuTreeVOList = menuService.tree(userDetails);
         return ResponseEntity.ok(menuTreeVOList);

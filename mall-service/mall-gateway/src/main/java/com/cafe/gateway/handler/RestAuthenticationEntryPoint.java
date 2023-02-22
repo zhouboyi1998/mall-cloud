@@ -1,7 +1,7 @@
 package com.cafe.gateway.handler;
 
 import cn.hutool.json.JSONUtil;
-import com.cafe.common.constant.HttpHeaderConstant;
+import com.cafe.common.constant.RequestConstant;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -37,7 +37,7 @@ public class RestAuthenticationEntryPoint implements ServerAuthenticationEntryPo
         // 允许跨域访问: 所有路径
         response.getHeaders().set(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, MediaType.ALL.getType());
         // 缓存控制: 无缓存
-        response.getHeaders().set(HttpHeaders.CACHE_CONTROL, HttpHeaderConstant.NO_CACHE);
+        response.getHeaders().set(HttpHeaders.CACHE_CONTROL, RequestConstant.NO_CACHE);
         String body = JSONUtil.toJsonStr(ResponseEntity.status(HttpStatus.FORBIDDEN).body(e.getMessage()));
         DataBuffer buffer = response.bufferFactory().wrap(body.getBytes(StandardCharsets.UTF_8));
         return response.writeWith(Mono.just(buffer));
