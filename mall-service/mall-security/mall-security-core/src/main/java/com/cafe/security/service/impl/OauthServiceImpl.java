@@ -1,6 +1,6 @@
 package com.cafe.security.service.impl;
 
-import com.cafe.common.constant.HttpHeaderConstant;
+import com.cafe.common.constant.RequestConstant;
 import com.cafe.security.service.OauthService;
 import com.cafe.security.token.Oauth2TokenDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ public class OauthServiceImpl implements OauthService {
         Oauth2TokenDetails oauth2TokenDetails = new Oauth2TokenDetails();
         oauth2TokenDetails.setAccessToken(oAuth2AccessToken.getValue());
         oauth2TokenDetails.setRefreshToken(oAuth2AccessToken.getRefreshToken().getValue());
-        oauth2TokenDetails.setTokenPrefix(HttpHeaderConstant.AUTHORIZATION_HEADER_PREFIX);
+        oauth2TokenDetails.setTokenPrefix(RequestConstant.BEARER_PREFIX);
         oauth2TokenDetails.setExpiresIn(oAuth2AccessToken.getExpiresIn());
 
         return oauth2TokenDetails;
