@@ -10,17 +10,17 @@ package com.cafe.common.constant;
 public class RedisConstant {
 
     /**
-     * 资源-角色对应关系的 Key
+     * 资源-角色对应关系Key
      */
     public static final String MENU_ROLE_MAP = "AUTH:MENU_ROLE_MAP";
 
     /**
-     * 角色名称列表
-     */
-    public static final String ROLE_NAME_LIST = "AUTH:ROLE_NAME_LIST";
-
-    /**
-     * 令牌存储相关的 Key 前缀
+     * 令牌存储Key前缀
      */
     public static final String TOKEN_PREFIX = "AUTH:TOKEN_";
+
+    /**
+     * 验证码Key前缀
+     */
+    public static final String CAPTCHA_PREFIX = "VALIDATE:CAPTCHA_";
 }
