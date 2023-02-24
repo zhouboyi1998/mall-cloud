@@ -1,4 +1,4 @@
-package com.cafe.gateway.handler;
+package com.cafe.gateway.authorization;
 
 import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.RequestConstant;
@@ -21,7 +21,7 @@ import java.nio.charset.StandardCharsets;
  * @Package: com.cafe.gateway.handle
  * @Author: zhouboyi
  * @Date: 2022/5/11 10:39
- * @Description: 自定义用户未认证处理类 (未登录 / Token 过期)
+ * @Description: 自定义用户未认证处理器 (用户未登录 / 访问令牌过期)
  */
 @Component
 public class RestAuthenticationEntryPoint implements ServerAuthenticationEntryPoint {
