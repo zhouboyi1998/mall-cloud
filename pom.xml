@@ -51,6 +51,8 @@
         <canal.version>1.1.5</canal.version>
         <tomcat-embed.version>9.0.46</tomcat-embed.version>
         <commons-collections4.version>4.4</commons-collections4.version>
+        <kaptcha-starter.version>1.1.0</kaptcha-starter.version>
+        <easy-captcha.version>1.6.2</easy-captcha.version>
     </properties>
 
     <dependencies>
@@ -220,6 +222,18 @@
                 <groupId>org.apache.commons</groupId>
                 <artifactId>commons-collections4</artifactId>
                 <version>${commons-collections4.version}</version>
+            </dependency>
+            <!-- Kaptcha 图片验证码 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>kaptcha-spring-boot-starter</artifactId>
+                <version>${kaptcha-starter.version}</version>
+            </dependency>
+            <!-- Easy Captcha 图片验证码 -->
+            <dependency>
+                <groupId>com.github.whvcse</groupId>
+                <artifactId>easy-captcha</artifactId>
+                <version>${easy-captcha.version}</version>
             </dependency>
 
             <!-- 公共包 -->
