@@ -33,4 +33,9 @@ public class StringConstant {
      * 与
      */
     public static final String AMPERSAND = "&";
+
+    /**
+     * 艾特
+     */
+    public static final String AT = "@";
 }
