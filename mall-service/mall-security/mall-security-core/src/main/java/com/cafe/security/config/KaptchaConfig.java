@@ -28,7 +28,7 @@ public class KaptchaConfig {
         // 图片边框厚度
         properties.setProperty("kaptcha.border.thickness", "0");
         // 图片宽度
-        properties.setProperty("kaptcha.image.width", "140");
+        properties.setProperty("kaptcha.image.width", "130");
         // 图片高度
         properties.setProperty("kaptcha.image.height", "48");
         // 图片实现类
@@ -37,15 +37,15 @@ public class KaptchaConfig {
         // 文本集合
         properties.setProperty("kaptcha.textproducer.char.string", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         // 文本字符长度
-        properties.setProperty("kaptcha.textproducer.char.length", "6");
+        properties.setProperty("kaptcha.textproducer.char.length", "4");
         // 文本字符间距
-        properties.setProperty("kaptcha.textproducer.char.space", "4");
+        properties.setProperty("kaptcha.textproducer.char.space", "8");
         // 文本字体样式
         properties.setProperty("kaptcha.textproducer.font.names", "Arial");
         // 文本字符颜色
         properties.setProperty("kaptcha.textproducer.font.color", "0,175,155");
         // 文本字符大小
-        properties.setProperty("kaptcha.textproducer.font.size", "26");
+        properties.setProperty("kaptcha.textproducer.font.size", "32");
         // 文本生成器
         properties.setProperty("kaptcha.textproducer.impl", "com.google.code.kaptcha.text.impl.DefaultTextCreator");
 
