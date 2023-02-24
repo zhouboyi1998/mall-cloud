@@ -4,8 +4,8 @@ import cn.hutool.core.util.ArrayUtil;
 import com.cafe.common.constant.AuthorizationConstant;
 import com.cafe.gateway.authorization.AuthorizationManager;
 import com.cafe.gateway.filter.IgnoreUrlsRemoveJwtFilter;
-import com.cafe.gateway.handler.RestAccessDeniedHandler;
-import com.cafe.gateway.handler.RestAuthenticationEntryPoint;
+import com.cafe.gateway.authorization.RestAccessDeniedHandler;
+import com.cafe.gateway.authorization.RestAuthenticationEntryPoint;
 import com.cafe.gateway.property.IgnoreUrlsProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -54,12 +54,12 @@ public class ResourceSecurityConfig {
     private final AuthorizationManager authorizationManager;
 
     /**
-     * 未授权处理类
+     * 未授权处理器
      */
     private final RestAccessDeniedHandler restAccessDeniedHandler;
 
     /**
-     * 未认证处理类
+     * 未认证处理器
      */
     private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
