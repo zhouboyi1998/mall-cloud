@@ -1,7 +1,7 @@
 package com.cafe.admin.service.impl;
 
 import com.cafe.admin.model.Admin;
-import com.cafe.admin.dao.AdminMapper;
+import com.cafe.admin.mapper.AdminMapper;
 import com.cafe.admin.service.AdminService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

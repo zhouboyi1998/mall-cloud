@@ -24,7 +24,7 @@ public class MyBatisOriginGenerator {
     private static final Logger LOGGER = LoggerFactory.getLogger(MyBatisOriginGenerator.class);
 
     /**
-     * 生成代码: Model、DAO、Mapper
+     * 生成代码: Model、Mapper
      */
     public static void generate() {
         try {

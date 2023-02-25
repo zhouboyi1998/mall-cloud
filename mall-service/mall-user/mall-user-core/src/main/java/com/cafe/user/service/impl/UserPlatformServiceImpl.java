@@ -1,7 +1,7 @@
 package com.cafe.user.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.cafe.user.dao.UserPlatformMapper;
+import com.cafe.user.mapper.UserPlatformMapper;
 import com.cafe.user.model.UserPlatform;
 import com.cafe.user.service.UserPlatformService;
 import org.springframework.beans.factory.annotation.Autowired;
