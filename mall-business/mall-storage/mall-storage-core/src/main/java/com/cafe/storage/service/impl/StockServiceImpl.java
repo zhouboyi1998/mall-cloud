@@ -1,7 +1,7 @@
 package com.cafe.storage.service.impl;
 
 import com.cafe.storage.model.Stock;
-import com.cafe.storage.dao.StockMapper;
+import com.cafe.storage.mapper.StockMapper;
 import com.cafe.storage.service.StockService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

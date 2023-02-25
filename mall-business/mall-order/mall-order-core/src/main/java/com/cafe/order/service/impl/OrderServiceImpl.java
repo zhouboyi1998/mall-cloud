@@ -1,7 +1,7 @@
 package com.cafe.order.service.impl;
 
 import com.cafe.order.model.Order;
-import com.cafe.order.dao.OrderMapper;
+import com.cafe.order.mapper.OrderMapper;
 import com.cafe.order.service.OrderService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

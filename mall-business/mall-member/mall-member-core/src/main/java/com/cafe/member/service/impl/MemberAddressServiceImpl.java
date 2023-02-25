@@ -1,7 +1,7 @@
 package com.cafe.member.service.impl;
 
 import com.cafe.member.model.MemberAddress;
-import com.cafe.member.dao.MemberAddressMapper;
+import com.cafe.member.mapper.MemberAddressMapper;
 import com.cafe.member.service.MemberAddressService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
