@@ -33,10 +33,12 @@ client-config:
   client-details:
     # 客户端id (后台管理系统)
     - client-id: "manage"
-      # 授权模式: password 密码, authorization_code 授权码, client_credentials 客户端, refresh_token 刷新令牌
+      # 授权模式 (默认): password 密码, authorization_code 授权码, client_credentials 客户端, implicit 隐藏, refresh_token 刷新令牌
+      # 授权模式 (扩展): captcha 图片验证码
       authorized-grant-types:
         - "password"
         - "refresh_token"
+        - "captcha"
       # 授权范围
       scopes:
         - "all"
@@ -47,10 +49,12 @@ client-config:
 
     # 客户端id (前台门户网站)
     - client-id: "portal"
-      # 授权模式: password 密码, authorization_code 授权码, client_credentials 客户端, refresh_token 刷新令牌
+      # 授权模式 (默认): password 密码, authorization_code 授权码, client_credentials 客户端, implicit 隐藏, refresh_token 刷新令牌
+      # 授权模式 (扩展): captcha 图片验证码
       authorized-grant-types:
         - "password"
         - "refresh_token"
+        - "captcha"
       # 授权范围
       scopes:
         - "all"

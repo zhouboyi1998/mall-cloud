@@ -2,6 +2,7 @@ package com.cafe.security.config;
 
 import com.cafe.common.constant.RedisConstant;
 import com.cafe.security.enhancer.JwtTokenEnhancer;
+import com.cafe.security.granter.CaptchaTokenGranter;
 import com.cafe.security.property.ClientConfigProperties;
 import com.cafe.security.property.ClientDetail;
 import com.cafe.security.property.RsaCredentialProperties;
@@ -11,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,6 +22,8 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.CompositeTokenGranter;
+import org.springframework.security.oauth2.provider.TokenGranter;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -29,6 +33,7 @@ import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 
 import java.security.KeyPair;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -78,6 +83,11 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      */
     private final RedisConnectionFactory redisConnectionFactory;
 
+    /**
+     * Redis 交互模板
+     */
+    private final RedisTemplate<String, Object> redisTemplate;
+
     @Autowired
     public Oauth2ServerConfig(
         PasswordEncoder passwordEncoder,
@@ -86,7 +96,8 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         UserDetailsService userDetailsService,
         RsaCredentialProperties rsaCredentialProperties,
         ClientConfigProperties clientConfigProperties,
-        RedisConnectionFactory redisConnectionFactory
+        RedisConnectionFactory redisConnectionFactory,
+        RedisTemplate<String, Object> redisTemplate
     ) {
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
@@ -95,6 +106,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         this.rsaCredentialProperties = rsaCredentialProperties;
         this.clientConfigProperties = clientConfigProperties;
         this.redisConnectionFactory = redisConnectionFactory;
+        this.redisTemplate = redisTemplate;
     }
 
     /**
@@ -141,6 +153,51 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     }
 
     /**
+     * 配置令牌增强器链
+     *
+     * @return
+     */
+    public TokenEnhancerChain tokenEnhancerChain() {
+        // 新建存储令牌增强器的集合
+        List<TokenEnhancer> tokenEnhancerList = new ArrayList<>();
+        // 添加自定义 JWT 令牌增强器
+        tokenEnhancerList.add(jwtTokenEnhancer);
+        // 添加密钥对生成的 OAuth2 JWT 访问令牌转换器
+        tokenEnhancerList.add(jwtAccessTokenConverter());
+
+        // 新建令牌增强器链
+        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+        // 加载令牌增强器集合
+        tokenEnhancerChain.setTokenEnhancers(tokenEnhancerList);
+        return tokenEnhancerChain;
+    }
+
+    /**
+     * 配置令牌授权模式
+     *
+     * @return
+     */
+    public CompositeTokenGranter compositeTokenGranter(AuthorizationServerEndpointsConfigurer endpoints) {
+        // 获取 Oauth2 默认提供的授权模式
+        List<TokenGranter> tokenGranterList = new ArrayList<>(Collections.singletonList(endpoints.getTokenGranter()));
+
+        // 初始化图片验证码授权模式
+        CaptchaTokenGranter captchaTokenGranter = new CaptchaTokenGranter(
+            authenticationManager,
+            endpoints.getTokenServices(),
+            endpoints.getClientDetailsService(),
+            endpoints.getOAuth2RequestFactory(),
+            redisTemplate
+        );
+
+        // 添加自定义扩展的授权模式
+        tokenGranterList.add(captchaTokenGranter);
+
+        // 新建复合授权模式, 加载授权模式集合
+        return new CompositeTokenGranter(tokenGranterList);
+    }
+
+    /**
      * 客户端详细信息配置
      *
      * @param clients
@@ -159,7 +216,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
                 .withClient(clientDetail.getClientId())
                 // 客户端密钥: 生成 RSA 证书文件 (jwt.jks) 时设置的密钥口令 (key-pass)
                 .secret(passwordEncoder.encode(rsaCredentialProperties.getKeyPass()))
-                // 授权模式
+                // 允许的授权模式
                 .authorizedGrantTypes(clientDetail.getAuthorizedGrantTypes())
                 // 授权范围
                 .scopes(clientDetail.getScopes())
@@ -178,32 +235,22 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        // 存储令牌增强器集合
-        List<TokenEnhancer> tokenEnhancerList = new ArrayList<>();
-        // 自定义 JWT 访问令牌转换器
-        tokenEnhancerList.add(jwtTokenEnhancer);
-        // OAuth2 JWT 访问令牌转换器
-        tokenEnhancerList.add(jwtAccessTokenConverter());
-
-        // 令牌增强器链
-        TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-        // 加载 JWT 令牌增强器集合
-        tokenEnhancerChain.setTokenEnhancers(tokenEnhancerList);
-
         endpoints
-            // 配置认证管理器
+            // 认证管理器
             .authenticationManager(authenticationManager)
             // 不复用刷新令牌
             .reuseRefreshTokens(false)
-            // 配置管理员账号详细信息加载类
+            // 管理员账号详细信息加载类
             .userDetailsService(userDetailsService)
-            // 配置登录请求限制的 HTTP 类型
+            // 登录请求限制的 HTTP 类型
             .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
-            // 配置访问令牌转换器
+            // 访问令牌转换器
             .accessTokenConverter(jwtAccessTokenConverter())
-            // 配置自定义的令牌增强器链
-            .tokenEnhancer(tokenEnhancerChain)
-            // 配置令牌存储方式: 使用 Redis 存储
+            // 令牌增强器链
+            .tokenEnhancer(tokenEnhancerChain())
+            // 令牌授权模式
+            .tokenGranter(compositeTokenGranter(endpoints))
+            // 令牌存储方式: 使用 Redis 存储
             .tokenStore(tokenStore());
     }
 

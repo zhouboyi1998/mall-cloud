@@ -10,7 +10,7 @@ package com.cafe.common.constant;
 public class RequestConstant {
 
     /**
-     * 访问令牌Key
+     * 访问令牌
      */
     public static final String AUTHORIZATION = "Authorization";
 
@@ -20,7 +20,7 @@ public class RequestConstant {
     public static final String BEARER_PREFIX = "Bearer ";
 
     /**
-     * 用户详细信息Key
+     * 用户详细信息
      */
     public static final String USER_DETAILS = "User-Details";
 
@@ -38,4 +38,24 @@ public class RequestConstant {
      * 客户端id
      */
     public static final String CLIENT_ID = "client_id";
+
+    /**
+     * 用户名
+     */
+    public static final String USERNAME = "username";
+
+    /**
+     * 密码
+     */
+    public static final String PASSWORD = "password";
+
+    /**
+     * 图片验证码唯一标识
+     */
+    public static final String KEY = "key";
+
+    /**
+     * 图片验证码文本
+     */
+    public static final String CODE = "code";
 }
