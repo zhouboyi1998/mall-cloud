@@ -1,7 +1,7 @@
 package com.cafe.system.service.impl;
 
 import com.cafe.system.model.Area;
-import com.cafe.system.dao.AreaMapper;
+import com.cafe.system.mapper.AreaMapper;
 import com.cafe.system.service.AreaService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

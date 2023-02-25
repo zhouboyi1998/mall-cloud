@@ -3,7 +3,7 @@ package com.cafe.user.service.impl;
 import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.cafe.user.dao.MenuMapper;
+import com.cafe.user.mapper.MenuMapper;
 import com.cafe.user.model.Menu;
 import com.cafe.user.service.MenuService;
 import com.cafe.user.vo.MenuTreeVO;

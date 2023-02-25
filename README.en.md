@@ -12,14 +12,17 @@
 <img src="https://img.shields.io/badge/Spring Cloud-Hoxton.SR12-brightgreen">
 <img src="https://img.shields.io/badge/Spring Cloud Alibaba-2.2.7.RELEASE-brightgreen">
 <img src="https://img.shields.io/badge/MyBatis Plus-3.4.1-dodgerblue">
-<img src="https://img.shields.io/badge/Swagger2 Knife4J-2.0.9-blue">
-<img src="https://img.shields.io/badge/MinIO-8.3.4-crimson">
-<img src="https://img.shields.io/badge/FastDFS-1.27.0.0-orange">
-<img src="https://img.shields.io/badge/Binlog-0.21.0-dodgerblue">
-<img src="https://img.shields.io/badge/Canal-1.1.5-orange">
-<img src="https://img.shields.io/badge/RabbitMQ-3.6.5-orange">
-<img src="https://img.shields.io/badge/RocketMQ-4.9.3-orange">
+<img src="https://img.shields.io/badge/Knife4J-2.0.9-midnightblue">
+</p>
+<p align="center">
+<img src="https://img.shields.io/badge/MySQL-8.0.19-royalblue">
 <img src="https://img.shields.io/badge/ElasticSearch-7.6.2-mediumturquoise">
+<img src="https://img.shields.io/badge/Solr-8.11.1-orangered">
+<img src="https://img.shields.io/badge/MinIO-8.3.4-crimson">
+<img src="https://img.shields.io/badge/FastDFS-1.27.0.0-darkorange">
+<img src="https://img.shields.io/badge/RabbitMQ-3.6.5-orange">
+<img src="https://img.shields.io/badge/RocketMQ-4.9.3-darkorange">
+<img src="https://img.shields.io/badge/Canal-1.1.5-darkorange">
 </p>
 
 ### 📖 Language
@@ -28,4 +31,4 @@
 
 ### 📜 Licence
 
-[MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2022 周博义
+[MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2022 zhouboyi

@@ -1,7 +1,7 @@
 package com.cafe.merchant.service.impl;
 
 import com.cafe.merchant.model.MerchantShop;
-import com.cafe.merchant.dao.MerchantShopMapper;
+import com.cafe.merchant.mapper.MerchantShopMapper;
 import com.cafe.merchant.service.MerchantShopService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;

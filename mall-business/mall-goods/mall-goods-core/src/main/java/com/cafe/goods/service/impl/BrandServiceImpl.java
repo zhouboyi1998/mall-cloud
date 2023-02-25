@@ -1,7 +1,7 @@
 package com.cafe.goods.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.cafe.goods.dao.BrandMapper;
+import com.cafe.goods.mapper.BrandMapper;
 import com.cafe.goods.model.Brand;
 import com.cafe.goods.service.BrandService;
 import org.springframework.beans.factory.annotation.Autowired;

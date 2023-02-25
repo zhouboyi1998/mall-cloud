@@ -4,7 +4,7 @@ import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.MessageConstant;
 import com.cafe.common.constant.rocketmq.RocketMQTopic;
 import com.cafe.goods.bo.Goods;
-import com.cafe.goods.dao.GoodsMapper;
+import com.cafe.goods.mapper.GoodsMapper;
 import com.cafe.goods.service.GoodsService;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.slf4j.Logger;

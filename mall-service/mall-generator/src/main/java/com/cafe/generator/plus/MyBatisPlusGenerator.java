@@ -56,7 +56,7 @@ public class MyBatisPlusGenerator {
         // 1. 全局配置
         GlobalConfig globalConfig = new GlobalConfig()
             // 生成文件的输出目录
-            .setOutputDir("mall-generator/src/main/java")
+            .setOutputDir(properties.getProperty("generate-directory"))
             // 是否覆盖已有文件
             .setFileOverride(false)
             // 生成后是否打开输出目录
@@ -114,19 +114,17 @@ public class MyBatisPlusGenerator {
                 }
             });
 
-        // 代码生成路径前缀拼接
-        String prefix = properties.getProperty("project-package") + "." + properties.getProperty("module") + ".";
         // 3. 生成路径配置
         PackageConfig packageConfig = new PackageConfig()
             // 父路径
-            .setParent(properties.getProperty("com.cafe"))
+            .setParent(properties.getProperty("project-package") + "." + properties.getProperty("module"))
             // 代码生成路径
-            .setEntity(prefix + properties.getProperty("model-package"))
-            .setMapper(prefix + properties.getProperty("dao-package"))
-            .setXml(prefix + properties.getProperty("mapper-package"))
-            .setService(prefix + properties.getProperty("service-package"))
-            .setServiceImpl(prefix + properties.getProperty("service-impl-package"))
-            .setController(prefix + properties.getProperty("controller-package"));
+            .setEntity(properties.getProperty("model-package"))
+            .setMapper(properties.getProperty("mapper-package"))
+            .setXml(properties.getProperty("xml-package"))
+            .setService(properties.getProperty("service-package"))
+            .setServiceImpl(properties.getProperty("service-impl-package"))
+            .setController(properties.getProperty("controller-package"));
 
         // 4. 策略配置
         StrategyConfig strategyConfig = new StrategyConfig()
