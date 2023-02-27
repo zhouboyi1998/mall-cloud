@@ -1,5 +1,6 @@
 package com.cafe.security.config;
 
+import com.cafe.common.constant.CaptchaConstant;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
 import org.springframework.context.annotation.Bean;
@@ -28,18 +29,18 @@ public class KaptchaConfig {
         // 图片边框厚度
         properties.setProperty("kaptcha.border.thickness", "0");
         // 图片宽度
-        properties.setProperty("kaptcha.image.width", "130");
+        properties.setProperty("kaptcha.image.width", CaptchaConstant.WIDTH.toString());
         // 图片高度
-        properties.setProperty("kaptcha.image.height", "48");
+        properties.setProperty("kaptcha.image.height", CaptchaConstant.HEIGHT.toString());
         // 图片实现类
         properties.setProperty("kaptcha.producer.impl", "com.google.code.kaptcha.impl.DefaultKaptcha");
 
         // 文本集合
         properties.setProperty("kaptcha.textproducer.char.string", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
         // 文本字符长度
-        properties.setProperty("kaptcha.textproducer.char.length", "4");
+        properties.setProperty("kaptcha.textproducer.char.length", CaptchaConstant.LENGTH.toString());
         // 文本字符间距
-        properties.setProperty("kaptcha.textproducer.char.space", "8");
+        properties.setProperty("kaptcha.textproducer.char.space", "7");
         // 文本字体样式
         properties.setProperty("kaptcha.textproducer.font.names", "Arial");
         // 文本字符颜色
