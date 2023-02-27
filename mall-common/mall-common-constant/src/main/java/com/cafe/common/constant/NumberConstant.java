@@ -33,6 +33,8 @@ public class NumberConstant {
 
     public static final Integer TEN = 10;
 
+    public static final Integer FIFTY = 50;
+
     public static final Integer SIXTY = 60;
 
     public static final Integer ONE_HUNDRED = 100;
