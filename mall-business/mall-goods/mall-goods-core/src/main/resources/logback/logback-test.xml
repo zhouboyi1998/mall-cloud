@@ -1,7 +1,8 @@
 <configuration scan="true" scanPeriod="60 seconds" debug="false">
 
     <!-- 日志文件路径及名称 -->
-    <property name="LOG_FILE" value="logs/mall-goods" />
+    <springProperty name="APP_NAME" source="spring.application.name" scope="context" />
+    <property name="LOG_FILE" value="logs/${APP_NAME}" />
 
     <!-- SpringBoot LogBack 颜色配置 -->
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
