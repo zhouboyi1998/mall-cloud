@@ -1,6 +1,5 @@
-package com.cafe.common.core.exception;
+package com.cafe.common.core.handler;
 
-import com.cafe.common.enumeration.HttpStatusCodeEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.core.exception
+ * @Package: com.cafe.common.core.handler
  * @Author: zhouboyi
  * @Date: 2022/9/29 15:27
  * @Description: 全局异常处理器
@@ -24,8 +23,6 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<String> handler(Exception e) {
         LOGGER.error("GlobalExceptionHandler.handler(): catch exception -> {}", e.getMessage());
-        return ResponseEntity
-            .status(HttpStatus.INTERNAL_SERVER_ERROR)
-            .body(HttpStatusCodeEnum.MALL_INTERNAL_SERVER_ERROR.getMessage());
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
     }
 }
