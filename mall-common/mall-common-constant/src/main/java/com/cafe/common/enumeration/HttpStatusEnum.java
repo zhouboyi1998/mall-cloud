@@ -7,10 +7,10 @@ package com.cafe.common.enumeration;
  * @Date: 2022/5/9 9:09
  * @Description: 自定义状态码枚举
  */
-public enum HttpStatusCodeEnum {
+public enum HttpStatusEnum {
 
     /**
-     * 请求成功
+     * 成功
      */
     SUCCESS(2000, "Success"),
 
@@ -42,33 +42,28 @@ public enum HttpStatusCodeEnum {
     /**
      * 角色不存在
      */
-    ROLE_NOT_FOUND(4006, "Role Not Found"),
-
-    /**
-     * 商城内部服务错误
-     */
-    MALL_INTERNAL_SERVER_ERROR(5000, "Mall Internal Server Error");
+    ROLE_NOT_FOUND(4006, "Role Not Found");
 
     /**
      * 状态码
      */
-    private final Integer code;
+    private final Integer value;
 
     /**
      * 状态信息
      */
-    private final String message;
+    private final String reasonPhrase;
 
-    HttpStatusCodeEnum(Integer code, String message) {
-        this.code = code;
-        this.message = message;
+    HttpStatusEnum(Integer value, String reasonPhrase) {
+        this.value = value;
+        this.reasonPhrase = reasonPhrase;
     }
 
-    public Integer getCode() {
-        return this.code;
+    public Integer getValue() {
+        return value;
     }
 
-    public String getMessage() {
-        return this.message;
+    public String getReasonPhrase() {
+        return reasonPhrase;
     }
 }
