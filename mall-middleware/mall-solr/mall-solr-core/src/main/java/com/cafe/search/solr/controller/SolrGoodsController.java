@@ -1,6 +1,6 @@
 package com.cafe.search.solr.controller;
 
-import com.cafe.common.enumeration.HttpStatusCodeEnum;
+import com.cafe.common.enumeration.HttpStatusEnum;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.search.solr.model.Goods;
 import com.cafe.search.solr.service.SolrGoodsService;
@@ -53,7 +53,7 @@ public class SolrGoodsController {
     @PostMapping(value = "")
     public ResponseEntity<String> save(@RequestBody Goods goods) {
         solrGoodsService.save(goods);
-        return ResponseEntity.ok(HttpStatusCodeEnum.SUCCESS.getMessage());
+        return ResponseEntity.ok(HttpStatusEnum.SUCCESS.getReasonPhrase());
     }
 
     @LogPrint(value = "批量插入商品/批量更新商品")
@@ -62,7 +62,7 @@ public class SolrGoodsController {
     @PostMapping(value = "/batch")
     public ResponseEntity<String> saveBatch(@RequestBody List<Goods> goodsList) {
         solrGoodsService.saveBatch(goodsList);
-        return ResponseEntity.ok(HttpStatusCodeEnum.SUCCESS.getMessage());
+        return ResponseEntity.ok(HttpStatusEnum.SUCCESS.getReasonPhrase());
     }
 
     @LogPrint(value = "删除商品")
@@ -71,7 +71,7 @@ public class SolrGoodsController {
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<String> delete(@PathVariable(value = "id") String id) {
         solrGoodsService.delete(id);
-        return ResponseEntity.ok(HttpStatusCodeEnum.SUCCESS.getMessage());
+        return ResponseEntity.ok(HttpStatusEnum.SUCCESS.getReasonPhrase());
     }
 
     @LogPrint(value = "批量删除商品")
@@ -80,6 +80,6 @@ public class SolrGoodsController {
     @DeleteMapping(value = "/batch")
     public ResponseEntity<String> deleteBatch(@RequestBody List<String> ids) {
         solrGoodsService.deleteBatch(ids);
-        return ResponseEntity.ok(HttpStatusCodeEnum.SUCCESS.getMessage());
+        return ResponseEntity.ok(HttpStatusEnum.SUCCESS.getReasonPhrase());
     }
 }

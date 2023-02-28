@@ -2,7 +2,7 @@ package com.cafe.security.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.cafe.common.constant.RequestConstant;
-import com.cafe.common.enumeration.HttpStatusCodeEnum;
+import com.cafe.common.enumeration.HttpStatusEnum;
 import com.cafe.security.model.UserInfo;
 import com.cafe.user.feign.RoleFeign;
 import com.cafe.user.feign.UserFeign;
@@ -60,24 +60,24 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             // 根据用户id查询角色名称列表
             List<String> roleNameList = roleFeign.listRoleName(user.getId()).getBody();
             if (ObjectUtil.isNull(roleNameList)) {
-                throw new UsernameNotFoundException(HttpStatusCodeEnum.ROLE_NOT_FOUND.getMessage());
+                throw new UsernameNotFoundException(HttpStatusEnum.ROLE_NOT_FOUND.getReasonPhrase());
             }
             // 角色名称列表转换为数组形式
             String[] roleNameArray = roleNameList.toArray(new String[0]);
             UserInfo userDetails = new UserInfo(user.getUsername(), user.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray), user.getId());
             if (!userDetails.isEnabled()) {
-                throw new DisabledException(HttpStatusCodeEnum.ACCOUNT_DISABLED.getMessage());
+                throw new DisabledException(HttpStatusEnum.ACCOUNT_DISABLED.getReasonPhrase());
             } else if (!userDetails.isAccountNonLocked()) {
-                throw new LockedException(HttpStatusCodeEnum.ACCOUNT_LOCKED.getMessage());
+                throw new LockedException(HttpStatusEnum.ACCOUNT_LOCKED.getReasonPhrase());
             } else if (!userDetails.isAccountNonExpired()) {
-                throw new AccountExpiredException(HttpStatusCodeEnum.ACCOUNT_EXPIRED.getMessage());
+                throw new AccountExpiredException(HttpStatusEnum.ACCOUNT_EXPIRED.getReasonPhrase());
             } else if (!userDetails.isCredentialsNonExpired()) {
-                throw new CredentialsExpiredException(HttpStatusCodeEnum.CREDENTIALS_EXPIRED.getMessage());
+                throw new CredentialsExpiredException(HttpStatusEnum.CREDENTIALS_EXPIRED.getReasonPhrase());
             }
             LOGGER.info("UserDetailsServiceImpl.loadUserByUsername(): username -> {}, client_id -> {}", username, clientId);
             return userDetails;
         } else {
-            throw new UsernameNotFoundException(HttpStatusCodeEnum.USERNAME_NOT_FOUND.getMessage());
+            throw new UsernameNotFoundException(HttpStatusEnum.USERNAME_NOT_FOUND.getReasonPhrase());
         }
     }
 }

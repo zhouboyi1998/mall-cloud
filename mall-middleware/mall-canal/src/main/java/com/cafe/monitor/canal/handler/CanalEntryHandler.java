@@ -2,6 +2,7 @@ package com.cafe.monitor.canal.handler;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.cafe.monitor.canal.property.CanalProperties;
+import com.google.protobuf.InvalidProtocolBufferException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,8 +57,9 @@ public class CanalEntryHandler {
             CanalEntry.RowChange rowChange;
             try {
                 rowChange = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
-            } catch (Exception e) {
-                throw new RuntimeException("CanalEntryHandler.handler(): Failed to parser from entry store value, entry -> " + entry, e);
+            } catch (InvalidProtocolBufferException e) {
+                LOGGER.error("CanalEntryHandler.handler(): Failed to parser from entry store value, Entry -> {}, Exception -> {}", entry, e.getMessage());
+                throw new RuntimeException("CanalEntryHandler.handler(): Failed to parser from entry store value, Entry -> " + entry, e);
             }
 
             // 获取 Entry Header
