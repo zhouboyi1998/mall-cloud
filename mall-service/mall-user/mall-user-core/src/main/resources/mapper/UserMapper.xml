@@ -7,18 +7,29 @@
         <id column="id" property="id" />
         <result column="username" property="username" />
         <result column="password" property="password" />
+        <result column="mobile" property="mobile" />
         <result column="status" property="status" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
-    <select id="detail" resultType="com.cafe.user.model.User">
-        SELECT u.id, u.username, u.password, u.status, u.create_time, u.update_time, u.is_deleted
+    <select id="detailByUsername" resultType="com.cafe.user.model.User">
+        SELECT u.id, u.username, u.password, u.mobile, u.status, u.create_time, u.update_time, u.is_deleted
         FROM mall_user AS u
         LEFT JOIN mall_user_platform AS up ON up.user_id = u.id
         LEFT JOIN mall_platform AS p ON p.id = up.platform_id
         WHERE u.username = #{username}
         AND p.client_id = #{clientId}
     </select>
+
+    <select id="detailByMobile" resultType="com.cafe.user.model.User">
+        SELECT u.id, u.username, u.password, u.mobile, u.status, u.create_time, u.update_time, u.is_deleted
+        FROM mall_user AS u
+        LEFT JOIN mall_user_platform AS up ON up.user_id = u.id
+        LEFT JOIN mall_platform AS p ON p.id = up.platform_id
+        WHERE u.mobile = #{mobile}
+        AND p.client_id = #{clientId}
+    </select>
+
 </mapper>

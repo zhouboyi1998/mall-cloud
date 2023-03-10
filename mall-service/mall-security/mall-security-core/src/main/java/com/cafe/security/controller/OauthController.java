@@ -2,7 +2,7 @@ package com.cafe.security.controller;
 
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.security.service.OauthService;
-import com.cafe.security.token.Oauth2TokenDetails;
+import com.cafe.security.model.TokenDetails;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -46,7 +46,7 @@ public class OauthController {
     @LogPrint(value = "Oauth2 登录认证")
     @ApiOperation(value = "Oauth2 登录认证")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "授权模式", name = "grant_type", dataType = "String", paramType = "form", required = true, allowableValues = "password, refresh_token"),
+        @ApiImplicitParam(value = "授权模式", name = "grant_type", dataType = "String", paramType = "form", required = true, allowableValues = "password, refresh_token, captcha"),
         @ApiImplicitParam(value = "客户端id", name = "client_id", dataType = "String", paramType = "form", required = true),
         @ApiImplicitParam(value = "客户端密钥", name = "client_secret", dataType = "String", paramType = "form", required = true),
         @ApiImplicitParam(value = "用户名", name = "username", dataType = "String", paramType = "form"),
@@ -54,11 +54,8 @@ public class OauthController {
         @ApiImplicitParam(value = "刷新令牌", name = "refresh_token", dataType = "String", paramType = "form")
     })
     @PostMapping(value = "/token")
-    public ResponseEntity<Oauth2TokenDetails> postAccessToken(
-        Principal principal,
-        @RequestParam Map<String, String> parameters
-    ) throws HttpRequestMethodNotSupportedException {
-        Oauth2TokenDetails oauth2TokenDetails = oauthService.postAccessToken(principal, parameters);
-        return ResponseEntity.ok(oauth2TokenDetails);
+    public ResponseEntity<TokenDetails> postAccessToken(Principal principal, @RequestParam Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
+        TokenDetails tokenDetails = oauthService.postAccessToken(principal, parameters);
+        return ResponseEntity.ok(tokenDetails);
     }
 }

@@ -25,7 +25,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public User detail(String username, String clientId) {
-        return userMapper.detail(username, clientId);
+    public User detailByUsername(String username, String clientId) {
+        return userMapper.detailByUsername(username, clientId);
+    }
+
+    @Override
+    public User detailByMobile(String mobile, String clientId) {
+        return userMapper.detailByMobile(mobile, clientId);
     }
 }

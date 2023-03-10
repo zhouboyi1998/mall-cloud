@@ -3,9 +3,11 @@ package com.cafe.security.config;
 import com.cafe.common.constant.RedisConstant;
 import com.cafe.security.enhancer.JwtTokenEnhancer;
 import com.cafe.security.granter.CaptchaTokenGranter;
+import com.cafe.security.granter.MobileTokenGranter;
 import com.cafe.security.property.ClientConfigProperties;
 import com.cafe.security.property.ClientDetail;
 import com.cafe.security.property.RsaCredentialProperties;
+import com.cafe.security.service.UserDetailsExtensionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -15,7 +17,6 @@ import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -48,7 +49,7 @@ import java.util.List;
 public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
     /**
-     * 使用 SCrypt 加密
+     * 密码编码器 (SCrypt)
      */
     @Qualifier("sCryptPasswordEncoder")
     private final PasswordEncoder passwordEncoder;
@@ -64,9 +65,9 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     private final JwtTokenEnhancer jwtTokenEnhancer;
 
     /**
-     * 用户详细信息加载类
+     * 用户详细信息组装服务
      */
-    private final UserDetailsService userDetailsService;
+    private final UserDetailsExtensionService userDetailsExtensionService;
 
     /**
      * RSA 证书配置
@@ -93,7 +94,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         PasswordEncoder passwordEncoder,
         AuthenticationManager authenticationManager,
         JwtTokenEnhancer jwtTokenEnhancer,
-        UserDetailsService userDetailsService,
+        UserDetailsExtensionService userDetailsExtensionService,
         RsaCredentialProperties rsaCredentialProperties,
         ClientConfigProperties clientConfigProperties,
         RedisConnectionFactory redisConnectionFactory,
@@ -102,7 +103,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
         this.jwtTokenEnhancer = jwtTokenEnhancer;
-        this.userDetailsService = userDetailsService;
+        this.userDetailsExtensionService = userDetailsExtensionService;
         this.rsaCredentialProperties = rsaCredentialProperties;
         this.clientConfigProperties = clientConfigProperties;
         this.redisConnectionFactory = redisConnectionFactory;
@@ -175,6 +176,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     /**
      * 配置令牌授权模式
      *
+     * @param endpoints
      * @return
      */
     public CompositeTokenGranter compositeTokenGranter(AuthorizationServerEndpointsConfigurer endpoints) {
@@ -182,16 +184,13 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         List<TokenGranter> tokenGranterList = new ArrayList<>(Collections.singletonList(endpoints.getTokenGranter()));
 
         // 初始化图片验证码授权模式
-        CaptchaTokenGranter captchaTokenGranter = new CaptchaTokenGranter(
-            authenticationManager,
-            endpoints.getTokenServices(),
-            endpoints.getClientDetailsService(),
-            endpoints.getOAuth2RequestFactory(),
-            redisTemplate
-        );
+        CaptchaTokenGranter captchaTokenGranter = new CaptchaTokenGranter(authenticationManager, endpoints.getTokenServices(), endpoints.getClientDetailsService(), endpoints.getOAuth2RequestFactory(), redisTemplate);
+        // 初始化手机号授权模式
+        MobileTokenGranter mobileTokenGranter = new MobileTokenGranter(authenticationManager, endpoints.getTokenServices(), endpoints.getClientDetailsService(), endpoints.getOAuth2RequestFactory());
 
         // 添加自定义扩展的授权模式
         tokenGranterList.add(captchaTokenGranter);
+        tokenGranterList.add(mobileTokenGranter);
 
         // 新建复合授权模式, 加载授权模式集合
         return new CompositeTokenGranter(tokenGranterList);
@@ -240,8 +239,8 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
             .authenticationManager(authenticationManager)
             // 不复用刷新令牌
             .reuseRefreshTokens(false)
-            // 管理员账号详细信息加载类
-            .userDetailsService(userDetailsService)
+            // 用户详细信息组装服务
+            .userDetailsService(userDetailsExtensionService)
             // 登录请求限制的 HTTP 类型
             .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
             // 访问令牌转换器

@@ -204,18 +204,33 @@ public class UserController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据用户名和客户端id查询单个用户")
-    @ApiOperation(value = "根据用户名和客户端id查询单个用户")
+    @LogPrint(value = "根据用户名和客户端id查询用户详情")
+    @ApiOperation(value = "根据用户名和客户端id查询用户详情")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "用户名", name = "username", dataType = "String", paramType = "path", required = true),
         @ApiImplicitParam(value = "客户端id", name = "clientId", dataType = "String", paramType = "path", required = true)
     })
-    @GetMapping(value = "/detail/{username}/{clientId}")
-    public ResponseEntity<User> detail(
+    @GetMapping(value = "/detail/username/{username}/{clientId}")
+    public ResponseEntity<User> detailByUsername(
         @PathVariable(value = "username") String username,
         @PathVariable(value = "clientId") String clientId
     ) {
-        User user = userService.detail(username, clientId);
+        User user = userService.detailByUsername(username, clientId);
+        return ResponseEntity.ok(user);
+    }
+
+    @LogPrint(value = "根据手机号和客户端id查询用户详情")
+    @ApiOperation(value = "根据手机号和客户端id查询用户详情")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(value = "手机号", name = "mobile", dataType = "String", paramType = "path", required = true),
+        @ApiImplicitParam(value = "客户端id", name = "clientId", dataType = "String", paramType = "path", required = true)
+    })
+    @GetMapping(value = "/detail/mobile/{mobile}/{clientId}")
+    public ResponseEntity<User> detailByMobile(
+        @PathVariable(value = "mobile") String mobile,
+        @PathVariable(value = "clientId") String clientId
+    ) {
+        User user = userService.detailByMobile(mobile, clientId);
         return ResponseEntity.ok(user);
     }
 }

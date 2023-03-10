@@ -77,9 +77,69 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
 * 新建一个类继承 `AbstractTokenGranter`
     * 重写继承的 `getOAuth2Authentication()` 方法
-    * 在这个方法中编写校验 `Token` 的规则
-* 在继承了 `AuthorizationServerConfigurerAdapter` 的配置类中
+    * 在这个方法中编写令牌授权的规则
+
+```
+public class CaptchaTokenGranter extends AbstractTokenGranter {
+    ...
+}
+```
+
+* 在 `AuthorizationServerConfigurerAdapter` 配置类中
     * 修改令牌访问端点配置
-    * 将自定义的授权模式加入到 `Spring Security` 授权模式列表中
-* 最后修改 `application.yml` 配置文件
-    * 开启自定义的授权模式
+    * 将扩展的授权模式加入到 `Spring Security` 授权模式列表中
+
+```
+public CompositeTokenGranter compositeTokenGranter(AuthorizationServerEndpointsConfigurer endpoints) {
+    ...
+}
+```
+
+* 修改 `application.yml` 配置文件
+    * 开启新扩展的授权模式
+
+```
+client-config:
+  client-details:
+    - client-id: "manage"
+      authorized-grant-types:
+        - "captcha"
+```
+
+#### 新增认证令牌和认证提供器
+
+* 如果新的授权模式需要使用对应的认证令牌，可以自定义认证令牌和认证提供器
+* 新建一个类继承 `AbstractAuthenticationToken`
+
+```
+public class MobilePasswordAuthenticationToken extends AbstractAuthenticationToken {
+    ...
+}
+```
+
+* 新建一个类继承 `AuthenticationProvider`
+    * 重写继承来的 `authenticate()` 方法
+    * 在这个方法中编写令牌认证规则
+
+```
+public class MobilePasswordAuthenticationProvider implements AuthenticationProvider {
+  ...
+}
+```
+
+* 在 `WebSecurityConfigurerAdapter` 配置类中
+    * 将自定义的认证提供器添加到 `Spring` 容器中
+    * 注意：不可以使用 `@Autowired` 注入
+        * 不然会有依赖构建顺序问题
+        * 在 `WebSecurityConfigurerAdapter` 配置类加载时
+        * 如果使用 `@Autowired` 注入认证提供器
+        * 那么此时认证提供器就会开始实例化
+        * 但此时密码编码器 `PasswordEncoded` 还没有实例化
+        * 而认证提供器需要使用到密码编码器
+
+```
+@Bean
+public MobilePasswordAuthenticationProvider mobilePasswordAuthenticationProvider() {
+    return new MobilePasswordAuthenticationProvider(userDetailsService, passwordEncoder());
+}
+```

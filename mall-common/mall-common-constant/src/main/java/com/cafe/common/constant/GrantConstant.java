@@ -13,4 +13,9 @@ public class GrantConstant {
      * 图片验证码授权模式
      */
     public static final String CAPTCHA = "captcha";
+
+    /**
+     * 手机号授权模式
+     */
+    public static final String MOBILE = "mobile";
 }
