@@ -1,15 +1,15 @@
-package com.cafe.security.token;
+package com.cafe.security.model;
 
 import java.io.Serializable;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.security.token
+ * @Package: com.cafe.security.model
  * @Author: zhouboyi
  * @Date: 2022/5/9 10:48
- * @Description: 自定义令牌信息封装
+ * @Description: 令牌详细信息
  */
-public class Oauth2TokenDetails implements Serializable {
+public class TokenDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

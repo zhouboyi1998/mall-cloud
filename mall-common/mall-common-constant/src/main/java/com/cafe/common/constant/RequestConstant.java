@@ -50,6 +50,11 @@ public class RequestConstant {
     public static final String PASSWORD = "password";
 
     /**
+     * 手机号
+     */
+    public static final String MOBILE = "mobile";
+
+    /**
      * 图片验证码唯一标识
      */
     public static final String KEY = "key";

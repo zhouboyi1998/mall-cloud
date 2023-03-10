@@ -38,6 +38,9 @@ public class User implements Serializable {
     @TableField(select = false)
     private String password;
 
+    @ApiModelProperty(value = "手机号")
+    private String mobile;
+
     @ApiModelProperty(value = "状态: 0 禁用, 1 正常")
     private Integer status;
 
@@ -76,6 +79,15 @@ public class User implements Serializable {
 
     public User setPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public User setMobile(String mobile) {
+        this.mobile = mobile;
         return this;
     }
 
@@ -121,6 +133,7 @@ public class User implements Serializable {
             "id=" + id +
             ", username=" + username +
             ", password=" + password +
+            ", mobile=" + mobile +
             ", status=" + status +
             ", createTime=" + createTime +
             ", updateTime=" + updateTime +
