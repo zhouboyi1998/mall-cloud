@@ -1,6 +1,6 @@
 package com.cafe.security.service;
 
-import com.cafe.security.token.Oauth2TokenDetails;
+import com.cafe.security.model.TokenDetails;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 
 import java.security.Principal;
@@ -23,7 +23,5 @@ public interface OauthService {
      * @return
      * @throws HttpRequestMethodNotSupportedException
      */
-    Oauth2TokenDetails postAccessToken(
-        Principal principal, Map<String, String> parameters
-    ) throws HttpRequestMethodNotSupportedException;
+    TokenDetails postAccessToken(Principal principal, Map<String, String> parameters) throws HttpRequestMethodNotSupportedException;
 }

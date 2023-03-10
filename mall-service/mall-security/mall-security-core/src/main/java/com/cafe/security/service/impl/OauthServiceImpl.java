@@ -2,7 +2,7 @@ package com.cafe.security.service.impl;
 
 import com.cafe.common.constant.RequestConstant;
 import com.cafe.security.service.OauthService;
-import com.cafe.security.token.Oauth2TokenDetails;
+import com.cafe.security.model.TokenDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
@@ -31,18 +31,18 @@ public class OauthServiceImpl implements OauthService {
     }
 
     @Override
-    public Oauth2TokenDetails postAccessToken(Principal principal, Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
+    public TokenDetails postAccessToken(Principal principal, Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
         // 使用 TokenEndpoint 生成访问令牌
         OAuth2AccessToken oAuth2AccessToken = Optional.ofNullable(tokenEndpoint.postAccessToken(principal, parameters).getBody())
             .orElseThrow(NullPointerException::new);
 
         // 将访问令牌信息封装到自定义令牌信息封装类中返回
-        Oauth2TokenDetails oauth2TokenDetails = new Oauth2TokenDetails();
-        oauth2TokenDetails.setAccessToken(oAuth2AccessToken.getValue());
-        oauth2TokenDetails.setRefreshToken(oAuth2AccessToken.getRefreshToken().getValue());
-        oauth2TokenDetails.setTokenPrefix(RequestConstant.BEARER_PREFIX);
-        oauth2TokenDetails.setExpiresIn(oAuth2AccessToken.getExpiresIn());
+        TokenDetails tokenDetails = new TokenDetails();
+        tokenDetails.setAccessToken(oAuth2AccessToken.getValue());
+        tokenDetails.setRefreshToken(oAuth2AccessToken.getRefreshToken().getValue());
+        tokenDetails.setTokenPrefix(RequestConstant.BEARER_PREFIX);
+        tokenDetails.setExpiresIn(oAuth2AccessToken.getExpiresIn());
 
-        return oauth2TokenDetails;
+        return tokenDetails;
     }
 }
