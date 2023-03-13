@@ -38,4 +38,9 @@ public class StringConstant {
      * 艾特
      */
     public static final String AT = "@";
+
+    /**
+     * 冒号
+     */
+    public static final String COLON = ":";
 }
