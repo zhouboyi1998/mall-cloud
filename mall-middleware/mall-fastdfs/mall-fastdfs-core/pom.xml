@@ -31,6 +31,10 @@
             <groupId>com.cafe</groupId>
             <artifactId>mall-fastdfs-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-id-api</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

@@ -1,6 +1,8 @@
 package com.cafe.file.fastdfs.service.impl;
 
+import com.cafe.common.constant.StringConstant;
 import com.cafe.file.fastdfs.model.FastDFSFile;
+import com.cafe.file.fastdfs.property.FastDFSProperties;
 import com.cafe.file.fastdfs.service.FastDFSService;
 import org.csource.fastdfs.ClientGlobal;
 import org.csource.fastdfs.FileInfo;
@@ -10,13 +12,14 @@ import org.csource.fastdfs.TrackerClient;
 import org.csource.fastdfs.TrackerServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Project: mall-cloud
@@ -42,8 +45,15 @@ public class FastDFSServiceImpl implements FastDFSService {
         }
     }
 
+    private final FastDFSProperties fastDFSProperties;
+
+    @Autowired
+    public FastDFSServiceImpl(FastDFSProperties fastDFSProperties) {
+        this.fastDFSProperties = fastDFSProperties;
+    }
+
     @Override
-    public String[] upload(MultipartFile file) throws Exception {
+    public String upload(MultipartFile file) throws Exception {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
         StorageClient storageClient = new StorageClient(trackerServer, null);
@@ -56,54 +66,69 @@ public class FastDFSServiceImpl implements FastDFSService {
             .setName(originalFilename)
             .setExtension(StringUtils.getFilenameExtension(originalFilename))
             .setContent(file.getBytes());
-        return storageClient.upload_file(fastDFSFile.getContent(), fastDFSFile.getExtension(), null);
+        String[] result = storageClient.upload_file(fastDFSFile.getContent(), fastDFSFile.getExtension(), null);
+        // result[0]:
+        return StringConstant.SLASH + result[0] + StringConstant.SLASH + result[1];
     }
 
     @Override
-    public InputStream download(String groupName, String remoteFileName) throws Exception {
+    public void download(String groupName, String remoteFilename, HttpServletResponse httpResponse) throws Exception {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
         StorageClient storageClient = new StorageClient(trackerServer, null);
-        byte[] bytes = storageClient.download_file(groupName, remoteFileName);
-        return new ByteArrayInputStream(bytes);
+        byte[] bytes = storageClient.download_file(groupName, remoteFilename);
+
+        // 获取文件名
+        String[] split = remoteFilename.split(StringConstant.SLASH);
+        String filename = split[split.length - 1];
+
+        // 配置 HTTP Response
+        httpResponse.setCharacterEncoding(fastDFSProperties.getCharacterEncoding());
+        httpResponse.setContentType(fastDFSProperties.getContentType());
+        httpResponse.setHeader(fastDFSProperties.getHeaderKey(), fastDFSProperties.getHeaderValuePrefix() + filename);
+
+        // 将要下载的文件写入 HTTP Response 中
+        ServletOutputStream servletOutputStream = httpResponse.getOutputStream();
+        servletOutputStream.write(bytes);
+        servletOutputStream.flush();
     }
 
     @Override
-    public Integer delete(String groupName, String remoteFileName) throws Exception {
+    public Integer delete(String groupName, String remoteFilename) throws Exception {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
         StorageClient storageClient = new StorageClient(trackerServer, null);
-        return storageClient.delete_file(groupName, remoteFileName);
+        return storageClient.delete_file(groupName, remoteFilename);
     }
 
     @Override
-    public FileInfo getFileInfo(String groupName, String remoteFileName) throws Exception {
+    public FileInfo fileInfo(String groupName, String remoteFilename) throws Exception {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
         StorageClient storageClient = new StorageClient(trackerServer, null);
-        return storageClient.get_file_info(groupName, remoteFileName);
+        return storageClient.get_file_info(groupName, remoteFilename);
     }
 
     @Override
-    public String getTrackerUrl() throws Exception {
+    public String trackerUrl() throws Exception {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
         String ip = trackerServer.getInetSocketAddress().getHostString();
         Integer trackerPort = ClientGlobal.getG_tracker_http_port();
-        return ip + ":" + trackerPort;
+        return ip + StringConstant.COLON + trackerPort;
     }
 
     @Override
-    public StorageServer getStorageInfo() throws Exception {
+    public StorageServer storageInfo() throws Exception {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
         return trackerClient.getStoreStorage(trackerServer);
     }
 
     @Override
-    public StorageServer getStorageServerInfo(String groupName, String remoteFileName) throws Exception {
+    public StorageServer storageServerInfo(String groupName, String remoteFilename) throws Exception {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
-        return trackerClient.getFetchStorage(trackerServer, groupName, remoteFileName);
+        return trackerClient.getFetchStorage(trackerServer, groupName, remoteFilename);
     }
 }
