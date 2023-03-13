@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,25 +47,25 @@ public class MinioController {
     @PostMapping(value = "/upload/{bucket}")
     public ResponseEntity<String> upload(
         @PathVariable(value = "bucket") String bucket,
-        MultipartFile file
+        @RequestParam(value = "file") MultipartFile file
     ) throws Exception {
-        String result = minioService.upload(bucket, file);
-        return ResponseEntity.ok(result);
+        String filepath = minioService.upload(bucket, file);
+        return ResponseEntity.ok(filepath);
     }
 
     @LogPrint(value = "文件下载")
     @ApiOperation(value = "文件下载")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
-        @ApiImplicitParam(value = "文件名", name = "fileName", dataType = "String", paramType = "path", required = true)
+        @ApiImplicitParam(value = "文件名", name = "filename", dataType = "String", paramType = "path", required = true)
     })
-    @GetMapping(value = "/download/{bucket}/{fileName}")
+    @GetMapping(value = "/download/{bucket}/{filename}")
     public ResponseEntity<String> download(
         @PathVariable(value = "bucket") String bucket,
-        @PathVariable(value = "fileName") String fileName,
+        @PathVariable(value = "filename") String filename,
         HttpServletResponse httpResponse
     ) throws Exception {
-        minioService.download(bucket, fileName, httpResponse);
+        minioService.download(bucket, filename, httpResponse);
         return ResponseEntity.ok(HttpStatusEnum.SUCCESS.getReasonPhrase());
     }
 
@@ -72,14 +73,14 @@ public class MinioController {
     @ApiOperation(value = "获取文件外链 (永久)")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
-        @ApiImplicitParam(value = "文件名", name = "fileName", dataType = "String", paramType = "path", required = true)
+        @ApiImplicitParam(value = "文件名", name = "filename", dataType = "String", paramType = "path", required = true)
     })
-    @GetMapping(value = "/url/{bucket}/{fileName}")
-    public ResponseEntity<String> getFileUrl(
+    @GetMapping(value = "/url/{bucket}/{filename}")
+    public ResponseEntity<String> url(
         @PathVariable(value = "bucket") String bucket,
-        @PathVariable(value = "fileName") String fileName
+        @PathVariable(value = "filename") String filename
     ) throws Exception {
-        String url = minioService.getFileUrl(bucket, fileName);
+        String url = minioService.url(bucket, filename);
         return ResponseEntity.ok(url);
     }
 
@@ -87,16 +88,16 @@ public class MinioController {
     @ApiOperation(value = "获取文件外链 (限时)")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
-        @ApiImplicitParam(value = "文件名", name = "fileName", dataType = "String", paramType = "path", required = true),
+        @ApiImplicitParam(value = "文件名", name = "filename", dataType = "String", paramType = "path", required = true),
         @ApiImplicitParam(value = "过期时间 (单位: 秒)", name = "expiry", dataType = "String", paramType = "path", required = true)
     })
-    @GetMapping(value = "/url/{bucket}/{fileName}/{expiry}")
-    public ResponseEntity<String> getFileUrl(
+    @GetMapping(value = "/url/{bucket}/{filename}/{expiry}")
+    public ResponseEntity<String> url(
         @PathVariable(value = "bucket") String bucket,
-        @PathVariable(value = "fileName") String fileName,
+        @PathVariable(value = "filename") String filename,
         @PathVariable(value = "expiry") Integer expiry
     ) throws Exception {
-        String url = minioService.getFileUrl(bucket, fileName, expiry);
+        String url = minioService.url(bucket, filename, expiry);
         return ResponseEntity.ok(url);
     }
 }

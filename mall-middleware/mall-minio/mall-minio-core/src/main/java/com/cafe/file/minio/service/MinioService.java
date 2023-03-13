@@ -27,31 +27,31 @@ public interface MinioService {
      * 文件下载
      *
      * @param bucket       存储桶
-     * @param fileName     文件名
+     * @param filename     文件名
      * @param httpResponse
      * @return
      * @throws Exception
      */
-    void download(String bucket, String fileName, HttpServletResponse httpResponse) throws Exception;
+    void download(String bucket, String filename, HttpServletResponse httpResponse) throws Exception;
 
     /**
      * 获取文件外链 (永久)
      *
      * @param bucket   存储桶
-     * @param fileName 文件名
+     * @param filename 文件名
      * @return
      * @throws Exception
      */
-    String getFileUrl(String bucket, String fileName) throws Exception;
+    String url(String bucket, String filename) throws Exception;
 
     /**
      * 获取文件外链 (限时)
      *
      * @param bucket   存储桶
-     * @param fileName 文件名
+     * @param filename 文件名
      * @param expiry   过期时间 (单位: 秒)
      * @return
      * @throws Exception
      */
-    String getFileUrl(String bucket, String fileName, Integer expiry) throws Exception;
+    String url(String bucket, String filename, Integer expiry) throws Exception;
 }
