@@ -143,3 +143,17 @@ public MobilePasswordAuthenticationProvider mobilePasswordAuthenticationProvider
     return new MobilePasswordAuthenticationProvider(userDetailsService, passwordEncoder());
 }
 ```
+
+#### 刷新令牌默认执行流程
+
+* 如果使用了默认的刷新令牌授权器 `RefreshTokenGranter`
+* 这个授权器会调用 `DefaultTokenServices.refreshAccessToken()` 方法
+* 在这个方法中经过一系列调用
+* 最终会调用 `UserDetailsService.loadUserByUsername()` 方法来获取用户信息
+* 并创建一个新的 `Authentication` 对象
+* 执行流程：
+    * `DefaultTokenServices.refreshAccessToken()`
+    * ...
+    * `ProviderManager.authenticate()`
+    * ...
+    * `UserDetailsService.loadUserByUsername()`

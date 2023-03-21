@@ -32,22 +32,6 @@ public class UserInfo implements UserDetails, CredentialsContainer {
 
     private static final long serialVersionUID = 1L;
 
-    /**
-     * 令牌主体类型
-     */
-    public enum PrincipalType {
-
-        /**
-         * 用户名
-         */
-        USERNAME,
-
-        /**
-         * 手机号
-         */
-        MOBILE
-    }
-
     private final Long id;
 
     private String username;
@@ -66,21 +50,22 @@ public class UserInfo implements UserDetails, CredentialsContainer {
 
     private final boolean enabled;
 
-    public UserInfo(UserInfo.PrincipalType principalType, Long id, String principal, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserInfo(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this(id, password, true, true, true, true, authorities);
-        if (principal == null || "".equals(principal) || password == null) {
-            throw new IllegalArgumentException("Principal and password should not be null!");
+        if (username == null || "".equals(username) || password == null) {
+            throw new IllegalArgumentException("Username and password should not be null!");
         }
-        switch (principalType) {
-            case USERNAME:
-                this.username = principal;
-                break;
-            case MOBILE:
-                this.mobile = principal;
-                break;
-            default:
-                throw new IllegalArgumentException("Principal type not support!");
+        this.username = username;
+    }
+
+    public UserInfo(Long id, String username, String mobile, String password, Collection<? extends GrantedAuthority> authorities) {
+        // 使用手机号登录时也要同时保存用户名, 因为使用刷新令牌时需要用户名
+        this(id, password, true, true, true, true, authorities);
+        if (mobile == null || "".equals(mobile) || password == null) {
+            throw new IllegalArgumentException("Mobile and password should not be null!");
         }
+        this.username = username;
+        this.mobile = mobile;
     }
 
     public UserInfo(Long id, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
@@ -205,8 +190,6 @@ public class UserInfo implements UserDetails, CredentialsContainer {
 
     public static class UserBuilder {
 
-        private UserInfo.PrincipalType principalType;
-
         private Long id;
 
         private String username;
@@ -229,12 +212,6 @@ public class UserInfo implements UserDetails, CredentialsContainer {
 
         private UserBuilder() {
             this.passwordEncoder = (password) -> password;
-        }
-
-        public UserInfo.UserBuilder principalType(UserInfo.PrincipalType principalType) {
-            Assert.notNull(principalType, "Principal type cannot be null!");
-            this.principalType = principalType;
-            return this;
         }
 
         public UserInfo.UserBuilder id(Long id) {
@@ -314,7 +291,7 @@ public class UserInfo implements UserDetails, CredentialsContainer {
             String principal = Optional.ofNullable(this.username)
                 .orElse(Optional.ofNullable(this.mobile)
                     .orElse(StringConstant.EMPTY));
-            return new UserInfo(this.principalType, this.id, principal, encodedPassword, this.authorities);
+            return new UserInfo(this.id, principal, encodedPassword, this.authorities);
         }
     }
 

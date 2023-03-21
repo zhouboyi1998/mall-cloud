@@ -65,7 +65,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
             }
             // 角色名称列表转换为数组形式
             String[] roleNameArray = roleNameList.toArray(new String[0]);
-            UserInfo userDetails = new UserInfo(UserInfo.PrincipalType.USERNAME, user.getId(), user.getUsername(), user.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
+            UserInfo userDetails = new UserInfo(user.getId(), user.getUsername(), user.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
             // 校验用户状态
             validateUserDetails(userDetails);
             LOGGER.info("UserDetailsServiceImpl.loadUserByUsername(): username -> {}, client_id -> {}", username, clientId);
@@ -91,7 +91,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
             }
             // 角色名称列表转换为数组形式
             String[] roleNameArray = roleNameList.toArray(new String[0]);
-            UserInfo userDetails = new UserInfo(UserInfo.PrincipalType.MOBILE, user.getId(), user.getUsername(), user.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
+            UserInfo userDetails = new UserInfo(user.getId(), user.getUsername(), user.getMobile(), user.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
             // 校验用户状态
             validateUserDetails(userDetails);
             LOGGER.info("UserDetailsServiceImpl.loadUserByMobile(): mobile -> {}, client_id -> {}", mobile, clientId);
