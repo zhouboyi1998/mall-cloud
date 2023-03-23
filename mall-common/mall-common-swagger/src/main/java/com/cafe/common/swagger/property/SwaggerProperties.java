@@ -23,9 +23,6 @@ public class SwaggerProperties {
 
     /**
      * 微服务描述 (默认值: Microservice)
-     *
-     * @Value 注解获取配置的方式, 不允许配置为空, 找不到配置会报错
-     * @ConfigurationProperties 注解允许配置为空, 找不到匹配的配置时, 也可以使用默认值
      */
     private String description = "Microservice";
 
