@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,13 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/spu")
 public class SpuController {
 
+    private final Clock clock;
+
     private final SpuService spuService;
 
     @Autowired
-    public SpuController(SpuService spuService) {
+    public SpuController(Clock clock, SpuService spuService) {
+        this.clock = clock;
         this.spuService = spuService;
     }
 
@@ -139,7 +143,7 @@ public class SpuController {
     @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Spu spu) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         spu.setCreateTime(now).setUpdateTime(now);
         Boolean code = spuService.save(spu);
         return ResponseEntity.ok(code);
@@ -150,7 +154,7 @@ public class SpuController {
     @ApiImplicitParam(value = "标准化产品单元列表", name = "spuList", dataType = "List<Spu>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<Spu> spuList) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         spuList = spuList.stream()
             .map(spu -> spu.setCreateTime(now).setUpdateTime(now))
             .collect(Collectors.toList());

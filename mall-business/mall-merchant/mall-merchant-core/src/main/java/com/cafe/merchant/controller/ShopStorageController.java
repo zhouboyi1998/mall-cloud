@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,13 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/shop-storage")
 public class ShopStorageController {
 
+    private final Clock clock;
+
     private final ShopStorageService shopStorageService;
 
     @Autowired
-    public ShopStorageController(ShopStorageService shopStorageService) {
+    public ShopStorageController(Clock clock, ShopStorageService shopStorageService) {
+        this.clock = clock;
         this.shopStorageService = shopStorageService;
     }
 
@@ -139,7 +143,7 @@ public class ShopStorageController {
     @ApiImplicitParam(value = "店铺-仓库关联关系Model", name = "shopStorage", dataType = "ShopStorage", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody ShopStorage shopStorage) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         shopStorage.setCreateTime(now).setUpdateTime(now);
         Boolean code = shopStorageService.save(shopStorage);
         return ResponseEntity.ok(code);
@@ -150,7 +154,7 @@ public class ShopStorageController {
     @ApiImplicitParam(value = "店铺-仓库关联关系列表", name = "shopStorageList", dataType = "List<ShopStorage>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<ShopStorage> shopStorageList) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         shopStorageList = shopStorageList.stream()
             .map(shopStorage -> shopStorage.setCreateTime(now).setUpdateTime(now))
             .collect(Collectors.toList());

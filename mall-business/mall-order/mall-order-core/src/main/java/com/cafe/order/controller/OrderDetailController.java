@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,13 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/order-detail")
 public class OrderDetailController {
 
+    private final Clock clock;
+
     private final OrderDetailService orderDetailService;
 
     @Autowired
-    public OrderDetailController(OrderDetailService orderDetailService) {
+    public OrderDetailController(Clock clock, OrderDetailService orderDetailService) {
+        this.clock = clock;
         this.orderDetailService = orderDetailService;
     }
 
@@ -139,7 +143,7 @@ public class OrderDetailController {
     @ApiImplicitParam(value = "订单明细表Model", name = "orderDetail", dataType = "OrderDetail", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody OrderDetail orderDetail) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         orderDetail.setCreateTime(now).setUpdateTime(now);
         Boolean code = orderDetailService.save(orderDetail);
         return ResponseEntity.ok(code);
@@ -150,7 +154,7 @@ public class OrderDetailController {
     @ApiImplicitParam(value = "订单明细表列表", name = "orderDetailList", dataType = "List<OrderDetail>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<OrderDetail> orderDetailList) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         orderDetailList = orderDetailList.stream()
             .map(orderDetail -> orderDetail.setCreateTime(now).setUpdateTime(now))
             .collect(Collectors.toList());

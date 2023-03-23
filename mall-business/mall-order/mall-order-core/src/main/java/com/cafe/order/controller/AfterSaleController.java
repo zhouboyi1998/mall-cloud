@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,13 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/after-sale")
 public class AfterSaleController {
 
+    private final Clock clock;
+
     private final AfterSaleService afterSaleService;
 
     @Autowired
-    public AfterSaleController(AfterSaleService afterSaleService) {
+    public AfterSaleController(Clock clock, AfterSaleService afterSaleService) {
+        this.clock = clock;
         this.afterSaleService = afterSaleService;
     }
 
@@ -139,7 +143,7 @@ public class AfterSaleController {
     @ApiImplicitParam(value = "售后Model", name = "afterSale", dataType = "AfterSale", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody AfterSale afterSale) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         afterSale.setCreateTime(now).setUpdateTime(now);
         Boolean code = afterSaleService.save(afterSale);
         return ResponseEntity.ok(code);
@@ -150,7 +154,7 @@ public class AfterSaleController {
     @ApiImplicitParam(value = "售后列表", name = "afterSaleList", dataType = "List<AfterSale>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<AfterSale> afterSaleList) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         afterSaleList = afterSaleList.stream()
             .map(afterSale -> afterSale.setCreateTime(now).setUpdateTime(now))
             .collect(Collectors.toList());

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,13 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/user-platform")
 public class UserPlatformController {
 
+    private final Clock clock;
+
     private final UserPlatformService userPlatformService;
 
     @Autowired
-    public UserPlatformController(UserPlatformService userPlatformService) {
+    public UserPlatformController(Clock clock, UserPlatformService userPlatformService) {
+        this.clock = clock;
         this.userPlatformService = userPlatformService;
     }
 
@@ -139,7 +143,7 @@ public class UserPlatformController {
     @ApiImplicitParam(value = "用户-平台关联关系Model", name = "userPlatform", dataType = "UserPlatform", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody UserPlatform userPlatform) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         userPlatform.setCreateTime(now).setUpdateTime(now);
         Boolean code = userPlatformService.save(userPlatform);
         return ResponseEntity.ok(code);
@@ -150,7 +154,7 @@ public class UserPlatformController {
     @ApiImplicitParam(value = "用户-平台关联关系列表", name = "userPlatformList", dataType = "List<UserPlatform>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<UserPlatform> userPlatformList) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         userPlatformList = userPlatformList.stream()
             .map(userPlatform -> userPlatform.setCreateTime(now).setUpdateTime(now))
             .collect(Collectors.toList());
