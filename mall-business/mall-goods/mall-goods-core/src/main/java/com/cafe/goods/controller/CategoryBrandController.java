@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,13 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/category-brand")
 public class CategoryBrandController {
 
+    private final Clock clock;
+
     private final CategoryBrandService categoryBrandService;
 
     @Autowired
-    public CategoryBrandController(CategoryBrandService categoryBrandService) {
+    public CategoryBrandController(Clock clock, CategoryBrandService categoryBrandService) {
+        this.clock = clock;
         this.categoryBrandService = categoryBrandService;
     }
 
@@ -139,7 +143,7 @@ public class CategoryBrandController {
     @ApiImplicitParam(value = "分类-品牌关联关系Model", name = "categoryBrand", dataType = "CategoryBrand", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody CategoryBrand categoryBrand) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         categoryBrand.setCreateTime(now).setUpdateTime(now);
         Boolean code = categoryBrandService.save(categoryBrand);
         return ResponseEntity.ok(code);
@@ -150,7 +154,7 @@ public class CategoryBrandController {
     @ApiImplicitParam(value = "分类-品牌关联关系列表", name = "categoryBrandList", dataType = "List<CategoryBrand>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<CategoryBrand> categoryBrandList) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         categoryBrandList = categoryBrandList.stream()
             .map(categoryBrand -> categoryBrand.setCreateTime(now).setUpdateTime(now))
             .collect(Collectors.toList());

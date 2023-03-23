@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,13 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/member-address")
 public class MemberAddressController {
 
+    private final Clock clock;
+
     private final MemberAddressService memberAddressService;
 
     @Autowired
-    public MemberAddressController(MemberAddressService memberAddressService) {
+    public MemberAddressController(Clock clock, MemberAddressService memberAddressService) {
+        this.clock = clock;
         this.memberAddressService = memberAddressService;
     }
 
@@ -139,7 +143,7 @@ public class MemberAddressController {
     @ApiImplicitParam(value = "会员收货地址Model", name = "memberAddress", dataType = "MemberAddress", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody MemberAddress memberAddress) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         memberAddress.setCreateTime(now).setUpdateTime(now);
         Boolean code = memberAddressService.save(memberAddress);
         return ResponseEntity.ok(code);
@@ -150,7 +154,7 @@ public class MemberAddressController {
     @ApiImplicitParam(value = "会员收货地址列表", name = "memberAddressList", dataType = "List<MemberAddress>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<MemberAddress> memberAddressList) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         memberAddressList = memberAddressList.stream()
             .map(memberAddress -> memberAddress.setCreateTime(now).setUpdateTime(now))
             .collect(Collectors.toList());

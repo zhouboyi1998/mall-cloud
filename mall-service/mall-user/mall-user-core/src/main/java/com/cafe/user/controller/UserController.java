@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,13 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/user")
 public class UserController {
 
+    private final Clock clock;
+
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(Clock clock, UserService userService) {
+        this.clock = clock;
         this.userService = userService;
     }
 
@@ -139,7 +143,7 @@ public class UserController {
     @ApiImplicitParam(value = "用户Model", name = "user", dataType = "User", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody User user) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         user.setCreateTime(now).setUpdateTime(now);
         Boolean code = userService.save(user);
         return ResponseEntity.ok(code);
@@ -150,7 +154,7 @@ public class UserController {
     @ApiImplicitParam(value = "用户列表", name = "userList", dataType = "List<User>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<User> userList) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         userList = userList.stream()
             .map(user -> user.setCreateTime(now).setUpdateTime(now))
             .collect(Collectors.toList());

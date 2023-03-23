@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,13 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/shop")
 public class ShopController {
 
+    private final Clock clock;
+
     private final ShopService shopService;
 
     @Autowired
-    public ShopController(ShopService shopService) {
+    public ShopController(Clock clock, ShopService shopService) {
+        this.clock = clock;
         this.shopService = shopService;
     }
 
@@ -139,7 +143,7 @@ public class ShopController {
     @ApiImplicitParam(value = "店铺Model", name = "shop", dataType = "Shop", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Shop shop) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         shop.setCreateTime(now).setUpdateTime(now);
         Boolean code = shopService.save(shop);
         return ResponseEntity.ok(code);
@@ -150,7 +154,7 @@ public class ShopController {
     @ApiImplicitParam(value = "店铺列表", name = "shopList", dataType = "List<Shop>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<Shop> shopList) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         shopList = shopList.stream()
             .map(shop -> shop.setCreateTime(now).setUpdateTime(now))
             .collect(Collectors.toList());

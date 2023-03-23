@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,13 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/merchant")
 public class MerchantController {
 
+    private final Clock clock;
+
     private final MerchantService merchantService;
 
     @Autowired
-    public MerchantController(MerchantService merchantService) {
+    public MerchantController(Clock clock, MerchantService merchantService) {
+        this.clock = clock;
         this.merchantService = merchantService;
     }
 
@@ -139,7 +143,7 @@ public class MerchantController {
     @ApiImplicitParam(value = "商家Model", name = "merchant", dataType = "Merchant", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Merchant merchant) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         merchant.setCreateTime(now).setUpdateTime(now);
         Boolean code = merchantService.save(merchant);
         return ResponseEntity.ok(code);
@@ -150,7 +154,7 @@ public class MerchantController {
     @ApiImplicitParam(value = "商家列表", name = "merchantList", dataType = "List<Merchant>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<Merchant> merchantList) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         merchantList = merchantList.stream()
             .map(merchant -> merchant.setCreateTime(now).setUpdateTime(now))
             .collect(Collectors.toList());

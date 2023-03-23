@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,13 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/admin")
 public class AdminController {
 
+    private final Clock clock;
+
     private final AdminService adminService;
 
     @Autowired
-    public AdminController(AdminService adminService) {
+    public AdminController(Clock clock, AdminService adminService) {
+        this.clock = clock;
         this.adminService = adminService;
     }
 
@@ -139,7 +143,7 @@ public class AdminController {
     @ApiImplicitParam(value = "管理员Model", name = "admin", dataType = "Admin", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Admin admin) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         admin.setCreateTime(now).setUpdateTime(now);
         Boolean code = adminService.save(admin);
         return ResponseEntity.ok(code);
@@ -150,7 +154,7 @@ public class AdminController {
     @ApiImplicitParam(value = "管理员列表", name = "adminList", dataType = "List<Admin>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<Admin> adminList) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         adminList = adminList.stream()
             .map(admin -> admin.setCreateTime(now).setUpdateTime(now))
             .collect(Collectors.toList());
