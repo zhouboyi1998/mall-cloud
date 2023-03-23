@@ -18,4 +18,9 @@ public class AppConstant {
      * 测试环境
      */
     public static final String TEST = "test";
+
+    /**
+     * 默认时区id
+     */
+    public static final String DEFAULT_ZONE_ID = "Asia/Shanghai";
 }

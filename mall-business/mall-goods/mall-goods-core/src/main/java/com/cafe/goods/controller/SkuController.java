@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,13 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/sku")
 public class SkuController {
 
+    private final Clock clock;
+
     private final SkuService skuService;
 
     @Autowired
-    public SkuController(SkuService skuService) {
+    public SkuController(Clock clock, SkuService skuService) {
+        this.clock = clock;
         this.skuService = skuService;
     }
 
@@ -139,7 +143,7 @@ public class SkuController {
     @ApiImplicitParam(value = "库存量单位Model", name = "sku", dataType = "Sku", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Sku sku) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         sku.setCreateTime(now).setUpdateTime(now);
         Boolean code = skuService.save(sku);
         return ResponseEntity.ok(code);
@@ -150,7 +154,7 @@ public class SkuController {
     @ApiImplicitParam(value = "库存量单位列表", name = "skuList", dataType = "List<Sku>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<Sku> skuList) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         skuList = skuList.stream()
             .map(sku -> sku.setCreateTime(now).setUpdateTime(now))
             .collect(Collectors.toList());

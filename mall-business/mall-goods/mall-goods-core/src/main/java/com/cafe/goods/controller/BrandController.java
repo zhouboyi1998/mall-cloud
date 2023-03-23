@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Clock;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +38,13 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/brand")
 public class BrandController {
 
+    private final Clock clock;
+
     private final BrandService brandService;
 
     @Autowired
-    public BrandController(BrandService brandService) {
+    public BrandController(Clock clock, BrandService brandService) {
+        this.clock = clock;
         this.brandService = brandService;
     }
 
@@ -139,7 +143,7 @@ public class BrandController {
     @ApiImplicitParam(value = "品牌Model", name = "brand", dataType = "Brand", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Brand brand) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         brand.setCreateTime(now).setUpdateTime(now);
         Boolean code = brandService.save(brand);
         return ResponseEntity.ok(code);
@@ -150,7 +154,7 @@ public class BrandController {
     @ApiImplicitParam(value = "品牌列表", name = "brandList", dataType = "List<Brand>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<Brand> brandList) {
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now = LocalDateTime.now(clock);
         brandList = brandList.stream()
             .map(brand -> brand.setCreateTime(now).setUpdateTime(now))
             .collect(Collectors.toList());
