@@ -17,6 +17,7 @@
     <description>公共包</description>
 
     <modules>
+        <module>mall-common-config</module>
         <module>mall-common-constant</module>
         <module>mall-common-core</module>
         <module>mall-common-log</module>

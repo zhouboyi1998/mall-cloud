@@ -1,4 +1,4 @@
-package com.cafe.common.core.config;
+package com.cafe.common.config.date;
 
 import com.cafe.common.constant.AppConstant;
 import org.springframework.context.annotation.Bean;
@@ -9,13 +9,13 @@ import java.time.ZoneId;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.core.config
+ * @Package: com.cafe.common.config.date
  * @Author: zhouboyi
  * @Date: 2023/3/23 16:30
- * @Description: 应用配置
+ * @Description: 日期相关配置
  */
 @Configuration
-public class AppConfig {
+public class DateConfig {
 
     /**
      * 默认时区

@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -38,13 +35,10 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/user-role")
 public class UserRoleController {
 
-    private final Clock clock;
-
     private final UserRoleService userRoleService;
 
     @Autowired
-    public UserRoleController(Clock clock, UserRoleService userRoleService) {
-        this.clock = clock;
+    public UserRoleController(UserRoleService userRoleService) {
         this.userRoleService = userRoleService;
     }
 
@@ -143,8 +137,6 @@ public class UserRoleController {
     @ApiImplicitParam(value = "用户-角色关联关系Model", name = "userRole", dataType = "UserRole", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody UserRole userRole) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        userRole.setCreateTime(now).setUpdateTime(now);
         Boolean code = userRoleService.save(userRole);
         return ResponseEntity.ok(code);
     }
@@ -154,10 +146,6 @@ public class UserRoleController {
     @ApiImplicitParam(value = "用户-角色关联关系列表", name = "userRoleList", dataType = "List<UserRole>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<UserRole> userRoleList) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        userRoleList = userRoleList.stream()
-            .map(userRole -> userRole.setCreateTime(now).setUpdateTime(now))
-            .collect(Collectors.toList());
         Boolean code = userRoleService.saveBatch(userRoleList);
         return ResponseEntity.ok(code);
     }
