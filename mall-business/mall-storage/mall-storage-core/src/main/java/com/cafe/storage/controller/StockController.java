@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -38,13 +35,10 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/stock")
 public class StockController {
 
-    private final Clock clock;
-
     private final StockService stockService;
 
     @Autowired
-    public StockController(Clock clock, StockService stockService) {
-        this.clock = clock;
+    public StockController(StockService stockService) {
         this.stockService = stockService;
     }
 
@@ -143,8 +137,6 @@ public class StockController {
     @ApiImplicitParam(value = "库存Model", name = "stock", dataType = "Stock", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Stock stock) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        stock.setCreateTime(now).setUpdateTime(now);
         Boolean code = stockService.save(stock);
         return ResponseEntity.ok(code);
     }
@@ -154,10 +146,6 @@ public class StockController {
     @ApiImplicitParam(value = "库存列表", name = "stockList", dataType = "List<Stock>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<Stock> stockList) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        stockList = stockList.stream()
-            .map(stock -> stock.setCreateTime(now).setUpdateTime(now))
-            .collect(Collectors.toList());
         Boolean code = stockService.saveBatch(stockList);
         return ResponseEntity.ok(code);
     }

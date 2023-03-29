@@ -240,6 +240,11 @@
             <!-- 公共包 -->
             <dependency>
                 <groupId>com.cafe</groupId>
+                <artifactId>mall-common-config</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-common-constant</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>

@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -38,13 +35,10 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/role-menu")
 public class RoleMenuController {
 
-    private final Clock clock;
-
     private final RoleMenuService roleMenuService;
 
     @Autowired
-    public RoleMenuController(Clock clock, RoleMenuService roleMenuService) {
-        this.clock = clock;
+    public RoleMenuController(RoleMenuService roleMenuService) {
         this.roleMenuService = roleMenuService;
     }
 
@@ -143,8 +137,6 @@ public class RoleMenuController {
     @ApiImplicitParam(value = "角色-菜单关联关系Model", name = "roleMenu", dataType = "RoleMenu", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody RoleMenu roleMenu) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        roleMenu.setCreateTime(now).setUpdateTime(now);
         Boolean code = roleMenuService.save(roleMenu);
         return ResponseEntity.ok(code);
     }
@@ -154,10 +146,6 @@ public class RoleMenuController {
     @ApiImplicitParam(value = "角色-菜单关联关系列表", name = "roleMenuList", dataType = "List<RoleMenu>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<RoleMenu> roleMenuList) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        roleMenuList = roleMenuList.stream()
-            .map(roleMenu -> roleMenu.setCreateTime(now).setUpdateTime(now))
-            .collect(Collectors.toList());
         Boolean code = roleMenuService.saveBatch(roleMenuList);
         return ResponseEntity.ok(code);
     }
