@@ -24,10 +24,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -41,13 +38,10 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/menu")
 public class MenuController {
 
-    private final Clock clock;
-
     private final MenuService menuService;
 
     @Autowired
-    public MenuController(Clock clock, MenuService menuService) {
-        this.clock = clock;
+    public MenuController(MenuService menuService) {
         this.menuService = menuService;
     }
 
@@ -146,8 +140,6 @@ public class MenuController {
     @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Menu menu) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        menu.setCreateTime(now).setUpdateTime(now);
         Boolean code = menuService.save(menu);
         return ResponseEntity.ok(code);
     }
@@ -157,10 +149,6 @@ public class MenuController {
     @ApiImplicitParam(value = "菜单列表", name = "menuList", dataType = "List<Menu>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<Menu> menuList) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        menuList = menuList.stream()
-            .map(menu -> menu.setCreateTime(now).setUpdateTime(now))
-            .collect(Collectors.toList());
         Boolean code = menuService.saveBatch(menuList);
         return ResponseEntity.ok(code);
     }

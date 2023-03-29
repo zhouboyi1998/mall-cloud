@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -38,13 +35,10 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/merchant-shop")
 public class MerchantShopController {
 
-    private final Clock clock;
-
     private final MerchantShopService merchantShopService;
 
     @Autowired
-    public MerchantShopController(Clock clock, MerchantShopService merchantShopService) {
-        this.clock = clock;
+    public MerchantShopController(MerchantShopService merchantShopService) {
         this.merchantShopService = merchantShopService;
     }
 
@@ -143,8 +137,6 @@ public class MerchantShopController {
     @ApiImplicitParam(value = "商家-店铺关联关系Model", name = "merchantShop", dataType = "MerchantShop", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody MerchantShop merchantShop) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        merchantShop.setCreateTime(now).setUpdateTime(now);
         Boolean code = merchantShopService.save(merchantShop);
         return ResponseEntity.ok(code);
     }
@@ -154,10 +146,6 @@ public class MerchantShopController {
     @ApiImplicitParam(value = "商家-店铺关联关系列表", name = "merchantShopList", dataType = "List<MerchantShop>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<MerchantShop> merchantShopList) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        merchantShopList = merchantShopList.stream()
-            .map(merchantShop -> merchantShop.setCreateTime(now).setUpdateTime(now))
-            .collect(Collectors.toList());
         Boolean code = merchantShopService.saveBatch(merchantShopList);
         return ResponseEntity.ok(code);
     }

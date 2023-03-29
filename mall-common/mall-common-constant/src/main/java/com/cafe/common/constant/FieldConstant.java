@@ -20,6 +20,16 @@ public class FieldConstant {
     public static final String SERIAL_VERSION_UID = "serialVersionUID";
 
     /**
+     * 创建时间
+     */
+    public static final String CREATE_TIME = "createTime";
+
+    /**
+     * 更新时间
+     */
+    public static final String UPDATE_TIME = "updateTime";
+
+    /**
      * 品牌ID
      */
     public static final String BRAND_ID = "brandId";

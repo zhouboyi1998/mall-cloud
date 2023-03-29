@@ -1,6 +1,7 @@
 package com.cafe.generator.plus;
 
 import com.baomidou.mybatisplus.annotation.DbType;
+import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
@@ -9,14 +10,18 @@ import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
+import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.cafe.common.constant.mysql.ColumnConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -50,6 +55,16 @@ public class MyBatisPlusGenerator {
         } catch (Exception e) {
             LOGGER.error("MyBatisPlusGenerator: failed to create properties -> {}", e.getMessage());
         }
+    }
+
+    /**
+     * 字段填充策略
+     */
+    public static final List<TableFill> TABLE_FILL_LIST = new ArrayList<>(2);
+
+    static {
+        TABLE_FILL_LIST.add(new TableFill(ColumnConstant.CREATE_TIME, FieldFill.INSERT));
+        TABLE_FILL_LIST.add(new TableFill(ColumnConstant.UPDATE_TIME, FieldFill.INSERT_UPDATE));
     }
 
     public static void generate() {
@@ -153,7 +168,9 @@ public class MyBatisPlusGenerator {
             // 是否生成 RESTful 风格 Controller
             .setRestControllerStyle(true)
             // 请求路径格式 (true: 连字符, false: 驼峰)
-            .setControllerMappingHyphenStyle(true);
+            .setControllerMappingHyphenStyle(true)
+            // 设置字段填充策略
+            .setTableFillList(TABLE_FILL_LIST);
 
         // 5. 模板配置
         TemplateConfig templateConfig = new TemplateConfig()

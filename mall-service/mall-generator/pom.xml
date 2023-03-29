@@ -47,6 +47,11 @@
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-constant</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

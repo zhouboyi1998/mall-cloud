@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -38,13 +35,10 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/area")
 public class AreaController {
 
-    private final Clock clock;
-
     private final AreaService areaService;
 
     @Autowired
-    public AreaController(Clock clock, AreaService areaService) {
-        this.clock = clock;
+    public AreaController(AreaService areaService) {
         this.areaService = areaService;
     }
 
@@ -143,8 +137,6 @@ public class AreaController {
     @ApiImplicitParam(value = "地址Model", name = "area", dataType = "Area", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Area area) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        area.setCreateTime(now).setUpdateTime(now);
         Boolean code = areaService.save(area);
         return ResponseEntity.ok(code);
     }
@@ -154,10 +146,6 @@ public class AreaController {
     @ApiImplicitParam(value = "地址列表", name = "areaList", dataType = "List<Area>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<Area> areaList) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        areaList = areaList.stream()
-            .map(area -> area.setCreateTime(now).setUpdateTime(now))
-            .collect(Collectors.toList());
         Boolean code = areaService.saveBatch(areaList);
         return ResponseEntity.ok(code);
     }

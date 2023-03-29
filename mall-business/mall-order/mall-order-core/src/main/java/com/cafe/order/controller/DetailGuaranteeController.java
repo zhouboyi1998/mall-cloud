@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -38,13 +35,10 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/detail-guarantee")
 public class DetailGuaranteeController {
 
-    private final Clock clock;
-
     private final DetailGuaranteeService detailGuaranteeService;
 
     @Autowired
-    public DetailGuaranteeController(Clock clock, DetailGuaranteeService detailGuaranteeService) {
-        this.clock = clock;
+    public DetailGuaranteeController(DetailGuaranteeService detailGuaranteeService) {
         this.detailGuaranteeService = detailGuaranteeService;
     }
 
@@ -143,8 +137,6 @@ public class DetailGuaranteeController {
     @ApiImplicitParam(value = "订单明细-保障关联关系Model", name = "detailGuarantee", dataType = "DetailGuarantee", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody DetailGuarantee detailGuarantee) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        detailGuarantee.setCreateTime(now).setUpdateTime(now);
         Boolean code = detailGuaranteeService.save(detailGuarantee);
         return ResponseEntity.ok(code);
     }
@@ -154,10 +146,6 @@ public class DetailGuaranteeController {
     @ApiImplicitParam(value = "订单明细-保障关联关系列表", name = "detailGuaranteeList", dataType = "List<DetailGuarantee>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<DetailGuarantee> detailGuaranteeList) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        detailGuaranteeList = detailGuaranteeList.stream()
-            .map(detailGuarantee -> detailGuarantee.setCreateTime(now).setUpdateTime(now))
-            .collect(Collectors.toList());
         Boolean code = detailGuaranteeService.saveBatch(detailGuaranteeList);
         return ResponseEntity.ok(code);
     }

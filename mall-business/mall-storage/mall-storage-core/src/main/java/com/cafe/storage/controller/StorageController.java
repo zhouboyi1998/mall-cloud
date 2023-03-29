@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -38,13 +35,10 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/storage")
 public class StorageController {
 
-    private final Clock clock;
-
     private final StorageService storageService;
 
     @Autowired
-    public StorageController(Clock clock, StorageService storageService) {
-        this.clock = clock;
+    public StorageController(StorageService storageService) {
         this.storageService = storageService;
     }
 
@@ -143,8 +137,6 @@ public class StorageController {
     @ApiImplicitParam(value = "仓库Model", name = "storage", dataType = "Storage", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Storage storage) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        storage.setCreateTime(now).setUpdateTime(now);
         Boolean code = storageService.save(storage);
         return ResponseEntity.ok(code);
     }
@@ -154,10 +146,6 @@ public class StorageController {
     @ApiImplicitParam(value = "仓库列表", name = "storageList", dataType = "List<Storage>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<Storage> storageList) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        storageList = storageList.stream()
-            .map(storage -> storage.setCreateTime(now).setUpdateTime(now))
-            .collect(Collectors.toList());
         Boolean code = storageService.saveBatch(storageList);
         return ResponseEntity.ok(code);
     }
