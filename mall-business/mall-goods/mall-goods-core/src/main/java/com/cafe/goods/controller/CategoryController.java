@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -38,13 +35,10 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/category")
 public class CategoryController {
 
-    private final Clock clock;
-
     private final CategoryService categoryService;
 
     @Autowired
-    public CategoryController(Clock clock, CategoryService categoryService) {
-        this.clock = clock;
+    public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
@@ -143,8 +137,6 @@ public class CategoryController {
     @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Category category) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        category.setCreateTime(now).setUpdateTime(now);
         Boolean code = categoryService.save(category);
         return ResponseEntity.ok(code);
     }
@@ -154,10 +146,6 @@ public class CategoryController {
     @ApiImplicitParam(value = "分类列表", name = "categoryList", dataType = "List<Category>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<Category> categoryList) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        categoryList = categoryList.stream()
-            .map(category -> category.setCreateTime(now).setUpdateTime(now))
-            .collect(Collectors.toList());
         Boolean code = categoryService.saveBatch(categoryList);
         return ResponseEntity.ok(code);
     }

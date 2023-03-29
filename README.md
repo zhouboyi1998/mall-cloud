@@ -42,6 +42,7 @@
     |-- mall-system (系统模块)
 
 |-- mall-common (公共包)
+    |-- mall-common-config (配置公共包)
     |-- mall-common-constant (常量公共包)
     |-- mall-common-core (核心公共包)
     |-- mall-common-log (日志公共包)

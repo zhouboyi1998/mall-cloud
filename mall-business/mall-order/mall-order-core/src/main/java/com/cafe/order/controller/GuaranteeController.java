@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -38,13 +35,10 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/guarantee")
 public class GuaranteeController {
 
-    private final Clock clock;
-
     private final GuaranteeService guaranteeService;
 
     @Autowired
-    public GuaranteeController(Clock clock, GuaranteeService guaranteeService) {
-        this.clock = clock;
+    public GuaranteeController(GuaranteeService guaranteeService) {
         this.guaranteeService = guaranteeService;
     }
 
@@ -143,8 +137,6 @@ public class GuaranteeController {
     @ApiImplicitParam(value = "保障Model", name = "guarantee", dataType = "Guarantee", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Guarantee guarantee) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        guarantee.setCreateTime(now).setUpdateTime(now);
         Boolean code = guaranteeService.save(guarantee);
         return ResponseEntity.ok(code);
     }
@@ -154,10 +146,6 @@ public class GuaranteeController {
     @ApiImplicitParam(value = "保障列表", name = "guaranteeList", dataType = "List<Guarantee>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<Guarantee> guaranteeList) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        guaranteeList = guaranteeList.stream()
-            .map(guarantee -> guarantee.setCreateTime(now).setUpdateTime(now))
-            .collect(Collectors.toList());
         Boolean code = guaranteeService.saveBatch(guaranteeList);
         return ResponseEntity.ok(code);
     }

@@ -21,10 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.Clock;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -38,13 +35,10 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/platform")
 public class PlatformController {
 
-    private final Clock clock;
-
     private final PlatformService platformService;
 
     @Autowired
-    public PlatformController(Clock clock, PlatformService platformService) {
-        this.clock = clock;
+    public PlatformController(PlatformService platformService) {
         this.platformService = platformService;
     }
 
@@ -143,8 +137,6 @@ public class PlatformController {
     @ApiImplicitParam(value = "平台Model", name = "platform", dataType = "Platform", paramType = "body", required = true)
     @PostMapping(value = "/insert")
     public ResponseEntity<Boolean> insert(@RequestBody Platform platform) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        platform.setCreateTime(now).setUpdateTime(now);
         Boolean code = platformService.save(platform);
         return ResponseEntity.ok(code);
     }
@@ -154,10 +146,6 @@ public class PlatformController {
     @ApiImplicitParam(value = "平台列表", name = "platformList", dataType = "List<Platform>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
     public ResponseEntity<Boolean> insertBatch(@RequestBody List<Platform> platformList) {
-        LocalDateTime now = LocalDateTime.now(clock);
-        platformList = platformList.stream()
-            .map(platform -> platform.setCreateTime(now).setUpdateTime(now))
-            .collect(Collectors.toList());
         Boolean code = platformService.saveBatch(platformList);
         return ResponseEntity.ok(code);
     }
