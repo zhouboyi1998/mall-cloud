@@ -1,8 +1,10 @@
-package com.cafe.common.constant;
+package com.cafe.common.constant.elasticsearch;
+
+import com.cafe.common.constant.app.FieldConstant;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.constant
+ * @Package: com.cafe.common.constant.elasticsearch
  * @Author: zhouboyi
  * @Date: 2022/7/28 10:03
  * @Description: ElasticSearch 相关常量

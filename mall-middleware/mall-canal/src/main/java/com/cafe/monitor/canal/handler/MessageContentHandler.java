@@ -1,7 +1,7 @@
 package com.cafe.monitor.canal.handler;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
-import com.cafe.common.constant.MonitorConstant;
+import com.cafe.common.constant.monitor.MonitorConstant;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @Package: com.cafe.file.fastdfs.property
  * @Author: zhouboyi
  * @Date: 2023/3/13 21:22
- * @Description:
+ * @Description: FastDFS 配置
  */
 @Component
 @ConfigurationProperties(prefix = "fastdfs")

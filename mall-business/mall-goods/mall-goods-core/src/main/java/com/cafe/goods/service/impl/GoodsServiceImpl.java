@@ -1,7 +1,8 @@
 package com.cafe.goods.service.impl;
 
 import cn.hutool.json.JSONUtil;
-import com.cafe.common.constant.MessageConstant;
+import com.cafe.common.constant.app.FieldConstant;
+import com.cafe.common.constant.app.StatusConstant;
 import com.cafe.common.constant.rocketmq.RocketMQTopic;
 import com.cafe.goods.bo.Goods;
 import com.cafe.goods.mapper.GoodsMapper;
@@ -51,16 +52,16 @@ public class GoodsServiceImpl implements GoodsService {
         // 组装 RocketMQ 消息内容
         Map<String, Object> content = new HashMap<>(2);
         // 消息标识: 标识消息是上架通知还是下架通知
-        content.put(MessageConstant.STATUS, status);
+        content.put(FieldConstant.STATUS, status);
         // 消息内容
-        if (MessageConstant.LAUNCH.equals(status)) {
+        if (StatusConstant.LAUNCH.equals(status)) {
             // 查询上架商品的信息
             List<Goods> goodsList = goodsMapper.list(ids);
             // 将上架商品的信息组装进 RocketMQ 消息内容中
-            content.put(MessageConstant.DATA, goodsList);
+            content.put(FieldConstant.DATA, goodsList);
         } else {
             // 将下架商品的主键组装进 RocketMQ 消息内容中
-            content.put(MessageConstant.DATA, ids);
+            content.put(FieldConstant.DATA, ids);
         }
 
         // 发送消息到 RocketMQ, 通知 ElasticSearch 上下架商品

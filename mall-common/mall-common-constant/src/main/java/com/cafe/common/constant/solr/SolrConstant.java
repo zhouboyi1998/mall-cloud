@@ -1,8 +1,8 @@
-package com.cafe.common.constant;
+package com.cafe.common.constant.solr;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.constant
+ * @Package: com.cafe.common.constant.solr
  * @Author: zhouboyi
  * @Date: 2022/10/26 17:23
  * @Description: Solr 相关常量

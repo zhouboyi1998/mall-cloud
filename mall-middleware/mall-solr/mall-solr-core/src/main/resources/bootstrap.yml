@@ -6,4 +6,5 @@ spring:
     name: mall-solr
 
 swagger:
+  title: ${spring.application.name}
   description: Solr 搜索模块

@@ -1,8 +1,8 @@
 package com.cafe.security.granter;
 
-import com.cafe.common.constant.GrantConstant;
-import com.cafe.common.constant.RedisConstant;
-import com.cafe.common.constant.RequestConstant;
+import com.cafe.common.constant.redis.RedisConstant;
+import com.cafe.common.constant.request.RequestConstant;
+import com.cafe.common.constant.security.GrantConstant;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AccountStatusException;

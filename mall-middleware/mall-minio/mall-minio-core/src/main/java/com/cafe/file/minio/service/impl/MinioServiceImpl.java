@@ -1,6 +1,6 @@
 package com.cafe.file.minio.service.impl;
 
-import com.cafe.common.constant.StringConstant;
+import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.file.minio.property.MinioProperties;
 import com.cafe.file.minio.service.MinioService;
 import com.cafe.id.feign.IDFeign;

@@ -1,6 +1,6 @@
 package com.cafe.common.core.util;
 
-import com.cafe.common.enumeration.MediaFormatEnum;
+import com.cafe.common.enumeration.media.MediaFormatEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -7,7 +7,7 @@ import com.cafe.user.mapper.MenuMapper;
 import com.cafe.user.model.Menu;
 import com.cafe.user.service.MenuService;
 import com.cafe.user.vo.MenuTreeVO;
-import com.cafe.common.constant.AuthorizationConstant;
+import com.cafe.common.constant.security.AuthorizationConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

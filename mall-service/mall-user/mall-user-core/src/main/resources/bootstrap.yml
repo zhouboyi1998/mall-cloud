@@ -6,4 +6,5 @@ spring:
     name: mall-user
 
 swagger:
+  title: ${spring.application.name}
   description: 用户模块

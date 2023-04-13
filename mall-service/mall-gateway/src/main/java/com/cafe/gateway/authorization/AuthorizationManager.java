@@ -2,10 +2,10 @@ package com.cafe.gateway.authorization;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSONUtil;
-import com.cafe.common.constant.RequestConstant;
-import com.cafe.common.constant.NumberConstant;
-import com.cafe.common.constant.RedisConstant;
-import com.cafe.common.constant.StringConstant;
+import com.cafe.common.constant.pool.NumberConstant;
+import com.cafe.common.constant.pool.StringConstant;
+import com.cafe.common.constant.redis.RedisConstant;
+import com.cafe.common.constant.request.RequestConstant;
 import com.nimbusds.jose.JWSObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

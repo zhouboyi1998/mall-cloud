@@ -1,6 +1,6 @@
 package com.cafe.search.solr.controller;
 
-import com.cafe.common.enumeration.HttpStatusEnum;
+import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.search.solr.model.Goods;
 import com.cafe.search.solr.service.SolrGoodsService;

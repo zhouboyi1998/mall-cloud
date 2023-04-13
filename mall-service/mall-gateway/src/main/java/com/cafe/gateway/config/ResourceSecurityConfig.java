@@ -1,12 +1,12 @@
 package com.cafe.gateway.config;
 
 import cn.hutool.core.util.ArrayUtil;
-import com.cafe.common.constant.AuthorizationConstant;
+import com.cafe.common.constant.security.AuthorizationConstant;
 import com.cafe.gateway.authorization.AuthorizationManager;
 import com.cafe.gateway.filter.IgnoreUrlsRemoveJwtFilter;
 import com.cafe.gateway.authorization.RestAccessDeniedHandler;
 import com.cafe.gateway.authorization.RestAuthenticationEntryPoint;
-import com.cafe.gateway.property.IgnoreUrlsProperties;
+import com.cafe.gateway.property.SecureProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,9 +44,9 @@ public class ResourceSecurityConfig {
     private final IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter;
 
     /**
-     * 白名单 URL 配置
+     * 安全配置
      */
-    private final IgnoreUrlsProperties ignoreUrlsProperties;
+    private final SecureProperties secureProperties;
 
     /**
      * 授权管理器
@@ -67,14 +67,14 @@ public class ResourceSecurityConfig {
     public ResourceSecurityConfig(
         GlobalCorsConfig globalCorsConfig,
         IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter,
-        IgnoreUrlsProperties ignoreUrlsProperties,
+        SecureProperties secureProperties,
         AuthorizationManager authorizationManager,
         RestAccessDeniedHandler restAccessDeniedHandler,
         RestAuthenticationEntryPoint restAuthenticationEntryPoint
     ) {
         this.globalCorsConfig = globalCorsConfig;
         this.ignoreUrlsRemoveJwtFilter = ignoreUrlsRemoveJwtFilter;
-        this.ignoreUrlsProperties = ignoreUrlsProperties;
+        this.secureProperties = secureProperties;
         this.authorizationManager = authorizationManager;
         this.restAccessDeniedHandler = restAccessDeniedHandler;
         this.restAuthenticationEntryPoint = restAuthenticationEntryPoint;
@@ -92,8 +92,8 @@ public class ResourceSecurityConfig {
             // 添加过滤器: 移除白名单 URL 中的 JWT 请求头
             .addFilterBefore(ignoreUrlsRemoveJwtFilter, SecurityWebFiltersOrder.AUTHENTICATION)
             .authorizeExchange()
-            // 白名单配置
-            .pathMatchers(ArrayUtil.toArray(ignoreUrlsProperties.getUrls(), String.class))
+            // 白名单 URL 配置
+            .pathMatchers(ArrayUtil.toArray(secureProperties.getIgnoreUrls(), String.class))
             .permitAll()
             // 鉴权管理器配置
             .anyExchange()

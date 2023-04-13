@@ -1,7 +1,7 @@
 package com.cafe.security.granter;
 
-import com.cafe.common.constant.GrantConstant;
-import com.cafe.common.constant.RequestConstant;
+import com.cafe.common.constant.request.RequestConstant;
+import com.cafe.common.constant.security.GrantConstant;
 import com.cafe.security.token.MobilePasswordAuthenticationToken;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AccountStatusException;

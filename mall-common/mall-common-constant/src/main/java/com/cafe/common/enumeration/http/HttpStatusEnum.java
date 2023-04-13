@@ -1,8 +1,8 @@
-package com.cafe.common.enumeration;
+package com.cafe.common.enumeration.http;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.enumeration
+ * @Package: com.cafe.common.enumeration.http
  * @Author: zhouboyi
  * @Date: 2022/5/9 9:09
  * @Description: 自定义状态码枚举
