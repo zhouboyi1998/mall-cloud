@@ -1,6 +1,6 @@
 package com.cafe.security.config;
 
-import com.cafe.common.constant.CaptchaConstant;
+import com.cafe.common.constant.captcha.CaptchaConstant;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.google.code.kaptcha.util.Config;
 import org.springframework.context.annotation.Bean;

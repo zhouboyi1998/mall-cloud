@@ -1,8 +1,8 @@
-package com.cafe.common.constant;
+package com.cafe.common.constant.pool;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.constant
+ * @Package: com.cafe.common.constant.pool
  * @Author: zhouboyi
  * @Date: 2022/5/6 14:42
  * @Description: 数字常量

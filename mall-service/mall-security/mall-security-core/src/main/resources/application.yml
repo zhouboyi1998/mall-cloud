@@ -15,22 +15,21 @@ feign:
   sentinel:
     enabled: true
 
-# RSA 证书口令, 生成 RSA 证书文件 (jwt.jks) 时设置
-rsa:
-  credential:
-    # 密钥库名称
-    key-store: "jwt.jks"
-    # 密钥库口令
-    store-pass: "123456"
-    # 别名
-    alias: "jwt"
-    # 密钥口令
-    key-pass: "123456"
+# RSA 证书配置 (生成证书文件 jwt.jks 时的设置)
+rsa-credential:
+  # 密钥库名称
+  key-store: "jwt.jks"
+  # 密钥库口令
+  store-pass: "123456"
+  # 别名
+  alias: "jwt"
+  # 密钥口令
+  key-pass: "123456"
 
 # 客户端配置
-client-config:
+client:
   # 客户端详细信息列表
-  client-details:
+  details:
     # 客户端id (后台管理系统)
     - client-id: "manage"
       # 授权模式 (默认): password 密码, authorization_code 授权码, client_credentials 客户端, implicit 隐藏, refresh_token 刷新令牌

@@ -1,6 +1,6 @@
 package com.cafe.security.model;
 
-import com.cafe.common.constant.StringConstant;
+import com.cafe.common.constant.pool.StringConstant;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;

@@ -1,6 +1,6 @@
 package com.cafe.common.core.util;
 
-import com.cafe.common.constant.NumberConstant;
+import com.cafe.common.constant.pool.NumberConstant;
 
 /**
  * @Project: mall-cloud

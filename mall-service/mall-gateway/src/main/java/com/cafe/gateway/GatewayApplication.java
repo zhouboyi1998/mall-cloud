@@ -1,5 +1,6 @@
 package com.cafe.gateway;
 
+import com.cafe.common.constant.app.AppConstant;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.context.annotation.ComponentScan;
@@ -12,7 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @Description: SpringCloud Gateway 网关启动类
  */
 @SpringCloudApplication
-@ComponentScan(basePackages = "com.cafe")
+@ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
 public class GatewayApplication {
 
     public static void main(String[] args) {

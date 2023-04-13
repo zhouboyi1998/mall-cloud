@@ -1,8 +1,8 @@
-package com.cafe.common.constant;
+package com.cafe.common.constant.captcha;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.constant
+ * @Package: com.cafe.common.constant.captcha
  * @Author: zhouboyi
  * @Date: 2023/2/27 10:30
  * @Description: 图片验证码相关常量

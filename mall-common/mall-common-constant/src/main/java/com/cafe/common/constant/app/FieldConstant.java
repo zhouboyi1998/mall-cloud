@@ -1,8 +1,8 @@
-package com.cafe.common.constant;
+package com.cafe.common.constant.app;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.constant
+ * @Package: com.cafe.common.constant.app
  * @Author: zhouboyi
  * @Date: 2022/5/6 14:42
  * @Description: 字段常量
@@ -58,4 +58,14 @@ public class FieldConstant {
      * SKU 名称
      */
     public static final String SKU_NAME = "skuName";
+
+    /**
+     * 状态
+     */
+    public static final String STATUS = "status";
+
+    /**
+     * 数据
+     */
+    public static final String DATA = "data";
 }

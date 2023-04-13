@@ -10,22 +10,22 @@ import java.util.List;
  * @Package: com.cafe.gateway.property
  * @Author: zhouboyi
  * @Date: 2022/5/11 0:58
- * @Description: 获取 application 中定义的白名单 URL
+ * @Description: 安全配置
  */
 @Component
-@ConfigurationProperties(prefix = "secure.ignore")
-public class IgnoreUrlsProperties {
+@ConfigurationProperties(prefix = "secure")
+public class SecureProperties {
 
     /**
      * 白名单 URL 列表
      */
-    private List<String> urls;
+    private List<String> ignoreUrls;
 
-    public List<String> getUrls() {
-        return urls;
+    public List<String> getIgnoreUrls() {
+        return ignoreUrls;
     }
 
-    public void setUrls(List<String> urls) {
-        this.urls = urls;
+    public void setIgnoreUrls(List<String> ignoreUrls) {
+        this.ignoreUrls = ignoreUrls;
     }
 }

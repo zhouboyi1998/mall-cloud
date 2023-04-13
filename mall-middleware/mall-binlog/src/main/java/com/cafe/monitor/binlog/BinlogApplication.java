@@ -1,5 +1,7 @@
 package com.cafe.monitor.binlog;
 
+import com.cafe.common.constant.app.AppConstant;
+import com.cafe.common.constant.app.FeignConstant;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -14,8 +16,8 @@ import org.springframework.context.annotation.ComponentScan;
  * @Description: MySQL Binlog 数据库监听模块启动类
  */
 @SpringBootApplication
-@EnableFeignClients(basePackages = "com.cafe.id.feign")
-@ComponentScan(basePackages = "com.cafe")
+@EnableFeignClients(basePackages = FeignConstant.FEIGN_CLIENT_PACKAGE_ID)
+@ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
 public class BinlogApplication {
 
     public static void main(String[] args) {

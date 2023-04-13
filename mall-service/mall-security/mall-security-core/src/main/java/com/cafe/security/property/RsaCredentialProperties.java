@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
  * @Description: RSA 证书配置
  */
 @Component
-@ConfigurationProperties(prefix = "rsa.credential")
+@ConfigurationProperties(prefix = "rsa-credential")
 public class RsaCredentialProperties {
 
     /**

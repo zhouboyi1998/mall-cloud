@@ -1,6 +1,6 @@
 package com.cafe.file.fastdfs.controller;
 
-import com.cafe.common.enumeration.HttpStatusEnum;
+import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.file.fastdfs.service.FastDFSService;
 import io.swagger.annotations.Api;

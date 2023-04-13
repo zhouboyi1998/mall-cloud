@@ -10,7 +10,7 @@ import java.util.List;
  * @Package: com.cafe.monitor.canal.property
  * @Author: zhouboyi
  * @Date: 2022/7/13 23:32
- * @Description:
+ * @Description: Canal 配置
  */
 @Component
 @ConfigurationProperties(prefix = "canal")

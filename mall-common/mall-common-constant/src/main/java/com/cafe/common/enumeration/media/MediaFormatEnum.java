@@ -1,8 +1,8 @@
-package com.cafe.common.enumeration;
+package com.cafe.common.enumeration.media;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.enumeration
+ * @Package: com.cafe.common.enumeration.media
  * @Author: zhouboyi
  * @Date: 2023/2/25 0:35
  * @Description: 媒体文件格式枚举

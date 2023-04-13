@@ -1,8 +1,8 @@
 package com.cafe.monitor.binlog.handler;
 
-import com.cafe.common.constant.FieldConstant;
-import com.cafe.common.constant.MonitorConstant;
-import com.cafe.common.constant.StringConstant;
+import com.cafe.common.constant.app.FieldConstant;
+import com.cafe.common.constant.monitor.MonitorConstant;
+import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.rabbitmq.RabbitMQExchange;
 import com.cafe.common.constant.rabbitmq.RabbitMQRoutingKeyMap;
 import com.cafe.common.message.rabbitmq.producer.RabbitMQProducer;

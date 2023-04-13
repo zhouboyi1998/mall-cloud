@@ -2,10 +2,10 @@ package com.cafe.security.service.impl;
 
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
-import com.cafe.common.constant.CaptchaConstant;
-import com.cafe.common.constant.NumberConstant;
-import com.cafe.common.constant.RedisConstant;
-import com.cafe.common.enumeration.MediaFormatEnum;
+import com.cafe.common.constant.captcha.CaptchaConstant;
+import com.cafe.common.constant.pool.NumberConstant;
+import com.cafe.common.constant.redis.RedisConstant;
+import com.cafe.common.enumeration.media.MediaFormatEnum;
 import com.cafe.id.feign.IDFeign;
 import com.cafe.security.model.Captcha;
 import com.cafe.security.service.CaptchaService;

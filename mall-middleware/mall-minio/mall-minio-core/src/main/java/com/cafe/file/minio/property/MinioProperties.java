@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @Package: com.cafe.file.minio.property
  * @Author: zhouboyi
  * @Date: 2022/6/9 10:37
- * @Description:
+ * @Description: MinIO 配置
  */
 @Component
 @ConfigurationProperties(prefix = "minio")

@@ -1,6 +1,6 @@
 package com.cafe.file.fastdfs.service.impl;
 
-import com.cafe.common.constant.StringConstant;
+import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.file.fastdfs.model.FastDFSFile;
 import com.cafe.file.fastdfs.property.FastDFSProperties;
 import com.cafe.file.fastdfs.service.FastDFSService;

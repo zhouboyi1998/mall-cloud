@@ -6,4 +6,5 @@ spring:
     name: mall-id
 
 swagger:
-  description: 分布式ID生成模块
+  title: ${spring.application.name}
+  description: 分布式 ID 生成器
