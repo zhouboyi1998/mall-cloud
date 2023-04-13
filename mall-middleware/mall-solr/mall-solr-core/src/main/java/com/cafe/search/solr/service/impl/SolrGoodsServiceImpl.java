@@ -1,6 +1,6 @@
 package com.cafe.search.solr.service.impl;
 
-import com.cafe.common.constant.SolrConstant;
+import com.cafe.common.constant.solr.SolrConstant;
 import com.cafe.search.solr.model.Goods;
 import com.cafe.search.solr.service.SolrGoodsService;
 import org.apache.solr.common.SolrException;

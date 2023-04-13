@@ -6,4 +6,5 @@ spring:
     name: mall-fastdfs
 
 swagger:
+  title: ${spring.application.name}
   description: FastDFS 文件模块

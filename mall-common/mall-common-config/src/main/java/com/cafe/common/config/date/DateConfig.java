@@ -1,6 +1,6 @@
 package com.cafe.common.config.date;
 
-import com.cafe.common.constant.AppConstant;
+import com.cafe.common.constant.app.AppConstant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

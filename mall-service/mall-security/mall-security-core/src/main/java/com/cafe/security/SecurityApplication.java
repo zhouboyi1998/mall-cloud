@@ -1,5 +1,7 @@
 package com.cafe.security;
 
+import com.cafe.common.constant.app.AppConstant;
+import com.cafe.common.constant.app.FeignConstant;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -17,8 +19,11 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableSwagger2WebMvc
-@EnableFeignClients(basePackages = {"com.cafe.id.feign", "com.cafe.user.feign"})
-@ComponentScan(basePackages = "com.cafe")
+@EnableFeignClients(basePackages = {
+    FeignConstant.FEIGN_CLIENT_PACKAGE_ID,
+    FeignConstant.FEIGN_CLIENT_PACKAGE_USER
+})
+@ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
 public class SecurityApplication {
 
     public static void main(String[] args) {

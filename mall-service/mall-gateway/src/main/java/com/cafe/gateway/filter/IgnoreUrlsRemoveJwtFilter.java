@@ -1,8 +1,8 @@
 package com.cafe.gateway.filter;
 
-import com.cafe.common.constant.RequestConstant;
-import com.cafe.common.constant.StringConstant;
-import com.cafe.gateway.property.IgnoreUrlsProperties;
+import com.cafe.common.constant.pool.StringConstant;
+import com.cafe.common.constant.request.RequestConstant;
+import com.cafe.gateway.property.SecureProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
@@ -26,11 +26,11 @@ import java.util.List;
 @Component
 public class IgnoreUrlsRemoveJwtFilter implements WebFilter {
 
-    private final IgnoreUrlsProperties ignoreUrlsProperties;
+    private final SecureProperties secureProperties;
 
     @Autowired
-    public IgnoreUrlsRemoveJwtFilter(IgnoreUrlsProperties ignoreUrlsProperties) {
-        this.ignoreUrlsProperties = ignoreUrlsProperties;
+    public IgnoreUrlsRemoveJwtFilter(SecureProperties secureProperties) {
+        this.secureProperties = secureProperties;
     }
 
     /**
@@ -49,7 +49,7 @@ public class IgnoreUrlsRemoveJwtFilter implements WebFilter {
         // 新建 URI 路径匹配器
         PathMatcher pathMatcher = new AntPathMatcher();
         // 获取所有白名单 URL
-        List<String> ignoreUrls = ignoreUrlsProperties.getUrls();
+        List<String> ignoreUrls = secureProperties.getIgnoreUrls();
         // 遍历所有白名单 URL
         for (String ignoreUrl : ignoreUrls) {
             if (pathMatcher.match(ignoreUrl, uri.getPath())) {

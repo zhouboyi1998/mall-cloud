@@ -1,8 +1,8 @@
-package com.cafe.common.constant;
+package com.cafe.common.constant.monitor;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.constant
+ * @Package: com.cafe.common.constant.monitor
  * @Author: zhouboyi
  * @Date: 2022/5/19 17:22
  * @Description: 数据库监听相关常量

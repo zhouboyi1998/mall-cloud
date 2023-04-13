@@ -1,7 +1,7 @@
 package com.cafe.gateway.config;
 
-import com.cafe.common.constant.AuthorizationConstant;
-import com.cafe.common.constant.StringConstant;
+import com.cafe.common.constant.pool.StringConstant;
+import com.cafe.common.constant.security.AuthorizationConstant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.cors.CorsConfiguration;

@@ -1,10 +1,10 @@
 package com.cafe.common.log.aspect;
 
 import cn.hutool.json.JSONUtil;
-import com.cafe.common.constant.AppConstant;
-import com.cafe.common.constant.FieldConstant;
-import com.cafe.common.constant.NumberConstant;
-import com.cafe.common.constant.StringConstant;
+import com.cafe.common.constant.app.FieldConstant;
+import com.cafe.common.constant.app.AppConstant;
+import com.cafe.common.constant.pool.NumberConstant;
+import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.log.annotation.LogPrint;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;

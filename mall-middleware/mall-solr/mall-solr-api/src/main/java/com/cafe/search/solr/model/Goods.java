@@ -1,6 +1,6 @@
 package com.cafe.search.solr.model;
 
-import com.cafe.common.constant.SolrConstant;
+import com.cafe.common.constant.solr.SolrConstant;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;

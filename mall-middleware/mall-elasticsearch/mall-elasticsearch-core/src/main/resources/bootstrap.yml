@@ -6,4 +6,5 @@ spring:
     name: mall-elasticsearch
 
 swagger:
+  title: ${spring.application.name}
   description: ElasticSearch 搜索模块

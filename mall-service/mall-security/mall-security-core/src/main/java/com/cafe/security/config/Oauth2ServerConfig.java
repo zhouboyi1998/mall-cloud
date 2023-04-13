@@ -1,11 +1,11 @@
 package com.cafe.security.config;
 
-import com.cafe.common.constant.RedisConstant;
+import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.security.enhancer.JwtTokenEnhancer;
 import com.cafe.security.granter.CaptchaTokenGranter;
 import com.cafe.security.granter.MobileTokenGranter;
-import com.cafe.security.property.ClientConfigProperties;
-import com.cafe.security.property.ClientDetail;
+import com.cafe.security.property.ClientProperties;
+import com.cafe.security.property.ClientProperties.Detail;
 import com.cafe.security.property.RsaCredentialProperties;
 import com.cafe.security.service.UserDetailsExtensionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,9 +75,9 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     private final RsaCredentialProperties rsaCredentialProperties;
 
     /**
-     * 客户端详细信息配置
+     * 客户端配置
      */
-    private final ClientConfigProperties clientConfigProperties;
+    private final ClientProperties clientProperties;
 
     /**
      * Redis 连接工厂
@@ -96,7 +96,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         JwtTokenEnhancer jwtTokenEnhancer,
         UserDetailsExtensionService userDetailsExtensionService,
         RsaCredentialProperties rsaCredentialProperties,
-        ClientConfigProperties clientConfigProperties,
+        ClientProperties clientProperties,
         RedisConnectionFactory redisConnectionFactory,
         RedisTemplate<String, Object> redisTemplate
     ) {
@@ -105,7 +105,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         this.jwtTokenEnhancer = jwtTokenEnhancer;
         this.userDetailsExtensionService = userDetailsExtensionService;
         this.rsaCredentialProperties = rsaCredentialProperties;
-        this.clientConfigProperties = clientConfigProperties;
+        this.clientProperties = clientProperties;
         this.redisConnectionFactory = redisConnectionFactory;
         this.redisTemplate = redisTemplate;
     }
@@ -205,11 +205,11 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         // 获取所有客户端详细信息配置
-        List<ClientDetail> clientDetails = clientConfigProperties.getClientDetails();
+        List<Detail> clientDetails = clientProperties.getDetails();
         // 使用内存
         clients.inMemory();
         // 配置所有客户端的详细信息
-        for (ClientDetail clientDetail : clientDetails) {
+        for (Detail clientDetail : clientDetails) {
             clients.and()
                 // 客户端id
                 .withClient(clientDetail.getClientId())

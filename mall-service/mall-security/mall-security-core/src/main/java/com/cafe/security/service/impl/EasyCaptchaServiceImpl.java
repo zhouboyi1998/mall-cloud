@@ -1,8 +1,8 @@
 package com.cafe.security.service.impl;
 
-import com.cafe.common.constant.CaptchaConstant;
-import com.cafe.common.constant.NumberConstant;
-import com.cafe.common.constant.RedisConstant;
+import com.cafe.common.constant.captcha.CaptchaConstant;
+import com.cafe.common.constant.pool.NumberConstant;
+import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.id.feign.IDFeign;
 import com.cafe.security.model.Captcha;
 import com.cafe.security.service.CaptchaService;
