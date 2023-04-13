@@ -1,7 +1,7 @@
 package com.cafe.gateway.authorization;
 
 import cn.hutool.json.JSONUtil;
-import com.cafe.common.constant.RequestConstant;
+import com.cafe.common.constant.request.RequestConstant;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

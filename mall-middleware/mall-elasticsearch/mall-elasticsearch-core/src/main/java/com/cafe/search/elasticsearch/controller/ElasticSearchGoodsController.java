@@ -1,7 +1,7 @@
 package com.cafe.search.elasticsearch.controller;
 
+import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.constant.ElasticSearchConstant;
 import com.cafe.search.elasticsearch.model.Goods;
 import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import io.swagger.annotations.Api;

@@ -1,6 +1,5 @@
 package com.cafe.common.swagger.property;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -9,29 +8,28 @@ import org.springframework.stereotype.Component;
  * @Package: com.cafe.common.swagger.property
  * @Author: zhouboyi
  * @Date: 2022/9/23 16:28
- * @Description:
+ * @Description: Swagger 配置
  */
 @Component
 @ConfigurationProperties(prefix = "swagger")
 public class SwaggerProperties {
 
     /**
-     * 微服务名称
+     * 文档标题
      */
-    @Value(value = "${spring.application.name}")
-    private String applicationName;
+    private String title;
 
     /**
-     * 微服务描述 (默认值: Microservice)
+     * 文档描述
      */
-    private String description = "Microservice";
+    private String description;
 
-    public String getApplicationName() {
-        return applicationName;
+    public String getTitle() {
+        return title;
     }
 
-    public void setApplicationName(String applicationName) {
-        this.applicationName = applicationName;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getDescription() {

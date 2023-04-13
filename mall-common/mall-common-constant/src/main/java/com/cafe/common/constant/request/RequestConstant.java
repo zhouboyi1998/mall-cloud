@@ -1,8 +1,8 @@
-package com.cafe.common.constant;
+package com.cafe.common.constant.request;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.constant
+ * @Package: com.cafe.common.constant.request
  * @Author: zhouboyi
  * @Date: 2022/11/23 14:57
  * @Description: HTTP 请求相关常量

@@ -1,6 +1,6 @@
 package com.cafe.security.service.impl;
 
-import com.cafe.common.constant.RequestConstant;
+import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.security.service.OauthService;
 import com.cafe.security.model.TokenDetails;
 import org.springframework.beans.factory.annotation.Autowired;

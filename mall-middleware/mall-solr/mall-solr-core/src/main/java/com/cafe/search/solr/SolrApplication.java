@@ -1,5 +1,6 @@
 package com.cafe.search.solr;
 
+import com.cafe.common.constant.app.AppConstant;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -16,7 +17,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableSwagger2WebMvc
-@ComponentScan(basePackages = "com.cafe")
+@ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
 public class SolrApplication {
 
     public static void main(String[] args) {

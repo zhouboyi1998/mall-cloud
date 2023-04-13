@@ -1,6 +1,6 @@
 package com.cafe.security.config;
 
-import com.cafe.common.constant.AuthorizationConstant;
+import com.cafe.common.constant.security.AuthorizationConstant;
 import com.cafe.security.provider.MobilePasswordAuthenticationProvider;
 import com.cafe.security.provider.UsernamePasswordAuthenticationProvider;
 import com.cafe.security.service.UserDetailsExtensionService;

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * @Package: com.cafe.id.property
  * @Author: zhouboyi
  * @Date: 2022/11/1 9:26
- * @Description:
+ * @Description: Snowflake 雪花算法配置
  */
 @Component
 @ConfigurationProperties(prefix = "snowflake")

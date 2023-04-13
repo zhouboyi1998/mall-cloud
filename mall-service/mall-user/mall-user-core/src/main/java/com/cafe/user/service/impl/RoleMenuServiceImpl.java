@@ -1,12 +1,12 @@
 package com.cafe.user.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cafe.common.constant.redis.RedisConstant;
+import com.cafe.common.constant.security.AuthorizationConstant;
 import com.cafe.user.bo.MenuRoleBO;
 import com.cafe.user.mapper.RoleMenuMapper;
 import com.cafe.user.model.RoleMenu;
 import com.cafe.user.service.RoleMenuService;
-import com.cafe.common.constant.AuthorizationConstant;
-import com.cafe.common.constant.RedisConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;

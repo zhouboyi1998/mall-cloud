@@ -1,8 +1,8 @@
 package com.cafe.user.message;
 
 import cn.hutool.json.JSONUtil;
-import com.cafe.common.constant.BooleanConstant;
-import com.cafe.common.constant.MonitorConstant;
+import com.cafe.common.constant.monitor.MonitorConstant;
+import com.cafe.common.constant.pool.BooleanConstant;
 import com.cafe.common.constant.rabbitmq.RabbitMQExchange;
 import com.cafe.common.constant.rabbitmq.RabbitMQQueue;
 import com.cafe.common.constant.rabbitmq.RabbitMQRoutingKey;

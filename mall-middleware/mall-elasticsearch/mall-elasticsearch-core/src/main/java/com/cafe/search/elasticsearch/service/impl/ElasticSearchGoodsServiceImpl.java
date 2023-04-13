@@ -2,7 +2,7 @@ package com.cafe.search.elasticsearch.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.json.JSONUtil;
-import com.cafe.common.constant.ElasticSearchConstant;
+import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
 import com.cafe.search.elasticsearch.model.Goods;
 import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.elasticsearch.action.bulk.BulkRequest;

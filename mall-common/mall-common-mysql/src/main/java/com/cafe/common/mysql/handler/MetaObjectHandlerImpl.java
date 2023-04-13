@@ -1,7 +1,7 @@
 package com.cafe.common.mysql.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.cafe.common.constant.FieldConstant;
+import com.cafe.common.constant.app.FieldConstant;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

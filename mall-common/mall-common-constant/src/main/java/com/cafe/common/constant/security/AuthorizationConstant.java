@@ -1,8 +1,8 @@
-package com.cafe.common.constant;
+package com.cafe.common.constant.security;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.constant
+ * @Package: com.cafe.common.constant.security
  * @Author: zhouboyi
  * @Date: 2022/5/10 23:14
  * @Description: 权限相关常量

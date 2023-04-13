@@ -6,4 +6,5 @@ spring:
     name: mall-security
 
 swagger:
+  title: ${spring.application.name}
   description: SpringSecurity 安全模块

@@ -1,5 +1,7 @@
 package com.cafe.common.swagger.config;
 
+import com.cafe.common.constant.app.AppConstant;
+import com.cafe.common.constant.swagger.SwaggerConstant;
 import com.cafe.common.swagger.property.SwaggerProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -21,7 +23,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
  * @Date: 2022/5/3 23:12
  * @Description: Swagger 配置类
  */
-@Profile({"dev", "test"})
+@Profile({AppConstant.DEV, AppConstant.TEST})
 @Configuration
 @EnableSwagger2WebMvc
 public class SwaggerConfig {
@@ -38,20 +40,20 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
             .apiInfo(apiInfo())
             .select()
-            .apis(RequestHandlerSelectors.basePackage("com.cafe"))
+            .apis(RequestHandlerSelectors.basePackage(AppConstant.DEFAULT_PACKAGE))
             .paths(PathSelectors.any())
             .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title(swaggerProperties.getApplicationName())
+            .title(swaggerProperties.getTitle())
             .description(swaggerProperties.getDescription())
-            .contact(new Contact("zhouboyi", "https://github.com/zhouboyi1998", "1144188685@qq.com"))
-            .termsOfServiceUrl("https://github.com/zhouboyi1998/mall-cloud")
-            .version("version 1.0")
-            .license("MIT")
-            .licenseUrl("https://opensource.org/licenses/MIT")
+            .contact(new Contact(SwaggerConstant.CONTACT_NAME, SwaggerConstant.CONTACT_URL, SwaggerConstant.CONTACT_EMAIL))
+            .termsOfServiceUrl(SwaggerConstant.TERMS_OF_SERVICE_URL)
+            .version(SwaggerConstant.VERSION)
+            .license(SwaggerConstant.LICENCE)
+            .licenseUrl(SwaggerConstant.LICENCE_URL)
             .build();
     }
 }
