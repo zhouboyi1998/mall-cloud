@@ -43,4 +43,14 @@ public class StringConstant {
      * 冒号
      */
     public static final String COLON = ":";
+
+    /**
+     * 连字符
+     */
+    public static final String HYPHEN = "-";
+
+    /**
+     * 百分号
+     */
+    public static final String PERCENT = "%";
 }
