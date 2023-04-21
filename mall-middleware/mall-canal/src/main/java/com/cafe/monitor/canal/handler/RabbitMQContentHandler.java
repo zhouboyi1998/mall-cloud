@@ -40,15 +40,13 @@ public class RabbitMQContentHandler {
 
     public void handle(String tableName, List<CanalEntry.RowData> rowDataList, CanalEntry.EventType eventType) {
         // 组装消息
-        Map<String, Object> content = messageContentHandler.handle(tableName, rowDataList, eventType);
-
+        Map<String, Object> content = messageContentHandler.handle(rowDataList, eventType);
         // 发送消息到 RabbitMQ
         rabbitMQProducer.convertAndSend(
             RabbitMQExchange.CANAL,
             RabbitMQRoutingKeyMap.ROUTING_KEY_MAP.get(RabbitMQExchange.CANAL, tableName),
             content
         );
-
         // 打印日志
         LOGGER.info("RabbitMQContentHandler.handle(): Send RabbitMQ Message -> {}", JSONUtil.toJsonStr(content));
     }

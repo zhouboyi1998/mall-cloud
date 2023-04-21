@@ -15,7 +15,7 @@ import java.util.List;
  * @Package: com.cafe.monitor.canal.handler
  * @Author: zhouboyi
  * @Date: 2022/7/14 0:12
- * @Description: 消息内容处理器
+ * @Description: Canal 处理器入口
  */
 @Component
 public class CanalEntryHandler {

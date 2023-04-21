@@ -22,7 +22,9 @@
 <img src="https://img.shields.io/badge/FastDFS-1.27.0.0-darkorange">
 <img src="https://img.shields.io/badge/RabbitMQ-3.6.5-orange">
 <img src="https://img.shields.io/badge/RocketMQ-4.9.3-darkorange">
+<img src="https://img.shields.io/badge/MySQL Binlog Connector-0.21.0-royalblue">
 <img src="https://img.shields.io/badge/Canal-1.1.5-darkorange">
+<img src="https://img.shields.io/badge/Debezium-1.5.4.Final-mediumspringgreen">
 </p>
 
 ### 📖 语言
@@ -53,8 +55,9 @@
     |-- mall-common-swagger (Swagger API 文档公共包)
 
 |-- mall-middleware (中间件模块)
-    |-- mall-binlog (Binlog 数据库监听器)
+    |-- mall-binlog (MySQL Binlog Connector 数据库监听器)
     |-- mall-canal (Canal 数据库监听器)
+    |-- mall-debezium (Debezium 数据库监听器)
     |-- mall-elasticsearch (ElasticSearch 搜索引擎)
     |-- mall-fastdfs (FastDFS 分布式文件存储)
     |-- mall-minio (MinIO 分布式文件存储)

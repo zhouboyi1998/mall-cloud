@@ -19,6 +19,7 @@
     <modules>
         <module>mall-binlog</module>
         <module>mall-canal</module>
+        <module>mall-debezium</module>
         <module>mall-elasticsearch</module>
         <module>mall-fastdfs</module>
         <module>mall-minio</module>
