@@ -17,12 +17,11 @@
     <description>Canal 数据库监听器</description>
 
     <dependencies>
-        <!-- Canal 客户端 -->
+        <!-- Canal 数据库监听器 -->
         <dependency>
             <groupId>com.alibaba.otter</groupId>
             <artifactId>canal.client</artifactId>
         </dependency>
-        <!-- Canal 协议包 -->
         <dependency>
             <groupId>com.alibaba.otter</groupId>
             <artifactId>canal.protocol</artifactId>
@@ -34,19 +33,15 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-common-rabbitmq</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-rocketmq</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-user-api</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-goods-api</artifactId>
         </dependency>
     </dependencies>
 

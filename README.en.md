@@ -22,7 +22,9 @@
 <img src="https://img.shields.io/badge/FastDFS-1.27.0.0-darkorange">
 <img src="https://img.shields.io/badge/RabbitMQ-3.6.5-orange">
 <img src="https://img.shields.io/badge/RocketMQ-4.9.3-darkorange">
+<img src="https://img.shields.io/badge/MySQL Binlog Connector-0.21.0-royalblue">
 <img src="https://img.shields.io/badge/Canal-1.1.5-darkorange">
+<img src="https://img.shields.io/badge/Debezium-1.5.4.Final-mediumspringgreen">
 </p>
 
 ### 📖 Language

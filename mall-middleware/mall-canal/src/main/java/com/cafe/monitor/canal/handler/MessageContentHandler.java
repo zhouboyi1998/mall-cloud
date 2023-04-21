@@ -19,7 +19,7 @@ import java.util.Map;
 @Component
 public class MessageContentHandler {
 
-    public Map<String, Object> handle(String tableName, List<CanalEntry.RowData> rowDataList, CanalEntry.EventType eventType) {
+    public Map<String, Object> handle(List<CanalEntry.RowData> rowDataList, CanalEntry.EventType eventType) {
         // 分别存储所有更新前数据和更新后数据
         List<Map<String, Object>> beforeDataList = new ArrayList<>();
         List<Map<String, Object>> afterDataList = new ArrayList<>();

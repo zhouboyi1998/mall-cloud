@@ -38,4 +38,9 @@ public class MonitorConstant {
      * 监听到的更新后数据
      */
     public static final String AFTER_DATA = "after_data";
+
+    /**
+     * 监听到的数据来源
+     */
+    public static final String SOURCE = "source";
 }

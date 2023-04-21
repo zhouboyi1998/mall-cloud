@@ -1,13 +1,11 @@
 package com.cafe.monitor.canal;
 
 import com.cafe.common.constant.app.AppConstant;
-import com.cafe.common.constant.app.FeignConstant;
 import com.cafe.common.constant.pool.BooleanConstant;
 import com.cafe.common.constant.rocketmq.RocketMQConstant;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -18,7 +16,6 @@ import org.springframework.context.annotation.ComponentScan;
  * @Description:
  */
 @SpringBootApplication
-@EnableFeignClients(basePackages = FeignConstant.FEIGN_CLIENT_PACKAGE_ID)
 @ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
 public class CanalApplication {
 

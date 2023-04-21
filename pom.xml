@@ -31,6 +31,8 @@
         <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.7.RELEASE</spring-cloud-alibaba.version>
+        <!-- Nacos 2.x 需要依赖低版本的 Reflections, 覆盖 Debezium 提供的高版本 -->
+        <reflections.version>0.9.11</reflections.version>
         <hutool.version>5.4.0</hutool.version>
         <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <mysql-connector.version>8.0.19</mysql-connector.version>
@@ -41,15 +43,15 @@
         <velocity.version>2.3</velocity.version>
         <jjwt.version>0.9.0</jjwt.version>
         <nimbus-jose-jwt.version>8.16</nimbus-jose-jwt.version>
-        <bcprov-jdk15on.version>1.64</bcprov-jdk15on.version>
-        <bcpkix-jdk15on.version>1.64</bcpkix-jdk15on.version>
+        <bouncy-castle.version>1.64</bouncy-castle.version>
         <rocketmq-starter.version>2.2.2</rocketmq-starter.version>
         <fastdfs.version>1.27.0.0</fastdfs.version>
         <minio.version>8.3.4</minio.version>
-        <!-- 覆盖 Spring Boot 自带的低版本 OK HTTP3, MinIO 需要使用高版本的 -->
-        <squareup-okhttp3.version>4.9.3</squareup-okhttp3.version>
+        <!-- MinIO 需要依赖高版本的 OK HTTP3, 覆盖 Spring Boot 提供的低版本 -->
+        <okhttp3.version>4.9.3</okhttp3.version>
         <mysql-binlog-connector.version>0.21.0</mysql-binlog-connector.version>
         <canal.version>1.1.5</canal.version>
+        <debezium.version>1.5.4.Final</debezium.version>
         <tomcat-embed.version>9.0.46</tomcat-embed.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <kaptcha-starter.version>1.1.0</kaptcha-starter.version>
@@ -78,6 +80,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
         </dependency>
+        <!-- SpringBoot 校验包 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -97,6 +104,12 @@
                 <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <!-- Reflections 反射框架 -->
+            <dependency>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.version}</version>
             </dependency>
             <!-- Hutool 工具包 -->
             <dependency>
@@ -162,12 +175,12 @@
             <dependency>
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcprov-jdk15on</artifactId>
-                <version>${bcprov-jdk15on.version}</version>
+                <version>${bouncy-castle.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.bouncycastle</groupId>
                 <artifactId>bcpkix-jdk15on</artifactId>
-                <version>${bcpkix-jdk15on.version}</version>
+                <version>${bouncy-castle.version}</version>
             </dependency>
             <!-- RocketMQ Starter -->
             <dependency>
@@ -191,25 +204,40 @@
             <dependency>
                 <groupId>com.squareup.okhttp3</groupId>
                 <artifactId>okhttp</artifactId>
-                <version>${squareup-okhttp3.version}</version>
+                <version>${okhttp3.version}</version>
             </dependency>
-            <!-- Binlog MySQL 数据库监听 -->
+            <!-- MySQL Binlog Connector 数据库监听器 -->
             <dependency>
                 <groupId>com.github.shyiko</groupId>
                 <artifactId>mysql-binlog-connector-java</artifactId>
                 <version>${mysql-binlog-connector.version}</version>
             </dependency>
-            <!-- Canal 客户端 -->
+            <!-- Canal 数据库监听器 -->
             <dependency>
                 <groupId>com.alibaba.otter</groupId>
                 <artifactId>canal.client</artifactId>
                 <version>${canal.version}</version>
             </dependency>
-            <!-- Canal 协议包 -->
             <dependency>
                 <groupId>com.alibaba.otter</groupId>
                 <artifactId>canal.protocol</artifactId>
                 <version>${canal.version}</version>
+            </dependency>
+            <!-- Debezium 数据库监听器 -->
+            <dependency>
+                <groupId>io.debezium</groupId>
+                <artifactId>debezium-embedded</artifactId>
+                <version>${debezium.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.debezium</groupId>
+                <artifactId>debezium-api</artifactId>
+                <version>${debezium.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.debezium</groupId>
+                <artifactId>debezium-connector-mysql</artifactId>
+                <version>${debezium.version}</version>
             </dependency>
             <!-- Tomcat embed 相关依赖 -->
             <dependency>
