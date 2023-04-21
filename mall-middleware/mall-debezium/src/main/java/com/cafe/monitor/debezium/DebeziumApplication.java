@@ -1,27 +1,24 @@
-package com.cafe.monitor.binlog;
+package com.cafe.monitor.debezium;
 
 import com.cafe.common.constant.app.AppConstant;
-import com.cafe.common.constant.app.FeignConstant;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.monitor.binlog
+ * @Package: com.cafe.monitor.debezium
  * @Author: zhouboyi
- * @Date: 2022/5/16 15:06
+ * @Date: 2023/4/21 16:18
  * @Description:
  */
 @SpringBootApplication
-@EnableFeignClients(basePackages = FeignConstant.FEIGN_CLIENT_PACKAGE_ID)
 @ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
-public class BinlogApplication {
+public class DebeziumApplication {
 
     public static void main(String[] args) {
-        new SpringApplicationBuilder(BinlogApplication.class)
+        new SpringApplicationBuilder(DebeziumApplication.class)
             .web(WebApplicationType.NONE)
             .run(args);
     }

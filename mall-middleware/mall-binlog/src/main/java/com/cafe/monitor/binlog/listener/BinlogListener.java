@@ -73,10 +73,7 @@ public class BinlogListener implements CommandLineRunner {
                 if (eventData instanceof TableMapEventData) {
                     TableMapEventData tableMapEventData = (TableMapEventData) eventData;
                     // 维护 TableId 和 TableName 的对应关系
-                    tableMap.put(
-                        tableMapEventData.getTableId(),
-                        tableMapEventData.getDatabase() + "." + tableMapEventData.getTable()
-                    );
+                    tableMap.put(tableMapEventData.getTableId(), tableMapEventData.getDatabase() + "." + tableMapEventData.getTable());
                 }
                 // 监听 update 操作
                 if (eventData instanceof UpdateRowsEventData) {
@@ -98,10 +95,7 @@ public class BinlogListener implements CommandLineRunner {
                             afterRowList.add(row.getValue());
                         }
                         // 将数据交给消息内容处理器
-                        messageContentHandler.handle(
-                            beforeRowList, afterRowList,
-                            tableName, MonitorConstant.UPDATE
-                        );
+                        messageContentHandler.handle(beforeRowList, afterRowList, tableName, MonitorConstant.UPDATE);
                     }
                 }
                 // 监听 insert 操作
@@ -115,10 +109,7 @@ public class BinlogListener implements CommandLineRunner {
                         // 打印日志
                         LOGGER.info("BinlogListener.run(): Insert Operation TableName -> {}", tableName);
                         // 将监听到的新增数据交给消息内容处理器
-                        messageContentHandler.handle(
-                            Collections.emptyList(), writeRowsEventData.getRows(),
-                            tableName, MonitorConstant.INSERT
-                        );
+                        messageContentHandler.handle(Collections.emptyList(), writeRowsEventData.getRows(), tableName, MonitorConstant.INSERT);
                     }
                 }
                 // 监听 delete 操作
@@ -132,10 +123,7 @@ public class BinlogListener implements CommandLineRunner {
                         // 打印日志
                         LOGGER.info("BinlogListener.run(): Delete Operation TableName -> {}", tableName);
                         // 将监听到的删除数据交给消息内容处理器
-                        messageContentHandler.handle(
-                            deleteRowsEventData.getRows(), Collections.emptyList(),
-                            tableName, MonitorConstant.DELETE
-                        );
+                        messageContentHandler.handle(deleteRowsEventData.getRows(), Collections.emptyList(), tableName, MonitorConstant.DELETE);
                     }
                 }
             }

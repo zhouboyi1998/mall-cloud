@@ -6,7 +6,7 @@ import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.rabbitmq.RabbitMQExchange;
 import com.cafe.common.constant.rabbitmq.RabbitMQRoutingKeyMap;
 import com.cafe.common.message.rabbitmq.producer.RabbitMQProducer;
-import com.cafe.monitor.binlog.bean.TableBeanMap;
+import com.cafe.user.relation.UserRelation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -76,7 +76,7 @@ public class MessageContentHandler {
         // 存储列名的字符串集合
         List<String> fieldNameList = new ArrayList<>();
         // 根据表名获取对应的 JavaBean 属性数组
-        Field[] fields = TableBeanMap.TABLE_BEAN_MAP.get(tableName).getDeclaredFields();
+        Field[] fields = UserRelation.TABLE_MODEL_MAP.get(tableName).getDeclaredFields();
         for (Field field : fields) {
             // 获取列名的最后一段 (去除列名的修饰符、类名前缀)
             fieldNameList.add(field.toString().substring(field.toString().lastIndexOf(StringConstant.POINT) + 1));

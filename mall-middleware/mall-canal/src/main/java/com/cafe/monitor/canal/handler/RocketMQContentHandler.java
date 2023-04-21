@@ -40,11 +40,9 @@ public class RocketMQContentHandler {
 
     public void handle(String tableName, List<CanalEntry.RowData> rowDataList, CanalEntry.EventType eventType) {
         // 组装消息
-        Map<String, Object> content = messageContentHandler.handle(tableName, rowDataList, eventType);
-
+        Map<String, Object> content = messageContentHandler.handle(rowDataList, eventType);
         // 发送消息到 RocketMQ
         rocketMQTemplate.convertAndSend(RocketMQTopicMap.TOPIC_MAP.get(RocketMQProducer.CANAL, tableName), content);
-
         // 打印日志
         LOGGER.info("RocketMQContentHandler.handle(): Send RocketMQ Message -> {}", JSONUtil.toJsonStr(content));
     }

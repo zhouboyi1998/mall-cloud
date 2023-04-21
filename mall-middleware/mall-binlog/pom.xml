@@ -14,10 +14,10 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>Binlog 数据库监听器</description>
+    <description>MySQL Binlog Connector 数据库监听器</description>
 
     <dependencies>
-        <!-- Binlog MySQL 数据库监听 -->
+        <!-- MySQL Binlog Connector 数据库监听器 -->
         <dependency>
             <groupId>com.github.shyiko</groupId>
             <artifactId>mysql-binlog-connector-java</artifactId>
