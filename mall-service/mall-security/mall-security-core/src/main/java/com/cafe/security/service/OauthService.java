@@ -23,5 +23,5 @@ public interface OauthService {
      * @return
      * @throws HttpRequestMethodNotSupportedException
      */
-    TokenDetails postAccessToken(Principal principal, Map<String, String> parameters) throws HttpRequestMethodNotSupportedException;
+    TokenDetails token(Principal principal, Map<String, String> parameters) throws HttpRequestMethodNotSupportedException;
 }
