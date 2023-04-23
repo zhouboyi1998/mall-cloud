@@ -54,8 +54,8 @@ public class OauthController {
         @ApiImplicitParam(value = "刷新令牌", name = "refresh_token", dataType = "String", paramType = "form")
     })
     @PostMapping(value = "/token")
-    public ResponseEntity<TokenDetails> postAccessToken(Principal principal, @RequestParam Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
-        TokenDetails tokenDetails = oauthService.postAccessToken(principal, parameters);
+    public ResponseEntity<TokenDetails> token(Principal principal, @RequestParam Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
+        TokenDetails tokenDetails = oauthService.token(principal, parameters);
         return ResponseEntity.ok(tokenDetails);
     }
 }
