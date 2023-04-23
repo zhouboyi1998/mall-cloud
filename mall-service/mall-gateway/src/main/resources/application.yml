@@ -82,8 +82,8 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          # 获取 RSA 公钥 (不要直接配置成安全模块的地址, 因为只能配置单个地址, 而安全模块会启动多个; 配置网关本身的地址, 使用网关转发请求)
-          jwk-set-uri: http://127.0.0.1:${server.port}/security/key-pair/rsa/public-key
+          # 获取 RSA 公钥
+          jwk-set-uri: http://127.0.0.1:${server.port}/security/keypair/rsa
 
 # 安全配置
 secure:
