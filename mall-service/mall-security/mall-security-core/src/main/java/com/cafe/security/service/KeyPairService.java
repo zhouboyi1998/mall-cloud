@@ -16,5 +16,5 @@ public interface KeyPairService {
      *
      * @return
      */
-    Map<String, Object> selectRsaPublicKey();
+    Map<String, Object> rsa();
 }

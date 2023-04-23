@@ -23,6 +23,9 @@ import java.util.Optional;
 @Service
 public class OauthServiceImpl implements OauthService {
 
+    /**
+     * 令牌端点 (获取令牌的入口)
+     */
     private final TokenEndpoint tokenEndpoint;
 
     @Autowired
@@ -31,7 +34,7 @@ public class OauthServiceImpl implements OauthService {
     }
 
     @Override
-    public TokenDetails postAccessToken(Principal principal, Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
+    public TokenDetails token(Principal principal, Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
         // 使用 TokenEndpoint 生成访问令牌
         OAuth2AccessToken oAuth2AccessToken = Optional.ofNullable(tokenEndpoint.postAccessToken(principal, parameters).getBody())
             .orElseThrow(NullPointerException::new);

@@ -19,7 +19,7 @@ import java.util.Map;
  * @Description: 密钥对接口
  */
 @RestController
-@RequestMapping(value = "/key-pair")
+@RequestMapping(value = "/keypair")
 public class KeyPairController {
 
     private final KeyPairService keyPairService;
@@ -31,9 +31,9 @@ public class KeyPairController {
 
     @LogPrint(value = "获取 RSA 公钥")
     @ApiOperation(value = "获取 RSA 公钥")
-    @GetMapping(value = "/rsa/public-key")
-    public ResponseEntity<Map<String, Object>> selectRsaPublicKey() {
-        Map<String, Object> map = keyPairService.selectRsaPublicKey();
-        return ResponseEntity.ok(map);
+    @GetMapping(value = "/rsa")
+    public ResponseEntity<Map<String, Object>> rsa() {
+        Map<String, Object> key = keyPairService.rsa();
+        return ResponseEntity.ok(key);
     }
 }

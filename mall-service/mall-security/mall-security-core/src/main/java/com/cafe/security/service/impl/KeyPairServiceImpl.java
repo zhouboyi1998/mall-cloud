@@ -20,6 +20,9 @@ import java.util.Map;
 @Service
 public class KeyPairServiceImpl implements KeyPairService {
 
+    /**
+     * 密钥对工具
+     */
     private final KeyPair keyPair;
 
     @Autowired
@@ -28,7 +31,7 @@ public class KeyPairServiceImpl implements KeyPairService {
     }
 
     @Override
-    public Map<String, Object> selectRsaPublicKey() {
+    public Map<String, Object> rsa() {
         // 从证书中获取 RSA 公钥
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
         // 使用 RSA 公钥生成 Nimbus JOSE + JWT 提供的 RSA 密钥对 (密钥中只存储公钥)
