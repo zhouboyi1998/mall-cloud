@@ -23,10 +23,10 @@ import java.util.Map;
  * @Package: com.cafe.search.elasticsearch.message
  * @Author: zhouboyi
  * @Date: 2022/11/3 15:24
- * @Description:
+ * @Description: RocketMQ 商品消息消费者
  */
 @Component
-@RocketMQMessageListener(consumerGroup = RocketMQConsumerGroup.GROUP_GOODS, topic = RocketMQTopic.CANAL_TO_ES_GOODS)
+@RocketMQMessageListener(consumerGroup = RocketMQConsumerGroup.GROUP_GOODS, topic = RocketMQTopic.CANAL_SEND_GOODS_TO_ELASTICSEARCH)
 public class RocketMQGoodsConsumer implements RocketMQListener<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RocketMQGoodsConsumer.class);

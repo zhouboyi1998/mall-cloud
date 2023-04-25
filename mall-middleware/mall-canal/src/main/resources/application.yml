@@ -9,7 +9,6 @@ spring:
 canal:
   # 以下表的数据变更发送到 RabbitMQ
   rabbit-table:
-    - mall_user.mall_role
     - mall_user.mall_role_menu
   # 以下表的数据变更发送到 RocketMQ
   rocket-table:

@@ -1,9 +1,10 @@
 package com.cafe.search.elasticsearch.config;
 
+import com.cafe.search.elasticsearch.property.ElasticSearchProperties;
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,19 +13,21 @@ import org.springframework.context.annotation.Configuration;
  * @Package: com.cafe.search.elasticsearch.config
  * @Author: zhouboyi
  * @Date: 2022/7/27 10:55
- * @Description:
+ * @Description: ElasticSearch 配置类
  */
 @Configuration
 public class ElasticSearchConfig {
 
-    @Value(value = "${elastic-search.host}")
-    private String host;
+    private final ElasticSearchProperties elasticSearchProperties;
 
-    @Value(value = "${elastic-search.port}")
-    private Integer port;
+    @Autowired
+    public ElasticSearchConfig(ElasticSearchProperties elasticSearchProperties) {
+        this.elasticSearchProperties = elasticSearchProperties;
+    }
 
     @Bean
     public RestHighLevelClient restHighLevelClient() {
-        return new RestHighLevelClient(RestClient.builder(new HttpHost(host, port, "http")));
+        HttpHost httpHost = new HttpHost(elasticSearchProperties.getHost(), elasticSearchProperties.getPort(), elasticSearchProperties.getSchema());
+        return new RestHighLevelClient(RestClient.builder(httpHost));
     }
 }

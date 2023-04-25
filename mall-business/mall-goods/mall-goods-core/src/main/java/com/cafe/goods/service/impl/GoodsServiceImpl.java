@@ -4,10 +4,10 @@ import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.app.StatusConstant;
 import com.cafe.common.constant.rocketmq.RocketMQTopic;
+import com.cafe.common.message.rocketmq.producer.RocketMQProducer;
 import com.cafe.goods.bo.Goods;
 import com.cafe.goods.mapper.GoodsMapper;
 import com.cafe.goods.service.GoodsService;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +31,12 @@ public class GoodsServiceImpl implements GoodsService {
 
     private final GoodsMapper goodsMapper;
 
-    private final RocketMQTemplate rocketMQTemplate;
+    private final RocketMQProducer rocketMQProducer;
 
     @Autowired
-    public GoodsServiceImpl(GoodsMapper goodsMapper, RocketMQTemplate rocketMQTemplate) {
+    public GoodsServiceImpl(GoodsMapper goodsMapper, RocketMQProducer rocketMQProducer) {
         this.goodsMapper = goodsMapper;
-        this.rocketMQTemplate = rocketMQTemplate;
+        this.rocketMQProducer = rocketMQProducer;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class GoodsServiceImpl implements GoodsService {
         }
 
         // 发送消息到 RocketMQ, 通知 ElasticSearch 上下架商品
-        rocketMQTemplate.convertAndSend(RocketMQTopic.CANAL_TO_ES_GOODS, content);
+        rocketMQProducer.convertAndSend(RocketMQTopic.CANAL_SEND_GOODS_TO_ELASTICSEARCH, content);
         // 打印日志
         LOGGER.info("GoodsServiceImpl.launch(): Send RocketMQ Message -> {}", JSONUtil.toJsonStr(content));
     }

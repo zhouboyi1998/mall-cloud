@@ -8,7 +8,6 @@ spring:
 # MySQL Binlog Connector 数据库监听配置 (监听表配置)
 binlog:
   table:
-    - mall_user.mall_role
     - mall_user.mall_role_menu
 
 # LogBack 配置
