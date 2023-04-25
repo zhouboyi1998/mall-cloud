@@ -1,12 +1,9 @@
 package com.cafe.monitor.canal.handler;
 
-import cn.hutool.json.JSONUtil;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.cafe.common.constant.rabbitmq.RabbitMQExchange;
+import com.cafe.common.constant.rabbitmq.RabbitMQRoutingKey;
 import com.cafe.common.message.rabbitmq.producer.RabbitMQProducer;
-import com.cafe.common.constant.rabbitmq.RabbitMQRoutingKeyMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,8 +19,6 @@ import java.util.Map;
  */
 @Component
 public class RabbitMQContentHandler {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQContentHandler.class);
 
     private final MessageContentHandler messageContentHandler;
 
@@ -42,12 +37,7 @@ public class RabbitMQContentHandler {
         // 组装消息
         Map<String, Object> content = messageContentHandler.handle(rowDataList, eventType);
         // 发送消息到 RabbitMQ
-        rabbitMQProducer.convertAndSend(
-            RabbitMQExchange.CANAL,
-            RabbitMQRoutingKeyMap.ROUTING_KEY_MAP.get(RabbitMQExchange.CANAL, tableName),
-            content
-        );
-        // 打印日志
-        LOGGER.info("RabbitMQContentHandler.handle(): Send RabbitMQ Message -> {}", JSONUtil.toJsonStr(content));
+        String routingKey = RabbitMQRoutingKey.ROUTING_KEY_MAP.get(RabbitMQExchange.CANAL, tableName);
+        rabbitMQProducer.convertAndSend(RabbitMQExchange.CANAL, routingKey, content);
     }
 }

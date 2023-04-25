@@ -10,11 +10,6 @@ package com.cafe.common.constant.rabbitmq;
 public class RabbitMQQueue {
 
     /**
-     * 角色表使用的队列
-     */
-    public static final String ROLE = "role";
-
-    /**
      * 角色-菜单表使用的队列
      */
     public static final String ROLE_MENU = "role-menu";

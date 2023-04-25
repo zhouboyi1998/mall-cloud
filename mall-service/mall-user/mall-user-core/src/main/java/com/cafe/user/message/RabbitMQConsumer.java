@@ -46,12 +46,12 @@ public class RabbitMQConsumer {
         @RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = RabbitMQQueue.ROLE_MENU, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
             exchange = @Exchange(value = RabbitMQExchange.BINLOG),
-            key = {RabbitMQRoutingKey.BINLOG_TO_ROLE_MENU}
+            key = {RabbitMQRoutingKey.BINLOG_SEND_ROLE_MENU}
         )),
         @RabbitListener(bindings = @QueueBinding(
             value = @Queue(value = RabbitMQQueue.ROLE_MENU, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
             exchange = @Exchange(value = RabbitMQExchange.CANAL),
-            key = {RabbitMQRoutingKey.CANAL_TO_ROLE_MENU}
+            key = {RabbitMQRoutingKey.CANAL_SEND_ROLE_MENU}
         ))
     })
     public void listenerRoleMenuQueue(String message) {
