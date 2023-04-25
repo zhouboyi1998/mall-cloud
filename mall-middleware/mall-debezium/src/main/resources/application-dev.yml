@@ -11,4 +11,4 @@ debezium:
     # 密码
     password: 123456
     # 监听的数据库
-    database: mall_user
+    database: mall_order

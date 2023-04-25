@@ -282,6 +282,11 @@
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
+                <artifactId>mall-common-kafka</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-common-log</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
