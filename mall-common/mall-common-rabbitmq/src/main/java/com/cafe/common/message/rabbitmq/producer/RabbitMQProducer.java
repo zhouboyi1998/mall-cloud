@@ -39,6 +39,6 @@ public class RabbitMQProducer {
         // 打印日志
         LOGGER.info("RabbitMQProducer.convertAndSend(): message -> {}", message);
         // 发送消息到 RabbitMQ
-        rabbitTemplate.convertAndSend(exchange, routingKey, JSONUtil.toJsonStr(message));
+        rabbitTemplate.convertAndSend(exchange, routingKey, message);
     }
 }

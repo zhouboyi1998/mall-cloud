@@ -1,5 +1,8 @@
 package com.cafe.common.constant.rabbitmq;
 
+import com.cafe.common.constant.mysql.TableConstant;
+import org.apache.commons.collections4.map.MultiKeyMap;
+
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.common.constant.rabbitmq
@@ -10,22 +13,22 @@ package com.cafe.common.constant.rabbitmq;
 public class RabbitMQRoutingKey {
 
     /**
-     * Binlog 模块发送消息到角色表队列的路由键
+     * Binlog 发送消息到 RoutingKey (角色-菜单关联数据)
      */
-    public static final String BINLOG_TO_ROLE = "binlog-to-role";
+    public static final String BINLOG_SEND_ROLE_MENU = "binlog-send-role-menu";
 
     /**
-     * Binlog 模块发送消息到角色-菜单表队列的路由键
+     * Canal 发送消息到 RoutingKey (角色-菜单关联数据)
      */
-    public static final String BINLOG_TO_ROLE_MENU = "binlog-to-role-menu";
+    public static final String CANAL_SEND_ROLE_MENU = "canal-send-role-menu";
 
     /**
-     * Canal 模块发送消息到角色表队列的路由键
+     * 使用 RabbitMQ Exchange、Database Table 作为组合键, 获取 RabbitMQ RoutingKey
      */
-    public static final String CANAL_TO_ROLE = "canal-to-role";
+    public static final MultiKeyMap<String, String> ROUTING_KEY_MAP = new MultiKeyMap<>();
 
-    /**
-     * Canal 模块发送消息到角色-菜单表队列的路由键
-     */
-    public static final String CANAL_TO_ROLE_MENU = "canal-to-role-menu";
+    static {
+        ROUTING_KEY_MAP.put(RabbitMQExchange.BINLOG, TableConstant.ROLE_MENU, RabbitMQRoutingKey.BINLOG_SEND_ROLE_MENU);
+        ROUTING_KEY_MAP.put(RabbitMQExchange.CANAL, TableConstant.ROLE_MENU, RabbitMQRoutingKey.CANAL_SEND_ROLE_MENU);
+    }
 }

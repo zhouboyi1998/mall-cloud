@@ -13,4 +13,9 @@ public class RocketMQConstant {
      * 系统配置 (RocketMQ 日志)
      */
     public static final String SYSTEM_PROPERTY_ROCKETMQ_LOG = "rocketmq.client.logUseSlf4j";
+
+    /**
+     * 消息生产者 (Canal)
+     */
+    public static final String CANAL = "canal";
 }
