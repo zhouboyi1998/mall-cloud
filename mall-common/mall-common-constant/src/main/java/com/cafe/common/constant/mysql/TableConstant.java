@@ -28,4 +28,14 @@ public class TableConstant {
      * 商品数据库.分类表
      */
     public static final String CATEGORY = "mall_goods.mall_category";
+
+    /**
+     * 订单数据库.订单表
+     */
+    public static final String ORDER = "mall_order.mall_order";
+
+    /**
+     * 订单数据库.订单详情表
+     */
+    public static final String ORDER_DETAIL = "mall_order.mall_order_detail";
 }
