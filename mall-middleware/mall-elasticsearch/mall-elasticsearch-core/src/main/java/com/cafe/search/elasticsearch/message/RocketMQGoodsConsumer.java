@@ -3,8 +3,7 @@ package com.cafe.search.elasticsearch.message;
 import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.app.StatusConstant;
-import com.cafe.common.constant.rocketmq.RocketMQConsumerGroup;
-import com.cafe.common.constant.rocketmq.RocketMQTopic;
+import com.cafe.common.constant.rocketmq.RocketMQConstant;
 import com.cafe.search.elasticsearch.model.Goods;
 import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
@@ -26,7 +25,7 @@ import java.util.Map;
  * @Description: RocketMQ 商品消息消费者
  */
 @Component
-@RocketMQMessageListener(consumerGroup = RocketMQConsumerGroup.GROUP_GOODS, topic = RocketMQTopic.CANAL_SEND_GOODS_TO_ELASTICSEARCH)
+@RocketMQMessageListener(topic = RocketMQConstant.Topic.CANAL_TO_GOODS, consumerGroup = RocketMQConstant.ConsumerGroup.ELASTICSEARCH)
 public class RocketMQGoodsConsumer implements RocketMQListener<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RocketMQGoodsConsumer.class);

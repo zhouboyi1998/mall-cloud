@@ -15,7 +15,7 @@ import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import com.cafe.common.constant.mysql.ColumnConstant;
+import com.cafe.common.constant.mysql.MySQLConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,8 +63,8 @@ public class MyBatisPlusGenerator {
     public static final List<TableFill> TABLE_FILL_LIST = new ArrayList<>(2);
 
     static {
-        TABLE_FILL_LIST.add(new TableFill(ColumnConstant.CREATE_TIME, FieldFill.INSERT));
-        TABLE_FILL_LIST.add(new TableFill(ColumnConstant.UPDATE_TIME, FieldFill.INSERT_UPDATE));
+        TABLE_FILL_LIST.add(new TableFill(MySQLConstant.Column.CREATE_TIME, FieldFill.INSERT));
+        TABLE_FILL_LIST.add(new TableFill(MySQLConstant.Column.UPDATE_TIME, FieldFill.INSERT_UPDATE));
     }
 
     public static void generate() {

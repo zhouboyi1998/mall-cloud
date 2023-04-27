@@ -2,7 +2,6 @@ package com.cafe.monitor.canal.handler;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.cafe.common.constant.rocketmq.RocketMQConstant;
-import com.cafe.common.constant.rocketmq.RocketMQTopic;
 import com.cafe.common.message.rocketmq.producer.RocketMQProducer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,6 +36,6 @@ public class RocketMQContentHandler {
         // 组装消息
         Map<String, Object> content = messageContentHandler.handle(rowDataList, eventType);
         // 发送消息到 RocketMQ
-        rocketMQProducer.convertAndSend(RocketMQTopic.TOPIC_MAP.get(RocketMQConstant.CANAL, tableName), content);
+        rocketMQProducer.convertAndSend(RocketMQConstant.Topic.MAP.get(RocketMQConstant.Producer.CANAL, tableName), content);
     }
 }
