@@ -1,14 +1,8 @@
-server:
-  port: 8761
-
 spring:
-  application:
-    name: eureka-server
+  profiles:
+    active: dev
 
 eureka:
-  instance:
-    # 本地地址
-    hostname: 127.0.0.1
   client:
     # 是否注册到 Eureka
     register-with-eureka: false

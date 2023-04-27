@@ -4,9 +4,31 @@ spring:
 
 # Feign 配置
 feign:
-  # Feign 远程方法调用开启 Sentinel 熔断限流
+  # 开启 Sentinel 熔断限流
   sentinel:
     enabled: true
+
+# Actuator 服务健康监控监控配置
+management:
+  endpoints:
+    web:
+      exposure:
+        # 开放所有 Actuator 端点
+        include: "*"
+  endpoint:
+    health:
+      # 显示详细信息
+      show-details: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.appcation.name}
+    export:
+      prometheus:
+        enabled: true
 
 # MyBatis-Plus 配置
 mybatis-plus:
