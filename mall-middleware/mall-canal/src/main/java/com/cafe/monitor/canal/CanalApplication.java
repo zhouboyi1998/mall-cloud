@@ -21,7 +21,7 @@ public class CanalApplication {
 
     public static void main(String[] args) {
         // 指定 RocketMQ 使用的日志框架
-        System.setProperty(RocketMQConstant.SYSTEM_PROPERTY_ROCKETMQ_LOG, BooleanConstant.TRUE);
+        System.setProperty(RocketMQConstant.ROCKETMQ_CLIENT_LOG, BooleanConstant.TRUE);
         new SpringApplicationBuilder(CanalApplication.class)
             .web(WebApplicationType.NONE)
             .run(args);

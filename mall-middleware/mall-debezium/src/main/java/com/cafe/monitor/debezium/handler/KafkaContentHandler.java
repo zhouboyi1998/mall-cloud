@@ -1,7 +1,6 @@
 package com.cafe.monitor.debezium.handler;
 
 import com.cafe.common.constant.kafka.KafkaConstant;
-import com.cafe.common.constant.kafka.KafkaTopic;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.enumeration.debezium.SchemaFieldEnum;
 import com.cafe.common.message.kafka.producer.KafkaProducer;
@@ -45,6 +44,6 @@ public class KafkaContentHandler {
         String tableName = content.get(SchemaFieldEnum.DATABASE.getSchemaField()) +
             StringConstant.POINT +
             content.get(SchemaFieldEnum.TABLE.getSchemaField());
-        kafkaProducer.send(KafkaTopic.TOPIC_MAP.get(KafkaConstant.DEBEZIUM, tableName), content);
+        kafkaProducer.send(KafkaConstant.Topic.MAP.get(KafkaConstant.Producer.DEBEZIUM, tableName), content);
     }
 }
