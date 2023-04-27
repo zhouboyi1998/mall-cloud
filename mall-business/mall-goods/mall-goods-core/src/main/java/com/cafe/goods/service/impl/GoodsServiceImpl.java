@@ -3,7 +3,7 @@ package com.cafe.goods.service.impl;
 import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.app.StatusConstant;
-import com.cafe.common.constant.rocketmq.RocketMQTopic;
+import com.cafe.common.constant.rocketmq.RocketMQConstant;
 import com.cafe.common.message.rocketmq.producer.RocketMQProducer;
 import com.cafe.goods.bo.Goods;
 import com.cafe.goods.mapper.GoodsMapper;
@@ -65,7 +65,7 @@ public class GoodsServiceImpl implements GoodsService {
         }
 
         // 发送消息到 RocketMQ, 通知 ElasticSearch 上下架商品
-        rocketMQProducer.convertAndSend(RocketMQTopic.CANAL_SEND_GOODS_TO_ELASTICSEARCH, content);
+        rocketMQProducer.convertAndSend(RocketMQConstant.Topic.CANAL_TO_GOODS, content);
         // 打印日志
         LOGGER.info("GoodsServiceImpl.launch(): Send RocketMQ Message -> {}", JSONUtil.toJsonStr(content));
     }

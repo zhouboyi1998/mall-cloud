@@ -1,5 +1,8 @@
 package com.cafe.common.constant.rocketmq;
 
+import com.cafe.common.constant.mysql.MySQLConstant;
+import org.apache.commons.collections4.map.MultiKeyMap;
+
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.common.constant.rocketmq
@@ -10,12 +13,60 @@ package com.cafe.common.constant.rocketmq;
 public class RocketMQConstant {
 
     /**
-     * 系统配置 (RocketMQ 日志)
+     * 日志系统参数
      */
-    public static final String SYSTEM_PROPERTY_ROCKETMQ_LOG = "rocketmq.client.logUseSlf4j";
+    public static final String ROCKETMQ_CLIENT_LOG = "rocketmq.client.logUseSlf4j";
 
     /**
-     * 消息生产者 (Canal)
+     * 生产者
      */
-    public static final String CANAL = "canal";
+    public static class Producer {
+
+        /**
+         * canal 生产者
+         */
+        public static final String CANAL = "canal";
+    }
+
+    /**
+     * 主题
+     */
+    public static class Topic {
+
+        /**
+         * canal 生产者 --> goods 主题
+         */
+        public static final String CANAL_TO_GOODS = "canal-to-goods";
+
+        /**
+         * canal 生产者 --> brand 主题
+         */
+        public static final String CANAL_TO_BRAND = "canal-to-brand";
+
+        /**
+         * canal 生产者 --> category 主题
+         */
+        public static final String CANAL_TO_CATEGORY = "canal-to-category";
+
+        /**
+         * Producer + TableName 作为组合键, 获取 Topic
+         */
+        public static final MultiKeyMap<String, String> MAP = new MultiKeyMap<>();
+
+        static {
+            MAP.put(Producer.CANAL, MySQLConstant.Table.BRAND, CANAL_TO_BRAND);
+            MAP.put(Producer.CANAL, MySQLConstant.Table.CATEGORY, CANAL_TO_CATEGORY);
+        }
+    }
+
+    /**
+     * 消费者组
+     */
+    public static class ConsumerGroup {
+
+        /**
+         * elasticsearch 消费者组
+         */
+        public static final String ELASTICSEARCH = "elasticsearch";
+    }
 }
