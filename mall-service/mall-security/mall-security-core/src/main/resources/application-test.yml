@@ -17,11 +17,3 @@ spring:
     port: 6379
     password: 123456
     database: 0
-
-# Actuator Health 服务健康监控监控
-management:
-  endpoints:
-    web:
-      exposure:
-        # 暴露所有端点
-        include: "*"
