@@ -12,7 +12,8 @@
 <img src="https://img.shields.io/badge/Spring Cloud-Hoxton.SR12-brightgreen">
 <img src="https://img.shields.io/badge/Spring Cloud Alibaba-2.2.7.RELEASE-brightgreen">
 <img src="https://img.shields.io/badge/MyBatis Plus-3.4.1-dodgerblue">
-<img src="https://img.shields.io/badge/Knife4J-2.0.9-midnightblue">
+<img src="https://img.shields.io/badge/Swagger Knife4J-2.0.9-orange">
+<img src="https://img.shields.io/badge/Prometheus-1.6.12-orange">
 </p>
 <p align="center">
 <img src="https://img.shields.io/badge/MySQL-8.0.19-royalblue">
