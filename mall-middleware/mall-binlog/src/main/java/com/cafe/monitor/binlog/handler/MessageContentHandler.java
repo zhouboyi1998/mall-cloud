@@ -3,8 +3,7 @@ package com.cafe.monitor.binlog.handler;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.monitor.MonitorConstant;
 import com.cafe.common.constant.pool.StringConstant;
-import com.cafe.common.constant.rabbitmq.RabbitMQExchange;
-import com.cafe.common.constant.rabbitmq.RabbitMQRoutingKey;
+import com.cafe.common.constant.rabbitmq.RabbitMQConstant;
 import com.cafe.common.message.rabbitmq.producer.RabbitMQProducer;
 import com.cafe.user.relation.UserRelation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,8 +59,8 @@ public class MessageContentHandler {
 
         // 发送消息到 RabbitMQ
         rabbitMQProducer.convertAndSend(
-            RabbitMQExchange.BINLOG,
-            RabbitMQRoutingKey.ROUTING_KEY_MAP.get(RabbitMQExchange.BINLOG, tableName),
+            RabbitMQConstant.Exchange.BINLOG,
+            RabbitMQConstant.RoutingKey.MAP.get(RabbitMQConstant.Exchange.BINLOG, tableName),
             content
         );
     }
