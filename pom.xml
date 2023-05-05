@@ -57,6 +57,7 @@
         <kaptcha-starter.version>1.1.0</kaptcha-starter.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <prometheus.version>1.6.12</prometheus.version>
+        <xxl-job.version>2.4.0</xxl-job.version>
     </properties>
 
     <dependencies>
@@ -270,6 +271,12 @@
                 <artifactId>micrometer-registry-prometheus</artifactId>
                 <version>${prometheus.version}</version>
             </dependency>
+            <!-- XXL-JOB 分布式任务调度 -->
+            <dependency>
+                <groupId>com.xuxueli</groupId>
+                <artifactId>xxl-job-core</artifactId>
+                <version>${xxl-job.version}</version>
+            </dependency>
 
             <!-- 公共包 -->
             <dependency>
@@ -320,6 +327,11 @@
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-common-swagger</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-common-xxljob</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
 
