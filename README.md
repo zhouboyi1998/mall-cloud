@@ -8,12 +8,11 @@
 <img src="https://img.shields.io/badge/license-MIT-red"> 
 </a>
 <img src="https://img.shields.io/badge/JDK-1.8-darkcyan">
-<img src="https://img.shields.io/badge/Spring Boot-2.3.12.RELEASE-brightgreen">
-<img src="https://img.shields.io/badge/Spring Cloud-Hoxton.SR12-brightgreen">
-<img src="https://img.shields.io/badge/Spring Cloud Alibaba-2.2.7.RELEASE-brightgreen">
+<img src="https://img.shields.io/badge/Spring Boot-2.3.12.RELEASE-brightener">
+<img src="https://img.shields.io/badge/Spring Cloud-Hoxton.SR12-brightener">
+<img src="https://img.shields.io/badge/Spring Cloud Alibaba-2.2.7.RELEASE-brightener">
 <img src="https://img.shields.io/badge/MyBatis Plus-3.4.1-dodgerblue">
 <img src="https://img.shields.io/badge/Swagger Knife4J-2.0.9-orange">
-<img src="https://img.shields.io/badge/Prometheus-1.6.12-orange">
 </p>
 <p align="center">
 <img src="https://img.shields.io/badge/MySQL-8.0.19-royalblue">
@@ -28,6 +27,8 @@
 <img src="https://img.shields.io/badge/MySQL Binlog Connector-0.21.0-royalblue">
 <img src="https://img.shields.io/badge/Canal-1.1.5-darkorange">
 <img src="https://img.shields.io/badge/Debezium-1.5.4.Final-mediumspringgreen">
+<img src="https://img.shields.io/badge/XXL JOB-2.4.0-mediumseagreen">
+<img src="https://img.shields.io/badge/Prometheus-2.43.0-orange">
 </p>
 
 ### 📖 语言
@@ -57,6 +58,7 @@
     |-- mall-common-redis (Redis 缓存公共包)
     |-- mall-common-rocketmq (RocketMQ 消息队列公共包)
     |-- mall-common-swagger (Swagger API 文档公共包)
+    |-- mall-common-xxljob (XXL-JOB 分布式任务调度公共包)
 
 |-- mall-middleware (中间件模块)
     |-- mall-binlog (MySQL Binlog Connector 数据库监听器)
