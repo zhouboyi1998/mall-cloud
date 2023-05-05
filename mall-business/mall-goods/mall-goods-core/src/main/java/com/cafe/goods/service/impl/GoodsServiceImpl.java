@@ -2,8 +2,8 @@ package com.cafe.goods.service.impl;
 
 import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.app.FieldConstant;
-import com.cafe.common.constant.app.StatusConstant;
 import com.cafe.common.constant.rocketmq.RocketMQConstant;
+import com.cafe.common.constant.status.GoodsStatusConstant;
 import com.cafe.common.message.rocketmq.producer.RocketMQProducer;
 import com.cafe.goods.bo.Goods;
 import com.cafe.goods.mapper.GoodsMapper;
@@ -54,7 +54,7 @@ public class GoodsServiceImpl implements GoodsService {
         // 消息标识: 标识消息是上架通知还是下架通知
         content.put(FieldConstant.STATUS, status);
         // 消息内容
-        if (StatusConstant.LAUNCH.equals(status)) {
+        if (GoodsStatusConstant.LAUNCH.equals(status)) {
             // 查询上架商品的信息
             List<Goods> goodsList = goodsMapper.list(ids);
             // 将上架商品的信息组装进 RocketMQ 消息内容中
