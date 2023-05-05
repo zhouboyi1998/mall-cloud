@@ -2,8 +2,8 @@ package com.cafe.search.elasticsearch.message;
 
 import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.app.FieldConstant;
-import com.cafe.common.constant.app.StatusConstant;
 import com.cafe.common.constant.rocketmq.RocketMQConstant;
+import com.cafe.common.constant.status.GoodsStatusConstant;
 import com.cafe.search.elasticsearch.model.Goods;
 import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
@@ -47,7 +47,7 @@ public class RocketMQGoodsConsumer implements RocketMQListener<String> {
         Integer status = Integer.parseInt(String.valueOf(content.get(FieldConstant.STATUS)));
 
         try {
-            if (StatusConstant.LAUNCH.equals(status)) {
+            if (GoodsStatusConstant.LAUNCH.equals(status)) {
                 // 获取上架商品的信息
                 List<Goods> goodsList = JSONUtil.parseArray(content.get(FieldConstant.DATA)).toList(Goods.class);
                 // 上架商品
