@@ -3,7 +3,7 @@ package com.cafe.goods.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.WrapperUtil;
+import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.goods.model.Category;
 import com.cafe.goods.service.CategoryService;
 import io.swagger.annotations.Api;

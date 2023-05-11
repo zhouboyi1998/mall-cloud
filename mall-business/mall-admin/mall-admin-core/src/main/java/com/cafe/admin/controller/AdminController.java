@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.admin.model.Admin;
 import com.cafe.admin.service.AdminService;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.WrapperUtil;
+import com.cafe.common.mybatisplus.util.WrapperUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

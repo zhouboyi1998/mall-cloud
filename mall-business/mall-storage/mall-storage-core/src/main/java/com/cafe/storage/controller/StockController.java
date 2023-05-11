@@ -3,7 +3,7 @@ package com.cafe.storage.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.WrapperUtil;
+import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.storage.model.Stock;
 import com.cafe.storage.service.StockService;
 import io.swagger.annotations.Api;
