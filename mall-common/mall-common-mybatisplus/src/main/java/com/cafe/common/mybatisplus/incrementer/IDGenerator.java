@@ -1,4 +1,4 @@
-package com.cafe.common.mysql.incrementer;
+package com.cafe.common.mybatisplus.incrementer;
 
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.cafe.id.feign.IDFeign;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Component;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.mysql.incrementer
+ * @Package: com.cafe.common.mybatisplus.incrementer
  * @Author: zhouboyi
  * @Date: 2022/11/1 16:59
- * @Description: 自定义 MyBatis-Plus 分布式ID生成器
+ * @Description: MyBatis-Plus ID 生成器实现类
  */
 @Component
 public class IDGenerator implements IdentifierGenerator {

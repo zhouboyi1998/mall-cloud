@@ -1,4 +1,4 @@
-package com.cafe.common.mysql.util;
+package com.cafe.common.mybatisplus.util;
 
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.ReflectUtil;
@@ -15,7 +15,7 @@ import java.util.Map;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.mysql.util
+ * @Package: com.cafe.common.mybatisplus.util
  * @Author: zhouboyi
  * @Date: 2022/5/1 20:21
  * @Description: MyBatis-Plus 条件构造工具类
@@ -40,17 +40,6 @@ public class WrapperUtil {
      */
     public static <T> QueryWrapper<T> createQueryWrapper(T model) {
         return (QueryWrapper<T>) createWrapper(model, new QueryWrapper<>());
-    }
-
-    /**
-     * 构造 UpdateWrapper 条件
-     *
-     * @param model
-     * @param <T>
-     * @return
-     */
-    public static <T> UpdateWrapper<T> createUpdateWrapper(T model) {
-        return (UpdateWrapper<T>) createWrapper(model, new UpdateWrapper<>());
     }
 
     /**
