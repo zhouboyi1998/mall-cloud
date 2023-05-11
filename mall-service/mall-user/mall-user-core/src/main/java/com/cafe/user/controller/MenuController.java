@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.mysql.util.WrapperUtil;
+import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.user.model.Menu;
 import com.cafe.user.service.MenuService;
 import com.cafe.user.vo.MenuTreeVO;

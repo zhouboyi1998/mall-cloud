@@ -17,7 +17,7 @@
     <description>Spring Cloud Gateway 网关</description>
 
     <dependencies>
-        <!-- Spring Boot WebFlux 相关依赖 -->
+        <!-- Spring Boot WebFlux -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>

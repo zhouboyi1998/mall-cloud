@@ -14,7 +14,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>分布式ID生成器远程调用接口</description>
+    <description>分布式 ID 生成器远程调用接口</description>
 
     <dependencies>
         <dependency>

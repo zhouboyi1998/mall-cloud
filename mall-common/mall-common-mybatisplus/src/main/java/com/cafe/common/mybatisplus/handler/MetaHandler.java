@@ -1,4 +1,4 @@
-package com.cafe.common.mysql.handler;
+package com.cafe.common.mybatisplus.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.cafe.common.constant.app.FieldConstant;
@@ -11,18 +11,18 @@ import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.mysql.handler
+ * @Package: com.cafe.common.mybatisplus.handler
  * @Author: zhouboyi
  * @Date: 2023/3/29 11:39
- * @Description: 自定义 MyBatis-Plus 字段填充处理器
+ * @Description: MyBatis-Plus 字段填充处理器实现类
  */
 @Component
-public class MetaObjectHandlerImpl implements MetaObjectHandler {
+public class MetaHandler implements MetaObjectHandler {
 
     private final Clock clock;
 
     @Autowired
-    public MetaObjectHandlerImpl(Clock clock) {
+    public MetaHandler(Clock clock) {
         this.clock = clock;
     }
 

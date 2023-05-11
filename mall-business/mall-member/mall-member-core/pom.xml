@@ -17,6 +17,12 @@
     <description>会员模块核心业务</description>
 
     <dependencies>
+        <!-- MySQL 驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-log</artifactId>
