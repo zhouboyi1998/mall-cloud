@@ -17,10 +17,15 @@
     <description>代码生成器</description>
 
     <dependencies>
-        <!-- MySQL 连接 -->
+        <!-- MySQL 驱动 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- PostgreSQL 驱动 -->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
         </dependency>
         <!-- PageHelper 分页插件 -->
         <dependency>
@@ -32,7 +37,7 @@
             <groupId>org.mybatis.generator</groupId>
             <artifactId>mybatis-generator-core</artifactId>
         </dependency>
-        <!-- MyBatis-Plus 相关依赖 -->
+        <!-- MyBatis-Plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
@@ -42,7 +47,7 @@
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-generator</artifactId>
         </dependency>
-        <!-- MyBatis-Plus 代码生成器默认模板引擎 Velocity -->
+        <!-- Velocity 模板引擎 -->
         <dependency>
             <groupId>org.apache.velocity</groupId>
             <artifactId>velocity-engine-core</artifactId>

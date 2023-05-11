@@ -23,7 +23,7 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-mysql</artifactId>
+            <artifactId>mall-common-mybatisplus</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
