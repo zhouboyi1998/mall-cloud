@@ -10,7 +10,12 @@ spring:
 
 # Feign 配置
 feign:
-  # 开启 Sentinel 熔断限流
+  httpclient:
+    enabled: true
+  okhttp:
+    enabled: true
+  hystrix:
+    enabled: true
   sentinel:
     enabled: true
 
