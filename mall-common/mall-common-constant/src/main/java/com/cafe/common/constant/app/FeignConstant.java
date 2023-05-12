@@ -9,7 +9,10 @@ package com.cafe.common.constant.app;
  */
 public class FeignConstant {
 
-    public static final String FEIGN_CLIENT_PACKAGE_ID = "com.cafe.id.feign";
+    public static class Client {
 
-    public static final String FEIGN_CLIENT_PACKAGE_USER = "com.cafe.user.feign";
+        public static final String ID = "com.cafe.id.feign";
+
+        public static final String USER = "com.cafe.user.feign";
+    }
 }
