@@ -16,7 +16,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @Description:
  */
 @SpringBootApplication
-@EnableFeignClients(basePackages = FeignConstant.FEIGN_CLIENT_PACKAGE_ID)
+@EnableFeignClients(basePackages = FeignConstant.Client.ID)
 @ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
 public class BinlogApplication {
 
