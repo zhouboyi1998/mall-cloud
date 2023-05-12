@@ -44,8 +44,8 @@ public class KafkaConstant {
         public static final MultiKeyMap<String, String> MAP = new MultiKeyMap<>();
 
         static {
-            MAP.put(Producer.DEBEZIUM, MySQLConstant.Table.ORDER, DEBEZIUM_TO_ORDER);
-            MAP.put(Producer.DEBEZIUM, MySQLConstant.Table.ORDER_DETAIL, DEBEZIUM_TO_ORDER_DETAIL);
+            MAP.put(Producer.DEBEZIUM, MySQLConstant.DatabaseTable.ORDER, DEBEZIUM_TO_ORDER);
+            MAP.put(Producer.DEBEZIUM, MySQLConstant.DatabaseTable.ORDER_DETAIL, DEBEZIUM_TO_ORDER_DETAIL);
         }
     }
 }

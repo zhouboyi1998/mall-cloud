@@ -4,8 +4,8 @@
     "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <properties resource="generator.properties" />
-    <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+    <properties resource="generator-postgresql.properties" />
+    <context id="PostgreSqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
         <property name="beginningDelimiter" value="`" />
         <property name="endingDelimiter" value="`" />
         <property name="javaFileEncoding" value="UTF-8" />
@@ -25,10 +25,9 @@
 
         <!-- 数据库连接配置: 驱动、地址、用户名、密码 -->
         <jdbcConnection driverClass="${driver}"
-                        connectionURL="${url-prefix}${module}${url-suffix}"
+                        connectionURL="${url}${table-prefix}${module}${parameter}"
                         userId="${username}"
                         password="${password}">
-            <!-- 解决 MySQL 驱动升级到 8.0 后不生成指定数据库代码的问题 -->
             <property name="nullCatalogMeansCurrent" value="true" />
         </jdbcConnection>
 
@@ -37,7 +36,7 @@
             true: 把 JDBC 的 DECIMAL、NUMERIC 类型解析为 java.math.BigDecimal
 		-->
         <javaTypeResolver>
-            <property name="forceBigDecimals" value="false" />
+            <property name="forceBigDecimals" value="true" />
         </javaTypeResolver>
 
         <!-- Model 实体模型生成路径 -->
@@ -55,7 +54,7 @@
 
         <!-- tableName="%" 表示: 生成全部表-->
         <table tableName="%">
-            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+            <generatedKey column="id" sqlStatement="PostgreSql" identity="true" />
             <!-- 去除生成类名的 Mall 前缀, 注意 ^ 后面第一个字母大写 -->
             <domainObjectRenamingRule searchString="^Mall" replaceString="" />
         </table>

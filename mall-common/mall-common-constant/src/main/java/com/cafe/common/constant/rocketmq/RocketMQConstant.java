@@ -54,8 +54,8 @@ public class RocketMQConstant {
         public static final MultiKeyMap<String, String> MAP = new MultiKeyMap<>();
 
         static {
-            MAP.put(Producer.CANAL, MySQLConstant.Table.BRAND, CANAL_TO_BRAND);
-            MAP.put(Producer.CANAL, MySQLConstant.Table.CATEGORY, CANAL_TO_CATEGORY);
+            MAP.put(Producer.CANAL, MySQLConstant.DatabaseTable.BRAND, CANAL_TO_BRAND);
+            MAP.put(Producer.CANAL, MySQLConstant.DatabaseTable.CATEGORY, CANAL_TO_CATEGORY);
         }
     }
 

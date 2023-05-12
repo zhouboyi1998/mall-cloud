@@ -49,8 +49,8 @@ public class RabbitMQConstant {
         public static final MultiKeyMap<String, String> MAP = new MultiKeyMap<>();
 
         static {
-            MAP.put(Exchange.BINLOG, MySQLConstant.Table.ROLE_MENU, BINLOG_TO_ROLE_MENU);
-            MAP.put(Exchange.CANAL, MySQLConstant.Table.ROLE_MENU, CANAL_TO_ROLE_MENU);
+            MAP.put(Exchange.BINLOG, MySQLConstant.DatabaseTable.ROLE_MENU, BINLOG_TO_ROLE_MENU);
+            MAP.put(Exchange.CANAL, MySQLConstant.DatabaseTable.ROLE_MENU, CANAL_TO_ROLE_MENU);
         }
     }
 

@@ -22,7 +22,7 @@ public class UserRelation {
     public static final Map<String, Class<?>> TABLE_MODEL_MAP = new HashMap<>();
 
     static {
-        TABLE_MODEL_MAP.put(MySQLConstant.Table.ROLE, Role.class);
-        TABLE_MODEL_MAP.put(MySQLConstant.Table.ROLE_MENU, RoleMenu.class);
+        TABLE_MODEL_MAP.put(MySQLConstant.DatabaseTable.ROLE, Role.class);
+        TABLE_MODEL_MAP.put(MySQLConstant.DatabaseTable.ROLE_MENU, RoleMenu.class);
     }
 }

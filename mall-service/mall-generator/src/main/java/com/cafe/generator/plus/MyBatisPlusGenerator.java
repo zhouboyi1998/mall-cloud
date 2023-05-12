@@ -1,6 +1,5 @@
 package com.cafe.generator.plus;
 
-import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -9,13 +8,10 @@ import com.baomidou.mybatisplus.generator.config.GlobalConfig;
 import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.TemplateConfig;
-import com.baomidou.mybatisplus.generator.config.converts.MySqlTypeConvert;
 import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
-import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
-import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
-import com.cafe.common.constant.mysql.MySQLConstant;
+import com.cafe.common.constant.database.DatabaseConstant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,11 +26,13 @@ import java.util.Properties;
  * @Package: com.cafe.generator.plus
  * @Author: zhouboyi
  * @Date: 2022/4/22 15:37
- * @Description: MyBatis-Plus Generator 代码生成器
+ * @Description: MyBatis-Plus 代码生成器
  */
 public class MyBatisPlusGenerator {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MyBatisPlusGenerator.class);
+
+    private static final String DATABASE_TYPE = "mysql";
 
     /**
      * 配置文件
@@ -46,7 +44,8 @@ public class MyBatisPlusGenerator {
             // 创建 properties 对象
             properties = new Properties();
             // 获取配置文件
-            InputStream inputStream = Optional.ofNullable(MyBatisPlusGenerator.class.getClassLoader().getResourceAsStream("generator.properties"))
+            String fileName = "generator-" + DATABASE_TYPE + ".properties";
+            InputStream inputStream = Optional.ofNullable(MyBatisPlusGenerator.class.getClassLoader().getResourceAsStream(fileName))
                 .orElseThrow(NullPointerException::new);
             // 将配置文件加载到 properties 对象中
             properties.load(inputStream);
@@ -63,8 +62,8 @@ public class MyBatisPlusGenerator {
     public static final List<TableFill> TABLE_FILL_LIST = new ArrayList<>(2);
 
     static {
-        TABLE_FILL_LIST.add(new TableFill(MySQLConstant.Column.CREATE_TIME, FieldFill.INSERT));
-        TABLE_FILL_LIST.add(new TableFill(MySQLConstant.Column.UPDATE_TIME, FieldFill.INSERT_UPDATE));
+        TABLE_FILL_LIST.add(new TableFill(DatabaseConstant.Column.CREATE_TIME, FieldFill.INSERT));
+        TABLE_FILL_LIST.add(new TableFill(DatabaseConstant.Column.UPDATE_TIME, FieldFill.INSERT_UPDATE));
     }
 
     public static void generate() {
@@ -108,26 +107,12 @@ public class MyBatisPlusGenerator {
             .setControllerName("%sController");
 
         // 2. 数据源配置
-        DataSourceConfig dataSourceConfig = new DataSourceConfig()
-            // 数据库类型
-            .setDbType(DbType.MYSQL)
+        DataSourceConfig dataSourceConfig = DynamicDataSourceConfig.database(DATABASE_TYPE)
             // 数据库连接配置
-            .setUrl(properties.getProperty("url-prefix") + properties.getProperty("module") + properties.getProperty("url-suffix"))
+            .setUrl(properties.getProperty("url") + properties.getProperty("table-prefix") + properties.getProperty("module") + properties.getProperty("parameter"))
             .setDriverName(properties.getProperty("driver"))
             .setUsername(properties.getProperty("username"))
-            .setPassword(properties.getProperty("password"))
-            // 指定 MySQL 数据类型和 Java 数据类型的映射
-            .setTypeConvert(new MySqlTypeConvert() {
-                @Override
-                public IColumnType processTypeConvert(GlobalConfig config, String fieldType) {
-                    if (fieldType.toUpperCase().contains(DatabaseTypeEnum.DECIMAL.toString())) {
-                        return DbColumnType.BIG_DECIMAL;
-                    } else if (fieldType.toUpperCase().contains(DatabaseTypeEnum.DATETIME.toString())) {
-                        return DbColumnType.LOCAL_DATE_TIME;
-                    }
-                    return super.processTypeConvert(config, fieldType);
-                }
-            });
+            .setPassword(properties.getProperty("password"));
 
         // 3. 生成路径配置
         PackageConfig packageConfig = new PackageConfig()
@@ -152,9 +137,9 @@ public class MyBatisPlusGenerator {
             // 数据库表字段映射到实体属性的命名策略 (下划线转驼峰)
             .setColumnNaming(NamingStrategy.underline_to_camel)
             // 表前缀
-            .setTablePrefix("mall_")
+            .setTablePrefix(properties.getProperty("table-prefix"))
             // 逻辑删除属性名称
-            .setLogicDeleteFieldName("is_deleted")
+            .setLogicDeleteFieldName(DatabaseConstant.Column.IS_DELETED)
             // Boolean 类型字段是否移除 is 前缀
             .setEntityBooleanColumnRemoveIsPrefix(true)
             // 是否生成序列化ID
