@@ -1,5 +1,6 @@
 package com.cafe.generator.mybatis;
 
+import com.cafe.common.constant.pool.StringConstant;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.CompilationUnit;
@@ -46,8 +47,8 @@ public class CommentGenerator extends DefaultCommentGenerator {
         if (addRemarkComments && StringUtility.stringHasValue(remarks)) {
             addFieldJavaDoc(field, remarks);
             // 数据库中特殊字符需要转义
-            if (remarks.contains("\"")) {
-                remarks = remarks.replace("\"", "'");
+            if (remarks.contains(StringConstant.DOUBLE_QUOTATION_MARK)) {
+                remarks = remarks.replace(StringConstant.DOUBLE_QUOTATION_MARK, StringConstant.SINGLE_QUOTATION_MARK);
             }
             // 给 Model 的字段添加 Swagger 注解
             field.addJavaDocLine("@ApiModelProperty(value = \"" + remarks + "\")");

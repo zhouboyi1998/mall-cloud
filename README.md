@@ -16,6 +16,8 @@
 </p>
 <p align="center">
 <img src="https://img.shields.io/badge/MySQL-8.0.19-royalblue">
+<img src="https://img.shields.io/badge/PostgreSQL-14.3-royalblue">
+<img src="https://img.shields.io/badge/Redis-3.2.100-crimson">
 <img src="https://img.shields.io/badge/ElasticSearch-7.6.2-darkturquoise">
 <img src="https://img.shields.io/badge/Solr-8.11.1-orangered">
 <img src="https://img.shields.io/badge/MinIO-8.3.4-crimson">
@@ -53,9 +55,9 @@
     |-- mall-common-core (核心公共包)
     |-- mall-common-kafka (Kafka 消息队列公共包)
     |-- mall-common-log (日志公共包)
-    |-- mall-common-mysql (MySQL 数据库公共包)
+    |-- mall-common-mybatisplus (MyBatis-Plus 公共包)
     |-- mall-common-rabbitmq (RabbitMQ 消息队列公共包)
-    |-- mall-common-redis (Redis 缓存公共包)
+    |-- mall-common-redis (Redis 公共包)
     |-- mall-common-rocketmq (RocketMQ 消息队列公共包)
     |-- mall-common-swagger (Swagger API 文档公共包)
     |-- mall-common-xxljob (XXL-JOB 分布式任务调度公共包)
@@ -73,7 +75,7 @@
     |-- mall-eureka (Eureka 注册中心, 弃用)
     |-- mall-gateway (Spring Cloud Gateway 网关)
     |-- mall-generator (代码生成器)
-    |-- mall-id (分布式ID生成器)
+    |-- mall-id (分布式 ID 生成器)
     |-- mall-security (Spring Security 安全模块)
     |-- mall-user (用户模块)
 ```
