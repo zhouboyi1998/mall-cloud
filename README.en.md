@@ -16,6 +16,8 @@
 </p>
 <p align="center">
 <img src="https://img.shields.io/badge/MySQL-8.0.19-royalblue">
+<img src="https://img.shields.io/badge/PostgreSQL-14.3-royalblue">
+<img src="https://img.shields.io/badge/Redis-3.2.100-crimson">
 <img src="https://img.shields.io/badge/ElasticSearch-7.6.2-darkturquoise">
 <img src="https://img.shields.io/badge/Solr-8.11.1-orangered">
 <img src="https://img.shields.io/badge/MinIO-8.3.4-crimson">

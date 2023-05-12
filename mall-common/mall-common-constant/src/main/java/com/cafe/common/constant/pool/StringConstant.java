@@ -53,4 +53,14 @@ public class StringConstant {
      * 百分号
      */
     public static final String PERCENT = "%";
+
+    /**
+     * 单引号
+     */
+    public static final String SINGLE_QUOTATION_MARK = "'";
+
+    /**
+     * 双引号
+     */
+    public static final String DOUBLE_QUOTATION_MARK = "\"";
 }
