@@ -19,10 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableSwagger2WebMvc
-@EnableFeignClients(basePackages = {
-    FeignConstant.FEIGN_CLIENT_PACKAGE_ID,
-    FeignConstant.FEIGN_CLIENT_PACKAGE_USER
-})
+@EnableFeignClients(basePackages = {FeignConstant.Client.ID, FeignConstant.Client.USER})
 @ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
 public class SecurityApplication {
 
