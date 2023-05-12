@@ -17,11 +17,13 @@ import java.util.Optional;
  * @Package: com.cafe.generator.mybatis
  * @Author: zhouboyi
  * @Date: 2022/4/22 14:37
- * @Description: MyBatis Generator 代码生成器
+ * @Description: MyBatis 代码生成器
  */
-public class MyBatisOriginGenerator {
+public class MyBatisCodeGenerator {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MyBatisOriginGenerator.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MyBatisCodeGenerator.class);
+
+    private static final String DATABASE_TYPE = "mysql";
 
     /**
      * 生成代码: Model、Mapper
@@ -32,7 +34,8 @@ public class MyBatisOriginGenerator {
             List<String> warns = new ArrayList<>();
 
             // 读取 XML 配置文件
-            InputStream inputStream = Optional.ofNullable(MyBatisOriginGenerator.class.getClassLoader().getResourceAsStream("generator.xml"))
+            String fileName = "generator-" + DATABASE_TYPE + ".xml";
+            InputStream inputStream = Optional.ofNullable(MyBatisCodeGenerator.class.getClassLoader().getResourceAsStream(fileName))
                 .orElseThrow(NullPointerException::new);
             // 创建 MyBatis Generator 配置解析器
             ConfigurationParser configurationParser = new ConfigurationParser(warns);
@@ -50,10 +53,10 @@ public class MyBatisOriginGenerator {
 
             // 输出警告信息
             for (String warn : warns) {
-                LOGGER.warn("MyBatisGenerator.generate(): warn -> {}", warn);
+                LOGGER.warn("MyBatisCodeGenerator.generate(): warn -> {}", warn);
             }
         } catch (Exception e) {
-            LOGGER.error("MyBatisGenerator.generate(): failed to generate code -> {}", e.getMessage());
+            LOGGER.error("MyBatisCodeGenerator.generate(): failed to generate code -> {}", e.getMessage());
         }
     }
 
