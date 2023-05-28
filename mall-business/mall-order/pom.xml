@@ -13,7 +13,6 @@
     <artifactId>mall-order</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>${project.artifactId}</name>
     <description>订单模块</description>
 
     <modules>

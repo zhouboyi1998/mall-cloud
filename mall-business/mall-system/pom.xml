@@ -13,7 +13,6 @@
     <artifactId>mall-system</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>${project.artifactId}</name>
     <description>系统模块</description>
 
     <modules>
