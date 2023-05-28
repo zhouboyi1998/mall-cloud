@@ -13,7 +13,6 @@
     <artifactId>mall-middleware</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>${project.artifactId}</name>
     <description>中间件模块</description>
 
     <modules>
