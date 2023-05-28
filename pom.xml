@@ -14,7 +14,6 @@
     <artifactId>mall-cloud</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>${project.artifactId}</name>
     <description>微服务商城项目</description>
 
     <modules>

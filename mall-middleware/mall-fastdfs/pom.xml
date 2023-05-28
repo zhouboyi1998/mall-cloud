@@ -13,7 +13,6 @@
     <artifactId>mall-fastdfs</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>${project.artifactId}</name>
     <description>FastDFS 分布式文件存储</description>
 
     <modules>
