@@ -13,7 +13,6 @@
     <artifactId>mall-minio</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>${project.artifactId}</name>
     <description>MinIO 分布式文件存储</description>
 
     <modules>
