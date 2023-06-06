@@ -1,0 +1,19 @@
+spring:
+  # 微服务配置
+  cloud:
+    # Nacos 配置
+    nacos:
+      # Nacos 注册中心
+      discovery:
+        server-addr: host.docker.internal:8848
+        username: nacos
+        password: nacos
+      # Nacos 配置中心
+      config:
+        server-addr: host.docker.internal:8848
+        username: nacos
+        password: nacos
+        file-extension: yaml
+        shared-configs:
+          - data-id: mall.yaml
+            refresh: true

@@ -1,0 +1,18 @@
+spring:
+  # 微服务配置
+  cloud:
+    # Sentinel 配置
+    sentinel:
+      # Sentinel 控制台
+      transport:
+        dashboard: 127.0.0.1:8858
+
+# ElasticSearch 配置
+elastic-search:
+  host: 127.0.0.1
+  port: 9200
+  schema: http
+
+# RocketMQ 配置
+rocketmq:
+  name-server: 127.0.0.1:9876
