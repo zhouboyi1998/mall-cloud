@@ -4,7 +4,5 @@ server:
 spring:
   application:
     name: mall-admin
-
-swagger:
-  title: ${spring.application.name}
-  description: 管理员模块
+  profiles:
+    active: dev

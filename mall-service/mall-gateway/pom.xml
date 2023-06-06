@@ -32,11 +32,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
-        <!-- Nacos 注册中心-->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
         <!-- Hystrix 服务熔断、降级 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -73,6 +68,10 @@
             <artifactId>hutool-all</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-config</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-constant</artifactId>

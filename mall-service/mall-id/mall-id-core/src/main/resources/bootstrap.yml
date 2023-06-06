@@ -4,7 +4,5 @@ server:
 spring:
   application:
     name: mall-id
-
-swagger:
-  title: ${spring.application.name}
-  description: 分布式 ID 生成器
+  profiles:
+    active: dev

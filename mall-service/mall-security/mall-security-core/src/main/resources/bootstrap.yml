@@ -4,7 +4,12 @@ server:
 spring:
   application:
     name: mall-security
-
-swagger:
-  title: ${spring.application.name}
-  description: SpringSecurity 安全模块
+  profiles:
+    active: dev
+  # 允许同名 Bean 覆盖
+  main:
+    allow-bean-definition-overriding: true
+  # 自动装配时排除 JDBC 数据源配置
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration

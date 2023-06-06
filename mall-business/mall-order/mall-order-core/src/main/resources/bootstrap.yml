@@ -4,7 +4,8 @@ server:
 spring:
   application:
     name: mall-order
-
-swagger:
-  title: ${spring.application.name}
-  description: 订单模块
+  profiles:
+    active: dev
+  # 允许同名 Bean 覆盖
+  main:
+    allow-bean-definition-overriding: true
