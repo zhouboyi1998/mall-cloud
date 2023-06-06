@@ -4,3 +4,5 @@ server:
 spring:
   application:
     name: mall-gateway
+  profiles:
+    active: dev

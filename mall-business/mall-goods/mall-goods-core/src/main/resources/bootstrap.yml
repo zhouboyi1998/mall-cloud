@@ -4,7 +4,5 @@ server:
 spring:
   application:
     name: mall-goods
-
-swagger:
-  title: ${spring.application.name}
-  description: 商品模块
+  profiles:
+    active: dev

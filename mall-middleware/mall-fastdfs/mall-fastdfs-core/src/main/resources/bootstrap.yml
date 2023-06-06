@@ -4,7 +4,5 @@ server:
 spring:
   application:
     name: mall-fastdfs
-
-swagger:
-  title: ${spring.application.name}
-  description: FastDFS 文件模块
+  profiles:
+    active: dev
