@@ -67,6 +67,7 @@
 | 数据库 | <img src="https://img.shields.io/badge/MySQL-8.0.19-royalblue"> <img src="https://img.shields.io/badge/Redis-3.2.100-crimson"> <img src="https://img.shields.io/badge/PostgreSQL-14.3-royalblue"> |
 | ORM | <img src="https://img.shields.io/badge/MyBatis Plus-3.4.1-dodgerblue"> <img src="https://img.shields.io/badge/Spring Data--brightener"> |
 | 注册中心 | <img src="https://img.shields.io/badge/Eureka--brightener"> <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> <img src="https://img.shields.io/badge/Zookeeper-3.6.3-forestgreen"> |
+| 配置中心 | <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> |
 | 远程调用 | <img src="https://img.shields.io/badge/OpenFeign--brightener"> |
 | 网关 | <img src="https://img.shields.io/badge/Spring Cloud Gateway--brightener"> |
 | 安全 | <img src="https://img.shields.io/badge/Spring Security--brightener"> <img src="https://img.shields.io/badge/Spring Cloud Oauth2--brightener"> <img src="https://img.shields.io/badge/Nimbus JOSE JWT-8.16-deepskyblue"> |

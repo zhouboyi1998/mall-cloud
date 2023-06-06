@@ -1,0 +1,14 @@
+spring:
+  # 微服务配置
+  cloud:
+    # Sentinel 配置
+    sentinel:
+      # Sentinel 控制台
+      transport:
+        dashboard: host.docker.internal:8858
+  # Redis 配置
+  redis:
+    host: host.docker.internal
+    port: 6379
+    password: 123456
+    database: 0

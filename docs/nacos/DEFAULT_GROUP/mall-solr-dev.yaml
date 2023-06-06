@@ -1,0 +1,13 @@
+spring:
+  # 微服务配置
+  cloud:
+    # Sentinel 配置
+    sentinel:
+      # Sentinel 控制台
+      transport:
+        dashboard: 127.0.0.1:8858
+  # Spring Data 配置
+  data:
+    # Solr 配置
+    solr:
+      host: http://127.0.0.1:8983/solr

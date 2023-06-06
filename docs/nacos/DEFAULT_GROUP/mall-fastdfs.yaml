@@ -1,0 +1,19 @@
+spring:
+  # Servlet 配置
+  servlet:
+    # 文件设置
+    multipart:
+      # 文件上传最大限制
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+# FastDFS 配置
+fastdfs:
+  # 字符集&编码
+  character-encoding: utf-8
+  # 下载时的 HTTP Response 内容类型 (强制下载)
+  content-type: application/force-download
+  # 下载时使用的 HTTP Header Key
+  header-key: Content-Disposition
+  # 下载时使用的 HTTP Header Value 前缀
+  header-value-prefix: attachment;fileName=

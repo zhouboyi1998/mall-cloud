@@ -4,7 +4,5 @@ server:
 spring:
   application:
     name: mall-minio
-
-swagger:
-  title: ${spring.application.name}
-  description: MinIO 文件模块
+  profiles:
+    active: dev

@@ -1,0 +1,49 @@
+# Feign 配置
+feign:
+  httpclient:
+    enabled: true
+  okhttp:
+    enabled: true
+  hystrix:
+    enabled: true
+  sentinel:
+    enabled: true
+
+# Actuator 服务健康监控监控配置
+management:
+  endpoints:
+    web:
+      exposure:
+        # 开放所有 Actuator 端点
+        include: "*"
+  endpoint:
+    health:
+      # 显示详细信息
+      show-details: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: ${spring.appcation.name}
+    export:
+      prometheus:
+        enabled: true
+
+# LogBack 配置
+logging:
+  config: classpath:logback/logback-${spring.profiles.active}.xml
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/*Mapper.xml
+  global-config:
+    db-config:
+      # 数据库表命名使用下划线分割
+      table-underline: true
+
+# Swagger 配置
+swagger:
+  title: ${spring.application.name}
+  description: ${spring.application.name}
