@@ -12,10 +12,10 @@ import java.time.ZoneId;
  * @Package: com.cafe.common.config.date
  * @Author: zhouboyi
  * @Date: 2023/3/23 16:30
- * @Description: 日期相关配置
+ * @Description: 时钟配置类
  */
 @Configuration
-public class DateConfig {
+public class ClockConfig {
 
     /**
      * 默认时区

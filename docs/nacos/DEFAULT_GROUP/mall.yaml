@@ -1,3 +1,9 @@
+spring:
+  # Jackson 配置
+  jackson:
+    # 日期类型格式
+    date-format: yyyy-MM-dd HH:mm:ss
+
 # Feign 配置
 feign:
   httpclient:
