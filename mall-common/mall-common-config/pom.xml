@@ -17,6 +17,11 @@
     <description>配置公共包</description>
 
     <dependencies>
+        <!-- Spring Boot JSON -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-json</artifactId>
+        </dependency>
         <!-- Nacos 注册中心-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
