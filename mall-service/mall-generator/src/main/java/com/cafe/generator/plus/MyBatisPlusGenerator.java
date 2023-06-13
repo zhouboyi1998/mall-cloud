@@ -66,6 +66,9 @@ public class MyBatisPlusGenerator {
         TABLE_FILL_LIST.add(new TableFill(DatabaseConstant.Column.UPDATE_TIME, FieldFill.INSERT_UPDATE));
     }
 
+    /**
+     * 生成代码
+     */
     public static void generate() {
         // 1. 全局配置
         GlobalConfig globalConfig = new GlobalConfig()
@@ -109,16 +112,14 @@ public class MyBatisPlusGenerator {
         // 2. 数据源配置
         DataSourceConfig dataSourceConfig = DynamicDataSourceConfig.database(DATABASE_TYPE)
             // 数据库连接配置
-            .setUrl(properties.getProperty("url") + properties.getProperty("table-prefix") + properties.getProperty("module") + properties.getProperty("parameter"))
             .setDriverName(properties.getProperty("driver"))
+            .setUrl(properties.getProperty("url"))
             .setUsername(properties.getProperty("username"))
             .setPassword(properties.getProperty("password"));
 
         // 3. 生成路径配置
         PackageConfig packageConfig = new PackageConfig()
-            // 父路径
-            .setParent(properties.getProperty("project-package") + "." + properties.getProperty("module"))
-            // 代码生成路径
+            .setParent(properties.getProperty("module-package"))
             .setEntity(properties.getProperty("model-package"))
             .setMapper(properties.getProperty("mapper-package"))
             .setXml(properties.getProperty("xml-package"))
