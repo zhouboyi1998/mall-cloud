@@ -26,7 +26,7 @@ public class MyBatisCodeGenerator {
     private static final String DATABASE_TYPE = "mysql";
 
     /**
-     * 生成代码: Model、Mapper
+     * 生成代码
      */
     public static void generate() {
         try {
