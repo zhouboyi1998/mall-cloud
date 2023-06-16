@@ -9,6 +9,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -20,6 +23,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-12-29
  * @Description: 商家-店铺关联关系实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "MerchantShop", description = "商家-店铺关联关系实体模型")
 @TableName("mall_merchant_shop")
 public class MerchantShop implements Serializable {
@@ -49,70 +55,4 @@ public class MerchantShop implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-    public Long getId() {
-        return id;
-    }
-
-    public MerchantShop setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public Long getMerchantId() {
-        return merchantId;
-    }
-
-    public MerchantShop setMerchantId(Long merchantId) {
-        this.merchantId = merchantId;
-        return this;
-    }
-
-    public Long getShopId() {
-        return shopId;
-    }
-
-    public MerchantShop setShopId(Long shopId) {
-        this.shopId = shopId;
-        return this;
-    }
-
-    public Integer getJob() {
-        return job;
-    }
-
-    public MerchantShop setJob(Integer job) {
-        this.job = job;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public MerchantShop setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public MerchantShop setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "MerchantShop{" +
-            "id=" + id +
-            ", merchantId=" + merchantId +
-            ", shopId=" + shopId +
-            ", job=" + job +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            "}";
-    }
 }

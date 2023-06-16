@@ -1,6 +1,7 @@
 package com.cafe.security.model;
 
 import com.cafe.common.constant.pool.StringConstant;
+import io.swagger.annotations.ApiModel;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -26,8 +27,9 @@ import java.util.function.Function;
  * @Package: com.cafe.security.model
  * @Author: zhouboyi
  * @Date: 2022/5/6 14:42
- * @Description: 自定义用户详细信息类
+ * @Description: 用户详细信息
  */
+@ApiModel(value = "UserInfo", description = "用户详细信息")
 public class UserInfo implements UserDetails, CredentialsContainer {
 
     private static final long serialVersionUID = 1L;

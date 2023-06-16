@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,6 +24,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-05-09
  * @Description: 标准化产品单元实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "Spu", description = "标准化产品单元实体模型")
 @TableName("mall_spu")
 public class Spu implements Serializable {
@@ -83,170 +89,4 @@ public class Spu implements Serializable {
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Spu setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getSpuName() {
-        return spuName;
-    }
-
-    public Spu setSpuName(String spuName) {
-        this.spuName = spuName;
-        return this;
-    }
-
-    public Long getBrandId() {
-        return brandId;
-    }
-
-    public Spu setBrandId(Long brandId) {
-        this.brandId = brandId;
-        return this;
-    }
-
-    public Long getCategoryId() {
-        return categoryId;
-    }
-
-    public Spu setCategoryId(Long categoryId) {
-        this.categoryId = categoryId;
-        return this;
-    }
-
-    public Long getShopId() {
-        return shopId;
-    }
-
-    public Spu setShopId(Long shopId) {
-        this.shopId = shopId;
-        return this;
-    }
-
-    public String getCaption() {
-        return caption;
-    }
-
-    public Spu setCaption(String caption) {
-        this.caption = caption;
-        return this;
-    }
-
-    public String getIntro() {
-        return intro;
-    }
-
-    public Spu setIntro(String intro) {
-        this.intro = intro;
-        return this;
-    }
-
-    public Integer getCommentVolume() {
-        return commentVolume;
-    }
-
-    public Spu setCommentVolume(Integer commentVolume) {
-        this.commentVolume = commentVolume;
-        return this;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public Spu setSort(Integer sort) {
-        this.sort = sort;
-        return this;
-    }
-
-    public Integer getAudit() {
-        return audit;
-    }
-
-    public Spu setAudit(Integer audit) {
-        this.audit = audit;
-        return this;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public Spu setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Spu setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public Spu setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    public LocalDateTime getAuditTime() {
-        return auditTime;
-    }
-
-    public Spu setAuditTime(LocalDateTime auditTime) {
-        this.auditTime = auditTime;
-        return this;
-    }
-
-    public LocalDateTime getLaunchTime() {
-        return launchTime;
-    }
-
-    public Spu setLaunchTime(LocalDateTime launchTime) {
-        this.launchTime = launchTime;
-        return this;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public Spu setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Spu{" +
-            "id=" + id +
-            ", spuName=" + spuName +
-            ", brandId=" + brandId +
-            ", categoryId=" + categoryId +
-            ", shopId=" + shopId +
-            ", caption=" + caption +
-            ", intro=" + intro +
-            ", commentVolume=" + commentVolume +
-            ", sort=" + sort +
-            ", audit=" + audit +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", auditTime=" + auditTime +
-            ", launchTime=" + launchTime +
-            ", deleted=" + deleted +
-            "}";
-    }
 }

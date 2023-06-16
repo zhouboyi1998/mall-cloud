@@ -9,6 +9,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -20,6 +23,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-12-29
  * @Description: 保障实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "Guarantee", description = "保障实体模型")
 @TableName("mall_guarantee")
 public class Guarantee implements Serializable {
@@ -50,80 +56,4 @@ public class Guarantee implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Guarantee setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public Integer getGuaranteeType() {
-        return guaranteeType;
-    }
-
-    public Guarantee setGuaranteeType(Integer guaranteeType) {
-        this.guaranteeType = guaranteeType;
-        return this;
-    }
-
-    public Integer getGuaranteePeriod() {
-        return guaranteePeriod;
-    }
-
-    public Guarantee setGuaranteePeriod(Integer guaranteePeriod) {
-        this.guaranteePeriod = guaranteePeriod;
-        return this;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public Guarantee setRemark(String remark) {
-        this.remark = remark;
-        return this;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public Guarantee setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Guarantee setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public Guarantee setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Guarantee{" +
-            "id=" + id +
-            ", guaranteeType=" + guaranteeType +
-            ", guaranteePeriod=" + guaranteePeriod +
-            ", remark=" + remark +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            "}";
-    }
 }

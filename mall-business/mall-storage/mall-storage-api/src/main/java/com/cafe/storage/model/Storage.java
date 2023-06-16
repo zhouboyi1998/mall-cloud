@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,6 +24,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-12-29
  * @Description: 仓库实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "Storage", description = "仓库实体模型")
 @TableName("mall_storage")
 public class Storage implements Serializable {
@@ -71,130 +77,4 @@ public class Storage implements Serializable {
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Storage setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getStorageName() {
-        return storageName;
-    }
-
-    public Storage setStorageName(String storageName) {
-        this.storageName = storageName;
-        return this;
-    }
-
-    public Long getProvinceId() {
-        return provinceId;
-    }
-
-    public Storage setProvinceId(Long provinceId) {
-        this.provinceId = provinceId;
-        return this;
-    }
-
-    public Long getCityId() {
-        return cityId;
-    }
-
-    public Storage setCityId(Long cityId) {
-        this.cityId = cityId;
-        return this;
-    }
-
-    public Long getDistrictId() {
-        return districtId;
-    }
-
-    public Storage setDistrictId(Long districtId) {
-        this.districtId = districtId;
-        return this;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public Storage setAddress(String address) {
-        this.address = address;
-        return this;
-    }
-
-    public Integer getStorageType() {
-        return storageType;
-    }
-
-    public Storage setStorageType(Integer storageType) {
-        this.storageType = storageType;
-        return this;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public Storage setSort(Integer sort) {
-        this.sort = sort;
-        return this;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public Storage setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Storage setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public Storage setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public Storage setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Storage{" +
-            "id=" + id +
-            ", storageName=" + storageName +
-            ", provinceId=" + provinceId +
-            ", cityId=" + cityId +
-            ", districtId=" + districtId +
-            ", address=" + address +
-            ", storageType=" + storageType +
-            ", sort=" + sort +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", deleted=" + deleted +
-            "}";
-    }
 }

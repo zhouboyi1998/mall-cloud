@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -14,6 +17,9 @@ import java.io.Serializable;
  * @Date: 2023/2/22 16:58
  * @Description: 图片验证码模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "Captcha", description = "图片验证码模型")
 public class Captcha implements Serializable {
 
@@ -25,30 +31,4 @@ public class Captcha implements Serializable {
 
     @ApiModelProperty(value = "Base64 编码图片验证码")
     private String image;
-
-    public Long getKey() {
-        return key;
-    }
-
-    public Captcha setKey(Long key) {
-        this.key = key;
-        return this;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public Captcha setImage(String image) {
-        this.image = image;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Captcha{" +
-            "key=" + key +
-            ", image=" + image +
-            '}';
-    }
 }

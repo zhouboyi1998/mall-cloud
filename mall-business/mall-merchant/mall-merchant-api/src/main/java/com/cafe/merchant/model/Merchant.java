@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,6 +24,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-12-29
  * @Description: 商家实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "Merchant", description = "商家实体模型")
 @TableName("mall_merchant")
 public class Merchant implements Serializable {
@@ -57,90 +63,4 @@ public class Merchant implements Serializable {
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Merchant setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public Merchant setUserId(Long userId) {
-        this.userId = userId;
-        return this;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public Merchant setNickname(String nickname) {
-        this.nickname = nickname;
-        return this;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public Merchant setAvatar(String avatar) {
-        this.avatar = avatar;
-        return this;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public Merchant setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Merchant setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public Merchant setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public Merchant setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Merchant{" +
-            "id=" + id +
-            ", userId=" + userId +
-            ", nickname=" + nickname +
-            ", avatar=" + avatar +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", deleted=" + deleted +
-            "}";
-    }
 }
