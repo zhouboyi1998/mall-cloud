@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,6 +24,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-11-23
  * @Description: 平台实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "Platform", description = "平台实体模型")
 @TableName("mall_platform")
 public class Platform implements Serializable {
@@ -53,80 +59,4 @@ public class Platform implements Serializable {
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Platform setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getClientId() {
-        return clientId;
-    }
-
-    public Platform setClientId(String clientId) {
-        this.clientId = clientId;
-        return this;
-    }
-
-    public String getPlatformName() {
-        return platformName;
-    }
-
-    public Platform setPlatformName(String platformName) {
-        this.platformName = platformName;
-        return this;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public Platform setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Platform setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public Platform setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public Platform setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Platform{" +
-            "id=" + id +
-            ", clientId=" + clientId +
-            ", platformName=" + platformName +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", deleted=" + deleted +
-            "}";
-    }
 }

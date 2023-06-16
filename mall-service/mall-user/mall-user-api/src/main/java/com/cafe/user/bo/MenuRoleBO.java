@@ -2,6 +2,9 @@ package com.cafe.user.bo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -13,6 +16,9 @@ import java.util.ArrayList;
  * @Date: 2022/9/48 09:47
  * @Description: 菜单-角色关联关系业务对象
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "MenuRoleBO", description = "菜单-角色关联关系业务对象")
 public class MenuRoleBO implements Serializable {
 
@@ -23,30 +29,4 @@ public class MenuRoleBO implements Serializable {
 
     @ApiModelProperty(value = "角色名称列表")
     private ArrayList<String> roleNameList;
-
-    public String getMenuPath() {
-        return menuPath;
-    }
-
-    public MenuRoleBO setMenuPath(String menuPath) {
-        this.menuPath = menuPath;
-        return this;
-    }
-
-    public ArrayList<String> getRoleNameList() {
-        return roleNameList;
-    }
-
-    public MenuRoleBO setRoleNameList(ArrayList<String> roleNameList) {
-        this.roleNameList = roleNameList;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "MenuRoleBO{" +
-            ", menuPath=" + menuPath +
-            ", roleNameList=" + roleNameList +
-            "}";
-    }
 }

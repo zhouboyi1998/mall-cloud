@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,6 +24,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-05-10
  * @Description: 用户实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "User", description = "用户实体模型")
 @TableName("mall_user")
 public class User implements Serializable {
@@ -57,90 +63,4 @@ public class User implements Serializable {
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
-
-    public Long getId() {
-        return id;
-    }
-
-    public User setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public User setUsername(String username) {
-        this.username = username;
-        return this;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public User setPassword(String password) {
-        this.password = password;
-        return this;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public User setMobile(String mobile) {
-        this.mobile = mobile;
-        return this;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public User setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public User setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public User setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public User setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-            "id=" + id +
-            ", username=" + username +
-            ", password=" + password +
-            ", mobile=" + mobile +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", deleted=" + deleted +
-            "}";
-    }
 }

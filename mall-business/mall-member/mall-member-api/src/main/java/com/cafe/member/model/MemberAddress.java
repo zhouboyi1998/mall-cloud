@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,6 +24,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-12-29
  * @Description: 会员收货地址实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "MemberAddress", description = "会员收货地址实体模型")
 @TableName("mall_member_address")
 public class MemberAddress implements Serializable {
@@ -79,150 +85,4 @@ public class MemberAddress implements Serializable {
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
-
-    public Long getId() {
-        return id;
-    }
-
-    public MemberAddress setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public Long getMemberId() {
-        return memberId;
-    }
-
-    public MemberAddress setMemberId(Long memberId) {
-        this.memberId = memberId;
-        return this;
-    }
-
-    public Long getProvinceId() {
-        return provinceId;
-    }
-
-    public MemberAddress setProvinceId(Long provinceId) {
-        this.provinceId = provinceId;
-        return this;
-    }
-
-    public Long getCityId() {
-        return cityId;
-    }
-
-    public MemberAddress setCityId(Long cityId) {
-        this.cityId = cityId;
-        return this;
-    }
-
-    public Long getDistrictId() {
-        return districtId;
-    }
-
-    public MemberAddress setDistrictId(Long districtId) {
-        this.districtId = districtId;
-        return this;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public MemberAddress setAddress(String address) {
-        this.address = address;
-        return this;
-    }
-
-    public String getReceiver() {
-        return receiver;
-    }
-
-    public MemberAddress setReceiver(String receiver) {
-        this.receiver = receiver;
-        return this;
-    }
-
-    public String getReceiverMobile() {
-        return receiverMobile;
-    }
-
-    public MemberAddress setReceiverMobile(String receiverMobile) {
-        this.receiverMobile = receiverMobile;
-        return this;
-    }
-
-    public Boolean getDefaulted() {
-        return defaulted;
-    }
-
-    public MemberAddress setDefaulted(Boolean defaulted) {
-        this.defaulted = defaulted;
-        return this;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public MemberAddress setSort(Integer sort) {
-        this.sort = sort;
-        return this;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public MemberAddress setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public MemberAddress setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public MemberAddress setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public MemberAddress setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "MemberAddress{" +
-            "id=" + id +
-            ", memberId=" + memberId +
-            ", provinceId=" + provinceId +
-            ", cityId=" + cityId +
-            ", districtId=" + districtId +
-            ", address=" + address +
-            ", receiver=" + receiver +
-            ", receiverMobile=" + receiverMobile +
-            ", defaulted=" + defaulted +
-            ", sort=" + sort +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", deleted=" + deleted +
-            "}";
-    }
 }

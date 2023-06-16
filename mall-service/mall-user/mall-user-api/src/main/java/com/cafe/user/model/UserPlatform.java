@@ -9,6 +9,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -20,6 +23,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-11-23
  * @Description: 用户-平台关联关系实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "UserPlatform", description = "用户-平台关联关系实体模型")
 @TableName("mall_user_platform")
 public class UserPlatform implements Serializable {
@@ -46,60 +52,4 @@ public class UserPlatform implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-    public Long getId() {
-        return id;
-    }
-
-    public UserPlatform setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public UserPlatform setUserId(Long userId) {
-        this.userId = userId;
-        return this;
-    }
-
-    public Long getPlatformId() {
-        return platformId;
-    }
-
-    public UserPlatform setPlatformId(Long platformId) {
-        this.platformId = platformId;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public UserPlatform setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public UserPlatform setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "UserPlatform{" +
-            "id=" + id +
-            ", userId=" + userId +
-            ", platformId=" + platformId +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            "}";
-    }
 }
