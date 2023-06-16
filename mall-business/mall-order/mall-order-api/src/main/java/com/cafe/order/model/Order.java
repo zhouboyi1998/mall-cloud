@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -22,6 +25,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-12-29
  * @Description: 订单实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "Order", description = "订单实体模型")
 @TableName("mall_order")
 public class Order implements Serializable {
@@ -95,210 +101,4 @@ public class Order implements Serializable {
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Order setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public Long getOrderNo() {
-        return orderNo;
-    }
-
-    public Order setOrderNo(Long orderNo) {
-        this.orderNo = orderNo;
-        return this;
-    }
-
-    public Long getMemberId() {
-        return memberId;
-    }
-
-    public Order setMemberId(Long memberId) {
-        this.memberId = memberId;
-        return this;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public Order setAddress(String address) {
-        this.address = address;
-        return this;
-    }
-
-    public String getReceiver() {
-        return receiver;
-    }
-
-    public Order setReceiver(String receiver) {
-        this.receiver = receiver;
-        return this;
-    }
-
-    public String getMobile() {
-        return mobile;
-    }
-
-    public Order setMobile(String mobile) {
-        this.mobile = mobile;
-        return this;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public Order setAmount(BigDecimal amount) {
-        this.amount = amount;
-        return this;
-    }
-
-    public BigDecimal getDiscount() {
-        return discount;
-    }
-
-    public Order setDiscount(BigDecimal discount) {
-        this.discount = discount;
-        return this;
-    }
-
-    public BigDecimal getCoupon() {
-        return coupon;
-    }
-
-    public Order setCoupon(BigDecimal coupon) {
-        this.coupon = coupon;
-        return this;
-    }
-
-    public BigDecimal getPostage() {
-        return postage;
-    }
-
-    public Order setPostage(BigDecimal postage) {
-        this.postage = postage;
-        return this;
-    }
-
-    public BigDecimal getPayment() {
-        return payment;
-    }
-
-    public Order setPayment(BigDecimal payment) {
-        this.payment = payment;
-        return this;
-    }
-
-    public Integer getPaymentChannel() {
-        return paymentChannel;
-    }
-
-    public Order setPaymentChannel(Integer paymentChannel) {
-        this.paymentChannel = paymentChannel;
-        return this;
-    }
-
-    public Integer getInvoice() {
-        return invoice;
-    }
-
-    public Order setInvoice(Integer invoice) {
-        this.invoice = invoice;
-        return this;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public Order setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Order setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public Order setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    public LocalDateTime getPaymentTime() {
-        return paymentTime;
-    }
-
-    public Order setPaymentTime(LocalDateTime paymentTime) {
-        this.paymentTime = paymentTime;
-        return this;
-    }
-
-    public LocalDateTime getDeliverTime() {
-        return deliverTime;
-    }
-
-    public Order setDeliverTime(LocalDateTime deliverTime) {
-        this.deliverTime = deliverTime;
-        return this;
-    }
-
-    public LocalDateTime getCompletionTime() {
-        return completionTime;
-    }
-
-    public Order setCompletionTime(LocalDateTime completionTime) {
-        this.completionTime = completionTime;
-        return this;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public Order setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Order{" +
-            "id=" + id +
-            ", orderNo=" + orderNo +
-            ", memberId=" + memberId +
-            ", address=" + address +
-            ", receiver=" + receiver +
-            ", mobile=" + mobile +
-            ", amount=" + amount +
-            ", discount=" + discount +
-            ", coupon=" + coupon +
-            ", postage=" + postage +
-            ", payment=" + payment +
-            ", paymentChannel=" + paymentChannel +
-            ", invoice=" + invoice +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", paymentTime=" + paymentTime +
-            ", deliverTime=" + deliverTime +
-            ", completionTime=" + completionTime +
-            ", deleted=" + deleted +
-            "}";
-    }
 }

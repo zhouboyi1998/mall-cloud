@@ -2,6 +2,9 @@ package com.cafe.file.fastdfs.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -12,6 +15,9 @@ import java.io.Serializable;
  * @Date: 2022/7/23 19:32
  * @Description: FastDFS 文件模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "FastDFSFile", description = "FastDFS 文件模型")
 public class FastDFSFile implements Serializable {
 
@@ -23,31 +29,4 @@ public class FastDFSFile implements Serializable {
 
     @ApiModelProperty(value = "文件内容")
     private byte[] content;
-
-    public String getName() {
-        return name;
-    }
-
-    public FastDFSFile setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public String getExtension() {
-        return extension;
-    }
-
-    public FastDFSFile setExtension(String extension) {
-        this.extension = extension;
-        return this;
-    }
-
-    public byte[] getContent() {
-        return content;
-    }
-
-    public FastDFSFile setContent(byte[] content) {
-        this.content = content;
-        return this;
-    }
 }

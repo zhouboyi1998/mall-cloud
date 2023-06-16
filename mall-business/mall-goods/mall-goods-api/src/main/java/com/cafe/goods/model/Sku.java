@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -22,6 +25,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-05-09
  * @Description: 库存量单位实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "Sku", description = "库存量单位实体模型")
 @TableName("mall_sku")
 public class Sku implements Serializable {
@@ -97,220 +103,4 @@ public class Sku implements Serializable {
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Sku setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getSkuName() {
-        return skuName;
-    }
-
-    public Sku setSkuName(String skuName) {
-        this.skuName = skuName;
-        return this;
-    }
-
-    public Long getSpuId() {
-        return spuId;
-    }
-
-    public Sku setSpuId(Long spuId) {
-        this.spuId = spuId;
-        return this;
-    }
-
-    public BigDecimal getOriginalPrice() {
-        return originalPrice;
-    }
-
-    public Sku setOriginalPrice(BigDecimal originalPrice) {
-        this.originalPrice = originalPrice;
-        return this;
-    }
-
-    public BigDecimal getDiscountPrice() {
-        return discountPrice;
-    }
-
-    public Sku setDiscountPrice(BigDecimal discountPrice) {
-        this.discountPrice = discountPrice;
-        return this;
-    }
-
-    public BigDecimal getSeckillPrice() {
-        return seckillPrice;
-    }
-
-    public Sku setSeckillPrice(BigDecimal seckillPrice) {
-        this.seckillPrice = seckillPrice;
-        return this;
-    }
-
-    public String getImage() {
-        return image;
-    }
-
-    public Sku setImage(String image) {
-        this.image = image;
-        return this;
-    }
-
-    public String getImageList() {
-        return imageList;
-    }
-
-    public Sku setImageList(String imageList) {
-        this.imageList = imageList;
-        return this;
-    }
-
-    public String getVideo() {
-        return video;
-    }
-
-    public Sku setVideo(String video) {
-        this.video = video;
-        return this;
-    }
-
-    public String getSpecification() {
-        return specification;
-    }
-
-    public Sku setSpecification(String specification) {
-        this.specification = specification;
-        return this;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public Sku setStock(Integer stock) {
-        this.stock = stock;
-        return this;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public Sku setUnit(String unit) {
-        this.unit = unit;
-        return this;
-    }
-
-    public Integer getSaleVolume() {
-        return saleVolume;
-    }
-
-    public Sku setSaleVolume(Integer saleVolume) {
-        this.saleVolume = saleVolume;
-        return this;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public Sku setSort(Integer sort) {
-        this.sort = sort;
-        return this;
-    }
-
-    public Integer getAudit() {
-        return audit;
-    }
-
-    public Sku setAudit(Integer audit) {
-        this.audit = audit;
-        return this;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public Sku setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Sku setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public Sku setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    public LocalDateTime getAuditTime() {
-        return auditTime;
-    }
-
-    public Sku setAuditTime(LocalDateTime auditTime) {
-        this.auditTime = auditTime;
-        return this;
-    }
-
-    public LocalDateTime getLaunchTime() {
-        return launchTime;
-    }
-
-    public Sku setLaunchTime(LocalDateTime launchTime) {
-        this.launchTime = launchTime;
-        return this;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public Sku setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Sku{" +
-            "id=" + id +
-            ", skuName=" + skuName +
-            ", spuId=" + spuId +
-            ", originalPrice=" + originalPrice +
-            ", discountPrice=" + discountPrice +
-            ", seckillPrice=" + seckillPrice +
-            ", image=" + image +
-            ", imageList=" + imageList +
-            ", video=" + video +
-            ", specification=" + specification +
-            ", stock=" + stock +
-            ", unit=" + unit +
-            ", saleVolume=" + saleVolume +
-            ", sort=" + sort +
-            ", audit=" + audit +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", auditTime=" + auditTime +
-            ", launchTime=" + launchTime +
-            ", deleted=" + deleted +
-            "}";
-    }
 }

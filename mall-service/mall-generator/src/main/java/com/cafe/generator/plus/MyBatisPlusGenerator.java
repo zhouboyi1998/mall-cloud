@@ -150,7 +150,7 @@ public class MyBatisPlusGenerator {
             // 是否生成链式 Model
             .setChainModel(true)
             // 是否生成 Lombok Model
-            .setEntityLombokModel(false)
+            .setEntityLombokModel(true)
             // 是否生成 RESTful 风格 Controller
             .setRestControllerStyle(true)
             // 请求路径格式 (true: 连字符, false: 驼峰)

@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,6 +24,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-12-29
  * @Description: 店铺实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "Shop", description = "店铺实体模型")
 @TableName("mall_shop")
 public class Shop implements Serializable {
@@ -71,140 +77,4 @@ public class Shop implements Serializable {
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Shop setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getShopName() {
-        return shopName;
-    }
-
-    public Shop setShopName(String shopName) {
-        this.shopName = shopName;
-        return this;
-    }
-
-    public Integer getShopType() {
-        return shopType;
-    }
-
-    public Shop setShopType(Integer shopType) {
-        this.shopType = shopType;
-        return this;
-    }
-
-    public String getLogo() {
-        return logo;
-    }
-
-    public Shop setLogo(String logo) {
-        this.logo = logo;
-        return this;
-    }
-
-    public String getIntro() {
-        return intro;
-    }
-
-    public Shop setIntro(String intro) {
-        this.intro = intro;
-        return this;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public Shop setTelephone(String telephone) {
-        this.telephone = telephone;
-        return this;
-    }
-
-    public String getBusinessLicense() {
-        return businessLicense;
-    }
-
-    public Shop setBusinessLicense(String businessLicense) {
-        this.businessLicense = businessLicense;
-        return this;
-    }
-
-    public Integer getAudit() {
-        return audit;
-    }
-
-    public Shop setAudit(Integer audit) {
-        this.audit = audit;
-        return this;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public Shop setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Shop setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public Shop setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    public LocalDateTime getAuditTime() {
-        return auditTime;
-    }
-
-    public Shop setAuditTime(LocalDateTime auditTime) {
-        this.auditTime = auditTime;
-        return this;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public Shop setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Shop{" +
-            "id=" + id +
-            ", shopName=" + shopName +
-            ", shopType=" + shopType +
-            ", logo=" + logo +
-            ", intro=" + intro +
-            ", telephone=" + telephone +
-            ", businessLicense=" + businessLicense +
-            ", audit=" + audit +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", auditTime=" + auditTime +
-            ", deleted=" + deleted +
-            "}";
-    }
 }

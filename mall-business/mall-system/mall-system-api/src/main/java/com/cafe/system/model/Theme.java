@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,6 +24,9 @@ import java.time.LocalDateTime;
  * @Date: 2023-05-16
  * @Description: 主题实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "Theme", description = "主题实体模型")
 @TableName("mall_theme")
 public class Theme implements Serializable {
@@ -62,110 +68,4 @@ public class Theme implements Serializable {
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Theme setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getBasicName() {
-        return basicName;
-    }
-
-    public Theme setBasicName(String basicName) {
-        this.basicName = basicName;
-        return this;
-    }
-
-    public String getBasicCode() {
-        return basicCode;
-    }
-
-    public Theme setBasicCode(String basicCode) {
-        this.basicCode = basicCode;
-        return this;
-    }
-
-    public String getHoverName() {
-        return hoverName;
-    }
-
-    public Theme setHoverName(String hoverName) {
-        this.hoverName = hoverName;
-        return this;
-    }
-
-    public String getHoverCode() {
-        return hoverCode;
-    }
-
-    public Theme setHoverCode(String hoverCode) {
-        this.hoverCode = hoverCode;
-        return this;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public Theme setSort(Integer sort) {
-        this.sort = sort;
-        return this;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public Theme setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Theme setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public Theme setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public Theme setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Theme{" +
-            "id=" + id +
-            ", basicName=" + basicName +
-            ", basicCode=" + basicCode +
-            ", hoverName=" + hoverName +
-            ", hoverCode=" + hoverCode +
-            ", sort=" + sort +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", deleted=" + deleted +
-            "}";
-    }
 }
