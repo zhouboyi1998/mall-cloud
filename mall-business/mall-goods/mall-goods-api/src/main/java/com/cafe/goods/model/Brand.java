@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,6 +24,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-05-09
  * @Description: 品牌实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "Brand", description = "品牌实体模型")
 @TableName("mall_brand")
 public class Brand implements Serializable {
@@ -59,100 +65,4 @@ public class Brand implements Serializable {
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Brand setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getBrandName() {
-        return brandName;
-    }
-
-    public Brand setBrandName(String brandName) {
-        this.brandName = brandName;
-        return this;
-    }
-
-    public String getLetter() {
-        return letter;
-    }
-
-    public Brand setLetter(String letter) {
-        this.letter = letter;
-        return this;
-    }
-
-    public String getBrandImage() {
-        return brandImage;
-    }
-
-    public Brand setBrandImage(String brandImage) {
-        this.brandImage = brandImage;
-        return this;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public Brand setSort(Integer sort) {
-        this.sort = sort;
-        return this;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public Brand setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Brand setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public Brand setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public Brand setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Brand{" +
-            "id=" + id +
-            ", brandName=" + brandName +
-            ", letter=" + letter +
-            ", brandImage=" + brandImage +
-            ", sort=" + sort +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", deleted=" + deleted +
-            "}";
-    }
 }

@@ -9,6 +9,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -20,6 +23,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-12-29
  * @Description: 库存实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "Stock", description = "库存实体模型")
 @TableName("mall_stock")
 public class Stock implements Serializable {
@@ -56,90 +62,4 @@ public class Stock implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Stock setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public Long getSkuId() {
-        return skuId;
-    }
-
-    public Stock setSkuId(Long skuId) {
-        this.skuId = skuId;
-        return this;
-    }
-
-    public Long getShopId() {
-        return shopId;
-    }
-
-    public Stock setShopId(Long shopId) {
-        this.shopId = shopId;
-        return this;
-    }
-
-    public Long getStorageId() {
-        return storageId;
-    }
-
-    public Stock setStorageId(Long storageId) {
-        this.storageId = storageId;
-        return this;
-    }
-
-    public Integer getStock() {
-        return stock;
-    }
-
-    public Stock setStock(Integer stock) {
-        this.stock = stock;
-        return this;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public Stock setUnit(String unit) {
-        this.unit = unit;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Stock setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public Stock setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Stock{" +
-            "id=" + id +
-            ", skuId=" + skuId +
-            ", shopId=" + shopId +
-            ", storageId=" + storageId +
-            ", stock=" + stock +
-            ", unit=" + unit +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            "}";
-    }
 }

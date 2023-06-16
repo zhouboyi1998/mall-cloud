@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,6 +24,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-12-29
  * @Description: 管理员实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "Admin", description = "管理员实体模型")
 @TableName("mall_admin")
 public class Admin implements Serializable {
@@ -60,100 +66,4 @@ public class Admin implements Serializable {
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Admin setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public Admin setUserId(Long userId) {
-        this.userId = userId;
-        return this;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public Admin setNickname(String nickname) {
-        this.nickname = nickname;
-        return this;
-    }
-
-    public String getAvatar() {
-        return avatar;
-    }
-
-    public Admin setAvatar(String avatar) {
-        this.avatar = avatar;
-        return this;
-    }
-
-    public Integer getGender() {
-        return gender;
-    }
-
-    public Admin setGender(Integer gender) {
-        this.gender = gender;
-        return this;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public Admin setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Admin setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public Admin setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public Admin setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Admin{" +
-            "id=" + id +
-            ", userId=" + userId +
-            ", nickname=" + nickname +
-            ", avatar=" + avatar +
-            ", gender=" + gender +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", deleted=" + deleted +
-            "}";
-    }
 }

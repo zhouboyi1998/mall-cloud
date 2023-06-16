@@ -9,6 +9,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -20,6 +23,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-05-09
  * @Description: 角色-菜单关联关系实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "RoleMenu", description = "角色-菜单关联关系实体模型")
 @TableName("mall_role_menu")
 public class RoleMenu implements Serializable {
@@ -46,60 +52,4 @@ public class RoleMenu implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
-
-    public Long getId() {
-        return id;
-    }
-
-    public RoleMenu setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public Long getRoleId() {
-        return roleId;
-    }
-
-    public RoleMenu setRoleId(Long roleId) {
-        this.roleId = roleId;
-        return this;
-    }
-
-    public Long getMenuId() {
-        return menuId;
-    }
-
-    public RoleMenu setMenuId(Long menuId) {
-        this.menuId = menuId;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public RoleMenu setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public RoleMenu setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "RoleMenu{" +
-            "id=" + id +
-            ", roleId=" + roleId +
-            ", menuId=" + menuId +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            "}";
-    }
 }

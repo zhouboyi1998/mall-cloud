@@ -10,6 +10,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -21,6 +24,9 @@ import java.time.LocalDateTime;
  * @Date: 2022-12-29
  * @Description: 地址实体模型
  */
+@Data
+@EqualsAndHashCode(callSuper = false)
+@Accessors(chain = true)
 @ApiModel(value = "Area", description = "地址实体模型")
 @TableName("mall_area")
 public class Area implements Serializable {
@@ -62,110 +68,4 @@ public class Area implements Serializable {
     @TableField(value = "is_deleted")
     @TableLogic
     private Boolean deleted;
-
-    public Long getId() {
-        return id;
-    }
-
-    public Area setId(Long id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getAreaName() {
-        return areaName;
-    }
-
-    public Area setAreaName(String areaName) {
-        this.areaName = areaName;
-        return this;
-    }
-
-    public Integer getParentId() {
-        return parentId;
-    }
-
-    public Area setParentId(Integer parentId) {
-        this.parentId = parentId;
-        return this;
-    }
-
-    public Integer getAreaLevel() {
-        return areaLevel;
-    }
-
-    public Area setAreaLevel(Integer areaLevel) {
-        this.areaLevel = areaLevel;
-        return this;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public Area setPostcode(String postcode) {
-        this.postcode = postcode;
-        return this;
-    }
-
-    public Integer getSort() {
-        return sort;
-    }
-
-    public Area setSort(Integer sort) {
-        this.sort = sort;
-        return this;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public Area setStatus(Integer status) {
-        this.status = status;
-        return this;
-    }
-
-    public LocalDateTime getCreateTime() {
-        return createTime;
-    }
-
-    public Area setCreateTime(LocalDateTime createTime) {
-        this.createTime = createTime;
-        return this;
-    }
-
-    public LocalDateTime getUpdateTime() {
-        return updateTime;
-    }
-
-    public Area setUpdateTime(LocalDateTime updateTime) {
-        this.updateTime = updateTime;
-        return this;
-    }
-
-    public Boolean getDeleted() {
-        return deleted;
-    }
-
-    public Area setDeleted(Boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "Area{" +
-            "id=" + id +
-            ", areaName=" + areaName +
-            ", parentId=" + parentId +
-            ", areaLevel=" + areaLevel +
-            ", postcode=" + postcode +
-            ", sort=" + sort +
-            ", status=" + status +
-            ", createTime=" + createTime +
-            ", updateTime=" + updateTime +
-            ", deleted=" + deleted +
-            "}";
-    }
 }
