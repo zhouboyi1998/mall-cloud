@@ -1,15 +1,15 @@
-package com.cafe.admin.service.impl;
+package com.cafe.system.service.impl;
 
-import com.cafe.admin.model.Admin;
-import com.cafe.admin.mapper.AdminMapper;
-import com.cafe.admin.service.AdminService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cafe.system.mapper.AdminMapper;
+import com.cafe.system.model.Admin;
+import com.cafe.system.service.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.admin.service.impl
+ * @Package: com.cafe.system.service.impl
  * @Author: zhouboyi
  * @Date: 2022-12-29
  * @Description: 管理员业务实现类

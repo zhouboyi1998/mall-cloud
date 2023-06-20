@@ -16,7 +16,6 @@
     <description>业务模块</description>
 
     <modules>
-        <module>mall-admin</module>
         <module>mall-goods</module>
         <module>mall-member</module>
         <module>mall-merchant</module>

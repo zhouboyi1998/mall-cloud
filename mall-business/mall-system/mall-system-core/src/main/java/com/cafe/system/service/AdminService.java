@@ -1,11 +1,11 @@
-package com.cafe.admin.service;
+package com.cafe.system.service;
 
-import com.cafe.admin.model.Admin;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.cafe.system.model.Admin;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.admin.service
+ * @Package: com.cafe.system.service
  * @Author: zhouboyi
  * @Date: 2022-12-29
  * @Description: 管理员业务接口
