@@ -21,7 +21,6 @@
 
 ```
 |-- mall-business (业务模块)
-    |-- mall-admin (管理员模块)
     |-- mall-goods (商品模块)
     |-- mall-member (会员模块)
     |-- mall-merchant (商家模块)

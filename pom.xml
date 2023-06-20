@@ -380,11 +380,6 @@
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
-                <artifactId>mall-admin-api</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
                 <artifactId>mall-member-api</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>

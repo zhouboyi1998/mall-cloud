@@ -1,12 +1,12 @@
-package com.cafe.admin.mapper;
+package com.cafe.system.mapper;
 
-import com.cafe.admin.model.Admin;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.cafe.system.model.Admin;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.admin.mapper
+ * @Package: com.cafe.system.mapper
  * @Author: zhouboyi
  * @Date: 2022-12-29
  * @Description: 管理员数据访问接口
