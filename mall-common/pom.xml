@@ -20,6 +20,7 @@
         <module>mall-common-constant</module>
         <module>mall-common-core</module>
         <module>mall-common-kafka</module>
+        <module>mall-common-lang</module>
         <module>mall-common-log</module>
         <module>mall-common-mybatisplus</module>
         <module>mall-common-rabbitmq</module>

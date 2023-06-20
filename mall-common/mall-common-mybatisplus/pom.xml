@@ -38,6 +38,10 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-common-lang</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-id-api</artifactId>
         </dependency>
     </dependencies>
