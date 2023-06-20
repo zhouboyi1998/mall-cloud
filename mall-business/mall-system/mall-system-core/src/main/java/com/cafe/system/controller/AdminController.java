@@ -1,9 +1,9 @@
-package com.cafe.admin.controller;
+package com.cafe.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.admin.model.Admin;
-import com.cafe.admin.service.AdminService;
+import com.cafe.system.model.Admin;
+import com.cafe.system.service.AdminService;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import io.swagger.annotations.Api;
@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.admin.controller
+ * @Package: com.cafe.system.controller
  * @Author: zhouboyi
  * @Date: 2022-12-29
  * @Description: 管理员接口

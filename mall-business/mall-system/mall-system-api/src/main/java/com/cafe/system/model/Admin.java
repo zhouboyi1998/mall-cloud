@@ -1,4 +1,4 @@
-package com.cafe.admin.model;
+package com.cafe.system.model;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.admin.model
+ * @Package: com.cafe.system.model
  * @Author: zhouboyi
  * @Date: 2022-12-29
  * @Description: 管理员实体模型
