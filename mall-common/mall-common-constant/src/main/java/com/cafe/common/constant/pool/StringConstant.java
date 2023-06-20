@@ -63,4 +63,14 @@ public class StringConstant {
      * 双引号
      */
     public static final String DOUBLE_QUOTATION_MARK = "\"";
+
+    /**
+     * 时间
+     */
+    public static final String TIME = "time";
+
+    /**
+     * 时间区间
+     */
+    public static final String PERIOD = "period";
 }
