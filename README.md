@@ -34,6 +34,7 @@
     |-- mall-common-constant (常量公共包)
     |-- mall-common-core (核心公共包)
     |-- mall-common-kafka (Kafka 消息队列公共包)
+    |-- mall-common-lang (数据类型公共包)
     |-- mall-common-log (日志公共包)
     |-- mall-common-mybatisplus (MyBatis-Plus 公共包)
     |-- mall-common-rabbitmq (RabbitMQ 消息队列公共包)
