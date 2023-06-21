@@ -52,6 +52,7 @@
     |-- mall-solr (Solr 搜索引擎)
 
 |-- mall-service (基础服务模块)
+    |-- mall-admin (Spring Boot Admin 监控)
     |-- mall-eureka (Eureka 注册中心, 弃用)
     |-- mall-gateway (Spring Cloud Gateway 网关)
     |-- mall-generator (代码生成器)
@@ -80,7 +81,7 @@
 | 对象存储 | <img src="https://img.shields.io/badge/MinIO-8.3.4-crimson"> <img src="https://img.shields.io/badge/FastDFS-1.27.0.0-darkorange"> |
 | 验证码生成器 | <img src="https://img.shields.io/badge/Kaptcha-1.1.0-blue"> <img src="https://img.shields.io/badge/Easy Captcha-1.6.2-blue"> |
 | 任务调度 | <img src="https://img.shields.io/badge/XXL JOB-2.4.0-mediumseagreen"> |
-| 监控告警 | <img src="https://img.shields.io/badge/Prometheus-2.43.0-orange"> |
+| 监控告警 | <img src="https://img.shields.io/badge/Prometheus-2.43.0-orange"> <img src="https://img.shields.io/badge/Spring Boot Admin-2.3.1-seagreen"> |
 | 容器化 | <img src="https://img.shields.io/badge/Docker--deepskyblue"> |
 | 可视化 | <img src="https://img.shields.io/badge/Kibana-7.6.2-darkturquoise"> <img src="https://img.shields.io/badge/ElasticSearch Head--darkturquoise"> <img src="https://img.shields.io/badge/KafkaUI Lite-1.2.11-deepgreen"> |
 

@@ -1,0 +1,8 @@
+server:
+  port: 18075
+
+spring:
+  application:
+    name: mall-admin
+  profiles:
+    active: dev

@@ -16,6 +16,7 @@
     <description>基础服务模块</description>
 
     <modules>
+        <module>mall-admin</module>
         <module>mall-eureka</module>
         <module>mall-gateway</module>
         <module>mall-generator</module>
