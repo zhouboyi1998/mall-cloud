@@ -56,6 +56,7 @@
         <kaptcha-starter.version>1.1.0</kaptcha-starter.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <prometheus.version>1.6.12</prometheus.version>
+        <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
         <xxl-job.version>2.4.0</xxl-job.version>
     </properties>
 
@@ -287,6 +288,17 @@
                 <groupId>io.micrometer</groupId>
                 <artifactId>micrometer-registry-prometheus</artifactId>
                 <version>${prometheus.version}</version>
+            </dependency>
+            <!-- Spring Boot Admin 监控 -->
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-server</artifactId>
+                <version>${spring-boot-admin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>de.codecentric</groupId>
+                <artifactId>spring-boot-admin-starter-client</artifactId>
+                <version>${spring-boot-admin.version}</version>
             </dependency>
             <!-- XXL-JOB 分布式任务调度 -->
             <dependency>

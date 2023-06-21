@@ -26,6 +26,9 @@ management:
     health:
       # 显示详细信息
       show-details: always
+    logfile:
+      # 日志文件位置
+      external-file: logs/${spring.application.name}.log
     metrics:
       enabled: true
     prometheus:
