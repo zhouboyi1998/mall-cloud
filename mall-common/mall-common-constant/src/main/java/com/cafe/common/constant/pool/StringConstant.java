@@ -15,6 +15,11 @@ public class StringConstant {
     public static final String EMPTY = "";
 
     /**
+     * 逗号
+     */
+    public static final String COMMA = ",";
+
+    /**
      * 点
      */
     public static final String POINT = ".";
@@ -63,6 +68,36 @@ public class StringConstant {
      * 双引号
      */
     public static final String DOUBLE_QUOTATION_MARK = "\"";
+
+    /**
+     * 左圆括号
+     */
+    public static final String LEFT_PARENTHESIS = "(";
+
+    /**
+     * 右圆括号
+     */
+    public static final String RIGHT_PARENTHESIS = ")";
+
+    /**
+     * 左方括号
+     */
+    public static final String LEFT_BRACKET = "[";
+
+    /**
+     * 右方括号
+     */
+    public static final String RIGHT_BRACKET = "]";
+
+    /**
+     * 左花括号
+     */
+    public static final String LEFT_BRACE = "{";
+
+    /**
+     * 右花括号
+     */
+    public static final String RIGHT_BRACE = "}";
 
     /**
      * 时间

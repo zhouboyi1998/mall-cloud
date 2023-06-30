@@ -16,8 +16,8 @@ import java.lang.annotation.Target;
  * @Description: 接口日志打印注解
  */
 @Documented
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.METHOD)
+@Retention(value = RetentionPolicy.RUNTIME)
+@Target(value = ElementType.METHOD)
 public @interface LogPrint {
 
     @AliasFor(value = "description")
