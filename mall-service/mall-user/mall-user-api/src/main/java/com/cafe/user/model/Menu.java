@@ -34,7 +34,7 @@ public class Menu implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "菜单ID")
-    @TableId(value = "id", type = IdType.INPUT)
+    @TableId(value = "id", type = IdType.ASSIGN_ID)
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
