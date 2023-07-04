@@ -1,5 +1,6 @@
 package com.cafe.common.log.annotation;
 
+import com.cafe.common.constant.pool.StringConstant;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.Documented;
@@ -21,8 +22,8 @@ import java.lang.annotation.Target;
 public @interface LogPrint {
 
     @AliasFor(value = "description")
-    String value() default "";
+    String value() default StringConstant.EMPTY;
 
     @AliasFor(value = "value")
-    String description() default "";
+    String description() default StringConstant.EMPTY;
 }
