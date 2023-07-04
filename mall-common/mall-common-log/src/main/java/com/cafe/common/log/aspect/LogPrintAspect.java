@@ -26,7 +26,6 @@ import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -86,10 +85,9 @@ public class LogPrintAspect {
      * 前置通知
      *
      * @param joinPoint 连接点
-     * @throws Throwable
      */
     @Before(value = "logPrint()")
-    public void doBefore(JoinPoint joinPoint) throws Throwable {
+    public void doBefore(JoinPoint joinPoint) {
         // 获取 HTTP 请求相关信息
         HttpServletRequest request = Optional.ofNullable(RequestContextHolder.getRequestAttributes())
             .map(attributes -> (ServletRequestAttributes) attributes)
@@ -121,8 +119,9 @@ public class LogPrintAspect {
         // 存储请求参数
         StringBuilder args = new StringBuilder(StringConstant.LEFT_BRACE);
 
-        // 获取参数名列表
+        // 获取目标签名, 转换成方法签名
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        // 获取参数名列表
         List<String> keyList = Arrays.stream(signature.getParameterNames()).collect(Collectors.toList());
         // 获取参数值列表
         List<Object> valueList = Arrays.stream(joinPoint.getArgs()).collect(Collectors.toList());
@@ -150,38 +149,19 @@ public class LogPrintAspect {
     }
 
     /**
-     * 获取 @LogPrint 注解中配置的描述信息
+     * 获取日志打印注解的描述信息
      *
      * @param joinPoint 连接点
      * @return
-     * @throws ClassNotFoundException
      */
-    private String description(JoinPoint joinPoint) throws ClassNotFoundException {
-        // 获取目标对象的类名
-        String targetClassName = joinPoint.getTarget().getClass().getName();
-        // 获取目标方法名
-        String methodName = joinPoint.getSignature().getName();
-        // 获取目标方法实参
-        Object[] arguments = joinPoint.getArgs();
-        // 获取目标对象的类
-        Class<?> targetClass = Class.forName(targetClassName);
-        // 获取目标对象的类的所有方法
-        Method[] methods = targetClass.getMethods();
-        // 存储 @LogPrint 注解上配置的描述信息
-        String description = StringConstant.EMPTY;
-        // 遍历所有方法
-        for (Method method : methods) {
-            // 判断方法名是否相同、形参个数和实参个数是否相等 (可能存在重载方法)
-            // 如果找到目标方法, 获取方法 @LogPrint 注解上配置的描述信息
-            if (Objects.equals(method.getName(), methodName) && Objects.equals(method.getParameterCount(), arguments.length)) {
-                // 获取 @LogPrint 注解上配置的描述信息
-                // 因为使用了 Spring 提供的注解 @AliasFor 配置属性别名, 所以需要使用 Spring 提供的 AnnotationUtils 工具类获取注解
-                // 如果使用 Method 对象获取注解, 无法使用别名获取注解属性
-                description = Optional.ofNullable(AnnotationUtils.getAnnotation(method, LogPrint.class))
-                    .map(LogPrint::description)
-                    .orElse(StringConstant.EMPTY);
-            }
-        }
-        return description;
+    private String description(JoinPoint joinPoint) {
+        // 获取目标签名, 转换成方法签名
+        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
+        // 获取目标方法
+        Method method = signature.getMethod();
+        // 获取日志打印注解 (必须使用 Spring 提供的工具获取注解, 否则无法获取别名配置)
+        LogPrint logPrint = AnnotationUtils.getAnnotation(method, LogPrint.class);
+        // 返回日志打印注解的描述信息
+        return Optional.ofNullable(logPrint).map(LogPrint::description).orElse(StringConstant.EMPTY);
     }
 }
