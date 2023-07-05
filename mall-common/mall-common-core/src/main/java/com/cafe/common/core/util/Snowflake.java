@@ -1,6 +1,6 @@
 package com.cafe.common.core.util;
 
-import com.cafe.common.constant.pool.NumberConstant;
+import com.cafe.common.constant.pool.IntegerConstant;
 
 /**
  * @Project: mall-cloud
@@ -207,8 +207,8 @@ public class Snowflake {
     // -------------------- TEST -------------------
 
     public static void main(String[] args) {
-        Snowflake snowflake = new Snowflake(NumberConstant.ONE, NumberConstant.ONE);
-        for (int i = NumberConstant.ZERO; i < NumberConstant.TEN_THOUSAND; i++) {
+        Snowflake snowflake = new Snowflake(IntegerConstant.ONE, IntegerConstant.ONE);
+        for (int i = IntegerConstant.ZERO; i < IntegerConstant.TEN_THOUSAND; i++) {
             System.out.println(snowflake.nextId());
         }
     }

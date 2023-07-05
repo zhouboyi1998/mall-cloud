@@ -2,7 +2,7 @@ package com.cafe.gateway.authorization;
 
 import cn.hutool.core.convert.Convert;
 import cn.hutool.json.JSONUtil;
-import com.cafe.common.constant.pool.NumberConstant;
+import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.constant.request.RequestConstant;
@@ -48,7 +48,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         // 获取 Request
         ServerHttpRequest request = authorizationContext.getExchange().getRequest();
         // 获取 Request Path 中的菜单路径
-        String menuPath = request.getPath().subPath(NumberConstant.ZERO, NumberConstant.FOUR).toString();
+        String menuPath = request.getPath().subPath(IntegerConstant.ZERO, IntegerConstant.FOUR).toString();
         // 获取 Request Header 中的 Token
         String token = Optional.ofNullable(request.getHeaders().getFirst(RequestConstant.AUTHORIZATION))
             .orElseThrow(NullPointerException::new);
