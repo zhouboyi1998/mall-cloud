@@ -10,18 +10,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mall-common-log</artifactId>
+    <artifactId>mall-common-util</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>日志公共包</description>
+    <description>工具公共包</description>
 
     <dependencies>
-        <!-- Spring Boot Web -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
         <!-- Hutool 工具包 -->
         <dependency>
             <groupId>cn.hutool</groupId>
@@ -31,10 +26,6 @@
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-constant</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-common-util</artifactId>
         </dependency>
     </dependencies>
 
