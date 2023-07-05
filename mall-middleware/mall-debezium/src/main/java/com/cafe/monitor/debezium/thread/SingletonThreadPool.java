@@ -1,6 +1,6 @@
 package com.cafe.monitor.debezium.thread;
 
-import com.cafe.common.constant.pool.NumberConstant;
+import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.thread.ThreadConstant;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
@@ -30,8 +30,8 @@ public enum SingletonThreadPool {
 
     SingletonThreadPool() {
         executorService = new ThreadPoolExecutor(
-            NumberConstant.EIGHT, NumberConstant.SIXTEEN, NumberConstant.SIXTY, TimeUnit.SECONDS,
-            new ArrayBlockingQueue<>(NumberConstant.TWO_HUNDRED_AND_FIFTY_SIX),
+            IntegerConstant.EIGHT, IntegerConstant.SIXTEEN, IntegerConstant.SIXTY, TimeUnit.SECONDS,
+            new ArrayBlockingQueue<>(IntegerConstant.TWO_HUNDRED_AND_FIFTY_SIX),
             new ThreadFactoryBuilder().setNameFormat(ThreadConstant.DEBEZIUM_LISTENER_POOL).build(),
             new ThreadPoolExecutor.DiscardPolicy()
         );

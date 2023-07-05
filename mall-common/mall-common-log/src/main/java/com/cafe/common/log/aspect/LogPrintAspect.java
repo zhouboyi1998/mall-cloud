@@ -3,7 +3,7 @@ package com.cafe.common.log.aspect;
 import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.app.FieldConstant;
-import com.cafe.common.constant.pool.NumberConstant;
+import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.log.annotation.LogPrint;
 import org.aspectj.lang.JoinPoint;
@@ -142,7 +142,7 @@ public class LogPrintAspect {
         }
         // 删除最后一个逗号, 拼接右花括号
         Integer index = args.lastIndexOf(StringConstant.COMMA);
-        if (index > NumberConstant.MINUS_ONE) {
+        if (index > IntegerConstant.MINUS_ONE) {
             args.deleteCharAt(index).append(StringConstant.RIGHT_BRACE);
         }
         return args.toString();
