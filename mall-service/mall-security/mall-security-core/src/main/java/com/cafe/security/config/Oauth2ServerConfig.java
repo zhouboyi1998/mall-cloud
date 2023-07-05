@@ -51,7 +51,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     /**
      * 密码编码器 (SCrypt)
      */
-    @Qualifier("sCryptPasswordEncoder")
+    @Qualifier(value = "sCryptPasswordEncoder")
     private final PasswordEncoder passwordEncoder;
 
     /**
