@@ -5,9 +5,9 @@ package com.cafe.common.constant.pool;
  * @Package: com.cafe.common.constant.pool
  * @Author: zhouboyi
  * @Date: 2022/5/6 14:42
- * @Description: 数字常量
+ * @Description: Integer 数字常量
  */
-public class NumberConstant {
+public class IntegerConstant {
 
     public static final Integer MINUS_ONE = -1;
 

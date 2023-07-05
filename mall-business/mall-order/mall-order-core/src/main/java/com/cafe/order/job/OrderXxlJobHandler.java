@@ -1,7 +1,7 @@
 package com.cafe.order.job;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.cafe.common.constant.pool.NumberConstant;
+import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.status.OrderStatusConstant;
 import com.cafe.order.mapper.OrderMapper;
 import com.cafe.order.model.Order;
@@ -38,7 +38,7 @@ public class OrderXxlJobHandler {
         LocalDateTime now = LocalDateTime.now();
         LambdaUpdateWrapper<Order> wrapper = new LambdaUpdateWrapper<Order>()
             .eq(Order::getStatus, OrderStatusConstant.CREATE)
-            .le(Order::getCreateTime, now.minusMinutes(NumberConstant.TEN))
+            .le(Order::getCreateTime, now.minusMinutes(IntegerConstant.TEN))
             .set(Order::getStatus, OrderStatusConstant.CANCEL)
             .set(Order::getUpdateTime, now)
             .set(Order::getCompletionTime, now);
