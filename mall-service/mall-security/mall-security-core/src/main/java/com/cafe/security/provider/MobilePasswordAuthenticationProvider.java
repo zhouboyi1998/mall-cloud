@@ -30,7 +30,7 @@ public class MobilePasswordAuthenticationProvider implements AuthenticationProvi
     /**
      * 密码编码器
      */
-    @Qualifier("sCryptPasswordEncoder")
+    @Qualifier(value = "sCryptPasswordEncoder")
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
