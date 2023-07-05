@@ -27,6 +27,7 @@
         <module>mall-common-redis</module>
         <module>mall-common-rocketmq</module>
         <module>mall-common-swagger</module>
+        <module>mall-common-util</module>
         <module>mall-common-xxljob</module>
     </modules>
 

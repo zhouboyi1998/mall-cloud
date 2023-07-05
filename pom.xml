@@ -365,6 +365,11 @@
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
+                <artifactId>mall-common-util</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-common-xxljob</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
