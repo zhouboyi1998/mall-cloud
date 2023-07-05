@@ -1,6 +1,6 @@
 package com.cafe.security.service.impl;
 
-import com.cafe.common.constant.pool.NumberConstant;
+import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.core.util.Base64Util;
 import com.cafe.common.enumeration.media.MediaFormatEnum;
@@ -49,7 +49,7 @@ public class KaptchaServiceImpl implements CaptchaService {
         Long key = idFeign.nextId().getBody();
 
         // 保存图片验证码的唯一标识和文本到 Redis 中
-        redisTemplate.opsForValue().set(RedisConstant.CAPTCHA_PREFIX + key, code, NumberConstant.SIXTY, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(RedisConstant.CAPTCHA_PREFIX + key, code, IntegerConstant.SIXTY, TimeUnit.SECONDS);
 
         // 返回图片验证码
         return new Captcha().setKey(key).setImage(Base64Util.encode(bufferedImage, MediaFormatEnum.PNG));
