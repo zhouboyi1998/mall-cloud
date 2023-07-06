@@ -40,6 +40,7 @@
     |-- mall-common-redis (Redis 公共包)
     |-- mall-common-rocketmq (RocketMQ 消息队列公共包)
     |-- mall-common-swagger (Swagger API 文档公共包)
+    |-- mall-common-util (工具公共包)
     |-- mall-common-xxljob (XXL-JOB 分布式任务调度公共包)
 
 |-- mall-middleware (中间件模块)

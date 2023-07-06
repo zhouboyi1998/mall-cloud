@@ -5,6 +5,7 @@ import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.rocketmq.RocketMQConstant;
 import com.cafe.common.constant.status.GoodsStatusConstant;
 import com.cafe.common.message.rocketmq.producer.RocketMQProducer;
+import com.cafe.common.redis.annotation.ResultCache;
 import com.cafe.goods.bo.Goods;
 import com.cafe.goods.mapper.GoodsMapper;
 import com.cafe.goods.service.GoodsService;
@@ -39,6 +40,7 @@ public class GoodsServiceImpl implements GoodsService {
         this.rocketMQProducer = rocketMQProducer;
     }
 
+    @ResultCache
     @Override
     public List<Goods> list() {
         return goodsMapper.list(null);
