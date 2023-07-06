@@ -23,4 +23,9 @@ public class RedisConstant {
      * 验证码Key前缀
      */
     public static final String CAPTCHA_PREFIX = "VALIDATE:CAPTCHA_";
+
+    /**
+     * 返回结果Key前缀
+     */
+    public static final String RESULT_PREFIX = "CACHE:RESULT_";
 }

@@ -9,41 +9,43 @@ package com.cafe.common.constant.pool;
  */
 public class IntegerConstant {
 
-    public static final Integer MINUS_ONE = -1;
+    public static final int MINUS_ONE = -1;
 
-    public static final Integer ZERO = 0;
+    public static final int ZERO = 0;
 
-    public static final Integer ONE = 1;
+    public static final int ONE = 1;
 
-    public static final Integer TWO = 2;
+    public static final int TWO = 2;
 
-    public static final Integer THREE = 3;
+    public static final int THREE = 3;
 
-    public static final Integer FOUR = 4;
+    public static final int FOUR = 4;
 
-    public static final Integer FIVE = 5;
+    public static final int FIVE = 5;
 
-    public static final Integer SIX = 6;
+    public static final int SIX = 6;
 
-    public static final Integer SEVEN = 7;
+    public static final int SEVEN = 7;
 
-    public static final Integer EIGHT = 8;
+    public static final int EIGHT = 8;
 
-    public static final Integer NINE = 9;
+    public static final int NINE = 9;
 
-    public static final Integer TEN = 10;
+    public static final int TEN = 10;
 
-    public static final Integer SIXTEEN = 16;
+    public static final int SIXTEEN = 16;
 
-    public static final Integer FIFTY = 50;
+    public static final int FIFTY = 50;
 
-    public static final Integer SIXTY = 60;
+    public static final int SIXTY = 60;
 
-    public static final Integer TWO_HUNDRED_AND_FIFTY_SIX = 256;
+    public static final int TWO_HUNDRED_AND_FIFTY_SIX = 256;
 
-    public static final Integer ONE_HUNDRED = 100;
+    public static final int ONE_HUNDRED = 100;
 
-    public static final Integer ONE_THOUSAND = 1000;
+    public static final int ONE_THOUSAND = 1000;
 
-    public static final Integer TEN_THOUSAND = 10000;
+    public static final int TEN_THOUSAND = 10000;
+
+    public static final int MAX_VALUE = 2147483647;
 }
