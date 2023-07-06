@@ -12,6 +12,12 @@ spring:
       # Sentinel 控制台
       transport:
         dashboard: 127.0.0.1:8858
+  # Redis 配置
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    database: 0
 
 # RocketMQ 配置
 rocketmq:

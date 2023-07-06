@@ -20,6 +20,11 @@ public class AppConstant {
     public static final String TEST = "test";
 
     /**
+     * Docker 环境
+     */
+    public static final String DOCKER = "docker";
+
+    /**
      * 默认时区id
      */
     public static final String DEFAULT_ZONE_ID = "Asia/Shanghai";
