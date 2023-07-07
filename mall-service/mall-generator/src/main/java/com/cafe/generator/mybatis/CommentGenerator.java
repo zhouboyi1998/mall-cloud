@@ -47,8 +47,8 @@ public class CommentGenerator extends DefaultCommentGenerator {
         if (addRemarkComments && StringUtility.stringHasValue(remarks)) {
             addFieldJavaDoc(field, remarks);
             // 数据库中特殊字符需要转义
-            if (remarks.contains(StringConstant.DOUBLE_QUOTATION_MARK)) {
-                remarks = remarks.replace(StringConstant.DOUBLE_QUOTATION_MARK, StringConstant.SINGLE_QUOTATION_MARK);
+            if (remarks.contains(StringConstant.DOUBLE_QUOTATION)) {
+                remarks = remarks.replace(StringConstant.DOUBLE_QUOTATION, StringConstant.SINGLE_QUOTATION);
             }
             // 给 Model 的字段添加 Swagger 注解
             field.addJavaDocLine("@ApiModelProperty(value = \"" + remarks + "\")");

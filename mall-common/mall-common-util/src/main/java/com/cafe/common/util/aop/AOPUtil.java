@@ -39,17 +39,17 @@ public class AOPUtil {
 
         // 遍历组装成 JSON 格式
         for (int i = 0; i < valueList.size(); i++) {
-            args.append(StringConstant.DOUBLE_QUOTATION_MARK).append(keyList.get(i))
-                .append(StringConstant.DOUBLE_QUOTATION_MARK).append(StringConstant.COLON);
+            args.append(StringConstant.DOUBLE_QUOTATION).append(keyList.get(i))
+                .append(StringConstant.DOUBLE_QUOTATION).append(StringConstant.COLON);
             Object value = valueList.get(i);
             if (value instanceof Number || value instanceof Character || value instanceof Boolean || value instanceof CharSequence) {
                 // 基本类型、字符串类型的参数直接拼接
-                args.append(StringConstant.DOUBLE_QUOTATION_MARK).append(value)
-                    .append(StringConstant.DOUBLE_QUOTATION_MARK).append(StringConstant.COMMA);
+                args.append(StringConstant.DOUBLE_QUOTATION).append(value)
+                    .append(StringConstant.DOUBLE_QUOTATION).append(StringConstant.COMMA);
             } else if (value instanceof MultipartFile) {
                 // 文件类型的参数, 拼接文件名称
-                args.append(StringConstant.DOUBLE_QUOTATION_MARK).append(((MultipartFile) value).getOriginalFilename())
-                    .append(StringConstant.DOUBLE_QUOTATION_MARK).append(StringConstant.COMMA);
+                args.append(StringConstant.DOUBLE_QUOTATION).append(((MultipartFile) value).getOriginalFilename())
+                    .append(StringConstant.DOUBLE_QUOTATION).append(StringConstant.COMMA);
             } else {
                 // 引用类型的参数转换成 JSON 字符串再拼接
                 args.append(JSONUtil.toJsonStr(value)).append(StringConstant.COMMA);
