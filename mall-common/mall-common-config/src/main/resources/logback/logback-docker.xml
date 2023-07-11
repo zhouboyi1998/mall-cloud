@@ -4,15 +4,15 @@
     <springProperty name="APP_NAME" source="spring.application.name" scope="context" />
     <property name="LOG_FILE" value="logs/${APP_NAME}" />
 
-    <!-- SpringBoot LogBack 颜色配置 -->
+    <!-- SpringBoot LogBack 颜色转换器 -->
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
-    <!-- SpringBoot LogBack 空格配置 -->
+    <!-- SpringBoot LogBack 空格转换器 -->
     <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
 
     <!-- 控制台打印格式 -->
-    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr([%X{requestId}]){blue} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
+    <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-64.64logger{63}){cyan} %clr(%-32.32M{31}){magenta} %clr(%6.6L{5}){red} %clr([%X{requestId}]){blue} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
     <!-- 日志文件打印格式 -->
-    <property name="FILE_LOG_PATTERN" value="${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %-40.40logger{39} [%X{requestId}] : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
+    <property name="FILE_LOG_PATTERN" value="${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %logger %M %L [%X{requestId}] : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
 
     <!-- SpringBoot LogBack 日志级别配置 -->
     <logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR" />
