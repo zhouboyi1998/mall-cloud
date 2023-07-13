@@ -1,6 +1,5 @@
 package com.cafe.file.fastdfs.controller;
 
-import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.file.fastdfs.service.FastDFSService;
 import io.swagger.annotations.Api;
@@ -59,7 +58,7 @@ public class FastDFSController {
         HttpServletResponse httpResponse
     ) throws Exception {
         fastDFSService.download(groupName, remoteFilename, httpResponse);
-        return ResponseEntity.ok(HttpStatusEnum.SUCCESS.getReasonPhrase());
+        return ResponseEntity.ok().build();
     }
 
     @LogPrint(value = "获取访问 Tracker 的 URL")

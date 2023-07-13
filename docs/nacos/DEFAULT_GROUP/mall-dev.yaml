@@ -1,0 +1,7 @@
+spring:
+  # Spring Security 安全配置
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://127.0.0.1:${server.port}/mall-security/keypair/rsa

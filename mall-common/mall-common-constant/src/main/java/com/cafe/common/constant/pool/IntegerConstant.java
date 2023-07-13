@@ -43,6 +43,8 @@ public class IntegerConstant {
 
     public static final int ONE_HUNDRED = 100;
 
+    public static final int TWO_HUNDRED = 200;
+
     public static final int ONE_THOUSAND = 1000;
 
     public static final int TEN_THOUSAND = 10000;

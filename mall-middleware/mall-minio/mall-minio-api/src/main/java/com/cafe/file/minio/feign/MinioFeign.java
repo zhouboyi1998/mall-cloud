@@ -1,5 +1,6 @@
 package com.cafe.file.minio.feign;
 
+import com.cafe.common.core.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Date: 2022/6/9 20:03
  * @Description:
  */
-@FeignClient(value = "mall-minio")
+@FeignClient(value = "mall-minio", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/minio")
 public interface MinioFeign {
 
