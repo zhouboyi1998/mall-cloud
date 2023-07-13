@@ -1,5 +1,6 @@
 package com.cafe.user.feign;
 
+import com.cafe.common.core.feign.FeignRequestInterceptor;
 import com.cafe.user.model.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date: 2022/5/7 17:29
  * @Description:
  */
-@FeignClient(value = "mall-user")
+@FeignClient(value = "mall-user", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/user")
 public interface UserFeign {
 

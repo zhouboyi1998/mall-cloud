@@ -1,28 +1,33 @@
-package com.cafe.common.core.handler;
+package com.cafe.common.core.exception;
 
+import com.cafe.common.constant.pool.IntegerConstant;
+import com.cafe.common.core.result.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.core.handler
+ * @Package: com.cafe.common.core.exception
  * @Author: zhouboyi
  * @Date: 2022/9/29 15:27
  * @Description: 全局异常处理器
  */
-@ControllerAdvice(annotations = {RestController.class})
+@RestControllerAdvice(annotations = {RestController.class})
+@Order(value = IntegerConstant.ONE_HUNDRED)
 public class GlobalExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<String> handler(Exception e) {
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result<Object> handler(Exception e) {
         LOGGER.error("GlobalExceptionHandler.handler(): catch exception -> {}", e.getMessage());
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        return Result.fail(e.getMessage());
     }
 }
