@@ -1,0 +1,7 @@
+spring:
+  # Spring Security 安全配置
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://host.docker.internal:${server.port}/mall-security/keypair/rsa

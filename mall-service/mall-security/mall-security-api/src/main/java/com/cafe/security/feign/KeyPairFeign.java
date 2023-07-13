@@ -1,5 +1,6 @@
 package com.cafe.security.feign;
 
+import com.cafe.common.core.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +15,8 @@ import java.util.Map;
  * @Date: 2022/5/10 22:10
  * @Description:
  */
-@FeignClient(value = "mall-security")
-@RequestMapping(value = "/key-pair")
+@FeignClient(value = "mall-security", configuration = {FeignRequestInterceptor.class})
+@RequestMapping(value = "/keypair")
 public interface KeyPairFeign {
 
     /**
@@ -23,6 +24,6 @@ public interface KeyPairFeign {
      *
      * @return
      */
-    @GetMapping(value = "/rsa/public-key")
-    ResponseEntity<Map<String, Object>> selectRsaPublicKey();
+    @GetMapping(value = "/rsa")
+    ResponseEntity<Map<String, Object>> rsa();
 }

@@ -33,4 +33,9 @@ public class AppConstant {
      * 默认包名
      */
     public static final String DEFAULT_PACKAGE = "com.cafe";
+
+    /**
+     * 安全模块前缀
+     */
+    public static final String MALL_SECURITY_PREFIX = "/mall-security";
 }
