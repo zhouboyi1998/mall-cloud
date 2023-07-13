@@ -2,7 +2,7 @@ package com.cafe.user.message;
 
 import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.monitor.MonitorConstant;
-import com.cafe.common.constant.pool.BooleanConstant;
+import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.rabbitmq.RabbitMQConstant;
 import com.cafe.user.model.RoleMenu;
 import com.cafe.user.service.RoleMenuService;
@@ -42,12 +42,12 @@ public class RabbitMQConsumer {
      */
     @RabbitListeners(value = {
         @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = RabbitMQConstant.Queue.ROLE_MENU, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
+            value = @Queue(value = RabbitMQConstant.Queue.ROLE_MENU, durable = StringConstant.TRUE, autoDelete = StringConstant.FALSE),
             exchange = @Exchange(value = RabbitMQConstant.Exchange.BINLOG),
             key = {RabbitMQConstant.RoutingKey.BINLOG_TO_ROLE_MENU}
         )),
         @RabbitListener(bindings = @QueueBinding(
-            value = @Queue(value = RabbitMQConstant.Queue.ROLE_MENU, durable = BooleanConstant.TRUE, autoDelete = BooleanConstant.FALSE),
+            value = @Queue(value = RabbitMQConstant.Queue.ROLE_MENU, durable = StringConstant.TRUE, autoDelete = StringConstant.FALSE),
             exchange = @Exchange(value = RabbitMQConstant.Exchange.CANAL),
             key = {RabbitMQConstant.RoutingKey.CANAL_TO_ROLE_MENU}
         ))
