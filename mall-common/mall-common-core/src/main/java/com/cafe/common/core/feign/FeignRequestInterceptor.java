@@ -1,6 +1,6 @@
 package com.cafe.common.core.feign;
 
-import com.cafe.common.constant.pool.BooleanConstant;
+import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.request.RequestConstant;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
@@ -19,6 +19,6 @@ public class FeignRequestInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate template) {
         // 添加请求头, 标识为 Feign 请求
-        template.header(RequestConstant.IS_FEIGN, BooleanConstant.TRUE);
+        template.header(RequestConstant.IS_FEIGN, StringConstant.TRUE);
     }
 }
