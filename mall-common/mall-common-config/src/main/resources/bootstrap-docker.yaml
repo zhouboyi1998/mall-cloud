@@ -17,3 +17,5 @@ spring:
         shared-configs:
           - data-id: mall.yaml
             refresh: true
+          - data-id: mall-docker.yaml
+            refresh: true

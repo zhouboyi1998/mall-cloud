@@ -12,37 +12,42 @@ public enum HttpStatusEnum {
     /**
      * 成功
      */
-    SUCCESS(2000, "Success"),
+    SUCCESS(200, "Success"),
 
     /**
      * 用户不存在
      */
-    USERNAME_NOT_FOUND(4001, "Username Not Found"),
+    USERNAME_NOT_FOUND(401, "Username Not Found"),
 
     /**
      * 账号已禁用
      */
-    ACCOUNT_DISABLED(4002, "Account Disabled"),
+    ACCOUNT_DISABLED(401, "Account Disabled"),
 
     /**
      * 账号被锁定
      */
-    ACCOUNT_LOCKED(4003, "Account Locked"),
+    ACCOUNT_LOCKED(401, "Account Locked"),
 
     /**
      * 账号已过期
      */
-    ACCOUNT_EXPIRED(4004, "Account Expired"),
+    ACCOUNT_EXPIRED(401, "Account Expired"),
 
     /**
      * 证书已过期
      */
-    CREDENTIALS_EXPIRED(4005, "Credentials Expired"),
+    CREDENTIALS_EXPIRED(401, "Credentials Expired"),
 
     /**
      * 角色不存在
      */
-    ROLE_NOT_FOUND(4006, "Role Not Found");
+    ROLE_NOT_FOUND(401, "Role Not Found"),
+
+    /**
+     * 失败
+     */
+    FAIL(500, "Fail");
 
     /**
      * 状态码
@@ -59,7 +64,7 @@ public enum HttpStatusEnum {
         this.reasonPhrase = reasonPhrase;
     }
 
-    public Integer getValue() {
+    public Integer value() {
         return value;
     }
 

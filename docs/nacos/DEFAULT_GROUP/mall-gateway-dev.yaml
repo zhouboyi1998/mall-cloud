@@ -1,11 +1,4 @@
 spring:
-  # Spring Security 安全配置
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          # 获取 RSA 公钥
-          jwk-set-uri: http://127.0.0.1:${server.port}/mall-security/keypair/rsa
   # Redis 配置
   redis:
     host: 127.0.0.1

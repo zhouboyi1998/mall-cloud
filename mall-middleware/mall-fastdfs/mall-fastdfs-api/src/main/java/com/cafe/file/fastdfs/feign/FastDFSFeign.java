@@ -1,5 +1,6 @@
 package com.cafe.file.fastdfs.feign;
 
+import com.cafe.common.core.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @Date: 2022/7/23 20:26
  * @Description:
  */
-@FeignClient(value = "mall-fastdfs")
+@FeignClient(value = "mall-fastdfs", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/fastdfs")
 public interface FastDFSFeign {
 

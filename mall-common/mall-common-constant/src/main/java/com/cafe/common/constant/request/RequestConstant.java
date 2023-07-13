@@ -9,6 +9,8 @@ package com.cafe.common.constant.request;
  */
 public class RequestConstant {
 
+    // -------------------- REQUEST HEADER KEY --------------------
+
     /**
      * 访问令牌
      */
@@ -25,9 +27,18 @@ public class RequestConstant {
     public static final String USER_DETAILS = "User-Details";
 
     /**
+     * 是否为Feign请求
+     */
+    public static final String IS_FEIGN = "Is-Feign";
+
+    // -------------------- REQUEST HEADER VALUE --------------------
+
+    /**
      * 无缓存
      */
     public static final String NO_CACHE = "no-cache";
+
+    // -------------------- REQUEST PARAMETER KEY --------------------
 
     /**
      * 用户id
