@@ -1,4 +1,4 @@
-package com.cafe.common.core.util;
+package com.cafe.common.util.codec;
 
 import com.cafe.common.enumeration.media.MediaFormatEnum;
 import org.slf4j.Logger;
@@ -12,7 +12,7 @@ import java.util.Base64;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.core.util
+ * @Package: com.cafe.common.util.codec
  * @Author: zhouboyi
  * @Date: 2023/2/25 0:20
  * @Description: Base64 编码工具类
