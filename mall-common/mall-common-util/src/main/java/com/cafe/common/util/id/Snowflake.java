@@ -1,10 +1,10 @@
-package com.cafe.common.core.util;
+package com.cafe.common.util.id;
 
 import com.cafe.common.constant.pool.IntegerConstant;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.core.util
+ * @Package: com.cafe.common.util.id
  * @Author: zhouboyi
  * @Date: 2022/10/28 9:59
  * @Description: 雪花算法 (生成分布式ID)
