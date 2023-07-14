@@ -27,7 +27,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<Object> handle(Exception e) {
-        LOGGER.error("GlobalExceptionHandler.handle(): catch exception -> {}", e.getMessage());
+        LOGGER.error("GlobalExceptionHandler.handle(): exception class -> {}, cause class -> {}",
+            e.getClass().getCanonicalName(), e.getCause().getClass().getCanonicalName(), e);
         return Result.fail(e.getMessage());
     }
 }
