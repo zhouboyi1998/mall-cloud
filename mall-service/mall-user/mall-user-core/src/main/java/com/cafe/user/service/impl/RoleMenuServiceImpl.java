@@ -12,7 +12,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -45,13 +45,13 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
     @Override
     public void initMenuRoleBO() {
         // 获取所有 <菜单路径-角色名称> 的对应关系
-        List<MenuRoleBO> menuRoleBOList = roleMenuMapper.listMenuRoleBO(new ArrayList<>(0));
+        List<MenuRoleBO> menuRoleBOList = roleMenuMapper.listMenuRoleBO(Collections.emptyList());
         // 将对应关系组装成 Map 格式
         Map<String, List<String>> relationMap = new TreeMap<>();
         for (MenuRoleBO menuRoleBO : menuRoleBOList) {
             // 添加权限前缀
             List<String> roleNameList = menuRoleBO.getRoleNameList().stream()
-                .map(i -> i = AuthorizationConstant.AUTHORITY_PREFIX + i)
+                .map(roleName -> AuthorizationConstant.AUTHORITY_PREFIX + roleName)
                 .collect(Collectors.toList());
             relationMap.put(menuRoleBO.getMenuPath(), roleNameList);
         }
@@ -69,7 +69,7 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
         for (MenuRoleBO menuRoleBO : menuRoleBOList) {
             // 添加权限前缀
             List<String> roleNameList = menuRoleBO.getRoleNameList().stream()
-                .map(i -> i = AuthorizationConstant.AUTHORITY_PREFIX + i)
+                .map(roleName -> AuthorizationConstant.AUTHORITY_PREFIX + roleName)
                 .collect(Collectors.toList());
             // 将对应关系保存到 Redis 中
             redisTemplate.opsForHash().put(RedisConstant.MENU_ROLE_MAP, menuRoleBO.getMenuPath(), roleNameList);
