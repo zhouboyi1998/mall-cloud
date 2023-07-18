@@ -21,28 +21,19 @@
     </resultMap>
 
     <select id="listMenuRoleBO" resultMap="MenuRoleBOMap">
-        (
-            SELECT m.menu_path, r.role_name
-            FROM mall_menu AS m
-            LEFT JOIN mall_role_menu AS rm ON rm.menu_id = m.id
-            LEFT JOIN mall_role AS r ON r.id = rm.role_id
-            <where>
-                <if test="menuIds != null and menuIds.size() > 0">
-                    AND rm.menu_id IN
-                    <foreach collection="menuIds" item="menuId" open="(" close=")" separator=",">
-                        #{menuId}
-                    </foreach>
-                </if>
-            </where>
-        )
-        UNION
-        (
-            SELECT m.menu_path, r.role_name
-            FROM mall_menu AS m
-            LEFT JOIN mall_role_menu AS rm ON rm.menu_id = m.id
-            LEFT JOIN mall_role AS r ON r.id = rm.role_id
-            WHERE ISNULL(r.role_name)
-        )
+        SELECT m.menu_path, r.role_name
+        FROM mall_menu AS m
+        LEFT JOIN mall_role_menu AS rm ON rm.menu_id = m.id
+        LEFT JOIN mall_role AS r ON r.id = rm.role_id
+        <where>
+            <if test="menuIds != null and menuIds.size() > 0">
+                AND rm.menu_id IN
+                <foreach collection="menuIds" item="menuId" open="(" close=")" separator=",">
+                    #{menuId}
+                </foreach>
+                OR ISNULL(r.role_name)
+            </if>
+        </where>
     </select>
 
 </mapper>
