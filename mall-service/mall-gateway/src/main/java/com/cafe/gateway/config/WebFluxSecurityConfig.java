@@ -2,10 +2,10 @@ package com.cafe.gateway.config;
 
 import cn.hutool.core.util.ArrayUtil;
 import com.cafe.common.constant.security.AuthorizationConstant;
+import com.cafe.gateway.authentication.OauthServerAuthenticationEntryPoint;
 import com.cafe.gateway.authorization.AuthorizationManager;
+import com.cafe.gateway.authorization.OauthServerAccessDeniedHandler;
 import com.cafe.gateway.filter.IgnoreUrlsRemoveJwtFilter;
-import com.cafe.gateway.authorization.RestAccessDeniedHandler;
-import com.cafe.gateway.authorization.RestAuthenticationEntryPoint;
 import com.cafe.gateway.property.SecureProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -27,11 +27,11 @@ import reactor.core.publisher.Mono;
  * @Package: com.cafe.gateway.config
  * @Author: zhouboyi
  * @Date: 2022/5/10 22:57
- * @Description: Web 安全配置
+ * @Description: WebFlux 安全配置
  */
 @Configuration
 @EnableWebFluxSecurity
-public class ResourceSecurityConfig {
+public class WebFluxSecurityConfig {
 
     /**
      * 全局跨域配置
@@ -54,30 +54,30 @@ public class ResourceSecurityConfig {
     private final AuthorizationManager authorizationManager;
 
     /**
-     * 未授权处理器
-     */
-    private final RestAccessDeniedHandler restAccessDeniedHandler;
-
-    /**
      * 未认证处理器
      */
-    private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
+    private final OauthServerAuthenticationEntryPoint oauthServerAuthenticationEntryPoint;
+
+    /**
+     * 未授权处理器
+     */
+    private final OauthServerAccessDeniedHandler oauthServerAccessDeniedHandler;
 
     @Autowired
-    public ResourceSecurityConfig(
+    public WebFluxSecurityConfig(
         GlobalCorsConfig globalCorsConfig,
         IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter,
         SecureProperties secureProperties,
         AuthorizationManager authorizationManager,
-        RestAccessDeniedHandler restAccessDeniedHandler,
-        RestAuthenticationEntryPoint restAuthenticationEntryPoint
+        OauthServerAuthenticationEntryPoint oauthServerAuthenticationEntryPoint,
+        OauthServerAccessDeniedHandler oauthServerAccessDeniedHandler
     ) {
         this.globalCorsConfig = globalCorsConfig;
         this.ignoreUrlsRemoveJwtFilter = ignoreUrlsRemoveJwtFilter;
         this.secureProperties = secureProperties;
         this.authorizationManager = authorizationManager;
-        this.restAccessDeniedHandler = restAccessDeniedHandler;
-        this.restAuthenticationEntryPoint = restAuthenticationEntryPoint;
+        this.oauthServerAuthenticationEntryPoint = oauthServerAuthenticationEntryPoint;
+        this.oauthServerAccessDeniedHandler = oauthServerAccessDeniedHandler;
     }
 
     @Bean
@@ -100,10 +100,10 @@ public class ResourceSecurityConfig {
             .access(authorizationManager)
             .and()
             .exceptionHandling()
-            // 处理未授权
-            .accessDeniedHandler(restAccessDeniedHandler)
-            // 处理未认证
-            .authenticationEntryPoint(restAuthenticationEntryPoint)
+            // 未认证处理器配置
+            .authenticationEntryPoint(oauthServerAuthenticationEntryPoint)
+            // 未授权处理器配置
+            .accessDeniedHandler(oauthServerAccessDeniedHandler)
             .and()
             .oauth2ResourceServer()
             .jwt()
