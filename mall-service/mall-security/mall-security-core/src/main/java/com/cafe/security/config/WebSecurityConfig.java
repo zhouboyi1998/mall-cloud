@@ -21,7 +21,7 @@ import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
  * @Package: com.cafe.security.config
  * @Author: zhouboyi
  * @Date: 2022/5/10 22:17
- * @Description: SpringSecurity Web 配置
+ * @Description: Web 安全配置
  */
 @Configuration
 @EnableWebSecurity
