@@ -100,6 +100,11 @@ public class StringConstant {
     public static final String RIGHT_BRACE = "}";
 
     /**
+     * 空
+     */
+    public static final String NULL = "null";
+
+    /**
      * 正确
      */
     public static final String TRUE = "true";
