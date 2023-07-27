@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  * @Date: 2023/2/24 9:59
  * @Description: Kaptcha 图片验证码业务实现类
  */
-@Service(value = "KaptchaServiceImpl")
+@Service(value = "kaptchaServiceImpl")
 public class KaptchaServiceImpl implements CaptchaService {
 
     private final Producer producer;

@@ -27,7 +27,7 @@ public class CaptchaController {
     private final CaptchaService captchaService;
 
     @Autowired
-    public CaptchaController(@Qualifier(value = "EasyCaptchaServiceImpl") CaptchaService captchaService) {
+    public CaptchaController(@Qualifier(value = "easyCaptchaServiceImpl") CaptchaService captchaService) {
         this.captchaService = captchaService;
     }
 

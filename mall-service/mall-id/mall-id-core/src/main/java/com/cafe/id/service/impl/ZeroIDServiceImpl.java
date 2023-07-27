@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
  * @Date: 2022/10/31 17:29
  * @Description:
  */
-@Service(value = "ZeroIDServiceImpl")
+@Service(value = "zeroIDServiceImpl")
 public class ZeroIDServiceImpl implements IDService {
 
     @Override
