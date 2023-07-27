@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @Date: 2022/10/31 17:02
  * @Description:
  */
-@Service(value = "SnowflakeIDServiceImpl")
+@Service(value = "snowflakeIDServiceImpl")
 public class SnowflakeIDServiceImpl implements IDService {
 
     private final Snowflake snowflake;
