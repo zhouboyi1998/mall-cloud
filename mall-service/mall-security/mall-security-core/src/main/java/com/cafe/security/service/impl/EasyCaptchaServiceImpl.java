@@ -20,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  * @Date: 2023/2/24 23:42
  * @Description: Easy Captcha 图片验证码业务实现类
  */
-@Service(value = "EasyCaptchaServiceImpl")
+@Service(value = "easyCaptchaServiceImpl")
 public class EasyCaptchaServiceImpl implements CaptchaService {
 
     private final IDFeign idFeign;

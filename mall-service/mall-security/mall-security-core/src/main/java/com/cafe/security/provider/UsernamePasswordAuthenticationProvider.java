@@ -2,7 +2,6 @@ package com.cafe.security.provider;
 
 import com.cafe.security.service.UserDetailsExtensionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,11 +29,13 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
     /**
      * 密码编码器
      */
-    @Qualifier(value = "sCryptPasswordEncoder")
     private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UsernamePasswordAuthenticationProvider(UserDetailsExtensionService userDetailsExtensionService, PasswordEncoder passwordEncoder) {
+    public UsernamePasswordAuthenticationProvider(
+        UserDetailsExtensionService userDetailsExtensionService,
+        PasswordEncoder passwordEncoder
+    ) {
         this.userDetailsExtensionService = userDetailsExtensionService;
         this.passwordEncoder = passwordEncoder;
     }
