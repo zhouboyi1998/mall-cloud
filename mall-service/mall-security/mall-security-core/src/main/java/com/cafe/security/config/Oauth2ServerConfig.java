@@ -9,7 +9,6 @@ import com.cafe.security.property.ClientProperties.Detail;
 import com.cafe.security.property.RsaCredentialProperties;
 import com.cafe.security.service.UserDetailsExtensionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
@@ -49,9 +48,8 @@ import java.util.List;
 public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 
     /**
-     * 密码编码器 (SCrypt)
+     * 密码编码器
      */
-    @Qualifier(value = "sCryptPasswordEncoder")
     private final PasswordEncoder passwordEncoder;
 
     /**

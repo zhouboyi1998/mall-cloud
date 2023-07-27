@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit;
  * @Date: 2023/2/27 9:56
  * @Description: Hutool Captcha 图片验证码业务实现类
  */
-@Service(value = "HutoolCaptchaServiceImpl")
+@Service(value = "hutoolCaptchaServiceImpl")
 public class HutoolCaptchaServiceImpl implements CaptchaService {
 
     private final IDFeign idFeign;

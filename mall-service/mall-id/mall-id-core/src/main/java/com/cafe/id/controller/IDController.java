@@ -26,7 +26,7 @@ public class IDController {
     private final IDService idService;
 
     @Autowired
-    public IDController(@Qualifier(value = "SnowflakeIDServiceImpl") IDService idService) {
+    public IDController(@Qualifier(value = "snowflakeIDServiceImpl") IDService idService) {
         this.idService = idService;
     }
 
