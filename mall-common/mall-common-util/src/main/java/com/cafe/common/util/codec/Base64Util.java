@@ -33,7 +33,7 @@ public class Base64Util {
         try {
             ImageIO.write(bufferedImage, mediaFormat.getFormat(), outputStream);
         } catch (IOException e) {
-            LOGGER.error("Base64Util.encode(): could not convert image to base64 -> {}", e.getMessage());
+            LOGGER.error("Base64Util.encode(): Could not convert image to base64! message -> {}", e.getMessage(), e);
         }
         return mediaFormat.getBase64Prefix() + Base64.getEncoder().encodeToString(outputStream.toByteArray());
     }

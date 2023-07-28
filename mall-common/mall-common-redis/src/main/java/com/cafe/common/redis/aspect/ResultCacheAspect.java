@@ -96,7 +96,7 @@ public class ResultCacheAspect {
             return result;
         } catch (Exception e) {
             // 打印异常信息
-            LOGGER.error("ResultCacheAspect.doAround(): class -> {}, method -> {}, message -> {}", className, methodName, e.getMessage());
+            LOGGER.error("ResultCacheAspect.doAround(): class -> {}, method -> {}, message -> {}", className, methodName, e.getMessage(), e);
             // 方法执行异常, 返回缓存在 Redis 中的上一次执行结果
             return redisTemplate.opsForValue().get(key.toString());
         }
