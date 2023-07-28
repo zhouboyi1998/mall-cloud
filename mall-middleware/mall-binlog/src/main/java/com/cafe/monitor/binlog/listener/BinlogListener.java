@@ -84,7 +84,7 @@ public class BinlogListener implements CommandLineRunner {
                     // 判断是否为需要监听的表
                     if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
-                        LOGGER.info("BinlogListener.run(): Update Operation TableName -> {}", tableName);
+                        LOGGER.info("BinlogListener.run(): Update operation, table -> {}", tableName);
                         // 存储监听到的修改前的数据
                         List<Serializable[]> beforeRowList = new ArrayList<>();
                         // 存储监听到的修改后的数据
@@ -107,7 +107,7 @@ public class BinlogListener implements CommandLineRunner {
                     // 判断是否为需要监听的表
                     if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
-                        LOGGER.info("BinlogListener.run(): Insert Operation TableName -> {}", tableName);
+                        LOGGER.info("BinlogListener.run(): Insert operation, table -> {}", tableName);
                         // 将监听到的新增数据交给消息内容处理器
                         messageContentHandler.handle(Collections.emptyList(), writeRowsEventData.getRows(), tableName, MonitorConstant.INSERT);
                     }
@@ -121,7 +121,7 @@ public class BinlogListener implements CommandLineRunner {
                     // 判断是否为需要监听的表
                     if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
-                        LOGGER.info("BinlogListener.run(): Delete Operation TableName -> {}", tableName);
+                        LOGGER.info("BinlogListener.run(): Delete operation, table -> {}", tableName);
                         // 将监听到的删除数据交给消息内容处理器
                         messageContentHandler.handle(deleteRowsEventData.getRows(), Collections.emptyList(), tableName, MonitorConstant.DELETE);
                     }
@@ -132,11 +132,9 @@ public class BinlogListener implements CommandLineRunner {
         // 开启数据库连接
         try {
             binaryLogClient.connect();
-            LOGGER.info("BinlogListener.run() successful to listen on the database -> {}:{}",
-                binlogProperties.getHost(), binlogProperties.getPort());
+            LOGGER.info("BinlogListener.run(): Listener connect success! database -> {}:{}", binlogProperties.getHost(), binlogProperties.getPort());
         } catch (IOException e) {
-            LOGGER.error("BinlogListener.run() failed to listen on the database -> {}:{}, connection error by -> {}",
-                binlogProperties.getHost(), binlogProperties.getPort(), e.getMessage());
+            LOGGER.error("BinlogListener.run(): Listener connect fail! database -> {}:{}, message -> {}", binlogProperties.getHost(), binlogProperties.getPort(), e.getMessage(), e);
         }
     }
 }

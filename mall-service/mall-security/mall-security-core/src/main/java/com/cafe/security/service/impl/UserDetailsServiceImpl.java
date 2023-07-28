@@ -68,7 +68,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
             UserInfo userDetails = new UserInfo(user.getId(), user.getUsername(), user.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
             // 校验用户状态
             validateUserDetails(userDetails);
-            LOGGER.info("UserDetailsServiceImpl.loadUserByUsername(): username -> {}, client_id -> {}", username, clientId);
+            LOGGER.info("UserDetailsServiceImpl.loadUserByUsername(): username -> {}, client id -> {}", username, clientId);
             return userDetails;
         } else {
             throw new UsernameNotFoundException(HttpStatusEnum.USERNAME_NOT_FOUND.getReasonPhrase());
@@ -94,7 +94,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
             UserInfo userDetails = new UserInfo(user.getId(), user.getUsername(), user.getMobile(), user.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
             // 校验用户状态
             validateUserDetails(userDetails);
-            LOGGER.info("UserDetailsServiceImpl.loadUserByMobile(): mobile -> {}, client_id -> {}", mobile, clientId);
+            LOGGER.info("UserDetailsServiceImpl.loadUserByMobile(): mobile -> {}, client id -> {}", mobile, clientId);
             return userDetails;
         } else {
             throw new UsernameNotFoundException(HttpStatusEnum.USERNAME_NOT_FOUND.getReasonPhrase());

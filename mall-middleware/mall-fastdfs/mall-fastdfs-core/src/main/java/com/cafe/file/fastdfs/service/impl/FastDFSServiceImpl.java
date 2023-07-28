@@ -39,9 +39,9 @@ public class FastDFSServiceImpl implements FastDFSService {
             String config = new ClassPathResource("fastdfs_client.conf").getPath();
             // 加载配置文件中的 Tracker 连接信息
             ClientGlobal.init(config);
-            LOGGER.info("FastdfsServiceImpl: Connect FastDFS tracker success.");
+            LOGGER.info("FastdfsServiceImpl: Connect FastDFS tracker success!");
         } catch (Exception e) {
-            LOGGER.error("FastdfsServiceImpl: Connect FastDFS tracker fail -> {}", e.getMessage());
+            LOGGER.error("FastdfsServiceImpl: Connect FastDFS tracker fail! message -> {}", e.getMessage(), e);
         }
     }
 

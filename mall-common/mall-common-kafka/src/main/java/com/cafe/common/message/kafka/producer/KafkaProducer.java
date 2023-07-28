@@ -36,7 +36,7 @@ public class KafkaProducer {
         // 将消息内容转换为 JSON 字符串格式
         String message = JSONUtil.toJsonStr(content);
         // 打印日志
-        LOGGER.info("KafkaProducer.send(): message -> {}", message);
+        LOGGER.info("KafkaProducer.send(): kafka message -> {}", message);
         // 发送消息到 Kafka
         kafkaTemplate.send(topic, message);
     }
