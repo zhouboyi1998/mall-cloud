@@ -62,9 +62,9 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
             // 获取用户详细信息中的用户id和客户端id
             Long userId = (Long) JSONUtil.parseObj(userDetails).get(RequestConstant.USER_ID);
             String clientId = (String) JSONUtil.parseObj(userDetails).get(RequestConstant.CLIENT_ID);
-            LOGGER.info("AuthorizationManager.check(): userId -> {}, clientId -> {}, menuPath -> {}", userId, clientId, menuPath);
+            LOGGER.info("AuthorizationManager.check(): user id -> {}, client id -> {}, menu path -> {}", userId, clientId, menuPath);
         } catch (ParseException e) {
-            LOGGER.error("AuthorizationManager.check(): could not parse accessToken -> {}, message -> {}", accessToken, e.getMessage());
+            LOGGER.error("AuthorizationManager.check(): Could not parse token! access token -> {}, message -> {}", accessToken, e.getMessage(), e);
         }
 
         // 获取可以访问当前菜单的角色列表

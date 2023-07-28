@@ -69,6 +69,6 @@ public class GoodsServiceImpl implements GoodsService {
         // 发送消息到 RocketMQ, 通知 ElasticSearch 上下架商品
         rocketMQProducer.convertAndSend(RocketMQConstant.Topic.CANAL_TO_GOODS, content);
         // 打印日志
-        LOGGER.info("GoodsServiceImpl.launch(): Send RocketMQ Message -> {}", JSONUtil.toJsonStr(content));
+        LOGGER.info("GoodsServiceImpl.launch(): rocketmq message -> {}", JSONUtil.toJsonStr(content));
     }
 }

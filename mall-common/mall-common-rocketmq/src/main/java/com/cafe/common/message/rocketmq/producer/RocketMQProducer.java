@@ -36,7 +36,7 @@ public class RocketMQProducer {
         // 将消息内容转换为 JSON 字符串格式
         String message = JSONUtil.toJsonStr(content);
         // 打印日志
-        LOGGER.info("RocketMQProducer.convertAndSend(): message -> {}", message);
+        LOGGER.info("RocketMQProducer.convertAndSend(): rocketmq message -> {}", message);
         // 发送消息到 RocketMQ
         rocketMQTemplate.convertAndSend(topic, message);
     }

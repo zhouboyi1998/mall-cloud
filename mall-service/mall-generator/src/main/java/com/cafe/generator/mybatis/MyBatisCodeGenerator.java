@@ -52,11 +52,9 @@ public class MyBatisCodeGenerator {
             mybatisGenerator.generate(null);
 
             // 输出警告信息
-            for (String warn : warns) {
-                LOGGER.warn("MyBatisCodeGenerator.generate(): warn -> {}", warn);
-            }
+            warns.forEach(warn -> LOGGER.warn("MyBatisCodeGenerator.generate(): warn -> {}", warn));
         } catch (Exception e) {
-            LOGGER.error("MyBatisCodeGenerator.generate(): failed to generate code -> {}", e.getMessage());
+            LOGGER.error("MyBatisCodeGenerator.generate(): Failed to generate code! message -> {}", e.getMessage(), e);
         }
     }
 

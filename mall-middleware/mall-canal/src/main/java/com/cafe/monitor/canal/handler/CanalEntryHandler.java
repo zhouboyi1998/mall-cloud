@@ -58,15 +58,14 @@ public class CanalEntryHandler {
             try {
                 rowChange = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
             } catch (InvalidProtocolBufferException e) {
-                LOGGER.error("CanalEntryHandler.handle(): Failed to parser from entry store value, Entry -> {}, Exception -> {}", entry, e.getMessage());
-                throw new RuntimeException("CanalEntryHandler.handle(): Failed to parser from entry store value, Entry -> " + entry, e);
+                LOGGER.error("CanalEntryHandler.handle(): Failed to parser from entry store value! entry -> {}, message -> {}", entry, e.getMessage(), e);
+                throw new RuntimeException("CanalEntryHandler.handle(): Failed to parser from entry store value! entry -> " + entry, e);
             }
 
             // 获取 Entry Header
             CanalEntry.Header header = entry.getHeader();
             // 打印日志
-            LOGGER.info("CanalEntryHandler.handle(): Database -> {}, Table -> {}, Operation -> {}",
-                header.getSchemaName(), header.getTableName(), header.getEventType());
+            LOGGER.info("CanalEntryHandler.handle(): database -> {}, table -> {}, operation -> {}", header.getSchemaName(), header.getTableName(), header.getEventType());
 
             // 判断是否为需要处理的表
             String tableName = header.getSchemaName() + "." + header.getTableName();

@@ -53,13 +53,13 @@ public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
             // 从解析后的 Access Token 中获取用户详细信息
             String userDetails = jwsObject.getPayload().toString();
             // 打印日志
-            LOGGER.info("AuthenticationGlobalFilter.filter(): userDetails -> {}", userDetails);
+            LOGGER.info("AuthenticationGlobalFilter.filter(): user details -> {}", userDetails);
             // 将用户信息设置到 Request 请求头中
             request.mutate().header(RequestConstant.USER_DETAILS, userDetails).build();
             // 使用改变后的 Request 重新生成 ServerWebExchange
             exchange = exchange.mutate().request(request).build();
         } catch (ParseException e) {
-            LOGGER.error("AuthenticationGlobalFilter.filter(): could not parse accessToken -> {}, message -> {}", accessToken, e.getMessage());
+            LOGGER.error("AuthenticationGlobalFilter.filter(): Could not parse token! access token -> {}, message -> {}", accessToken, e.getMessage(), e);
         }
         return chain.filter(exchange);
     }
