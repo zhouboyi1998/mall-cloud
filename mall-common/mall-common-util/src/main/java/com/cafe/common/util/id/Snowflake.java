@@ -1,7 +1,5 @@
 package com.cafe.common.util.id;
 
-import com.cafe.common.constant.pool.IntegerConstant;
-
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.common.util.id
@@ -202,14 +200,5 @@ public class Snowflake {
     private long timeGen() {
         // 获取系统时间
         return System.currentTimeMillis();
-    }
-
-    // -------------------- TEST -------------------
-
-    public static void main(String[] args) {
-        Snowflake snowflake = new Snowflake(IntegerConstant.ONE, IntegerConstant.ONE);
-        for (int i = IntegerConstant.ZERO; i < IntegerConstant.TEN_THOUSAND; i++) {
-            System.out.println(snowflake.nextId());
-        }
     }
 }
