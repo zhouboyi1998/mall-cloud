@@ -30,11 +30,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<String> handle(Exception e) {
-        String exceptionName = e.getClass().getCanonicalName();
         String causeName = Optional.ofNullable(e.getCause())
             .map(cause -> cause.getClass().getCanonicalName())
             .orElse(StringConstant.NULL);
-        LOGGER.error("GlobalExceptionHandler.handle(): exception -> {}, cause -> {}", exceptionName, causeName, e);
+        LOGGER.error("GlobalExceptionHandler.handle(): exception -> {}, cause -> {}, message -> {}", e.getClass().getCanonicalName(), causeName, e.getMessage(), e);
         return Result.fail(e.getMessage());
     }
 }

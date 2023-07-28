@@ -40,7 +40,7 @@ public class RocketMQGoodsConsumer implements RocketMQListener<String> {
     @Override
     public void onMessage(String message) {
         // 打印成功接收消息的日志
-        LOGGER.info("RocketMQGoodsConsumer.onMessage(): Goods JSON Message -> {}", message);
+        LOGGER.info("RocketMQGoodsConsumer.onMessage(): rocketmq message -> {}", message);
         // 获取消息内容
         Map<String, Object> content = JSONUtil.parseObj(message);
         // 获取上下架标识
@@ -53,17 +53,17 @@ public class RocketMQGoodsConsumer implements RocketMQListener<String> {
                 // 上架商品
                 elasticSearchGoodsService.insertBatch(goodsList);
                 // 打印成功上架商品的日志
-                LOGGER.info("RocketMQGoodsConsumer.onMessage(): Put away goods success -> {}", message);
+                LOGGER.info("RocketMQGoodsConsumer.onMessage(): Put away goods success! rocketmq message -> {}", message);
             } else {
                 // 获取下架商品的主键
                 List<String> ids = JSONUtil.parseArray(content.get(FieldConstant.DATA)).toList(String.class);
                 // 下架商品
                 elasticSearchGoodsService.deleteBatch(ids);
                 // 打印成功下架商品的日志
-                LOGGER.info("RocketMQGoodsConsumer.onMessage(): Sold out goods success -> {}", message);
+                LOGGER.info("RocketMQGoodsConsumer.onMessage(): Sold out goods success! rocketmq message -> {}", message);
             }
         } catch (IOException e) {
-            LOGGER.error("RocketMQGoodsConsumer.onMessage(): Failed to launch goods -> {}", e.getMessage());
+            LOGGER.error("RocketMQGoodsConsumer.onMessage(): Failed to launch goods! message -> {}", e.getMessage(), e);
         }
     }
 }

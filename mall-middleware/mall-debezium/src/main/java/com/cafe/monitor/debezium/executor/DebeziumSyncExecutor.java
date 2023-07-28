@@ -33,19 +33,19 @@ public class DebeziumSyncExecutor implements InitializingBean, SmartLifecycle {
 
     @Override
     public void start() {
-        LOGGER.info("DebeziumEngine 监听器启动, 单例线程池 {} 启动!", ThreadConstant.DEBEZIUM_LISTENER_POOL);
+        LOGGER.info("DebeziumEngine listener start! Singleton thread pool <{}> start!", ThreadConstant.DEBEZIUM_LISTENER_POOL);
         executorService.execute(debeziumEngine);
     }
 
     @Override
     public void stop() {
         try {
-            LOGGER.warn("DebeziumEngine 监听器关闭!");
+            LOGGER.warn("DebeziumEngine listener stop!");
             debeziumEngine.close();
         } catch (IOException e) {
-            LOGGER.error("DebeziumEngine 监听器关闭出错!");
+            LOGGER.error("DebeziumEngine listener stop error! message -> {}", e.getMessage(), e);
         } finally {
-            LOGGER.warn("单例线程池 {} 关闭!", ThreadConstant.DEBEZIUM_LISTENER_POOL);
+            LOGGER.warn("Singleton thread pool <{}> stop!", ThreadConstant.DEBEZIUM_LISTENER_POOL);
             executorService.shutdown();
         }
     }
