@@ -28,4 +28,9 @@ public class RedisConstant {
      * 返回结果Key前缀
      */
     public static final String RESULT_PREFIX = "CACHE:RESULT_";
+
+    /**
+     * 幂等性Key前缀
+     */
+    public static final String IDEMPOTENCE_PREFIX = "LIMIT:IDEMPOTENCE_";
 }

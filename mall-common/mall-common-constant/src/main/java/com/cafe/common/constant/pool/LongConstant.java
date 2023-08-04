@@ -10,4 +10,6 @@ package com.cafe.common.constant.pool;
 public class LongConstant {
 
     public static final long MINUS_ONE = -1L;
+
+    public static final long TWO = 2L;
 }
