@@ -55,11 +55,12 @@ public class AOPUtil {
                 args.append(JSONUtil.toJsonStr(value)).append(StringConstant.COMMA);
             }
         }
-        // 删除最后一个逗号, 拼接右花括号
+        // 删除最后一个逗号
         Integer index = args.lastIndexOf(StringConstant.COMMA);
         if (index > IntegerConstant.MINUS_ONE) {
-            args.deleteCharAt(index).append(StringConstant.RIGHT_BRACE);
+            args.deleteCharAt(index);
         }
-        return args.toString();
+        // 拼接右花括号, 返回 JSON 格式参数
+        return args.append(StringConstant.RIGHT_BRACE).toString();
     }
 }
