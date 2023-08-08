@@ -1,13 +1,10 @@
 package com.cafe.user.service.impl;
 
-import cn.hutool.json.JSONArray;
-import cn.hutool.json.JSONUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.user.mapper.MenuMapper;
 import com.cafe.user.model.Menu;
 import com.cafe.user.service.MenuService;
 import com.cafe.user.vo.MenuTreeVO;
-import com.cafe.common.constant.security.AuthorizationConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -32,11 +29,9 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     }
 
     @Override
-    public List<MenuTreeVO> tree(String userDetails) {
-        // 从用户详细信息中获取角色列表
-        List<String> roleNameList = ((JSONArray) JSONUtil.parseObj(userDetails).get(AuthorizationConstant.AUTHORITIES_CLAIM_NAME)).toList(String.class);
-        // 根据角色列表获取对应的菜单列表树形格式 VO
-        List<MenuTreeVO> menuList = menuMapper.tree(roleNameList);
+    public List<MenuTreeVO> tree(List<String> authorities) {
+        // 根据权限列表获取对应的菜单树VO
+        List<MenuTreeVO> menuList = menuMapper.tree(authorities);
 
         // 组装成树形格式
         return menuList.stream()

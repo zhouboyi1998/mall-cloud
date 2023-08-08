@@ -3,6 +3,7 @@ package com.cafe.user.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.constant.request.RequestConstant;
+import com.cafe.common.core.model.UserDetails;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.user.model.Menu;
@@ -16,11 +17,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -199,12 +200,13 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据角色列表获取菜单树")
-    @ApiOperation(value = "根据角色列表获取菜单树")
-    @ApiImplicitParam(value = "用户详细信息", name = RequestConstant.Header.USER_DETAILS, dataType = "String", paramType = "header", required = true)
+    @LogPrint(value = "根据权限列表获取菜单树")
+    @ApiOperation(value = "根据权限列表获取菜单树")
     @GetMapping(value = "/tree")
-    public ResponseEntity<List<MenuTreeVO>> tree(@RequestHeader(value = RequestConstant.Header.USER_DETAILS) String userDetails) {
-        List<MenuTreeVO> menuTreeVOList = menuService.tree(userDetails);
+    public ResponseEntity<List<MenuTreeVO>> tree(
+        @ModelAttribute(value = RequestConstant.ModelAttribute.USER_DETAILS) UserDetails userDetails
+    ) {
+        List<MenuTreeVO> menuTreeVOList = menuService.tree(userDetails.getAuthorities());
         return ResponseEntity.ok(menuTreeVOList);
     }
 }
