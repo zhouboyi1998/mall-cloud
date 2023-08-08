@@ -46,7 +46,7 @@ public class ResponseBodyHandler implements ResponseBodyAdvice<Object> {
     @Override
     public Object beforeBodyWrite(@Nullable Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         // Feign 请求直接返回
-        if (Boolean.parseBoolean(request.getHeaders().getFirst(RequestConstant.IS_FEIGN))) {
+        if (Boolean.parseBoolean(request.getHeaders().getFirst(RequestConstant.Header.IS_FEIGN))) {
             return body;
         }
         // JWT SET 接口直接返回

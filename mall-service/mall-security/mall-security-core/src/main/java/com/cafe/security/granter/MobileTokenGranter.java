@@ -57,9 +57,9 @@ public class MobileTokenGranter extends AbstractTokenGranter {
         Map<String, String> parameters = new LinkedHashMap<>(tokenRequest.getRequestParameters());
 
         // 手机号密码校验逻辑
-        String mobile = parameters.get(RequestConstant.MOBILE);
-        String password = parameters.get(RequestConstant.PASSWORD);
-        parameters.remove(RequestConstant.PASSWORD);
+        String mobile = parameters.get(RequestConstant.Parameter.MOBILE);
+        String password = parameters.get(RequestConstant.Parameter.PASSWORD);
+        parameters.remove(RequestConstant.Parameter.PASSWORD);
         Authentication userAuth = new MobilePasswordAuthenticationToken(mobile, password);
         ((AbstractAuthenticationToken) userAuth).setDetails(parameters);
 

@@ -54,7 +54,7 @@ public class IgnoreUrlsRemoveJwtFilter implements WebFilter {
         for (String ignoreUrl : ignoreUrls) {
             if (pathMatcher.match(ignoreUrl, uri.getPath())) {
                 // 移除 Request Header 中的访问令牌
-                request.mutate().header(RequestConstant.AUTHORIZATION, StringConstant.EMPTY).build();
+                request.mutate().header(RequestConstant.Header.AUTHORIZATION, StringConstant.EMPTY).build();
                 // 使用改变后的 Request 重新生成 ServerWebExchange
                 exchange = exchange.mutate().request(request).build();
                 break;
