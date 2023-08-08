@@ -70,8 +70,8 @@ public class IdempotenceAspect {
             .map(ServletRequestAttributes::getRequest)
             .orElseThrow(NullPointerException::new);
         // 获取访问令牌
-        String accessToken = request.getHeader(RequestConstant.AUTHORIZATION)
-            .replace(RequestConstant.BEARER_PREFIX, StringConstant.EMPTY);
+        String accessToken = request.getHeader(RequestConstant.Header.AUTHORIZATION)
+            .replace(RequestConstant.Header.BEARER_PREFIX, StringConstant.EMPTY);
 
         // 获取注解
         Idempotence idempotence = AnnotationUtils.getAnnotation(method, Idempotence.class);

@@ -65,10 +65,10 @@ public class CaptchaTokenGranter extends AbstractTokenGranter {
         Map<String, String> parameters = new LinkedHashMap<>(tokenRequest.getRequestParameters());
 
         // 验证码校验逻辑
-        String key = RedisConstant.CAPTCHA_PREFIX + parameters.get(RequestConstant.KEY);
-        String code = parameters.get(RequestConstant.CODE).toUpperCase();
-        parameters.remove(RequestConstant.KEY);
-        parameters.remove(RequestConstant.CODE);
+        String key = RedisConstant.CAPTCHA_PREFIX + parameters.get(RequestConstant.Parameter.KEY);
+        String code = parameters.get(RequestConstant.Parameter.CODE).toUpperCase();
+        parameters.remove(RequestConstant.Parameter.KEY);
+        parameters.remove(RequestConstant.Parameter.CODE);
 
         // 从 Redis 中获取正确的图片验证码文本
         String correctCode = (String) redisTemplate.opsForValue().get(key);
@@ -82,9 +82,9 @@ public class CaptchaTokenGranter extends AbstractTokenGranter {
         }
 
         // 密码校验逻辑
-        String username = parameters.get(RequestConstant.USERNAME);
-        String password = parameters.get(RequestConstant.PASSWORD);
-        parameters.remove(RequestConstant.PASSWORD);
+        String username = parameters.get(RequestConstant.Parameter.USERNAME);
+        String password = parameters.get(RequestConstant.Parameter.PASSWORD);
+        parameters.remove(RequestConstant.Parameter.PASSWORD);
         Authentication userAuth = new UsernamePasswordAuthenticationToken(username, password);
         ((AbstractAuthenticationToken) userAuth).setDetails(parameters);
 

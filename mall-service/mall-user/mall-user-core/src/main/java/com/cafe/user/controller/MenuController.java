@@ -201,9 +201,9 @@ public class MenuController {
 
     @LogPrint(value = "根据角色列表获取菜单树")
     @ApiOperation(value = "根据角色列表获取菜单树")
-    @ApiImplicitParam(value = "用户详细信息", name = RequestConstant.USER_DETAILS, dataType = "String", paramType = "header", required = true)
+    @ApiImplicitParam(value = "用户详细信息", name = RequestConstant.Header.USER_DETAILS, dataType = "String", paramType = "header", required = true)
     @GetMapping(value = "/tree")
-    public ResponseEntity<List<MenuTreeVO>> tree(@RequestHeader(value = RequestConstant.USER_DETAILS) String userDetails) {
+    public ResponseEntity<List<MenuTreeVO>> tree(@RequestHeader(value = RequestConstant.Header.USER_DETAILS) String userDetails) {
         List<MenuTreeVO> menuTreeVOList = menuService.tree(userDetails);
         return ResponseEntity.ok(menuTreeVOList);
     }

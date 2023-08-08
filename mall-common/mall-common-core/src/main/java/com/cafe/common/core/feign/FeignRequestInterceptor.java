@@ -19,6 +19,6 @@ public class FeignRequestInterceptor implements RequestInterceptor {
     @Override
     public void apply(RequestTemplate template) {
         // 添加请求头, 标识为 Feign 请求
-        template.header(RequestConstant.IS_FEIGN, StringConstant.TRUE);
+        template.header(RequestConstant.Header.IS_FEIGN, StringConstant.TRUE);
     }
 }
