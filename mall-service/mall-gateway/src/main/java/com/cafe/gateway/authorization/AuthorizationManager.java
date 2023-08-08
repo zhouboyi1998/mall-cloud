@@ -50,18 +50,18 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         // 获取 Request Path 中的菜单路径
         String menuPath = request.getPath().subPath(IntegerConstant.ZERO, IntegerConstant.FOUR).toString();
         // 获取 Request Header 中的 Token
-        String token = Optional.ofNullable(request.getHeaders().getFirst(RequestConstant.AUTHORIZATION))
+        String token = Optional.ofNullable(request.getHeaders().getFirst(RequestConstant.Header.AUTHORIZATION))
             .orElseThrow(NullPointerException::new);
         // 移除 Token 中的令牌头, 获取 Access Token
-        String accessToken = token.replace(RequestConstant.BEARER_PREFIX, StringConstant.EMPTY);
+        String accessToken = token.replace(RequestConstant.Header.BEARER_PREFIX, StringConstant.EMPTY);
         try {
             // 解析 Access Token
             JWSObject jwsObject = JWSObject.parse(accessToken);
             // 从解析后的 Access Token 中获取用户详细信息
             String userDetails = jwsObject.getPayload().toString();
             // 获取用户详细信息中的用户id和客户端id
-            Long userId = (Long) JSONUtil.parseObj(userDetails).get(RequestConstant.USER_ID);
-            String clientId = (String) JSONUtil.parseObj(userDetails).get(RequestConstant.CLIENT_ID);
+            Long userId = (Long) JSONUtil.parseObj(userDetails).get(RequestConstant.Parameter.USER_ID);
+            String clientId = (String) JSONUtil.parseObj(userDetails).get(RequestConstant.Parameter.CLIENT_ID);
             LOGGER.info("AuthorizationManager.check(): user id -> {}, client id -> {}, menu path -> {}", userId, clientId, menuPath);
         } catch (ParseException e) {
             LOGGER.error("AuthorizationManager.check(): Could not parse token! access token -> {}, message -> {}", accessToken, e.getMessage(), e);
