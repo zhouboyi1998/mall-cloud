@@ -37,7 +37,7 @@ public class OauthServerAccessDeniedHandler implements ServerAccessDeniedHandler
                 // 允许跨域访问: 所有路径
                 response.getHeaders().set(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, MediaType.ALL.getType());
                 // 缓存控制: 无缓存
-                response.getHeaders().set(HttpHeaders.CACHE_CONTROL, RequestConstant.NO_CACHE);
+                response.getHeaders().set(HttpHeaders.CACHE_CONTROL, RequestConstant.Value.NO_CACHE);
                 // ----- 设置 HTTP 响应体 -----
                 ResponseEntity<String> body = ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(HttpStatus.UNAUTHORIZED.getReasonPhrase());

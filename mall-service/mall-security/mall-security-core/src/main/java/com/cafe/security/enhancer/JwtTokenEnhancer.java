@@ -27,7 +27,7 @@ public class JwtTokenEnhancer implements TokenEnhancer {
         UserInfo userDetails = (UserInfo) oAuth2Authentication.getPrincipal();
         Map<String, Object> info = new HashMap<>(16);
         // 为 JWT 令牌增加额外的内容 ...
-        info.put(RequestConstant.USER_ID, userDetails.getId());
+        info.put(RequestConstant.Parameter.USER_ID, userDetails.getId());
         ((DefaultOAuth2AccessToken) oAuth2AccessToken).setAdditionalInformation(info);
         return oAuth2AccessToken;
     }

@@ -52,7 +52,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         // 从 Request Parameter 中获取客户端id
-        String clientId = request.getParameter(RequestConstant.CLIENT_ID);
+        String clientId = request.getParameter(RequestConstant.Parameter.CLIENT_ID);
 
         // 根据用户名和客户端id查询用户详情
         User user = userFeign.detailByUsername(username, clientId).getBody();
@@ -78,7 +78,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
     @Override
     public UserDetails loadUserByMobile(String mobile) throws MobileNotFoundException {
         // 从 Request Parameter 中获取客户端id
-        String clientId = request.getParameter(RequestConstant.CLIENT_ID);
+        String clientId = request.getParameter(RequestConstant.Parameter.CLIENT_ID);
 
         // 根据手机号和客户端id查询用户详情
         User user = userFeign.detailByMobile(mobile, clientId).getBody();
