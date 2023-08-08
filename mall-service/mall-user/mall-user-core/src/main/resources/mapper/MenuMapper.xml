@@ -25,8 +25,8 @@
         LEFT JOIN mall_role_menu AS rm ON rm.menu_id = m.id
         LEFT JOIN mall_role AS r ON r.id = rm.role_id
         WHERE r.role_name IN
-        <foreach collection="roleNameList" item="roleName" open="(" close=")" separator=",">
-            #{roleName}
+        <foreach collection="authorities" item="authority" open="(" close=")" separator=",">
+            #{authority}
         </foreach>
         AND m.status = 1
         ORDER BY m.sort
