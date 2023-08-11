@@ -2,6 +2,7 @@ package com.cafe.monitor.binlog.listener;
 
 import cn.hutool.core.util.ObjectUtil;
 import com.cafe.common.constant.monitor.MonitorConstant;
+import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.monitor.binlog.handler.MessageContentHandler;
 import com.cafe.monitor.binlog.property.BinlogProperties;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
@@ -73,7 +74,7 @@ public class BinlogListener implements CommandLineRunner {
                 if (eventData instanceof TableMapEventData) {
                     TableMapEventData tableMapEventData = (TableMapEventData) eventData;
                     // 维护 TableId 和 TableName 的对应关系
-                    tableMap.put(tableMapEventData.getTableId(), tableMapEventData.getDatabase() + "." + tableMapEventData.getTable());
+                    tableMap.put(tableMapEventData.getTableId(), tableMapEventData.getDatabase() + StringConstant.POINT + tableMapEventData.getTable());
                 }
                 // 监听 update 操作
                 if (eventData instanceof UpdateRowsEventData) {
