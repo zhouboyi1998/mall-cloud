@@ -79,19 +79,22 @@ public class DebeziumConfig {
     }
 
     /**
-     * 实例化同步执行器
+     * Debezium 同步执行器
      *
      * @param configuration
      * @return
      */
     @Bean
     DebeziumSyncExecutor debeziumSyncExecutor(io.debezium.config.Configuration configuration) {
-        DebeziumSyncExecutor debeziumSyncExecutor = new DebeziumSyncExecutor();
+        // 创建 DebeziumEngine
         DebeziumEngine<RecordChangeEvent<SourceRecord>> debeziumEngine = DebeziumEngine
             .create(ChangeEventFormat.of(Connect.class))
             .using(configuration.asProperties())
             .notifying(debeziumEntryHandler::handle)
             .build();
+
+        // 创建 Debezium 同步执行器
+        DebeziumSyncExecutor debeziumSyncExecutor = new DebeziumSyncExecutor();
         debeziumSyncExecutor.setDebeziumEngine(debeziumEngine);
         return debeziumSyncExecutor;
     }

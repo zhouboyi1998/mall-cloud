@@ -2,10 +2,11 @@ package com.cafe.monitor.canal.client;
 
 import com.alibaba.otter.canal.client.CanalConnector;
 import com.alibaba.otter.canal.client.CanalConnectors;
-
 import com.alibaba.otter.canal.protocol.Message;
 import com.cafe.monitor.canal.handler.CanalEntryHandler;
 import com.cafe.monitor.canal.property.CanalProperties;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,6 +22,8 @@ import java.net.InetSocketAddress;
  */
 @Component
 public class CanalClient implements InitializingBean {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(CanalClient.class);
 
     private final CanalProperties canalProperties;
 
@@ -55,9 +58,9 @@ public class CanalClient implements InitializingBean {
             while (true) {
                 // 获取指定数量的数据
                 Message message = connector.getWithoutAck(canalProperties.getBatchSize());
-                // 获取 batch id
+                // 获取批次号
                 long batchId = message.getId();
-                // 获取 batch 数据的数量
+                // 获取该批次数据的数量
                 int size = message.getEntries().size();
                 // 如果没有数据
                 if (batchId == -1 || size == 0) {
@@ -65,18 +68,19 @@ public class CanalClient implements InitializingBean {
                         // 线程休眠 2 秒
                         Thread.sleep(2000);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        LOGGER.error("CanalClient.afterPropertiesSet(): Thread sleep error! message -> {}", e.getMessage(), e);
                     }
                 } else {
                     // 如果有数据, 处理数据
                     canalEntryHandler.handle(message.getEntries());
                 }
-                // 根据 batch id 进行确认, 小于或等于该 batch id 的 message都会被 ack
+                // 根据批次号进行确认, 小于或等于该批次号的 message 都会被 ack
                 connector.ack(batchId);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            LOGGER.error("CanalClient.afterPropertiesSet(): Canal fail to connect Database! message -> {}", e.getMessage(), e);
         } finally {
+            // 关闭连接
             connector.disconnect();
         }
     }

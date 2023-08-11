@@ -31,21 +31,27 @@ public class DebeziumSyncExecutor implements InitializingBean, SmartLifecycle {
         this.debeziumEngine = debeziumEngine;
     }
 
+    /**
+     * Debezium 启动
+     */
     @Override
     public void start() {
-        LOGGER.info("DebeziumEngine listener start! Singleton thread pool <{}> start!", ThreadConstant.DEBEZIUM_LISTENER_POOL);
+        LOGGER.info("DebeziumSyncExecutor.start(): DebeziumEngine start! Singleton thread pool <{}> start!", ThreadConstant.DEBEZIUM_LISTENER_POOL);
         executorService.execute(debeziumEngine);
     }
 
+    /**
+     * Debezium 关闭
+     */
     @Override
     public void stop() {
         try {
-            LOGGER.warn("DebeziumEngine listener stop!");
+            LOGGER.warn("DebeziumSyncExecutor.stop(): DebeziumEngine stop!");
             debeziumEngine.close();
         } catch (IOException e) {
-            LOGGER.error("DebeziumEngine listener stop error! message -> {}", e.getMessage(), e);
+            LOGGER.error("DebeziumSyncExecutor.stop(): DebeziumEngine stop error! message -> {}", e.getMessage(), e);
         } finally {
-            LOGGER.warn("Singleton thread pool <{}> stop!", ThreadConstant.DEBEZIUM_LISTENER_POOL);
+            LOGGER.warn("DebeziumSyncExecutor.stop(): Singleton thread pool <{}> stop!", ThreadConstant.DEBEZIUM_LISTENER_POOL);
             executorService.shutdown();
         }
     }
@@ -57,6 +63,7 @@ public class DebeziumSyncExecutor implements InitializingBean, SmartLifecycle {
 
     @Override
     public void afterPropertiesSet() {
-        Assert.notNull(debeziumEngine, "DebeziumEngine 不可以为空!");
+        // 判断 DebeziumEngine 是否为 null
+        Assert.notNull(debeziumEngine, "DebeziumEngine can not be null!");
     }
 }
