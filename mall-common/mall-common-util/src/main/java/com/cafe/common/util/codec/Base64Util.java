@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
@@ -22,9 +23,29 @@ public class Base64Util {
     private static final Logger LOGGER = LoggerFactory.getLogger(Base64Util.class);
 
     /**
-     * BufferedImage 格式图片转换成 Base64 编码
+     * 字符串 Base64 编码
      *
-     * @param bufferedImage
+     * @param plaintext 字符串明文
+     * @return
+     */
+    public static String encode(String plaintext) {
+        return Base64.getEncoder().encodeToString(plaintext.getBytes(StandardCharsets.UTF_8));
+    }
+
+    /**
+     * 字符串 Base64 解码
+     *
+     * @param ciphertext 字符串密文
+     * @return
+     */
+    public static String decode(String ciphertext) {
+        return new String(Base64.getDecoder().decode(ciphertext), StandardCharsets.UTF_8);
+    }
+
+    /**
+     * 图片缓冲 Base64 编码
+     *
+     * @param bufferedImage 图片缓冲
      * @return
      */
     public static String encode(BufferedImage bufferedImage, MediaFormatEnum mediaFormat) {
