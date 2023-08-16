@@ -1,5 +1,6 @@
 package com.cafe.common.core.response;
 
+import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
@@ -56,6 +58,12 @@ public class ResponseBodyHandler implements ResponseBodyAdvice<Object> {
         // 返回值已经是 Result 类型时不需要再次封装
         if (body instanceof Result) {
             return body;
+        }
+        // 返回值是 String 类型时, 需要手动将 Result 转换成 JSON 字符串, 否则会出现 ClassCastException
+        if (body instanceof String) {
+            // 设置 Content-Type = application/json
+            response.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
+            return JSONUtil.toJsonStr(Result.success(body));
         }
         // 返回结果封装成 Result 类型
         return Result.success(body);
