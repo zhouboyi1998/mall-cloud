@@ -16,11 +16,11 @@ import java.util.Map;
  * @Description:
  */
 @FeignClient(value = "mall-security", configuration = {FeignRequestInterceptor.class})
-@RequestMapping(value = "/keypair")
-public interface KeyPairFeign {
+@RequestMapping(value = "/jwk-set")
+public interface JWKSetFeign {
 
     /**
-     * 获取 RSA 公钥
+     * 获取 RSA JWKSet
      *
      * @return
      */
