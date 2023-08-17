@@ -9,10 +9,10 @@ import java.util.Map;
  * @Date: 2022/7/8 10:09
  * @Description:
  */
-public interface KeyPairService {
+public interface JWKSetService {
 
     /**
-     * 获取 RSA 公钥
+     * 获取 RSA JWKSet
      *
      * @return
      */
