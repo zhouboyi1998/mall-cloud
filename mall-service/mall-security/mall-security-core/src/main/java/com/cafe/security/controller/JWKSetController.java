@@ -1,7 +1,8 @@
 package com.cafe.security.controller;
 
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.security.service.KeyPairService;
+import com.cafe.security.service.JWKSetService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,24 +17,25 @@ import java.util.Map;
  * @Package: com.cafe.security.controller
  * @Author: zhouboyi
  * @Date: 2022/5/10 21:34
- * @Description: 密钥对接口
+ * @Description: JWKSet 接口
  */
+@Api(value = "JWKSet 接口")
 @RestController
-@RequestMapping(value = "/keypair")
-public class KeyPairController {
+@RequestMapping(value = "/jwk-set")
+public class JWKSetController {
 
-    private final KeyPairService keyPairService;
+    private final JWKSetService jwkSetService;
 
     @Autowired
-    public KeyPairController(KeyPairService keyPairService) {
-        this.keyPairService = keyPairService;
+    public JWKSetController(JWKSetService jwkSetService) {
+        this.jwkSetService = jwkSetService;
     }
 
-    @LogPrint(value = "获取 RSA 公钥")
-    @ApiOperation(value = "获取 RSA 公钥")
+    @LogPrint(value = "获取 RSA JWKSet")
+    @ApiOperation(value = "获取 RSA JWKSet")
     @GetMapping(value = "/rsa")
     public ResponseEntity<Map<String, Object>> rsa() {
-        Map<String, Object> key = keyPairService.rsa();
-        return ResponseEntity.ok(key);
+        Map<String, Object> jwkSet = jwkSetService.rsa();
+        return ResponseEntity.ok(jwkSet);
     }
 }

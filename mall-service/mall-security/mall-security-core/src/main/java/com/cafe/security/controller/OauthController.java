@@ -1,8 +1,9 @@
 package com.cafe.security.controller;
 
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.security.service.OauthService;
 import com.cafe.security.model.TokenDetails;
+import com.cafe.security.service.OauthService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
@@ -24,6 +25,7 @@ import java.util.Map;
  * @Date: 2022/5/10 21:34
  * @Description: 登录认证接口
  */
+@Api(value = "登录认证接口")
 @RestController
 @RequestMapping(value = "/oauth")
 public class OauthController {
@@ -51,7 +53,10 @@ public class OauthController {
         @ApiImplicitParam(value = "客户端密钥", name = "client_secret", dataType = "String", paramType = "form", required = true),
         @ApiImplicitParam(value = "用户名", name = "username", dataType = "String", paramType = "form"),
         @ApiImplicitParam(value = "密码", name = "password", dataType = "String", paramType = "form"),
-        @ApiImplicitParam(value = "刷新令牌", name = "refresh_token", dataType = "String", paramType = "form")
+        @ApiImplicitParam(value = "刷新令牌", name = "refresh_token", dataType = "String", paramType = "form"),
+        @ApiImplicitParam(value = "验证码key", name = "key", dataType = "Long", paramType = "form"),
+        @ApiImplicitParam(value = "验证码code", name = "code", dataType = "String", paramType = "form"),
+        @ApiImplicitParam(value = "手机号", name = "mobile", dataType = "String", paramType = "form")
     })
     @PostMapping(value = "/token")
     public ResponseEntity<TokenDetails> token(Principal principal, @RequestParam Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
