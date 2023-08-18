@@ -1,5 +1,6 @@
 package com.cafe.security.provider;
 
+import com.cafe.common.util.codec.RSAUtil;
 import com.cafe.security.service.UserDetailsExtensionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -10,6 +11,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.security.KeyPair;
+import java.security.interfaces.RSAPrivateKey;
 
 /**
  * @Project: mall-cloud
@@ -31,19 +35,27 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
      */
     private final PasswordEncoder passwordEncoder;
 
+    /**
+     * 密钥对
+     */
+    private final KeyPair keyPair;
+
     @Autowired
     public UsernamePasswordAuthenticationProvider(
         UserDetailsExtensionService userDetailsExtensionService,
-        PasswordEncoder passwordEncoder
+        PasswordEncoder passwordEncoder,
+        KeyPair keyPair
     ) {
         this.userDetailsExtensionService = userDetailsExtensionService;
         this.passwordEncoder = passwordEncoder;
+        this.keyPair = keyPair;
     }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
-        String password = authentication.getCredentials().toString();
+        // 使用私钥解密获取原始密码
+        String password = RSAUtil.decrypt(authentication.getCredentials().toString(), (RSAPrivateKey) keyPair.getPrivate());
 
         UserDetails userDetails = userDetailsExtensionService.loadUserByUsername(username);
         if (passwordEncoder.matches(password, userDetails.getPassword())) {

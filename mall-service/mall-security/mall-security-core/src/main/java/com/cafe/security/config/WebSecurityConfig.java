@@ -1,6 +1,7 @@
 package com.cafe.security.config;
 
 import com.cafe.common.constant.security.AuthorizationConstant;
+import com.cafe.security.property.RSACredentialProperties;
 import com.cafe.security.provider.MobilePasswordAuthenticationProvider;
 import com.cafe.security.provider.UsernamePasswordAuthenticationProvider;
 import com.cafe.security.service.UserDetailsExtensionService;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +17,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
+import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
+
+import java.security.KeyPair;
 
 /**
  * @Project: mall-cloud
@@ -32,9 +37,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     private final UserDetailsExtensionService userDetailsExtensionService;
 
+    /**
+     * RSA 证书配置
+     */
+    private final RSACredentialProperties rsaCredentialProperties;
+
     @Autowired
-    public WebSecurityConfig(UserDetailsExtensionService userDetailsExtensionService) {
+    public WebSecurityConfig(
+        UserDetailsExtensionService userDetailsExtensionService,
+        RSACredentialProperties rsaCredentialProperties
+    ) {
         this.userDetailsExtensionService = userDetailsExtensionService;
+        this.rsaCredentialProperties = rsaCredentialProperties;
     }
 
     /**
@@ -48,13 +62,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
+     * 从 RSA 证书文件 (jwt.jks) 中获取密钥对
+     *
+     * @return
+     */
+    @Bean
+    public KeyPair keyPair() {
+        // 获取密钥库
+        ClassPathResource keyStore = new ClassPathResource(rsaCredentialProperties.getKeyStore());
+        // 获取密钥库口令
+        char[] storePass = rsaCredentialProperties.getStorePass().toCharArray();
+        // 新建密钥库工厂
+        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(keyStore, storePass);
+        // 使用密钥库口令从密钥库中获取密钥对
+        return keyStoreKeyFactory.getKeyPair(rsaCredentialProperties.getAlias(), storePass);
+    }
+
+    /**
      * 用户名密码认证提供器
      *
      * @return
      */
     @Bean
     public UsernamePasswordAuthenticationProvider usernamePasswordAuthenticationProvider() {
-        return new UsernamePasswordAuthenticationProvider(userDetailsExtensionService, passwordEncoder());
+        return new UsernamePasswordAuthenticationProvider(userDetailsExtensionService, passwordEncoder(), keyPair());
     }
 
     /**
@@ -64,7 +95,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public MobilePasswordAuthenticationProvider mobilePasswordAuthenticationProvider() {
-        return new MobilePasswordAuthenticationProvider(userDetailsExtensionService, passwordEncoder());
+        return new MobilePasswordAuthenticationProvider(userDetailsExtensionService, passwordEncoder(), keyPair());
     }
 
     /**

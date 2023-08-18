@@ -6,12 +6,11 @@ import com.cafe.security.granter.CaptchaTokenGranter;
 import com.cafe.security.granter.MobileTokenGranter;
 import com.cafe.security.property.ClientProperties;
 import com.cafe.security.property.ClientProperties.Detail;
-import com.cafe.security.property.RsaCredentialProperties;
+import com.cafe.security.property.RSACredentialProperties;
 import com.cafe.security.service.UserDetailsExtensionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
@@ -29,7 +28,6 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
-import org.springframework.security.rsa.crypto.KeyStoreKeyFactory;
 
 import java.security.KeyPair;
 import java.util.ArrayList;
@@ -53,6 +51,11 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
 
     /**
+     * 密钥对
+     */
+    private final KeyPair keyPair;
+
+    /**
      * 认证管理器
      */
     private final AuthenticationManager authenticationManager;
@@ -70,7 +73,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     /**
      * RSA 证书配置
      */
-    private final RsaCredentialProperties rsaCredentialProperties;
+    private final RSACredentialProperties rsaCredentialProperties;
 
     /**
      * 客户端配置
@@ -90,15 +93,17 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     @Autowired
     public Oauth2ServerConfig(
         PasswordEncoder passwordEncoder,
+        KeyPair keyPair,
         AuthenticationManager authenticationManager,
         JwtTokenEnhancer jwtTokenEnhancer,
         UserDetailsExtensionService userDetailsExtensionService,
-        RsaCredentialProperties rsaCredentialProperties,
+        RSACredentialProperties rsaCredentialProperties,
         ClientProperties clientProperties,
         RedisConnectionFactory redisConnectionFactory,
         RedisTemplate<String, Object> redisTemplate
     ) {
         this.passwordEncoder = passwordEncoder;
+        this.keyPair = keyPair;
         this.authenticationManager = authenticationManager;
         this.jwtTokenEnhancer = jwtTokenEnhancer;
         this.userDetailsExtensionService = userDetailsExtensionService;
@@ -122,32 +127,13 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     }
 
     /**
-     * 从 RSA 证书文件 (jwt.jks) 中获取密钥对
-     *
-     * @return
-     */
-    @Bean
-    public KeyPair keyPair() {
-        // 使用 key-store 和 store-pass 获取密钥对
-        KeyStoreKeyFactory keyStoreKeyFactory = new KeyStoreKeyFactory(
-            new ClassPathResource(rsaCredentialProperties.getKeyStore()),
-            rsaCredentialProperties.getStorePass().toCharArray()
-        );
-
-        return keyStoreKeyFactory.getKeyPair(
-            rsaCredentialProperties.getAlias(),
-            rsaCredentialProperties.getStorePass().toCharArray()
-        );
-    }
-
-    /**
      * 使用密钥对生成 OAuth2 JWT 访问令牌转换器
      *
      * @return
      */
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
-        jwtAccessTokenConverter.setKeyPair(keyPair());
+        jwtAccessTokenConverter.setKeyPair(keyPair);
         return jwtAccessTokenConverter;
     }
 
