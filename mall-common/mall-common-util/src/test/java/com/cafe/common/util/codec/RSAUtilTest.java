@@ -41,15 +41,28 @@ class RSAUtilTest {
     }
 
     @Test
-    void encrypt() {
+    void encryptByPublicKey() {
         String ciphertext = RSAUtil.encrypt(PLAINTEXT, PUBLIC_KEY);
         System.out.println(ciphertext);
     }
 
     @Test
-    void decrypt() {
+    void decryptByPrivateKey() {
         String ciphertext = RSAUtil.encrypt(PLAINTEXT, PUBLIC_KEY);
         String plaintext = RSAUtil.decrypt(ciphertext, PRIVATE_KEY);
+        System.out.println(plaintext);
+    }
+
+    @Test
+    void encryptByPrivateKey() {
+        String ciphertext = RSAUtil.encrypt(PLAINTEXT, PRIVATE_KEY);
+        System.out.println(ciphertext);
+    }
+
+    @Test
+    void decryptByPublicKey() {
+        String ciphertext = RSAUtil.encrypt(PLAINTEXT, PRIVATE_KEY);
+        String plaintext = RSAUtil.decrypt(ciphertext, PUBLIC_KEY);
         System.out.println(plaintext);
     }
 }
