@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @ConfigurationProperties(prefix = "rsa-credential")
-public class RsaCredentialProperties {
+public class RSACredentialProperties {
 
     /**
      * 密钥库名称
