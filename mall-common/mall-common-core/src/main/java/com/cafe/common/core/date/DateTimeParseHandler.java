@@ -25,17 +25,17 @@ import java.util.Date;
  * @Package: com.cafe.common.core.date
  * @Author: zhouboyi
  * @Date: 2023/8/8 15:51
- * @Description: 日期时间格式化处理器
+ * @Description: 日期时间解析处理器
  */
 @RestControllerAdvice(annotations = {RestController.class})
 @Order(value = IntegerConstant.SIXTY)
-public class DateTimeFormatHandler {
+public class DateTimeParseHandler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateTimeFormatHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DateTimeParseHandler.class);
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
-        // LocalDateTime 类型接收日期时间格式字符串
+        // 解析日期时间格式字符串成 LocalDateTime 类型
         binder.registerCustomEditor(LocalDateTime.class, new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) throws IllegalArgumentException {
@@ -43,7 +43,7 @@ public class DateTimeFormatHandler {
             }
         });
 
-        // LocalDate 类型接收日期格式字符串
+        // 解析日期格式字符串成 LocalDate 类型
         binder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) throws IllegalArgumentException {
@@ -51,7 +51,7 @@ public class DateTimeFormatHandler {
             }
         });
 
-        // LocalTime 类型接收时间格式字符串
+        // 解析时间格式字符串成 LocalTime 类型
         binder.registerCustomEditor(LocalTime.class, new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) throws IllegalArgumentException {
@@ -59,36 +59,33 @@ public class DateTimeFormatHandler {
             }
         });
 
-        // Date 类型接收日期时间格式、日期格式、时间格式字符串
+        // 解析日期时间格式、日期格式、时间格式字符串成 Date 类型
         binder.registerCustomEditor(Date.class, new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) throws IllegalArgumentException {
-                SimpleDateFormat format;
-                Date date = new Date();
                 try {
-                    // 接收日期时间格式字符串
-                    format = new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE_TIME.getPattern());
-                    date = format.parse(text);
+                    // 解析日期时间格式字符串
+                    setValue(new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE_TIME.getPattern()).parse(text));
                 } catch (ParseException e1) {
                     try {
-                        // 接收日期格式字符串
-                        format = new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE.getPattern());
-                        date = format.parse(text);
+                        // 解析日期格式字符串 (时间为 00:00:00)
+                        setValue(new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE.getPattern()).parse(text));
                     } catch (ParseException e2) {
                         try {
-                            // 接收时间格式字符串
-                            format = new SimpleDateFormat(DateTimePatternEnum.DEFAULT_TIME.getPattern());
-                            Calendar instance = Calendar.getInstance();
+                            // 解析时间格式字符串 (日期为当前年月日)
                             Calendar calendar = Calendar.getInstance();
-                            calendar.setTime(format.parse(text));
-                            calendar.set(instance.get(Calendar.YEAR), instance.get(Calendar.MONTH), instance.get(Calendar.DATE));
-                            date = calendar.getTime();
+                            int year = calendar.get(Calendar.YEAR);
+                            int month = calendar.get(Calendar.MONTH);
+                            int date = calendar.get(Calendar.DATE);
+                            calendar.setTime(new SimpleDateFormat(DateTimePatternEnum.DEFAULT_TIME.getPattern()).parse(text));
+                            calendar.set(year, month, date);
+                            setValue(calendar.getTime());
                         } catch (ParseException e3) {
                             LOGGER.error("DateTimeFormatHandler.initBinder(): Can not parse the String text to Date type! text -> {}", text, e3);
+                            throw new IllegalArgumentException("Can not parse the String text to Date type! text -> " + text);
                         }
                     }
                 }
-                setValue(date);
             }
         });
     }
