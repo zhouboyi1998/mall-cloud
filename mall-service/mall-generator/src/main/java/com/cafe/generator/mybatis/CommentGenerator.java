@@ -1,14 +1,16 @@
 package com.cafe.generator.mybatis;
 
-import com.cafe.common.constant.pool.StringConstant;
+import com.cafe.common.enumeration.date.DateTimePatternEnum;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.CompilationUnit;
 import org.mybatis.generator.api.dom.java.Field;
 import org.mybatis.generator.api.dom.java.FullyQualifiedJavaType;
+import org.mybatis.generator.api.dom.java.TopLevelClass;
 import org.mybatis.generator.internal.DefaultCommentGenerator;
-import org.mybatis.generator.internal.util.StringUtility;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 /**
@@ -20,13 +22,9 @@ import java.util.Properties;
  */
 public class CommentGenerator extends DefaultCommentGenerator {
 
-    private boolean addRemarkComments = false;
-
     private static final String EXAMPLE_SUFFIX = "Example";
 
     private static final String MAPPER_SUFFIX = "Mapper";
-
-    private static final String API_MODEL_PROPERTY_FULL_CLASS_NAME = "io.swagger.annotations.ApiModelProperty";
 
     /**
      * 设置用户配置的参数
@@ -34,48 +32,59 @@ public class CommentGenerator extends DefaultCommentGenerator {
     @Override
     public void addConfigurationProperties(Properties properties) {
         super.addConfigurationProperties(properties);
-        this.addRemarkComments = StringUtility.isTrue(properties.getProperty("addRemarkComments"));
     }
 
     /**
-     * 给字段添加注释
+     * Java 文件添加 import
+     *
+     * @param compilationUnit
      */
-    @Override
-    public void addFieldComment(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-        String remarks = introspectedColumn.getRemarks();
-        // 根据参数和备注信息判断是否添加备注信息
-        if (addRemarkComments && StringUtility.stringHasValue(remarks)) {
-            addFieldJavaDoc(field, remarks);
-            // 数据库中特殊字符需要转义
-            if (remarks.contains(StringConstant.DOUBLE_QUOTATION)) {
-                remarks = remarks.replace(StringConstant.DOUBLE_QUOTATION, StringConstant.SINGLE_QUOTATION);
-            }
-            // 给 Model 的字段添加 Swagger 注解
-            field.addJavaDocLine("@ApiModelProperty(value = \"" + remarks + "\")");
-        }
-    }
-
-    /**
-     * 给 Model 的字段添加注释
-     */
-    private void addFieldJavaDoc(Field field, String remarks) {
-        // 文档注释开始
-        field.addJavaDocLine("/**");
-        // 获取数据库字段的备注信息
-        String[] remarkLines = remarks.split(System.getProperty("line.separator"));
-        for (String remarkLine : remarkLines) {
-            field.addJavaDocLine(" * " + remarkLine);
-        }
-        field.addJavaDocLine(" */");
-    }
-
     @Override
     public void addJavaFileComment(CompilationUnit compilationUnit) {
         super.addJavaFileComment(compilationUnit);
-        // 只在 Model 中添加 Swagger 注解类的导入
-        if (!compilationUnit.getType().getFullyQualifiedName().contains(MAPPER_SUFFIX) &&
-            !compilationUnit.getType().getFullyQualifiedName().contains(EXAMPLE_SUFFIX)) {
-            compilationUnit.addImportedType(new FullyQualifiedJavaType(API_MODEL_PROPERTY_FULL_CLASS_NAME));
+        String fullyQualifiedName = compilationUnit.getType().getFullyQualifiedName();
+        // Model 添加 import
+        if (!fullyQualifiedName.contains(MAPPER_SUFFIX) && !fullyQualifiedName.contains(EXAMPLE_SUFFIX)) {
+            compilationUnit.addImportedType(new FullyQualifiedJavaType("io.swagger.annotations.ApiModel"));
+            compilationUnit.addImportedType(new FullyQualifiedJavaType("io.swagger.annotations.ApiModelProperty"));
         }
+        // Mapper 接口添加 import
+        if (fullyQualifiedName.contains(MAPPER_SUFFIX)) {
+            compilationUnit.addImportedType(new FullyQualifiedJavaType("org.apache.ibatis.annotations.Mapper"));
+        }
+    }
+
+    /**
+     * Model 添加 class 注释
+     *
+     * @param topLevelClass
+     * @param introspectedTable
+     */
+    @Override
+    public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        String remarks = introspectedTable.getRemarks();
+        // 添加 class 注释
+        topLevelClass.addJavaDocLine("/**");
+        topLevelClass.addJavaDocLine(" * @Project: mall-cloud");
+        topLevelClass.addJavaDocLine(" * @Package:");
+        topLevelClass.addJavaDocLine(" * @Author: zhouboyi");
+        topLevelClass.addJavaDocLine(" * @Date: " + new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE.getPattern()).format(new Date()));
+        topLevelClass.addJavaDocLine(" * @Description: " + remarks);
+        topLevelClass.addJavaDocLine(" */");
+        // 添加 class 注解
+        topLevelClass.addJavaDocLine("@ApiModel(value = \"" + "\", description = \"" + remarks + "\")");
+    }
+
+    /**
+     * 字段添加注释
+     *
+     * @param field
+     * @param introspectedTable
+     * @param introspectedColumn
+     */
+    @Override
+    public void addFieldComment(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
+        // 添加 Swagger 注解
+        field.addJavaDocLine("@ApiModelProperty(value = \"" + introspectedColumn.getRemarks() + "\")");
     }
 }
