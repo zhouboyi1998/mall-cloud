@@ -50,10 +50,10 @@ public class ElasticSearchGoodsController {
 
     @LogPrint(value = "获取商品")
     @ApiOperation(value = "获取商品")
-    @ApiImplicitParam(value = "ElasticSearch id", name = "esId", dataType = "String", paramType = "path", required = true)
-    @GetMapping(value = "/{esId}")
-    public ResponseEntity<GetResponse> one(@PathVariable(value = "esId") String esId) throws IOException {
-        GetResponse getResponse = elasticSearchGoodsService.one(esId);
+    @ApiImplicitParam(value = "ElasticSearch id", name = "id", dataType = "String", paramType = "path", required = true)
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<GetResponse> one(@PathVariable(value = "id") String id) throws IOException {
+        GetResponse getResponse = elasticSearchGoodsService.one(id);
         return ResponseEntity.ok(getResponse);
     }
 
@@ -77,10 +77,10 @@ public class ElasticSearchGoodsController {
 
     @LogPrint(value = "删除商品")
     @ApiOperation(value = "删除商品")
-    @ApiImplicitParam(value = "ElasticSearch id", name = "esId", dataType = "String", paramType = "path", required = true)
-    @DeleteMapping(value = "/{esId}")
-    public ResponseEntity<DeleteResponse> delete(@PathVariable(value = "esId") String esId) throws IOException {
-        DeleteResponse deleteResponse = elasticSearchGoodsService.delete(esId);
+    @ApiImplicitParam(value = "ElasticSearch id", name = "id", dataType = "String", paramType = "path", required = true)
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<DeleteResponse> delete(@PathVariable(value = "id") String id) throws IOException {
+        DeleteResponse deleteResponse = elasticSearchGoodsService.delete(id);
         return ResponseEntity.ok(deleteResponse);
     }
 
@@ -104,10 +104,10 @@ public class ElasticSearchGoodsController {
 
     @LogPrint(value = "批量删除商品")
     @ApiOperation(value = "批量删除商品")
-    @ApiImplicitParam(value = "ElasticSearch id列表", name = "esIds", dataType = "List<String>", paramType = "body", required = true)
+    @ApiImplicitParam(value = "ElasticSearch ids", name = "ids", dataType = "List<String>", paramType = "body", required = true)
     @DeleteMapping(value = "/batch")
-    public ResponseEntity<BulkResponse> deleteBatch(@RequestBody List<String> esIds) throws IOException {
-        BulkResponse bulkResponse = elasticSearchGoodsService.deleteBatch(esIds);
+    public ResponseEntity<BulkResponse> deleteBatch(@RequestBody List<String> ids) throws IOException {
+        BulkResponse bulkResponse = elasticSearchGoodsService.deleteBatch(ids);
         return ResponseEntity.ok(bulkResponse);
     }
 
@@ -125,8 +125,8 @@ public class ElasticSearchGoodsController {
         @PathVariable(value = "current") Integer current,
         @PathVariable(value = "size") Integer size,
         @RequestParam(value = "keyword", required = false) String keyword,
-        @RequestParam(value = "sort", required = false, defaultValue = ElasticSearchConstant.GOODS_DEFAULT_SORT) String sort,
-        @RequestParam(value = "rule", required = false, defaultValue = ElasticSearchConstant.GOODS_DEFAULT_RULE) String rule
+        @RequestParam(value = "sort", required = false, defaultValue = ElasticSearchConstant.DEFAULT_SORT) String sort,
+        @RequestParam(value = "rule", required = false, defaultValue = ElasticSearchConstant.DEFAULT_RULE) String rule
     ) throws IOException {
         SearchResponse searchResponse = elasticSearchGoodsService.page(current, size, keyword, sort, rule);
         return ResponseEntity.ok(searchResponse);
