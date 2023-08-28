@@ -49,9 +49,9 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
     }
 
     @Override
-    public GetResponse one(String esId) throws IOException {
+    public GetResponse one(String id) throws IOException {
         // 组装查询请求
-        GetRequest getRequest = new GetRequest(ElasticSearchConstant.GOODS_INDEX, esId);
+        GetRequest getRequest = new GetRequest(ElasticSearchConstant.Goods.INDEX, id);
         // 查询数据
         return restHighLevelClient.get(getRequest, RequestOptions.DEFAULT);
     }
@@ -59,7 +59,7 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
     @Override
     public IndexResponse insert(Goods goods) throws IOException {
         // 组装插入请求
-        IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.GOODS_INDEX)
+        IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.Goods.INDEX)
             .timeout(TimeValue.timeValueSeconds(10))
             .id(goods.getId().toString())
             .source(JSONUtil.toJsonStr(goods), XContentType.JSON);
@@ -70,7 +70,7 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
     @Override
     public UpdateResponse update(Goods goods) throws IOException {
         // 组装更新请求
-        UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.GOODS_INDEX, goods.getId().toString())
+        UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Goods.INDEX, goods.getId().toString())
             .timeout(TimeValue.timeValueSeconds(10))
             .doc(JSONUtil.toJsonStr(goods), XContentType.JSON);
         // 更新数据
@@ -78,9 +78,9 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
     }
 
     @Override
-    public DeleteResponse delete(String esId) throws IOException {
+    public DeleteResponse delete(String id) throws IOException {
         // 组装删除请求
-        DeleteRequest deleteRequest = new DeleteRequest(ElasticSearchConstant.GOODS_INDEX, esId)
+        DeleteRequest deleteRequest = new DeleteRequest(ElasticSearchConstant.Goods.INDEX, id)
             .timeout(TimeValue.timeValueSeconds(10));
         // 删除数据
         return restHighLevelClient.delete(deleteRequest, RequestOptions.DEFAULT);
@@ -91,7 +91,7 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
         // 组装批量插入请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
         for (Goods goods : goodsList) {
-            IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.GOODS_INDEX)
+            IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.Goods.INDEX)
                 // ElasticSearch 索引库的主键不使用自动生成的 ID, 使用数据库中存储的业务 ID
                 .id(goods.getId().toString())
                 .source(JSONUtil.toJsonStr(goods), XContentType.JSON);
@@ -106,7 +106,7 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
         // 组装批量更新请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
         for (Goods goods : goodsList) {
-            UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.GOODS_INDEX, goods.getId().toString())
+            UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Goods.INDEX, goods.getId().toString())
                 .doc(JSONUtil.toJsonStr(goods), XContentType.JSON);
             bulkRequest.add(updateRequest);
         }
@@ -115,11 +115,11 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
     }
 
     @Override
-    public BulkResponse deleteBatch(List<String> esIds) throws IOException {
+    public BulkResponse deleteBatch(List<String> ids) throws IOException {
         // 组装批量删除请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
-        for (String esId : esIds) {
-            DeleteRequest deleteRequest = new DeleteRequest(ElasticSearchConstant.GOODS_INDEX, esId);
+        for (String id : ids) {
+            DeleteRequest deleteRequest = new DeleteRequest(ElasticSearchConstant.Goods.INDEX, id);
             bulkRequest.add(deleteRequest);
         }
         // 批量删除数据
@@ -138,12 +138,11 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
             .timeout(TimeValue.timeValueSeconds(10));
         // 如果关键词不为空, 组装关键词匹配
         if (ObjectUtil.isNotEmpty(keyword)) {
-            QueryBuilder queryBuilder
-                = QueryBuilders.multiMatchQuery(keyword, ElasticSearchConstant.GOODS_SEARCH_FIELD);
+            QueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(keyword, ElasticSearchConstant.Goods.SEARCH_FIELD);
             searchSourceBuilder.query(queryBuilder);
         }
         // 组装搜索请求
-        SearchRequest searchRequest = new SearchRequest(ElasticSearchConstant.GOODS_INDEX)
+        SearchRequest searchRequest = new SearchRequest(ElasticSearchConstant.Goods.INDEX)
             .source(searchSourceBuilder);
         // 搜索获取返回值
         return restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);

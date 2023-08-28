@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "Goods", description = "Solr 商品实体模型")
-@SolrDocument(collection = SolrConstant.GOODS_INDEX)
+@SolrDocument(collection = SolrConstant.Goods.INDEX)
 public class Goods implements Serializable {
 
     private static final long serialVersionUID = 1L;
