@@ -23,11 +23,11 @@ public interface ElasticSearchGoodsService {
     /**
      * 获取商品
      *
-     * @param _id
+     * @param id
      * @return
      * @throws IOException
      */
-    GetResponse one(String _id) throws IOException;
+    GetResponse one(String id) throws IOException;
 
     /**
      * 插入商品
@@ -50,11 +50,11 @@ public interface ElasticSearchGoodsService {
     /**
      * 删除商品
      *
-     * @param _id
+     * @param id
      * @return
      * @throws IOException
      */
-    DeleteResponse delete(String _id) throws IOException;
+    DeleteResponse delete(String id) throws IOException;
 
     /**
      * 批量插入商品
@@ -77,11 +77,11 @@ public interface ElasticSearchGoodsService {
     /**
      * 批量删除商品
      *
-     * @param _ids
+     * @param ids
      * @return
      * @throws IOException
      */
-    BulkResponse deleteBatch(List<String> _ids) throws IOException;
+    BulkResponse deleteBatch(List<String> ids) throws IOException;
 
     /**
      * 搜索商品

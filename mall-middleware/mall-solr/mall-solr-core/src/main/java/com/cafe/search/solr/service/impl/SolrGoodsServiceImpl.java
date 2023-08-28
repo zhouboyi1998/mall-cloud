@@ -29,33 +29,33 @@ public class SolrGoodsServiceImpl implements SolrGoodsService {
 
     @Override
     public Goods one(String id) {
-        Goods goods = solrTemplate.getById(SolrConstant.GOODS_INDEX, id, Goods.class)
-            .orElseThrow(() -> new SolrException(SolrException.ErrorCode.NOT_FOUND, "Solr Goods ID is not exist!"));
-        solrTemplate.commit(SolrConstant.GOODS_INDEX);
+        Goods goods = solrTemplate.getById(SolrConstant.Goods.INDEX, id, Goods.class)
+            .orElseThrow(() -> new SolrException(SolrException.ErrorCode.NOT_FOUND, "Goods id is not exist!"));
+        solrTemplate.commit(SolrConstant.Goods.INDEX);
         return goods;
     }
 
     @Override
     public void save(Goods goods) {
-        solrTemplate.saveBean(SolrConstant.GOODS_INDEX, goods);
-        solrTemplate.commit(SolrConstant.GOODS_INDEX);
+        solrTemplate.saveBean(SolrConstant.Goods.INDEX, goods);
+        solrTemplate.commit(SolrConstant.Goods.INDEX);
     }
 
     @Override
     public void saveBatch(List<Goods> goodsList) {
-        solrTemplate.saveBeans(SolrConstant.GOODS_INDEX, goodsList);
-        solrTemplate.commit(SolrConstant.GOODS_INDEX);
+        solrTemplate.saveBeans(SolrConstant.Goods.INDEX, goodsList);
+        solrTemplate.commit(SolrConstant.Goods.INDEX);
     }
 
     @Override
     public void delete(String id) {
-        solrTemplate.deleteByIds(SolrConstant.GOODS_INDEX, id);
-        solrTemplate.commit(SolrConstant.GOODS_INDEX);
+        solrTemplate.deleteByIds(SolrConstant.Goods.INDEX, id);
+        solrTemplate.commit(SolrConstant.Goods.INDEX);
     }
 
     @Override
     public void deleteBatch(List<String> ids) {
-        solrTemplate.deleteByIds(SolrConstant.GOODS_INDEX, ids);
-        solrTemplate.commit(SolrConstant.GOODS_INDEX);
+        solrTemplate.deleteByIds(SolrConstant.Goods.INDEX, ids);
+        solrTemplate.commit(SolrConstant.Goods.INDEX);
     }
 }

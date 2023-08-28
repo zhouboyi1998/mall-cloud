@@ -12,5 +12,11 @@ public class SolrConstant {
     /**
      * 商品索引
      */
-    public static final String GOODS_INDEX = "goods";
+    public static class Goods {
+
+        /**
+         * 索引名称
+         */
+        public static final String INDEX = "goods";
+    }
 }
