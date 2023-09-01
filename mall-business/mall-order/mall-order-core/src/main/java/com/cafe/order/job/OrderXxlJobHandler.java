@@ -1,8 +1,8 @@
 package com.cafe.order.job;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
+import com.cafe.common.constant.model.OrderConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
-import com.cafe.common.constant.status.OrderStatusConstant;
 import com.cafe.order.mapper.OrderMapper;
 import com.cafe.order.model.Order;
 import com.xxl.job.core.context.XxlJobHelper;
@@ -37,9 +37,9 @@ public class OrderXxlJobHandler {
         // 自动取消下单 10 分钟仍未支付的订单
         LocalDateTime now = LocalDateTime.now();
         LambdaUpdateWrapper<Order> wrapper = new LambdaUpdateWrapper<Order>()
-            .eq(Order::getStatus, OrderStatusConstant.CREATE)
+            .eq(Order::getStatus, OrderConstant.Status.CREATE)
             .le(Order::getCreateTime, now.minusMinutes(IntegerConstant.TEN))
-            .set(Order::getStatus, OrderStatusConstant.CANCEL)
+            .set(Order::getStatus, OrderConstant.Status.CANCEL)
             .set(Order::getUpdateTime, now)
             .set(Order::getCompletionTime, now);
         Integer count = orderMapper.update(null, wrapper);

@@ -1,11 +1,12 @@
 package com.cafe.user.message;
 
-import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.monitor.MonitorConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.rabbitmq.RabbitMQConstant;
+import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.user.model.RoleMenu;
 import com.cafe.user.service.RoleMenuService;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
@@ -56,11 +57,11 @@ public class RabbitMQConsumer {
         // 存储 菜单ids
         List<Long> menuIds = new ArrayList<>();
         // 获取消息内容
-        Map<String, Object> content = JSONUtil.parseObj(message);
+        Map<String, Object> content = JacksonUtil.readValue(message, new TypeReference<Map<String, Object>>() {});
         // 获取变更前的数据
-        List<RoleMenu> beforeDataList = JSONUtil.parseArray(content.get(MonitorConstant.BEFORE_DATA)).toList(RoleMenu.class);
+        List<RoleMenu> beforeDataList = JacksonUtil.convertValue(content.get(MonitorConstant.BEFORE_DATA), new TypeReference<List<RoleMenu>>() {});
         // 获取变更前的数据
-        List<RoleMenu> afterDataList = JSONUtil.parseArray(content.get(MonitorConstant.AFTER_DATA)).toList(RoleMenu.class);
+        List<RoleMenu> afterDataList = JacksonUtil.convertValue(content.get(MonitorConstant.AFTER_DATA), new TypeReference<List<RoleMenu>>() {});
 
         for (RoleMenu roleMenu : beforeDataList) {
             menuIds.add(roleMenu.getMenuId());

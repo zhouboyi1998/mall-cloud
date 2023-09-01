@@ -1,8 +1,8 @@
 package com.cafe.common.util.aop;
 
-import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
+import com.cafe.common.util.json.JacksonUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,7 +52,7 @@ public class AOPUtil {
                     .append(StringConstant.DOUBLE_QUOTATION).append(StringConstant.COMMA);
             } else {
                 // 引用类型的参数转换成 JSON 字符串再拼接
-                args.append(JSONUtil.toJsonStr(value)).append(StringConstant.COMMA);
+                args.append(JacksonUtil.writeValueAsString(value)).append(StringConstant.COMMA);
             }
         }
         // 删除最后一个逗号
