@@ -1,11 +1,11 @@
 package com.cafe.common.log.aspect;
 
-import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.util.aop.AOPUtil;
+import com.cafe.common.util.json.JacksonUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -69,7 +69,7 @@ public class LogPrintAspect {
         // 进入连接点 (执行目标方法, 获取目标方法的响应结果)
         Object result = proceedingJoinPoint.proceed();
         // 响应结果
-        LOGGER.info("Response result  : {}", JSONUtil.toJsonStr(result));
+        LOGGER.info("Response result  : {}", JacksonUtil.writeValueAsString(result));
         // 执行耗时 (进入连接点之后的时间 - 进入连接点之前的时间)
         LOGGER.info("Time Consuming   : {} ms", System.currentTimeMillis() - startTime);
         // 结束打印

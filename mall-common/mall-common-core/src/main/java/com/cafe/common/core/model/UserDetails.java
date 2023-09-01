@@ -1,5 +1,7 @@
 package com.cafe.common.core.model;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -17,6 +19,7 @@ import java.util.List;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
+@JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class UserDetails implements Serializable {
 
     private static final long serialVersionUID = 1L;

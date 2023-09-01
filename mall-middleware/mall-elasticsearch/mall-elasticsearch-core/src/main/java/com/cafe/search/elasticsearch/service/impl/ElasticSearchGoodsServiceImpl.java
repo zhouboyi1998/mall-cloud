@@ -1,8 +1,8 @@
 package com.cafe.search.elasticsearch.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
+import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.search.elasticsearch.model.Goods;
 import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -62,7 +62,7 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
         IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.Goods.INDEX)
             .timeout(TimeValue.timeValueSeconds(10))
             .id(goods.getId().toString())
-            .source(JSONUtil.toJsonStr(goods), XContentType.JSON);
+            .source(JacksonUtil.writeValueAsString(goods), XContentType.JSON);
         // 插入数据
         return restHighLevelClient.index(indexRequest, RequestOptions.DEFAULT);
     }
@@ -72,7 +72,7 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
         // 组装更新请求
         UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Goods.INDEX, goods.getId().toString())
             .timeout(TimeValue.timeValueSeconds(10))
-            .doc(JSONUtil.toJsonStr(goods), XContentType.JSON);
+            .doc(JacksonUtil.writeValueAsString(goods), XContentType.JSON);
         // 更新数据
         return restHighLevelClient.update(updateRequest, RequestOptions.DEFAULT);
     }
@@ -94,7 +94,7 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
             IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.Goods.INDEX)
                 // ElasticSearch 索引库的主键不使用自动生成的 ID, 使用数据库中存储的业务 ID
                 .id(goods.getId().toString())
-                .source(JSONUtil.toJsonStr(goods), XContentType.JSON);
+                .source(JacksonUtil.writeValueAsString(goods), XContentType.JSON);
             bulkRequest.add(indexRequest);
         }
         // 批量插入数据
@@ -107,7 +107,7 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
         for (Goods goods : goodsList) {
             UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Goods.INDEX, goods.getId().toString())
-                .doc(JSONUtil.toJsonStr(goods), XContentType.JSON);
+                .doc(JacksonUtil.writeValueAsString(goods), XContentType.JSON);
             bulkRequest.add(updateRequest);
         }
         // 批量更新数据

@@ -1,9 +1,9 @@
 package com.cafe.common.core.request;
 
-import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.core.model.UserDetails;
+import com.cafe.common.util.json.JacksonUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -29,6 +29,6 @@ public class RequestHeaderHandler {
         // 获取请求头中的用户详细信息
         String userDetails = request.getHeader(RequestConstant.Header.USER_DETAILS);
         // 转换类型, 添加到 ModelAttribute 中
-        return JSONUtil.toBean(userDetails, UserDetails.class);
+        return JacksonUtil.readValue(userDetails, UserDetails.class);
     }
 }

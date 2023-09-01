@@ -1,11 +1,12 @@
 package com.cafe.gateway.authorization;
 
-import cn.hutool.core.convert.Convert;
-import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.constant.request.RequestConstant;
+import com.cafe.common.core.model.UserDetails;
+import com.cafe.common.util.json.JacksonUtil;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.nimbusds.jose.JWSObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -57,18 +58,17 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         try {
             // 解析 Access Token
             JWSObject jwsObject = JWSObject.parse(accessToken);
-            // 从解析后的 Access Token 中获取用户详细信息
-            String userDetails = jwsObject.getPayload().toString();
-            // 获取用户详细信息中的用户id和客户端id
-            Long userId = (Long) JSONUtil.parseObj(userDetails).get(RequestConstant.Parameter.USER_ID);
-            String clientId = (String) JSONUtil.parseObj(userDetails).get(RequestConstant.Parameter.CLIENT_ID);
-            LOGGER.info("AuthorizationManager.check(): user id -> {}, client id -> {}, menu path -> {}", userId, clientId, menuPath);
+            // 从解析后的 Access Token 中获取载荷
+            String payload = jwsObject.getPayload().toString();
+            // 解析载荷获取用户详细信息
+            UserDetails userDetails = JacksonUtil.readValue(payload, UserDetails.class);
+            LOGGER.info("AuthorizationManager.check(): user id -> {}, client id -> {}, menu path -> {}", userDetails.getUserId(), userDetails.getClientId(), menuPath);
         } catch (ParseException e) {
             LOGGER.error("AuthorizationManager.check(): Could not parse token! access token -> {}, message -> {}", accessToken, e.getMessage(), e);
         }
 
         // 获取可以访问当前菜单的角色列表
-        List<String> roleNameList = Convert.toList(String.class, redisTemplate.opsForHash().get(RedisConstant.MENU_ROLE_MAP, menuPath));
+        List<String> roleNameList = JacksonUtil.convertValue(redisTemplate.opsForHash().get(RedisConstant.MENU_ROLE_MAP, menuPath), new TypeReference<List<String>>() {});
 
         // 当用户认证通过, 且用户的角色可以访问当前菜单, 当前用户可以访问当前请求
         return mono

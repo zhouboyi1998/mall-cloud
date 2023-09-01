@@ -1,11 +1,11 @@
 package com.cafe.common.core.response;
 
-import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.core.result.Result;
+import com.cafe.common.util.json.JacksonUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.core.MethodParameter;
@@ -63,7 +63,7 @@ public class ResponseBodyHandler implements ResponseBodyAdvice<Object> {
         if (body instanceof String) {
             // 设置 Content-Type = application/json
             response.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
-            return JSONUtil.toJsonStr(Result.success(body));
+            return JacksonUtil.writeValueAsString(Result.success(body));
         }
         // 返回结果封装成 Result 类型
         return Result.success(body);

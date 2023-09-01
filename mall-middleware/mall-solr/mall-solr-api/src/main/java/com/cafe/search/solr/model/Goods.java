@@ -1,6 +1,7 @@
 package com.cafe.search.solr.model;
 
 import com.cafe.common.constant.solr.SolrConstant;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
@@ -27,6 +28,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "Goods", description = "Solr 商品实体模型")
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 @SolrDocument(collection = SolrConstant.Goods.INDEX)
 public class Goods implements Serializable {
 

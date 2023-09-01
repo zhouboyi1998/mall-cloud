@@ -27,6 +27,11 @@
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-all</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-util</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

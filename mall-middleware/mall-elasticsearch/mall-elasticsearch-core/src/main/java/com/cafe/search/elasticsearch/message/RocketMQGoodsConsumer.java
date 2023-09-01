@@ -1,11 +1,12 @@
 package com.cafe.search.elasticsearch.message;
 
-import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.app.FieldConstant;
+import com.cafe.common.constant.model.GoodsConstant;
 import com.cafe.common.constant.rocketmq.RocketMQConstant;
-import com.cafe.common.constant.status.GoodsStatusConstant;
+import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.search.elasticsearch.model.Goods;
 import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.slf4j.Logger;
@@ -42,21 +43,21 @@ public class RocketMQGoodsConsumer implements RocketMQListener<String> {
         // 打印成功接收消息的日志
         LOGGER.info("RocketMQGoodsConsumer.onMessage(): rocketmq message -> {}", message);
         // 获取消息内容
-        Map<String, Object> content = JSONUtil.parseObj(message);
+        Map<String, Object> content = JacksonUtil.readValue(message, new TypeReference<Map<String, Object>>() {});
         // 获取上下架标识
         Integer status = Integer.parseInt(String.valueOf(content.get(FieldConstant.STATUS)));
 
         try {
-            if (GoodsStatusConstant.LAUNCH.equals(status)) {
+            if (GoodsConstant.Status.LAUNCH.equals(status)) {
                 // 获取上架商品的信息
-                List<Goods> goodsList = JSONUtil.parseArray(content.get(FieldConstant.DATA)).toList(Goods.class);
+                List<Goods> goodsList = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<Goods>>() {});
                 // 上架商品
                 elasticSearchGoodsService.insertBatch(goodsList);
                 // 打印成功上架商品的日志
                 LOGGER.info("RocketMQGoodsConsumer.onMessage(): Put away goods success! rocketmq message -> {}", message);
             } else {
                 // 获取下架商品的主键
-                List<String> ids = JSONUtil.parseArray(content.get(FieldConstant.DATA)).toList(String.class);
+                List<String> ids = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<String>>() {});
                 // 下架商品
                 elasticSearchGoodsService.deleteBatch(ids);
                 // 打印成功下架商品的日志
