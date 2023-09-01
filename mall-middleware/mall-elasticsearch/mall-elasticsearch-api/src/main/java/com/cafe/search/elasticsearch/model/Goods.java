@@ -1,5 +1,6 @@
 package com.cafe.search.elasticsearch.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
@@ -23,6 +24,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "Goods", description = "ElasticSearch 商品实体模型")
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class Goods implements Serializable {
 
     private static final long serialVersionUID = 1L;

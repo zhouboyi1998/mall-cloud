@@ -1,7 +1,7 @@
 package com.cafe.gateway.authorization;
 
-import cn.hutool.json.JSONUtil;
 import com.cafe.common.constant.request.RequestConstant;
+import com.cafe.common.util.json.JacksonUtil;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -41,7 +41,7 @@ public class OauthServerAccessDeniedHandler implements ServerAccessDeniedHandler
                 // ----- 设置 HTTP 响应体 -----
                 ResponseEntity<String> body = ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(HttpStatus.UNAUTHORIZED.getReasonPhrase());
-                String result = JSONUtil.toJsonStr(body);
+                String result = JacksonUtil.writeValueAsString(body);
                 DataBuffer buffer = response.bufferFactory().wrap(result.getBytes(StandardCharsets.UTF_8));
                 return response.writeWith(Mono.just(buffer));
             });

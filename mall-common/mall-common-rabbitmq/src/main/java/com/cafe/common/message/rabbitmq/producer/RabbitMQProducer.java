@@ -1,6 +1,6 @@
 package com.cafe.common.message.rabbitmq.producer;
 
-import cn.hutool.json.JSONUtil;
+import com.cafe.common.util.json.JacksonUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -35,7 +35,7 @@ public class RabbitMQProducer {
      */
     public <T> void convertAndSend(String exchange, String routingKey, T content) {
         // 将消息内容转换为 JSON 字符串格式
-        String message = JSONUtil.toJsonStr(content);
+        String message = JacksonUtil.writeValueAsString(content);
         // 打印日志
         LOGGER.info("RabbitMQProducer.convertAndSend(): rabbitmq message -> {}", message);
         // 发送消息到 RabbitMQ
