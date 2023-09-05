@@ -1,6 +1,5 @@
 package com.cafe.security.service.impl;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.security.exception.MobileNotFoundException;
@@ -23,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @Project: mall-cloud
@@ -57,10 +57,10 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
         // 根据用户名和客户端id查询用户详情
         User user = userFeign.detailByUsername(username, clientId).getBody();
 
-        if (ObjectUtil.isNotNull(user)) {
+        if (Objects.nonNull(user)) {
             // 根据用户id查询角色名称列表
             List<String> roleNameList = roleFeign.listRoleName(user.getId()).getBody();
-            if (ObjectUtil.isNull(roleNameList)) {
+            if (Objects.isNull(roleNameList)) {
                 throw new UsernameNotFoundException(HttpStatusEnum.ROLE_NOT_FOUND.getReasonPhrase());
             }
             // 角色名称列表转换为数组形式
@@ -83,10 +83,10 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
         // 根据手机号和客户端id查询用户详情
         User user = userFeign.detailByMobile(mobile, clientId).getBody();
 
-        if (ObjectUtil.isNotNull(user)) {
+        if (Objects.nonNull(user)) {
             // 根据用户id查询角色名称列表
             List<String> roleNameList = roleFeign.listRoleName(user.getId()).getBody();
-            if (ObjectUtil.isNull(roleNameList)) {
+            if (Objects.isNull(roleNameList)) {
                 throw new UsernameNotFoundException(HttpStatusEnum.ROLE_NOT_FOUND.getReasonPhrase());
             }
             // 角色名称列表转换为数组形式

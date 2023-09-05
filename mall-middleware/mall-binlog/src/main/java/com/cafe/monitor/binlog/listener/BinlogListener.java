@@ -1,6 +1,5 @@
 package com.cafe.monitor.binlog.listener;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.cafe.common.constant.monitor.MonitorConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.monitor.binlog.handler.MessageContentHandler;
@@ -24,6 +23,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @Project: mall-cloud
@@ -69,7 +69,7 @@ public class BinlogListener implements CommandLineRunner {
         binaryLogClient.registerEventListener((event -> {
             // 获取事件数据
             EventData eventData = event.getData();
-            if (ObjectUtil.isNotNull(eventData)) {
+            if (Objects.nonNull(eventData)) {
                 // 获取数据库表信息
                 if (eventData instanceof TableMapEventData) {
                     TableMapEventData tableMapEventData = (TableMapEventData) eventData;
@@ -83,7 +83,7 @@ public class BinlogListener implements CommandLineRunner {
                     // 从监听数据中获取表名
                     String tableName = tableMap.get(updateRowsEventData.getTableId());
                     // 判断是否为需要监听的表
-                    if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
+                    if (Objects.nonNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
                         LOGGER.info("BinlogListener.run(): Update operation, table -> {}", tableName);
                         // 存储监听到的修改前的数据
@@ -106,7 +106,7 @@ public class BinlogListener implements CommandLineRunner {
                     // 从监听数据中获取表名
                     String tableName = tableMap.get(writeRowsEventData.getTableId());
                     // 判断是否为需要监听的表
-                    if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
+                    if (Objects.nonNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
                         LOGGER.info("BinlogListener.run(): Insert operation, table -> {}", tableName);
                         // 将监听到的新增数据交给消息内容处理器
@@ -120,7 +120,7 @@ public class BinlogListener implements CommandLineRunner {
                     // 从监听数据中获取表名
                     String tableName = tableMap.get(deleteRowsEventData.getTableId());
                     // 判断是否为需要监听的表
-                    if (ObjectUtil.isNotNull(tableName) && binlogProperties.getTable().contains(tableName)) {
+                    if (Objects.nonNull(tableName) && binlogProperties.getTable().contains(tableName)) {
                         // 打印日志
                         LOGGER.info("BinlogListener.run(): Delete operation, table -> {}", tableName);
                         // 将监听到的删除数据交给消息内容处理器
