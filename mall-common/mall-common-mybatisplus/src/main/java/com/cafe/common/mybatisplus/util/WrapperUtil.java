@@ -1,18 +1,17 @@
 package com.cafe.common.mybatisplus.util;
 
-import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.ReflectUtil;
-import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.lang.date.AbstractPeriod;
+import com.google.common.base.CaseFormat;
+import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.util.ReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @Project: mall-cloud
@@ -55,21 +54,21 @@ public class WrapperUtil {
      */
     public static <T, R, Children extends AbstractWrapper<T, R, Children>> AbstractWrapper<T, R, Children> createWrapper(T model, AbstractWrapper<T, R, Children> wrapper) {
         // 获取所有属性
-        Map<String, Field> fieldMap = ReflectUtil.getFieldMap(model.getClass());
+        Field[] fields = model.getClass().getDeclaredFields();
         // 迭代器遍历所有属性
-        for (Map.Entry<String, Field> entry : fieldMap.entrySet()) {
+        for (Field field : fields) {
             // 跳过条件构造时忽略的属性
-            if (IGNORE_FIELD_LIST.contains(entry.getKey())) {
+            if (IGNORE_FIELD_LIST.contains(field.getName())) {
                 continue;
             }
-            // 获取属性
-            Field field = entry.getValue();
-            // 根据传入的对象和属性, 获取属性值
-            Object fieldValue = ReflectUtil.getFieldValue(model, field);
+            // 设置允许访问该属性 (反射时默认不允许访问私有的属性、方法、构造器)
+            ReflectionUtils.makeAccessible(field);
+            // 获取属性值
+            Object fieldValue = ReflectionUtils.getField(field, model);
             // 如果属性值不为空, 加入 Wrapper 条件中
-            if (ObjectUtil.isNotEmpty(fieldValue)) {
+            if (ObjectUtils.isNotEmpty(fieldValue)) {
                 // 将驼峰格式的属性名转换为下划线格式的字段名
-                String column = StrUtil.toUnderlineCase(field.getName());
+                String column = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field.getName());
                 if (fieldValue instanceof String) {
                     // 字符串类型使用 like 条件
                     wrapper.like((R) column, fieldValue);
@@ -81,10 +80,10 @@ public class WrapperUtil {
                     Object start = period.getStart();
                     Object end = period.getEnd();
                     // 时间区间类型使用 gt / lt 条件
-                    if (ObjectUtil.isNotEmpty(start)) {
+                    if (ObjectUtils.isNotEmpty(start)) {
                         wrapper.gt((R) column, start);
                     }
-                    if (ObjectUtil.isNotEmpty(end)) {
+                    if (ObjectUtils.isNotEmpty(end)) {
                         wrapper.lt((R) column, end);
                     }
                 } else {

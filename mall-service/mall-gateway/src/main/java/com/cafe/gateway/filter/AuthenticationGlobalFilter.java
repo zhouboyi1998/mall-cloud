@@ -1,9 +1,9 @@
 package com.cafe.gateway.filter;
 
-import cn.hutool.core.util.StrUtil;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.request.RequestConstant;
 import com.nimbusds.jose.JWSObject;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
@@ -42,7 +42,7 @@ public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
         // 获取 Request Header 中的 Token
         String token = request.getHeaders().getFirst(RequestConstant.Header.AUTHORIZATION);
         // 如果 Token 为空, 直接返回
-        if (StrUtil.isEmpty(token)) {
+        if (StringUtils.isEmpty(token)) {
             return chain.filter(exchange);
         }
         // 移除 Token 中的令牌头, 获取 Access Token
