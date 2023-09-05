@@ -1,6 +1,5 @@
 package com.cafe.gateway.config;
 
-import cn.hutool.core.util.ArrayUtil;
 import com.cafe.common.constant.security.AuthorizationConstant;
 import com.cafe.gateway.authentication.OauthServerAuthenticationEntryPoint;
 import com.cafe.gateway.authorization.AuthorizationManager;
@@ -20,6 +19,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverterAdapter;
 import org.springframework.security.web.server.SecurityWebFilterChain;
+import org.springframework.util.StringUtils;
 import reactor.core.publisher.Mono;
 
 /**
@@ -93,7 +93,7 @@ public class WebFluxSecurityConfig {
             .addFilterBefore(ignoreUrlsRemoveJwtFilter, SecurityWebFiltersOrder.AUTHENTICATION)
             .authorizeExchange()
             // 白名单 URL 配置
-            .pathMatchers(ArrayUtil.toArray(secureProperties.getIgnoreUrls(), String.class))
+            .pathMatchers(StringUtils.toStringArray(secureProperties.getIgnoreUrls()))
             .permitAll()
             // 鉴权管理器配置
             .anyExchange()
