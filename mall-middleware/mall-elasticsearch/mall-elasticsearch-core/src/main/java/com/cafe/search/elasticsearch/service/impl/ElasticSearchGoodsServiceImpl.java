@@ -1,10 +1,10 @@
 package com.cafe.search.elasticsearch.service.impl;
 
-import cn.hutool.core.util.ObjectUtil;
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
 import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.search.elasticsearch.model.Goods;
 import com.cafe.search.elasticsearch.service.ElasticSearchGoodsService;
+import org.apache.commons.lang3.ObjectUtils;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
@@ -137,7 +137,7 @@ public class ElasticSearchGoodsServiceImpl implements ElasticSearchGoodsService 
             // 超时时间
             .timeout(TimeValue.timeValueSeconds(10));
         // 如果关键词不为空, 组装关键词匹配
-        if (ObjectUtil.isNotEmpty(keyword)) {
+        if (ObjectUtils.isNotEmpty(keyword)) {
             QueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(keyword, ElasticSearchConstant.Goods.SEARCH_FIELD);
             searchSourceBuilder.query(queryBuilder);
         }
