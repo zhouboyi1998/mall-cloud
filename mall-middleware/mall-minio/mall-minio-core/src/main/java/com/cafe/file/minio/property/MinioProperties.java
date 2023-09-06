@@ -1,5 +1,7 @@
 package com.cafe.file.minio.property;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Component;
  * @Date: 2022/6/9 10:37
  * @Description: MinIO 配置
  */
+@Getter
+@Setter
 @Component
 @ConfigurationProperties(prefix = "minio")
 public class MinioProperties {
@@ -40,7 +44,7 @@ public class MinioProperties {
     private String characterEncoding;
 
     /**
-     * 下载时的 HTTP Response 内容类型
+     * 下载时使用的 HTTP Response 内容类型
      */
     private String contentType;
 
@@ -53,68 +57,4 @@ public class MinioProperties {
      * 下载时使用的 HTTP Header Value 前缀
      */
     private String headerValuePrefix;
-
-    public String getEndpoint() {
-        return endpoint;
-    }
-
-    public void setEndpoint(String endpoint) {
-        this.endpoint = endpoint;
-    }
-
-    public String getFileHost() {
-        return fileHost;
-    }
-
-    public void setFileHost(String fileHost) {
-        this.fileHost = fileHost;
-    }
-
-    public String getAccessKey() {
-        return accessKey;
-    }
-
-    public void setAccessKey(String accessKey) {
-        this.accessKey = accessKey;
-    }
-
-    public String getSecretKey() {
-        return secretKey;
-    }
-
-    public void setSecretKey(String secretKey) {
-        this.secretKey = secretKey;
-    }
-
-    public String getCharacterEncoding() {
-        return characterEncoding;
-    }
-
-    public void setCharacterEncoding(String characterEncoding) {
-        this.characterEncoding = characterEncoding;
-    }
-
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
-    public String getHeaderKey() {
-        return headerKey;
-    }
-
-    public void setHeaderKey(String headerKey) {
-        this.headerKey = headerKey;
-    }
-
-    public String getHeaderValuePrefix() {
-        return headerValuePrefix;
-    }
-
-    public void setHeaderValuePrefix(String headerValuePrefix) {
-        this.headerValuePrefix = headerValuePrefix;
-    }
 }

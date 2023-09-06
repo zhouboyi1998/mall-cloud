@@ -1,5 +1,7 @@
 package com.cafe.common.xxljob.property;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Component;
  * @Date: 2023/5/5 11:23
  * @Description: XXL-JOB 配置
  */
+@Getter
+@Setter
 @Component
 @ConfigurationProperties(prefix = "xxl.job")
 public class XxlJobProperties {
@@ -29,46 +33,18 @@ public class XxlJobProperties {
      */
     private Executor executor;
 
-    public String getAccessToken() {
-        return accessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        this.accessToken = accessToken;
-    }
-
-    public Admin getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
-    }
-
-    public Executor getExecutor() {
-        return executor;
-    }
-
-    public void setExecutor(Executor executor) {
-        this.executor = executor;
-    }
-
+    @Getter
+    @Setter
     public static class Admin {
 
         /**
          * 调度中心地址
          */
         private String addresses;
-
-        public String getAddresses() {
-            return addresses;
-        }
-
-        public void setAddresses(String addresses) {
-            this.addresses = addresses;
-        }
     }
 
+    @Getter
+    @Setter
     public static class Executor {
 
         /**
@@ -82,7 +58,7 @@ public class XxlJobProperties {
         private String address;
 
         /**
-         * 执行器 IP
+         * 执行器IP
          */
         private String ip;
 
@@ -100,53 +76,5 @@ public class XxlJobProperties {
          * 执行器日志保存天数
          */
         private Integer logRetentionDays;
-
-        public String getAppname() {
-            return appname;
-        }
-
-        public void setAppname(String appname) {
-            this.appname = appname;
-        }
-
-        public String getAddress() {
-            return address;
-        }
-
-        public void setAddress(String address) {
-            this.address = address;
-        }
-
-        public String getIp() {
-            return ip;
-        }
-
-        public void setIp(String ip) {
-            this.ip = ip;
-        }
-
-        public Integer getPort() {
-            return port;
-        }
-
-        public void setPort(Integer port) {
-            this.port = port;
-        }
-
-        public String getLogPath() {
-            return logPath;
-        }
-
-        public void setLogPath(String logPath) {
-            this.logPath = logPath;
-        }
-
-        public Integer getLogRetentionDays() {
-            return logRetentionDays;
-        }
-
-        public void setLogRetentionDays(Integer logRetentionDays) {
-            this.logRetentionDays = logRetentionDays;
-        }
     }
 }

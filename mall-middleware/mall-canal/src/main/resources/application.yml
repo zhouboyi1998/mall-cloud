@@ -5,12 +5,12 @@ spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
-# Canal 数据库监听配置 (监听表配置)
+# Canal 数据库监听配置
 canal:
-  # 以下表的数据变更发送到 RabbitMQ
+  # 监听并推送至 RabbitMQ 的数据表
   rabbit-table:
     - mall_user.mall_role_menu
-  # 以下表的数据变更发送到 RocketMQ
+  # 监听并推送至 RocketMQ 的数据表
   rocket-table:
     - mall_goods.mall_brand
     - mall_goods.mall_category

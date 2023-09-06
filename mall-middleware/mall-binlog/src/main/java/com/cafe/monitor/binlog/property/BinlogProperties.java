@@ -1,5 +1,7 @@
 package com.cafe.monitor.binlog.property;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -12,67 +14,39 @@ import java.util.List;
  * @Date: 2022/5/16 15:09
  * @Description: 获取 application 中定义的数据库监听配置
  */
+@Getter
+@Setter
 @Component
 @ConfigurationProperties(prefix = "binlog")
 public class BinlogProperties {
 
+    /**
+     * 主机名
+     */
     private String host;
 
+    /**
+     * 端口
+     */
     private Integer port;
 
+    /**
+     * 用户名
+     */
     private String username;
 
+    /**
+     * 密码
+     */
     private String password;
 
+    /**
+     * MySQL 服务端唯一标识
+     */
     private Long serverId;
 
+    /**
+     * 监听的数据表
+     */
     private List<String> table;
-
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public Integer getPort() {
-        return port;
-    }
-
-    public void setPort(Integer port) {
-        this.port = port;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Long getServerId() {
-        return serverId;
-    }
-
-    public void setServerId(Long serverId) {
-        this.serverId = serverId;
-    }
-
-    public List<String> getTable() {
-        return table;
-    }
-
-    public void setTable(List<String> table) {
-        this.table = table;
-    }
 }
