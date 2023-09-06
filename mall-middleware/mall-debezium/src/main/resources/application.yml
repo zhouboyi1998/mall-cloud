@@ -24,9 +24,9 @@ debezium:
   strategy:
     # 是否监听表结构的变化
     schema-change: false
-    # 监听器在 MySQL 主从同步中的 server-id
+    # MySQL 服务端唯一标识
     server-id: 20
-    # 监听器在 MySQL 主从同步中的逻辑名称
+    # MySQL 主从同步中的逻辑名称
     server-name: debezium-mysql-cluster
 
 # LogBack 配置

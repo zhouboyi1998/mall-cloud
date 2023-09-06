@@ -1,5 +1,7 @@
 package com.cafe.file.fastdfs.property;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Component;
  * @Date: 2023/3/13 21:22
  * @Description: FastDFS 配置
  */
+@Getter
+@Setter
 @Component
 @ConfigurationProperties(prefix = "fastdfs")
 public class FastDFSProperties {
@@ -20,7 +24,7 @@ public class FastDFSProperties {
     private String characterEncoding;
 
     /**
-     * 下载时的 HTTP Response 内容类型
+     * 下载时使用的 HTTP Response 内容类型
      */
     private String contentType;
 
@@ -33,36 +37,4 @@ public class FastDFSProperties {
      * 下载时使用的 HTTP Header Value 前缀
      */
     private String headerValuePrefix;
-
-    public String getCharacterEncoding() {
-        return characterEncoding;
-    }
-
-    public void setCharacterEncoding(String characterEncoding) {
-        this.characterEncoding = characterEncoding;
-    }
-
-    public String getContentType() {
-        return contentType;
-    }
-
-    public void setContentType(String contentType) {
-        this.contentType = contentType;
-    }
-
-    public String getHeaderKey() {
-        return headerKey;
-    }
-
-    public void setHeaderKey(String headerKey) {
-        this.headerKey = headerKey;
-    }
-
-    public String getHeaderValuePrefix() {
-        return headerValuePrefix;
-    }
-
-    public void setHeaderValuePrefix(String headerValuePrefix) {
-        this.headerValuePrefix = headerValuePrefix;
-    }
 }

@@ -1,5 +1,7 @@
 package com.cafe.common.swagger.property;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Component;
  * @Date: 2022/9/23 16:28
  * @Description: Swagger 配置
  */
+@Getter
+@Setter
 @Component
 @ConfigurationProperties(prefix = "swagger")
 public class SwaggerProperties {
@@ -23,20 +27,4 @@ public class SwaggerProperties {
      * 文档描述
      */
     private String description;
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }

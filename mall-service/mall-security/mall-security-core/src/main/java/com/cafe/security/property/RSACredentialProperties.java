@@ -1,5 +1,7 @@
 package com.cafe.security.property;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Component;
  * @Date: 2022/5/13 11:12
  * @Description: RSA 证书配置
  */
+@Getter
+@Setter
 @Component
 @ConfigurationProperties(prefix = "rsa-credential")
 public class RSACredentialProperties {
@@ -33,36 +37,4 @@ public class RSACredentialProperties {
      * 密钥口令
      */
     private String keyPass;
-
-    public String getKeyStore() {
-        return keyStore;
-    }
-
-    public void setKeyStore(String keyStore) {
-        this.keyStore = keyStore;
-    }
-
-    public String getStorePass() {
-        return storePass;
-    }
-
-    public void setStorePass(String storePass) {
-        this.storePass = storePass;
-    }
-
-    public String getAlias() {
-        return alias;
-    }
-
-    public void setAlias(String alias) {
-        this.alias = alias;
-    }
-
-    public String getKeyPass() {
-        return keyPass;
-    }
-
-    public void setKeyPass(String keyPass) {
-        this.keyPass = keyPass;
-    }
 }
