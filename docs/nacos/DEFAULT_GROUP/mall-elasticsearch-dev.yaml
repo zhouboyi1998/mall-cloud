@@ -11,7 +11,8 @@ spring:
 elastic-search:
   host: 127.0.0.1
   port: 9200
-  schema: http
+  # 网络连接策略
+  scheme: http
 
 # RocketMQ 配置
 rocketmq:

@@ -17,11 +17,12 @@ rocketmq:
     # 生产者组名
     group: GROUP-ES
 
-# Canal 数据库监听配置 (数据库信息配置)
+# Canal 数据库监听配置
 canal:
   host: host.docker.internal
   port: 11111
   destination: example
   username: canal
   password: canal
+  # 批处理数据量
   batch-size: 1000

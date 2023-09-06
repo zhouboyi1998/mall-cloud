@@ -1,5 +1,7 @@
 package com.cafe.id.property;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -10,6 +12,8 @@ import org.springframework.stereotype.Component;
  * @Date: 2022/11/1 9:26
  * @Description: Snowflake 雪花算法配置
  */
+@Getter
+@Setter
 @Component
 @ConfigurationProperties(prefix = "snowflake")
 public class SnowflakeProperties {
@@ -23,20 +27,4 @@ public class SnowflakeProperties {
      * 数据中心ID
      */
     private Long datacenterId;
-
-    public Long getWorkerId() {
-        return workerId;
-    }
-
-    public void setWorkerId(Long workerId) {
-        this.workerId = workerId;
-    }
-
-    public Long getDatacenterId() {
-        return datacenterId;
-    }
-
-    public void setDatacenterId(Long datacenterId) {
-        this.datacenterId = datacenterId;
-    }
 }

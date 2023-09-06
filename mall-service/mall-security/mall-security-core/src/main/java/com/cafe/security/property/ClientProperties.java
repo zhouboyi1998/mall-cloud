@@ -1,5 +1,7 @@
 package com.cafe.security.property;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
 
@@ -12,26 +14,19 @@ import java.util.List;
  * @Date: 2022/5/15 18:53
  * @Description: 客户端配置
  */
+@Getter
+@Setter
 @Component
 @ConfigurationProperties(prefix = "client")
 public class ClientProperties {
 
     /**
-     * 客户端详细信息列表
+     * 客户端详细信息配置列表
      */
     private List<Detail> details;
 
-    public List<Detail> getDetails() {
-        return details;
-    }
-
-    public void setDetails(List<Detail> details) {
-        this.details = details;
-    }
-
-    /**
-     * 客户端详细信息配置
-     */
+    @Getter
+    @Setter
     public static class Detail {
 
         /**
@@ -58,45 +53,5 @@ public class ClientProperties {
          * 刷新令牌过期时间
          */
         private Integer refreshTokenValiditySeconds;
-
-        public String getClientId() {
-            return clientId;
-        }
-
-        public void setClientId(String clientId) {
-            this.clientId = clientId;
-        }
-
-        public String[] getAuthorizedGrantTypes() {
-            return authorizedGrantTypes;
-        }
-
-        public void setAuthorizedGrantTypes(String[] authorizedGrantTypes) {
-            this.authorizedGrantTypes = authorizedGrantTypes;
-        }
-
-        public String[] getScopes() {
-            return scopes;
-        }
-
-        public void setScopes(String[] scopes) {
-            this.scopes = scopes;
-        }
-
-        public Integer getAccessTokenValiditySeconds() {
-            return accessTokenValiditySeconds;
-        }
-
-        public void setAccessTokenValiditySeconds(Integer accessTokenValiditySeconds) {
-            this.accessTokenValiditySeconds = accessTokenValiditySeconds;
-        }
-
-        public Integer getRefreshTokenValiditySeconds() {
-            return refreshTokenValiditySeconds;
-        }
-
-        public void setRefreshTokenValiditySeconds(Integer refreshTokenValiditySeconds) {
-            this.refreshTokenValiditySeconds = refreshTokenValiditySeconds;
-        }
     }
 }
