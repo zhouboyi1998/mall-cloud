@@ -88,5 +88,31 @@ public class DateTimeParseHandler {
                 }
             }
         });
+
+        // 解析日期时间格式、日期格式、时间格式字符串成 Calendar 类型
+        binder.registerCustomEditor(Calendar.class, new PropertyEditorSupport() {
+            @Override
+            public void setAsText(String text) throws IllegalArgumentException {
+                Calendar calendar = Calendar.getInstance();
+                try {
+                    // 解析日期时间格式字符串
+                    calendar.setTime(new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE_TIME.getPattern()).parse(text));
+                } catch (ParseException e1) {
+                    try {
+                        // 解析日期格式字符串
+                        calendar.setTime(new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE.getPattern()).parse(text));
+                    } catch (ParseException e2) {
+                        try {
+                            // 解析时间格式字符串
+                            calendar.setTime(new SimpleDateFormat(DateTimePatternEnum.DEFAULT_TIME.getPattern()).parse(text));
+                        } catch (ParseException e3) {
+                            LOGGER.error("DateTimeFormatHandler.initBinder(): Can not parse the String text to Calendar type! text -> {}", text, e3);
+                            throw new IllegalArgumentException("Can not parse the String text to Calendar type! text -> " + text);
+                        }
+                    }
+                }
+                setValue(calendar);
+            }
+        });
     }
 }
