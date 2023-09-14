@@ -7,7 +7,7 @@ import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.core.result.Result;
 import com.cafe.common.util.json.JacksonUtil;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -31,7 +31,7 @@ import java.util.Objects;
  * @Description: 全局返回结果转换器
  */
 @RestControllerAdvice(annotations = {RestController.class})
-@ConditionalOnClass(value = ResponseBodyAdvice.class)
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 @Order(value = IntegerConstant.TWO_HUNDRED)
 public class ResponseBodyHandler implements ResponseBodyAdvice<Object> {
 
