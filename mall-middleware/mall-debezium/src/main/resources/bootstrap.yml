@@ -1,6 +1,8 @@
 spring:
   application:
     name: mall-debezium
+  profiles:
+    active: dev
   main:
     # 无端口模式启动项目 (数据库监听模块不需要对外提供 web 服务)
     web-application-type: none
