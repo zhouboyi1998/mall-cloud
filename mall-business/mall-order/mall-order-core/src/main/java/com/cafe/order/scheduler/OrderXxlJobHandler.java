@@ -1,10 +1,11 @@
-package com.cafe.order.job;
+package com.cafe.order.scheduler;
 
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.cafe.common.constant.model.OrderConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.order.mapper.OrderMapper;
 import com.cafe.order.model.Order;
+import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +15,10 @@ import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.order.job
+ * @Package: com.cafe.order.scheduler
  * @Author: zhouboyi
  * @Date: 2023/5/5 14:54
- * @Description: 订单相关定时任务
+ * @Description: 订单相关 XXL-JOB 定时任务
  */
 @Component
 public class OrderXxlJobHandler {
@@ -30,11 +31,11 @@ public class OrderXxlJobHandler {
     }
 
     /**
-     * 处理未支付的订单
+     * 自动取消未支付的订单
      */
-    @XxlJob(value = "handleUnpaidOrder")
-    public void handleUnpaidOrder() throws Exception {
-        // 自动取消下单 10 分钟仍未支付的订单
+    @XxlJob(value = "handleCancelUnpaidOrder")
+    public ReturnT<String> handleCancelUnpaidOrder() throws Exception {
+        // 取消下单超过 10 分钟仍未支付的订单
         LocalDateTime now = LocalDateTime.now();
         LambdaUpdateWrapper<Order> wrapper = new LambdaUpdateWrapper<Order>()
             .eq(Order::getStatus, OrderConstant.Status.CREATE)
@@ -43,6 +44,7 @@ public class OrderXxlJobHandler {
             .set(Order::getUpdateTime, now)
             .set(Order::getCompletionTime, now);
         Integer count = orderMapper.update(null, wrapper);
-        XxlJobHelper.log("OrderXxlJobHandler.handleUnpaidOrder(): cancel unpaid order count -> {}", count);
+        XxlJobHelper.log("OrderXxlJobHandler.handleCancelUnpaidOrder(): cancel unpaid order count -> {}", count);
+        return ReturnT.SUCCESS;
     }
 }
