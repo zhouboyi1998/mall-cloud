@@ -1,19 +1,13 @@
 spring:
-  profiles:
-    active: dev
   # 自动装配时排除 JDBC 数据源配置
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 
-# Canal 数据库监听配置
-canal:
-  # 监听并推送至 RabbitMQ 的数据表
-  rabbit-table:
+# MySQL Binlog Connector 数据库监听配置
+binlog:
+  # 监听的数据表
+  table:
     - mall_user.mall_role_menu
-  # 监听并推送至 RocketMQ 的数据表
-  rocket-table:
-    - mall_goods.mall_brand
-    - mall_goods.mall_category
 
 # LogBack 配置
 logging:
