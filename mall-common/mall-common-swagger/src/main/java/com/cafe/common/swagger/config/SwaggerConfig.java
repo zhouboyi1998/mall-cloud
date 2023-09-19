@@ -3,6 +3,7 @@ package com.cafe.common.swagger.config;
 import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.swagger.SwaggerConstant;
 import com.cafe.common.swagger.property.SwaggerProperties;
+import com.github.xiaoymin.knife4j.spring.annotations.EnableKnife4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,6 +26,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
  */
 @Profile({AppConstant.DEV, AppConstant.TEST})
 @Configuration
+@EnableKnife4j
 @EnableSwagger2WebMvc
 public class SwaggerConfig {
 

@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
-import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 /**
  * @Project: mall-cloud
@@ -16,7 +15,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableSwagger2WebMvc
 @ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
 public class ElasticSearchApplication {
 
