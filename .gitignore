@@ -16,3 +16,6 @@ logs/
 
 # Temp
 temp/
+
+# SkyWalking Agent
+skywalking-agent/
