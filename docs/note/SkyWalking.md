@@ -56,3 +56,15 @@ tar -zxvf apache-skywalking-java-agent-9.0.0.tgz
 -Dskywalking.agent.instance_name=mall-gateway-instance
 -Dskywalking.collector.backend_service=127.0.0.1:11800
 ```
+
+---
+
+### 🐳 Docker 部署时添加 SkyWalking Agent
+
+* 复制 `SkyWalking Agent` 的文件夹到项目根目录
+* 修改 `Dockerfile` 文件，添加一行 `COPY` 语句，修改 `ENTRYPOINT` 语句
+
+```dockerfile
+COPY ./skywalking-agent /mall/skywalking-agent
+ENTRYPOINT ["java", "-javaagent:/mall/skywalking-agent/skywalking-agent.jar", "-Dskywalking.agent.service_name=xxx-service", "-Dskywalking.agent.instance_name=xxx-instance", "-Dskywalking.collector.backend_service=host.docker.internal:11800", "-jar", "xxx.jar", "--spring.profiles.active=docker"]
+```
