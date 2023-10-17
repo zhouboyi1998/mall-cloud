@@ -17,6 +17,7 @@
     <description>微服务商城项目</description>
 
     <modules>
+        <module>mall-api</module>
         <module>mall-business</module>
         <module>mall-common</module>
         <module>mall-middleware</module>
@@ -394,7 +395,7 @@
                 <version>${mall-cloud.version}</version>
             </dependency>
 
-            <!-- 远程调用接口 -->
+            <!-- 远程调用模块 -->
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-security-api</artifactId>
@@ -464,6 +465,7 @@
     </dependencyManagement>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>

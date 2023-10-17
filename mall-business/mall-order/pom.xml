@@ -12,12 +12,38 @@
 
     <artifactId>mall-order</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
     <description>订单模块</description>
 
-    <modules>
-        <module>mall-order-api</module>
-        <module>mall-order-core</module>
-    </modules>
+    <dependencies>
+        <!-- MySQL 驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-log</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-xxljob</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-order-api</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

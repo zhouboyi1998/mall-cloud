@@ -12,12 +12,32 @@
 
     <artifactId>mall-id</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-    <description>分布式 ID 生成器</description>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <description>ID 生成器</description>
 
-    <modules>
-        <module>mall-id-api</module>
-        <module>mall-id-core</module>
-    </modules>
+    <dependencies>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-log</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-util</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-id-api</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

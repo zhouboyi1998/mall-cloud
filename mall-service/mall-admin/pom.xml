@@ -14,7 +14,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>Spring Boot Admin 监控</description>
+    <description>Spring Boot Admin 监控模块</description>
 
     <dependencies>
         <!-- Spring Boot Admin 服务端 -->
@@ -45,7 +45,6 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

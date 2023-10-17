@@ -2,7 +2,7 @@ FROM openjdk:8-jre
 LABEL maintainer="zhouboyi<1144188685@qq.com>"
 
 WORKDIR /mall/mall-elasticsearch
-COPY ./mall-middleware/mall-elasticsearch/mall-elasticsearch-core/target/mall-elasticsearch.jar /mall/mall-elasticsearch/mall-elasticsearch.jar
+COPY ./mall-middleware/mall-elasticsearch/target/mall-elasticsearch.jar /mall/mall-elasticsearch/mall-elasticsearch.jar
 COPY ./skywalking-agent /mall/skywalking-agent
 
 EXPOSE 18093
