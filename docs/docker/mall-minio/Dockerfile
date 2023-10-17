@@ -2,7 +2,7 @@ FROM openjdk:8-jre
 LABEL maintainer="zhouboyi<1144188685@qq.com>"
 
 WORKDIR /mall/mall-minio
-COPY ./mall-middleware/mall-minio/mall-minio-core/target/mall-minio.jar /mall/mall-minio/mall-minio.jar
+COPY ./mall-middleware/mall-minio/target/mall-minio.jar /mall/mall-minio/mall-minio.jar
 COPY ./skywalking-agent /mall/skywalking-agent
 
 EXPOSE 18091

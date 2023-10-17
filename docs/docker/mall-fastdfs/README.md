@@ -6,7 +6,7 @@
 
 ```bash
 # 项目根目录下运行
-mvn package -pl :mall-fastdfs-core -am
+mvn package -pl :mall-fastdfs -am
 ```
 
 ### 🐳 Docker

@@ -20,6 +20,9 @@
 ### 💼 项目模块
 
 ```
+|-- mall-api (远程调用模块)
+    ...
+
 |-- mall-business (业务模块)
     |-- mall-goods (商品模块)
     |-- mall-member (会员模块)
@@ -53,11 +56,11 @@
     |-- mall-solr (Solr 搜索引擎)
 
 |-- mall-service (基础服务模块)
-    |-- mall-admin (Spring Boot Admin 监控)
-    |-- mall-eureka (Eureka 注册中心, 弃用)
-    |-- mall-gateway (Spring Cloud Gateway 网关)
+    |-- mall-admin (Spring Boot Admin 监控模块)
+    |-- mall-eureka (Eureka 注册中心模块, 弃用)
+    |-- mall-gateway (Spring Cloud Gateway 网关模块)
     |-- mall-generator (代码生成器)
-    |-- mall-id (分布式 ID 生成器)
+    |-- mall-id (ID 生成器)
     |-- mall-security (Spring Security 安全模块)
     |-- mall-user (用户模块)
 ```
@@ -89,4 +92,4 @@
 
 ### 📜 开源协议
 
-[MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2022 周博义
+[MIT License](https://opensource.org/licenses/MIT) Copyright (c) 2022 zhouboyi
