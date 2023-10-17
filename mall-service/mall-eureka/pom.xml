@@ -14,7 +14,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>Eureka 注册中心</description>
+    <description>Eureka 注册中心模块</description>
 
     <dependencies>
         <!-- Eureka 注册中心服务端 -->
@@ -25,7 +25,6 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

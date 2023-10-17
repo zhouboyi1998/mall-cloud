@@ -6,7 +6,7 @@
 
 ```bash
 # 项目根目录下运行
-mvn package -pl :mall-member-core -am
+mvn package -pl :mall-member -am
 ```
 
 ### 🐳 Docker
