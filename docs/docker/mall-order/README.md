@@ -6,7 +6,7 @@
 
 ```bash
 # 项目根目录下运行
-mvn package -pl :mall-order-core -am
+mvn package -pl :mall-order -am
 ```
 
 ### 🐳 Docker

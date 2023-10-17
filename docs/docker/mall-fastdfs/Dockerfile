@@ -2,7 +2,7 @@ FROM openjdk:8-jre
 LABEL maintainer="zhouboyi<1144188685@qq.com>"
 
 WORKDIR /mall/mall-fastdfs
-COPY ./mall-middleware/mall-fastdfs/mall-fastdfs-core/target/mall-fastdfs.jar /mall/mall-fastdfs/mall-fastdfs.jar
+COPY ./mall-middleware/mall-fastdfs/target/mall-fastdfs.jar /mall/mall-fastdfs/mall-fastdfs.jar
 COPY ./skywalking-agent /mall/skywalking-agent
 
 EXPOSE 18092

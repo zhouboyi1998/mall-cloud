@@ -6,7 +6,7 @@
 
 ```bash
 # 项目根目录下运行
-mvn package -pl :mall-security-core -am
+mvn package -pl :mall-security -am
 ```
 
 ### 🐳 Docker

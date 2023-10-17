@@ -12,12 +12,42 @@
 
     <artifactId>mall-goods</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
     <description>商品模块</description>
 
-    <modules>
-        <module>mall-goods-api</module>
-        <module>mall-goods-core</module>
-    </modules>
+    <dependencies>
+        <!-- MySQL 驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-log</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-rocketmq</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-goods-api</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
