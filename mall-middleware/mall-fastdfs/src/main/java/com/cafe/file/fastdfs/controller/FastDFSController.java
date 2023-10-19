@@ -52,7 +52,7 @@ public class FastDFSController {
         @ApiImplicitParam(value = "远程文件名", name = "remoteFilename", dataType = "String", paramType = "query", required = true)
     })
     @GetMapping(value = "/download")
-    public ResponseEntity<String> download(
+    public ResponseEntity<Void> download(
         @RequestParam(value = "groupName") String groupName,
         @RequestParam(value = "remoteFilename") String remoteFilename,
         HttpServletResponse httpResponse
