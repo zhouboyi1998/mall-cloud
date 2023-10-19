@@ -21,4 +21,15 @@ public interface QiniuService {
      * @throws Exception
      */
     String upload(String region, String bucket, MultipartFile file) throws Exception;
+
+    /**
+     * 文件删除
+     *
+     * @param region   存储区域
+     * @param bucket   存储桶
+     * @param filename 文件名
+     * @return
+     * @throws Exception
+     */
+    void delete(String region, String bucket, String filename) throws Exception;
 }
