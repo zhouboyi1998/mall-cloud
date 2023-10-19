@@ -50,7 +50,7 @@ public class SolrGoodsController {
     @ApiOperation(value = "插入商品/更新商品")
     @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
     @PostMapping(value = "")
-    public ResponseEntity<String> save(@RequestBody Goods goods) {
+    public ResponseEntity<Void> save(@RequestBody Goods goods) {
         solrGoodsService.save(goods);
         return ResponseEntity.ok().build();
     }
@@ -59,7 +59,7 @@ public class SolrGoodsController {
     @ApiOperation(value = "批量插入商品/批量更新商品")
     @ApiImplicitParam(value = "商品列表", name = "goodsList", dataType = "List<Goods>", paramType = "body", required = true)
     @PostMapping(value = "/batch")
-    public ResponseEntity<String> saveBatch(@RequestBody List<Goods> goodsList) {
+    public ResponseEntity<Void> saveBatch(@RequestBody List<Goods> goodsList) {
         solrGoodsService.saveBatch(goodsList);
         return ResponseEntity.ok().build();
     }
@@ -68,7 +68,7 @@ public class SolrGoodsController {
     @ApiOperation(value = "删除商品")
     @ApiImplicitParam(value = "商品id", name = "id", dataType = "String", paramType = "path", required = true)
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> delete(@PathVariable(value = "id") String id) {
+    public ResponseEntity<Void> delete(@PathVariable(value = "id") String id) {
         solrGoodsService.delete(id);
         return ResponseEntity.ok().build();
     }
@@ -77,7 +77,7 @@ public class SolrGoodsController {
     @ApiOperation(value = "批量删除商品")
     @ApiImplicitParam(value = "商品id列表", name = "ids", dataType = "List<String>", paramType = "body", required = true)
     @DeleteMapping(value = "/batch")
-    public ResponseEntity<String> deleteBatch(@RequestBody List<String> ids) {
+    public ResponseEntity<Void> deleteBatch(@RequestBody List<String> ids) {
         solrGoodsService.deleteBatch(ids);
         return ResponseEntity.ok().build();
     }
