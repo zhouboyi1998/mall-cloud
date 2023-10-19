@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,5 +50,22 @@ public class QiniuController {
     ) throws Exception {
         String filepath = qiniuService.upload(region, bucket, file);
         return ResponseEntity.ok(filepath);
+    }
+
+    @LogPrint(value = "文件删除")
+    @ApiOperation(value = "文件删除")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(value = "存储区域", name = "region", dataType = "String", paramType = "path", required = true),
+        @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
+        @ApiImplicitParam(value = "文件名", name = "filename", dataType = "String", paramType = "path", required = true)
+    })
+    @DeleteMapping(value = "/delete/{region}/{bucket}/{filename}")
+    public ResponseEntity<Void> delete(
+        @PathVariable(value = "region") String region,
+        @PathVariable(value = "bucket") String bucket,
+        @PathVariable(value = "filename") String filename
+    ) throws Exception {
+        qiniuService.delete(region, bucket, filename);
+        return ResponseEntity.ok().build();
     }
 }

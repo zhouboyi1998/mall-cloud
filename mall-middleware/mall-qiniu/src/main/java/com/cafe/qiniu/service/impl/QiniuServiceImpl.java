@@ -5,6 +5,7 @@ import com.cafe.id.feign.IDFeign;
 import com.cafe.qiniu.property.QiniuProperties;
 import com.cafe.qiniu.service.QiniuService;
 import com.qiniu.http.Response;
+import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.Configuration;
 import com.qiniu.storage.Region;
 import com.qiniu.storage.UploadManager;
@@ -70,5 +71,18 @@ public class QiniuServiceImpl implements QiniuService {
         LOGGER.info("QiniuServiceImpl.upload(): response -> {}", response);
 
         return StringConstant.SLASH + bucket + StringConstant.SLASH + filename;
+    }
+
+    @Override
+    public void delete(String region, String bucket, String filename) throws Exception {
+        // 生成令牌
+        Auth auth = Auth.create(qiniuProperties.getAccessKey(), qiniuProperties.getSecretKey());
+
+        // 删除文件
+        Configuration configuration = new Configuration(regionMap.get(region));
+        BucketManager bucketManager = new BucketManager(auth, configuration);
+        Response response = bucketManager.delete(bucket, filename);
+
+        LOGGER.info("QiniuServiceImpl.delete(): response -> {}", response);
     }
 }
