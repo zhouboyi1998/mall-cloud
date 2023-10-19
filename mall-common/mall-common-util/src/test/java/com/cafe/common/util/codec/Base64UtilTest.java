@@ -16,23 +16,38 @@ class Base64UtilTest {
 
     private static final String PLAINTEXT = "123456";
 
+    private static final String URL_PLAINTEXT = "https://github.com/zhouboyi1998";
+
     @Test
-    void encodeString() {
+    void encode() {
         String ciphertext = Base64Util.encode(PLAINTEXT);
         System.out.println(ciphertext);
     }
 
     @Test
-    void decodeString() {
+    void decode() {
         String ciphertext = Base64Util.encode(PLAINTEXT);
         String plaintext = Base64Util.decode(ciphertext);
         System.out.println(plaintext);
     }
 
     @Test
-    void encodeBufferedImage() {
+    void encodeUrl() {
+        String ciphertext = Base64Util.encodeUrl(URL_PLAINTEXT);
+        System.out.println(ciphertext);
+    }
+
+    @Test
+    void decodeUrl() {
+        String ciphertext = Base64Util.encodeUrl(URL_PLAINTEXT);
+        String plaintext = Base64Util.decodeUrl(ciphertext);
+        System.out.println(plaintext);
+    }
+
+    @Test
+    void encodeImage() {
         BufferedImage bufferedImage = new BufferedImage(100, 100, 1);
-        String base64Image = Base64Util.encode(bufferedImage, MediaFormatEnum.PNG);
+        String base64Image = Base64Util.encodeImage(bufferedImage, MediaFormatEnum.PNG);
         System.out.println(base64Image);
     }
 }
