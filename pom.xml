@@ -438,6 +438,11 @@
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
+                <artifactId>mall-qiniu-api</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-storage-api</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>

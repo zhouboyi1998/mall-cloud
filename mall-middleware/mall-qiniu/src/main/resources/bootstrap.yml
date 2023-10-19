@@ -1,0 +1,8 @@
+server:
+  port: 18095
+
+spring:
+  application:
+    name: mall-qiniu
+  profiles:
+    active: dev

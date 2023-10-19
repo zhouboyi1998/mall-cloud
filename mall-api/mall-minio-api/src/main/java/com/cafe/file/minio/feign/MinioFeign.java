@@ -58,7 +58,7 @@ public interface MinioFeign {
      * @return
      */
     @GetMapping(value = "/url/{bucket}/{fileName}")
-    ResponseEntity<String> getFileUrl(
+    ResponseEntity<String> url(
         @PathVariable(value = "bucket") String bucket,
         @PathVariable(value = "fileName") String fileName
     );
@@ -72,7 +72,7 @@ public interface MinioFeign {
      * @return
      */
     @GetMapping(value = "/url/{bucket}/{fileName}/{expiry}")
-    ResponseEntity<String> getFileUrl(
+    ResponseEntity<String> url(
         @PathVariable(value = "bucket") String bucket,
         @PathVariable(value = "fileName") String fileName,
         @PathVariable(value = "expiry") Integer expiry
