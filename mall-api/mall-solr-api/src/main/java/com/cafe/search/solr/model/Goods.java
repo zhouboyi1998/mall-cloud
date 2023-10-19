@@ -14,7 +14,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -51,15 +50,15 @@ public class Goods implements Serializable {
 
     @ApiModelProperty(value = "SKU 原价")
     @Field
-    private BigDecimal originalPrice;
+    private Double originalPrice;
 
     @ApiModelProperty(value = "SKU 折扣价")
     @Field
-    private BigDecimal discountPrice;
+    private Double discountPrice;
 
     @ApiModelProperty(value = "SKU 秒杀价")
     @Field
-    private BigDecimal seckillPrice;
+    private Double seckillPrice;
 
     @ApiModelProperty(value = "库存量")
     @Field
