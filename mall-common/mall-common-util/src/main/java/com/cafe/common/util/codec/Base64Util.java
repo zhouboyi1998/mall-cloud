@@ -43,12 +43,32 @@ public class Base64Util {
     }
 
     /**
+     * URL Base64 编码
+     *
+     * @param plaintext URL 明文
+     * @return
+     */
+    public static String encodeUrl(String plaintext) {
+        return Base64.getUrlEncoder().encodeToString(plaintext.getBytes(StandardCharsets.UTF_8));
+    }
+
+    /**
+     * URL Base64 解码
+     *
+     * @param ciphertext URL 密文
+     * @return
+     */
+    public static String decodeUrl(String ciphertext) {
+        return new String(Base64.getUrlDecoder().decode(ciphertext), StandardCharsets.UTF_8);
+    }
+
+    /**
      * 图片缓冲 Base64 编码
      *
      * @param bufferedImage 图片缓冲
      * @return
      */
-    public static String encode(BufferedImage bufferedImage, MediaFormatEnum mediaFormat) {
+    public static String encodeImage(BufferedImage bufferedImage, MediaFormatEnum mediaFormat) {
         // 将图片转换成 Base64 编码
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         try {
