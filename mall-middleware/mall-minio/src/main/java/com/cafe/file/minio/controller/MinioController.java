@@ -59,7 +59,7 @@ public class MinioController {
         @ApiImplicitParam(value = "文件名", name = "filename", dataType = "String", paramType = "path", required = true)
     })
     @GetMapping(value = "/download/{bucket}/{filename}")
-    public ResponseEntity<String> download(
+    public ResponseEntity<Void> download(
         @PathVariable(value = "bucket") String bucket,
         @PathVariable(value = "filename") String filename,
         HttpServletResponse httpResponse
