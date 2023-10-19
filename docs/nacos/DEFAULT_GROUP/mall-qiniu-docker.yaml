@@ -3,3 +3,4 @@ qiniu:
   url: xxx.com
   access-key: aaa
   secret-key: sss
+  region: huanan
