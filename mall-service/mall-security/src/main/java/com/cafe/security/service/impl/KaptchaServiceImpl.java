@@ -52,6 +52,6 @@ public class KaptchaServiceImpl implements CaptchaService {
         redisTemplate.opsForValue().set(RedisConstant.CAPTCHA_PREFIX + key, code, IntegerConstant.SIXTY, TimeUnit.SECONDS);
 
         // 返回图片验证码
-        return new Captcha().setKey(key).setImage(Base64Util.encode(bufferedImage, MediaFormatEnum.PNG));
+        return new Captcha().setKey(key).setImage(Base64Util.encodeImage(bufferedImage, MediaFormatEnum.PNG));
     }
 }
