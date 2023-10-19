@@ -32,4 +32,9 @@ public class QiniuProperties {
      * 私钥
      */
     private String secretKey;
+
+    /**
+     * 存储区域
+     */
+    private String region;
 }

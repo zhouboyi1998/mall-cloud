@@ -38,34 +38,30 @@ public class QiniuController {
     @LogPrint(value = "文件上传")
     @ApiOperation(value = "文件上传")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "存储区域", name = "region", dataType = "String", paramType = "path", required = true),
         @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
         @ApiImplicitParam(value = "文件", name = "file", dataType = "MultipartFile", paramType = "form", required = true)
     })
-    @PostMapping(value = "/upload/{region}/{bucket}")
+    @PostMapping(value = "/upload/{bucket}")
     public ResponseEntity<String> upload(
-        @PathVariable(value = "region") String region,
         @PathVariable(value = "bucket") String bucket,
         @RequestParam(value = "file") MultipartFile file
     ) throws Exception {
-        String filepath = qiniuService.upload(region, bucket, file);
+        String filepath = qiniuService.upload(bucket, file);
         return ResponseEntity.ok(filepath);
     }
 
     @LogPrint(value = "文件删除")
     @ApiOperation(value = "文件删除")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "存储区域", name = "region", dataType = "String", paramType = "path", required = true),
         @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
         @ApiImplicitParam(value = "文件名", name = "filename", dataType = "String", paramType = "path", required = true)
     })
-    @DeleteMapping(value = "/delete/{region}/{bucket}/{filename}")
+    @DeleteMapping(value = "/delete/{bucket}/{filename}")
     public ResponseEntity<Void> delete(
-        @PathVariable(value = "region") String region,
         @PathVariable(value = "bucket") String bucket,
         @PathVariable(value = "filename") String filename
     ) throws Exception {
-        qiniuService.delete(region, bucket, filename);
+        qiniuService.delete(bucket, filename);
         return ResponseEntity.ok().build();
     }
 }
