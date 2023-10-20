@@ -15,6 +15,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -52,7 +53,7 @@ public class Member implements Serializable {
     private Integer gender;
 
     @ApiModelProperty(value = "会员生日")
-    private LocalDateTime birthday;
+    private LocalDate birthday;
 
     @ApiModelProperty(value = "状态: 0 禁用, 1 正常")
     private Integer status;
