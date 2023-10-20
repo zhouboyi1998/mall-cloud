@@ -14,7 +14,7 @@ import com.cafe.common.enumeration.database.ColumnTypeEnum;
  * @Package: com.cafe.generator.plus
  * @Author: zhouboyi
  * @Date: 2023/5/9 19:18
- * @Description: 动态获取数据源配置
+ * @Description: MyBatis-Plus 代码生成器动态数据源配置
  */
 public class DynamicDataSourceConfig {
 
@@ -41,10 +41,12 @@ public class DynamicDataSourceConfig {
                         case NUMERIC:
                             return DbColumnType.BIG_DECIMAL;
                         case TIMESTAMP:
-                        case DATE:
-                        case TIME:
                         case DATETIME:
                             return DbColumnType.LOCAL_DATE_TIME;
+                        case DATE:
+                            return DbColumnType.LOCAL_DATE;
+                        case TIME:
+                            return DbColumnType.LOCAL_TIME;
                         default:
                             return super.processTypeConvert(config, fieldType);
                     }
@@ -64,9 +66,11 @@ public class DynamicDataSourceConfig {
                         case NUMERIC:
                             return DbColumnType.BIG_DECIMAL;
                         case TIMESTAMP:
-                        case DATE:
-                        case TIME:
                             return DbColumnType.LOCAL_DATE_TIME;
+                        case DATE:
+                            return DbColumnType.LOCAL_DATE;
+                        case TIME:
+                            return DbColumnType.LOCAL_TIME;
                         default:
                             return super.processTypeConvert(config, fieldType);
                     }
