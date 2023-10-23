@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @Package: com.cafe.system.service.impl
  * @Author: zhouboyi
  * @Date: 2022-12-29
- * @Description: 地址业务实现类
+ * @Description: 区域业务实现类
  */
 @Service
 public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements AreaService {
