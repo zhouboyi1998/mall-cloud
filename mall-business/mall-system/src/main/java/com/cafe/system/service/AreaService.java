@@ -8,7 +8,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @Package: com.cafe.system.service
  * @Author: zhouboyi
  * @Date: 2022-12-29
- * @Description: 地址业务接口
+ * @Description: 区域业务接口
  */
 public interface AreaService extends IService<Area> {
 
