@@ -1,15 +1,15 @@
-package com.cafe.storage.service.impl;
+package com.cafe.merchant.service.impl;
 
-import com.cafe.storage.model.Storage;
-import com.cafe.storage.mapper.StorageMapper;
-import com.cafe.storage.service.StorageService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cafe.merchant.mapper.StorageMapper;
+import com.cafe.merchant.model.Storage;
+import com.cafe.merchant.service.StorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.storage.service.impl
+ * @Package: com.cafe.merchant.service.impl
  * @Author: zhouboyi
  * @Date: 2022-12-29
  * @Description: 仓库业务实现类

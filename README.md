@@ -28,7 +28,6 @@
     |-- mall-member (会员模块)
     |-- mall-merchant (商家模块)
     |-- mall-order (订单模块)
-    |-- mall-storage (仓库模块)
     |-- mall-system (系统模块)
 
 |-- mall-common (公共包)
@@ -53,6 +52,7 @@
     |-- mall-elasticsearch (ElasticSearch 搜索引擎)
     |-- mall-fastdfs (FastDFS 分布式文件存储)
     |-- mall-minio (MinIO 分布式文件存储)
+    |-- mall-qiniu (七牛云对象存储)
     |-- mall-solr (Solr 搜索引擎)
 
 |-- mall-service (基础服务模块)

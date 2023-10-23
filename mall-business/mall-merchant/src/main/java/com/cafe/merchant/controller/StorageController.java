@@ -1,11 +1,11 @@
-package com.cafe.storage.controller;
+package com.cafe.merchant.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
-import com.cafe.storage.model.Storage;
-import com.cafe.storage.service.StorageService;
+import com.cafe.merchant.model.Storage;
+import com.cafe.merchant.service.StorageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.storage.controller
+ * @Package: com.cafe.merchant.controller
  * @Author: zhouboyi
  * @Date: 2022-12-29
  * @Description: 仓库接口
