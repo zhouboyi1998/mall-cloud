@@ -5,12 +5,15 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cafe.order.model.Guarantee">
         <id column="id" property="id" />
+        <result column="order_detail_id" property="orderDetailId" />
         <result column="guarantee_type" property="guaranteeType" />
         <result column="guarantee_period" property="guaranteePeriod" />
         <result column="remark" property="remark" />
         <result column="status" property="status" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
+        <result column="effect_time" property="effectTime" />
+        <result column="expire_time" property="expireTime" />
     </resultMap>
 
 </mapper>

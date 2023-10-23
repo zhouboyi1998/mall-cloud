@@ -37,10 +37,14 @@ public class Guarantee implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
-    @ApiModelProperty(value = "保障类型: 0 七天无理由退货, 1 保修, 2 以旧换新")
+    @ApiModelProperty(value = "订单明细ID")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long orderDetailId;
+
+    @ApiModelProperty(value = "保障类型: 0 无理由退款, 1 保修, 2 以旧换新")
     private Integer guaranteeType;
 
-    @ApiModelProperty(value = "保障期限")
+    @ApiModelProperty(value = "保障期限 (单位: 天)")
     private Integer guaranteePeriod;
 
     @ApiModelProperty(value = "备注")
@@ -56,4 +60,10 @@ public class Guarantee implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
+
+    @ApiModelProperty(value = "生效时间")
+    private LocalDateTime effectTime;
+
+    @ApiModelProperty(value = "到期时间")
+    private LocalDateTime expireTime;
 }
