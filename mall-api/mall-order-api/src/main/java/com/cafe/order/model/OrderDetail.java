@@ -43,13 +43,17 @@ public class OrderDetail implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long orderId;
 
+    @ApiModelProperty(value = "SKU ID")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long skuId;
+
     @ApiModelProperty(value = "店铺ID")
     @JsonSerialize(using = ToStringSerializer.class)
     private Long shopId;
 
-    @ApiModelProperty(value = "SKU ID")
+    @ApiModelProperty(value = "仓库ID")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long skuId;
+    private Long storageId;
 
     @ApiModelProperty(value = "SKU 名称快照")
     private String skuName;
