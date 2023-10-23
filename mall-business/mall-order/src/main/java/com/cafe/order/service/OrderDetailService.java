@@ -1,7 +1,7 @@
 package com.cafe.order.service;
 
-import com.cafe.order.model.OrderDetail;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.cafe.order.model.OrderDetail;
 
 /**
  * @Project: mall-cloud

@@ -1,7 +1,7 @@
 package com.cafe.order.mapper;
 
-import com.cafe.order.model.Order;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.cafe.order.model.Order;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
