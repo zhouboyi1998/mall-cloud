@@ -6,8 +6,9 @@
     <resultMap id="BaseResultMap" type="com.cafe.order.model.OrderDetail">
         <id column="id" property="id" />
         <result column="order_id" property="orderId" />
-        <result column="shop_id" property="shopId" />
         <result column="sku_id" property="skuId" />
+        <result column="shop_id" property="shopId" />
+        <result column="storage_id" property="storageId" />
         <result column="sku_name" property="skuName" />
         <result column="sku_image" property="skuImage" />
         <result column="sku_price" property="skuPrice" />
