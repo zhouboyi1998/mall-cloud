@@ -1,11 +1,11 @@
-package com.cafe.storage.service;
+package com.cafe.merchant.service;
 
-import com.cafe.storage.model.Storage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.cafe.merchant.model.Storage;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.storage.service
+ * @Package: com.cafe.merchant.service
  * @Author: zhouboyi
  * @Date: 2022-12-29
  * @Description: 仓库业务接口
