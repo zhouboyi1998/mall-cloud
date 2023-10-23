@@ -22,33 +22,37 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.system.model
  * @Author: zhouboyi
  * @Date: 2022-12-29
- * @Description: 地址实体模型
+ * @Description: 区域实体模型
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "Area", description = "地址实体模型")
+@ApiModel(value = "Area", description = "区域实体模型")
 @TableName("mall_area")
 public class Area implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "地址ID")
+    @ApiModelProperty(value = "区域ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
-    @ApiModelProperty(value = "地址名称")
+    @ApiModelProperty(value = "区域名称")
     private String areaName;
 
-    @ApiModelProperty(value = "上级地址ID")
-    private Integer parentId;
+    @ApiModelProperty(value = "行政区划编码")
+    private Integer areaCode;
 
-    @ApiModelProperty(value = "地址等级: 1 省份, 2 城市, 3 区县")
+    @ApiModelProperty(value = "邮政编码")
+    private Integer postCode;
+
+    @ApiModelProperty(value = "上级区域ID")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long parentId;
+
+    @ApiModelProperty(value = "区域等级: 1 省份, 2 城市, 3 区县")
     private Integer areaLevel;
-
-    @ApiModelProperty(value = "邮编")
-    private String postcode;
 
     @ApiModelProperty(value = "排序号")
     private Integer sort;

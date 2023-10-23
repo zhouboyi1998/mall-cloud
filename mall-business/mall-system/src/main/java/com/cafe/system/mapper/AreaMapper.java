@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @Package: com.cafe.system.mapper
  * @Author: zhouboyi
  * @Date: 2022-12-29
- * @Description: 地址数据访问接口
+ * @Description: 区域数据访问接口
  */
 @Mapper
 public interface AreaMapper extends BaseMapper<Area> {

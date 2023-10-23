@@ -22,14 +22,14 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.member.model
  * @Author: zhouboyi
  * @Date: 2022-12-29
- * @Description: 会员收货地址实体模型
+ * @Description: 收货地址实体模型
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "MemberAddress", description = "会员收货地址实体模型")
-@TableName("mall_member_address")
-public class MemberAddress implements Serializable {
+@ApiModel(value = "Address", description = "收货地址实体模型")
+@TableName("mall_address")
+public class Address implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -61,7 +61,7 @@ public class MemberAddress implements Serializable {
     private String receiver;
 
     @ApiModelProperty(value = "收货人手机号")
-    private String receiverMobile;
+    private String mobile;
 
     @ApiModelProperty(value = "默认地址: 0 非默认, 1 默认")
     @TableField(value = "is_defaulted")
