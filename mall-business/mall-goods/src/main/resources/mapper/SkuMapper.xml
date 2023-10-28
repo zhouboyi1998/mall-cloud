@@ -26,4 +26,15 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
+    <select id="unlisted" resultMap="BaseResultMap">
+        SELECT id, sku_name, spu_id, original_price, discount_price, seckill_price, image,
+        audit, status, create_time, update_time, audit_time, launch_time
+        FROM mall_sku
+        WHERE id IN
+        <foreach collection="skuIds" item="skuId" open="(" close=")" separator=",">
+            #{skuId}
+        </foreach>
+        AND status &lt;&gt; 1
+    </select>
+
 </mapper>

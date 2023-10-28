@@ -14,5 +14,15 @@ public class FeignConstant {
         public static final String ID = "com.cafe.id.feign";
 
         public static final String USER = "com.cafe.user.feign";
+
+        public static final String GOODS = "com.cafe.goods.feign";
+
+        public static final String ORDER = "com.cafe.order.feign";
+
+        public static final String SYSTEM = "com.cafe.system.feign";
+
+        public static final String MEMBER = "com.cafe.member.feign";
+
+        public static final String MERCHANT = "com.cafe.merchant.feign";
     }
 }

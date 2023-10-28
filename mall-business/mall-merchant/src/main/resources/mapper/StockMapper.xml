@@ -14,4 +14,17 @@
         <result column="update_time" property="updateTime" />
     </resultMap>
 
+    <update id="inbound" parameterType="com.cafe.merchant.vo.CartVO">
+        UPDATE mall_stock
+        SET stock = stock + #{cartVO.quantity}
+        WHERE sku_id = #{cartVO.skuId}
+    </update>
+
+    <update id="outbound" parameterType="com.cafe.merchant.vo.CartVO">
+        UPDATE mall_stock
+        SET stock = stock - #{cartVO.quantity}
+        WHERE sku_id = #{cartVO.skuId}
+          AND stock >= #{cartVO.quantity}
+    </update>
+
 </mapper>

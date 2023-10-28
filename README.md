@@ -30,6 +30,9 @@
     |-- mall-order (订单模块)
     |-- mall-system (系统模块)
 
+|-- mall-center (中台模块)
+    |-- mall-ordercenter (订单中心)
+
 |-- mall-common (公共包)
     |-- mall-common-config (配置公共包)
     |-- mall-common-constant (常量公共包)

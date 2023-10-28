@@ -1,0 +1,11 @@
+server:
+  port: 18061
+
+spring:
+  application:
+    name: mall-ordercenter
+  profiles:
+    active: dev
+  # 允许同名 Bean 覆盖
+  main:
+    allow-bean-definition-overriding: true

@@ -47,7 +47,22 @@ public enum HttpStatusEnum {
     /**
      * 失败
      */
-    FAIL(500, "Fail");
+    FAIL(500, "Fail"),
+
+    /**
+     * 商品已下架
+     */
+    UNLISTED(601, "Products Unlisted"),
+
+    /**
+     * 收货地址不存在
+     */
+    ADDRESS_NOT_FOUND(602, "Address Not Found"),
+
+    /**
+     * 库存不足
+     */
+    LOW_STOCK(603, "Low Stock");
 
     /**
      * 状态码

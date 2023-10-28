@@ -17,7 +17,7 @@ import java.util.List;
 public interface GoodsMapper {
 
     /**
-     * 根据 SKU ids 查询商品列表
+     * 根据库存量单位ids查询商品列表
      *
      * @param ids
      * @return
@@ -25,7 +25,7 @@ public interface GoodsMapper {
     List<Goods> list(@Param(value = "ids") List<Long> ids);
 
     /**
-     * 根据 SKU ids 更新 SKU 状态
+     * 根据ids更新库存量单位状态
      *
      * @param ids
      * @param status

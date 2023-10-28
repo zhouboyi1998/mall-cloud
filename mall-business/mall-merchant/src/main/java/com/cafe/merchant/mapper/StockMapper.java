@@ -2,7 +2,9 @@ package com.cafe.merchant.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cafe.merchant.model.Stock;
+import com.cafe.merchant.vo.CartVO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * @Project: mall-cloud
@@ -14,4 +16,19 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface StockMapper extends BaseMapper<Stock> {
 
+    /**
+     * 入库
+     *
+     * @param cartVO
+     * @return
+     */
+    Integer inbound(@Param(value = "cartVO") CartVO cartVO);
+
+    /**
+     * 出库
+     *
+     * @param cartVO
+     * @return
+     */
+    Integer outbound(@Param(value = "cartVO") CartVO cartVO);
 }
