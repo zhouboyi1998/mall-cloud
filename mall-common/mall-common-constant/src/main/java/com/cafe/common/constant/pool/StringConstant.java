@@ -15,6 +15,11 @@ public class StringConstant {
     public static final String EMPTY = "";
 
     /**
+     * 空格
+     */
+    public static final String SPACE = " ";
+
+    /**
      * 逗号
      */
     public static final String COMMA = ",";

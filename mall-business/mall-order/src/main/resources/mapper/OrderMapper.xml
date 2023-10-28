@@ -15,7 +15,7 @@
         <result column="coupon" property="coupon" />
         <result column="postage" property="postage" />
         <result column="payment" property="payment" />
-        <result column="payment_channel" property="paymentChannel" />
+        <result column="channel" property="channel" />
         <result column="invoice" property="invoice" />
         <result column="status" property="status" />
         <result column="create_time" property="createTime" />

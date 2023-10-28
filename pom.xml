@@ -19,6 +19,7 @@
     <modules>
         <module>mall-api</module>
         <module>mall-business</module>
+        <module>mall-center</module>
         <module>mall-common</module>
         <module>mall-middleware</module>
         <module>mall-service</module>
@@ -55,6 +56,7 @@
         <tomcat-embed.version>9.0.46</tomcat-embed.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <guava.version>30.0-jre</guava.version>
+        <mapstruct.version>1.5.5.Final</mapstruct.version>
         <kaptcha-starter.version>1.1.0</kaptcha-starter.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <prometheus.version>1.6.12</prometheus.version>
@@ -95,6 +97,17 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
+        </dependency>
+        <!-- MapStruct 对象映射 -->
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct</artifactId>
+            <version>${mapstruct.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mapstruct</groupId>
+            <artifactId>mapstruct-processor</artifactId>
+            <version>${mapstruct.version}</version>
         </dependency>
     </dependencies>
 
