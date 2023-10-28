@@ -195,4 +195,13 @@ public class SkuController {
         Boolean code = skuService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
+
+    @LogPrint(value = "根据ids查询未上架的库存量单位列表")
+    @ApiOperation(value = "根据ids查询未上架的库存量单位列表")
+    @ApiImplicitParam(value = "SKU ids", name = "skuIds", dataType = "List<Long>", paramType = "body", required = true)
+    @PostMapping(value = "/unlisted")
+    public ResponseEntity<List<Sku>> unlisted(@RequestBody List<Long> skuIds) {
+        List<Sku> skuList = skuService.unlisted(skuIds);
+        return ResponseEntity.ok(skuList);
+    }
 }

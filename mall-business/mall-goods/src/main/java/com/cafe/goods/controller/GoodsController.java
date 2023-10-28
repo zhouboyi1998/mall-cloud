@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -41,7 +42,15 @@ public class GoodsController {
     @ApiOperation(value = "查询商品列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Goods>> list() {
-        List<Goods> goodsList = goodsService.list();
+        List<Goods> goodsList = goodsService.list(Collections.emptyList());
+        return ResponseEntity.ok(goodsList);
+    }
+
+    @LogPrint(value = "根据库存量单位ids查询商品列表")
+    @ApiOperation(value = "根据库存量单位ids查询商品列表")
+    @PostMapping(value = "/list")
+    public ResponseEntity<List<Goods>> list(@RequestBody List<Long> ids) {
+        List<Goods> goodsList = goodsService.list(ids);
         return ResponseEntity.ok(goodsList);
     }
 

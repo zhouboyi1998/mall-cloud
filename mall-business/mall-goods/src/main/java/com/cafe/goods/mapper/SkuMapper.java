@@ -3,6 +3,9 @@ package com.cafe.goods.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.cafe.goods.model.Sku;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @Project: mall-cloud
@@ -14,4 +17,11 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SkuMapper extends BaseMapper<Sku> {
 
+    /**
+     * 根据ids查询未上架的库存量单位列表
+     *
+     * @param skuIds
+     * @return
+     */
+    List<Sku> unlisted(@Param(value = "skuIds") List<Long> skuIds);
 }

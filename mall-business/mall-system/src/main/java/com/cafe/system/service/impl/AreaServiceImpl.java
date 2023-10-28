@@ -1,9 +1,10 @@
 package com.cafe.system.service.impl;
 
-import com.cafe.system.model.Area;
-import com.cafe.system.mapper.AreaMapper;
-import com.cafe.system.service.AreaService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cafe.system.bo.AreaDetail;
+import com.cafe.system.mapper.AreaMapper;
+import com.cafe.system.model.Area;
+import com.cafe.system.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,5 +23,10 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
     @Autowired
     public AreaServiceImpl(AreaMapper areaMapper) {
         this.areaMapper = areaMapper;
+    }
+
+    @Override
+    public AreaDetail detail(Long provinceId, Long cityId, Long districtId) {
+        return areaMapper.detail(provinceId, cityId, districtId);
     }
 }

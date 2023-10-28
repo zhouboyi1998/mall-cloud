@@ -42,8 +42,8 @@ public class GoodsServiceImpl implements GoodsService {
 
     @ResultCache
     @Override
-    public List<Goods> list() {
-        return goodsMapper.list(null);
+    public List<Goods> list(List<Long> ids) {
+        return goodsMapper.list(ids);
     }
 
     @Override

@@ -72,7 +72,7 @@ public class Order implements Serializable {
     private BigDecimal payment;
 
     @ApiModelProperty(value = "支付渠道: 0 银行卡, 1 支付宝, 2 微信")
-    private Integer paymentChannel;
+    private Integer channel;
 
     @ApiModelProperty(value = "发票: 0 不开发票, 1 电子发票")
     private Integer invoice;
