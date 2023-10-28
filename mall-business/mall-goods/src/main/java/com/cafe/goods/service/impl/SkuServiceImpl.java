@@ -7,6 +7,8 @@ import com.cafe.goods.service.SkuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.goods.service.impl
@@ -22,5 +24,10 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     @Autowired
     public SkuServiceImpl(SkuMapper skuMapper) {
         this.skuMapper = skuMapper;
+    }
+
+    @Override
+    public List<Sku> unlisted(List<Long> skuIds) {
+        return skuMapper.unlisted(skuIds);
     }
 }

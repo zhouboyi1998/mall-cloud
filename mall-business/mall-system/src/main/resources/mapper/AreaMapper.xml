@@ -17,4 +17,14 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
+    <select id="detail" resultType="com.cafe.system.bo.AreaDetail">
+        SELECT #{provinceId} AS province_id, p.area_name AS province_name,
+               #{cityId}     AS city_id, c.area_name AS city_name,
+               #{districtId} AS district_id, d.area_name AS district_name, d.post_code
+        FROM mall_area AS p, mall_area AS c, mall_area AS d
+        WHERE p.id = #{provinceId}
+          AND c.id = #{cityId}
+          AND d.id = #{districtId}
+    </select>
+
 </mapper>

@@ -6,6 +6,7 @@ import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.merchant.model.Stock;
 import com.cafe.merchant.service.StockService;
+import com.cafe.merchant.vo.CartVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -194,5 +195,23 @@ public class StockController {
         QueryWrapper<Stock> wrapper = WrapperUtil.createQueryWrapper(stock);
         Boolean code = stockService.remove(wrapper);
         return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "批量入库")
+    @ApiOperation(value = "批量入库")
+    @ApiImplicitParam(value = "购物车视图模型列表", name = "cartVOList", dataType = "List<CartVO>", paramType = "body", required = true)
+    @PutMapping(value = "/inbound/batch")
+    public ResponseEntity<Void> inboundBatch(@RequestBody List<CartVO> cartVOList) {
+        stockService.inboundBatch(cartVOList);
+        return ResponseEntity.ok().build();
+    }
+
+    @LogPrint(value = "批量出库")
+    @ApiOperation(value = "批量出库")
+    @ApiImplicitParam(value = "购物车视图模型列表", name = "cartVOList", dataType = "List<CartVO>", paramType = "body", required = true)
+    @PutMapping(value = "/outbound/batch")
+    public ResponseEntity<List<String>> outboundBatch(@RequestBody List<CartVO> cartVOList) {
+        List<String> failIds = stockService.outboundBatch(cartVOList);
+        return ResponseEntity.ok(failIds);
     }
 }

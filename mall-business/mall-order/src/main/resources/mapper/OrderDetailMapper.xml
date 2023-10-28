@@ -12,7 +12,7 @@
         <result column="sku_name" property="skuName" />
         <result column="sku_image" property="skuImage" />
         <result column="sku_price" property="skuPrice" />
-        <result column="sku_count" property="skuCount" />
+        <result column="sku_quantity" property="skuQuantity" />
         <result column="detail_amount" property="detailAmount" />
         <result column="status" property="status" />
         <result column="create_time" property="createTime" />

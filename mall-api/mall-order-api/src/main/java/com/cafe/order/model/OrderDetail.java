@@ -65,7 +65,7 @@ public class OrderDetail implements Serializable {
     private BigDecimal skuPrice;
 
     @ApiModelProperty(value = "SKU 购买数量")
-    private Integer skuCount;
+    private Integer skuQuantity;
 
     @ApiModelProperty(value = "订单明细实际支付金额")
     private BigDecimal detailAmount;
