@@ -13,21 +13,6 @@ spring:
       transport:
         dashboard: 127.0.0.1:8858
 
-# XXL-JOB 配置
-xxl:
-  job:
-    # 通讯令牌
-    accessToken: default_token
-    # 调度中心配置
-    admin:
-      addresses: http://127.0.0.1:8001/xxl-job-admin
-    # 执行器配置
-    executor:
-      appname: ${spring.application.name}
-      port: 28082
-      logpath: logs/xxl-job/${xxl.job.executor.appname}
-      logretentiondays: 10
-
 # MyBatis-Plus 配置
 mybatis-plus:
   configuration:

@@ -22,6 +22,15 @@ import java.util.List;
 public interface StockFeign {
 
     /**
+     * 批量入库
+     *
+     * @param cartVOList
+     * @return
+     */
+    @PutMapping(value = "/inbound/batch")
+    ResponseEntity<Void> inboundBatch(@RequestBody List<CartVO> cartVOList);
+
+    /**
      * 批量出库
      *
      * @param cartVOList

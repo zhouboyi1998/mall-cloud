@@ -71,7 +71,7 @@ public class OrderVO implements Serializable {
     @ApiModelProperty(value = "发票: 0 不开发票, 1 电子发票")
     private Integer invoice;
 
-    @ApiModelProperty(value = "状态: 0 下单, 1 支付中, 2 付款失败, 3 付款成功, 4 申请退款, 5 退款成功, 6 已发货, 7 完成, 8 取消")
+    @ApiModelProperty(value = "状态: 0 下单, 1 支付中, 2 付款失败, 3 付款成功/待发货, 4 已发货, 5 完成, 6 取消, 7 申请退款, 8 退款成功")
     private Integer status;
 
     @ApiModelProperty(value = "下单时间")
