@@ -3,6 +3,7 @@ package com.cafe.center.order.service;
 import com.cafe.common.core.result.Result;
 import com.cafe.merchant.vo.CartVO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -24,4 +25,13 @@ public interface OrderCenterService {
      * @return
      */
     Result<Object> submit(Long addressId, Integer channel, Integer invoice, List<CartVO> cartVOList);
+
+    /**
+     * 自动取消超时未支付的订单
+     *
+     * @param now      当前时间
+     * @param duration 下单未支付时长 (单位: 分钟)
+     * @return
+     */
+    void autoCancel(LocalDateTime now, Integer duration);
 }
