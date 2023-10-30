@@ -8,6 +8,12 @@ feign:
     enabled: true
   sentinel:
     enabled: true
+  client:
+    config:
+      default:
+        # 超时时间 (单位: 毫秒)
+        connectTimeout: 10000
+        readTimeout: 10000
 
 # Actuator 服务健康监控监控配置
 management:
