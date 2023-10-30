@@ -29,10 +29,6 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-xxljob</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
             <artifactId>mall-order-api</artifactId>
         </dependency>
     </dependencies>

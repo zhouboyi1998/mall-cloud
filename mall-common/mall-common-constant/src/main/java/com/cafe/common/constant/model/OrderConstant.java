@@ -22,6 +22,6 @@ public class OrderConstant {
         /**
          * 取消
          */
-        public static final Integer CANCEL = 8;
+        public static final Integer CANCEL = 6;
     }
 }

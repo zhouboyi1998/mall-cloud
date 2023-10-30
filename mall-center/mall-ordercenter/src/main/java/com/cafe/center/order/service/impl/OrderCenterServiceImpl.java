@@ -26,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -177,5 +178,22 @@ public class OrderCenterServiceImpl implements OrderCenterService {
         orderStateFlowFeign.save(orderVO);
 
         return Result.success(orderVO);
+    }
+
+    @Override
+    public void autoCancel(LocalDateTime now, Integer duration) {
+        // 自动取消超时未支付的订单
+        List<OrderDetail> orderDetailList = Optional.ofNullable(orderStateFlowFeign.autoCancel(now, duration))
+            .map(ResponseEntity::getBody)
+            .orElse(Collections.emptyList());
+
+        // 还原商品库存
+        List<CartVO> cartVOList = orderDetailList.stream()
+            .map(orderDetail -> new CartVO()
+                .setSkuId(orderDetail.getSkuId())
+                .setShopId(orderDetail.getShopId())
+                .setQuantity(orderDetail.getSkuQuantity()))
+            .collect(Collectors.toList());
+        stockFeign.inboundBatch(cartVOList);
     }
 }
