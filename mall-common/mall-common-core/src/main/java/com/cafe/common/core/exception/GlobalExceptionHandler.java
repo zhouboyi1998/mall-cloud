@@ -1,7 +1,6 @@
 package com.cafe.common.core.exception;
 
 import com.cafe.common.constant.pool.IntegerConstant;
-import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.core.result.Result;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +10,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.util.Optional;
 
 /**
  * @Project: mall-cloud
@@ -27,13 +24,29 @@ public class GlobalExceptionHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
+    /**
+     * 业务异常处理
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(value = BusinessException.class)
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+    public Result<Object> handle(BusinessException e) {
+        LOGGER.error("GlobalExceptionHandler.handle(BusinessException e): code -> {}, message -> {}, data -> {}", e.getCode(), e.getMessage(), e.getData(), e);
+        return Result.builder().code(e.getCode()).message(e.getMessage()).data(e.getData());
+    }
+
+    /**
+     * 通用异常处理
+     *
+     * @param e
+     * @return
+     */
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<String> handle(Exception e) {
-        String causeName = Optional.ofNullable(e.getCause())
-            .map(cause -> cause.getClass().getCanonicalName())
-            .orElse(StringConstant.NULL);
-        LOGGER.error("GlobalExceptionHandler.handle(): exception -> {}, cause -> {}, message -> {}", e.getClass().getCanonicalName(), causeName, e.getMessage(), e);
+        LOGGER.error("GlobalExceptionHandler.handle(Exception e): exception -> {}, message -> {}", e.getClass().getCanonicalName(), e.getMessage(), e);
         return Result.fail(e.getMessage());
     }
 }

@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.Nullable;
 
 import java.io.Serializable;
+import java.util.StringJoiner;
 
 /**
  * @Project: mall-cloud
@@ -71,7 +72,11 @@ public class Result<T> implements Serializable {
 
     @Override
     public String toString() {
-        return "Result{" + "code=" + code + ", message=" + message + ", data=" + data + '}';
+        return new StringJoiner(", ", Result.class.getSimpleName() + "{", "}")
+            .add("code=" + code)
+            .add("message='" + message + "'")
+            .add("data=" + data)
+            .toString();
     }
 
     // -------------------- METHOD --------------------
