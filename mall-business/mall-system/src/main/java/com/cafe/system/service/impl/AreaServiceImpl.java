@@ -1,7 +1,7 @@
 package com.cafe.system.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.cafe.system.bo.AreaDetail;
+import com.cafe.system.dto.AreaDTO;
 import com.cafe.system.mapper.AreaMapper;
 import com.cafe.system.model.Area;
 import com.cafe.system.service.AreaService;
@@ -26,7 +26,7 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
     }
 
     @Override
-    public AreaDetail detail(Long provinceId, Long cityId, Long districtId) {
-        return areaMapper.detail(provinceId, cityId, districtId);
+    public AreaDTO dto(Long provinceId, Long cityId, Long districtId) {
+        return areaMapper.dto(provinceId, cityId, districtId);
     }
 }

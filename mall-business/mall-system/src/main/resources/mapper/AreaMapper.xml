@@ -17,7 +17,7 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
-    <select id="detail" resultType="com.cafe.system.bo.AreaDetail">
+    <select id="dto" resultType="com.cafe.system.dto.AreaDTO">
         SELECT #{provinceId} AS province_id, p.area_name AS province_name,
                #{cityId}     AS city_id, c.area_name AS city_name,
                #{districtId} AS district_id, d.area_name AS district_name, d.post_code
