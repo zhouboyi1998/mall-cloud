@@ -4,7 +4,7 @@ import com.cafe.center.order.service.OrderCenterService;
 import com.cafe.common.constant.pool.BigDecimalConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
-import com.cafe.common.core.result.Result;
+import com.cafe.common.core.exception.BusinessException;
 import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.goods.bo.Goods;
 import com.cafe.goods.feign.GoodsFeign;
@@ -18,12 +18,11 @@ import com.cafe.merchant.vo.CartVO;
 import com.cafe.order.feign.OrderStateFlowFeign;
 import com.cafe.order.model.OrderDetail;
 import com.cafe.order.vo.OrderVO;
-import com.cafe.system.bo.AreaDetail;
+import com.cafe.system.dto.AreaDTO;
 import com.cafe.system.feign.AreaFeign;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -31,7 +30,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
@@ -72,49 +70,99 @@ public class OrderCenterServiceImpl implements OrderCenterService {
     }
 
     @Override
-    public Result<Object> submit(Long addressId, Integer channel, Integer invoice, List<CartVO> cartVOList) {
-        // ---------- step.1 确认商品状态 ----------
+    public OrderVO submit(Long addressId, Integer channel, Integer invoice, List<CartVO> cartVOList) {
+        // 查询下单购买的所有商品的
+        List<Goods> goodsList = selectGoodsList(cartVOList);
+        // 查询收货地址
+        Address address = selectAddress(addressId);
+        // 查询区域
+        AreaDTO areaDTO = selectAreaDTO(address);
+        // 扣减库存
+        outboundStock(cartVOList);
+        // 创建订单
+        return createOrder(channel, invoice, cartVOList, goodsList, address, areaDTO);
+    }
 
+    /**
+     * 查询下单购买的所有商品
+     *
+     * @param cartVOList
+     * @return
+     */
+    private List<Goods> selectGoodsList(List<CartVO> cartVOList) {
         // 获取 SKU 主键列表
         List<Long> skuIds = cartVOList.stream().map(CartVO::getSkuId).collect(Collectors.toList());
-        // 查询未上架的 SKU
+        // 查询购买的 SKU 是否存在已下架的
         List<Sku> unlisted = Optional.ofNullable(skuFeign.unlisted(skuIds))
             .map(ResponseEntity::getBody)
             .orElse(Collections.emptyList());
-        // 如果存在未上架的 SKU, 终止提交
+        // 如果存在下架状态的 SKU, 终止订单提交
         if (unlisted.size() > 0) {
-            return Result.status(HttpStatusEnum.UNLISTED).data(unlisted);
+            throw new BusinessException(HttpStatusEnum.UNLISTED, unlisted);
         }
 
-        // ---------- step.2 查询收货地址 ----------
+        // 返回下单购买的所有商品的信息
+        return Optional.ofNullable(goodsFeign.list(skuIds))
+            .map(ResponseEntity::getBody)
+            .orElse(Collections.emptyList());
+    }
 
-        // 根据id查询收货地址
-        Address address = addressFeign.one(addressId).getBody();
-        // 如果收货地址不存在, 终止提交
-        if (Objects.isNull(address)) {
-            return Result.status(HttpStatusEnum.ADDRESS_NOT_FOUND).data(addressId.toString());
-        }
-        // 查询区域详细信息
-        AreaDetail areaDetail = areaFeign.detail(address.getProvinceId(), address.getCityId(), address.getDistrictId()).getBody();
-        Assert.notNull(areaDetail, "Unable to get AreaDetail!");
+    /**
+     * 查询收货地址
+     *
+     * @param addressId
+     * @return
+     */
+    private Address selectAddress(Long addressId) {
+        // 根据地址 ID 查询收货地址 (如果收货地址不存在, 终止订单提交)
+        return Optional.ofNullable(addressFeign.one(addressId))
+            .map(ResponseEntity::getBody)
+            .orElseThrow(() -> new BusinessException(HttpStatusEnum.ADDRESS_NOT_FOUND, addressId.toString()));
+    }
 
-        // ---------- step.3 扣减库存 ----------
+    /**
+     * 查询区域
+     *
+     * @param address
+     * @return
+     */
+    private AreaDTO selectAreaDTO(Address address) {
+        // 根据省份id、城市id、区县id获取区域 (如果区域不存在, 终止订单提交)
+        return Optional.ofNullable(areaFeign.dto(address.getProvinceId(), address.getCityId(), address.getDistrictId()))
+            .map(ResponseEntity::getBody)
+            .orElseThrow(() -> new BusinessException(HttpStatusEnum.AREA_NOT_FOUND, address));
+    }
 
-        // 扣减库存, 返回值是库存不足的 SKU 主键列表
+    /**
+     * 扣减库存
+     *
+     * @param cartVOList
+     */
+    private void outboundStock(List<CartVO> cartVOList) {
+        // SKU 出库, 返回值是库存不足的 SKU 主键列表
         List<String> failIds = Optional.ofNullable(stockFeign.outboundBatch(cartVOList))
             .map(ResponseEntity::getBody)
             .orElse(Collections.emptyList());
         // 如果存在库存不足的 SKU, 终止提交
         if (failIds.size() > 0) {
-            return Result.status(HttpStatusEnum.LOW_STOCK).data(failIds);
+            throw new BusinessException(HttpStatusEnum.LOW_STOCK, failIds);
         }
+    }
 
-        // ---------- step.4 生成订单 ----------
-
-        // 查询下单购买的所有商品的信息
-        List<Goods> goodsList = Optional.ofNullable(goodsFeign.list(skuIds))
-            .map(ResponseEntity::getBody)
-            .orElse(Collections.emptyList());
+    /**
+     * 创建订单
+     *
+     * @param channel
+     * @param invoice
+     * @param cartVOList
+     * @param goodsList
+     * @param address
+     * @param areaDTO
+     * @return
+     */
+    private OrderVO createOrder(Integer channel, Integer invoice, List<CartVO> cartVOList, List<Goods> goodsList, Address address, AreaDTO areaDTO) {
+        // SKU 主键和购买数量映射
+        Map<Long, Integer> quantityMap = cartVOList.stream().collect(Collectors.toMap(CartVO::getSkuId, CartVO::getQuantity));
 
         // 计算总金额和总折扣
         AtomicReference<BigDecimal> amount = new AtomicReference<>(BigDecimal.valueOf(0));
@@ -123,23 +171,21 @@ public class OrderCenterServiceImpl implements OrderCenterService {
             amount.set(amount.get().add(goods.getOriginalPrice()));
             discount.set(discount.get().add(goods.getOriginalPrice().subtract(goods.getDiscountPrice())));
         });
-        // 判断是否需要邮费
-        BigDecimal postage = amount.get().compareTo(BigDecimalConstant.ONE_HUNDRED) >= 0 ?
-            BigDecimalConstant.ZERO : BigDecimalConstant.EIGHT;
+
+        // 判断是否需要邮费 (商品总金额 100 块以下收 8 块邮费)
+        BigDecimal postage = amount.get().compareTo(BigDecimalConstant.ONE_HUNDRED) >= 0 ? BigDecimalConstant.ZERO : BigDecimalConstant.EIGHT;
+
         // 计算实际支付金额
         BigDecimal payment = amount.get().subtract(discount.get()).add(postage);
 
-        // 拼装具体地址
-        String specificAddress = areaDetail.getProvinceName() + StringConstant.SPACE +
-            areaDetail.getCityName() + StringConstant.SPACE +
-            areaDetail.getDistrictName() + StringConstant.SPACE +
-            address.getAddress();
+        // 拼装地址快照
+        String addressSnapshot = areaDTO.getProvinceName() + StringConstant.SPACE + areaDTO.getCityName() + StringConstant.SPACE + areaDTO.getDistrictName() + StringConstant.SPACE + address.getAddress();
 
         // 生成订单主体
         OrderVO orderVO = new OrderVO()
             .setOrderNo(idFeign.nextId().getBody())
             .setMemberId(address.getMemberId())
-            .setAddress(specificAddress)
+            .setAddress(addressSnapshot)
             .setReceiver(address.getReceiver())
             .setMobile(address.getMobile())
             .setAmount(amount.get())
@@ -151,16 +197,11 @@ public class OrderCenterServiceImpl implements OrderCenterService {
             .setInvoice(invoice)
             .setStatus(IntegerConstant.ZERO);
 
-        // SKU 主键和购买数量映射
-        Map<Long, Integer> quantityMap = cartVOList.stream()
-            .collect(Collectors.toMap(CartVO::getSkuId, CartVO::getQuantity));
-
-        // 订单明细列表
+        // 循环生成订单明细
         List<OrderDetail> orderDetailList = new ArrayList<>(goodsList.size());
         goodsList.forEach(goods -> {
             BigDecimal discountPrice = goods.getDiscountPrice();
             Integer quantity = quantityMap.get(goods.getId());
-            // 生成订单明细
             OrderDetail orderDetail = new OrderDetail()
                 .setSkuId(goods.getId())
                 .setShopId(goods.getShopId())
@@ -175,9 +216,9 @@ public class OrderCenterServiceImpl implements OrderCenterService {
         orderVO.setOrderDetailList(orderDetailList);
 
         // 保存订单
-        orderStateFlowFeign.save(orderVO);
-
-        return Result.success(orderVO);
+        return Optional.ofNullable(orderStateFlowFeign.save(orderVO))
+            .map(ResponseEntity::getBody)
+            .orElseThrow(() -> new BusinessException(HttpStatusEnum.CREATE_ORDER_EXCEPTION));
     }
 
     @Override

@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
-import com.cafe.system.bo.AreaDetail;
+import com.cafe.system.dto.AreaDTO;
 import com.cafe.system.model.Area;
 import com.cafe.system.service.AreaService;
 import io.swagger.annotations.Api;
@@ -197,20 +197,20 @@ public class AreaController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据省份id、城市id、区县id获取详细信息")
-    @ApiOperation(value = "根据省份id、城市id、区县id获取详细信息")
+    @LogPrint(value = "根据省份id、城市id、区县id获取区域")
+    @ApiOperation(value = "根据省份id、城市id、区县id获取区域")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "省份id", name = "provinceId", dataType = "Long", paramType = "path", required = true),
         @ApiImplicitParam(value = "城市id", name = "cityId", dataType = "Long", paramType = "path", required = true),
         @ApiImplicitParam(value = "区县id", name = "districtId", dataType = "Long", paramType = "path", required = true)
     })
-    @GetMapping(value = "/detail/{provinceId}/{cityId}/{districtId}")
-    public ResponseEntity<AreaDetail> detail(
+    @GetMapping(value = "/dto/{provinceId}/{cityId}/{districtId}")
+    public ResponseEntity<AreaDTO> dto(
         @PathVariable(value = "provinceId") Long provinceId,
         @PathVariable(value = "cityId") Long cityId,
         @PathVariable(value = "districtId") Long districtId
     ) {
-        AreaDetail detail = areaService.detail(provinceId, cityId, districtId);
-        return ResponseEntity.ok(detail);
+        AreaDTO dto = areaService.dto(provinceId, cityId, districtId);
+        return ResponseEntity.ok(dto);
     }
 }
