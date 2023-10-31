@@ -1,7 +1,7 @@
 package com.cafe.system.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.system.bo.AreaDetail;
+import com.cafe.system.dto.AreaDTO;
 import com.cafe.system.model.Area;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -17,14 +17,14 @@ import org.apache.ibatis.annotations.Param;
 public interface AreaMapper extends BaseMapper<Area> {
 
     /**
-     * 根据省份id、城市id、区县id获取详细信息
+     * 根据省份id、城市id、区县id获取区域
      *
      * @param provinceId
      * @param cityId
      * @param districtId
      * @return
      */
-    AreaDetail detail(
+    AreaDTO dto(
         @Param(value = "provinceId") Long provinceId,
         @Param(value = "cityId") Long cityId,
         @Param(value = "districtId") Long districtId

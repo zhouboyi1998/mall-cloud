@@ -43,9 +43,9 @@ public class OrderStateFlowController {
     @ApiOperation(value = "保存订单")
     @ApiImplicitParam(value = "订单VO", name = "orderVO", dataType = "OrderVO", paramType = "body", required = true)
     @PostMapping(value = "/save")
-    public ResponseEntity<Void> save(@RequestBody OrderVO orderVO) {
-        orderStateFlowService.save(orderVO);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<OrderVO> save(@RequestBody OrderVO orderVO) {
+        OrderVO newOrderVO = orderStateFlowService.save(orderVO);
+        return ResponseEntity.ok(newOrderVO);
     }
 
     @LogPrint(value = "自动取消超时未支付的订单")

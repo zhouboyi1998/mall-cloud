@@ -60,9 +60,19 @@ public enum HttpStatusEnum {
     ADDRESS_NOT_FOUND(602, "Address Not Found"),
 
     /**
+     * 区域不存在
+     */
+    AREA_NOT_FOUND(603, "Area Not Found"),
+
+    /**
      * 库存不足
      */
-    LOW_STOCK(603, "Low Stock");
+    LOW_STOCK(604, "Low Stock"),
+
+    /**
+     * 创建订单异常
+     */
+    CREATE_ORDER_EXCEPTION(605, "Create Order Exception");
 
     /**
      * 状态码

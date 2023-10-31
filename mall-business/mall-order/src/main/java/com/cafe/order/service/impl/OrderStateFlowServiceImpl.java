@@ -1,7 +1,6 @@
 package com.cafe.order.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.cafe.common.constant.model.OrderConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
@@ -40,21 +39,26 @@ public class OrderStateFlowServiceImpl implements OrderStateFlowService {
     }
 
     @Override
-    public void save(OrderVO orderVO) {
+    public OrderVO save(OrderVO orderVO) {
         // 保存订单主体
         Order order = OrderConverter.INSTANCE.toModel(orderVO);
-        Long orderNo = order.getOrderNo();
         orderService.save(order);
-        // 使用订单 NO 获取新保存的订单主体
-        QueryWrapper<Order> wrapper = WrapperUtil.createQueryWrapper(new Order().setOrderNo(orderNo));
-        Order newOrder = orderService.getOne(wrapper);
 
-        // 设置订单 ID
+        // 使用订单编号获取新保存的订单主体
+        Order newOrder = orderService.getOne(WrapperUtil.createQueryWrapper(new Order().setOrderNo(order.getOrderNo())));
+
+        // 遍历订单明细, 设置订单id
         Long orderId = newOrder.getId();
         List<OrderDetail> orderDetailList = orderVO.getOrderDetailList();
         orderDetailList.forEach(orderDetail -> orderDetail.setOrderId(orderId));
         // 保存订单明细
         orderDetailService.saveBatch(orderDetailList);
+
+        // 使用订单id获取新保存的订单明细列表
+        List<OrderDetail> newOrderDetailList = orderDetailService.list(WrapperUtil.createQueryWrapper(new OrderDetail().setOrderId(orderId)));
+
+        // 返回新保存的订单
+        return OrderConverter.INSTANCE.toVO(newOrder).setOrderDetailList(newOrderDetailList);
     }
 
     @Override
