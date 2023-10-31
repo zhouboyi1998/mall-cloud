@@ -1,7 +1,7 @@
 package com.cafe.center.order.service;
 
-import com.cafe.common.core.result.Result;
 import com.cafe.merchant.vo.CartVO;
+import com.cafe.order.vo.OrderVO;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -24,7 +24,7 @@ public interface OrderCenterService {
      * @param cartVOList
      * @return
      */
-    Result<Object> submit(Long addressId, Integer channel, Integer invoice, List<CartVO> cartVOList);
+    OrderVO submit(Long addressId, Integer channel, Integer invoice, List<CartVO> cartVOList);
 
     /**
      * 自动取消超时未支付的订单

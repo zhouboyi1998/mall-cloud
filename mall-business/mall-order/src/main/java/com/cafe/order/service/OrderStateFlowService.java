@@ -21,7 +21,7 @@ public interface OrderStateFlowService {
      * @param orderVO
      * @return
      */
-    void save(OrderVO orderVO);
+    OrderVO save(OrderVO orderVO);
 
     /**
      * 自动取消超时未支付的订单

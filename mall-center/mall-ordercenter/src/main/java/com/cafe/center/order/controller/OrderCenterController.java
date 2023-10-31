@@ -1,9 +1,9 @@
 package com.cafe.center.order.controller;
 
 import com.cafe.center.order.service.OrderCenterService;
-import com.cafe.common.core.result.Result;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.merchant.vo.CartVO;
+import com.cafe.order.vo.OrderVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -44,13 +44,13 @@ public class OrderCenterController {
         @ApiImplicitParam(value = "购物车视图模型列表", name = "cartVOList", dataType = "List<CartVO>", paramType = "body", required = true)
     })
     @PostMapping(value = "/submit/{addressId}/{channel}/{invoice}")
-    public ResponseEntity<Result<Object>> submit(
+    public ResponseEntity<OrderVO> submit(
         @PathVariable(value = "addressId") Long addressId,
         @PathVariable(value = "channel") Integer channel,
         @PathVariable(value = "invoice") Integer invoice,
         @RequestBody List<CartVO> cartVOList
     ) {
-        Result<Object> result = orderCenterService.submit(addressId, channel, invoice, cartVOList);
-        return ResponseEntity.ok(result);
+        OrderVO orderVO = orderCenterService.submit(addressId, channel, invoice, cartVOList);
+        return ResponseEntity.ok(orderVO);
     }
 }

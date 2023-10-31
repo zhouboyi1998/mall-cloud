@@ -34,7 +34,7 @@ public interface OrderStateFlowFeign {
      * @return
      */
     @PostMapping(value = "/save")
-    ResponseEntity<Void> save(@RequestBody OrderVO orderVO);
+    ResponseEntity<OrderVO> save(@RequestBody OrderVO orderVO);
 
     /**
      * 自动取消超时未支付的订单

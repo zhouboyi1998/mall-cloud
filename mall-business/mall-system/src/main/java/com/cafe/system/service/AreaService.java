@@ -1,7 +1,7 @@
 package com.cafe.system.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cafe.system.bo.AreaDetail;
+import com.cafe.system.dto.AreaDTO;
 import com.cafe.system.model.Area;
 
 /**
@@ -14,12 +14,12 @@ import com.cafe.system.model.Area;
 public interface AreaService extends IService<Area> {
 
     /**
-     * 根据省份id、城市id、区县id获取详细信息
+     * 根据省份id、城市id、区县id获取区域
      *
      * @param provinceId
      * @param cityId
      * @param districtId
      * @return
      */
-    AreaDetail detail(Long provinceId, Long cityId, Long districtId);
+    AreaDTO dto(Long provinceId, Long cityId, Long districtId);
 }
