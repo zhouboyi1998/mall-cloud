@@ -20,6 +20,7 @@ import com.cafe.order.model.OrderDetail;
 import com.cafe.order.vo.OrderVO;
 import com.cafe.system.dto.AreaDTO;
 import com.cafe.system.feign.AreaFeign;
+import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -69,6 +70,7 @@ public class OrderCenterServiceImpl implements OrderCenterService {
         this.orderStateFlowFeign = orderStateFlowFeign;
     }
 
+    @GlobalTransactional
     @Override
     public OrderVO submit(Long addressId, Integer channel, Integer invoice, List<CartVO> cartVOList) {
         // 查询下单购买的所有商品的
