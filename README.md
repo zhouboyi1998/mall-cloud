@@ -10,7 +10,7 @@
 <img src="https://img.shields.io/badge/JDK-8-crimson">
 <img src="https://img.shields.io/badge/Spring Boot-2.3.12.RELEASE-brightener">
 <img src="https://img.shields.io/badge/Spring Cloud-Hoxton.SR12-brightener">
-<img src="https://img.shields.io/badge/Spring Cloud Alibaba-2.2.7.RELEASE-brightener">
+<img src="https://img.shields.io/badge/Spring Cloud Alibaba-2.2.9.RELEASE-brightener">
 </p>
 
 ### 📖 自述文档
@@ -34,9 +34,9 @@
     |-- mall-ordercenter (订单中心)
 
 |-- mall-common (公共包)
-    |-- mall-common-config (配置公共包)
     |-- mall-common-constant (常量公共包)
     |-- mall-common-core (核心公共包)
+    |-- mall-common-jackson (Jackson 公共包)
     |-- mall-common-kafka (Kafka 消息队列公共包)
     |-- mall-common-lang (数据类型公共包)
     |-- mall-common-log (日志公共包)
@@ -80,6 +80,7 @@
 | 网关 | <img src="https://img.shields.io/badge/Spring Cloud Gateway--brightener"> |
 | 安全 | <img src="https://img.shields.io/badge/Spring Security--brightener"> <img src="https://img.shields.io/badge/Spring Cloud Oauth2--brightener"> <img src="https://img.shields.io/badge/Nimbus JOSE JWT-8.16-deepskyblue"> |
 | 服务流控 | <img src="https://img.shields.io/badge/Hystrix--brightener"> <img src="https://img.shields.io/badge/Sentinel-1.8.1-royalblue"> |
+| 分布式事务 | <img src="https://img.shields.io/badge/Seata-1.5.2-royalblue"> |
 | API 文档 | <img src="https://img.shields.io/badge/Knife4J-2.0.9-orangered"> |
 | 代码生成器 | <img src="https://img.shields.io/badge/MyBatis Generator-1.4.0-crimson"> <img src="https://img.shields.io/badge/MyBatis Plus Generator-3.4.1-dodgerblue"> |
 | 数据库监听器 | <img src="https://img.shields.io/badge/MySQL Binlog Connector-0.21.0-royalblue"> <img src="https://img.shields.io/badge/Canal-1.1.5-darkorange"> <img src="https://img.shields.io/badge/Debezium-1.5.4.Final-mediumspringgreen"> |

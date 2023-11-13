@@ -25,11 +25,11 @@
 
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-config</artifactId>
+            <artifactId>mall-common-constant</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-constant</artifactId>
+            <artifactId>mall-common-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
