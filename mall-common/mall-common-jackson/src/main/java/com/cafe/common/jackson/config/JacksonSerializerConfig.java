@@ -1,4 +1,4 @@
-package com.cafe.common.config.json;
+package com.cafe.common.jackson.config;
 
 import com.cafe.common.enumeration.date.DateTimePatternEnum;
 import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
@@ -24,7 +24,7 @@ import java.util.Date;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.config.json
+ * @Package: com.cafe.common.jackson.config
  * @Author: zhouboyi
  * @Date: 2023/6/12 15:02
  * @Description: Jackson 序列化配置类
