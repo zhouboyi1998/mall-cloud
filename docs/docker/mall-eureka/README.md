@@ -21,5 +21,5 @@ docker build -f docs/docker/mall-eureka/Dockerfile -t mall-eureka .
 #### 运行
 
 ```bash
-docker run -d -p 18761:18761 --name mall-eureka mall-eureka
+docker run -d -p 8761:8761 --name mall-eureka mall-eureka
 ```

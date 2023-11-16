@@ -15,6 +15,19 @@ feign:
         connectTimeout: 10000
         readTimeout: 10000
 
+# Seata 配置
+seata:
+  enabled: true
+  application-id: ${spring.application.name}
+  # 客户端事务组名称
+  tx-service-group: default_tx_group
+  # 事务模式: AT (默认)
+  data-source-proxy-mode: AT
+  # 客户端事务组与服务端集群的映射关系
+  service:
+    vgroup-mapping:
+      default_tx_group: default
+
 # Actuator 服务健康监控监控配置
 management:
   endpoints:

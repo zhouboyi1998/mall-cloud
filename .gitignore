@@ -19,3 +19,6 @@ temp/
 
 # SkyWalking Agent
 skywalking-agent/
+
+# Apollo
+cache/apollo

@@ -16,6 +16,7 @@
     <description>公共包</description>
 
     <modules>
+        <module>mall-common-apollo</module>
         <module>mall-common-constant</module>
         <module>mall-common-core</module>
         <module>mall-common-jackson</module>
@@ -23,6 +24,7 @@
         <module>mall-common-lang</module>
         <module>mall-common-log</module>
         <module>mall-common-mybatisplus</module>
+        <module>mall-common-nacos</module>
         <module>mall-common-rabbitmq</module>
         <module>mall-common-redis</module>
         <module>mall-common-rocketmq</module>
