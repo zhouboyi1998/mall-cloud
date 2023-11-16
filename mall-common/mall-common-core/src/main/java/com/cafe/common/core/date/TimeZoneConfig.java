@@ -15,7 +15,7 @@ import java.time.ZoneId;
  * @Description: 时区配置类
  */
 @Configuration
-public class ZoneConfig {
+public class TimeZoneConfig {
 
     /**
      * 默认时区
