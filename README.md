@@ -34,6 +34,7 @@
     |-- mall-ordercenter (订单中心)
 
 |-- mall-common (公共包)
+    |-- mall-common-apollo (Apollo 公共包)
     |-- mall-common-constant (常量公共包)
     |-- mall-common-core (核心公共包)
     |-- mall-common-jackson (Jackson 公共包)
@@ -41,6 +42,7 @@
     |-- mall-common-lang (数据类型公共包)
     |-- mall-common-log (日志公共包)
     |-- mall-common-mybatisplus (MyBatis-Plus 公共包)
+    |-- mall-common-nacos (Nacos 公共包)
     |-- mall-common-rabbitmq (RabbitMQ 消息队列公共包)
     |-- mall-common-redis (Redis 公共包)
     |-- mall-common-rocketmq (RocketMQ 消息队列公共包)
@@ -60,7 +62,7 @@
 
 |-- mall-service (基础服务模块)
     |-- mall-admin (Spring Boot Admin 监控模块)
-    |-- mall-eureka (Eureka 注册中心模块, 弃用)
+    |-- mall-eureka (Eureka 注册中心)
     |-- mall-gateway (Spring Cloud Gateway 网关模块)
     |-- mall-generator (代码生成器)
     |-- mall-id (ID 生成器)
@@ -75,7 +77,7 @@
 | 数据库 | <img src="https://img.shields.io/badge/MySQL-8.0.19-royalblue"> <img src="https://img.shields.io/badge/Redis-3.2.100-crimson"> <img src="https://img.shields.io/badge/PostgreSQL-14.3-royalblue"> |
 | ORM | <img src="https://img.shields.io/badge/MyBatis Plus-3.4.1-dodgerblue"> <img src="https://img.shields.io/badge/Spring Data--brightener"> |
 | 注册中心 | <img src="https://img.shields.io/badge/Eureka--brightener"> <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> <img src="https://img.shields.io/badge/Zookeeper-3.6.3-forestgreen"> |
-| 配置中心 | <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> |
+| 配置中心 | <img src="https://img.shields.io/badge/Apollo-2.1.0-darkseagreen"> <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> |
 | 远程调用 | <img src="https://img.shields.io/badge/OpenFeign--brightener"> |
 | 网关 | <img src="https://img.shields.io/badge/Spring Cloud Gateway--brightener"> |
 | 安全 | <img src="https://img.shields.io/badge/Spring Security--brightener"> <img src="https://img.shields.io/badge/Spring Cloud Oauth2--brightener"> <img src="https://img.shields.io/badge/Nimbus JOSE JWT-8.16-deepskyblue"> |

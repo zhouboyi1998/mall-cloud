@@ -1,0 +1,27 @@
+# Eureka 客户端配置
+eureka:
+  client:
+    service-url:
+      default-zone: http://host.docker.internal:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+# Apollo 客户端配置
+app:
+  id: mall-cloud
+apollo:
+  bootstrap:
+    enabled: true
+    namespaces: mall,mall-docker,${spring.application.name},${spring.application.name}-docker
+  cacheDir: ./cache/apollo
+  meta: http://host.docker.internal:8080
+
+# Seata 配置
+seata:
+  # Seata 服务端地址
+  registry:
+    type: eureka
+    eureka:
+      service-url: http://host.docker.internal:8761/eureka
+      application: seata-server
+      weight: 1
