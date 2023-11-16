@@ -34,7 +34,7 @@
         <spring-cloud-alibaba.version>2.2.9.RELEASE</spring-cloud-alibaba.version>
         <!-- Nacos 2.x 需要依赖低版本的 Reflections, 覆盖 Debezium 提供的高版本 -->
         <reflections.version>0.9.11</reflections.version>
-        <hutool.version>5.4.0</hutool.version>
+        <apollo.version>2.1.0</apollo.version>
         <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <mysql-connector.version>8.0.19</mysql-connector.version>
         <postgresql-driver.version>42.2.20</postgresql-driver.version>
@@ -59,6 +59,7 @@
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <kaptcha-starter.version>1.1.0</kaptcha-starter.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
+        <hutool.version>5.4.0</hutool.version>
         <prometheus.version>1.6.12</prometheus.version>
         <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
         <sky-walking.version>9.0.0</sky-walking.version>
@@ -134,6 +135,12 @@
                 <groupId>org.reflections</groupId>
                 <artifactId>reflections</artifactId>
                 <version>${reflections.version}</version>
+            </dependency>
+            <!-- Apollo 配置中心客户端 -->
+            <dependency>
+                <groupId>com.ctrip.framework.apollo</groupId>
+                <artifactId>apollo-client</artifactId>
+                <version>${apollo.version}</version>
             </dependency>
             <!-- Swagger2 API 文档 -->
             <dependency>
@@ -344,6 +351,11 @@
             <!-- 公共包 -->
             <dependency>
                 <groupId>com.cafe</groupId>
+                <artifactId>mall-common-apollo</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-common-constant</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
@@ -375,6 +387,11 @@
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-common-mybatisplus</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-common-nacos</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
