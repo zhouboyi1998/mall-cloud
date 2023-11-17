@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +33,7 @@ public interface MinioFeign {
     @PostMapping(value = "/upload/{bucket}")
     ResponseEntity<String> upload(
         @PathVariable(value = "bucket") String bucket,
-        MultipartFile file
+        @RequestParam(value = "file") MultipartFile file
     );
 
     /**
