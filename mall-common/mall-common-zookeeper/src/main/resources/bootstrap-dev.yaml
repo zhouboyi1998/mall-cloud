@@ -1,0 +1,28 @@
+spring:
+  # 微服务配置
+  cloud:
+    # Zookeeper 配置
+    zookeeper:
+      # 连接地址
+      connect-string: 127.0.0.1:2181
+      # Zookeeper 配置中心
+      config:
+        # 配置根节点
+        root: config
+        # 公共配置根节点
+        defaultContext: mall
+        # 公共配置根节点或服务名称和运行环境之间的分隔符
+        profileSeparator: ","
+
+# Seata 配置
+seata:
+  # Seata 服务端地址
+  registry:
+    type: zk
+    zk:
+      server-addr: 127.0.0.1:2181
+      cluster: default
+      username:
+      password:
+      connect-timeout: 2000
+      session-timeout: 6000

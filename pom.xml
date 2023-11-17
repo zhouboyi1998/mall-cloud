@@ -424,6 +424,11 @@
                 <artifactId>mall-common-xxljob</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-common-zookeeper</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
 
             <!-- 远程调用模块 -->
             <dependency>

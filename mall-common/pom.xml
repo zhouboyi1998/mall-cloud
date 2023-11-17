@@ -31,6 +31,7 @@
         <module>mall-common-swagger</module>
         <module>mall-common-util</module>
         <module>mall-common-xxljob</module>
+        <module>mall-common-zookeeper</module>
     </modules>
 
 </project>
