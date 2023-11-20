@@ -18,6 +18,7 @@
     <modules>
         <module>mall-common-apollo</module>
         <module>mall-common-constant</module>
+        <module>mall-common-consul</module>
         <module>mall-common-core</module>
         <module>mall-common-jackson</module>
         <module>mall-common-kafka</module>
