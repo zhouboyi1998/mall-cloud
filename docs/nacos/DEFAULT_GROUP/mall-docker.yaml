@@ -5,3 +5,13 @@ spring:
       resourceserver:
         jwt:
           jwk-set-uri: http://host.docker.internal:${server.port}/mall-security/jwk-set/rsa
+  # Sleuth 配置
+  sleuth:
+    sampler:
+      # 采样率 (1: 全部采集)
+      probability: 1
+      # 速率 (每秒接收的 trace 数量)
+      rate: 10
+  # Zipkin 配置
+  zipkin:
+    base-url: http://host.docker.internal:9411
