@@ -53,7 +53,7 @@ management:
       prometheus:
         enabled: true
 
-# LogBack 配置
+# Logback 配置
 logging:
   config: classpath:logback/logback-${spring.profiles.active}.xml
 

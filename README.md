@@ -91,12 +91,12 @@
 | 搜索引擎 | <img src="https://img.shields.io/badge/ElasticSearch-7.6.2-darkturquoise"> <img src="https://img.shields.io/badge/Solr-8.11.1-orangered"> |
 | 消息队列 | <img src="https://img.shields.io/badge/RabbitMQ-3.6.5-orange"> <img src="https://img.shields.io/badge/RocketMQ-4.9.3-darkorange"> <img src="https://img.shields.io/badge/Kafka-3.4.0-mediumturquoise"> |
 | 对象存储 | <img src="https://img.shields.io/badge/MinIO-8.3.4-crimson"> <img src="https://img.shields.io/badge/FastDFS-1.27.0.0-darkorange"> |
-| 验证码生成器 | <img src="https://img.shields.io/badge/Kaptcha-1.1.0-blue"> <img src="https://img.shields.io/badge/Easy Captcha-1.6.2-blue"> |
+| 验证码生成器 | <img src="https://img.shields.io/badge/Kaptcha-1.1.0-blue"> <img src="https://img.shields.io/badge/Easy Captcha-1.6.2-blue"> <img src="https://img.shields.io/badge/Hutool Captcha-5.0.4-blue"> |
 | 任务调度 | <img src="https://img.shields.io/badge/XXL JOB-2.4.0-mediumseagreen"> |
 | 监控告警 | <img src="https://img.shields.io/badge/Prometheus-2.43.0-orange"> <img src="https://img.shields.io/badge/Spring Boot Admin-2.3.1-seagreen"> |
 | 链路追踪 | <img src="https://img.shields.io/badge/SkyWalking-9.0.0-blue"> <img src="https://img.shields.io/badge/Sleuth--brightener"> <img src="https://img.shields.io/badge/Zipkin-2.24.3-orange"> |
 | 容器化 | <img src="https://img.shields.io/badge/Docker--deepskyblue"> |
-| 可视化 | <img src="https://img.shields.io/badge/Kibana-7.6.2-darkturquoise"> <img src="https://img.shields.io/badge/ElasticSearch Head--darkturquoise"> <img src="https://img.shields.io/badge/KafkaUI Lite-1.2.11-deepgreen"> |
+| 可视化 | <img src="https://img.shields.io/badge/Kibana-7.6.2-darkturquoise"> <img src="https://img.shields.io/badge/ElasticSearch Head--darkturquoise"> <img src="https://img.shields.io/badge/Kafka UI Lite-1.2.11-deepgreen"> |
 
 ### 📜 开源协议
 
