@@ -13,6 +13,6 @@ canal:
     - mall_goods.mall_brand
     - mall_goods.mall_category
 
-# LogBack 配置
+# Logback 配置
 logging:
   config: classpath:logback/logback-${spring.profiles.active}.xml

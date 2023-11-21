@@ -33,7 +33,7 @@ server:
 
 ---
 
-### 📈 SpringBoot 集成 SkyWalking Agent
+### 📈 Spring Boot 集成 SkyWalking Agent
 
 #### SkyWalking Agent 9.0.0
 

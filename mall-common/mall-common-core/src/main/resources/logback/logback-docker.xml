@@ -4,9 +4,9 @@
     <springProperty name="APP_NAME" source="spring.application.name" scope="context" />
     <property name="LOG_FILE" value="logs/${APP_NAME}" />
 
-    <!-- SpringBoot LogBack 颜色转换器 -->
+    <!-- Logback 颜色转换器 -->
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
-    <!-- SpringBoot LogBack 空格转换器 -->
+    <!-- Logback 空格转换器 -->
     <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter" />
 
     <!-- 控制台打印格式 -->
@@ -14,7 +14,7 @@
     <!-- 日志文件打印格式 -->
     <property name="FILE_LOG_PATTERN" value="${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %logger %M %L [%tid] [%X{requestId}] : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
 
-    <!-- SpringBoot LogBack 日志级别配置 -->
+    <!-- Logback 日志级别配置 -->
     <logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR" />
     <logger name="org.apache.catalina.util.LifecycleBase" level="ERROR" />
     <logger name="org.apache.coyote.http11.Http11NioProtocol" level="WARN" />

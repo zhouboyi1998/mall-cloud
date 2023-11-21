@@ -25,6 +25,6 @@ debezium:
     # MySQL 主从同步中的逻辑名称
     server-name: debezium-mysql-cluster
 
-# LogBack 配置
+# Logback 配置
 logging:
   config: classpath:logback/logback-${spring.profiles.active}.xml
