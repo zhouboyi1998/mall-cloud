@@ -21,6 +21,8 @@ import java.io.Serializable;
 @ApiModel(value = "FastDFSFile", description = "FastDFS 文件模型")
 public class FastDFSFile implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     @ApiModelProperty(value = "文件名")
     private String name;
 
