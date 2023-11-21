@@ -1,7 +1,7 @@
 spring:
   # 微服务配置
   cloud:
-    # SpringCloud Gateway 网关配置
+    # Spring Cloud Gateway 网关配置
     gateway:
       # 服务发现配置
       discovery:
