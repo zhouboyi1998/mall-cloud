@@ -4,7 +4,9 @@ import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.model.Log;
 import com.cafe.common.util.aop.AOPUtil;
+import com.cafe.common.util.id.Snowflake;
 import com.cafe.common.util.json.JacksonUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -25,7 +27,6 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * @Project: mall-cloud
@@ -42,7 +43,14 @@ public class LogPrintAspect {
     private static final Logger LOGGER = LoggerFactory.getLogger(LogPrintAspect.class);
 
     /**
-     * 配置 @LogPrint 注解为切入点
+     * 日志模型
+     */
+    private final Log log = new Log();
+
+    private final Snowflake snowflake = new Snowflake(0, 0);
+
+    /**
+     * 切点
      */
     @Pointcut(value = "@annotation(com.cafe.common.log.annotation.LogPrint)")
     public void logPrint() {
@@ -59,21 +67,27 @@ public class LogPrintAspect {
     @Around(value = "logPrint()")
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         // 为每一个请求生成 UUID 格式的 Request ID
-        String requestId = UUID.randomUUID().toString();
+        Long requestId = snowflake.nextId();
         // 将请求 Request ID 存储到日志上下文 (SLF4J MDC) 中
-        MDC.put(FieldConstant.REQUEST_ID, requestId);
-        // 开始打印
-        LOGGER.info("==================== start ====================");
+        MDC.put(FieldConstant.REQUEST_ID, String.valueOf(requestId));
+
         // 获取进入连接点之前的时间
         Long startTime = System.currentTimeMillis();
         // 进入连接点 (执行目标方法, 获取目标方法的响应结果)
         Object result = proceedingJoinPoint.proceed();
+        // 计算执行耗时
+        Long duration = System.currentTimeMillis() - startTime;
+
         // 响应结果
-        LOGGER.info("Response result  : {}", JacksonUtil.writeValueAsString(result));
-        // 执行耗时 (进入连接点之后的时间 - 进入连接点之前的时间)
-        LOGGER.info("Time Consuming   : {} ms", System.currentTimeMillis() - startTime);
-        // 结束打印
-        LOGGER.info("===================== end =====================");
+        LOGGER.info("Result      : {}", JacksonUtil.writeValueAsString(result));
+        // 执行耗时
+        LOGGER.info("Duration    : {} ms", duration);
+
+        // 组装响应相关信息到日志模型中
+        log.setResult(result).setDuration(duration);
+        // 完整的接口日志
+        LOGGER.info(JacksonUtil.writeValueAsString(log));
+
         // 返回目标方法的响应结果
         return result;
     }
@@ -90,20 +104,33 @@ public class LogPrintAspect {
             .map(attributes -> (ServletRequestAttributes) attributes)
             .map(ServletRequestAttributes::getRequest)
             .orElseThrow(NullPointerException::new);
-        // 请求来源 IP
-        LOGGER.info("Source IP        : {}", request.getRemoteAddr());
+
+        // 获取请求相关信息
+        String description = description(joinPoint);
+        String source = request.getRemoteAddr();
+        String url = request.getRequestURL().toString();
+        String type = request.getMethod();
+        String clazz = joinPoint.getSignature().getDeclaringTypeName();
+        String method = joinPoint.getSignature().getName();
+        String argument = AOPUtil.argument(joinPoint);
+
         // 描述信息
-        LOGGER.info("Description      : {}", description(joinPoint));
-        // HTTP 请求 URL
-        LOGGER.info("Request URL      : {}", request.getRequestURL());
-        // HTTP 请求类型
-        LOGGER.info("HTTP Method      : {}", request.getMethod());
-        // 控制器类的全路径
-        LOGGER.info("Class            : {}", joinPoint.getSignature().getDeclaringTypeName());
+        LOGGER.info("Description : {}", description);
+        // 来源 IP
+        LOGGER.info("Source      : {}", source);
+        // 请求 URL
+        LOGGER.info("URL         : {}", url);
+        // 请求类型
+        LOGGER.info("Type        : {}", type);
+        // 控制器类
+        LOGGER.info("Class       : {}", clazz);
         // 执行方法
-        LOGGER.info("Method           : {}", joinPoint.getSignature().getName());
+        LOGGER.info("Method      : {}", method);
         // 请求参数
-        LOGGER.info("Request Argument : {}", AOPUtil.argument(joinPoint));
+        LOGGER.info("Argument    : {}", argument);
+
+        // 组装请求相关信息到日志模型中
+        log.setDescription(description).setSource(source).setUrl(url).setType(type).setClazz(clazz).setMethod(method).setArgument(argument);
     }
 
     /**
