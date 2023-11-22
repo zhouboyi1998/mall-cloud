@@ -28,7 +28,7 @@ seata:
     vgroup-mapping:
       default_tx_group: default
 
-# Actuator 服务健康监控监控配置
+# Actuator 服务健康监控配置
 management:
   endpoints:
     web:
