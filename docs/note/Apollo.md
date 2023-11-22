@@ -13,8 +13,12 @@
 
 #### 初始化数据库
 
-* [**apollo config db**](../apollo/sql/apolloconfigdb.sql) **(**[**GitHub**](https://github.com/apolloconfig/apollo/blob/v2.1.0/scripts/sql/apolloconfigdb.sql)**)**
-* [**apollo portal db**](../apollo/sql/apolloportaldb.sql) **(**[**GitHub**](https://github.com/apolloconfig/apollo/blob/v2.1.0/scripts/sql/apolloportaldb.sql)**)**
+* [**apolloconfigdb.sql**](../apollo/sql/apolloconfigdb.sql)
+* [**https://github.com/apolloconfig/apollo/blob/v2.1.0/scripts/sql/apolloconfigdb.sql**](https://github.com/apolloconfig/apollo/blob/v2.1.0/scripts/sql/apolloconfigdb.sql)
+
+
+* [**apolloportaldb.sql**](../apollo/sql/apolloportaldb.sql)
+* [**https://github.com/apolloconfig/apollo/blob/v2.1.0/scripts/sql/apolloportaldb.sql**](https://github.com/apolloconfig/apollo/blob/v2.1.0/scripts/sql/apolloportaldb.sql)
 
 #### 修改配置文件
 
