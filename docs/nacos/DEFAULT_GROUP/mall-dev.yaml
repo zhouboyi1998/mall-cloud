@@ -7,6 +7,7 @@ spring:
           jwk-set-uri: http://127.0.0.1:${server.port}/mall-security/jwk-set/rsa
   # Sleuth 配置
   sleuth:
+    enabled: true
     sampler:
       # 采样率 (1: 全部采集)
       probability: 1
@@ -14,4 +15,5 @@ spring:
       rate: 10
   # Zipkin 配置
   zipkin:
+    enabled: true
     base-url: http://127.0.0.1:9411

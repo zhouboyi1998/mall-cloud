@@ -21,4 +21,4 @@ temp/
 skywalking-agent/
 
 # Apollo
-cache/apollo
+cache/apollo/
