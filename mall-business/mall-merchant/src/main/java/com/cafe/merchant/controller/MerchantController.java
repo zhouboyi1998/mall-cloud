@@ -89,7 +89,7 @@ public class MerchantController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Merchant> page = new Page<Merchant>().setCurrent(current).setSize(size);
+        Page<Merchant> page = new Page<>(current, size);
         Page<Merchant> merchantPage = merchantService.page(page);
         return ResponseEntity.ok(merchantPage);
     }
@@ -107,7 +107,7 @@ public class MerchantController {
         @PathVariable(value = "size") Long size,
         @RequestBody Merchant merchant
     ) {
-        Page<Merchant> page = new Page<Merchant>().setCurrent(current).setSize(size);
+        Page<Merchant> page = new Page<>(current, size);
         QueryWrapper<Merchant> wrapper = WrapperUtil.createQueryWrapper(merchant);
         Page<Merchant> merchantPage = merchantService.page(page, wrapper);
         return ResponseEntity.ok(merchantPage);

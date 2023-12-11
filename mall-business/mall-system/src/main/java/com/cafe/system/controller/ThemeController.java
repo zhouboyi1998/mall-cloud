@@ -89,7 +89,7 @@ public class ThemeController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Theme> page = new Page<Theme>().setCurrent(current).setSize(size);
+        Page<Theme> page = new Page<>(current, size);
         Page<Theme> themePage = themeService.page(page);
         return ResponseEntity.ok(themePage);
     }
@@ -107,7 +107,7 @@ public class ThemeController {
         @PathVariable(value = "size") Long size,
         @RequestBody Theme theme
     ) {
-        Page<Theme> page = new Page<Theme>().setCurrent(current).setSize(size);
+        Page<Theme> page = new Page<>(current, size);
         QueryWrapper<Theme> wrapper = WrapperUtil.createQueryWrapper(theme);
         Page<Theme> themePage = themeService.page(page, wrapper);
         return ResponseEntity.ok(themePage);

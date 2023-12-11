@@ -93,7 +93,7 @@ public class MenuController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Menu> page = new Page<Menu>().setCurrent(current).setSize(size);
+        Page<Menu> page = new Page<>(current, size);
         Page<Menu> menuPage = menuService.page(page);
         return ResponseEntity.ok(menuPage);
     }
@@ -111,7 +111,7 @@ public class MenuController {
         @PathVariable(value = "size") Long size,
         @RequestBody Menu menu
     ) {
-        Page<Menu> page = new Page<Menu>().setCurrent(current).setSize(size);
+        Page<Menu> page = new Page<>(current, size);
         QueryWrapper<Menu> wrapper = WrapperUtil.createQueryWrapper(menu);
         Page<Menu> menuPage = menuService.page(page, wrapper);
         return ResponseEntity.ok(menuPage);

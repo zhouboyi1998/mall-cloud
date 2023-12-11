@@ -89,7 +89,7 @@ public class SkuController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Sku> page = new Page<Sku>().setCurrent(current).setSize(size);
+        Page<Sku> page = new Page<>(current, size);
         Page<Sku> skuPage = skuService.page(page);
         return ResponseEntity.ok(skuPage);
     }
@@ -107,7 +107,7 @@ public class SkuController {
         @PathVariable(value = "size") Long size,
         @RequestBody Sku sku
     ) {
-        Page<Sku> page = new Page<Sku>().setCurrent(current).setSize(size);
+        Page<Sku> page = new Page<>(current, size);
         QueryWrapper<Sku> wrapper = WrapperUtil.createQueryWrapper(sku);
         Page<Sku> skuPage = skuService.page(page, wrapper);
         return ResponseEntity.ok(skuPage);
