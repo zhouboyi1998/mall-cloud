@@ -89,7 +89,7 @@ public class OrderController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Order> page = new Page<Order>().setCurrent(current).setSize(size);
+        Page<Order> page = new Page<>(current, size);
         Page<Order> orderPage = orderService.page(page);
         return ResponseEntity.ok(orderPage);
     }
@@ -107,7 +107,7 @@ public class OrderController {
         @PathVariable(value = "size") Long size,
         @RequestBody Order order
     ) {
-        Page<Order> page = new Page<Order>().setCurrent(current).setSize(size);
+        Page<Order> page = new Page<>(current, size);
         QueryWrapper<Order> wrapper = WrapperUtil.createQueryWrapper(order);
         Page<Order> orderPage = orderService.page(page, wrapper);
         return ResponseEntity.ok(orderPage);

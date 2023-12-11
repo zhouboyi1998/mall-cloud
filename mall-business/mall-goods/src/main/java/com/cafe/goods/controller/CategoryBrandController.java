@@ -89,7 +89,7 @@ public class CategoryBrandController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<CategoryBrand> page = new Page<CategoryBrand>().setCurrent(current).setSize(size);
+        Page<CategoryBrand> page = new Page<>(current, size);
         Page<CategoryBrand> categoryBrandPage = categoryBrandService.page(page);
         return ResponseEntity.ok(categoryBrandPage);
     }
@@ -107,7 +107,7 @@ public class CategoryBrandController {
         @PathVariable(value = "size") Long size,
         @RequestBody CategoryBrand categoryBrand
     ) {
-        Page<CategoryBrand> page = new Page<CategoryBrand>().setCurrent(current).setSize(size);
+        Page<CategoryBrand> page = new Page<>(current, size);
         QueryWrapper<CategoryBrand> wrapper = WrapperUtil.createQueryWrapper(categoryBrand);
         Page<CategoryBrand> categoryBrandPage = categoryBrandService.page(page, wrapper);
         return ResponseEntity.ok(categoryBrandPage);

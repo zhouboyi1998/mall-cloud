@@ -89,7 +89,7 @@ public class UserRoleController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<UserRole> page = new Page<UserRole>().setCurrent(current).setSize(size);
+        Page<UserRole> page = new Page<>(current, size);
         Page<UserRole> userRolePage = userRoleService.page(page);
         return ResponseEntity.ok(userRolePage);
     }
@@ -107,7 +107,7 @@ public class UserRoleController {
         @PathVariable(value = "size") Long size,
         @RequestBody UserRole userRole
     ) {
-        Page<UserRole> page = new Page<UserRole>().setCurrent(current).setSize(size);
+        Page<UserRole> page = new Page<>(current, size);
         QueryWrapper<UserRole> wrapper = WrapperUtil.createQueryWrapper(userRole);
         Page<UserRole> userRolePage = userRoleService.page(page, wrapper);
         return ResponseEntity.ok(userRolePage);

@@ -2,10 +2,10 @@ package com.cafe.system.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.system.model.Admin;
-import com.cafe.system.service.AdminService;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
+import com.cafe.system.model.Admin;
+import com.cafe.system.service.AdminService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -89,7 +89,7 @@ public class AdminController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Admin> page = new Page<Admin>().setCurrent(current).setSize(size);
+        Page<Admin> page = new Page<>(current, size);
         Page<Admin> adminPage = adminService.page(page);
         return ResponseEntity.ok(adminPage);
     }
@@ -107,7 +107,7 @@ public class AdminController {
         @PathVariable(value = "size") Long size,
         @RequestBody Admin admin
     ) {
-        Page<Admin> page = new Page<Admin>().setCurrent(current).setSize(size);
+        Page<Admin> page = new Page<>(current, size);
         QueryWrapper<Admin> wrapper = WrapperUtil.createQueryWrapper(admin);
         Page<Admin> adminPage = adminService.page(page, wrapper);
         return ResponseEntity.ok(adminPage);

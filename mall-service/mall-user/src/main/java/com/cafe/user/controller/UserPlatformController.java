@@ -89,7 +89,7 @@ public class UserPlatformController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<UserPlatform> page = new Page<UserPlatform>().setCurrent(current).setSize(size);
+        Page<UserPlatform> page = new Page<>(current, size);
         Page<UserPlatform> userPlatformPage = userPlatformService.page(page);
         return ResponseEntity.ok(userPlatformPage);
     }
@@ -107,7 +107,7 @@ public class UserPlatformController {
         @PathVariable(value = "size") Long size,
         @RequestBody UserPlatform userPlatform
     ) {
-        Page<UserPlatform> page = new Page<UserPlatform>().setCurrent(current).setSize(size);
+        Page<UserPlatform> page = new Page<>(current, size);
         QueryWrapper<UserPlatform> wrapper = WrapperUtil.createQueryWrapper(userPlatform);
         Page<UserPlatform> userPlatformPage = userPlatformService.page(page, wrapper);
         return ResponseEntity.ok(userPlatformPage);

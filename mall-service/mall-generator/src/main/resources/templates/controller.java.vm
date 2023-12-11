@@ -108,7 +108,7 @@ public class ${table.controllerName} {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<${entity}> page = new Page<${entity}>().setCurrent(current).setSize(size);
+        Page<${entity}> page = new Page<>(current, size);
         Page<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.page(page);
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);
     }
@@ -126,7 +126,7 @@ public class ${table.controllerName} {
         @PathVariable(value = "size") Long size,
         @RequestBody ${entity} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}
     ) {
-        Page<${entity}> page = new Page<${entity}>().setCurrent(current).setSize(size);
+        Page<${entity}> page = new Page<>(current, size);
         QueryWrapper<${entity}> wrapper = WrapperUtil.createQueryWrapper(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)});
         Page<${entity}> ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service.page(page, wrapper);
         return ResponseEntity.ok(${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Page);

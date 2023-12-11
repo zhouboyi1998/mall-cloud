@@ -90,7 +90,7 @@ public class StockController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Stock> page = new Page<Stock>().setCurrent(current).setSize(size);
+        Page<Stock> page = new Page<>(current, size);
         Page<Stock> stockPage = stockService.page(page);
         return ResponseEntity.ok(stockPage);
     }
@@ -108,7 +108,7 @@ public class StockController {
         @PathVariable(value = "size") Long size,
         @RequestBody Stock stock
     ) {
-        Page<Stock> page = new Page<Stock>().setCurrent(current).setSize(size);
+        Page<Stock> page = new Page<>(current, size);
         QueryWrapper<Stock> wrapper = WrapperUtil.createQueryWrapper(stock);
         Page<Stock> stockPage = stockService.page(page, wrapper);
         return ResponseEntity.ok(stockPage);

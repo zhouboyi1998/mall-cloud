@@ -89,7 +89,7 @@ public class StorageController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Storage> page = new Page<Storage>().setCurrent(current).setSize(size);
+        Page<Storage> page = new Page<>(current, size);
         Page<Storage> storagePage = storageService.page(page);
         return ResponseEntity.ok(storagePage);
     }
@@ -107,7 +107,7 @@ public class StorageController {
         @PathVariable(value = "size") Long size,
         @RequestBody Storage storage
     ) {
-        Page<Storage> page = new Page<Storage>().setCurrent(current).setSize(size);
+        Page<Storage> page = new Page<>(current, size);
         QueryWrapper<Storage> wrapper = WrapperUtil.createQueryWrapper(storage);
         Page<Storage> storagePage = storageService.page(page, wrapper);
         return ResponseEntity.ok(storagePage);
