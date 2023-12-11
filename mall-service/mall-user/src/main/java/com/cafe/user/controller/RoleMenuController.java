@@ -89,7 +89,7 @@ public class RoleMenuController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<RoleMenu> page = new Page<RoleMenu>().setCurrent(current).setSize(size);
+        Page<RoleMenu> page = new Page<>(current, size);
         Page<RoleMenu> roleMenuPage = roleMenuService.page(page);
         return ResponseEntity.ok(roleMenuPage);
     }
@@ -107,7 +107,7 @@ public class RoleMenuController {
         @PathVariable(value = "size") Long size,
         @RequestBody RoleMenu roleMenu
     ) {
-        Page<RoleMenu> page = new Page<RoleMenu>().setCurrent(current).setSize(size);
+        Page<RoleMenu> page = new Page<>(current, size);
         QueryWrapper<RoleMenu> wrapper = WrapperUtil.createQueryWrapper(roleMenu);
         Page<RoleMenu> roleMenuPage = roleMenuService.page(page, wrapper);
         return ResponseEntity.ok(roleMenuPage);

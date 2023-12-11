@@ -89,7 +89,7 @@ public class GuaranteeController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Guarantee> page = new Page<Guarantee>().setCurrent(current).setSize(size);
+        Page<Guarantee> page = new Page<>(current, size);
         Page<Guarantee> guaranteePage = guaranteeService.page(page);
         return ResponseEntity.ok(guaranteePage);
     }
@@ -107,7 +107,7 @@ public class GuaranteeController {
         @PathVariable(value = "size") Long size,
         @RequestBody Guarantee guarantee
     ) {
-        Page<Guarantee> page = new Page<Guarantee>().setCurrent(current).setSize(size);
+        Page<Guarantee> page = new Page<>(current, size);
         QueryWrapper<Guarantee> wrapper = WrapperUtil.createQueryWrapper(guarantee);
         Page<Guarantee> guaranteePage = guaranteeService.page(page, wrapper);
         return ResponseEntity.ok(guaranteePage);

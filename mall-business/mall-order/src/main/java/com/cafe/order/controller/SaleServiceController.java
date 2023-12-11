@@ -89,7 +89,7 @@ public class SaleServiceController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<SaleService> page = new Page<SaleService>().setCurrent(current).setSize(size);
+        Page<SaleService> page = new Page<>(current, size);
         Page<SaleService> saleServicePage = saleServiceService.page(page);
         return ResponseEntity.ok(saleServicePage);
     }
@@ -107,7 +107,7 @@ public class SaleServiceController {
         @PathVariable(value = "size") Long size,
         @RequestBody SaleService saleService
     ) {
-        Page<SaleService> page = new Page<SaleService>().setCurrent(current).setSize(size);
+        Page<SaleService> page = new Page<>(current, size);
         QueryWrapper<SaleService> wrapper = WrapperUtil.createQueryWrapper(saleService);
         Page<SaleService> saleServicePage = saleServiceService.page(page, wrapper);
         return ResponseEntity.ok(saleServicePage);

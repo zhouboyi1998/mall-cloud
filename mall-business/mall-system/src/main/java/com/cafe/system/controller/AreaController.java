@@ -90,7 +90,7 @@ public class AreaController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Area> page = new Page<Area>().setCurrent(current).setSize(size);
+        Page<Area> page = new Page<>(current, size);
         Page<Area> areaPage = areaService.page(page);
         return ResponseEntity.ok(areaPage);
     }
@@ -108,7 +108,7 @@ public class AreaController {
         @PathVariable(value = "size") Long size,
         @RequestBody Area area
     ) {
-        Page<Area> page = new Page<Area>().setCurrent(current).setSize(size);
+        Page<Area> page = new Page<>(current, size);
         QueryWrapper<Area> wrapper = WrapperUtil.createQueryWrapper(area);
         Page<Area> areaPage = areaService.page(page, wrapper);
         return ResponseEntity.ok(areaPage);

@@ -89,7 +89,7 @@ public class SpuController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Spu> page = new Page<Spu>().setCurrent(current).setSize(size);
+        Page<Spu> page = new Page<>(current, size);
         Page<Spu> spuPage = spuService.page(page);
         return ResponseEntity.ok(spuPage);
     }
@@ -107,7 +107,7 @@ public class SpuController {
         @PathVariable(value = "size") Long size,
         @RequestBody Spu spu
     ) {
-        Page<Spu> page = new Page<Spu>().setCurrent(current).setSize(size);
+        Page<Spu> page = new Page<>(current, size);
         QueryWrapper<Spu> wrapper = WrapperUtil.createQueryWrapper(spu);
         Page<Spu> spuPage = spuService.page(page, wrapper);
         return ResponseEntity.ok(spuPage);

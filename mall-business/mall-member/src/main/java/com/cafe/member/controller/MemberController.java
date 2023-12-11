@@ -89,7 +89,7 @@ public class MemberController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Member> page = new Page<Member>().setCurrent(current).setSize(size);
+        Page<Member> page = new Page<>(current, size);
         Page<Member> memberPage = memberService.page(page);
         return ResponseEntity.ok(memberPage);
     }
@@ -107,7 +107,7 @@ public class MemberController {
         @PathVariable(value = "size") Long size,
         @RequestBody Member member
     ) {
-        Page<Member> page = new Page<Member>().setCurrent(current).setSize(size);
+        Page<Member> page = new Page<>(current, size);
         QueryWrapper<Member> wrapper = WrapperUtil.createQueryWrapper(member);
         Page<Member> memberPage = memberService.page(page, wrapper);
         return ResponseEntity.ok(memberPage);

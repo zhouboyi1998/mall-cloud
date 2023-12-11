@@ -89,7 +89,7 @@ public class CategoryController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Category> page = new Page<Category>().setCurrent(current).setSize(size);
+        Page<Category> page = new Page<>(current, size);
         Page<Category> categoryPage = categoryService.page(page);
         return ResponseEntity.ok(categoryPage);
     }
@@ -107,7 +107,7 @@ public class CategoryController {
         @PathVariable(value = "size") Long size,
         @RequestBody Category category
     ) {
-        Page<Category> page = new Page<Category>().setCurrent(current).setSize(size);
+        Page<Category> page = new Page<>(current, size);
         QueryWrapper<Category> wrapper = WrapperUtil.createQueryWrapper(category);
         Page<Category> categoryPage = categoryService.page(page, wrapper);
         return ResponseEntity.ok(categoryPage);

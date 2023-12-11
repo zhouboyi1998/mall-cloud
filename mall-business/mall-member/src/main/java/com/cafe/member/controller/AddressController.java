@@ -89,7 +89,7 @@ public class AddressController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Address> page = new Page<Address>().setCurrent(current).setSize(size);
+        Page<Address> page = new Page<>(current, size);
         Page<Address> addressPage = addressService.page(page);
         return ResponseEntity.ok(addressPage);
     }
@@ -107,7 +107,7 @@ public class AddressController {
         @PathVariable(value = "size") Long size,
         @RequestBody Address address
     ) {
-        Page<Address> page = new Page<Address>().setCurrent(current).setSize(size);
+        Page<Address> page = new Page<>(current, size);
         QueryWrapper<Address> wrapper = WrapperUtil.createQueryWrapper(address);
         Page<Address> addressPage = addressService.page(page, wrapper);
         return ResponseEntity.ok(addressPage);
