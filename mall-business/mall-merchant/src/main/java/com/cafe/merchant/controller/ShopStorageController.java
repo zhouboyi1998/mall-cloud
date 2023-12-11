@@ -89,7 +89,7 @@ public class ShopStorageController {
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<ShopStorage> page = new Page<ShopStorage>().setCurrent(current).setSize(size);
+        Page<ShopStorage> page = new Page<>(current, size);
         Page<ShopStorage> shopStoragePage = shopStorageService.page(page);
         return ResponseEntity.ok(shopStoragePage);
     }
@@ -107,7 +107,7 @@ public class ShopStorageController {
         @PathVariable(value = "size") Long size,
         @RequestBody ShopStorage shopStorage
     ) {
-        Page<ShopStorage> page = new Page<ShopStorage>().setCurrent(current).setSize(size);
+        Page<ShopStorage> page = new Page<>(current, size);
         QueryWrapper<ShopStorage> wrapper = WrapperUtil.createQueryWrapper(shopStorage);
         Page<ShopStorage> shopStoragePage = shopStorageService.page(page, wrapper);
         return ResponseEntity.ok(shopStoragePage);
