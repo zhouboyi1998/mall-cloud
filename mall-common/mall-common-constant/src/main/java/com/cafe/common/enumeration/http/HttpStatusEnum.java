@@ -15,9 +15,19 @@ public enum HttpStatusEnum {
     SUCCESS(200, "Success"),
 
     /**
-     * 用户不存在
+     * 用户名不存在
      */
     USERNAME_NOT_FOUND(401, "Username Not Found"),
+
+    /**
+     * 手机号不存在
+     */
+    MOBILE_NOT_FOUND(401, "Mobile Not Found"),
+
+    /**
+     * 角色未分配
+     */
+    ROLE_UNASSIGNED(401, "Role Unassigned"),
 
     /**
      * 账号已禁用
@@ -38,11 +48,6 @@ public enum HttpStatusEnum {
      * 证书已过期
      */
     CREDENTIALS_EXPIRED(401, "Credentials Expired"),
-
-    /**
-     * 角色不存在
-     */
-    ROLE_NOT_FOUND(401, "Role Not Found"),
 
     /**
      * 失败

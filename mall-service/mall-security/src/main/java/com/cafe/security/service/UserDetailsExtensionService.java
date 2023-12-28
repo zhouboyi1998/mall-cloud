@@ -9,7 +9,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
  * @Package: com.cafe.security.service
  * @Author: zhouboyi
  * @Date: 2023/3/10 16:56
- * @Description: 用户详细信息组装服务扩展接口
+ * @Description: 用户详细信息加载扩展接口
  */
 public interface UserDetailsExtensionService extends UserDetailsService {
 
