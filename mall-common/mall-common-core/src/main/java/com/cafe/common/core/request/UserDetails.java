@@ -1,4 +1,4 @@
-package com.cafe.common.core.model;
+package com.cafe.common.core.request;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.core.model
+ * @Package: com.cafe.common.core.request
  * @Author: zhouboyi
  * @Date: 2023/8/7 16:16
  * @Description: 用户详细信息 (JWT 载荷)

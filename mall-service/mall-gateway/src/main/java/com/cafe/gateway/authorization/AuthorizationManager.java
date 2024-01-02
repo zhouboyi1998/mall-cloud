@@ -4,7 +4,7 @@ import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.constant.request.RequestConstant;
-import com.cafe.common.core.model.UserDetails;
+import com.cafe.common.core.request.UserDetails;
 import com.cafe.common.util.json.JacksonUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.nimbusds.jose.JWSObject;

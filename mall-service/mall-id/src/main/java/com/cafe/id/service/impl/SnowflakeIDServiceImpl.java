@@ -1,6 +1,6 @@
 package com.cafe.id.service.impl;
 
-import com.cafe.common.util.id.Snowflake;
+import com.cafe.common.lang.id.Snowflake;
 import com.cafe.id.service.IDService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
