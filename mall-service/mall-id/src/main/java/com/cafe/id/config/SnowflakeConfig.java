@@ -1,6 +1,6 @@
 package com.cafe.id.config;
 
-import com.cafe.common.util.id.Snowflake;
+import com.cafe.common.lang.id.Snowflake;
 import com.cafe.id.property.SnowflakeProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
