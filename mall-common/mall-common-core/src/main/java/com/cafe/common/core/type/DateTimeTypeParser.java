@@ -1,4 +1,4 @@
-package com.cafe.common.core.date;
+package com.cafe.common.core.type;
 
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.enumeration.date.DateTimePatternEnum;
@@ -22,16 +22,16 @@ import java.util.Date;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.core.date
+ * @Package: com.cafe.common.core.type
  * @Author: zhouboyi
  * @Date: 2023/8/8 15:51
- * @Description: 日期时间解析处理器
+ * @Description: 日期时间类型解析器
  */
 @RestControllerAdvice(annotations = {RestController.class})
 @Order(value = IntegerConstant.SIXTY)
-public class DateTimeParseHandler {
+public class DateTimeTypeParser {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateTimeParseHandler.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DateTimeTypeParser.class);
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
