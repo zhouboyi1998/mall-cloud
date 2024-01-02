@@ -3,10 +3,10 @@ package com.cafe.common.log.aspect;
 import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.pool.StringConstant;
+import com.cafe.common.lang.id.Snowflake;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.log.model.Log;
 import com.cafe.common.util.aop.AOPUtil;
-import com.cafe.common.util.id.Snowflake;
 import com.cafe.common.util.json.JacksonUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -66,9 +66,9 @@ public class LogPrintAspect {
      */
     @Around(value = "logPrint()")
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        // 为每一个请求生成 UUID 格式的 Request ID
+        // 为每一个请求生成雪花唯一 ID
         Long requestId = snowflake.nextId();
-        // 将请求 Request ID 存储到日志上下文 (SLF4J MDC) 中
+        // 将请求 ID 存储到日志上下文 (SLF4J MDC) 中
         MDC.put(FieldConstant.REQUEST_ID, String.valueOf(requestId));
 
         // 获取进入连接点之前的时间

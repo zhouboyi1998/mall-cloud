@@ -1,8 +1,8 @@
-package com.cafe.common.util.id;
+package com.cafe.common.lang.id;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.util.id
+ * @Package: com.cafe.common.lang.id
  * @Author: zhouboyi
  * @Date: 2022/10/28 9:59
  * @Description: 雪花算法 (生成分布式ID)
