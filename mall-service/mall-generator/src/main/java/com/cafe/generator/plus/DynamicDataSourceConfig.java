@@ -21,6 +21,7 @@ public class DynamicDataSourceConfig {
     public static DataSourceConfig database(String dbType) {
         switch (DbType.getDbType(dbType)) {
             case MYSQL:
+            case MARIADB:
                 return mysql();
             case POSTGRE_SQL:
                 return postgresql();
@@ -32,7 +33,7 @@ public class DynamicDataSourceConfig {
     public static DataSourceConfig mysql() {
         return new DataSourceConfig()
             .setDbType(DbType.MYSQL)
-            // 指定 MySQL 数据类型和 Java 数据类型的映射
+            // 指定 MySQL / MariaDB 数据类型和 Java 数据类型的映射
             .setTypeConvert(new MySqlTypeConvert() {
                 @Override
                 public IColumnType processTypeConvert(GlobalConfig config, String fieldType) {
