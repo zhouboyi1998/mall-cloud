@@ -76,7 +76,7 @@
 
 | ☸ | ⚛ |
 | :--- | :--- |
-| 数据库 | <img src="https://img.shields.io/badge/MySQL-8.0.19-royalblue"> <img src="https://img.shields.io/badge/Redis-3.2.100-crimson"> <img src="https://img.shields.io/badge/PostgreSQL-14.3-royalblue"> |
+| 数据库 | <img src="https://img.shields.io/badge/MySQL-8.0.19-royalblue"> <img src="https://img.shields.io/badge/Redis-3.2.100-crimson"> <img src="https://img.shields.io/badge/MariaDB-11.1.2-peru"> <img src="https://img.shields.io/badge/PostgreSQL-14.3-royalblue"> |
 | ORM | <img src="https://img.shields.io/badge/MyBatis Plus-3.4.1-dodgerblue"> <img src="https://img.shields.io/badge/Spring Data--brightener"> |
 | 注册中心 | <img src="https://img.shields.io/badge/Eureka--brightener"> <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> <img src="https://img.shields.io/badge/Zookeeper-3.6.3-forestgreen"> <img src="https://img.shields.io/badge/Consul-1.17.0-mediumvioletred"> |
 | 配置中心 | <img src="https://img.shields.io/badge/Apollo-2.1.0-darkseagreen"> <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> <img src="https://img.shields.io/badge/Zookeeper-3.6.3-forestgreen"> <img src="https://img.shields.io/badge/Consul-1.17.0-mediumvioletred"> |
