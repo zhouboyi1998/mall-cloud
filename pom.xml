@@ -37,6 +37,7 @@
         <apollo.version>2.1.0</apollo.version>
         <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
         <mysql-connector.version>8.0.19</mysql-connector.version>
+        <mariadb-client.version>3.3.2</mariadb-client.version>
         <postgresql-driver.version>42.2.20</postgresql-driver.version>
         <mybatis-pagehelper.version>1.3.0</mybatis-pagehelper.version>
         <mybatis-generator.version>1.4.0</mybatis-generator.version>
@@ -153,6 +154,12 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql-connector.version}</version>
+            </dependency>
+            <!-- MariaDB 驱动 -->
+            <dependency>
+                <groupId>org.mariadb.jdbc</groupId>
+                <artifactId>mariadb-java-client</artifactId>
+                <version>${mariadb-client.version}</version>
             </dependency>
             <!-- PostgreSQL 驱动 -->
             <dependency>
