@@ -1,5 +1,6 @@
 package com.cafe.generator.plus;
 
+import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -12,6 +13,7 @@ import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.cafe.common.constant.database.DatabaseConstant;
+import com.cafe.generator.plus.config.builder.DataSourceConfigBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -110,7 +112,7 @@ public class MyBatisPlusGenerator {
             .setControllerName("%sController");
 
         // 2. 数据源配置
-        DataSourceConfig dataSourceConfig = DynamicDataSourceConfig.database(DATABASE_TYPE)
+        DataSourceConfig dataSourceConfig = DataSourceConfigBuilder.build(DbType.getDbType(DATABASE_TYPE))
             // 数据库连接配置
             .setDriverName(properties.getProperty("driver"))
             .setUrl(properties.getProperty("url"))
