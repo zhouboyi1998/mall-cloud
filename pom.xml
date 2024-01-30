@@ -39,6 +39,7 @@
         <mysql-connector.version>8.0.19</mysql-connector.version>
         <mariadb-client.version>3.3.2</mariadb-client.version>
         <postgresql-driver.version>42.2.20</postgresql-driver.version>
+        <sqlserver-jdbc.version>12.4.2.jre8</sqlserver-jdbc.version>
         <mybatis-pagehelper.version>1.3.0</mybatis-pagehelper.version>
         <mybatis-generator.version>1.4.0</mybatis-generator.version>
         <mybatis-plus.version>3.4.1</mybatis-plus.version>
@@ -166,6 +167,12 @@
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>${postgresql-driver.version}</version>
+            </dependency>
+            <!-- SQL Server 驱动 -->
+            <dependency>
+                <groupId>com.microsoft.sqlserver</groupId>
+                <artifactId>mssql-jdbc</artifactId>
+                <version>${sqlserver-jdbc.version}</version>
             </dependency>
             <!-- PageHelper 分页插件 -->
             <dependency>
