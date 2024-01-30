@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.generator.config.converts.TypeConverts;
 import com.cafe.generator.plus.config.converter.MariaDBTypeConverter;
 import com.cafe.generator.plus.config.converter.MySQLTypeConverter;
 import com.cafe.generator.plus.config.converter.PostgreSQLTypeConverter;
+import com.cafe.generator.plus.config.converter.SQLServerTypeConverter;
 
 /**
  * @Project: mall-cloud
@@ -24,6 +25,8 @@ public class DataSourceConfigBuilder {
                 return new DataSourceConfig().setDbType(DbType.MARIADB).setTypeConvert(new MariaDBTypeConverter());
             case POSTGRE_SQL:
                 return new DataSourceConfig().setDbType(DbType.POSTGRE_SQL).setTypeConvert(new PostgreSQLTypeConverter());
+            case SQL_SERVER:
+                return new DataSourceConfig().setDbType(DbType.SQL_SERVER).setTypeConvert(new SQLServerTypeConverter());
             default:
                 return new DataSourceConfig().setDbType(dbType).setTypeConvert(TypeConverts.getTypeConvert(dbType));
         }
