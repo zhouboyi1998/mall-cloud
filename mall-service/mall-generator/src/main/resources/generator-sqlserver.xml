@@ -9,8 +9,8 @@
 
         <!-- 为与关键字冲突的表名、字段名添加反单引号 -->
         <property name="autoDelimitKeywords" value="true" />
-        <property name="beginningDelimiter" value="`" />
-        <property name="endingDelimiter" value="`" />
+        <property name="beginningDelimiter" value="&quot;" />
+        <property name="endingDelimiter" value="&quot;" />
 
         <!-- Java 文件编码 -->
         <property name="javaFileEncoding" value="UTF-8" />
@@ -56,8 +56,8 @@
         <!-- Mapper 接口生成路径 -->
         <javaClientGenerator targetPackage="${module-package}.${mapper-package}" targetProject="temp" type="XMLMAPPER" />
 
-        <!-- tableName="%" 生成全部表-->
-        <table tableName="%">
+        <!-- 指定数据库模式, tableName="%" 生成全部表-->
+        <table schema="${schema}" tableName="%">
             <generatedKey column="id" sqlStatement="SqlServer" identity="true" />
             <!-- 去除 Model 的前缀 -->
             <domainObjectRenamingRule searchString="^Mall" replaceString="" />
