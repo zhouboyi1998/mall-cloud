@@ -76,7 +76,7 @@
 
 | ☸ | ⚛ |
 | :--- | :--- |
-| 关系型数据库 | <img src="https://img.shields.io/badge/MySQL-8.0.19-royalblue"> <img src="https://img.shields.io/badge/MariaDB-11.1.2-peru"> <img src="https://img.shields.io/badge/PostgreSQL-14.3-royalblue"> <img src="https://img.shields.io/badge/SQL Server-2022-yellow"> |
+| 关系型数据库 | <img src="https://img.shields.io/badge/MySQL-8.0.19-royalblue"> <img src="https://img.shields.io/badge/MariaDB-11.1.2-peru"> <img src="https://img.shields.io/badge/PostgreSQL-14.3-royalblue"> <img src="https://img.shields.io/badge/SQL Server-2022-yellow"> <img src="https://img.shields.io/badge/Oracle XE-21c-crimson"> |
 | KV 数据库 | <img src="https://img.shields.io/badge/Redis-3.2.100-crimson"> |
 | 搜索引擎 | <img src="https://img.shields.io/badge/ElasticSearch-7.6.2-darkturquoise"> <img src="https://img.shields.io/badge/Solr-8.11.1-orangered"> |
 | ORM | <img src="https://img.shields.io/badge/MyBatis Plus-3.4.1-dodgerblue"> <img src="https://img.shields.io/badge/Spring Data--brightener"> |
