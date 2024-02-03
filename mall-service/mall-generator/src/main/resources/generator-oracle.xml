@@ -4,8 +4,8 @@
     "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <properties resource="generator-mariadb.properties" />
-    <context id="MariaDbContext" targetRuntime="MyBatis3" defaultModelType="flat">
+    <properties resource="generator-oracle.properties" />
+    <context id="OracleContext" targetRuntime="MyBatis3" defaultModelType="flat">
 
         <!-- 为与关键字冲突的表名、字段名添加反单引号 -->
         <property name="autoDelimitKeywords" value="true" />
@@ -56,9 +56,9 @@
         <!-- Mapper 接口生成路径 -->
         <javaClientGenerator targetPackage="${module-package}.${mapper-package}" targetProject="temp" type="XMLMAPPER" />
 
-        <!-- 生成所有以 mall_ 开头的表 (目的是排除 MariaDB 数据库中的系统表, 只生成用户创建的表) -->
-        <table tableName="mall_%">
-            <generatedKey column="id" sqlStatement="MariaDb" identity="true" />
+        <!-- 生成所有以 MALL_ 开头的表 (目的是排除 Oracle 数据库中的系统表, 只生成用户创建的表) -->
+        <table tableName="MALL_%">
+            <generatedKey column="id" sqlStatement="Oracle" identity="true" />
             <!-- 去除 Model 的前缀 -->
             <domainObjectRenamingRule searchString="^Mall" replaceString="" />
         </table>
