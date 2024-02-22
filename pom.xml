@@ -21,6 +21,8 @@
         <module>mall-business</module>
         <module>mall-center</module>
         <module>mall-common</module>
+        <module>mall-configuration</module>
+        <module>mall-discovery</module>
         <module>mall-middleware</module>
         <module>mall-service</module>
     </modules>
@@ -369,20 +371,54 @@
                 <version>${xxl-job.version}</version>
             </dependency>
 
+            <!-- 配置中心公共包 -->
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-configuration-apollo</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-configuration-consul</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-configuration-nacos</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-configuration-zookeeper</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+
+            <!-- 注册中心公共包 -->
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-discovery-consul</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-discovery-eureka</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-discovery-nacos</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-discovery-zookeeper</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+
             <!-- 公共包 -->
             <dependency>
                 <groupId>com.cafe</groupId>
-                <artifactId>mall-common-apollo</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
                 <artifactId>mall-common-constant</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
-                <artifactId>mall-common-consul</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
@@ -417,11 +453,6 @@
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
-                <artifactId>mall-common-nacos</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
                 <artifactId>mall-common-rabbitmq</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
@@ -448,11 +479,6 @@
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-common-xxljob</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
-                <artifactId>mall-common-zookeeper</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
 

@@ -78,7 +78,11 @@
 
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-nacos</artifactId>
+            <artifactId>mall-configuration-nacos</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-discovery-nacos</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
