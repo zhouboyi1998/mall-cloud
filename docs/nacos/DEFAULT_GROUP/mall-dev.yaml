@@ -17,3 +17,14 @@ spring:
   zipkin:
     enabled: true
     base-url: http://127.0.0.1:9411
+
+# Seata 配置
+seata:
+  # 客户端事务组名称
+  tx-service-group: default_tx_group
+  # 客户端事务组与服务端集群的映射关系
+  service:
+    vgroup-mapping:
+      default_tx_group: default
+    grouplist:
+      default: 127.0.0.1:8091
