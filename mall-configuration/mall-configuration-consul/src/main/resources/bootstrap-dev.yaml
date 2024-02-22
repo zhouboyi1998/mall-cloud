@@ -1,0 +1,19 @@
+spring:
+  # 微服务配置
+  cloud:
+    # Consul 配置
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      # Consul 配置中心
+      config:
+        # 项目配置的根文件夹
+        prefix: config
+        # 当前服务配置的文件夹名称
+        default-context: ${spring.application.name}
+        # 配置文件夹名称和运行环境之间的分隔符
+        profile-separator: ","
+        # 配置文件名称
+        data-key: data
+        # 配置文件格式
+        format: yaml
