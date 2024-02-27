@@ -17,6 +17,7 @@
 
     <modules>
         <module>mall-configuration-apollo</module>
+        <module>mall-configuration-config</module>
         <module>mall-configuration-consul</module>
         <module>mall-configuration-nacos</module>
         <module>mall-configuration-zookeeper</module>

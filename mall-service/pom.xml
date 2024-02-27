@@ -17,6 +17,7 @@
 
     <modules>
         <module>mall-admin</module>
+        <module>mall-config</module>
         <module>mall-eureka</module>
         <module>mall-gateway</module>
         <module>mall-generator</module>
