@@ -1,0 +1,6 @@
+spring:
+  cloud:
+    config:
+      uri: http://host.docker.internal:8888
+      name: ${spring.application.name}
+      profile: ${spring.profiles.active}
