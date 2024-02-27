@@ -50,6 +50,7 @@
 
 |-- mall-configuration (配置中心公共包)
     |-- mall-configuration-apollo (Apollo 配置中心公共包)
+    |-- mall-configuration-config (Spring Cloud Config 配置中心公共包)
     |-- mall-configuration-consul (Consul 配置中心公共包)
     |-- mall-configuration-nacos (Nacos 配置中心公共包)
     |-- mall-configuration-zookeeper (Zookeeper 配置中心公共包)
@@ -72,6 +73,7 @@
 
 |-- mall-service (基础服务模块)
     |-- mall-admin (Spring Boot Admin 监控模块)
+    |-- mall-config (Spring Cloud Config 配置中心服务端)
     |-- mall-eureka (Eureka 注册中心服务端)
     |-- mall-gateway (Spring Cloud Gateway 网关模块)
     |-- mall-generator (代码生成器)
@@ -88,8 +90,8 @@
 | KV 数据库 | <img src="https://img.shields.io/badge/Redis-3.2.100-crimson"> |
 | 搜索引擎 | <img src="https://img.shields.io/badge/ElasticSearch-7.6.2-darkturquoise"> <img src="https://img.shields.io/badge/Solr-8.11.1-orangered"> |
 | ORM | <img src="https://img.shields.io/badge/MyBatis Plus-3.4.1-dodgerblue"> <img src="https://img.shields.io/badge/Spring Data--brightener"> |
-| 注册中心 | <img src="https://img.shields.io/badge/Eureka--brightener"> <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> <img src="https://img.shields.io/badge/Zookeeper-3.6.3-forestgreen"> <img src="https://img.shields.io/badge/Consul-1.17.0-mediumvioletred"> |
-| 配置中心 | <img src="https://img.shields.io/badge/Apollo-2.1.0-darkseagreen"> <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> <img src="https://img.shields.io/badge/Zookeeper-3.6.3-forestgreen"> <img src="https://img.shields.io/badge/Consul-1.17.0-mediumvioletred"> |
+| 注册中心 | <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> <img src="https://img.shields.io/badge/Zookeeper-3.6.3-forestgreen"> <img src="https://img.shields.io/badge/Consul-1.17.0-mediumvioletred"> <img src="https://img.shields.io/badge/Eureka--brightener"> |
+| 配置中心 | <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> <img src="https://img.shields.io/badge/Zookeeper-3.6.3-forestgreen"> <img src="https://img.shields.io/badge/Consul-1.17.0-mediumvioletred"> <img src="https://img.shields.io/badge/Apollo-2.1.0-darkseagreen"> <img src="https://img.shields.io/badge/Spring Cloud Config--brightener"> |
 | 远程调用 | <img src="https://img.shields.io/badge/OpenFeign--brightener"> |
 | 网关 | <img src="https://img.shields.io/badge/Spring Cloud Gateway--brightener"> |
 | 安全 | <img src="https://img.shields.io/badge/Spring Security--brightener"> <img src="https://img.shields.io/badge/Spring Cloud Oauth2--brightener"> <img src="https://img.shields.io/badge/Nimbus JOSE JWT-8.16-deepskyblue"> |
