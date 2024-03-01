@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  * @Package: com.cafe.common.constant.pool
  * @Author: zhouboyi
  * @Date: 2023/10/27 9:59
- * @Description: BigDecimal 数字常量
+ * @Description: BigDecimal 定点数常量
  */
 public class BigDecimalConstant {
 
