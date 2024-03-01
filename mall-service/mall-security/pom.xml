@@ -37,10 +37,15 @@
             <groupId>com.github.whvcse</groupId>
             <artifactId>easy-captcha</artifactId>
         </dependency>
-        <!-- Hutool 图片验证码 -->
+        <!-- Hutool Captcha 图片验证码 -->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-captcha</artifactId>
+        </dependency>
+        <!-- Cage Captcha 图片验证码 -->
+        <dependency>
+            <groupId>com.github.cage</groupId>
+            <artifactId>cage</artifactId>
         </dependency>
 
         <dependency>

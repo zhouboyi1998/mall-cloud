@@ -1,4 +1,4 @@
-package com.cafe.security.config;
+package com.cafe.security.config.captcha;
 
 import com.cafe.common.constant.captcha.CaptchaConstant;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
@@ -35,8 +35,8 @@ public class KaptchaConfig {
         // 图片实现类
         properties.setProperty("kaptcha.producer.impl", "com.google.code.kaptcha.impl.DefaultKaptcha");
 
-        // 文本集合
-        properties.setProperty("kaptcha.textproducer.char.string", "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+        // 文本字符集
+        properties.setProperty("kaptcha.textproducer.char.string", CaptchaConstant.CHARACTER_SET);
         // 文本字符长度
         properties.setProperty("kaptcha.textproducer.char.length", CaptchaConstant.LENGTH.toString());
         // 文本字符间距

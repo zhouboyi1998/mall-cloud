@@ -5,7 +5,7 @@ package com.cafe.common.constant.pool;
  * @Package: com.cafe.common.constant.pool
  * @Author: zhouboyi
  * @Date: 2023/7/5 10:05
- * @Description: Long 数字常量
+ * @Description: Long 长整数常量
  */
 public class LongConstant {
 
