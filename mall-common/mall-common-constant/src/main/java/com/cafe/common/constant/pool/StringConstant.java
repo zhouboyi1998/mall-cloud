@@ -5,7 +5,7 @@ package com.cafe.common.constant.pool;
  * @Package: com.cafe.common.constant.pool
  * @Author: zhouboyi
  * @Date: 2022/5/6 14:42
- * @Description: 字符串常量
+ * @Description: String 字符串常量
  */
 public class StringConstant {
 

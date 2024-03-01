@@ -23,4 +23,9 @@ public class CaptchaConstant {
      * 文本长度
      */
     public static final Integer LENGTH = 4;
+
+    /**
+     * 文本字符集
+     */
+    public static final String CHARACTER_SET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 }
