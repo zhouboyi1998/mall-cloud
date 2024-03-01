@@ -5,7 +5,7 @@ package com.cafe.common.constant.pool;
  * @Package: com.cafe.common.constant.pool
  * @Author: zhouboyi
  * @Date: 2022/5/6 14:42
- * @Description: Integer 数字常量
+ * @Description: Integer 整数常量
  */
 public class IntegerConstant {
 
