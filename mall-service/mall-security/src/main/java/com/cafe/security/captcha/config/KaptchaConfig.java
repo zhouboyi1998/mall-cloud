@@ -1,4 +1,4 @@
-package com.cafe.security.config.captcha;
+package com.cafe.security.captcha.config;
 
 import com.cafe.common.constant.captcha.CaptchaConstant;
 import com.google.code.kaptcha.impl.DefaultKaptcha;
@@ -10,7 +10,7 @@ import java.util.Properties;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.security.config
+ * @Package: com.cafe.security.captcha.config
  * @Author: zhouboyi
  * @Date: 2023/2/22 17:59
  * @Description: Kaptcha 配置类

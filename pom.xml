@@ -61,11 +61,12 @@
         <tomcat-embed.version>9.0.46</tomcat-embed.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <guava.version>30.0-jre</guava.version>
+        <hutool.version>5.4.0</hutool.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <kaptcha-starter.version>1.1.0</kaptcha-starter.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
-        <hutool.version>5.4.0</hutool.version>
         <cage-captcha.version>1.0</cage-captcha.version>
+        <simple-captcha.version>1.2.2</simple-captcha.version>
         <prometheus.version>1.6.12</prometheus.version>
         <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
         <sky-walking.version>9.0.0</sky-walking.version>
@@ -341,6 +342,12 @@
                 <groupId>com.github.cage</groupId>
                 <artifactId>cage</artifactId>
                 <version>${cage-captcha.version}</version>
+            </dependency>
+            <!-- Simple Captcha 图片验证码 -->
+            <dependency>
+                <groupId>cn.apiclub.tool</groupId>
+                <artifactId>simplecaptcha</artifactId>
+                <version>${simple-captcha.version}</version>
             </dependency>
             <!-- Prometheus 监控 -->
             <dependency>
