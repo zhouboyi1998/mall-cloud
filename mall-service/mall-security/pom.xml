@@ -47,6 +47,11 @@
             <groupId>com.github.cage</groupId>
             <artifactId>cage</artifactId>
         </dependency>
+        <!-- Simple Captcha 图片验证码 -->
+        <dependency>
+            <groupId>cn.apiclub.tool</groupId>
+            <artifactId>simplecaptcha</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.cafe</groupId>
