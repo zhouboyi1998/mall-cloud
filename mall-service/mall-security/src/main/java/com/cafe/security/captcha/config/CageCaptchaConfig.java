@@ -1,4 +1,4 @@
-package com.cafe.security.config.captcha;
+package com.cafe.security.captcha.config;
 
 import com.cafe.common.constant.captcha.CaptchaConstant;
 import com.cafe.common.constant.pool.FloatConstant;
@@ -13,7 +13,7 @@ import java.awt.Color;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.security.config.captcha
+ * @Package: com.cafe.security.captcha.config
  * @Author: zhouboyi
  * @Date: 2024/3/1 17:08
  * @Description: Cage Captcha 配置类
