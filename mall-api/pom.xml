@@ -16,6 +16,7 @@
     <description>远程调用模块</description>
 
     <modules>
+        <module>mall-clickhouse-api</module>
         <module>mall-elasticsearch-api</module>
         <module>mall-fastdfs-api</module>
         <module>mall-goods-api</module>
