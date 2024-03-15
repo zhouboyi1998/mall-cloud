@@ -1,6 +1,5 @@
 package com.cafe.generator.plus;
 
-import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -112,12 +111,13 @@ public class MyBatisPlusGenerator {
             .setControllerName("%sController");
 
         // 2. 数据源配置
-        DataSourceConfig dataSourceConfig = DataSourceConfigBuilder.build(DbType.getDbType(DATABASE_TYPE))
+        DataSourceConfig dataSourceConfig = DataSourceConfigBuilder.build(DATABASE_TYPE, properties)
             // 数据库连接配置
             .setDriverName(properties.getProperty("driver"))
             .setUrl(properties.getProperty("url"))
             .setUsername(properties.getProperty("username"))
-            .setPassword(properties.getProperty("password"));
+            .setPassword(properties.getProperty("password"))
+            .setSchemaName(properties.getProperty("schema"));
 
         // 3. 生成路径配置
         PackageConfig packageConfig = new PackageConfig()
