@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    driver-class-name: com.clickhouse.jdbc.ClickHouseDriver
+    url: jdbc:clickhouse://host.docker.internal:8123/mall_goods
+    username: default
+    password:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      validation-query: SELECT 1

@@ -68,6 +68,7 @@
 |-- mall-middleware (中间件模块)
     |-- mall-binlog (MySQL Binlog Connector 数据库监听器)
     |-- mall-canal (Canal 数据库监听器)
+    |-- mall-clickhouse (ClickHouse 列式数据库)
     |-- mall-debezium (Debezium 数据库监听器)
     |-- mall-elasticsearch (ElasticSearch 搜索引擎)
     |-- mall-fastdfs (FastDFS 分布式文件存储)

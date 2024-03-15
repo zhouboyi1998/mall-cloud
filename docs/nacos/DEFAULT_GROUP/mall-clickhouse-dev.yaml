@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    driver-class-name: com.clickhouse.jdbc.ClickHouseDriver
+    url: jdbc:clickhouse://127.0.0.1:8123/mall_goods
+    username: default
+    password:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      validation-query: SELECT 1
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  configuration:
+    # dev 环境打印 SQL 到控制台
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
