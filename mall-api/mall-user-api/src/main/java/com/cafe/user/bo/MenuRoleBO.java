@@ -19,7 +19,7 @@ import java.util.ArrayList;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "MenuRoleBO", description = "菜单-角色关联关系业务对象")
+@ApiModel(value = "MenuRoleBO", description = "菜单-角色关联关系业务模型")
 public class MenuRoleBO implements Serializable {
 
     private static final long serialVersionUID = 1L;
