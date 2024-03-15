@@ -4,7 +4,7 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cafe.clickhouse.model.Goods">
-        <id column="id" property="id" />
+        <result column="id" property="id" />
         <result column="sku_name" property="skuName" />
         <result column="spu_id" property="spuId" />
         <result column="original_price" property="originalPrice" />

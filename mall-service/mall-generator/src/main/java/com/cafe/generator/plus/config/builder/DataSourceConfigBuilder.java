@@ -3,11 +3,16 @@ package com.cafe.generator.plus.config.builder;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.converts.TypeConverts;
+import com.cafe.common.enumeration.database.DatabaseTypeEnum;
+import com.cafe.generator.plus.config.converter.ClickHouseTypeConverter;
 import com.cafe.generator.plus.config.converter.MariaDBTypeConverter;
 import com.cafe.generator.plus.config.converter.MySQLTypeConverter;
 import com.cafe.generator.plus.config.converter.OracleTypeConverter;
 import com.cafe.generator.plus.config.converter.PostgreSQLTypeConverter;
 import com.cafe.generator.plus.config.converter.SQLServerTypeConverter;
+import com.cafe.generator.plus.config.query.ClickHouseQuery;
+
+import java.util.Properties;
 
 /**
  * @Project: mall-cloud
@@ -18,20 +23,26 @@ import com.cafe.generator.plus.config.converter.SQLServerTypeConverter;
  */
 public class DataSourceConfigBuilder {
 
-    public static DataSourceConfig build(DbType dbType) {
+    public static DataSourceConfig build(String databaseType, Properties properties) {
+        DbType dbType = DbType.getDbType(databaseType);
         switch (dbType) {
             case MYSQL:
-                return new DataSourceConfig().setDbType(DbType.MYSQL).setTypeConvert(new MySQLTypeConverter());
+                return new DataSourceConfig().setDbType(dbType).setTypeConvert(new MySQLTypeConverter());
             case MARIADB:
-                return new DataSourceConfig().setDbType(DbType.MARIADB).setTypeConvert(new MariaDBTypeConverter());
+                return new DataSourceConfig().setDbType(dbType).setTypeConvert(new MariaDBTypeConverter());
             case POSTGRE_SQL:
-                return new DataSourceConfig().setDbType(DbType.POSTGRE_SQL).setTypeConvert(new PostgreSQLTypeConverter());
+                return new DataSourceConfig().setDbType(dbType).setTypeConvert(new PostgreSQLTypeConverter());
             case SQL_SERVER:
-                return new DataSourceConfig().setDbType(DbType.SQL_SERVER).setTypeConvert(new SQLServerTypeConverter());
-            case ORACLE:
-                return new DataSourceConfig().setDbType(DbType.ORACLE).setTypeConvert(new OracleTypeConverter());
+                return new DataSourceConfig().setDbType(dbType).setTypeConvert(new SQLServerTypeConverter());
+            case ORACLE_12C:
+                return new DataSourceConfig().setDbType(dbType).setTypeConvert(new OracleTypeConverter());
             default:
-                return new DataSourceConfig().setDbType(dbType).setTypeConvert(TypeConverts.getTypeConvert(dbType));
+                switch (DatabaseTypeEnum.getDbType(databaseType)) {
+                    case CLICK_HOUSE:
+                        return new DataSourceConfig().setDbQuery(new ClickHouseQuery(properties)).setTypeConvert(new ClickHouseTypeConverter());
+                    default:
+                        return new DataSourceConfig().setDbType(dbType).setTypeConvert(TypeConverts.getTypeConvert(dbType));
+                }
         }
     }
 }
