@@ -1,0 +1,8 @@
+server:
+  port: 18096
+
+spring:
+  application:
+    name: mall-clickhouse
+  profiles:
+    active: dev
