@@ -9,10 +9,10 @@ import org.springframework.web.multipart.MultipartFile;
  * @Date: 2023/10/18 11:33
  * @Description:
  */
-public interface QiniuService {
+public interface FileService {
 
     /**
-     * 文件上传
+     * 上传文件
      *
      * @param bucket 存储桶
      * @param file   文件
@@ -22,7 +22,7 @@ public interface QiniuService {
     String upload(String bucket, MultipartFile file) throws Exception;
 
     /**
-     * 文件删除
+     * 删除文件
      *
      * @param bucket   存储桶
      * @param filename 文件名

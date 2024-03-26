@@ -1,7 +1,7 @@
 package com.cafe.qiniu.controller;
 
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.qiniu.service.QiniuService;
+import com.cafe.qiniu.service.FileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -25,18 +25,18 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Api(value = "Qiniu 文件接口")
 @RestController
-@RequestMapping(value = "/qiniu")
-public class QiniuController {
+@RequestMapping(value = "/file")
+public class FileController {
 
-    private final QiniuService qiniuService;
+    private final FileService fileService;
 
     @Autowired
-    public QiniuController(QiniuService qiniuService) {
-        this.qiniuService = qiniuService;
+    public FileController(FileService fileService) {
+        this.fileService = fileService;
     }
 
-    @LogPrint(value = "文件上传")
-    @ApiOperation(value = "文件上传")
+    @LogPrint(value = "上传文件")
+    @ApiOperation(value = "上传文件")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
         @ApiImplicitParam(value = "文件", name = "file", dataType = "MultipartFile", paramType = "form", required = true)
@@ -46,12 +46,12 @@ public class QiniuController {
         @PathVariable(value = "bucket") String bucket,
         @RequestParam(value = "file") MultipartFile file
     ) throws Exception {
-        String filepath = qiniuService.upload(bucket, file);
+        String filepath = fileService.upload(bucket, file);
         return ResponseEntity.ok(filepath);
     }
 
-    @LogPrint(value = "文件删除")
-    @ApiOperation(value = "文件删除")
+    @LogPrint(value = "删除文件")
+    @ApiOperation(value = "删除文件")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
         @ApiImplicitParam(value = "文件名", name = "filename", dataType = "String", paramType = "path", required = true)
@@ -61,7 +61,7 @@ public class QiniuController {
         @PathVariable(value = "bucket") String bucket,
         @PathVariable(value = "filename") String filename
     ) throws Exception {
-        qiniuService.delete(bucket, filename);
+        fileService.delete(bucket, filename);
         return ResponseEntity.ok().build();
     }
 }

@@ -3,7 +3,7 @@ package com.cafe.minio.service.impl;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.id.feign.IDFeign;
 import com.cafe.minio.property.MinioProperties;
-import com.cafe.minio.service.MinioService;
+import com.cafe.minio.service.FileService;
 import io.minio.GetObjectArgs;
 import io.minio.GetObjectResponse;
 import io.minio.GetPresignedObjectUrlArgs;
@@ -27,7 +27,7 @@ import java.util.Objects;
  * @Description:
  */
 @Service
-public class MinioServiceImpl implements MinioService {
+public class FileServiceImpl implements FileService {
 
     private final MinioProperties minioProperties;
 
@@ -36,11 +36,7 @@ public class MinioServiceImpl implements MinioService {
     private final IDFeign idFeign;
 
     @Autowired
-    public MinioServiceImpl(
-        MinioProperties minioProperties,
-        MinioClient minioClient,
-        IDFeign idFeign
-    ) {
+    public FileServiceImpl(MinioProperties minioProperties, MinioClient minioClient, IDFeign idFeign) {
         this.minioProperties = minioProperties;
         this.minioClient = minioClient;
         this.idFeign = idFeign;
@@ -57,9 +53,8 @@ public class MinioServiceImpl implements MinioService {
             filename.append(originalFilename.substring(originalFilename.indexOf(StringConstant.POINT)));
         }
 
-        // 构造文件上传参数
-        PutObjectArgs args = PutObjectArgs
-            .builder()
+        // 构造参数
+        PutObjectArgs args = PutObjectArgs.builder()
             .bucket(bucket)
             .object(filename.toString())
             .contentType(file.getContentType())
@@ -73,27 +68,27 @@ public class MinioServiceImpl implements MinioService {
 
     @Override
     public void download(String bucket, String filename, HttpServletResponse httpResponse) throws Exception {
-        // 构造文件下载参数
-        GetObjectArgs args = GetObjectArgs
-            .builder()
+        // 构造参数
+        GetObjectArgs args = GetObjectArgs.builder()
             .bucket(bucket)
             .object(filename)
             .build();
+        // 获取文件
         GetObjectResponse minioResponse = minioClient.getObject(args);
 
-        // 用于临时缓冲的 byte 数组
+        // 用于临时缓冲的字节数组
         byte[] buffer = new byte[1024];
         // 用于临时存储读取的字节长度
         int length;
 
-        // 从 MinIO 服务器读取文件字节流
+        // 读取文件到临时缓冲的字节数组中, 并写入到字节输出流
         FastByteArrayOutputStream fastByteArrayOutputStream = new FastByteArrayOutputStream();
         while ((length = minioResponse.read(buffer)) != -1) {
             fastByteArrayOutputStream.write(buffer, 0, length);
         }
         fastByteArrayOutputStream.flush();
 
-        // 转换成完整的文件字节流
+        // 输出完整的文件字节数据到一个字节数组中
         byte[] bytes = fastByteArrayOutputStream.toByteArray();
 
         // 配置 HTTP Response
@@ -108,29 +103,15 @@ public class MinioServiceImpl implements MinioService {
     }
 
     @Override
-    public String url(String bucket, String filename) throws Exception {
-        // 构造获取文件外链参数
-        GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs
-            .builder()
-            .bucket(bucket)
-            .object(filename)
-            .method(Method.GET)
-            .build();
-        // 获取文件外链 URL
-        return minioClient.getPresignedObjectUrl(args);
-    }
-
-    @Override
     public String url(String bucket, String filename, Integer expiry) throws Exception {
-        // 构造获取文件外链参数
-        GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs
-            .builder()
+        // 构造参数
+        GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs.builder()
             .bucket(bucket)
             .object(filename)
             .method(Method.GET)
             .expiry(expiry)
             .build();
-        // 获取文件外链 URL
+        // 获取文件外链
         return minioClient.getPresignedObjectUrl(args);
     }
 }

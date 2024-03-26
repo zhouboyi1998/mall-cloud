@@ -20,11 +20,11 @@ import javax.servlet.http.HttpServletResponse;
  * @Description:
  */
 @FeignClient(value = "mall-minio", configuration = {FeignRequestInterceptor.class})
-@RequestMapping(value = "/minio")
-public interface MinioFeign {
+@RequestMapping(value = "/file")
+public interface FileFeign {
 
     /**
-     * 文件上传
+     * 上传文件
      *
      * @param bucket 存储桶
      * @param file   文件
@@ -37,7 +37,7 @@ public interface MinioFeign {
     );
 
     /**
-     * 文件下载
+     * 下载文件
      *
      * @param bucket       存储桶
      * @param fileName     文件名
@@ -52,7 +52,7 @@ public interface MinioFeign {
     );
 
     /**
-     * 获取文件外链 (永久)
+     * 获取文件外链 (不指定过期时间, 默认过期时间: 7 天, 最大过期时间: 7天)
      *
      * @param bucket   存储桶
      * @param fileName 文件名
@@ -65,7 +65,7 @@ public interface MinioFeign {
     );
 
     /**
-     * 获取文件外链 (限时)
+     * 获取文件外链 (指定过期时间)
      *
      * @param bucket   存储桶
      * @param fileName 文件名
