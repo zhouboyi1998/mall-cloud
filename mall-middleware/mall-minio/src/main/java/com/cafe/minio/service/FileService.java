@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletResponse;
  * @Date: 2022/6/9 10:53
  * @Description:
  */
-public interface MinioService {
+public interface FileService {
 
     /**
-     * 文件上传
+     * 上传文件
      *
      * @param bucket 存储桶
      * @param file   文件
@@ -24,7 +24,7 @@ public interface MinioService {
     String upload(String bucket, MultipartFile file) throws Exception;
 
     /**
-     * 文件下载
+     * 下载文件
      *
      * @param bucket       存储桶
      * @param filename     文件名
@@ -35,17 +35,7 @@ public interface MinioService {
     void download(String bucket, String filename, HttpServletResponse httpResponse) throws Exception;
 
     /**
-     * 获取文件外链 (永久)
-     *
-     * @param bucket   存储桶
-     * @param filename 文件名
-     * @return
-     * @throws Exception
-     */
-    String url(String bucket, String filename) throws Exception;
-
-    /**
-     * 获取文件外链 (限时)
+     * 获取文件外链
      *
      * @param bucket   存储桶
      * @param filename 文件名
