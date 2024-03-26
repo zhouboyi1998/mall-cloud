@@ -18,11 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
  * @Description:
  */
 @FeignClient(value = "mall-qiniu", configuration = {FeignRequestInterceptor.class})
-@RequestMapping(value = "/qiniu")
-public interface QiniuFeign {
+@RequestMapping(value = "/file")
+public interface FileFeign {
 
     /**
-     * 文件上传
+     * 上传文件
      *
      * @param bucket 存储桶
      * @param file   文件
@@ -35,7 +35,7 @@ public interface QiniuFeign {
     );
 
     /**
-     * 文件删除
+     * 删除文件
      *
      * @param bucket   存储桶
      * @param filename 文件名
