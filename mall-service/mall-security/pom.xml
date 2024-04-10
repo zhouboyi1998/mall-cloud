@@ -52,6 +52,11 @@
             <groupId>cn.apiclub.tool</groupId>
             <artifactId>simplecaptcha</artifactId>
         </dependency>
+        <!-- Mica Captcha 图片验证码 -->
+        <dependency>
+            <groupId>net.dreamlu</groupId>
+            <artifactId>mica-captcha</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>com.cafe</groupId>
