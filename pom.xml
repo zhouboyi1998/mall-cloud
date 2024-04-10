@@ -70,6 +70,7 @@
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <cage-captcha.version>1.0</cage-captcha.version>
         <simple-captcha.version>1.2.2</simple-captcha.version>
+        <mica-captcha.version>2.1.1-GA</mica-captcha.version>
         <prometheus.version>1.6.12</prometheus.version>
         <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
         <sky-walking.version>9.0.0</sky-walking.version>
@@ -369,6 +370,12 @@
                 <groupId>cn.apiclub.tool</groupId>
                 <artifactId>simplecaptcha</artifactId>
                 <version>${simple-captcha.version}</version>
+            </dependency>
+            <!-- Mica Captcha 图片验证码 -->
+            <dependency>
+                <groupId>net.dreamlu</groupId>
+                <artifactId>mica-captcha</artifactId>
+                <version>${mica-captcha.version}</version>
             </dependency>
             <!-- Prometheus 监控 -->
             <dependency>
