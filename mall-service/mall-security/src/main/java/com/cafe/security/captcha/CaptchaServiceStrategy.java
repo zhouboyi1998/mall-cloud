@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -32,7 +33,7 @@ public class CaptchaServiceStrategy {
     @PostConstruct
     public void initCaptchaServiceMap() {
         captchaServiceMap = captchaServiceList.stream()
-            .collect(Collectors.toMap(captchaService -> StringUtil.lowerCaseFirstLetter(captchaService.getClass().getSimpleName()), captchaService -> captchaService));
+            .collect(Collectors.toMap(captchaService -> StringUtil.lowerCaseFirstLetter(captchaService.getClass().getSimpleName()), Function.identity()));
     }
 
     public CaptchaService getCaptchaService(String name) {
