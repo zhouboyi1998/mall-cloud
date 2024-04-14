@@ -28,12 +28,16 @@
     </modules>
 
     <properties>
-        <!-- 项目版本管理 -->
+        <!-- 项目版本号 -->
         <mall-cloud.version>1.0-SNAPSHOT</mall-cloud.version>
-        <!-- 依赖版本管理 -->
+
+        <!-- 基础框架版本管理 -->
+        <java.version>1.8</java.version>
         <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
         <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
         <spring-cloud-alibaba.version>2.2.9.RELEASE</spring-cloud-alibaba.version>
+
+        <!-- 依赖组件版本管理 -->
         <!-- Nacos 2.x 需要依赖低版本的 Reflections, 覆盖 Debezium 提供的高版本 -->
         <reflections.version>0.9.11</reflections.version>
         <apollo.version>2.1.0</apollo.version>
@@ -141,6 +145,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <!-- Reflections 反射框架 -->
             <dependency>
                 <groupId>org.reflections</groupId>
@@ -605,6 +610,21 @@
 
     <build>
         <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                </configuration>
+            </plugin>
+        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>
