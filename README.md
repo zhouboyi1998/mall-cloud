@@ -35,6 +35,7 @@
     |-- mall-system (系统模块)
 
 |-- mall-center (中台模块)
+    |-- mall-apiconsumer (开放接口消费中心)
     |-- mall-ordercenter (订单中心)
 
 |-- mall-common (公共包)
