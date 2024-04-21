@@ -3,6 +3,7 @@ package com.cafe.common.util.json;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -57,5 +58,13 @@ public class JacksonUtil {
 
     public static <T> T convertValue(Object fromValue, TypeReference<T> toValueTypeRef) {
         return OBJECT_MAPPER.convertValue(fromValue, toValueTypeRef);
+    }
+
+    public static ObjectNode createObjectNode(String... keysAndValues) {
+        ObjectNode objectNode = OBJECT_MAPPER.createObjectNode();
+        for (int i = 0; i < keysAndValues.length - 1; i += 2) {
+            objectNode.put(keysAndValues[i], keysAndValues[i + 1]);
+        }
+        return objectNode;
     }
 }

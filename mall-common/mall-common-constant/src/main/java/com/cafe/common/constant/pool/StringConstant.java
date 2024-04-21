@@ -128,4 +128,9 @@ public class StringConstant {
      * 时间区间
      */
     public static final String PERIOD = "period";
+
+    /**
+     * 消息
+     */
+    public static final String MESSAGE = "message";
 }
