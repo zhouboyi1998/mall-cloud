@@ -1,0 +1,8 @@
+server:
+  port: 18062
+
+spring:
+  application:
+    name: mall-apiconsumer
+  profiles:
+    active: dev
