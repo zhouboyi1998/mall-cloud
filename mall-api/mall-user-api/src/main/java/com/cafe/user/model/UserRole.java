@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "UserRole", description = "用户-角色关联关系实体模型")
-@TableName("mall_user_role")
+@TableName(value = "mall_user_role")
 public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 1L;

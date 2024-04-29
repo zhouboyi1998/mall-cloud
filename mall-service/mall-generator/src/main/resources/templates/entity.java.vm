@@ -39,7 +39,7 @@ import lombok.experimental.Accessors;
 @ApiModel(value = "${entity}", description = "$!{table.comment}实体模型")
 #end
 #if(${table.convert})
-@TableName("${table.name}")
+@TableName(value = "${table.name}")
 #end
 #if(${superEntityClass})
 public class ${entity} extends ${superEntityClass}#if(${activeRecord})<${entity}>#end {

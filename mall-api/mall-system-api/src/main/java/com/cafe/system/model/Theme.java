@@ -28,7 +28,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "Theme", description = "主题实体模型")
-@TableName("mall_theme")
+@TableName(value = "mall_theme")
 public class Theme implements Serializable {
 
     private static final long serialVersionUID = 1L;
