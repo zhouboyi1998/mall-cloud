@@ -27,7 +27,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "UserPlatform", description = "用户-平台关联关系实体模型")
-@TableName("mall_user_platform")
+@TableName(value = "mall_user_platform")
 public class UserPlatform implements Serializable {
 
     private static final long serialVersionUID = 1L;

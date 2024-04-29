@@ -28,7 +28,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "Brand", description = "品牌实体模型")
-@TableName("mall_brand")
+@TableName(value = "mall_brand")
 public class Brand implements Serializable {
 
     private static final long serialVersionUID = 1L;
