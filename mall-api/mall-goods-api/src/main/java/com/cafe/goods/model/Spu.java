@@ -28,7 +28,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "Spu", description = "标准化产品单元实体模型")
-@TableName("mall_spu")
+@TableName(value = "mall_spu")
 public class Spu implements Serializable {
 
     private static final long serialVersionUID = 1L;

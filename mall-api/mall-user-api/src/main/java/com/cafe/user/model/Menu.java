@@ -28,7 +28,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "Menu", description = "菜单实体模型")
-@TableName("mall_menu")
+@TableName(value = "mall_menu")
 public class Menu implements Serializable {
 
     private static final long serialVersionUID = 1L;

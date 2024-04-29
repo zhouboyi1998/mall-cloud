@@ -29,7 +29,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "Sku", description = "库存量单位实体模型")
-@TableName("mall_sku")
+@TableName(value = "mall_sku")
 public class Sku implements Serializable {
 
     private static final long serialVersionUID = 1L;

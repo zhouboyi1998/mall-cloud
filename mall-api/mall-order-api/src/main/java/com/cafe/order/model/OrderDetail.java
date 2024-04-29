@@ -29,7 +29,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value = "OrderDetail", description = "订单明细表实体模型")
-@TableName("mall_order_detail")
+@TableName(value = "mall_order_detail")
 public class OrderDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
