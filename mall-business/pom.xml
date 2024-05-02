@@ -20,6 +20,7 @@
         <module>mall-member</module>
         <module>mall-merchant</module>
         <module>mall-order</module>
+        <module>mall-storage</module>
         <module>mall-system</module>
     </modules>
 
