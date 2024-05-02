@@ -1,9 +1,10 @@
-package com.cafe.merchant.model;
+package com.cafe.storage.model;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
@@ -18,35 +19,41 @@ import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.merchant.model
+ * @Package: com.cafe.storage.model
  * @Author: zhouboyi
  * @Date: 2022-12-29
- * @Description: 商家-店铺关联关系实体模型
+ * @Description: 库存实体模型
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "MerchantShop", description = "商家-店铺关联关系实体模型")
-@TableName(value = "mall_merchant_shop")
-public class MerchantShop implements Serializable {
+@ApiModel(value = "Stock", description = "库存实体模型")
+@TableName(value = "mall_stock")
+public class Stock implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "商家-店铺关联关系ID")
+    @ApiModelProperty(value = "库存ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
-    @ApiModelProperty(value = "商家ID")
+    @ApiModelProperty(value = "SKU ID")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long merchantId;
+    private Long skuId;
 
     @ApiModelProperty(value = "店铺ID")
     @JsonSerialize(using = ToStringSerializer.class)
     private Long shopId;
 
-    @ApiModelProperty(value = "职位: 0 店员, 1 店长, 2 店主")
-    private Integer position;
+    @ApiModelProperty(value = "总库存量")
+    private Integer stock;
+
+    @ApiModelProperty(value = "库存单位")
+    private String unit;
+
+    @ApiModelProperty(value = "状态: 0 禁用, 1 正常")
+    private Integer status;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)
@@ -55,4 +62,9 @@ public class MerchantShop implements Serializable {
     @ApiModelProperty(value = "更新时间")
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
+
+    @ApiModelProperty(value = "逻辑删除: 0 未删除, 1 已删除")
+    @TableField(value = "is_deleted")
+    @TableLogic
+    private Boolean deleted;
 }

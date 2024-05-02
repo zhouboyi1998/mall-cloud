@@ -1,9 +1,9 @@
 package com.cafe.ordercenter.controller;
 
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.merchant.vo.CartVO;
 import com.cafe.order.vo.OrderVO;
 import com.cafe.ordercenter.service.OrderCenterService;
+import com.cafe.storage.vo.CartVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
