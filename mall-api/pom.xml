@@ -28,6 +28,7 @@
         <module>mall-qiniu-api</module>
         <module>mall-security-api</module>
         <module>mall-solr-api</module>
+        <module>mall-storage-api</module>
         <module>mall-system-api</module>
         <module>mall-user-api</module>
     </modules>

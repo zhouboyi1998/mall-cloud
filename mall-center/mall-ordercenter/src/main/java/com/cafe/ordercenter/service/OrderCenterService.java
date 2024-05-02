@@ -1,7 +1,7 @@
 package com.cafe.ordercenter.service;
 
-import com.cafe.merchant.vo.CartVO;
 import com.cafe.order.vo.OrderVO;
+import com.cafe.storage.vo.CartVO;
 
 import java.time.LocalDateTime;
 import java.util.List;

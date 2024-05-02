@@ -17,6 +17,8 @@ public class FeignConstant {
 
         public static final String GOODS = "com.cafe.goods.feign";
 
+        public static final String STORAGE = "com.cafe.storage.feign";
+
         public static final String ORDER = "com.cafe.order.feign";
 
         public static final String SYSTEM = "com.cafe.system.feign";
