@@ -13,16 +13,12 @@
 
 #### 初始化数据库
 
-* [**apolloconfigdb.sql**](../apollo/sql/apolloconfigdb.sql)
 * [**https://github.com/apolloconfig/apollo/blob/v2.1.0/scripts/sql/apolloconfigdb.sql**](https://github.com/apolloconfig/apollo/blob/v2.1.0/scripts/sql/apolloconfigdb.sql)
-
-
-* [**apolloportaldb.sql**](../apollo/sql/apolloportaldb.sql)
 * [**https://github.com/apolloconfig/apollo/blob/v2.1.0/scripts/sql/apolloportaldb.sql**](https://github.com/apolloconfig/apollo/blob/v2.1.0/scripts/sql/apolloportaldb.sql)
 
 #### 修改配置文件
 
-* `apollo-configservice-2.1.0-github\config\application-github.properties`
+* `\apollo-configservice-2.1.0-github\config\application-github.properties`
 
 ```properties
 spring.datasource.url = jdbc:mysql://127.0.0.1:3306/ApolloConfigDB?characterEncoding=utf8
@@ -30,7 +26,7 @@ spring.datasource.username = root
 spring.datasource.password = 123456
 ```
 
-* `apollo-adminservice-2.1.0-github\config\application-github.properties`
+* `\apollo-adminservice-2.1.0-github\config\application-github.properties`
 
 ```properties
 spring.datasource.url = jdbc:mysql://127.0.0.1:3306/ApolloConfigDB?characterEncoding=utf8
@@ -38,7 +34,7 @@ spring.datasource.username = root
 spring.datasource.password = 123456
 ```
 
-* `apollo-portal-2.1.0-github\config\application-github.properties`
+* `\apollo-portal-2.1.0-github\config\application-github.properties`
 
 ```properties
 spring.datasource.url = jdbc:mysql://127.0.0.1:3306/ApolloPortalDB?characterEncoding=utf8

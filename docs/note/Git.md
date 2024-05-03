@@ -6,15 +6,21 @@
 
 * 添加网络代理
 
-```
+```bash
 git config --global http.proxy http://127.0.0.1:10809
+```
+
+```bash
 git config --global https.proxy http://127.0.0.1:10809
 ```
 
 * 还原网络代理
 
-```
+```bash
 git config --global --unset http.proxy
+```
+
+```bash
 git config --global --unset https.proxy
 ```
 
@@ -26,14 +32,17 @@ git config --global --unset https.proxy
 
 * 添加远程仓库
 
-```
+```bash
 git remote add github https://github.com/zhouboyi1998/mall-cloud.git
 ```
 
 * 查看关联的远程仓库
 
-```
+```bash
 git remote show
+```
+
+```bash
 git remote -v
 ```
 
@@ -43,13 +52,13 @@ git remote -v
 
 * 回退到上一个版本
 
-```
+```bash
 git reset --soft HEAD^
 ```
 
 * 回退到指定版本
 
-```
+```bash
 git reset --soft bcd58534
 ```
 
@@ -67,7 +76,7 @@ git reset --soft bcd58534
 
 * 从指定版本开始变基
 
-```
+```bash
 git rebase -i bcd58534
 ```
 
@@ -95,14 +104,14 @@ git rebase -i bcd58534
 * 如果遇到无法合并的文件，手动解决冲突，合并代码
 * 然后重新进入变基
 
-```
+```bash
 git rebase --continue
 ```
 
 * 如果重新进入变基时，提示有文件没有 `add`，询问是否需要执行 `add` 操作时
 * 按提示执行一次 `add` 命令，再重新进入变基即可
 
-```
+```bash
 git add .
 ```
 
@@ -111,19 +120,19 @@ git add .
 * 修改该版本的内容
 * 执行 `add` 操作
 
-```
+```bash
 git add .
 ```
 
 * 执行修订提交操作
 
-```
+```bash
 git commit --amend
 ```
 
 * 重新进入变基
 
-```
+```bash
 git rebase --continue
 ```
 
@@ -133,7 +142,10 @@ git rebase --continue
 
 * 强制推送
 
-```
+```bash
 git push origin master --force
+```
+
+```bash
 git push github master --force
 ```

@@ -41,16 +41,16 @@ server-id=1
 
 ```properties
 # 数据库 URL
-canal.instance.master.address=127.0.0.1:3306
+canal.instance.master.address = 127.0.0.1:3306
 # 数据库 Username / Password
-canal.instance.dbUsername=canal
-canal.instance.dbPassword=canal
+canal.instance.dbUsername = canal
+canal.instance.dbPassword = canal
 # 数据库编码集
-canal.instance.connectionCharset=UTF-8
+canal.instance.connectionCharset = UTF-8
 # 监听的 Database
-canal.instance.defaultDatabaseName=
+canal.instance.defaultDatabaseName =
 # 监听的 Table, 可以指定, 多个用逗号分割, 这里的正则表示监听所有
-canal.instance.filter.regex=.*\\..*
+canal.instance.filter.regex = .*\\..*
 ```
 
 * MySQL 创建一个专门给 Canal 使用的用户
