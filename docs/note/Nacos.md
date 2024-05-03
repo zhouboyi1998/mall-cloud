@@ -1,5 +1,32 @@
 <h2 align="center">📔 Nacos</h2>
 
+### 📦 Windows 安装
+
+#### Nacos 2.0.3
+
+* 解压 `nacos-server-2.0.3.zip`
+* 进入 `\nacos\conf` 目录
+* 执行 `nacos-mysql.sql`
+
+
+* 修改 `application.properties` 配置文件
+
+```properties
+# 数据库连接配置
+db.url.0 = jdbc:mysql://127.0.0.1:3306/nacos_config?characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=UTC
+db.user.0 = root
+db.password.0 = 123456
+
+# 开启权限认证
+nacos.core.auth.enabled = true
+```
+
+* 运行 `\nacos\bin\startup.cmd` 批处理文件
+* 访问 `Nacos` 控制台：`127.0.0.1:8848/nacos`
+* 默认用户名 / 密码：`nacos` / `nacos`
+
+---
+
 ### 🧰 模块搭建
 
 * `Nacos` 在 `2.x` 版本有非常大的改动

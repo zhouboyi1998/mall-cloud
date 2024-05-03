@@ -26,9 +26,9 @@ start mqbroker.cmd -n 127.0.0.1:9876 autoCreateTopicEnable=true
 
 ```properties
 # 控制台访问端口
-server.port=8085
+server.port = 8085
 # 配置 NameServer 地址
-rocketmq.config.namesrvAddr=127.0.0.1:9876
+rocketmq.config.namesrvAddr = 127.0.0.1:9876
 ```
 
 * 根目录中打包
