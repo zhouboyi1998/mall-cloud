@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe.foundation.mapper.AreaMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cafe.foundation.model.Area">
+        <id column="id" property="id" />
+        <result column="area_name" property="areaName" />
+        <result column="area_code" property="areaCode" />
+        <result column="post_code" property="postCode" />
+        <result column="parent_id" property="parentId" />
+        <result column="area_level" property="areaLevel" />
+        <result column="sort" property="sort" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="deleted" />
+    </resultMap>
+
+    <select id="dto" resultType="com.cafe.foundation.dto.AreaDTO">
+        SELECT #{provinceId} AS province_id, p.area_name AS province_name,
+               #{cityId}     AS city_id, c.area_name AS city_name,
+               #{districtId} AS district_id, d.area_name AS district_name, d.post_code
+        FROM mall_area AS p, mall_area AS c, mall_area AS d
+        WHERE p.id = #{provinceId}
+          AND c.id = #{cityId}
+          AND d.id = #{districtId}
+    </select>
+
+</mapper>

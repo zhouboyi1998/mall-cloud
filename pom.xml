@@ -552,7 +552,12 @@
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
-                <artifactId>mall-system-api</artifactId>
+                <artifactId>mall-foundation-api</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-manager-api</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>

@@ -1,0 +1,8 @@
+server:
+  port: 18084
+
+spring:
+  application:
+    name: mall-foundation
+  profiles:
+    active: dev

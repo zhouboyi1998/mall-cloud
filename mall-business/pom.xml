@@ -16,12 +16,13 @@
     <description>业务模块</description>
 
     <modules>
+        <module>mall-foundation</module>
         <module>mall-goods</module>
+        <module>mall-manager</module>
         <module>mall-member</module>
         <module>mall-merchant</module>
         <module>mall-order</module>
         <module>mall-storage</module>
-        <module>mall-system</module>
     </modules>
 
 </project>

@@ -1,4 +1,4 @@
-package com.cafe.ordercenter;
+package com.cafe.foundation;
 
 import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.app.FeignConstant;
@@ -10,18 +10,18 @@ import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.ordercenter
+ * @Package: com.cafe.foundation
  * @Author: zhouboyi
- * @Date: 2023/10/24 16:58
- * @Description: 订单中心启动类
+ * @Date: 2022/12/29 16:52
+ * @Description: 基座模块启动类
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = {FeignConstant.Client.ID, FeignConstant.Client.GOODS, FeignConstant.Client.STORAGE, FeignConstant.Client.ORDER, FeignConstant.Client.FOUNDATION, FeignConstant.Client.MEMBER})
+@EnableFeignClients(basePackages = FeignConstant.Client.ID)
 @ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
-public class OrderCenterApplication {
+public class FoundationApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(OrderCenterApplication.class, args);
+        SpringApplication.run(FoundationApplication.class, args);
     }
 }

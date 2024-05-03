@@ -69,7 +69,7 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-system-api</artifactId>
+            <artifactId>mall-foundation-api</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>com.cafe</groupId>
