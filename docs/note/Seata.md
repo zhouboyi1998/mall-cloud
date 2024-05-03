@@ -15,7 +15,6 @@
 * 存储模式选择 `MySQL`
 * 在 `MySQL` 中创建一个名为 `seata` 数据库
 * 执行初始化 `SQL`
-    * [**mysql.sql**](../seata/server/db/mysql.sql)
     * [**https://github.com/seata/seata/blob/1.5.2/script/server/db/mysql.sql**](https://github.com/seata/seata/blob/1.5.2/script/server/db/mysql.sql)
 
 #### 配置中心
@@ -43,7 +42,7 @@ store.db.password = 123456
 
 #### 配置文件
 
-* 修改 `seata\conf\application.yml` 配置文件
+* 修改 `\seata\conf\application.yml` 配置文件
     * 配置中心使用 `Nacos`
     * 注册中心信息从 `Nacos` 中获取
     * 删除存储模式配置，从 `seataServer.properties` 中读取
@@ -107,7 +106,7 @@ seata:
 
 #### 运行
 
-* 运行 `seata\bin\seata-server.bat` 批处理文件
+* 运行 `\seata\bin\seata-server.bat` 批处理文件
 * 访问 `Seata` 控制台：`127.0.0.1:7091`
 * 默认用户名 / 密码：`seata` / `seata`
 
@@ -119,7 +118,7 @@ seata:
 
 * 所有业务数据库新增 `undo_log` 回滚表
 * 执行创建回滚表的 `SQL`
-    * [**mysql.sql**](../seata/client/at/db/mysql.sql)
+    * [**mysql.sql**](../sql/seata/client/mysql.sql)
     * [**https://github.com/seata/seata/blob/1.5.2/script/client/at/db/mysql.sql**](https://github.com/seata/seata/blob/1.5.2/script/client/at/db/mysql.sql)
 
 #### 引入依赖
