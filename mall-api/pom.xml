@@ -19,8 +19,10 @@
         <module>mall-clickhouse-api</module>
         <module>mall-elasticsearch-api</module>
         <module>mall-fastdfs-api</module>
+        <module>mall-foundation-api</module>
         <module>mall-goods-api</module>
         <module>mall-id-api</module>
+        <module>mall-manager-api</module>
         <module>mall-member-api</module>
         <module>mall-merchant-api</module>
         <module>mall-minio-api</module>
@@ -29,7 +31,6 @@
         <module>mall-security-api</module>
         <module>mall-solr-api</module>
         <module>mall-storage-api</module>
-        <module>mall-system-api</module>
         <module>mall-user-api</module>
     </modules>
 
