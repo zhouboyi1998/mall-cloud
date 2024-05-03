@@ -28,12 +28,13 @@
     ...
 
 |-- mall-business (业务模块)
+    |-- mall-foundation (基座模块)
     |-- mall-goods (商品模块)
+    |-- mall-manager (管理员模块)
     |-- mall-member (会员模块)
     |-- mall-merchant (商家模块)
     |-- mall-order (订单模块)
     |-- mall-storage (仓储模块)
-    |-- mall-system (系统模块)
 
 |-- mall-center (中台模块)
     |-- mall-apiconsumer (开放接口消费中心)
