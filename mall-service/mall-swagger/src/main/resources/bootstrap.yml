@@ -1,0 +1,8 @@
+server:
+  port: 18076
+
+spring:
+  application:
+    name: mall-swagger
+  profiles:
+    active: dev

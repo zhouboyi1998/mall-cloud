@@ -1,0 +1,52 @@
+knife4j:
+  cloud:
+    enable: true
+    routes:
+      - name: mall-security
+        uri: host.docker.internal:18072
+        location: /v2/api-docs
+      - name: mall-user
+        uri: host.docker.internal:18073
+        location: /v2/api-docs
+      - name: mall-id
+        uri: host.docker.internal:18074
+        location: /v2/api-docs
+      - name: mall-goods
+        uri: host.docker.internal:18081
+        location: /v2/api-docs
+      - name: mall-order
+        uri: host.docker.internal:18082
+        location: /v2/api-docs
+      - name: mall-storage
+        uri: host.docker.internal:18083
+        location: /v2/api-docs
+      - name: mall-foundation
+        uri: host.docker.internal:18084
+        location: /v2/api-docs
+      - name: mall-manager
+        uri: host.docker.internal:18085
+        location: /v2/api-docs
+      - name: mall-member
+        uri: host.docker.internal:18086
+        location: /v2/api-docs
+      - name: mall-merchant
+        uri: host.docker.internal:18087
+        location: /v2/api-docs
+      - name: mall-minio
+        uri: host.docker.internal:18091
+        location: /v2/api-docs
+      - name: mall-fastdfs
+        uri: host.docker.internal:18092
+        location: /v2/api-docs
+      - name: mall-elasticsearch
+        uri: host.docker.internal:18093
+        location: /v2/api-docs
+      - name: mall-solr
+        uri: host.docker.internal:18094
+        location: /v2/api-docs
+      - name: mall-qiniu
+        uri: host.docker.internal:18095
+        location: /v2/api-docs
+      - name: mall-clickhouse
+        uri: host.docker.internal:18096
+        location: /v2/api-docs
