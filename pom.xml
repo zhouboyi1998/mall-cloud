@@ -41,7 +41,7 @@
         <!-- Nacos 2.x 需要依赖低版本的 Reflections, 覆盖 Debezium 提供的高版本 -->
         <reflections.version>0.9.11</reflections.version>
         <apollo.version>2.1.0</apollo.version>
-        <swagger2-knife4j.version>2.0.9</swagger2-knife4j.version>
+        <knife4j.version>2.0.9</knife4j.version>
         <mysql-connector.version>8.0.19</mysql-connector.version>
         <mariadb-client.version>3.3.2</mariadb-client.version>
         <postgresql-driver.version>42.2.20</postgresql-driver.version>
@@ -158,11 +158,17 @@
                 <artifactId>apollo-client</artifactId>
                 <version>${apollo.version}</version>
             </dependency>
-            <!-- Swagger2 API 文档 -->
+            <!-- Swagger API 文档 -->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>
-                <version>${swagger2-knife4j.version}</version>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <!-- Swagger API 文档聚合 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-aggregation-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
             </dependency>
             <!-- MySQL 驱动 -->
             <dependency>

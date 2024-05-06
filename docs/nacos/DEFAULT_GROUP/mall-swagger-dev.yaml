@@ -1,0 +1,52 @@
+knife4j:
+  cloud:
+    enable: true
+    routes:
+      - name: mall-security
+        uri: 127.0.0.1:18072
+        location: /v2/api-docs
+      - name: mall-user
+        uri: 127.0.0.1:18073
+        location: /v2/api-docs
+      - name: mall-id
+        uri: 127.0.0.1:18074
+        location: /v2/api-docs
+      - name: mall-goods
+        uri: 127.0.0.1:18081
+        location: /v2/api-docs
+      - name: mall-order
+        uri: 127.0.0.1:18082
+        location: /v2/api-docs
+      - name: mall-storage
+        uri: 127.0.0.1:18083
+        location: /v2/api-docs
+      - name: mall-foundation
+        uri: 127.0.0.1:18084
+        location: /v2/api-docs
+      - name: mall-manager
+        uri: 127.0.0.1:18085
+        location: /v2/api-docs
+      - name: mall-member
+        uri: 127.0.0.1:18086
+        location: /v2/api-docs
+      - name: mall-merchant
+        uri: 127.0.0.1:18087
+        location: /v2/api-docs
+      - name: mall-minio
+        uri: 127.0.0.1:18091
+        location: /v2/api-docs
+      - name: mall-fastdfs
+        uri: 127.0.0.1:18092
+        location: /v2/api-docs
+      - name: mall-elasticsearch
+        uri: 127.0.0.1:18093
+        location: /v2/api-docs
+      - name: mall-solr
+        uri: 127.0.0.1:18094
+        location: /v2/api-docs
+      - name: mall-qiniu
+        uri: 127.0.0.1:18095
+        location: /v2/api-docs
+      - name: mall-clickhouse
+        uri: 127.0.0.1:18096
+        location: /v2/api-docs

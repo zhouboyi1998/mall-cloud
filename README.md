@@ -87,5 +87,6 @@
     |-- mall-generator (代码生成器)
     |-- mall-id (ID 生成器)
     |-- mall-security (Spring Security 安全模块)
+    |-- mall-swagger (Swagger API 文档聚合模块)
     |-- mall-user (用户模块)
 ```

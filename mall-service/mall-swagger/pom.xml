@@ -5,28 +5,37 @@
 
     <parent>
         <groupId>com.cafe</groupId>
-        <artifactId>mall-common</artifactId>
+        <artifactId>mall-service</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mall-common-swagger</artifactId>
+    <artifactId>mall-swagger</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>Swagger API 文档公共包</description>
+    <description>Swagger API 文档聚合模块</description>
 
     <dependencies>
-        <!-- Swagger API 文档 -->
+        <!-- Swagger API 文档聚合 -->
         <dependency>
             <groupId>com.github.xiaoymin</groupId>
-            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <artifactId>knife4j-aggregation-spring-boot-starter</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-constant</artifactId>
+            <artifactId>mall-common-core</artifactId>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

@@ -1,0 +1,4 @@
+# Knife4J 配置
+knife4j:
+  # 开启聚合文档
+  enableAggregation: true
