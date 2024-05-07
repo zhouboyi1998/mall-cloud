@@ -1,6 +1,6 @@
 <h2 align="center">📔 Apollo</h2>
 
-### 📦 模块搭建
+### 📦 Windows 安装
 
 * 从 [**GitHub**](https://github.com/apolloconfig/apollo/releases) 下载 `2.1.0` 版本的 `Apollo`
     * `apollo-configservice-2.1.0-github.zip`
