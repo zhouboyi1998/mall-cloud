@@ -27,7 +27,7 @@ public class RequestHeaderHandler {
     public UserDetails userDetails(HttpServletRequest request) {
         // 获取请求头中的用户详细信息
         String userDetails = request.getHeader(RequestConstant.Header.USER_DETAILS);
-        // 转换类型, 添加到 ModelAttribute 中
+        // 将用户详细信息反序列化成 UserDetails 类型, 添加到 ModelAttribute 中
         return JacksonUtil.readValue(userDetails, UserDetails.class);
     }
 }

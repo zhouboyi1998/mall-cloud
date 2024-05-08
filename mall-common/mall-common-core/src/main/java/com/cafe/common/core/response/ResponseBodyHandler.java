@@ -36,30 +36,30 @@ import java.util.Objects;
 public class ResponseBodyHandler implements ResponseBodyAdvice<Object> {
 
     @Value(value = "${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
-    private URI jwtSetUri;
+    private URI jwkSetUri;
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
-        // 判断是否执行 beforeBodyWrite() 方法
+        // 是否执行 beforeBodyWrite() 方法
         return true;
     }
 
     @Nullable
     @Override
     public Object beforeBodyWrite(@Nullable Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
-        // Feign 请求直接返回
+        // 微服务之间的 Feign 远程调用的返回结果, 不需要封装成 Result 类型
         if (Boolean.parseBoolean(request.getHeaders().getFirst(RequestConstant.Header.IS_FEIGN))) {
             return body;
         }
-        // JWT SET 接口直接返回
-        if (Objects.equals(request.getURI().getPath(), jwtSetUri.getPath().replace(AppConstant.MALL_SECURITY_PREFIX, StringConstant.EMPTY))) {
+        // 安全模块获取 RSA JWKSet 接口的返回结果, 不需要封装 Result 类型
+        if (Objects.equals(request.getURI().getPath(), jwkSetUri.getPath().replace(AppConstant.MALL_SECURITY_PREFIX, StringConstant.EMPTY))) {
             return body;
         }
-        // 返回值已经是 Result 类型时不需要再次封装
+        // 返回结果已经是 Result 类型时, 不需要再次封装
         if (body instanceof Result) {
             return body;
         }
-        // 返回值是 String 类型时, 需要手动将 Result 转换成 JSON 字符串, 否则会出现 ClassCastException
+        // 返回结果是 String 类型时, 封装成 Result 类型后, 需要手动序列化成 JSON 格式, 否则会出现 ClassCastException 异常
         if (body instanceof String) {
             // 设置 Content-Type = application/json
             response.getHeaders().set(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
