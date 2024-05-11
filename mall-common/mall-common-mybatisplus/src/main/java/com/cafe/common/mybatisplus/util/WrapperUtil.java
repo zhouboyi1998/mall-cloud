@@ -94,4 +94,14 @@ public class WrapperUtil {
         }
         return wrapper;
     }
+
+    /**
+     * 构造空的 QueryWrapper 条件
+     *
+     * @param <T>
+     * @return
+     */
+    public static <T> QueryWrapper<T> emptyQueryWrapper() {
+        return new QueryWrapper<>();
+    }
 }

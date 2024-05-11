@@ -2,6 +2,7 @@ package com.cafe.foundation.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.foundation.dto.AreaDTO;
@@ -212,5 +213,13 @@ public class AreaController {
     ) {
         AreaDTO dto = areaService.dto(provinceId, cityId, districtId);
         return ResponseEntity.ok(dto);
+    }
+
+    @LogPrint(value = "查询区域树")
+    @ApiOperation(value = "查询区域树")
+    @GetMapping(value = "/tree-list")
+    public ResponseEntity<List<Tree>> treeList() {
+        List<Tree> treeList = areaService.treeList();
+        return ResponseEntity.ok(treeList);
     }
 }
