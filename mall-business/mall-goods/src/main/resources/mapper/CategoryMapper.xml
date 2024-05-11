@@ -15,4 +15,32 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
+    <select id="selectTreeList" resultType="com.cafe.goods.vo.CategoryTreeVO">
+        WITH RECURSIVE tree AS (
+            SELECT id, category_name, parent_id, category_level, sort, status
+            FROM mall_category
+            WHERE parent_id = #{parentId}
+            UNION ALL
+            SELECT c.id, c.category_name, c.parent_id, c.category_level, c.sort, c.status
+            FROM mall_category AS c
+                     INNER JOIN tree AS p ON c.parent_id = p.id
+        )
+        SELECT *
+        FROM tree
+    </select>
+
+    <select id="selectTree" resultType="com.cafe.goods.vo.CategoryTreeVO">
+        WITH RECURSIVE tree AS (
+            SELECT id, category_name, parent_id, category_level, sort, status
+            FROM mall_category
+            WHERE id = #{id}
+            UNION ALL
+            SELECT c.id, c.category_name, c.parent_id, c.category_level, c.sort, c.status
+            FROM mall_category AS c
+                     INNER JOIN tree AS p ON c.parent_id = p.id
+        )
+        SELECT *
+        FROM tree
+    </select>
+
 </mapper>
