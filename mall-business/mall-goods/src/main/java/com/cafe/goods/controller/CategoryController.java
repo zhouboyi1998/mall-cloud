@@ -2,6 +2,7 @@ package com.cafe.goods.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.goods.model.Category;
@@ -194,5 +195,31 @@ public class CategoryController {
         QueryWrapper<Category> wrapper = WrapperUtil.createQueryWrapper(category);
         Boolean code = categoryService.remove(wrapper);
         return ResponseEntity.ok(code);
+    }
+
+    @LogPrint(value = "查询分类树")
+    @ApiOperation(value = "查询分类树")
+    @GetMapping(value = "/tree-list")
+    public ResponseEntity<List<Tree>> treeList() {
+        List<Tree> treeList = categoryService.treeList();
+        return ResponseEntity.ok(treeList);
+    }
+
+    @LogPrint(value = "根据上级分类id查询分类树")
+    @ApiOperation(value = "根据上级分类id查询分类树")
+    @ApiImplicitParam(value = "上级分类id", name = "parentId", dataType = "Long", paramType = "path", required = true)
+    @GetMapping(value = "/tree-list/{parentId}")
+    public ResponseEntity<List<Tree>> treeList(@PathVariable(value = "parentId") Long parentId) {
+        List<Tree> treeList = categoryService.treeList(parentId);
+        return ResponseEntity.ok(treeList);
+    }
+
+    @LogPrint(value = "根据分类id查询分类树")
+    @ApiOperation(value = "根据分类id查询分类树")
+    @ApiImplicitParam(value = "分类id", name = "id", dataType = "Long", paramType = "path", required = true)
+    @GetMapping(value = "/tree/{id}")
+    public ResponseEntity<Tree> tree(@PathVariable(value = "id") Long id) {
+        Tree tree = categoryService.tree(id);
+        return ResponseEntity.ok(tree);
     }
 }
