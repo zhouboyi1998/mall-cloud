@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.core.request.UserDetails;
+import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.user.model.Menu;
 import com.cafe.user.service.MenuService;
-import com.cafe.user.vo.MenuTreeVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -200,13 +200,13 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据权限列表获取菜单树")
-    @ApiOperation(value = "根据权限列表获取菜单树")
-    @GetMapping(value = "/tree")
-    public ResponseEntity<List<MenuTreeVO>> tree(
+    @LogPrint(value = "根据权限列表查询菜单树")
+    @ApiOperation(value = "根据权限列表查询菜单树")
+    @GetMapping(value = "/tree-list")
+    public ResponseEntity<List<Tree>> treeList(
         @ModelAttribute(value = RequestConstant.ModelAttribute.USER_DETAILS) UserDetails userDetails
     ) {
-        List<MenuTreeVO> menuTreeVOList = menuService.tree(userDetails.getAuthorities());
-        return ResponseEntity.ok(menuTreeVOList);
+        List<Tree> treeList = menuService.treeList(userDetails.getAuthorities());
+        return ResponseEntity.ok(treeList);
     }
 }

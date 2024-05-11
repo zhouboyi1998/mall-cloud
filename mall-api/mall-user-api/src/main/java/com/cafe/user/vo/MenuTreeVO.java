@@ -1,5 +1,6 @@
 package com.cafe.user.vo;
 
+import com.cafe.common.lang.tree.Tree;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
@@ -9,7 +10,6 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * @Project: mall-cloud
@@ -19,10 +19,10 @@ import java.util.List;
  * @Description: 菜单树视图模型
  */
 @Data
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @ApiModel(value = "MenuTreeVO", description = "菜单树视图模型")
-public class MenuTreeVO implements Serializable {
+public class MenuTreeVO extends Tree implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -30,10 +30,14 @@ public class MenuTreeVO implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
+    @ApiModelProperty(value = "平台ID")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long platformId;
+
     @ApiModelProperty(value = "菜单名称")
     private String menuName;
 
-    @ApiModelProperty(value = "菜单显示标题")
+    @ApiModelProperty(value = "菜单标题")
     private String menuTitle;
 
     @ApiModelProperty(value = "菜单图标")
@@ -46,9 +50,12 @@ public class MenuTreeVO implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long parentId;
 
+    @ApiModelProperty(value = "菜单等级: 1 一级菜单, 2 二级菜单, 3 三级菜单")
+    private Integer menuLevel;
+
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 
-    @ApiModelProperty(value = "子菜单列表")
-    private List<MenuTreeVO> children;
+    @ApiModelProperty(value = "状态: 0 禁用, 1 正常")
+    private Integer status;
 }
