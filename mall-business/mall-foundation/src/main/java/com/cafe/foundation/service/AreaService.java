@@ -1,8 +1,11 @@
 package com.cafe.foundation.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.cafe.common.lang.tree.Tree;
 import com.cafe.foundation.dto.AreaDTO;
 import com.cafe.foundation.model.Area;
+
+import java.util.List;
 
 /**
  * @Project: mall-cloud
@@ -22,4 +25,11 @@ public interface AreaService extends IService<Area> {
      * @return
      */
     AreaDTO dto(Long provinceId, Long cityId, Long districtId);
+
+    /**
+     * 查询区域树
+     *
+     * @return
+     */
+    List<Tree> treeList();
 }
