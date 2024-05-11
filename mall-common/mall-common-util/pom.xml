@@ -27,6 +27,10 @@
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-constant</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-lang</artifactId>
+        </dependency>
     </dependencies>
 
 </project>
