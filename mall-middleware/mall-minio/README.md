@@ -15,11 +15,11 @@ mvn package -pl :mall-minio -am
 
 ```bash
 # 项目根目录下运行
-docker build -f docs/docker/mall-minio/Dockerfile -t mall-minio .
+docker build -f ./docs/docker/mall-minio/Dockerfile -t mall-minio:latest .
 ```
 
 #### 运行
 
 ```bash
-docker run -d -p 18091:18091 --name mall-minio mall-minio
+docker run -d -p 18091:18091 --name mall-minio mall-minio:latest
 ```
