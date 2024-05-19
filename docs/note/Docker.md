@@ -216,3 +216,25 @@ docker export container_name/container_id > file_name.tar
 ```shell
 docker import file_name.tar < image_name[:image_tag]
 ```
+
+---
+
+### 🏹 实战
+
+#### 批量构建镜像
+
+###### Windows
+
+```bash
+# 项目根目录下运行
+.\docs\script\docker-build.bat
+```
+
+#### 批量运行容器
+
+###### Windows
+
+```bash
+# 项目根目录下运行
+.\docs\script\docker-run.bat
+```
