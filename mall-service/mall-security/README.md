@@ -15,11 +15,11 @@ mvn package -pl :mall-security -am
 
 ```bash
 # 项目根目录下运行
-docker build -f docs/docker/mall-security/Dockerfile -t mall-security .
+docker build -f ./docs/docker/mall-security/Dockerfile -t mall-security:latest .
 ```
 
 #### 运行
 
 ```bash
-docker run -d -p 18072:18072 --name mall-security mall-security
+docker run -d -p 18072:18072 --name mall-security mall-security:latest
 ```
