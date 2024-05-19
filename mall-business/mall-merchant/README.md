@@ -15,11 +15,11 @@ mvn package -pl :mall-merchant -am
 
 ```bash
 # 项目根目录下运行
-docker build -f docs/docker/mall-merchant/Dockerfile -t mall-merchant .
+docker build -f ./docs/docker/mall-merchant/Dockerfile -t mall-merchant:latest .
 ```
 
 #### 运行
 
 ```bash
-docker run -d -p 18087:18087 --name mall-merchant mall-merchant
+docker run -d -p 18087:18087 --name mall-merchant mall-merchant:latest
 ```

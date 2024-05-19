@@ -15,11 +15,11 @@ mvn package -pl :mall-order -am
 
 ```bash
 # 项目根目录下运行
-docker build -f docs/docker/mall-order/Dockerfile -t mall-order .
+docker build -f ./docs/docker/mall-order/Dockerfile -t mall-order:latest .
 ```
 
 #### 运行
 
 ```bash
-docker run -d -p 18082:18082 --name mall-order mall-order
+docker run -d -p 18082:18082 --name mall-order mall-order:latest
 ```

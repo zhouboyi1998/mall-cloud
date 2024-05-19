@@ -15,11 +15,11 @@ mvn package -pl :mall-apiconsumer -am
 
 ```bash
 # 项目根目录下运行
-docker build -f docs/docker/mall-apiconsumer/Dockerfile -t mall-apiconsumer .
+docker build -f ./docs/docker/mall-apiconsumer/Dockerfile -t mall-apiconsumer:latest .
 ```
 
 #### 运行
 
 ```bash
-docker run -d -p 18062:18062 --name mall-apiconsumer mall-apiconsumer
+docker run -d -p 18062:18062 --name mall-apiconsumer mall-apiconsumer:latest
 ```

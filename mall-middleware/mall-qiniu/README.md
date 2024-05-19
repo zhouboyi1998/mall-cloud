@@ -15,11 +15,11 @@ mvn package -pl :mall-qiniu -am
 
 ```bash
 # 项目根目录下运行
-docker build -f docs/docker/mall-qiniu/Dockerfile -t mall-qiniu .
+docker build -f ./docs/docker/mall-qiniu/Dockerfile -t mall-qiniu:latest .
 ```
 
 #### 运行
 
 ```bash
-docker run -d -p 18095:18095 --name mall-qiniu mall-qiniu
+docker run -d -p 18095:18095 --name mall-qiniu mall-qiniu:latest
 ```

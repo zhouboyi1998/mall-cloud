@@ -15,11 +15,11 @@ mvn package -pl :mall-clickhouse -am
 
 ```bash
 # 项目根目录下运行
-docker build -f docs/docker/mall-clickhouse/Dockerfile -t mall-clickhouse .
+docker build -f ./docs/docker/mall-clickhouse/Dockerfile -t mall-clickhouse:latest .
 ```
 
 #### 运行
 
 ```bash
-docker run -d -p 18096:18096 --name mall-clickhouse mall-clickhouse
+docker run -d -p 18096:18096 --name mall-clickhouse mall-clickhouse:latest
 ```

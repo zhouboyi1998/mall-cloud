@@ -15,11 +15,11 @@ mvn package -pl :mall-manager -am
 
 ```bash
 # 项目根目录下运行
-docker build -f docs/docker/mall-manager/Dockerfile -t mall-manager .
+docker build -f ./docs/docker/mall-manager/Dockerfile -t mall-manager:latest .
 ```
 
 #### 运行
 
 ```bash
-docker run -d -p 18085:18085 --name mall-manager mall-manager
+docker run -d -p 18085:18085 --name mall-manager mall-manager:latest
 ```
