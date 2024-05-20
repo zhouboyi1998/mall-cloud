@@ -149,3 +149,37 @@ docker-compose logs [-f] [service_name]
 ```shell
 docker-compose top [service_name]
 ```
+
+---
+
+### 🏹 实战
+
+* 项目根目录下运行以下命令
+
+#### 上线所有服务
+
+```shell
+docker-compose -f ./docs/docker-compose/docker-compose.yaml up -d
+```
+
+#### 下线所有服务
+
+```shell
+docker-compose -f ./docs/docker-compose/docker-compose.yaml down
+```
+
+#### 上线某个服务
+
+* 将 `mall-id` 替换成实际需要上线的服务名称
+
+```shell
+docker-compose -f ./docs/docker-compose/docker-compose.yaml up -d mall-id
+```
+
+#### 下线某个服务
+
+* 将 `mall-id` 替换成实际需要下线的服务名称
+
+```shell
+docker-compose -f ./docs/docker-compose/docker-compose.yaml down mall-id
+```
