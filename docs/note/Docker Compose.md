@@ -1,5 +1,34 @@
 <h2 align="center">📔 Docker Compose</h2>
 
+### 📦 Linux 安装
+
+* 选择与安装的 `Docker` 版本兼容的 `Docker Compose` 版本安装
+    * 版本对应关系可以在 `Docker Compose` 的 `GitHub RELEASE` 页面查看
+
+```shell
+curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+```
+
+* 修改 `/usr/local/bin/docker-compose` 目录权限
+
+```shell
+chmod +x /usr/local/bin/docker-compose
+```
+
+* 查看 `Docker Compose` 版本
+
+```shell
+docker-compose --version
+```
+
+* 锁定 `Docker Compose` 版本
+
+```shell
+apt-mark hold docker-compose
+```
+
+---
+
 ### 🐳 Docker Compose 文件
 
 ```yaml
@@ -41,7 +70,7 @@ networks:
 
 #### 配置项
 
-* `version`：指定 `Docker Compose` 文件的语法版本
+* `version`：当前配置文件使用的语法版本
 
 
 * `services`：服务列表
