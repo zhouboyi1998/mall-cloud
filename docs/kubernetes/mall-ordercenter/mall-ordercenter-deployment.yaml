@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-ordercenter-deployment
+  labels:
+    name: mall-ordercenter-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-ordercenter
+  template:
+    metadata:
+      namespace: mall
+      name: mall-ordercenter-pod
+      labels:
+        app: mall-ordercenter
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-ordercenter-container
+          image: 192.168.159.128:5000/mall/mall-ordercenter:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18061
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

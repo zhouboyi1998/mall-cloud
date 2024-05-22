@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-security-deployment
+  labels:
+    name: mall-security-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-security
+  template:
+    metadata:
+      namespace: mall
+      name: mall-security-pod
+      labels:
+        app: mall-security
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-security-container
+          image: 192.168.159.128:5000/mall/mall-security:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18072
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

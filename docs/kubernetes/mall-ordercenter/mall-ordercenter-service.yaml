@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: mall
+  name: mall-ordercenter-service
+spec:
+  type: NodePort
+  selector:
+    app: mall-ordercenter
+  ports:
+    - nodePort: 30061
+      port: 18061
+      targetPort: 18061
+      protocol: TCP

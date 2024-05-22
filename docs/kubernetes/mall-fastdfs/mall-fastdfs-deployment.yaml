@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-fastdfs-deployment
+  labels:
+    name: mall-fastdfs-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-fastdfs
+  template:
+    metadata:
+      namespace: mall
+      name: mall-fastdfs-pod
+      labels:
+        app: mall-fastdfs
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-fastdfs-container
+          image: 192.168.159.128:5000/mall/mall-fastdfs:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18092
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

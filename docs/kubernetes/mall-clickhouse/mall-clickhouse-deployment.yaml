@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-clickhouse-deployment
+  labels:
+    name: mall-clickhouse-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-clickhouse
+  template:
+    metadata:
+      namespace: mall
+      name: mall-clickhouse-pod
+      labels:
+        app: mall-clickhouse
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-clickhouse-container
+          image: 192.168.159.128:5000/mall/mall-clickhouse:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18096
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

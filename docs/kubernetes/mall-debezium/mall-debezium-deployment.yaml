@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-debezium-deployment
+  labels:
+    name: mall-debezium-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mall-debezium
+  template:
+    metadata:
+      namespace: mall
+      name: mall-debezium-pod
+      labels:
+        app: mall-debezium
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-debezium-container
+          image: 192.168.159.128:5000/mall/mall-debezium:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

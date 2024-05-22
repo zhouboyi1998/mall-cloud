@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-elasticsearch-deployment
+  labels:
+    name: mall-elasticsearch-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-elasticsearch
+  template:
+    metadata:
+      namespace: mall
+      name: mall-elasticsearch-pod
+      labels:
+        app: mall-elasticsearch
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-elasticsearch-container
+          image: 192.168.159.128:5000/mall/mall-elasticsearch:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18093
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

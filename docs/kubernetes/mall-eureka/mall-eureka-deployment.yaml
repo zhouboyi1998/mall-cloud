@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-eureka-deployment
+  labels:
+    name: mall-eureka-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-eureka
+  template:
+    metadata:
+      namespace: mall
+      name: mall-eureka-pod
+      labels:
+        app: mall-eureka
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-eureka-container
+          image: 192.168.159.128:5000/mall/mall-eureka:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8761
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

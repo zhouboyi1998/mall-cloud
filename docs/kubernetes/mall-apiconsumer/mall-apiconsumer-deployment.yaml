@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-apiconsumer-deployment
+  labels:
+    name: mall-apiconsumer-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-apiconsumer
+  template:
+    metadata:
+      namespace: mall
+      name: mall-apiconsumer-pod
+      labels:
+        app: mall-apiconsumer
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-apiconsumer-container
+          image: 192.168.159.128:5000/mall/mall-apiconsumer:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18062
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

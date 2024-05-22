@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-solr-deployment
+  labels:
+    name: mall-solr-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-solr
+  template:
+    metadata:
+      namespace: mall
+      name: mall-solr-pod
+      labels:
+        app: mall-solr
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-solr-container
+          image: 192.168.159.128:5000/mall/mall-solr:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18094
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
