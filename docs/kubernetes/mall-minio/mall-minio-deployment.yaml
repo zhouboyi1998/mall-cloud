@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-minio-deployment
+  labels:
+    name: mall-minio-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-minio
+  template:
+    metadata:
+      namespace: mall
+      name: mall-minio-pod
+      labels:
+        app: mall-minio
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-minio-container
+          image: 192.168.159.128:5000/mall/mall-minio:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18091
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: mall
+  name: mall-order-service
+spec:
+  type: NodePort
+  selector:
+    app: mall-order
+  ports:
+    - nodePort: 30082
+      port: 18082
+      targetPort: 18082
+      protocol: TCP

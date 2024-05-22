@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-canal-deployment
+  labels:
+    name: mall-canal-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mall-canal
+  template:
+    metadata:
+      namespace: mall
+      name: mall-canal-pod
+      labels:
+        app: mall-canal
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-canal-container
+          image: 192.168.159.128:5000/mall/mall-canal:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

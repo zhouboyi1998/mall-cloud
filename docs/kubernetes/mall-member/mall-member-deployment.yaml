@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-member-deployment
+  labels:
+    name: mall-member-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-member
+  template:
+    metadata:
+      namespace: mall
+      name: mall-member-pod
+      labels:
+        app: mall-member
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-member-container
+          image: 192.168.159.128:5000/mall/mall-member:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18086
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
