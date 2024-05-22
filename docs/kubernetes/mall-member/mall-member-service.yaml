@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: mall
+  name: mall-member-service
+spec:
+  type: NodePort
+  selector:
+    app: mall-member
+  ports:
+    - nodePort: 30086
+      port: 18086
+      targetPort: 18086
+      protocol: TCP

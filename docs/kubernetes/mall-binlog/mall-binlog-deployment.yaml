@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-binlog-deployment
+  labels:
+    name: mall-binlog-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mall-binlog
+  template:
+    metadata:
+      namespace: mall
+      name: mall-binlog-pod
+      labels:
+        app: mall-binlog
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-binlog-container
+          image: 192.168.159.128:5000/mall/mall-binlog:latest
+          imagePullPolicy: Always
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
