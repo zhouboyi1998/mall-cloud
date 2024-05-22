@@ -21,5 +21,6 @@
 | 任务调度 | <img src="https://img.shields.io/badge/XXL JOB-2.4.0-mediumseagreen"> |
 | 监控告警 | <img src="https://img.shields.io/badge/Prometheus-2.43.0-orange"> <img src="https://img.shields.io/badge/Spring Boot Admin-2.3.1-seagreen"> |
 | 链路追踪 | <img src="https://img.shields.io/badge/SkyWalking-9.0.0-blue"> <img src="https://img.shields.io/badge/Sleuth--brightener"> <img src="https://img.shields.io/badge/Zipkin-2.24.3-orange"> |
-| 容器化 | <img src="https://img.shields.io/badge/Docker--deepskyblue"> |
+| 容器化 | <img src="https://img.shields.io/badge/Docker-26.1.3-deepskyblue"> <img src="https://img.shields.io/badge/Docker Compose-2.27.0-deepskyblue"> <img src="https://img.shields.io/badge/Kubernetes-1.28.2-royalblue"> |
+| 制品仓库 | <img src="https://img.shields.io/badge/Harbor-2.9.4-darkcyan"> |
 | 可视化 | <img src="https://img.shields.io/badge/Kibana-7.6.2-darkturquoise"> <img src="https://img.shields.io/badge/ElasticSearch Head--darkturquoise"> <img src="https://img.shields.io/badge/Kafka UI Lite-1.2.11-deepgreen"> |

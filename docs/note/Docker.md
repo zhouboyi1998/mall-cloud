@@ -1,5 +1,87 @@
 <h2 align="center">📔 Docker</h2>
 
+### 📦 Linux 安装
+
+* 更新软件包索引
+
+```shell
+apt-get update
+```
+
+* 更新软件包版本
+
+```shell
+apt-get upgrade
+```
+
+* 安装 `HTTPS` 相关的软件包
+
+```shell
+apt-get install apt-transport-https ca-certificates curl software-properties-common
+```
+
+* 从 `Docker` 官网下载 `Docker APT Key`
+
+```shell
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+```
+
+* 添加 `Docker RELEASE` 仓库
+
+```shell
+add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+```
+
+* 再次更新软件包索引
+
+```shell
+apt-get update
+```
+
+* 安装 `Docker`
+
+```shell
+apt-get install docker-ce
+```
+
+* 运行 `Docker`
+
+```shell
+systemctl start docker
+```
+
+* 设置 `Docker` 开机启动
+
+```shell
+systemctl enable docker
+```
+
+* 查看 `Docker` 版本
+
+```shell
+docker version
+```
+
+* 运行 `Hello World` 容器
+
+```shell
+docker run hello-world
+```
+
+* 安装 `Docker CLI`
+
+```shell
+apt-get install docker-ce-cli
+```
+
+* 锁定 `Docker`、`Docker CLI`、`Containerd` 版本
+
+```shell
+apt-mark hold docker-ce docker-ce-cli containerd.io
+```
+
+---
+
 ### 🐳 Dockerfile 文件
 
 * `FROM`：指定基础镜像
