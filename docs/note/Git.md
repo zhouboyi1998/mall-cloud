@@ -24,6 +24,70 @@ git config --global --unset http.proxy
 git config --global --unset https.proxy
 ```
 
+#### 可信列表
+
+* 在 `C:\Users\{username}\.ssh` 目录下打开 `Git Bash`
+* 为各个远程仓库分别生成 `SSH` 密钥文件
+* 执行命令后根据提示回车三次
+
+```bash
+ssh-keygen -t ed25519 -C "1144188685@qq.com" -f "github_id_rsa"
+```
+
+```bash
+ssh-keygen -t ed25519 -C "1144188685@qq.com" -f "gitee_id_rsa"
+```
+
+```bash
+ssh-keygen -t ed25519 -C "1144188685@qq.com" -f "gitlab_id_rsa"
+```
+
+* 在 `C:\Users\{username}\.ssh` 目录下创建 `config` 配置文件
+
+```bash
+touch ~/.ssh/config
+```
+
+* 在 `config` 配置文件中添加 `SSH` 私钥配置
+
+```
+# GitHub
+Host github.com
+HostName github.com
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/github_id_rsa
+
+# Gitee
+Host gitee.com
+HostName gitee.com
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/gitee_id_rsa
+
+# GitLab
+Host 192.168.159.128:8000
+HostName gitlab.com
+PreferredAuthentications publickey
+IdentityFile ~/.ssh/gitlab_id_rsa
+```
+
+* 将生成的 `SSH` 公钥（`xxx_id_rsa.pub` 公钥文件中的内容）分别添加到对应的远程仓库
+
+
+* 将远程仓库添加到 `Git` 可信列表
+* 执行命令后根据提示输入 `yes` 并回车
+
+```bash
+ssh -T git@github.com
+```
+
+```bash
+ssh -T git@gitee.com
+```
+
+```bash
+ssh -T git@gitlab.com
+```
+
 ---
 
 ### 🔑 命令
@@ -34,6 +98,14 @@ git config --global --unset https.proxy
 
 ```bash
 git remote add github https://github.com/zhouboyi1998/mall-cloud.git
+```
+
+```bash
+git remote add gitee https://gitee.com/zhouboyi/mall-cloud.git
+```
+
+```bash
+git remote add gitlab http://192.168.159.128:8000/root/mall-cloud.git
 ```
 
 * 查看关联的远程仓库
@@ -153,4 +225,12 @@ git push origin master --force
 
 ```bash
 git push github master --force
+```
+
+```bash
+git push gitee master --force
+```
+
+```bash
+git push gitlab master --force
 ```
