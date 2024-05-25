@@ -1,23 +1,23 @@
 <h2 align="center">📔 GitLab</h2>
 
-### 📦 Linux 安装
+### 📦 Ubuntu 安装
 
 ###### 更新软件包索引
 
 ```shell
-apt-get update
+sudo apt-get update
 ```
 
 ###### 更新软件包版本
 
 ```shell
-apt-get upgrade
+sudo apt-get upgrade
 ```
 
 ###### 安装 `GitLab` 依赖的软件包
 
 ```shell
-apt-get install curl openssh-server ca-certificates postfix
+sudo apt-get install curl openssh-server ca-certificates postfix
 ```
 
 * 安装 `Postfix` 时会弹出一个配置窗口
@@ -27,19 +27,19 @@ apt-get install curl openssh-server ca-certificates postfix
 ###### 添加 `GitLab` 仓库
 
 ```shell
-curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | bash
+sudo curl https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh | sudo bash
 ```
 
 ###### 安装 `GitLab`
 
 ```shell
-apt-get install gitlab-ce
+sudo apt-get install gitlab-ce
 ```
 
 ###### 配置 `GitLab` 的外部访问地址
 
 ```shell
-vim /etc/gitlab/gitlab.rb
+sudo vim /etc/gitlab/gitlab.rb
 ```
 
 * 修改 `external_url` 配置
@@ -51,43 +51,43 @@ external_url '192.168.159.128:8000'
 ###### 停止 `GitLab`
 
 ```shell
-gitlab-ctl stop
+sudo gitlab-ctl stop
 ```
 
 ###### 刷新 `GitLab` 配置
 
 ```shell
-gitlab-ctl reconfigure
+sudo gitlab-ctl reconfigure
 ```
 
 ###### 重启 `GitLab`
 
 ```shell
-gitlab-ctl restart
+sudo gitlab-ctl restart
 ```
 
 ###### 启动 `GitLab`
 
 ```shell
-gitlab-ctl start
+sudo gitlab-ctl start
 ```
 
 ###### 查看 `GitLab` 状态
 
 ```shell
-gitlab-ctl status
+sudo gitlab-ctl status
 ```
 
 ###### 设置 `GitLab` 开机启动
 
 ```shell
-systemctl enable gitlab-runsvdir.service
+sudo systemctl enable gitlab-runsvdir.service
 ```
 
 ###### 锁定 `GitLab` 版本
 
 ```shell
-apt-mark hold gitlab-ce
+sudo apt-mark hold gitlab-ce
 ```
 
 #### 解决访问 `GitLab` 报错 `502` 的问题
@@ -95,7 +95,7 @@ apt-mark hold gitlab-ce
 ###### 查看 `GitLab` 日志
 
 ```shell
-gitlab-ctl tail
+sudo gitlab-ctl tail
 ```
 
 * 查看是否存在 `badgateway` 错误日志
@@ -105,7 +105,7 @@ gitlab-ctl tail
 ###### 修改 `GitLab` `Web Server` 使用的端口
 
 ```shell
-vim /etc/gitlab/gitlab.rb
+sudo vim /etc/gitlab/gitlab.rb
 ```
 
 * `GitLab 13.10` 及之前的版本使用的 `Web Server` 是 `Unicorn`
@@ -130,7 +130,7 @@ puma['port'] = 8101
 * 保存在 `/etc/gitlab/initial_root_password` 文件中
 
 ```shell
-vim /etc/gitlab/initial_root_password
+sudo vim /etc/gitlab/initial_root_password
 ```
 
 * 注意：安装成功 `24` 小时后该文件就会被删除

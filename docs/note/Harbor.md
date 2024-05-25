@@ -1,6 +1,6 @@
 <h2 align="center">📔 Harbor</h2>
 
-### 📦 Linux 安装
+### 📦 Ubuntu 安装
 
 * 安装 `Harbor` 需要先安装 `Docker` 和 `Docker Compose`
 * 从 [**GitHub**](https://github.com/goharbor/harbor/releases) 下载 `2.9.4` 版本的 `Harbor`
@@ -8,7 +8,7 @@
 * 解压压缩包
 
 ```shell
-tar xf harbor-offline-installer-v2.9.4.tgz -C /opt
+sudo tar xf harbor-offline-installer-v2.9.4.tgz -C /opt
 ```
 
 * 进入解压后的目录
@@ -20,13 +20,13 @@ cd /opt/harbor
 * 复制 `harbor.yml.tmpl` 文件为 `harbor.yml`
 
 ```shell
-cp harbor.yml.tmpl harbor.yml
+sudo cp harbor.yml.tmpl harbor.yml
 ```
 
 * 修改 `harbor.yml` 文件
 
 ```shell
-vim harbor.yml
+sudo vim harbor.yml
 ```
 
 * `hostname` 修改为虚拟机的实际 `IP` 地址
@@ -64,13 +64,13 @@ harbor_admin_password: Harbor12345
 * 执行预处理脚本
 
 ```shell
-./prepare
+sudo ./prepare
 ```
 
 * 执行安装脚本
 
 ```shell
-./install.sh
+sudo ./install.sh
 ```
 
 * 宿主机访问 `192.168.159.128:5000`
@@ -88,13 +88,13 @@ cd /opt/harbor
 * 使用 `Docker Compose` 命令关闭 `Harbor`
 
 ```shell
-docker-compose down
+sudo docker-compose down
 ```
 
 * 启动 `Harbor`
 
 ```shell
-docker-compose up -d
+sudo docker-compose up -d
 ```
 
 ---
@@ -109,7 +109,7 @@ docker-compose up -d
     * 如果文件不存在，手动创建一个
 
 ```shell
-vim /etc/docker/daemon.json
+sudo vim /etc/docker/daemon.json
 ```
 
 * 在配置文件中添加以下内容
@@ -125,13 +125,13 @@ vim /etc/docker/daemon.json
 * 重新加载 `Docker` 守护进程配置
 
 ```shell
-systemctl daemon-reload
+sudo systemctl daemon-reload
 ```
 
 * 重启 `Docker`
 
 ```shell
-systemctl restart docker
+sudo systemctl restart docker
 ```
 
 ###### Windows

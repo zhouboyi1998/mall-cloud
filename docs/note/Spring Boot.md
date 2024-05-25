@@ -4,13 +4,15 @@
 
 #### 配置文件
 
+* 自动装配时排除 `JDBC` 数据源配置
+
 ```
-# 自动装配时排除 JDBC 数据源配置
 spring.autoconfigure.exclude: org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 ```
 
+* 允许同名 `Bean` 覆盖
+
 ```
-# 允许同名 Bean 覆盖
 spring.main.allow-bean-definition-overriding: true
 ```
 
