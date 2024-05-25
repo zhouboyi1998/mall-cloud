@@ -1,83 +1,83 @@
 <h2 align="center">📔 Docker</h2>
 
-### 📦 Linux 安装
+### 📦 Ubuntu 安装
 
 * 更新软件包索引
 
 ```shell
-apt-get update
+sudo apt-get update
 ```
 
 * 更新软件包版本
 
 ```shell
-apt-get upgrade
+sudo apt-get upgrade
 ```
 
 * 安装 `HTTPS` 相关的软件包
 
 ```shell
-apt-get install apt-transport-https ca-certificates curl software-properties-common
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
 ```
 
 * 从 `Docker` 官网下载 `Docker APT Key`
 
 ```shell
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 ```
 
 * 添加 `Docker RELEASE` 仓库
 
 ```shell
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 ```
 
 * 再次更新软件包索引
 
 ```shell
-apt-get update
+sudo apt-get update
 ```
 
 * 安装 `Docker`
 
 ```shell
-apt-get install docker-ce
+sudo apt-get install docker-ce
 ```
 
 * 运行 `Docker`
 
 ```shell
-systemctl start docker
+sudo systemctl start docker
 ```
 
 * 设置 `Docker` 开机启动
 
 ```shell
-systemctl enable docker
+sudo systemctl enable docker
 ```
 
 * 查看 `Docker` 版本
 
 ```shell
-docker version
+sudo docker version
 ```
 
 * 运行 `Hello World` 容器
 
 ```shell
-docker run hello-world
+sudo docker run hello-world
 ```
 
 * 安装 `Docker CLI`
 
 ```shell
-apt-get install docker-ce-cli
+sudo apt-get install docker-ce-cli
 ```
 
 * 锁定 `Docker`、`Docker CLI`、`Containerd` 版本
 
 ```shell
-apt-mark hold docker-ce docker-ce-cli containerd.io
+sudo apt-mark hold docker-ce docker-ce-cli containerd.io
 ```
 
 ---
@@ -301,11 +301,11 @@ docker import file_name.tar < image_name[:image_tag]
 
 ---
 
-### 🏹 实战
+### 🏹 项目实战
+
+* 项目根目录下运行以下命令
 
 #### 批量构建镜像
-
-###### Windows
 
 ```bash
 # 项目根目录下运行
@@ -313,8 +313,6 @@ docker import file_name.tar < image_name[:image_tag]
 ```
 
 #### 批量运行容器
-
-###### Windows
 
 ```bash
 # 项目根目录下运行

@@ -1,29 +1,29 @@
 <h2 align="center">📔 Kubernetes</h2>
 
-### 📦 Linux 安装
+### 📦 Ubuntu 安装
 
 * 更新软件包索引
 
 ```shell
-apt-get update
+sudo apt-get update
 ```
 
 * 更新软件包版本
 
 ```shell
-apt-get upgrade
+sudo apt-get upgrade
 ```
 
 * 禁用交换分区
 
 ```shell
-swapoff -a
+sudo swapoff -a
 ```
 
 * 修改配置文件永久禁用交换分区
 
 ```shell
-vim /etc/fstab
+sudo vim /etc/fstab
 ```
 
 * 注释掉 `/swapfile` 开头那一行
@@ -32,7 +32,7 @@ vim /etc/fstab
 * 安装 `bridge-utils`
 
 ```shell
-apt-get install bridge-utils
+sudo apt-get install bridge-utils
 ```
 
 * 开机自动挂载 `br_netfilter` 模块到内核
@@ -50,37 +50,37 @@ lsmod | grep br_netfilter
 * 安装 `HTTPS` 相关的软件包
 
 ```shell
-apt-get install apt-transport-https ca-certificates curl software-properties-common
+sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
 ```
 
 * 从阿里云下载 `Kubernetes APT Key`
 
 ```shell
-curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | apt-key add -
+sudo curl -s https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -
 ```
 
 * 修改 `/etc/apt/sources.list.d` 目录权限
 
 ```shell
-chmod 777 /etc/apt/sources.list.d
+sudo chmod 777 /etc/apt/sources.list.d
 ```
 
 * 配置 `Kubernetes` 的阿里云源
 
 ```shell
-echo 'deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main' >>/etc/apt/sources.list.d/kubernetes.list
+sudo echo 'deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main' >> /etc/apt/sources.list.d/kubernetes.list
 ```
 
 * 再次更新软件包索引
 
 ```shell
-apt-get update
+sudo apt-get update
 ```
 
 * 安装 `Kubelet`、`Kubeadm`、`Kubectl`
 
 ```shell
-apt-get install -y kubelet kubeadm kubectl
+sudo apt-get install -y kubelet kubeadm kubectl
 ```
 
 * 查看是否安装成功
@@ -92,7 +92,7 @@ kubectl version
 * 锁定 `Kubelet`、`Kubeadm`、`Kubectl` 版本
 
 ```shell
-apt-mark hold kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
 ```
 
 * 查看 `Kubernetes` 节点列表
