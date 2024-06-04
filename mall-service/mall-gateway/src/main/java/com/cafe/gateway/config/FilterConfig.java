@@ -13,11 +13,16 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
  * @Package: com.cafe.gateway.config
  * @Author: zhouboyi
  * @Date: 2022/4/30 20:59
- * @Description: 网关全局跨域配置
+ * @Description: 网关过滤器配置类
  */
 @Configuration
-public class GlobalCorsConfig {
+public class FilterConfig {
 
+    /**
+     * 跨域过滤器
+     *
+     * @return
+     */
     @Bean
     public CorsWebFilter corsWebFilter() {
         // 跨域配置

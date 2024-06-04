@@ -12,7 +12,8 @@ spring:
           lower-case-service-id: true
 
 # 网关安全配置
-secure:
-  ignore-urls:
+security:
+  # 白名单 API
+  whitelist:
     - "/actuator/**"
     - "/mall-security/**"

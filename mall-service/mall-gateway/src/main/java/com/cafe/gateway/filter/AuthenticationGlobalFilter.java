@@ -1,5 +1,6 @@
 package com.cafe.gateway.filter;
 
+import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.request.RequestConstant;
 import com.nimbusds.jose.JWSObject;
@@ -21,20 +22,13 @@ import java.text.ParseException;
  * @Package: com.cafe.gateway.filter
  * @Author: zhouboyi
  * @Date: 2022/5/10 23:01
- * @Description: 全局过滤器 (解析 JWT 中的用户认证信息)
+ * @Description: 认证过滤器
  */
 @Component
 public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthenticationGlobalFilter.class);
 
-    /**
-     * 解析 JWT 获取其中的用户信息
-     *
-     * @param exchange
-     * @param chain
-     * @return
-     */
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         // 获取 Request
@@ -64,13 +58,8 @@ public class AuthenticationGlobalFilter implements GlobalFilter, Ordered {
         return chain.filter(exchange);
     }
 
-    /**
-     * 设置过滤器优先级
-     *
-     * @return
-     */
     @Override
     public int getOrder() {
-        return 0;
+        return IntegerConstant.ONE_HUNDRED;
     }
 }
