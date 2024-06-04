@@ -4,8 +4,8 @@ import com.cafe.common.constant.security.AuthorizationConstant;
 import com.cafe.gateway.authentication.OauthServerAuthenticationEntryPoint;
 import com.cafe.gateway.authorization.AuthorizationManager;
 import com.cafe.gateway.authorization.OauthServerAccessDeniedHandler;
-import com.cafe.gateway.filter.IgnoreUrlsRemoveJwtFilter;
-import com.cafe.gateway.property.SecureProperties;
+import com.cafe.gateway.filter.WhitelistWebFilter;
+import com.cafe.gateway.property.SecurityProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +20,7 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtGra
 import org.springframework.security.oauth2.server.resource.authentication.ReactiveJwtAuthenticationConverterAdapter;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.util.StringUtils;
+import org.springframework.web.cors.reactive.CorsWebFilter;
 import reactor.core.publisher.Mono;
 
 /**
@@ -34,19 +35,19 @@ import reactor.core.publisher.Mono;
 public class WebFluxSecurityConfig {
 
     /**
-     * 全局跨域配置
+     * 跨域过滤器
      */
-    private final GlobalCorsConfig globalCorsConfig;
+    private final CorsWebFilter corsWebFilter;
 
     /**
-     * 白名单 URL 过滤器
+     * 白名单过滤器
      */
-    private final IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter;
+    private final WhitelistWebFilter whitelistWebFilter;
 
     /**
-     * 安全配置
+     * 网关安全配置
      */
-    private final SecureProperties secureProperties;
+    private final SecurityProperties securityProperties;
 
     /**
      * 授权管理器
@@ -65,16 +66,16 @@ public class WebFluxSecurityConfig {
 
     @Autowired
     public WebFluxSecurityConfig(
-        GlobalCorsConfig globalCorsConfig,
-        IgnoreUrlsRemoveJwtFilter ignoreUrlsRemoveJwtFilter,
-        SecureProperties secureProperties,
+        CorsWebFilter corsWebFilter,
+        WhitelistWebFilter whitelistWebFilter,
+        SecurityProperties securityProperties,
         AuthorizationManager authorizationManager,
         OauthServerAuthenticationEntryPoint oauthServerAuthenticationEntryPoint,
         OauthServerAccessDeniedHandler oauthServerAccessDeniedHandler
     ) {
-        this.globalCorsConfig = globalCorsConfig;
-        this.ignoreUrlsRemoveJwtFilter = ignoreUrlsRemoveJwtFilter;
-        this.secureProperties = secureProperties;
+        this.corsWebFilter = corsWebFilter;
+        this.whitelistWebFilter = whitelistWebFilter;
+        this.securityProperties = securityProperties;
         this.authorizationManager = authorizationManager;
         this.oauthServerAuthenticationEntryPoint = oauthServerAuthenticationEntryPoint;
         this.oauthServerAccessDeniedHandler = oauthServerAccessDeniedHandler;
@@ -87,13 +88,13 @@ public class WebFluxSecurityConfig {
             .disable()
             .cors()
             .and()
-            // 添加过滤器: 添加全局跨域配置
-            .addFilterBefore(globalCorsConfig.corsWebFilter(), SecurityWebFiltersOrder.CORS)
-            // 添加过滤器: 移除白名单 URL 中的 JWT 请求头
-            .addFilterBefore(ignoreUrlsRemoveJwtFilter, SecurityWebFiltersOrder.AUTHENTICATION)
+            // 添加跨域过滤器
+            .addFilterBefore(corsWebFilter, SecurityWebFiltersOrder.CORS)
+            // 添加白名单过滤器
+            .addFilterBefore(whitelistWebFilter, SecurityWebFiltersOrder.AUTHENTICATION)
             .authorizeExchange()
-            // 白名单 URL 配置
-            .pathMatchers(StringUtils.toStringArray(secureProperties.getIgnoreUrls()))
+            // 白名单配置
+            .pathMatchers(StringUtils.toStringArray(securityProperties.getWhitelist()))
             .permitAll()
             // 鉴权管理器配置
             .anyExchange()

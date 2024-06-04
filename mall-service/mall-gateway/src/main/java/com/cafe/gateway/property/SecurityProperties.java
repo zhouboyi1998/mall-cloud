@@ -12,16 +12,16 @@ import java.util.List;
  * @Package: com.cafe.gateway.property
  * @Author: zhouboyi
  * @Date: 2022/5/11 0:58
- * @Description: 安全配置
+ * @Description: 网关安全配置
  */
 @Getter
 @Setter
 @Component
-@ConfigurationProperties(prefix = "secure")
-public class SecureProperties {
+@ConfigurationProperties(prefix = "security")
+public class SecurityProperties {
 
     /**
-     * 白名单 URL 列表
+     * 白名单 API
      */
-    private List<String> ignoreUrls;
+    private List<String> whitelist;
 }
