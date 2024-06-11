@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date: 2022/5/7 17:29
  * @Description:
  */
-@FeignClient(value = "mall-user", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = "mall-user", contextId = "user", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/user")
 public interface UserFeign {
 

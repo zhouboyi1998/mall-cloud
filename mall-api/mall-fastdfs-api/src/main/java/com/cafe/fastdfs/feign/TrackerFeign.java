@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date: 2024/3/26 21:08
  * @Description:
  */
-@FeignClient(value = "mall-fastdfs", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = "mall-fastdfs", contextId = "tracker", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/tracker")
 public interface TrackerFeign {
 

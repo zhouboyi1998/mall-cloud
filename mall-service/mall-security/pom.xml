@@ -17,6 +17,11 @@
     <description>Spring Security 安全模块</description>
 
     <dependencies>
+        <!-- Spring Security 安全框架 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-security</artifactId>
+        </dependency>
         <!-- Oauth2 单点登录 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -60,6 +65,10 @@
 
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-common-log</artifactId>
         </dependency>
         <dependency>
@@ -68,8 +77,13 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-common-swagger</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-common-util</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-security-api</artifactId>
@@ -77,6 +91,10 @@
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-user-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-id-api</artifactId>
         </dependency>
     </dependencies>
 

@@ -18,6 +18,14 @@ start mqnamesrv.cmd
 start mqbroker.cmd -n 127.0.0.1:9876 autoCreateTopicEnable=true
 ```
 
+###### 添加环境变量
+
+* 系统变量
+    * 变量名：`ROCKETMQ_HOME`
+    * 变量值：`RocketMQ` 安装目录
+* 系统变量 `Path`
+    * `%ROCKETMQ_HOME%\bin`
+
 #### RocketMQ Dashboard
 
 * 解压 `rocketmq-dashboard-rocketmq-dashboard-1.0.0.zip`

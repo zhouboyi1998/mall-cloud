@@ -17,7 +17,7 @@ import java.util.List;
  * @Date: 2023/10/25 10:03
  * @Description:
  */
-@FeignClient(value = "mall-goods", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = "mall-goods", contextId = "sku", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/sku")
 public interface SkuFeign {
 

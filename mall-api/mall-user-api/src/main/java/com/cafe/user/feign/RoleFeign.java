@@ -16,7 +16,7 @@ import java.util.List;
  * @Date: 2022/5/10 9:55
  * @Description:
  */
-@FeignClient(value = "mall-user", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = "mall-user", contextId = "role", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/role")
 public interface RoleFeign {
 

@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.AnnotationUtils;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -35,9 +36,10 @@ import java.util.Optional;
  * @Date: 2022/9/16 9:30
  * @Description: 接口日志打印切面类
  */
+@Profile(value = {AppConstant.DEV, AppConstant.TEST})
+@Order
 @Aspect
 @Component
-@Profile(value = {AppConstant.DEV, AppConstant.TEST})
 public class LogPrintAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LogPrintAspect.class);
@@ -99,7 +101,7 @@ public class LogPrintAspect {
      */
     @Before(value = "logPrint()")
     public void doBefore(JoinPoint joinPoint) {
-        // 获取 HTTP 请求相关信息
+        // 获取 HttpServletRequest 对象
         HttpServletRequest request = Optional.ofNullable(RequestContextHolder.getRequestAttributes())
             .map(attributes -> (ServletRequestAttributes) attributes)
             .map(ServletRequestAttributes::getRequest)
