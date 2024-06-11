@@ -10,7 +10,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
 
 import java.security.KeyPair;
 import java.security.interfaces.RSAPrivateKey;
@@ -22,7 +21,6 @@ import java.security.interfaces.RSAPrivateKey;
  * @Date: 2023/3/9 16:13
  * @Description: 用户名密码认证提供器
  */
-@Component
 public class UsernamePasswordAuthenticationProvider implements AuthenticationProvider {
 
     /**

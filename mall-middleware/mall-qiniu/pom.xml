@@ -17,16 +17,25 @@
     <description>七牛云对象存储</description>
 
     <dependencies>
+        <!-- 七牛云对象存储 -->
         <dependency>
             <groupId>com.qiniu</groupId>
             <artifactId>qiniu-java-sdk</artifactId>
-            <version>7.12.1</version>
         </dependency>
 
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-common-log</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-swagger</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-qiniu-api</artifactId>

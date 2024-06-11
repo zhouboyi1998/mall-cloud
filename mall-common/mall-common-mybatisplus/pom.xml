@@ -17,10 +17,26 @@
     <description>MyBatis-Plus 公共包</description>
 
     <dependencies>
+        <!-- Spring Boot Web -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <optional>true</optional>
+        </dependency>
         <!-- MyBatis-Plus -->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+        <!-- Apache 工具包 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <!-- Guava 工具包 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
         </dependency>
 
         <dependency>
@@ -31,6 +47,7 @@
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-lang</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-id-api</artifactId>

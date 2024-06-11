@@ -15,7 +15,7 @@ import java.util.Map;
  * @Date: 2022/5/10 22:10
  * @Description:
  */
-@FeignClient(value = "mall-security", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = "mall-security", contextId = "jwk-set", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/jwk-set")
 public interface JWKSetFeign {
 

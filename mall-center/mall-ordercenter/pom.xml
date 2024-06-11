@@ -33,6 +33,7 @@
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-xxljob</artifactId>
         </dependency>
+
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-id-api</artifactId>
@@ -40,52 +41,22 @@
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-goods-api</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.cafe</groupId>
-                    <artifactId>mall-common-mybatisplus</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-storage-api</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.cafe</groupId>
-                    <artifactId>mall-common-mybatisplus</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-order-api</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.cafe</groupId>
-                    <artifactId>mall-common-mybatisplus</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-foundation-api</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.cafe</groupId>
-                    <artifactId>mall-common-mybatisplus</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-member-api</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>com.cafe</groupId>
-                    <artifactId>mall-common-mybatisplus</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 

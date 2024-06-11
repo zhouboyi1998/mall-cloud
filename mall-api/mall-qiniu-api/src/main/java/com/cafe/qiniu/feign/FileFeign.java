@@ -17,7 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @Date: 2023/11/17 21:04
  * @Description:
  */
-@FeignClient(value = "mall-qiniu", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = "mall-qiniu", contextId = "file", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/file")
 public interface FileFeign {
 

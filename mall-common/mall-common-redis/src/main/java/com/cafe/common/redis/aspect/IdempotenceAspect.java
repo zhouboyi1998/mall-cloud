@@ -1,6 +1,6 @@
 package com.cafe.common.redis.aspect;
 
-import com.cafe.common.constant.app.AppConstant;
+import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.constant.request.RequestConstant;
@@ -12,7 +12,6 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -32,10 +31,9 @@ import java.util.Optional;
  * @Date: 2023/8/4 15:08
  * @Description: 接口幂等性切面类
  */
+@Order(value = IntegerConstant.MIN_VALUE)
 @Aspect
-@Order
 @Component
-@Profile(value = {AppConstant.DEV, AppConstant.TEST, AppConstant.DOCKER})
 public class IdempotenceAspect {
 
     private final RedisTemplate<String, Object> redisTemplate;

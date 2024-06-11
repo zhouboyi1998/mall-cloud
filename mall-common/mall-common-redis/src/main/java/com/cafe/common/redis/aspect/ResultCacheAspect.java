@@ -1,6 +1,5 @@
 package com.cafe.common.redis.aspect;
 
-import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.redis.RedisConstant;
@@ -15,7 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -35,10 +33,9 @@ import java.util.stream.Collectors;
  * @Date: 2023/7/4 17:25
  * @Description: 接口返回结果缓存切面类
  */
-@Aspect
 @Order
+@Aspect
 @Component
-@Profile(value = {AppConstant.DEV, AppConstant.TEST, AppConstant.DOCKER})
 public class ResultCacheAspect {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ResultCacheAspect.class);

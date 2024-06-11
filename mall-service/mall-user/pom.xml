@@ -25,7 +25,15 @@
 
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-common-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-common-log</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-mybatisplus</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
@@ -35,6 +43,11 @@
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-redis</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-swagger</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-user-api</artifactId>

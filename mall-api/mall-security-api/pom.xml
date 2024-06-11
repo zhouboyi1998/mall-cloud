@@ -21,15 +21,18 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-security</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-core</artifactId>
+            <optional>true</optional>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-swagger</artifactId>
+            <optional>true</optional>
         </dependency>
     </dependencies>
 

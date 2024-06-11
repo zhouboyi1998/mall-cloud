@@ -17,10 +17,25 @@
     <description>Solr 搜索引擎</description>
 
     <dependencies>
+        <!-- Spring Data Solr -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-solr</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-core</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-log</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-swagger</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-solr-api</artifactId>
