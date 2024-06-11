@@ -6,6 +6,3 @@ spring:
     name: mall-order
   profiles:
     active: dev
-  # 允许同名 Bean 覆盖
-  main:
-    allow-bean-definition-overriding: true

@@ -23,7 +23,7 @@ import java.util.List;
  * @Date: 2023/10/27 15:07
  * @Description:
  */
-@FeignClient(value = "mall-order", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = "mall-order", contextId = "order-state-flow", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/order-state-flow")
 public interface OrderStateFlowFeign {
 

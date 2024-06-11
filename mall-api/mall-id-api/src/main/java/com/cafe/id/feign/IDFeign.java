@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date: 2022/11/1 10:07
  * @Description:
  */
-@FeignClient(value = "mall-id", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = "mall-id", contextId = "id", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/id")
 public interface IDFeign {
 

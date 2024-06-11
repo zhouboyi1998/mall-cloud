@@ -21,11 +21,16 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-constant</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-jackson</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>

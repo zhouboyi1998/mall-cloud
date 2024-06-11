@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Date: 2022/7/23 20:26
  * @Description:
  */
-@FeignClient(value = "mall-fastdfs", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = "mall-fastdfs", contextId = "file", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/file")
 public interface FileFeign {
 

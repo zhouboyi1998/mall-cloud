@@ -38,8 +38,6 @@
         <spring-cloud-alibaba.version>2.2.9.RELEASE</spring-cloud-alibaba.version>
 
         <!-- 依赖组件版本管理 -->
-        <!-- Nacos 2.x 需要依赖低版本的 Reflections, 覆盖 Debezium 提供的高版本 -->
-        <reflections.version>0.9.11</reflections.version>
         <apollo.version>2.1.0</apollo.version>
         <knife4j.version>2.0.9</knife4j.version>
         <mysql-connector.version>8.0.19</mysql-connector.version>
@@ -62,10 +60,12 @@
         <minio.version>8.3.4</minio.version>
         <!-- MinIO 需要依赖高版本的 OK HTTP3, 覆盖 Spring Boot 提供的低版本 -->
         <okhttp3.version>4.9.3</okhttp3.version>
+        <qiniu-sdk.version>7.12.1</qiniu-sdk.version>
         <mysql-binlog-connector.version>0.21.0</mysql-binlog-connector.version>
         <canal.version>1.1.5</canal.version>
         <debezium.version>1.5.4.Final</debezium.version>
-        <tomcat-embed.version>9.0.46</tomcat-embed.version>
+        <!-- Nacos 2.x 需要依赖低版本的 Reflections, 覆盖 Debezium 提供的高版本 -->
+        <reflections.version>0.9.11</reflections.version>
         <commons-collections4.version>4.4</commons-collections4.version>
         <guava.version>30.0-jre</guava.version>
         <hutool.version>5.4.0</hutool.version>
@@ -146,12 +146,6 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Reflections 反射框架 -->
-            <dependency>
-                <groupId>org.reflections</groupId>
-                <artifactId>reflections</artifactId>
-                <version>${reflections.version}</version>
-            </dependency>
             <!-- Apollo 配置中心客户端 -->
             <dependency>
                 <groupId>com.ctrip.framework.apollo</groupId>
@@ -295,6 +289,12 @@
                 <artifactId>okhttp</artifactId>
                 <version>${okhttp3.version}</version>
             </dependency>
+            <!-- 七牛云对象存储 -->
+            <dependency>
+                <groupId>com.qiniu</groupId>
+                <artifactId>qiniu-java-sdk</artifactId>
+                <version>${qiniu-sdk.version}</version>
+            </dependency>
             <!-- MySQL Binlog Connector 数据库监听器 -->
             <dependency>
                 <groupId>com.github.shyiko</groupId>
@@ -328,11 +328,11 @@
                 <artifactId>debezium-connector-mysql</artifactId>
                 <version>${debezium.version}</version>
             </dependency>
-            <!-- Tomcat embed -->
+            <!-- Reflections 反射框架 -->
             <dependency>
-                <groupId>org.apache.tomcat.embed</groupId>
-                <artifactId>tomcat-embed-core</artifactId>
-                <version>${tomcat-embed.version}</version>
+                <groupId>org.reflections</groupId>
+                <artifactId>reflections</artifactId>
+                <version>${reflections.version}</version>
             </dependency>
             <!-- Apache 集合包 -->
             <dependency>

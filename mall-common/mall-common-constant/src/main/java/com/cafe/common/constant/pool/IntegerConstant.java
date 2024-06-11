@@ -9,6 +9,8 @@ package com.cafe.common.constant.pool;
  */
 public class IntegerConstant {
 
+    public static final int MIN_VALUE = Integer.MIN_VALUE;
+
     public static final int MINUS_ONE = -1;
 
     public static final int ZERO = 0;
@@ -49,5 +51,5 @@ public class IntegerConstant {
 
     public static final int TEN_THOUSAND = 10000;
 
-    public static final int MAX_VALUE = 2147483647;
+    public static final int MAX_VALUE = Integer.MAX_VALUE;
 }

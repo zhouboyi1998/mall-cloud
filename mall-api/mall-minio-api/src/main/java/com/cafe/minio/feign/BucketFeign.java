@@ -18,7 +18,7 @@ import java.util.List;
  * @Date: 2024/3/26 21:11
  * @Description:
  */
-@FeignClient(value = "mall-minio", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = "mall-minio", contextId = "bucket", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/bucket")
 public interface BucketFeign {
 

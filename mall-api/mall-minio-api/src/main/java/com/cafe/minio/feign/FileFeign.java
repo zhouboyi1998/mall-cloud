@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Date: 2022/6/9 20:03
  * @Description:
  */
-@FeignClient(value = "mall-minio", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = "mall-minio", contextId = "file", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/file")
 public interface FileFeign {
 
