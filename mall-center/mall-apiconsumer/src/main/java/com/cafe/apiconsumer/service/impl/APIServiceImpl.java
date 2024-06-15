@@ -3,15 +3,18 @@ package com.cafe.apiconsumer.service.impl;
 import com.cafe.apiconsumer.model.API;
 import com.cafe.apiconsumer.service.APIService;
 import com.cafe.common.constant.pool.StringConstant;
-import com.cafe.common.enumeration.http.HttpMethodEnum;
 import com.cafe.common.util.json.JacksonUtil;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.util.UriBuilder;
 import reactor.core.publisher.Mono;
+
+import java.net.URI;
 
 /**
  * @Project: mall-cloud
@@ -29,12 +32,12 @@ public class APIServiceImpl implements APIService {
 
     @Autowired
     public APIServiceImpl() {
-        this.webClient = WebClient.builder().build();
+        this.webClient = WebClient.create();
     }
 
     @Override
     public Mono<ObjectNode> proxy(API api) {
-        switch (HttpMethodEnum.getHttpMethodByName(api.getMethod())) {
+        switch (HttpMethod.valueOf(api.getMethod())) {
             case GET:
                 return sendRequest(api, webClient.get());
             case POST:
@@ -49,10 +52,10 @@ public class APIServiceImpl implements APIService {
                 return sendRequest(api, webClient.head());
             case OPTIONS:
                 return sendRequest(api, webClient.options());
-            case UNKNOWN:
+            case TRACE:
             default:
-                LOGGER.error("APIServiceImpl.proxy(): Unknown HTTP Method! api -> {}", JacksonUtil.writeValueAsString(api));
-                return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, "Unknown HTTP Method!"));
+                LOGGER.error("APIServiceImpl.proxy(): Unsupported HTTP Method! api -> {}", JacksonUtil.writeValueAsString(api));
+                return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, "Unsupported HTTP Method!"));
         }
     }
 
@@ -65,19 +68,12 @@ public class APIServiceImpl implements APIService {
      */
     private Mono<ObjectNode> sendRequest(API api, WebClient.RequestHeadersUriSpec<?> spec) {
         return spec
-            .uri(api.getUrl(), uriBuilder -> {
-                api.getQuery().forEach(uriBuilder::queryParam);
-                return uriBuilder.build();
-            })
+            .uri(api.getUrl(), uriBuilder -> uri(api, uriBuilder))
             .headers(httpHeaders -> api.getHeader().forEach(httpHeaders::add))
             .retrieve()
             .bodyToMono(ObjectNode.class)
-            .doOnSuccess(response -> LOGGER.info("APIServiceImpl.sendRequest(): api -> {}, response -> {}", JacksonUtil.writeValueAsString(api), response))
-            .onErrorResume(throwable -> {
-                String message = throwable.getMessage();
-                LOGGER.error("APIServiceImpl.sendRequest(): api -> {}, message -> {}", JacksonUtil.writeValueAsString(api), message, throwable);
-                return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, message));
-            });
+            .doOnSuccess(response -> doOnSuccess(api, response))
+            .onErrorResume(throwable -> onErrorResume(api, throwable));
     }
 
     /**
@@ -89,19 +85,46 @@ public class APIServiceImpl implements APIService {
      */
     private Mono<ObjectNode> sendRequest(API api, WebClient.RequestBodyUriSpec spec) {
         return spec
-            .uri(api.getUrl(), uriBuilder -> {
-                api.getQuery().forEach(uriBuilder::queryParam);
-                return uriBuilder.build();
-            })
+            .uri(api.getUrl(), uriBuilder -> uri(api, uriBuilder))
             .headers(httpHeaders -> api.getHeader().forEach(httpHeaders::add))
             .bodyValue(api.getBody())
             .retrieve()
             .bodyToMono(ObjectNode.class)
-            .doOnSuccess(response -> LOGGER.info("APIServiceImpl.sendRequest(): api -> {}, response -> {}", JacksonUtil.writeValueAsString(api), response))
-            .onErrorResume(throwable -> {
-                String message = throwable.getMessage();
-                LOGGER.error("APIServiceImpl.sendRequest(): api -> {}, message -> {}", JacksonUtil.writeValueAsString(api), message, throwable);
-                return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, message));
-            });
+            .doOnSuccess(response -> doOnSuccess(api, response))
+            .onErrorResume(throwable -> onErrorResume(api, throwable));
+    }
+
+    /**
+     * 构建 URI
+     *
+     * @param api
+     * @param uriBuilder
+     * @return
+     */
+    private URI uri(API api, UriBuilder uriBuilder) {
+        api.getQuery().forEach(uriBuilder::queryParam);
+        return uriBuilder.build();
+    }
+
+    /**
+     * doOnSuccess 处理逻辑
+     *
+     * @param api
+     * @param response
+     */
+    private void doOnSuccess(API api, ObjectNode response) {
+        LOGGER.info("APIServiceImpl.doOnSuccess(): api -> {}, response -> {}", JacksonUtil.writeValueAsString(api), response);
+    }
+
+    /**
+     * onErrorResume 处理逻辑
+     *
+     * @param api
+     * @param throwable
+     * @return
+     */
+    private Mono<ObjectNode> onErrorResume(API api, Throwable throwable) {
+        LOGGER.error("APIServiceImpl.onErrorResume(): api -> {}, message -> {}", JacksonUtil.writeValueAsString(api), throwable.getMessage(), throwable);
+        return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, throwable.getMessage()));
     }
 }
