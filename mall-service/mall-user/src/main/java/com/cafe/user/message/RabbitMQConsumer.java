@@ -37,7 +37,7 @@ public class RabbitMQConsumer {
     }
 
     /**
-     * 监听 RabbitMQ, 接收 RabbitMQQueue.ROLE_MENU 消息队列中的消息
+     * 监听 RabbitMQ, 接收角色-菜单队列中的消息
      *
      * @param message JSON 字符串格式的消息内容
      */

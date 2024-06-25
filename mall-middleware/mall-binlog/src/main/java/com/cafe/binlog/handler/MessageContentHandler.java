@@ -38,7 +38,7 @@ public class MessageContentHandler {
      *
      * @param beforeRowList 更新前的数据
      * @param afterRowList  更新后的数据
-     * @param tableName     数据库表名 (database.table)
+     * @param tableName     数据库表名 (格式: database.table)
      * @param operation     数据变更的类型
      */
     public void handle(List<Serializable[]> beforeRowList, List<Serializable[]> afterRowList, String tableName, String operation) {

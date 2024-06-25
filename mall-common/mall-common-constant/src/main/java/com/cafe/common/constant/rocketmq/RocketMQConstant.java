@@ -34,19 +34,19 @@ public class RocketMQConstant {
     public static class Topic {
 
         /**
-         * canal 生产者 --> goods 主题
+         * goods 主题
          */
-        public static final String CANAL_TO_GOODS = "canal-to-goods";
+        public static final String GOODS = "goods";
 
         /**
-         * canal 生产者 --> brand 主题
+         * brand 主题
          */
-        public static final String CANAL_TO_BRAND = "canal-to-brand";
+        public static final String BRAND = "brand";
 
         /**
-         * canal 生产者 --> category 主题
+         * category 主题
          */
-        public static final String CANAL_TO_CATEGORY = "canal-to-category";
+        public static final String CATEGORY = "category";
 
         /**
          * Producer + TableName 作为组合键, 获取 Topic
@@ -54,8 +54,8 @@ public class RocketMQConstant {
         public static final MultiKeyMap<String, String> MAP = new MultiKeyMap<>();
 
         static {
-            MAP.put(Producer.CANAL, MySQLConstant.DatabaseTable.BRAND, CANAL_TO_BRAND);
-            MAP.put(Producer.CANAL, MySQLConstant.DatabaseTable.CATEGORY, CANAL_TO_CATEGORY);
+            MAP.put(Producer.CANAL, MySQLConstant.DatabaseTable.BRAND, BRAND);
+            MAP.put(Producer.CANAL, MySQLConstant.DatabaseTable.CATEGORY, CATEGORY);
         }
     }
 
