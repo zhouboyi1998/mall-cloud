@@ -29,14 +29,14 @@ public class KafkaConstant {
     public static class Topic {
 
         /**
-         * debezium 生产者 -> order 主题
+         * order 主题
          */
-        public static final String DEBEZIUM_TO_ORDER = "debezium-to-order";
+        public static final String ORDER = "order";
 
         /**
-         * debezium 生产者 -> order-detail 主题
+         * order-detail 主题
          */
-        public static final String DEBEZIUM_TO_ORDER_DETAIL = "debezium-to-order-detail";
+        public static final String ORDER_DETAIL = "order-detail";
 
         /**
          * Producer + TableName 作为组合键, 获取 Topic
@@ -44,8 +44,8 @@ public class KafkaConstant {
         public static final MultiKeyMap<String, String> MAP = new MultiKeyMap<>();
 
         static {
-            MAP.put(Producer.DEBEZIUM, MySQLConstant.DatabaseTable.ORDER, DEBEZIUM_TO_ORDER);
-            MAP.put(Producer.DEBEZIUM, MySQLConstant.DatabaseTable.ORDER_DETAIL, DEBEZIUM_TO_ORDER_DETAIL);
+            MAP.put(Producer.DEBEZIUM, MySQLConstant.DatabaseTable.ORDER, ORDER);
+            MAP.put(Producer.DEBEZIUM, MySQLConstant.DatabaseTable.ORDER_DETAIL, ORDER_DETAIL);
         }
     }
 }

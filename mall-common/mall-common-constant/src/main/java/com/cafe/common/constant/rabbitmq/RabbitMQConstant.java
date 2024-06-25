@@ -34,12 +34,12 @@ public class RabbitMQConstant {
     public static class RoutingKey {
 
         /**
-         * binlog 交换机 --> role-menu 队列
+         * binlog 交换机和 role-menu 队列绑定的路由键
          */
         public static final String BINLOG_TO_ROLE_MENU = "binlog-to-role-menu";
 
         /**
-         * canal 交换机 --> role-menu 队列
+         * canal 交换机和 role-menu 队列绑定的路由键
          */
         public static final String CANAL_TO_ROLE_MENU = "canal-to-role-menu";
 
