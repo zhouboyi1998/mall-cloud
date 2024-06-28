@@ -2,8 +2,8 @@ package com.cafe.elasticsearch.service.impl;
 
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
 import com.cafe.common.util.json.JacksonUtil;
-import com.cafe.elasticsearch.model.Goods;
 import com.cafe.elasticsearch.service.GoodsService;
+import com.cafe.goods.bo.Goods;
 import org.apache.commons.lang3.ObjectUtils;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;

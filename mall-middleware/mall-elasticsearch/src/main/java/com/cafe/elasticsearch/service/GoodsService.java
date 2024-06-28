@@ -1,6 +1,6 @@
 package com.cafe.elasticsearch.service;
 
-import com.cafe.elasticsearch.model.Goods;
+import com.cafe.goods.bo.Goods;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;

@@ -2,8 +2,8 @@ package com.cafe.elasticsearch.controller;
 
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
 import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.elasticsearch.model.Goods;
 import com.cafe.elasticsearch.service.GoodsService;
+import com.cafe.goods.bo.Goods;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
