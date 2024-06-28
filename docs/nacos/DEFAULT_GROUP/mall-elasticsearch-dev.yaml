@@ -6,6 +6,17 @@ spring:
       # Sentinel 控制台
       transport:
         dashboard: 127.0.0.1:8858
+  # Kafka 配置
+  kafka:
+    # Kafka 客户端唯一标识 (用于 Kafka 服务端日志记录)
+    client-id: ${spring.application.name}
+    # Kafka 消费者配置
+    consumer:
+      # Kafka 服务端地址
+      bootstrap-servers: 127.0.0.1:9092
+      # Kafka 消费者消息反序列化器
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
 # ElasticSearch 配置
 elastic-search:

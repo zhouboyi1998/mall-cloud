@@ -41,4 +41,15 @@ public class ElasticSearchConstant {
             FieldConstant.SKU_NAME
         };
     }
+
+    /**
+     * 订单VO索引
+     */
+    public static class OrderVO {
+
+        /**
+         * 索引名称
+         */
+        public static final String INDEX = "order-vo";
+    }
 }

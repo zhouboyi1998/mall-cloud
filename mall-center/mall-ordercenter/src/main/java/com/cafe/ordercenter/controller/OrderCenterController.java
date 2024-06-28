@@ -1,5 +1,7 @@
 package com.cafe.ordercenter.controller;
 
+import com.cafe.common.constant.kafka.KafkaConstant;
+import com.cafe.common.kafka.producer.KafkaProducer;
 import com.cafe.common.log.annotation.LogPrint;
 import com.cafe.order.vo.OrderVO;
 import com.cafe.ordercenter.service.OrderCenterService;
@@ -32,9 +34,12 @@ public class OrderCenterController {
 
     private final OrderCenterService orderCenterService;
 
+    private final KafkaProducer kafkaProducer;
+
     @Autowired
-    public OrderCenterController(OrderCenterService orderCenterService) {
+    public OrderCenterController(OrderCenterService orderCenterService, KafkaProducer kafkaProducer) {
         this.orderCenterService = orderCenterService;
+        this.kafkaProducer = kafkaProducer;
     }
 
     @LogPrint(value = "提交订单")
@@ -51,6 +56,8 @@ public class OrderCenterController {
         @RequestBody List<CartVO> cartVOList
     ) {
         OrderVO orderVO = orderCenterService.submit(addressId, channel, invoice, cartVOList);
+        // 发送消息到 Kafka
+        kafkaProducer.send(KafkaConstant.Topic.ORDER_VO, orderVO);
         return ResponseEntity.ok(orderVO);
     }
 }

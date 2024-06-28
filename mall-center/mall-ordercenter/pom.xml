@@ -23,6 +23,10 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-common-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-common-log</artifactId>
         </dependency>
         <dependency>
