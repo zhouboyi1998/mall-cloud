@@ -39,6 +39,11 @@ public class KafkaConstant {
         public static final String ORDER_DETAIL = "order-detail";
 
         /**
+         * order-vo 主题
+         */
+        public static final String ORDER_VO = "order-vo";
+
+        /**
          * Producer + TableName 作为组合键, 获取 Topic
          */
         public static final MultiKeyMap<String, String> MAP = new MultiKeyMap<>();
@@ -47,5 +52,16 @@ public class KafkaConstant {
             MAP.put(Producer.DEBEZIUM, MySQLConstant.DatabaseTable.ORDER, ORDER);
             MAP.put(Producer.DEBEZIUM, MySQLConstant.DatabaseTable.ORDER_DETAIL, ORDER_DETAIL);
         }
+    }
+
+    /**
+     * 消费者组
+     */
+    public static class ConsumerGroup {
+
+        /**
+         * elasticsearch 消费者组
+         */
+        public static final String ELASTICSEARCH = "elasticsearch";
     }
 }

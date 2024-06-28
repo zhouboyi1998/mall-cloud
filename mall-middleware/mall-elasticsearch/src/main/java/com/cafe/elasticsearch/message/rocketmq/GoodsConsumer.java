@@ -1,4 +1,4 @@
-package com.cafe.elasticsearch.message;
+package com.cafe.elasticsearch.message.rocketmq;
 
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.model.GoodsConstant;
@@ -20,28 +20,28 @@ import java.util.Map;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.elasticsearch.message
+ * @Package: com.cafe.elasticsearch.message.rocketmq
  * @Author: zhouboyi
  * @Date: 2022/11/3 15:24
  * @Description: RocketMQ 商品消息消费者
  */
 @Component
 @RocketMQMessageListener(topic = RocketMQConstant.Topic.GOODS, consumerGroup = RocketMQConstant.ConsumerGroup.ELASTICSEARCH)
-public class RocketMQGoodsConsumer implements RocketMQListener<String> {
+public class GoodsConsumer implements RocketMQListener<String> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RocketMQGoodsConsumer.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(GoodsConsumer.class);
 
     private final GoodsService goodsService;
 
     @Autowired
-    public RocketMQGoodsConsumer(GoodsService goodsService) {
+    public GoodsConsumer(GoodsService goodsService) {
         this.goodsService = goodsService;
     }
 
     @Override
     public void onMessage(String message) {
         // 打印成功接收消息的日志
-        LOGGER.info("RocketMQGoodsConsumer.onMessage(): rocketmq message -> {}", message);
+        LOGGER.info("GoodsConsumer.onMessage(): rocketmq message -> {}", message);
         // 获取消息内容
         Map<String, Object> content = JacksonUtil.readValue(message, new TypeReference<Map<String, Object>>() {});
         // 获取上下架标识
@@ -54,17 +54,17 @@ public class RocketMQGoodsConsumer implements RocketMQListener<String> {
                 // 上架商品
                 goodsService.insertBatch(goodsList);
                 // 打印成功上架商品的日志
-                LOGGER.info("RocketMQGoodsConsumer.onMessage(): Put away goods success! rocketmq message -> {}", message);
+                LOGGER.info("GoodsConsumer.onMessage(): Put away goods success! rocketmq message -> {}", message);
             } else {
                 // 获取下架商品的主键
                 List<String> ids = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<String>>() {});
                 // 下架商品
                 goodsService.deleteBatch(ids);
                 // 打印成功下架商品的日志
-                LOGGER.info("RocketMQGoodsConsumer.onMessage(): Sold out goods success! rocketmq message -> {}", message);
+                LOGGER.info("GoodsConsumer.onMessage(): Sold out goods success! rocketmq message -> {}", message);
             }
         } catch (IOException e) {
-            LOGGER.error("RocketMQGoodsConsumer.onMessage(): Failed to launch goods! message -> {}", e.getMessage(), e);
+            LOGGER.error("GoodsConsumer.onMessage(): Failed to update goods index! error message -> {}", e.getMessage(), e);
         }
     }
 }
