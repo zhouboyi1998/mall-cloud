@@ -3,6 +3,6 @@ server:
 
 spring:
   application:
-    name: mall-apiconsumer
+    name: mall-openapicenter
   profiles:
     active: dev

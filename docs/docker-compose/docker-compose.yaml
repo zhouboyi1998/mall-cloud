@@ -249,14 +249,14 @@ services:
       - ./logs:/mall/mall-ordercenter/logs
     restart: always
 
-  mall-apiconsumer:
-    image: mall-apiconsumer:latest
+  mall-openapicenter:
+    image: mall-openapicenter:latest
     ports:
       - "18062:18062"
     networks:
       - mall-net
     volumes:
-      - ./logs:/mall/mall-apiconsumer/logs
+      - ./logs:/mall/mall-openapicenter/logs
     restart: always
 
 networks:

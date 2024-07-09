@@ -43,6 +43,6 @@ docker build -f ./docs/docker/mall-merchant/Dockerfile -t mall-merchant:latest .
 @REM -------------------- mall-center --------------------
 
 docker build -f ./docs/docker/mall-ordercenter/Dockerfile -t mall-ordercenter:latest .
-docker build -f ./docs/docker/mall-apiconsumer/Dockerfile -t mall-apiconsumer:latest .
+docker build -f ./docs/docker/mall-openapicenter/Dockerfile -t mall-openapicenter:latest .
 
 pause

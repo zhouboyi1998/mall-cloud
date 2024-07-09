@@ -1,4 +1,4 @@
-package com.cafe.apiconsumer;
+package com.cafe.openapicenter;
 
 import com.cafe.common.constant.app.AppConstant;
 import org.springframework.boot.SpringApplication;
@@ -7,16 +7,16 @@ import org.springframework.context.annotation.ComponentScan;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.apiconsumer
+ * @Package: com.cafe.openapicenter
  * @Author: zhouboyi
  * @Date: 2024/4/21 4:39
- * @Description: 开放接口消费中心启动类
+ * @Description: 开放接口中心启动类
  */
 @SpringCloudApplication
 @ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
-public class APIConsumerApplication {
+public class OpenAPICenterApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(APIConsumerApplication.class, args);
+        SpringApplication.run(OpenAPICenterApplication.class, args);
     }
 }

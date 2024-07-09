@@ -1,8 +1,8 @@
-package com.cafe.apiconsumer.controller;
+package com.cafe.openapicenter.controller;
 
-import com.cafe.apiconsumer.model.API;
-import com.cafe.apiconsumer.service.APIService;
 import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.openapicenter.model.API;
+import com.cafe.openapicenter.service.APIService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,10 +13,10 @@ import reactor.core.publisher.Mono;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.apiconsumer.controller
+ * @Package: com.cafe.openapicenter.controller
  * @Author: zhouboyi
  * @Date: 2024/4/23 20:18
- * @Description:
+ * @Description: 通用开放接口消费者
  */
 @RestController
 @RequestMapping(value = "/api")
