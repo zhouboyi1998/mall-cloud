@@ -1,4 +1,4 @@
-package com.cafe.apiconsumer.model;
+package com.cafe.openapicenter.model;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -10,7 +10,7 @@ import java.util.Map;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.apiconsumer.model
+ * @Package: com.cafe.openapicenter.model
  * @Author: zhouboyi
  * @Date: 2024/4/23 20:11
  * @Description: 开放接口模型

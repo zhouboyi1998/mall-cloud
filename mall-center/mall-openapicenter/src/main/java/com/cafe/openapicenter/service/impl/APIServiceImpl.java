@@ -1,9 +1,9 @@
-package com.cafe.apiconsumer.service.impl;
+package com.cafe.openapicenter.service.impl;
 
-import com.cafe.apiconsumer.model.API;
-import com.cafe.apiconsumer.service.APIService;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.util.json.JacksonUtil;
+import com.cafe.openapicenter.model.API;
+import com.cafe.openapicenter.service.APIService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ import java.net.URI;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.apiconsumer.service.impl
+ * @Package: com.cafe.openapicenter.service.impl
  * @Author: zhouboyi
  * @Date: 2024/4/23 20:25
  * @Description:

@@ -16,7 +16,7 @@
     <description>中台模块</description>
 
     <modules>
-        <module>mall-apiconsumer</module>
+        <module>mall-openapicenter</module>
         <module>mall-ordercenter</module>
     </modules>
 

@@ -1,12 +1,12 @@
-package com.cafe.apiconsumer.service;
+package com.cafe.openapicenter.service;
 
-import com.cafe.apiconsumer.model.API;
+import com.cafe.openapicenter.model.API;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import reactor.core.publisher.Mono;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.apiconsumer.service
+ * @Package: com.cafe.openapicenter.service
  * @Author: zhouboyi
  * @Date: 2024/4/23 20:24
  * @Description:

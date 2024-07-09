@@ -2,25 +2,25 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: mall
-  name: mall-apiconsumer-deployment
+  name: mall-openapicenter-deployment
   labels:
-    name: mall-apiconsumer-deployment
+    name: mall-openapicenter-deployment
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: mall-apiconsumer
+      app: mall-openapicenter
   template:
     metadata:
       namespace: mall
-      name: mall-apiconsumer-pod
+      name: mall-openapicenter-pod
       labels:
-        app: mall-apiconsumer
+        app: mall-openapicenter
     spec:
       restartPolicy: Always
       containers:
-        - name: mall-apiconsumer-container
-          image: 192.168.159.128:5000/mall/mall-apiconsumer:latest
+        - name: mall-openapicenter-container
+          image: 192.168.159.128:5000/mall/mall-openapicenter:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 18062

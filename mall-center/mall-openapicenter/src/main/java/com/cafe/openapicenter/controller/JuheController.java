@@ -1,7 +1,7 @@
-package com.cafe.apiconsumer.controller;
+package com.cafe.openapicenter.controller;
 
-import com.cafe.apiconsumer.service.JuheService;
 import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.openapicenter.service.JuheService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +12,7 @@ import reactor.core.publisher.Mono;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.apiconsumer.controller
+ * @Package: com.cafe.openapicenter.controller
  * @Author: zhouboyi
  * @Date: 2024/4/21 4:45
  * @Description: 聚合数据开放接口消费者
