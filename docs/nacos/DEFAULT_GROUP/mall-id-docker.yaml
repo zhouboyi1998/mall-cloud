@@ -9,5 +9,5 @@ spring:
 
 # 雪花分布式ID生成器配置
 snowflake:
-  worker-id: 1
-  datacenter-id: 1
+  worker-id: 0
+  datacenter-id: 4

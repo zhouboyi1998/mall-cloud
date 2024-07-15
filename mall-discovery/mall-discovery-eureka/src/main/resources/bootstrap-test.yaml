@@ -1,0 +1,18 @@
+# Eureka 配置
+eureka:
+  # Eureka 客户端配置
+  client:
+    service-url:
+      default-zone: http://192.168.44.128:8761/eureka
+  instance:
+    prefer-ip-address: true
+
+# Seata 配置
+seata:
+  # Seata 服务端地址
+  registry:
+    type: eureka
+    eureka:
+      service-url: http://192.168.44.128:8761/eureka
+      application: seata-server
+      weight: 1

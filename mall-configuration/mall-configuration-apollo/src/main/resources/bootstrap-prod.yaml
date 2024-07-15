@@ -1,0 +1,9 @@
+# Apollo 配置
+app:
+  id: mall-cloud
+apollo:
+  meta: http://192.168.159.128:8080
+  bootstrap:
+    enabled: true
+    namespaces: mall,mall-prod,${spring.application.name},${spring.application.name}-prod
+  cacheDir: ./cache/apollo

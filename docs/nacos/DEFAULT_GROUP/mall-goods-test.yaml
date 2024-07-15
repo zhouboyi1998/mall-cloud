@@ -1,0 +1,27 @@
+spring:
+  # 数据库连接配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.44.128:3306/mall_goods?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  # 微服务配置
+  cloud:
+    # Sentinel 配置
+    sentinel:
+      # Sentinel 控制台
+      transport:
+        dashboard: 192.168.44.128:8858
+  # Redis 配置
+  redis:
+    host: 192.168.44.128
+    port: 6379
+    password: 123456
+    database: 0
+
+# RocketMQ 配置
+rocketmq:
+  name-server: 192.168.44.128:9876
+  producer:
+    # 生产者组名
+    group: GROUP-ES

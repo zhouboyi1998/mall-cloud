@@ -2,8 +2,8 @@
 app:
   id: mall-cloud
 apollo:
+  meta: http://host.docker.internal:8080
   bootstrap:
     enabled: true
     namespaces: mall,mall-docker,${spring.application.name},${spring.application.name}-docker
   cacheDir: ./cache/apollo
-  meta: http://host.docker.internal:8080

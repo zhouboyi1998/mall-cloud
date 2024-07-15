@@ -3,7 +3,3 @@ binlog:
   # 监听的数据表
   table:
     - mall_user.mall_role_menu
-
-# Logback 配置
-logging:
-  config: classpath:logback/logback-${spring.profiles.active}.xml

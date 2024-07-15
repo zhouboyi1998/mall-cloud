@@ -1,0 +1,30 @@
+spring:
+  # Spring Security 安全配置
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://192.168.159.128:${server.port}/mall-security/jwk-set/rsa
+  # Sleuth 配置
+  sleuth:
+    enabled: true
+    sampler:
+      # 采样率 (1: 全部采集)
+      probability: 1
+      # 速率 (每秒接收的 trace 数量)
+      rate: 10
+  # Zipkin 配置
+  zipkin:
+    enabled: true
+    base-url: http://192.168.159.128:9411
+
+# Seata 配置
+seata:
+  # 客户端事务组名称
+  tx-service-group: default_tx_group
+  # 客户端事务组与服务端集群的映射关系
+  service:
+    vgroup-mapping:
+      default_tx_group: default
+    grouplist:
+      default: 192.168.159.128:8091
