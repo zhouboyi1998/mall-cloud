@@ -1,0 +1,22 @@
+spring:
+  # 微服务配置
+  cloud:
+    # Consul 配置
+    consul:
+      host: 192.168.159.128
+      port: 8500
+      # Consul 注册中心
+      discovery:
+        # 服务名称
+        service-name: ${spring.application.name}
+        # 服务节点唯一ID
+        instance-id: ${spring.application.name}-${random.value}
+
+# Seata 配置
+seata:
+  # Seata 服务端地址
+  registry:
+    type: consul
+    consul:
+      server-addr: 192.168.159.128:8500
+      cluster: default

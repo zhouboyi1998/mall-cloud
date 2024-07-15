@@ -2,8 +2,8 @@
 app:
   id: mall-cloud
 apollo:
+  meta: http://127.0.0.1:8080
   bootstrap:
     enabled: true
     namespaces: mall,mall-dev,${spring.application.name},${spring.application.name}-dev
   cacheDir: ./cache/apollo
-  meta: http://127.0.0.1:8080

@@ -1,0 +1,23 @@
+spring:
+  # 微服务配置
+  cloud:
+    # Nacos 配置
+    nacos:
+      username: nacos
+      password: nacos
+      # Nacos 注册中心
+      discovery:
+        server-addr: 192.168.44.128:8848
+
+# Seata 配置
+seata:
+  # Seata 服务端地址
+  registry:
+    type: nacos
+    nacos:
+      server-addr: 192.168.44.128:8848
+      namespace:
+      group: SEATA_GROUP
+      username: nacos
+      password: nacos
+      application: seata-server

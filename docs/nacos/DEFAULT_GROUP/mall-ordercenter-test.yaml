@@ -1,0 +1,38 @@
+spring:
+  # 微服务配置
+  cloud:
+    # Sentinel 配置
+    sentinel:
+      # Sentinel 控制台
+      transport:
+        dashboard: 192.168.44.128:8858
+  # Kafka 配置
+  kafka:
+    # Kafka 客户端唯一标识 (用于 Kafka 服务端日志记录)
+    client-id: ${spring.application.name}
+    # Kafka 生产者配置
+    producer:
+      # Kafka 服务端地址
+      bootstrap-servers: 192.168.44.128:9092
+      # Kafka 生产者发送消息确认机制: 0 发出消息直接确认; 1 master分区成功写入消息之后确认; all 所有分区都成功写入消息之后才确认
+      acks: all
+      # Kafka 生产者发送消息失败的重试次数
+      retries: 3
+      # Kafka 生产者消息序列化器
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+# XXL-JOB 配置
+xxl:
+  job:
+    # 通讯令牌
+    accessToken: default_token
+    # 调度中心配置
+    admin:
+      addresses: http://192.168.44.128:8001/xxl-job-admin
+    # 执行器配置
+    executor:
+      appname: ${spring.application.name}
+      port: 28061
+      logpath: logs/xxl-job/${xxl.job.executor.appname}
+      logretentiondays: 10

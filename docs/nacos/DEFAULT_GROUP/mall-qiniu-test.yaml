@@ -1,0 +1,6 @@
+# Qiniu 配置
+qiniu:
+  url: xxx.com
+  access-key: aaa
+  secret-key: sss
+  region: huanan

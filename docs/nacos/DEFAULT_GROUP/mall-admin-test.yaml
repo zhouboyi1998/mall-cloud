@@ -1,0 +1,13 @@
+spring:
+  # 邮件配置
+  mail:
+    host: smtp.qq.com
+    username: xxx@qq.com
+    password: xxxxxxxxxx
+  # Spring Boot Admin 监控配置
+  boot:
+    admin:
+      notify:
+        mail:
+          from: xxx@qq.com
+          to: xxx@qq.com,yyy@qq.com

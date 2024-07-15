@@ -1,0 +1,33 @@
+spring:
+  # 微服务配置
+  cloud:
+    # Sentinel 配置
+    sentinel:
+      # Sentinel 控制台
+      transport:
+        dashboard: 192.168.159.128:8858
+  # Kafka 配置
+  kafka:
+    # Kafka 客户端唯一标识 (用于 Kafka 服务端日志记录)
+    client-id: ${spring.application.name}
+    # Kafka 消费者配置
+    consumer:
+      # Kafka 服务端地址
+      bootstrap-servers: 192.168.159.128:9092
+      # Kafka 消费者消息反序列化器
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+# ElasticSearch 配置
+elastic-search:
+  host: 192.168.159.128
+  port: 9200
+  # 网络连接策略
+  scheme: http
+
+# RocketMQ 配置
+rocketmq:
+  name-server: 192.168.159.128:9876
+  producer:
+    # 生产者组名
+    group: ES
