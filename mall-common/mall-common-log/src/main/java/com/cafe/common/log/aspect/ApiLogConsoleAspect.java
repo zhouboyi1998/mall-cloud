@@ -2,14 +2,16 @@ package com.cafe.common.log.aspect;
 
 import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.app.FieldConstant;
+import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.lang.id.Snowflake;
 import com.cafe.common.log.annotation.ApiLogPrint;
-import com.cafe.common.log.model.ApiLog;
 import com.cafe.common.util.aop.AOPUtil;
 import com.cafe.common.util.json.JacksonUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -34,20 +36,15 @@ import java.util.Optional;
  * @Package: com.cafe.common.log.aspect
  * @Author: zhouboyi
  * @Date: 2022/9/16 9:30
- * @Description: 接口日志打印切面
+ * @Description: 接口日志控制台打印切面
  */
 @Profile(value = {AppConstant.DEV, AppConstant.TEST})
-@Order
+@Order(value = IntegerConstant.ONE)
 @Aspect
 @Component
-public class ApiLogAspect {
+public class ApiLogConsoleAspect {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(ApiLogAspect.class);
-
-    /**
-     * 接口日志
-     */
-    private final ApiLog apiLog = new ApiLog();
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApiLogConsoleAspect.class);
 
     /**
      * 雪花ID生成器
@@ -83,16 +80,8 @@ public class ApiLogAspect {
         // 计算执行耗时
         Long duration = System.currentTimeMillis() - startTime;
 
-        // 响应结果
-        LOGGER.info("Result      : {}", JacksonUtil.writeValueAsString(result));
-        // 执行耗时
-        LOGGER.info("Duration    : {} ms", duration);
-
-        // 组装响应相关信息到接口日志中
-        apiLog.setResult(result).setDuration(duration);
-        // 完整的接口日志
-        LOGGER.info(JacksonUtil.writeValueAsString(apiLog));
-
+        // 打印执行耗时
+        LOGGER.info("@Around -> Duration: {} ms", duration);
         // 返回目标方法的响应结果
         return result;
     }
@@ -110,32 +99,44 @@ public class ApiLogAspect {
             .map(ServletRequestAttributes::getRequest)
             .orElseThrow(NullPointerException::new);
 
-        // 获取请求相关信息
-        String description = description(joinPoint);
-        String source = request.getRemoteAddr();
-        String url = request.getRequestURL().toString();
-        String type = request.getMethod();
-        String clazz = joinPoint.getSignature().getDeclaringTypeName();
-        String method = joinPoint.getSignature().getName();
-        String argument = AOPUtil.argument(joinPoint);
+        // 打印描述信息
+        LOGGER.info("@Before -> Description: {}", description(joinPoint));
+        // 打印来源IP
+        LOGGER.info("@Before -> Source: {}", request.getRemoteAddr());
+        // 打印请求URL
+        LOGGER.info("@Before -> URL: {}", request.getRequestURL().toString());
+        // 打印请求类型
+        LOGGER.info("@Before -> Type: {}", request.getMethod());
+        // 打印控制器类
+        LOGGER.info("@Before -> Class: {}", joinPoint.getSignature().getDeclaringTypeName());
+        // 打印执行方法
+        LOGGER.info("@Before -> Method: {}", joinPoint.getSignature().getName());
+        // 打印请求参数
+        LOGGER.info("@Before -> Argument: {}", AOPUtil.argument(joinPoint));
+    }
 
-        // 描述信息
-        LOGGER.info("Description : {}", description);
-        // 来源 IP
-        LOGGER.info("Source      : {}", source);
-        // 请求 URL
-        LOGGER.info("URL         : {}", url);
-        // 请求类型
-        LOGGER.info("Type        : {}", type);
-        // 控制器类
-        LOGGER.info("Class       : {}", clazz);
-        // 执行方法
-        LOGGER.info("Method      : {}", method);
-        // 请求参数
-        LOGGER.info("Argument    : {}", argument);
+    /**
+     * 响应通知
+     *
+     * @param joinPoint 连接点
+     * @param result    响应结果
+     */
+    @AfterReturning(value = "pointcut()", returning = "result")
+    public void doAfterReturning(JoinPoint joinPoint, Object result) {
+        // 打印响应结果
+        LOGGER.info("@AfterReturning -> Result: {}", JacksonUtil.writeValueAsString(result));
+    }
 
-        // 组装请求相关信息到接口日志中
-        apiLog.setDescription(description).setSource(source).setUrl(url).setType(type).setClazz(clazz).setMethod(method).setArgument(argument);
+    /**
+     * 异常通知
+     *
+     * @param joinPoint 连接点
+     * @param throwable 异常信息
+     */
+    @AfterThrowing(value = "pointcut()", throwing = "throwable")
+    public void doAfterThrowing(JoinPoint joinPoint, Throwable throwable) {
+        // 打印异常信息
+        LOGGER.warn("@AfterThrowing -> Throwable: {}", JacksonUtil.writeValueAsString(throwable));
     }
 
     /**
@@ -144,7 +145,7 @@ public class ApiLogAspect {
      * @param joinPoint 连接点
      * @return
      */
-    private String description(JoinPoint joinPoint) {
+    public static String description(JoinPoint joinPoint) {
         // 获取目标签名, 转换成方法签名
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         // 获取目标方法

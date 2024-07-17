@@ -26,12 +26,12 @@ public class ApiLog implements Serializable {
     private String description;
 
     /**
-     * 来源 IP
+     * 来源IP
      */
     private String source;
 
     /**
-     * 请求 URL
+     * 请求URL
      */
     private String url;
 
@@ -56,12 +56,12 @@ public class ApiLog implements Serializable {
     private String argument;
 
     /**
-     * 相应结果
+     * 响应结果
      */
     private Object result;
 
     /**
-     * 执行耗时
+     * 异常信息
      */
-    private Long duration;
+    private Throwable throwable;
 }

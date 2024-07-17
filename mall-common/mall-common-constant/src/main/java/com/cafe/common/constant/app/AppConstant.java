@@ -20,6 +20,11 @@ public class AppConstant {
     public static final String TEST = "test";
 
     /**
+     * 生产环境
+     */
+    public static final String PROD = "prod";
+
+    /**
      * Docker 环境
      */
     public static final String DOCKER = "docker";
