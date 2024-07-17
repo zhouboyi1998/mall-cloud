@@ -2,7 +2,7 @@ package com.cafe.ordercenter.controller;
 
 import com.cafe.common.constant.kafka.KafkaConstant;
 import com.cafe.common.kafka.producer.KafkaProducer;
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.order.vo.OrderVO;
 import com.cafe.ordercenter.service.OrderCenterService;
 import com.cafe.storage.vo.CartVO;
@@ -42,7 +42,7 @@ public class OrderCenterController {
         this.kafkaProducer = kafkaProducer;
     }
 
-    @LogPrint(value = "提交订单")
+    @ApiLogPrint(value = "提交订单")
     @ApiOperation(value = "提交订单")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "地址id", name = "addressId", dataType = "Long", paramType = "path", required = true),

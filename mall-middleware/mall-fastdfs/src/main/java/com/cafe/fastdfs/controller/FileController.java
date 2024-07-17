@@ -1,6 +1,6 @@
 package com.cafe.fastdfs.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.fastdfs.service.FileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -38,7 +38,7 @@ public class FileController {
         this.fileService = fileService;
     }
 
-    @LogPrint(value = "上传文件")
+    @ApiLogPrint(value = "上传文件")
     @ApiOperation(value = "上传文件")
     @ApiImplicitParam(value = "文件", name = "file", dataType = "MultipartFile", paramType = "form", required = true)
     @PostMapping(value = "/upload")
@@ -47,7 +47,7 @@ public class FileController {
         return ResponseEntity.ok(filepath);
     }
 
-    @LogPrint(value = "下载文件")
+    @ApiLogPrint(value = "下载文件")
     @ApiOperation(value = "下载文件")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "文件组", name = "group", dataType = "String", paramType = "query", required = true),
@@ -63,7 +63,7 @@ public class FileController {
         return ResponseEntity.ok().build();
     }
 
-    @LogPrint(value = "删除文件")
+    @ApiLogPrint(value = "删除文件")
     @ApiOperation(value = "删除文件")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "文件组", name = "group", dataType = "String", paramType = "query", required = true),
@@ -78,7 +78,7 @@ public class FileController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "获取文件信息")
+    @ApiLogPrint(value = "获取文件信息")
     @ApiOperation(value = "获取文件信息")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "文件组", name = "group", dataType = "String", paramType = "query", required = true),

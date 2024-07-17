@@ -1,7 +1,7 @@
 package com.cafe.minio.controller;
 
 import com.cafe.common.constant.pool.IntegerConstant;
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.minio.service.FileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -39,7 +39,7 @@ public class FileController {
         this.fileService = fileService;
     }
 
-    @LogPrint(value = "上传文件")
+    @ApiLogPrint(value = "上传文件")
     @ApiOperation(value = "上传文件")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
@@ -54,7 +54,7 @@ public class FileController {
         return ResponseEntity.ok(filepath);
     }
 
-    @LogPrint(value = "下载文件")
+    @ApiLogPrint(value = "下载文件")
     @ApiOperation(value = "下载文件")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
@@ -70,7 +70,7 @@ public class FileController {
         return ResponseEntity.ok().build();
     }
 
-    @LogPrint(value = "获取文件外链 (不指定过期时间, 默认过期时间: 7 天, 最大过期时间: 7天)")
+    @ApiLogPrint(value = "获取文件外链 (不指定过期时间, 默认过期时间: 7 天, 最大过期时间: 7天)")
     @ApiOperation(value = "获取文件外链 (不指定过期时间, 默认过期时间: 7 天, 最大过期时间: 7天)")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
@@ -85,7 +85,7 @@ public class FileController {
         return ResponseEntity.ok(url);
     }
 
-    @LogPrint(value = "获取文件外链 (指定过期时间)")
+    @ApiLogPrint(value = "获取文件外链 (指定过期时间)")
     @ApiOperation(value = "获取文件外链 (指定过期时间)")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),

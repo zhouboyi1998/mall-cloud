@@ -1,6 +1,6 @@
 package com.cafe.security.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.security.model.TokenDetails;
 import com.cafe.security.service.OauthService;
 import io.swagger.annotations.Api;
@@ -45,7 +45,7 @@ public class OauthController {
      * @return
      * @throws HttpRequestMethodNotSupportedException
      */
-    @LogPrint(value = "Oauth2 登录认证")
+    @ApiLogPrint(value = "Oauth2 登录认证")
     @ApiOperation(value = "Oauth2 登录认证")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "授权模式", name = "grant_type", dataType = "String", paramType = "form", required = true, allowableValues = "password, refresh_token, captcha"),

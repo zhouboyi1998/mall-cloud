@@ -2,7 +2,7 @@ package com.cafe.merchant.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.merchant.model.Merchant;
 import com.cafe.merchant.service.MerchantService;
@@ -42,7 +42,7 @@ public class MerchantController {
         this.merchantService = merchantService;
     }
 
-    @LogPrint(value = "查询商家数量")
+    @ApiLogPrint(value = "查询商家数量")
     @ApiOperation(value = "查询商家数量")
     @GetMapping(value = "/count")
     public ResponseEntity<Integer> count() {
@@ -50,7 +50,7 @@ public class MerchantController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "根据条件查询查询商家数量")
+    @ApiLogPrint(value = "根据条件查询查询商家数量")
     @ApiOperation(value = "根据条件查询商家数量")
     @ApiImplicitParam(value = "商家Model", name = "merchant", dataType = "Merchant", paramType = "body", required = true)
     @PostMapping(value = "/count")
@@ -60,7 +60,7 @@ public class MerchantController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "查询商家列表")
+    @ApiLogPrint(value = "查询商家列表")
     @ApiOperation(value = "查询商家列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Merchant>> list() {
@@ -68,7 +68,7 @@ public class MerchantController {
         return ResponseEntity.ok(merchantList);
     }
 
-    @LogPrint(value = "根据条件查询商家列表")
+    @ApiLogPrint(value = "根据条件查询商家列表")
     @ApiOperation(value = "根据条件查询商家列表")
     @ApiImplicitParam(value = "商家Model", name = "merchant", dataType = "Merchant", paramType = "body", required = true)
     @PostMapping(value = "/list")
@@ -78,7 +78,7 @@ public class MerchantController {
         return ResponseEntity.ok(merchantList);
     }
 
-    @LogPrint(value = "分页查询商家列表")
+    @ApiLogPrint(value = "分页查询商家列表")
     @ApiOperation(value = "分页查询商家列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -94,7 +94,7 @@ public class MerchantController {
         return ResponseEntity.ok(merchantPage);
     }
 
-    @LogPrint(value = "根据条件分页查询商家")
+    @ApiLogPrint(value = "根据条件分页查询商家")
     @ApiOperation(value = "根据条件分页查询商家")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -113,7 +113,7 @@ public class MerchantController {
         return ResponseEntity.ok(merchantPage);
     }
 
-    @LogPrint(value = "根据id查询单个商家")
+    @ApiLogPrint(value = "根据id查询单个商家")
     @ApiOperation(value = "根据id查询单个商家")
     @ApiImplicitParam(value = "商家id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
@@ -122,7 +122,7 @@ public class MerchantController {
         return ResponseEntity.ok(merchant);
     }
 
-    @LogPrint(value = "根据条件查询单个商家")
+    @ApiLogPrint(value = "根据条件查询单个商家")
     @ApiOperation(value = "根据条件查询单个商家")
     @ApiImplicitParam(value = "商家Model", name = "merchant", dataType = "Merchant", paramType = "body", required = true)
     @PostMapping(value = "/one")
@@ -132,7 +132,7 @@ public class MerchantController {
         return ResponseEntity.ok(one);
     }
 
-    @LogPrint(value = "新增商家")
+    @ApiLogPrint(value = "新增商家")
     @ApiOperation(value = "新增商家")
     @ApiImplicitParam(value = "商家Model", name = "merchant", dataType = "Merchant", paramType = "body", required = true)
     @PostMapping(value = "/insert")
@@ -141,7 +141,7 @@ public class MerchantController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "批量新增商家")
+    @ApiLogPrint(value = "批量新增商家")
     @ApiOperation(value = "批量新增商家")
     @ApiImplicitParam(value = "商家列表", name = "merchantList", dataType = "List<Merchant>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
@@ -150,7 +150,7 @@ public class MerchantController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id修改商家")
+    @ApiLogPrint(value = "根据id修改商家")
     @ApiOperation(value = "根据id修改商家")
     @ApiImplicitParam(value = "商家Model", name = "merchant", dataType = "Merchant", paramType = "body", required = true)
     @PutMapping(value = "/update")
@@ -159,7 +159,7 @@ public class MerchantController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量修改商家")
+    @ApiLogPrint(value = "根据ids批量修改商家")
     @ApiOperation(value = "根据ids批量修改商家")
     @ApiImplicitParam(value = "商家列表", name = "merchantList", dataType = "List<Merchant>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
@@ -168,7 +168,7 @@ public class MerchantController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id删除商家")
+    @ApiLogPrint(value = "根据id删除商家")
     @ApiOperation(value = "根据id删除商家")
     @ApiImplicitParam(value = "商家id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
@@ -177,7 +177,7 @@ public class MerchantController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量删除商家")
+    @ApiLogPrint(value = "根据ids批量删除商家")
     @ApiOperation(value = "根据ids批量删除商家")
     @ApiImplicitParam(value = "商家id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
@@ -186,7 +186,7 @@ public class MerchantController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据条件批量删除商家")
+    @ApiLogPrint(value = "根据条件批量删除商家")
     @ApiOperation(value = "根据条件批量删除商家")
     @ApiImplicitParam(value = "商家Model", name = "merchant", dataType = "Merchant", paramType = "body", required = true)
     @DeleteMapping(value = "/delete")

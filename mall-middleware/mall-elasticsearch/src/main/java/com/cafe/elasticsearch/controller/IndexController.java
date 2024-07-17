@@ -1,6 +1,6 @@
 package com.cafe.elasticsearch.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.elasticsearch.service.IndexService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -37,7 +37,7 @@ public class IndexController {
         this.indexService = indexService;
     }
 
-    @LogPrint(value = "判断索引是否存在")
+    @ApiLogPrint(value = "判断索引是否存在")
     @ApiOperation(value = "判断索引是否存在")
     @ApiImplicitParam(value = "索引名称", name = "index", dataType = "String", paramType = "path", required = true)
     @GetMapping(value = "/{index}")
@@ -46,7 +46,7 @@ public class IndexController {
         return ResponseEntity.ok(exists);
     }
 
-    @LogPrint(value = "创建索引")
+    @ApiLogPrint(value = "创建索引")
     @ApiOperation(value = "创建索引")
     @ApiImplicitParam(value = "索引名称", name = "index", dataType = "String", paramType = "path", required = true)
     @PostMapping(value = "/{index}")
@@ -55,7 +55,7 @@ public class IndexController {
         return ResponseEntity.ok(createIndexResponse);
     }
 
-    @LogPrint(value = "删除索引")
+    @ApiLogPrint(value = "删除索引")
     @ApiOperation(value = "删除索引")
     @ApiImplicitParam(value = "索引名称", name = "index", dataType = "String", paramType = "path", required = true)
     @DeleteMapping(value = "/{index}")

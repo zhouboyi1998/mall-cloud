@@ -4,8 +4,8 @@ import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.lang.id.Snowflake;
-import com.cafe.common.log.annotation.LogPrint;
-import com.cafe.common.log.model.Log;
+import com.cafe.common.log.annotation.ApiLogPrint;
+import com.cafe.common.log.model.ApiLog;
 import com.cafe.common.util.aop.AOPUtil;
 import com.cafe.common.util.json.JacksonUtil;
 import org.aspectj.lang.JoinPoint;
@@ -34,28 +34,31 @@ import java.util.Optional;
  * @Package: com.cafe.common.log.aspect
  * @Author: zhouboyi
  * @Date: 2022/9/16 9:30
- * @Description: 接口日志打印切面类
+ * @Description: 接口日志打印切面
  */
 @Profile(value = {AppConstant.DEV, AppConstant.TEST})
 @Order
 @Aspect
 @Component
-public class LogPrintAspect {
+public class ApiLogAspect {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(LogPrintAspect.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ApiLogAspect.class);
 
     /**
-     * 日志模型
+     * 接口日志
      */
-    private final Log log = new Log();
+    private final ApiLog apiLog = new ApiLog();
 
+    /**
+     * 雪花ID生成器
+     */
     private final Snowflake snowflake = new Snowflake(0, 0);
 
     /**
      * 切点
      */
-    @Pointcut(value = "@annotation(com.cafe.common.log.annotation.LogPrint)")
-    public void logPrint() {
+    @Pointcut(value = "@annotation(com.cafe.common.log.annotation.ApiLogPrint)")
+    public void pointcut() {
 
     }
 
@@ -66,11 +69,11 @@ public class LogPrintAspect {
      * @return
      * @throws Throwable
      */
-    @Around(value = "logPrint()")
+    @Around(value = "pointcut()")
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        // 为每一个请求生成雪花唯一 ID
+        // 生成请求ID
         Long requestId = snowflake.nextId();
-        // 将请求 ID 存储到日志上下文 (SLF4J MDC) 中
+        // 将请求ID存储到 Slf4J 日志上下文 (MDC) 中
         MDC.put(FieldConstant.REQUEST_ID, String.valueOf(requestId));
 
         // 获取进入连接点之前的时间
@@ -85,10 +88,10 @@ public class LogPrintAspect {
         // 执行耗时
         LOGGER.info("Duration    : {} ms", duration);
 
-        // 组装响应相关信息到日志模型中
-        log.setResult(result).setDuration(duration);
+        // 组装响应相关信息到接口日志中
+        apiLog.setResult(result).setDuration(duration);
         // 完整的接口日志
-        LOGGER.info(JacksonUtil.writeValueAsString(log));
+        LOGGER.info(JacksonUtil.writeValueAsString(apiLog));
 
         // 返回目标方法的响应结果
         return result;
@@ -99,7 +102,7 @@ public class LogPrintAspect {
      *
      * @param joinPoint 连接点
      */
-    @Before(value = "logPrint()")
+    @Before(value = "pointcut()")
     public void doBefore(JoinPoint joinPoint) {
         // 获取 HttpServletRequest 对象
         HttpServletRequest request = Optional.ofNullable(RequestContextHolder.getRequestAttributes())
@@ -131,12 +134,12 @@ public class LogPrintAspect {
         // 请求参数
         LOGGER.info("Argument    : {}", argument);
 
-        // 组装请求相关信息到日志模型中
-        log.setDescription(description).setSource(source).setUrl(url).setType(type).setClazz(clazz).setMethod(method).setArgument(argument);
+        // 组装请求相关信息到接口日志中
+        apiLog.setDescription(description).setSource(source).setUrl(url).setType(type).setClazz(clazz).setMethod(method).setArgument(argument);
     }
 
     /**
-     * 获取日志打印注解的描述信息
+     * 获取接口日志打印注解的描述信息
      *
      * @param joinPoint 连接点
      * @return
@@ -146,9 +149,9 @@ public class LogPrintAspect {
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();
         // 获取目标方法
         Method method = signature.getMethod();
-        // 获取日志打印注解 (必须使用 Spring 提供的工具获取注解, 否则无法获取别名配置)
-        LogPrint logPrint = AnnotationUtils.getAnnotation(method, LogPrint.class);
-        // 返回日志打印注解的描述信息
-        return Optional.ofNullable(logPrint).map(LogPrint::description).orElse(StringConstant.EMPTY);
+        // 获取接口日志打印注解 (必须使用 Spring 提供的工具获取注解, 否则无法获取别名配置)
+        ApiLogPrint apiLogPrint = AnnotationUtils.getAnnotation(method, ApiLogPrint.class);
+        // 返回接口日志打印注解的描述信息
+        return Optional.ofNullable(apiLogPrint).map(ApiLogPrint::description).orElse(StringConstant.EMPTY);
     }
 }

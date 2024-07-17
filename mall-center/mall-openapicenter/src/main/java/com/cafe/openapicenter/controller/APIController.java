@@ -1,6 +1,6 @@
 package com.cafe.openapicenter.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.openapicenter.model.API;
 import com.cafe.openapicenter.service.APIService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -29,7 +29,7 @@ public class APIController {
         this.apiService = apiService;
     }
 
-    @LogPrint(value = "通用代理")
+    @ApiLogPrint(value = "通用代理")
     @PostMapping(value = "/proxy")
     public Mono<ObjectNode> proxy(@RequestBody API api) {
         return apiService.proxy(api);

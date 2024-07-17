@@ -1,6 +1,6 @@
 package com.cafe.security.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.security.service.JWKSetService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -31,7 +31,7 @@ public class JWKSetController {
         this.jwkSetService = jwkSetService;
     }
 
-    @LogPrint(value = "获取 RSA JWKSet")
+    @ApiLogPrint(value = "获取 RSA JWKSet")
     @ApiOperation(value = "获取 RSA JWKSet")
     @GetMapping(value = "/rsa")
     public ResponseEntity<Map<String, Object>> rsa() {

@@ -1,6 +1,6 @@
 package com.cafe.openapicenter.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.openapicenter.service.JuheService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +28,7 @@ public class JuheController {
         this.juheService = juheService;
     }
 
-    @LogPrint(value = "查询手机号码归属地")
+    @ApiLogPrint(value = "查询手机号码归属地")
     @GetMapping(value = "/mobile2region")
     public Mono<ObjectNode> mobile2region(
         @RequestParam(value = "phone") String phone,
@@ -37,7 +37,7 @@ public class JuheController {
         return juheService.mobile2region(phone, key);
     }
 
-    @LogPrint(value = "查询IP地址归属地")
+    @ApiLogPrint(value = "查询IP地址归属地")
     @GetMapping(value = "/ip2region")
     public Mono<ObjectNode> ip2region(
         @RequestParam(value = "ip") String ip,
@@ -46,7 +46,7 @@ public class JuheController {
         return juheService.ip2region(ip, key);
     }
 
-    @LogPrint(value = "查询天气")
+    @ApiLogPrint(value = "查询天气")
     @GetMapping(value = "/weather")
     public Mono<ObjectNode> weather(
         @RequestParam(value = "city") String city,

@@ -1,6 +1,6 @@
 package com.cafe.security.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.security.service.RSAService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,7 +29,7 @@ public class RSAController {
         this.rsaService = rsaService;
     }
 
-    @LogPrint(value = "获取 RSA 公钥")
+    @ApiLogPrint(value = "获取 RSA 公钥")
     @ApiOperation(value = "获取 RSA 公钥")
     @GetMapping(value = "/public-key")
     public ResponseEntity<String> publicKey() {

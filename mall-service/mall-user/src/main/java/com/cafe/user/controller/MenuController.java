@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.core.request.UserDetails;
 import com.cafe.common.lang.tree.Tree;
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.user.model.Menu;
 import com.cafe.user.service.MenuService;
@@ -46,7 +46,7 @@ public class MenuController {
         this.menuService = menuService;
     }
 
-    @LogPrint(value = "查询菜单数量")
+    @ApiLogPrint(value = "查询菜单数量")
     @ApiOperation(value = "查询菜单数量")
     @GetMapping(value = "/count")
     public ResponseEntity<Integer> count() {
@@ -54,7 +54,7 @@ public class MenuController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "根据条件查询查询菜单数量")
+    @ApiLogPrint(value = "根据条件查询查询菜单数量")
     @ApiOperation(value = "根据条件查询菜单数量")
     @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
     @PostMapping(value = "/count")
@@ -64,7 +64,7 @@ public class MenuController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "查询菜单列表")
+    @ApiLogPrint(value = "查询菜单列表")
     @ApiOperation(value = "查询菜单列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Menu>> list() {
@@ -72,7 +72,7 @@ public class MenuController {
         return ResponseEntity.ok(menuList);
     }
 
-    @LogPrint(value = "根据条件查询菜单列表")
+    @ApiLogPrint(value = "根据条件查询菜单列表")
     @ApiOperation(value = "根据条件查询菜单列表")
     @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
     @PostMapping(value = "/list")
@@ -82,7 +82,7 @@ public class MenuController {
         return ResponseEntity.ok(menuList);
     }
 
-    @LogPrint(value = "分页查询菜单列表")
+    @ApiLogPrint(value = "分页查询菜单列表")
     @ApiOperation(value = "分页查询菜单列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -98,7 +98,7 @@ public class MenuController {
         return ResponseEntity.ok(menuPage);
     }
 
-    @LogPrint(value = "根据条件分页查询菜单")
+    @ApiLogPrint(value = "根据条件分页查询菜单")
     @ApiOperation(value = "根据条件分页查询菜单")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -117,7 +117,7 @@ public class MenuController {
         return ResponseEntity.ok(menuPage);
     }
 
-    @LogPrint(value = "根据id查询单个菜单")
+    @ApiLogPrint(value = "根据id查询单个菜单")
     @ApiOperation(value = "根据id查询单个菜单")
     @ApiImplicitParam(value = "菜单id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
@@ -126,7 +126,7 @@ public class MenuController {
         return ResponseEntity.ok(menu);
     }
 
-    @LogPrint(value = "根据条件查询单个菜单")
+    @ApiLogPrint(value = "根据条件查询单个菜单")
     @ApiOperation(value = "根据条件查询单个菜单")
     @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
     @PostMapping(value = "/one")
@@ -136,7 +136,7 @@ public class MenuController {
         return ResponseEntity.ok(one);
     }
 
-    @LogPrint(value = "新增菜单")
+    @ApiLogPrint(value = "新增菜单")
     @ApiOperation(value = "新增菜单")
     @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
     @PostMapping(value = "/insert")
@@ -145,7 +145,7 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "批量新增菜单")
+    @ApiLogPrint(value = "批量新增菜单")
     @ApiOperation(value = "批量新增菜单")
     @ApiImplicitParam(value = "菜单列表", name = "menuList", dataType = "List<Menu>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
@@ -154,7 +154,7 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id修改菜单")
+    @ApiLogPrint(value = "根据id修改菜单")
     @ApiOperation(value = "根据id修改菜单")
     @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
     @PutMapping(value = "/update")
@@ -163,7 +163,7 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量修改菜单")
+    @ApiLogPrint(value = "根据ids批量修改菜单")
     @ApiOperation(value = "根据ids批量修改菜单")
     @ApiImplicitParam(value = "菜单列表", name = "menuList", dataType = "List<Menu>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
@@ -172,7 +172,7 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id删除菜单")
+    @ApiLogPrint(value = "根据id删除菜单")
     @ApiOperation(value = "根据id删除菜单")
     @ApiImplicitParam(value = "菜单id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
@@ -181,7 +181,7 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量删除菜单")
+    @ApiLogPrint(value = "根据ids批量删除菜单")
     @ApiOperation(value = "根据ids批量删除菜单")
     @ApiImplicitParam(value = "菜单id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
@@ -190,7 +190,7 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据条件批量删除菜单")
+    @ApiLogPrint(value = "根据条件批量删除菜单")
     @ApiOperation(value = "根据条件批量删除菜单")
     @ApiImplicitParam(value = "菜单Model", name = "menu", dataType = "Menu", paramType = "body", required = true)
     @DeleteMapping(value = "/delete")
@@ -200,7 +200,7 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据权限列表查询菜单树")
+    @ApiLogPrint(value = "根据权限列表查询菜单树")
     @ApiOperation(value = "根据权限列表查询菜单树")
     @GetMapping(value = "/tree-list")
     public ResponseEntity<List<Tree>> treeList(

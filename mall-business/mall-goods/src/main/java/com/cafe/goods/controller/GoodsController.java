@@ -1,6 +1,6 @@
 package com.cafe.goods.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.goods.bo.Goods;
 import com.cafe.goods.service.GoodsService;
 import io.swagger.annotations.Api;
@@ -38,7 +38,7 @@ public class GoodsController {
         this.goodsService = goodsService;
     }
 
-    @LogPrint(value = "查询商品列表")
+    @ApiLogPrint(value = "查询商品列表")
     @ApiOperation(value = "查询商品列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Goods>> list() {
@@ -46,7 +46,7 @@ public class GoodsController {
         return ResponseEntity.ok(goodsList);
     }
 
-    @LogPrint(value = "根据库存量单位ids查询商品列表")
+    @ApiLogPrint(value = "根据库存量单位ids查询商品列表")
     @ApiOperation(value = "根据库存量单位ids查询商品列表")
     @PostMapping(value = "/list")
     public ResponseEntity<List<Goods>> list(@RequestBody List<Long> ids) {
@@ -54,7 +54,7 @@ public class GoodsController {
         return ResponseEntity.ok(goodsList);
     }
 
-    @LogPrint(value = "批量上下架商品")
+    @ApiLogPrint(value = "批量上下架商品")
     @ApiOperation(value = "批量上下架商品")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "SKU ids", name = "ids", dataType = "List<Long>", paramType = "body", required = true),

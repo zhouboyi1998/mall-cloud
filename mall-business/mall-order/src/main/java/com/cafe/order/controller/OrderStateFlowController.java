@@ -1,6 +1,6 @@
 package com.cafe.order.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.order.model.OrderDetail;
 import com.cafe.order.service.OrderStateFlowService;
 import com.cafe.order.vo.OrderVO;
@@ -39,7 +39,7 @@ public class OrderStateFlowController {
         this.orderStateFlowService = orderStateFlowService;
     }
 
-    @LogPrint(value = "保存订单")
+    @ApiLogPrint(value = "保存订单")
     @ApiOperation(value = "保存订单")
     @ApiImplicitParam(value = "订单VO", name = "orderVO", dataType = "OrderVO", paramType = "body", required = true)
     @PostMapping(value = "/save")
@@ -48,7 +48,7 @@ public class OrderStateFlowController {
         return ResponseEntity.ok(newOrderVO);
     }
 
-    @LogPrint(value = "自动取消超时未支付的订单")
+    @ApiLogPrint(value = "自动取消超时未支付的订单")
     @ApiOperation(value = "自动取消超时未支付的订单")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "当前时间", name = "now", dataType = "LocalDateTime", paramType = "path", required = true),

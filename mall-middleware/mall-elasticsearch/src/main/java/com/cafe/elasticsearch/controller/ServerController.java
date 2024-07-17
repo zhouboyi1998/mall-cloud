@@ -1,6 +1,6 @@
 package com.cafe.elasticsearch.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.elasticsearch.service.ServerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,7 +32,7 @@ public class ServerController {
         this.serverService = serverService;
     }
 
-    @LogPrint(value = "查询服务信息")
+    @ApiLogPrint(value = "查询服务信息")
     @ApiOperation(value = "查询服务信息")
     @GetMapping(value = "/info")
     public ResponseEntity<SearchResponse> info() throws IOException {

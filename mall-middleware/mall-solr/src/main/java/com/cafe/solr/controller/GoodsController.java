@@ -1,6 +1,6 @@
 package com.cafe.solr.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.solr.model.Goods;
 import com.cafe.solr.service.GoodsService;
 import io.swagger.annotations.Api;
@@ -37,7 +37,7 @@ public class GoodsController {
         this.goodsService = goodsService;
     }
 
-    @LogPrint(value = "获取商品")
+    @ApiLogPrint(value = "获取商品")
     @ApiOperation(value = "获取商品")
     @ApiImplicitParam(value = "商品id", name = "id", dataType = "String", paramType = "path", required = true)
     @GetMapping(value = "/{id}")
@@ -46,7 +46,7 @@ public class GoodsController {
         return ResponseEntity.ok(goods);
     }
 
-    @LogPrint(value = "插入商品/更新商品")
+    @ApiLogPrint(value = "插入商品/更新商品")
     @ApiOperation(value = "插入商品/更新商品")
     @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
     @PostMapping(value = "")
@@ -55,7 +55,7 @@ public class GoodsController {
         return ResponseEntity.ok().build();
     }
 
-    @LogPrint(value = "批量插入商品/批量更新商品")
+    @ApiLogPrint(value = "批量插入商品/批量更新商品")
     @ApiOperation(value = "批量插入商品/批量更新商品")
     @ApiImplicitParam(value = "商品列表", name = "goodsList", dataType = "List<Goods>", paramType = "body", required = true)
     @PostMapping(value = "/batch")
@@ -64,7 +64,7 @@ public class GoodsController {
         return ResponseEntity.ok().build();
     }
 
-    @LogPrint(value = "删除商品")
+    @ApiLogPrint(value = "删除商品")
     @ApiOperation(value = "删除商品")
     @ApiImplicitParam(value = "商品id", name = "id", dataType = "String", paramType = "path", required = true)
     @DeleteMapping(value = "/{id}")
@@ -73,7 +73,7 @@ public class GoodsController {
         return ResponseEntity.ok().build();
     }
 
-    @LogPrint(value = "批量删除商品")
+    @ApiLogPrint(value = "批量删除商品")
     @ApiOperation(value = "批量删除商品")
     @ApiImplicitParam(value = "商品id列表", name = "ids", dataType = "List<String>", paramType = "body", required = true)
     @DeleteMapping(value = "/batch")

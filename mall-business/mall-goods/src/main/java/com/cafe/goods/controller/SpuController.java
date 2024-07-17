@@ -2,7 +2,7 @@ package com.cafe.goods.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.goods.model.Spu;
 import com.cafe.goods.service.SpuService;
@@ -42,7 +42,7 @@ public class SpuController {
         this.spuService = spuService;
     }
 
-    @LogPrint(value = "查询标准化产品单元数量")
+    @ApiLogPrint(value = "查询标准化产品单元数量")
     @ApiOperation(value = "查询标准化产品单元数量")
     @GetMapping(value = "/count")
     public ResponseEntity<Integer> count() {
@@ -50,7 +50,7 @@ public class SpuController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "根据条件查询查询标准化产品单元数量")
+    @ApiLogPrint(value = "根据条件查询查询标准化产品单元数量")
     @ApiOperation(value = "根据条件查询标准化产品单元数量")
     @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     @PostMapping(value = "/count")
@@ -60,7 +60,7 @@ public class SpuController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "查询标准化产品单元列表")
+    @ApiLogPrint(value = "查询标准化产品单元列表")
     @ApiOperation(value = "查询标准化产品单元列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Spu>> list() {
@@ -68,7 +68,7 @@ public class SpuController {
         return ResponseEntity.ok(spuList);
     }
 
-    @LogPrint(value = "根据条件查询标准化产品单元列表")
+    @ApiLogPrint(value = "根据条件查询标准化产品单元列表")
     @ApiOperation(value = "根据条件查询标准化产品单元列表")
     @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     @PostMapping(value = "/list")
@@ -78,7 +78,7 @@ public class SpuController {
         return ResponseEntity.ok(spuList);
     }
 
-    @LogPrint(value = "分页查询标准化产品单元列表")
+    @ApiLogPrint(value = "分页查询标准化产品单元列表")
     @ApiOperation(value = "分页查询标准化产品单元列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -94,7 +94,7 @@ public class SpuController {
         return ResponseEntity.ok(spuPage);
     }
 
-    @LogPrint(value = "根据条件分页查询标准化产品单元")
+    @ApiLogPrint(value = "根据条件分页查询标准化产品单元")
     @ApiOperation(value = "根据条件分页查询标准化产品单元")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -113,7 +113,7 @@ public class SpuController {
         return ResponseEntity.ok(spuPage);
     }
 
-    @LogPrint(value = "根据id查询单个标准化产品单元")
+    @ApiLogPrint(value = "根据id查询单个标准化产品单元")
     @ApiOperation(value = "根据id查询单个标准化产品单元")
     @ApiImplicitParam(value = "标准化产品单元id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
@@ -122,7 +122,7 @@ public class SpuController {
         return ResponseEntity.ok(spu);
     }
 
-    @LogPrint(value = "根据条件查询单个标准化产品单元")
+    @ApiLogPrint(value = "根据条件查询单个标准化产品单元")
     @ApiOperation(value = "根据条件查询单个标准化产品单元")
     @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     @PostMapping(value = "/one")
@@ -132,7 +132,7 @@ public class SpuController {
         return ResponseEntity.ok(one);
     }
 
-    @LogPrint(value = "新增标准化产品单元")
+    @ApiLogPrint(value = "新增标准化产品单元")
     @ApiOperation(value = "新增标准化产品单元")
     @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     @PostMapping(value = "/insert")
@@ -141,7 +141,7 @@ public class SpuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "批量新增标准化产品单元")
+    @ApiLogPrint(value = "批量新增标准化产品单元")
     @ApiOperation(value = "批量新增标准化产品单元")
     @ApiImplicitParam(value = "标准化产品单元列表", name = "spuList", dataType = "List<Spu>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
@@ -150,7 +150,7 @@ public class SpuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id修改标准化产品单元")
+    @ApiLogPrint(value = "根据id修改标准化产品单元")
     @ApiOperation(value = "根据id修改标准化产品单元")
     @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     @PutMapping(value = "/update")
@@ -159,7 +159,7 @@ public class SpuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量修改标准化产品单元")
+    @ApiLogPrint(value = "根据ids批量修改标准化产品单元")
     @ApiOperation(value = "根据ids批量修改标准化产品单元")
     @ApiImplicitParam(value = "标准化产品单元列表", name = "spuList", dataType = "List<Spu>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
@@ -168,7 +168,7 @@ public class SpuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id删除标准化产品单元")
+    @ApiLogPrint(value = "根据id删除标准化产品单元")
     @ApiOperation(value = "根据id删除标准化产品单元")
     @ApiImplicitParam(value = "标准化产品单元id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
@@ -177,7 +177,7 @@ public class SpuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量删除标准化产品单元")
+    @ApiLogPrint(value = "根据ids批量删除标准化产品单元")
     @ApiOperation(value = "根据ids批量删除标准化产品单元")
     @ApiImplicitParam(value = "标准化产品单元id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
@@ -186,7 +186,7 @@ public class SpuController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据条件批量删除标准化产品单元")
+    @ApiLogPrint(value = "根据条件批量删除标准化产品单元")
     @ApiOperation(value = "根据条件批量删除标准化产品单元")
     @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     @DeleteMapping(value = "/delete")
