@@ -2,7 +2,7 @@ package com.cafe.storage.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.storage.model.Stock;
 import com.cafe.storage.service.StockService;
@@ -43,7 +43,7 @@ public class StockController {
         this.stockService = stockService;
     }
 
-    @LogPrint(value = "查询库存数量")
+    @ApiLogPrint(value = "查询库存数量")
     @ApiOperation(value = "查询库存数量")
     @GetMapping(value = "/count")
     public ResponseEntity<Integer> count() {
@@ -51,7 +51,7 @@ public class StockController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "根据条件查询查询库存数量")
+    @ApiLogPrint(value = "根据条件查询查询库存数量")
     @ApiOperation(value = "根据条件查询库存数量")
     @ApiImplicitParam(value = "库存Model", name = "stock", dataType = "Stock", paramType = "body", required = true)
     @PostMapping(value = "/count")
@@ -61,7 +61,7 @@ public class StockController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "查询库存列表")
+    @ApiLogPrint(value = "查询库存列表")
     @ApiOperation(value = "查询库存列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Stock>> list() {
@@ -69,7 +69,7 @@ public class StockController {
         return ResponseEntity.ok(stockList);
     }
 
-    @LogPrint(value = "根据条件查询库存列表")
+    @ApiLogPrint(value = "根据条件查询库存列表")
     @ApiOperation(value = "根据条件查询库存列表")
     @ApiImplicitParam(value = "库存Model", name = "stock", dataType = "Stock", paramType = "body", required = true)
     @PostMapping(value = "/list")
@@ -79,7 +79,7 @@ public class StockController {
         return ResponseEntity.ok(stockList);
     }
 
-    @LogPrint(value = "分页查询库存列表")
+    @ApiLogPrint(value = "分页查询库存列表")
     @ApiOperation(value = "分页查询库存列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -95,7 +95,7 @@ public class StockController {
         return ResponseEntity.ok(stockPage);
     }
 
-    @LogPrint(value = "根据条件分页查询库存")
+    @ApiLogPrint(value = "根据条件分页查询库存")
     @ApiOperation(value = "根据条件分页查询库存")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -114,7 +114,7 @@ public class StockController {
         return ResponseEntity.ok(stockPage);
     }
 
-    @LogPrint(value = "根据id查询单个库存")
+    @ApiLogPrint(value = "根据id查询单个库存")
     @ApiOperation(value = "根据id查询单个库存")
     @ApiImplicitParam(value = "库存id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
@@ -123,7 +123,7 @@ public class StockController {
         return ResponseEntity.ok(stock);
     }
 
-    @LogPrint(value = "根据条件查询单个库存")
+    @ApiLogPrint(value = "根据条件查询单个库存")
     @ApiOperation(value = "根据条件查询单个库存")
     @ApiImplicitParam(value = "库存Model", name = "stock", dataType = "Stock", paramType = "body", required = true)
     @PostMapping(value = "/one")
@@ -133,7 +133,7 @@ public class StockController {
         return ResponseEntity.ok(one);
     }
 
-    @LogPrint(value = "新增库存")
+    @ApiLogPrint(value = "新增库存")
     @ApiOperation(value = "新增库存")
     @ApiImplicitParam(value = "库存Model", name = "stock", dataType = "Stock", paramType = "body", required = true)
     @PostMapping(value = "/insert")
@@ -142,7 +142,7 @@ public class StockController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "批量新增库存")
+    @ApiLogPrint(value = "批量新增库存")
     @ApiOperation(value = "批量新增库存")
     @ApiImplicitParam(value = "库存列表", name = "stockList", dataType = "List<Stock>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
@@ -151,7 +151,7 @@ public class StockController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id修改库存")
+    @ApiLogPrint(value = "根据id修改库存")
     @ApiOperation(value = "根据id修改库存")
     @ApiImplicitParam(value = "库存Model", name = "stock", dataType = "Stock", paramType = "body", required = true)
     @PutMapping(value = "/update")
@@ -160,7 +160,7 @@ public class StockController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量修改库存")
+    @ApiLogPrint(value = "根据ids批量修改库存")
     @ApiOperation(value = "根据ids批量修改库存")
     @ApiImplicitParam(value = "库存列表", name = "stockList", dataType = "List<Stock>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
@@ -169,7 +169,7 @@ public class StockController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id删除库存")
+    @ApiLogPrint(value = "根据id删除库存")
     @ApiOperation(value = "根据id删除库存")
     @ApiImplicitParam(value = "库存id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
@@ -178,7 +178,7 @@ public class StockController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量删除库存")
+    @ApiLogPrint(value = "根据ids批量删除库存")
     @ApiOperation(value = "根据ids批量删除库存")
     @ApiImplicitParam(value = "库存id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
@@ -187,7 +187,7 @@ public class StockController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据条件批量删除库存")
+    @ApiLogPrint(value = "根据条件批量删除库存")
     @ApiOperation(value = "根据条件批量删除库存")
     @ApiImplicitParam(value = "库存Model", name = "stock", dataType = "Stock", paramType = "body", required = true)
     @DeleteMapping(value = "/delete")
@@ -197,7 +197,7 @@ public class StockController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "批量入库")
+    @ApiLogPrint(value = "批量入库")
     @ApiOperation(value = "批量入库")
     @ApiImplicitParam(value = "购物车视图模型列表", name = "cartVOList", dataType = "List<CartVO>", paramType = "body", required = true)
     @PutMapping(value = "/inbound/batch")
@@ -206,7 +206,7 @@ public class StockController {
         return ResponseEntity.ok().build();
     }
 
-    @LogPrint(value = "批量出库")
+    @ApiLogPrint(value = "批量出库")
     @ApiOperation(value = "批量出库")
     @ApiImplicitParam(value = "购物车视图模型列表", name = "cartVOList", dataType = "List<CartVO>", paramType = "body", required = true)
     @PutMapping(value = "/outbound/batch")

@@ -1,6 +1,6 @@
 package com.cafe.fastdfs.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.fastdfs.service.TrackerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,7 +29,7 @@ public class TrackerController {
         this.trackerService = trackerService;
     }
 
-    @LogPrint(value = "获取跟踪器地址")
+    @ApiLogPrint(value = "获取跟踪器地址")
     @ApiOperation(value = "获取跟踪器地址")
     @GetMapping(value = "/url")
     public ResponseEntity<String> url() throws Exception {

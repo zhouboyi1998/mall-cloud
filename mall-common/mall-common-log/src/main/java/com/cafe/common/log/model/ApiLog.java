@@ -11,12 +11,12 @@ import java.io.Serializable;
  * @Package: com.cafe.common.log.model
  * @Author: zhouboyi
  * @Date: 2023/11/21 10:09
- * @Description: 日志模型
+ * @Description: 接口日志
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-public class Log implements Serializable {
+public class ApiLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

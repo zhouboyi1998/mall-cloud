@@ -3,7 +3,7 @@ package com.cafe.goods.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.lang.tree.Tree;
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.goods.model.Category;
 import com.cafe.goods.service.CategoryService;
@@ -43,7 +43,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @LogPrint(value = "查询分类数量")
+    @ApiLogPrint(value = "查询分类数量")
     @ApiOperation(value = "查询分类数量")
     @GetMapping(value = "/count")
     public ResponseEntity<Integer> count() {
@@ -51,7 +51,7 @@ public class CategoryController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "根据条件查询查询分类数量")
+    @ApiLogPrint(value = "根据条件查询查询分类数量")
     @ApiOperation(value = "根据条件查询分类数量")
     @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
     @PostMapping(value = "/count")
@@ -61,7 +61,7 @@ public class CategoryController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "查询分类列表")
+    @ApiLogPrint(value = "查询分类列表")
     @ApiOperation(value = "查询分类列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Category>> list() {
@@ -69,7 +69,7 @@ public class CategoryController {
         return ResponseEntity.ok(categoryList);
     }
 
-    @LogPrint(value = "根据条件查询分类列表")
+    @ApiLogPrint(value = "根据条件查询分类列表")
     @ApiOperation(value = "根据条件查询分类列表")
     @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
     @PostMapping(value = "/list")
@@ -79,7 +79,7 @@ public class CategoryController {
         return ResponseEntity.ok(categoryList);
     }
 
-    @LogPrint(value = "分页查询分类列表")
+    @ApiLogPrint(value = "分页查询分类列表")
     @ApiOperation(value = "分页查询分类列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -95,7 +95,7 @@ public class CategoryController {
         return ResponseEntity.ok(categoryPage);
     }
 
-    @LogPrint(value = "根据条件分页查询分类")
+    @ApiLogPrint(value = "根据条件分页查询分类")
     @ApiOperation(value = "根据条件分页查询分类")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -114,7 +114,7 @@ public class CategoryController {
         return ResponseEntity.ok(categoryPage);
     }
 
-    @LogPrint(value = "根据id查询单个分类")
+    @ApiLogPrint(value = "根据id查询单个分类")
     @ApiOperation(value = "根据id查询单个分类")
     @ApiImplicitParam(value = "分类id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
@@ -123,7 +123,7 @@ public class CategoryController {
         return ResponseEntity.ok(category);
     }
 
-    @LogPrint(value = "根据条件查询单个分类")
+    @ApiLogPrint(value = "根据条件查询单个分类")
     @ApiOperation(value = "根据条件查询单个分类")
     @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
     @PostMapping(value = "/one")
@@ -133,7 +133,7 @@ public class CategoryController {
         return ResponseEntity.ok(one);
     }
 
-    @LogPrint(value = "新增分类")
+    @ApiLogPrint(value = "新增分类")
     @ApiOperation(value = "新增分类")
     @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
     @PostMapping(value = "/insert")
@@ -142,7 +142,7 @@ public class CategoryController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "批量新增分类")
+    @ApiLogPrint(value = "批量新增分类")
     @ApiOperation(value = "批量新增分类")
     @ApiImplicitParam(value = "分类列表", name = "categoryList", dataType = "List<Category>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
@@ -151,7 +151,7 @@ public class CategoryController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id修改分类")
+    @ApiLogPrint(value = "根据id修改分类")
     @ApiOperation(value = "根据id修改分类")
     @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
     @PutMapping(value = "/update")
@@ -160,7 +160,7 @@ public class CategoryController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量修改分类")
+    @ApiLogPrint(value = "根据ids批量修改分类")
     @ApiOperation(value = "根据ids批量修改分类")
     @ApiImplicitParam(value = "分类列表", name = "categoryList", dataType = "List<Category>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
@@ -169,7 +169,7 @@ public class CategoryController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id删除分类")
+    @ApiLogPrint(value = "根据id删除分类")
     @ApiOperation(value = "根据id删除分类")
     @ApiImplicitParam(value = "分类id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
@@ -178,7 +178,7 @@ public class CategoryController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量删除分类")
+    @ApiLogPrint(value = "根据ids批量删除分类")
     @ApiOperation(value = "根据ids批量删除分类")
     @ApiImplicitParam(value = "分类id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
@@ -187,7 +187,7 @@ public class CategoryController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据条件批量删除分类")
+    @ApiLogPrint(value = "根据条件批量删除分类")
     @ApiOperation(value = "根据条件批量删除分类")
     @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
     @DeleteMapping(value = "/delete")
@@ -197,7 +197,7 @@ public class CategoryController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "查询分类树")
+    @ApiLogPrint(value = "查询分类树")
     @ApiOperation(value = "查询分类树")
     @GetMapping(value = "/tree-list")
     public ResponseEntity<List<Tree>> treeList() {
@@ -205,7 +205,7 @@ public class CategoryController {
         return ResponseEntity.ok(treeList);
     }
 
-    @LogPrint(value = "根据上级分类id查询分类树")
+    @ApiLogPrint(value = "根据上级分类id查询分类树")
     @ApiOperation(value = "根据上级分类id查询分类树")
     @ApiImplicitParam(value = "上级分类id", name = "parentId", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/tree-list/{parentId}")
@@ -214,7 +214,7 @@ public class CategoryController {
         return ResponseEntity.ok(treeList);
     }
 
-    @LogPrint(value = "根据分类id查询分类树")
+    @ApiLogPrint(value = "根据分类id查询分类树")
     @ApiOperation(value = "根据分类id查询分类树")
     @ApiImplicitParam(value = "分类id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/tree/{id}")

@@ -1,6 +1,6 @@
 package com.cafe.elasticsearch.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.elasticsearch.service.OrderService;
 import com.cafe.order.vo.OrderVO;
 import io.swagger.annotations.Api;
@@ -44,7 +44,7 @@ public class OrderController {
         this.orderService = orderService;
     }
 
-    @LogPrint(value = "获取订单")
+    @ApiLogPrint(value = "获取订单")
     @ApiOperation(value = "获取订单")
     @ApiImplicitParam(value = "ElasticSearch id", name = "id", dataType = "String", paramType = "path", required = true)
     @GetMapping(value = "/{id}")
@@ -53,7 +53,7 @@ public class OrderController {
         return ResponseEntity.ok(getResponse);
     }
 
-    @LogPrint(value = "插入订单")
+    @ApiLogPrint(value = "插入订单")
     @ApiOperation(value = "插入订单")
     @ApiImplicitParam(value = "订单Model", name = "orderVO", dataType = "OrderVO", paramType = "body", required = true)
     @PostMapping(value = "")
@@ -62,7 +62,7 @@ public class OrderController {
         return ResponseEntity.ok(indexResponse);
     }
 
-    @LogPrint(value = "更新订单")
+    @ApiLogPrint(value = "更新订单")
     @ApiOperation(value = "更新订单")
     @ApiImplicitParam(value = "订单Model", name = "orderVO", dataType = "OrderVO", paramType = "body", required = true)
     @PutMapping(value = "")
@@ -71,7 +71,7 @@ public class OrderController {
         return ResponseEntity.ok(updateResponse);
     }
 
-    @LogPrint(value = "删除订单")
+    @ApiLogPrint(value = "删除订单")
     @ApiOperation(value = "删除订单")
     @ApiImplicitParam(value = "ElasticSearch id", name = "id", dataType = "String", paramType = "path", required = true)
     @DeleteMapping(value = "/{id}")
@@ -80,7 +80,7 @@ public class OrderController {
         return ResponseEntity.ok(deleteResponse);
     }
 
-    @LogPrint(value = "批量插入订单")
+    @ApiLogPrint(value = "批量插入订单")
     @ApiOperation(value = "批量插入订单")
     @ApiImplicitParam(value = "订单列表", name = "orderVOList", dataType = "List<OrderVO>", paramType = "body", required = true)
     @PostMapping(value = "/batch")
@@ -89,7 +89,7 @@ public class OrderController {
         return ResponseEntity.ok(bulkResponse);
     }
 
-    @LogPrint(value = "批量更新订单")
+    @ApiLogPrint(value = "批量更新订单")
     @ApiOperation(value = "批量更新订单")
     @ApiImplicitParam(value = "订单列表", name = "orderVOList", dataType = "List<OrderVO>", paramType = "body", required = true)
     @PutMapping(value = "/batch")
@@ -98,7 +98,7 @@ public class OrderController {
         return ResponseEntity.ok(bulkResponse);
     }
 
-    @LogPrint(value = "批量删除订单")
+    @ApiLogPrint(value = "批量删除订单")
     @ApiOperation(value = "批量删除订单")
     @ApiImplicitParam(value = "ElasticSearch ids", name = "ids", dataType = "List<String>", paramType = "body", required = true)
     @DeleteMapping(value = "/batch")

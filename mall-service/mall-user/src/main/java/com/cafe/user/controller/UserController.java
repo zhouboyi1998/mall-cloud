@@ -2,7 +2,7 @@ package com.cafe.user.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.user.model.User;
 import com.cafe.user.service.UserService;
@@ -42,7 +42,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @LogPrint(value = "查询用户数量")
+    @ApiLogPrint(value = "查询用户数量")
     @ApiOperation(value = "查询用户数量")
     @GetMapping(value = "/count")
     public ResponseEntity<Integer> count() {
@@ -50,7 +50,7 @@ public class UserController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "根据条件查询查询用户数量")
+    @ApiLogPrint(value = "根据条件查询查询用户数量")
     @ApiOperation(value = "根据条件查询用户数量")
     @ApiImplicitParam(value = "用户Model", name = "user", dataType = "User", paramType = "body", required = true)
     @PostMapping(value = "/count")
@@ -60,7 +60,7 @@ public class UserController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "查询用户列表")
+    @ApiLogPrint(value = "查询用户列表")
     @ApiOperation(value = "查询用户列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<User>> list() {
@@ -68,7 +68,7 @@ public class UserController {
         return ResponseEntity.ok(userList);
     }
 
-    @LogPrint(value = "根据条件查询用户列表")
+    @ApiLogPrint(value = "根据条件查询用户列表")
     @ApiOperation(value = "根据条件查询用户列表")
     @ApiImplicitParam(value = "用户Model", name = "user", dataType = "User", paramType = "body", required = true)
     @PostMapping(value = "/list")
@@ -78,7 +78,7 @@ public class UserController {
         return ResponseEntity.ok(userList);
     }
 
-    @LogPrint(value = "分页查询用户列表")
+    @ApiLogPrint(value = "分页查询用户列表")
     @ApiOperation(value = "分页查询用户列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -94,7 +94,7 @@ public class UserController {
         return ResponseEntity.ok(userPage);
     }
 
-    @LogPrint(value = "根据条件分页查询用户")
+    @ApiLogPrint(value = "根据条件分页查询用户")
     @ApiOperation(value = "根据条件分页查询用户")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -113,7 +113,7 @@ public class UserController {
         return ResponseEntity.ok(userPage);
     }
 
-    @LogPrint(value = "根据id查询单个用户")
+    @ApiLogPrint(value = "根据id查询单个用户")
     @ApiOperation(value = "根据id查询单个用户")
     @ApiImplicitParam(value = "用户id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
@@ -122,7 +122,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @LogPrint(value = "根据条件查询单个用户")
+    @ApiLogPrint(value = "根据条件查询单个用户")
     @ApiOperation(value = "根据条件查询单个用户")
     @ApiImplicitParam(value = "用户Model", name = "user", dataType = "User", paramType = "body", required = true)
     @PostMapping(value = "/one")
@@ -132,7 +132,7 @@ public class UserController {
         return ResponseEntity.ok(one);
     }
 
-    @LogPrint(value = "新增用户")
+    @ApiLogPrint(value = "新增用户")
     @ApiOperation(value = "新增用户")
     @ApiImplicitParam(value = "用户Model", name = "user", dataType = "User", paramType = "body", required = true)
     @PostMapping(value = "/insert")
@@ -141,7 +141,7 @@ public class UserController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "批量新增用户")
+    @ApiLogPrint(value = "批量新增用户")
     @ApiOperation(value = "批量新增用户")
     @ApiImplicitParam(value = "用户列表", name = "userList", dataType = "List<User>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
@@ -150,7 +150,7 @@ public class UserController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id修改用户")
+    @ApiLogPrint(value = "根据id修改用户")
     @ApiOperation(value = "根据id修改用户")
     @ApiImplicitParam(value = "用户Model", name = "user", dataType = "User", paramType = "body", required = true)
     @PutMapping(value = "/update")
@@ -159,7 +159,7 @@ public class UserController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量修改用户")
+    @ApiLogPrint(value = "根据ids批量修改用户")
     @ApiOperation(value = "根据ids批量修改用户")
     @ApiImplicitParam(value = "用户列表", name = "userList", dataType = "List<User>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
@@ -168,7 +168,7 @@ public class UserController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id删除用户")
+    @ApiLogPrint(value = "根据id删除用户")
     @ApiOperation(value = "根据id删除用户")
     @ApiImplicitParam(value = "用户id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
@@ -177,7 +177,7 @@ public class UserController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量删除用户")
+    @ApiLogPrint(value = "根据ids批量删除用户")
     @ApiOperation(value = "根据ids批量删除用户")
     @ApiImplicitParam(value = "用户id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
@@ -186,7 +186,7 @@ public class UserController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据条件批量删除用户")
+    @ApiLogPrint(value = "根据条件批量删除用户")
     @ApiOperation(value = "根据条件批量删除用户")
     @ApiImplicitParam(value = "用户Model", name = "user", dataType = "User", paramType = "body", required = true)
     @DeleteMapping(value = "/delete")
@@ -196,7 +196,7 @@ public class UserController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据用户名和客户端id查询用户详情")
+    @ApiLogPrint(value = "根据用户名和客户端id查询用户详情")
     @ApiOperation(value = "根据用户名和客户端id查询用户详情")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "用户名", name = "username", dataType = "String", paramType = "path", required = true),
@@ -211,7 +211,7 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @LogPrint(value = "根据手机号和客户端id查询用户详情")
+    @ApiLogPrint(value = "根据手机号和客户端id查询用户详情")
     @ApiOperation(value = "根据手机号和客户端id查询用户详情")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "手机号", name = "mobile", dataType = "String", paramType = "path", required = true),

@@ -3,7 +3,7 @@ package com.cafe.foundation.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.lang.tree.Tree;
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.foundation.dto.AreaDTO;
 import com.cafe.foundation.model.Area;
@@ -44,7 +44,7 @@ public class AreaController {
         this.areaService = areaService;
     }
 
-    @LogPrint(value = "查询区域数量")
+    @ApiLogPrint(value = "查询区域数量")
     @ApiOperation(value = "查询区域数量")
     @GetMapping(value = "/count")
     public ResponseEntity<Integer> count() {
@@ -52,7 +52,7 @@ public class AreaController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "根据条件查询查询区域数量")
+    @ApiLogPrint(value = "根据条件查询查询区域数量")
     @ApiOperation(value = "根据条件查询区域数量")
     @ApiImplicitParam(value = "区域Model", name = "area", dataType = "Area", paramType = "body", required = true)
     @PostMapping(value = "/count")
@@ -62,7 +62,7 @@ public class AreaController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "查询区域列表")
+    @ApiLogPrint(value = "查询区域列表")
     @ApiOperation(value = "查询区域列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Area>> list() {
@@ -70,7 +70,7 @@ public class AreaController {
         return ResponseEntity.ok(areaList);
     }
 
-    @LogPrint(value = "根据条件查询区域列表")
+    @ApiLogPrint(value = "根据条件查询区域列表")
     @ApiOperation(value = "根据条件查询区域列表")
     @ApiImplicitParam(value = "区域Model", name = "area", dataType = "Area", paramType = "body", required = true)
     @PostMapping(value = "/list")
@@ -80,7 +80,7 @@ public class AreaController {
         return ResponseEntity.ok(areaList);
     }
 
-    @LogPrint(value = "分页查询区域列表")
+    @ApiLogPrint(value = "分页查询区域列表")
     @ApiOperation(value = "分页查询区域列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -96,7 +96,7 @@ public class AreaController {
         return ResponseEntity.ok(areaPage);
     }
 
-    @LogPrint(value = "根据条件分页查询区域")
+    @ApiLogPrint(value = "根据条件分页查询区域")
     @ApiOperation(value = "根据条件分页查询区域")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -115,7 +115,7 @@ public class AreaController {
         return ResponseEntity.ok(areaPage);
     }
 
-    @LogPrint(value = "根据id查询单个区域")
+    @ApiLogPrint(value = "根据id查询单个区域")
     @ApiOperation(value = "根据id查询单个区域")
     @ApiImplicitParam(value = "区域id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
@@ -124,7 +124,7 @@ public class AreaController {
         return ResponseEntity.ok(area);
     }
 
-    @LogPrint(value = "根据条件查询单个区域")
+    @ApiLogPrint(value = "根据条件查询单个区域")
     @ApiOperation(value = "根据条件查询单个区域")
     @ApiImplicitParam(value = "区域Model", name = "area", dataType = "Area", paramType = "body", required = true)
     @PostMapping(value = "/one")
@@ -134,7 +134,7 @@ public class AreaController {
         return ResponseEntity.ok(one);
     }
 
-    @LogPrint(value = "新增区域")
+    @ApiLogPrint(value = "新增区域")
     @ApiOperation(value = "新增区域")
     @ApiImplicitParam(value = "区域Model", name = "area", dataType = "Area", paramType = "body", required = true)
     @PostMapping(value = "/insert")
@@ -143,7 +143,7 @@ public class AreaController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "批量新增区域")
+    @ApiLogPrint(value = "批量新增区域")
     @ApiOperation(value = "批量新增区域")
     @ApiImplicitParam(value = "区域列表", name = "areaList", dataType = "List<Area>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
@@ -152,7 +152,7 @@ public class AreaController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id修改区域")
+    @ApiLogPrint(value = "根据id修改区域")
     @ApiOperation(value = "根据id修改区域")
     @ApiImplicitParam(value = "区域Model", name = "area", dataType = "Area", paramType = "body", required = true)
     @PutMapping(value = "/update")
@@ -161,7 +161,7 @@ public class AreaController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量修改区域")
+    @ApiLogPrint(value = "根据ids批量修改区域")
     @ApiOperation(value = "根据ids批量修改区域")
     @ApiImplicitParam(value = "区域列表", name = "areaList", dataType = "List<Area>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
@@ -170,7 +170,7 @@ public class AreaController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id删除区域")
+    @ApiLogPrint(value = "根据id删除区域")
     @ApiOperation(value = "根据id删除区域")
     @ApiImplicitParam(value = "区域id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
@@ -179,7 +179,7 @@ public class AreaController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量删除区域")
+    @ApiLogPrint(value = "根据ids批量删除区域")
     @ApiOperation(value = "根据ids批量删除区域")
     @ApiImplicitParam(value = "区域id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
@@ -188,7 +188,7 @@ public class AreaController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据条件批量删除区域")
+    @ApiLogPrint(value = "根据条件批量删除区域")
     @ApiOperation(value = "根据条件批量删除区域")
     @ApiImplicitParam(value = "区域Model", name = "area", dataType = "Area", paramType = "body", required = true)
     @DeleteMapping(value = "/delete")
@@ -198,7 +198,7 @@ public class AreaController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据省份id、城市id、区县id获取区域")
+    @ApiLogPrint(value = "根据省份id、城市id、区县id获取区域")
     @ApiOperation(value = "根据省份id、城市id、区县id获取区域")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "省份id", name = "provinceId", dataType = "Long", paramType = "path", required = true),
@@ -215,7 +215,7 @@ public class AreaController {
         return ResponseEntity.ok(dto);
     }
 
-    @LogPrint(value = "查询区域树")
+    @ApiLogPrint(value = "查询区域树")
     @ApiOperation(value = "查询区域树")
     @GetMapping(value = "/tree-list")
     public ResponseEntity<List<Tree>> treeList() {

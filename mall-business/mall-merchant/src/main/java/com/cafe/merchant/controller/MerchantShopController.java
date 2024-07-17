@@ -2,7 +2,7 @@ package com.cafe.merchant.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.merchant.model.MerchantShop;
 import com.cafe.merchant.service.MerchantShopService;
@@ -42,7 +42,7 @@ public class MerchantShopController {
         this.merchantShopService = merchantShopService;
     }
 
-    @LogPrint(value = "查询商家-店铺关联关系数量")
+    @ApiLogPrint(value = "查询商家-店铺关联关系数量")
     @ApiOperation(value = "查询商家-店铺关联关系数量")
     @GetMapping(value = "/count")
     public ResponseEntity<Integer> count() {
@@ -50,7 +50,7 @@ public class MerchantShopController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "根据条件查询查询商家-店铺关联关系数量")
+    @ApiLogPrint(value = "根据条件查询查询商家-店铺关联关系数量")
     @ApiOperation(value = "根据条件查询商家-店铺关联关系数量")
     @ApiImplicitParam(value = "商家-店铺关联关系Model", name = "merchantShop", dataType = "MerchantShop", paramType = "body", required = true)
     @PostMapping(value = "/count")
@@ -60,7 +60,7 @@ public class MerchantShopController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "查询商家-店铺关联关系列表")
+    @ApiLogPrint(value = "查询商家-店铺关联关系列表")
     @ApiOperation(value = "查询商家-店铺关联关系列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<MerchantShop>> list() {
@@ -68,7 +68,7 @@ public class MerchantShopController {
         return ResponseEntity.ok(merchantShopList);
     }
 
-    @LogPrint(value = "根据条件查询商家-店铺关联关系列表")
+    @ApiLogPrint(value = "根据条件查询商家-店铺关联关系列表")
     @ApiOperation(value = "根据条件查询商家-店铺关联关系列表")
     @ApiImplicitParam(value = "商家-店铺关联关系Model", name = "merchantShop", dataType = "MerchantShop", paramType = "body", required = true)
     @PostMapping(value = "/list")
@@ -78,7 +78,7 @@ public class MerchantShopController {
         return ResponseEntity.ok(merchantShopList);
     }
 
-    @LogPrint(value = "分页查询商家-店铺关联关系列表")
+    @ApiLogPrint(value = "分页查询商家-店铺关联关系列表")
     @ApiOperation(value = "分页查询商家-店铺关联关系列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -94,7 +94,7 @@ public class MerchantShopController {
         return ResponseEntity.ok(merchantShopPage);
     }
 
-    @LogPrint(value = "根据条件分页查询商家-店铺关联关系")
+    @ApiLogPrint(value = "根据条件分页查询商家-店铺关联关系")
     @ApiOperation(value = "根据条件分页查询商家-店铺关联关系")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -113,7 +113,7 @@ public class MerchantShopController {
         return ResponseEntity.ok(merchantShopPage);
     }
 
-    @LogPrint(value = "根据id查询单个商家-店铺关联关系")
+    @ApiLogPrint(value = "根据id查询单个商家-店铺关联关系")
     @ApiOperation(value = "根据id查询单个商家-店铺关联关系")
     @ApiImplicitParam(value = "商家-店铺关联关系id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
@@ -122,7 +122,7 @@ public class MerchantShopController {
         return ResponseEntity.ok(merchantShop);
     }
 
-    @LogPrint(value = "根据条件查询单个商家-店铺关联关系")
+    @ApiLogPrint(value = "根据条件查询单个商家-店铺关联关系")
     @ApiOperation(value = "根据条件查询单个商家-店铺关联关系")
     @ApiImplicitParam(value = "商家-店铺关联关系Model", name = "merchantShop", dataType = "MerchantShop", paramType = "body", required = true)
     @PostMapping(value = "/one")
@@ -132,7 +132,7 @@ public class MerchantShopController {
         return ResponseEntity.ok(one);
     }
 
-    @LogPrint(value = "新增商家-店铺关联关系")
+    @ApiLogPrint(value = "新增商家-店铺关联关系")
     @ApiOperation(value = "新增商家-店铺关联关系")
     @ApiImplicitParam(value = "商家-店铺关联关系Model", name = "merchantShop", dataType = "MerchantShop", paramType = "body", required = true)
     @PostMapping(value = "/insert")
@@ -141,7 +141,7 @@ public class MerchantShopController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "批量新增商家-店铺关联关系")
+    @ApiLogPrint(value = "批量新增商家-店铺关联关系")
     @ApiOperation(value = "批量新增商家-店铺关联关系")
     @ApiImplicitParam(value = "商家-店铺关联关系列表", name = "merchantShopList", dataType = "List<MerchantShop>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
@@ -150,7 +150,7 @@ public class MerchantShopController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id修改商家-店铺关联关系")
+    @ApiLogPrint(value = "根据id修改商家-店铺关联关系")
     @ApiOperation(value = "根据id修改商家-店铺关联关系")
     @ApiImplicitParam(value = "商家-店铺关联关系Model", name = "merchantShop", dataType = "MerchantShop", paramType = "body", required = true)
     @PutMapping(value = "/update")
@@ -159,7 +159,7 @@ public class MerchantShopController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量修改商家-店铺关联关系")
+    @ApiLogPrint(value = "根据ids批量修改商家-店铺关联关系")
     @ApiOperation(value = "根据ids批量修改商家-店铺关联关系")
     @ApiImplicitParam(value = "商家-店铺关联关系列表", name = "merchantShopList", dataType = "List<MerchantShop>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
@@ -168,7 +168,7 @@ public class MerchantShopController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id删除商家-店铺关联关系")
+    @ApiLogPrint(value = "根据id删除商家-店铺关联关系")
     @ApiOperation(value = "根据id删除商家-店铺关联关系")
     @ApiImplicitParam(value = "商家-店铺关联关系id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
@@ -177,7 +177,7 @@ public class MerchantShopController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量删除商家-店铺关联关系")
+    @ApiLogPrint(value = "根据ids批量删除商家-店铺关联关系")
     @ApiOperation(value = "根据ids批量删除商家-店铺关联关系")
     @ApiImplicitParam(value = "商家-店铺关联关系id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
@@ -186,7 +186,7 @@ public class MerchantShopController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据条件批量删除商家-店铺关联关系")
+    @ApiLogPrint(value = "根据条件批量删除商家-店铺关联关系")
     @ApiOperation(value = "根据条件批量删除商家-店铺关联关系")
     @ApiImplicitParam(value = "商家-店铺关联关系Model", name = "merchantShop", dataType = "MerchantShop", paramType = "body", required = true)
     @DeleteMapping(value = "/delete")

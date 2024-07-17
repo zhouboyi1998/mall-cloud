@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
 @Documented
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = ElementType.METHOD)
-public @interface LogPrint {
+public @interface ApiLogPrint {
 
     @AliasFor(value = "description")
     String value() default StringConstant.EMPTY;

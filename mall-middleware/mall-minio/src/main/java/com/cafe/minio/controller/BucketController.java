@@ -1,6 +1,6 @@
 package com.cafe.minio.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.minio.service.BucketService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -35,7 +35,7 @@ public class BucketController {
         this.bucketService = bucketService;
     }
 
-    @LogPrint(value = "查询存储桶列表")
+    @ApiLogPrint(value = "查询存储桶列表")
     @ApiOperation(value = "查询存储桶列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<String>> list() throws Exception {
@@ -43,7 +43,7 @@ public class BucketController {
         return ResponseEntity.ok(bucketList);
     }
 
-    @LogPrint(value = "查询存储桶是否存在")
+    @ApiLogPrint(value = "查询存储桶是否存在")
     @ApiOperation(value = "查询存储桶是否存在")
     @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true)
     @GetMapping(value = "/exists/{bucket}")
@@ -52,7 +52,7 @@ public class BucketController {
         return ResponseEntity.ok(exists);
     }
 
-    @LogPrint(value = "新建存储桶")
+    @ApiLogPrint(value = "新建存储桶")
     @ApiOperation(value = "新建存储桶")
     @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true)
     @PostMapping(value = "/create/{bucket}")
@@ -61,7 +61,7 @@ public class BucketController {
         return ResponseEntity.ok().build();
     }
 
-    @LogPrint(value = "删除存储桶")
+    @ApiLogPrint(value = "删除存储桶")
     @ApiOperation(value = "删除存储桶")
     @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true)
     @DeleteMapping(value = "/remove/{bucket}")

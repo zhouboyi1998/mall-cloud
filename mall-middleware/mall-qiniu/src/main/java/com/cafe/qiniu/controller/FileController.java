@@ -1,6 +1,6 @@
 package com.cafe.qiniu.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.qiniu.service.FileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -35,7 +35,7 @@ public class FileController {
         this.fileService = fileService;
     }
 
-    @LogPrint(value = "上传文件")
+    @ApiLogPrint(value = "上传文件")
     @ApiOperation(value = "上传文件")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),
@@ -50,7 +50,7 @@ public class FileController {
         return ResponseEntity.ok(filepath);
     }
 
-    @LogPrint(value = "删除文件")
+    @ApiLogPrint(value = "删除文件")
     @ApiOperation(value = "删除文件")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true),

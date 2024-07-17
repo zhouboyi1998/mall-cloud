@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.clickhouse.model.Goods;
 import com.cafe.clickhouse.service.GoodsService;
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -42,7 +42,7 @@ public class GoodsController {
         this.goodsService = goodsService;
     }
 
-    @LogPrint(value = "查询商品数量")
+    @ApiLogPrint(value = "查询商品数量")
     @ApiOperation(value = "查询商品数量")
     @GetMapping(value = "/count")
     public ResponseEntity<Integer> count() {
@@ -50,7 +50,7 @@ public class GoodsController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "根据条件查询查询商品数量")
+    @ApiLogPrint(value = "根据条件查询查询商品数量")
     @ApiOperation(value = "根据条件查询商品数量")
     @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
     @PostMapping(value = "/count")
@@ -60,7 +60,7 @@ public class GoodsController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "查询商品列表")
+    @ApiLogPrint(value = "查询商品列表")
     @ApiOperation(value = "查询商品列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<Goods>> list() {
@@ -68,7 +68,7 @@ public class GoodsController {
         return ResponseEntity.ok(goodsList);
     }
 
-    @LogPrint(value = "根据条件查询商品列表")
+    @ApiLogPrint(value = "根据条件查询商品列表")
     @ApiOperation(value = "根据条件查询商品列表")
     @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
     @PostMapping(value = "/list")
@@ -78,7 +78,7 @@ public class GoodsController {
         return ResponseEntity.ok(goodsList);
     }
 
-    @LogPrint(value = "分页查询商品列表")
+    @ApiLogPrint(value = "分页查询商品列表")
     @ApiOperation(value = "分页查询商品列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -94,7 +94,7 @@ public class GoodsController {
         return ResponseEntity.ok(goodsPage);
     }
 
-    @LogPrint(value = "根据条件分页查询商品")
+    @ApiLogPrint(value = "根据条件分页查询商品")
     @ApiOperation(value = "根据条件分页查询商品")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -113,7 +113,7 @@ public class GoodsController {
         return ResponseEntity.ok(goodsPage);
     }
 
-    @LogPrint(value = "根据id查询单个商品")
+    @ApiLogPrint(value = "根据id查询单个商品")
     @ApiOperation(value = "根据id查询单个商品")
     @ApiImplicitParam(value = "商品id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
@@ -122,7 +122,7 @@ public class GoodsController {
         return ResponseEntity.ok(goods);
     }
 
-    @LogPrint(value = "根据条件查询单个商品")
+    @ApiLogPrint(value = "根据条件查询单个商品")
     @ApiOperation(value = "根据条件查询单个商品")
     @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
     @PostMapping(value = "/one")
@@ -132,7 +132,7 @@ public class GoodsController {
         return ResponseEntity.ok(one);
     }
 
-    @LogPrint(value = "新增商品")
+    @ApiLogPrint(value = "新增商品")
     @ApiOperation(value = "新增商品")
     @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
     @PostMapping(value = "/insert")
@@ -141,7 +141,7 @@ public class GoodsController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "批量新增商品")
+    @ApiLogPrint(value = "批量新增商品")
     @ApiOperation(value = "批量新增商品")
     @ApiImplicitParam(value = "商品列表", name = "goodsList", dataType = "List<Goods>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
@@ -150,7 +150,7 @@ public class GoodsController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id修改商品")
+    @ApiLogPrint(value = "根据id修改商品")
     @ApiOperation(value = "根据id修改商品")
     @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
     @PutMapping(value = "/update")
@@ -159,7 +159,7 @@ public class GoodsController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量修改商品")
+    @ApiLogPrint(value = "根据ids批量修改商品")
     @ApiOperation(value = "根据ids批量修改商品")
     @ApiImplicitParam(value = "商品列表", name = "goodsList", dataType = "List<Goods>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
@@ -168,7 +168,7 @@ public class GoodsController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id删除商品")
+    @ApiLogPrint(value = "根据id删除商品")
     @ApiOperation(value = "根据id删除商品")
     @ApiImplicitParam(value = "商品id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
@@ -177,7 +177,7 @@ public class GoodsController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量删除商品")
+    @ApiLogPrint(value = "根据ids批量删除商品")
     @ApiOperation(value = "根据ids批量删除商品")
     @ApiImplicitParam(value = "商品id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
@@ -186,7 +186,7 @@ public class GoodsController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据条件批量删除商品")
+    @ApiLogPrint(value = "根据条件批量删除商品")
     @ApiOperation(value = "根据条件批量删除商品")
     @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
     @DeleteMapping(value = "/delete")

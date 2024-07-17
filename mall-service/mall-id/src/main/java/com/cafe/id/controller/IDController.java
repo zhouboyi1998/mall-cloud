@@ -1,6 +1,6 @@
 package com.cafe.id.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.id.service.IDService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -30,7 +30,7 @@ public class IDController {
         this.idService = idService;
     }
 
-    @LogPrint(value = "获取下一个分布式ID")
+    @ApiLogPrint(value = "获取下一个分布式ID")
     @ApiOperation(value = "获取下一个分布式ID")
     @GetMapping(value = "/next")
     public ResponseEntity<Long> nextId() {

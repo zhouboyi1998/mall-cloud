@@ -2,7 +2,7 @@ package com.cafe.storage.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.storage.model.StockDetail;
 import com.cafe.storage.service.StockDetailService;
@@ -42,7 +42,7 @@ public class StockDetailController {
         this.stockDetailService = stockDetailService;
     }
 
-    @LogPrint(value = "查询库存明细数量")
+    @ApiLogPrint(value = "查询库存明细数量")
     @ApiOperation(value = "查询库存明细数量")
     @GetMapping(value = "/count")
     public ResponseEntity<Integer> count() {
@@ -50,7 +50,7 @@ public class StockDetailController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "根据条件查询查询库存明细数量")
+    @ApiLogPrint(value = "根据条件查询查询库存明细数量")
     @ApiOperation(value = "根据条件查询库存明细数量")
     @ApiImplicitParam(value = "库存明细Model", name = "stockDetail", dataType = "StockDetail", paramType = "body", required = true)
     @PostMapping(value = "/count")
@@ -60,7 +60,7 @@ public class StockDetailController {
         return ResponseEntity.ok(count);
     }
 
-    @LogPrint(value = "查询库存明细列表")
+    @ApiLogPrint(value = "查询库存明细列表")
     @ApiOperation(value = "查询库存明细列表")
     @GetMapping(value = "/list")
     public ResponseEntity<List<StockDetail>> list() {
@@ -68,7 +68,7 @@ public class StockDetailController {
         return ResponseEntity.ok(stockDetailList);
     }
 
-    @LogPrint(value = "根据条件查询库存明细列表")
+    @ApiLogPrint(value = "根据条件查询库存明细列表")
     @ApiOperation(value = "根据条件查询库存明细列表")
     @ApiImplicitParam(value = "库存明细Model", name = "stockDetail", dataType = "StockDetail", paramType = "body", required = true)
     @PostMapping(value = "/list")
@@ -78,7 +78,7 @@ public class StockDetailController {
         return ResponseEntity.ok(stockDetailList);
     }
 
-    @LogPrint(value = "分页查询库存明细列表")
+    @ApiLogPrint(value = "分页查询库存明细列表")
     @ApiOperation(value = "分页查询库存明细列表")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -94,7 +94,7 @@ public class StockDetailController {
         return ResponseEntity.ok(stockDetailPage);
     }
 
-    @LogPrint(value = "根据条件分页查询库存明细")
+    @ApiLogPrint(value = "根据条件分页查询库存明细")
     @ApiOperation(value = "根据条件分页查询库存明细")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
@@ -113,7 +113,7 @@ public class StockDetailController {
         return ResponseEntity.ok(stockDetailPage);
     }
 
-    @LogPrint(value = "根据id查询单个库存明细")
+    @ApiLogPrint(value = "根据id查询单个库存明细")
     @ApiOperation(value = "根据id查询单个库存明细")
     @ApiImplicitParam(value = "库存明细id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
@@ -122,7 +122,7 @@ public class StockDetailController {
         return ResponseEntity.ok(stockDetail);
     }
 
-    @LogPrint(value = "根据条件查询单个库存明细")
+    @ApiLogPrint(value = "根据条件查询单个库存明细")
     @ApiOperation(value = "根据条件查询单个库存明细")
     @ApiImplicitParam(value = "库存明细Model", name = "stockDetail", dataType = "StockDetail", paramType = "body", required = true)
     @PostMapping(value = "/one")
@@ -132,7 +132,7 @@ public class StockDetailController {
         return ResponseEntity.ok(one);
     }
 
-    @LogPrint(value = "新增库存明细")
+    @ApiLogPrint(value = "新增库存明细")
     @ApiOperation(value = "新增库存明细")
     @ApiImplicitParam(value = "库存明细Model", name = "stockDetail", dataType = "StockDetail", paramType = "body", required = true)
     @PostMapping(value = "/insert")
@@ -141,7 +141,7 @@ public class StockDetailController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "批量新增库存明细")
+    @ApiLogPrint(value = "批量新增库存明细")
     @ApiOperation(value = "批量新增库存明细")
     @ApiImplicitParam(value = "库存明细列表", name = "stockDetailList", dataType = "List<StockDetail>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
@@ -150,7 +150,7 @@ public class StockDetailController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id修改库存明细")
+    @ApiLogPrint(value = "根据id修改库存明细")
     @ApiOperation(value = "根据id修改库存明细")
     @ApiImplicitParam(value = "库存明细Model", name = "stockDetail", dataType = "StockDetail", paramType = "body", required = true)
     @PutMapping(value = "/update")
@@ -159,7 +159,7 @@ public class StockDetailController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量修改库存明细")
+    @ApiLogPrint(value = "根据ids批量修改库存明细")
     @ApiOperation(value = "根据ids批量修改库存明细")
     @ApiImplicitParam(value = "库存明细列表", name = "stockDetailList", dataType = "List<StockDetail>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
@@ -168,7 +168,7 @@ public class StockDetailController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据id删除库存明细")
+    @ApiLogPrint(value = "根据id删除库存明细")
     @ApiOperation(value = "根据id删除库存明细")
     @ApiImplicitParam(value = "库存明细id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
@@ -177,7 +177,7 @@ public class StockDetailController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据ids批量删除库存明细")
+    @ApiLogPrint(value = "根据ids批量删除库存明细")
     @ApiOperation(value = "根据ids批量删除库存明细")
     @ApiImplicitParam(value = "库存明细id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
@@ -186,7 +186,7 @@ public class StockDetailController {
         return ResponseEntity.ok(code);
     }
 
-    @LogPrint(value = "根据条件批量删除库存明细")
+    @ApiLogPrint(value = "根据条件批量删除库存明细")
     @ApiOperation(value = "根据条件批量删除库存明细")
     @ApiImplicitParam(value = "库存明细Model", name = "stockDetail", dataType = "StockDetail", paramType = "body", required = true)
     @DeleteMapping(value = "/delete")

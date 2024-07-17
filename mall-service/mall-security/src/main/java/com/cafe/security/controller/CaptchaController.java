@@ -1,6 +1,6 @@
 package com.cafe.security.controller;
 
-import com.cafe.common.log.annotation.LogPrint;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.security.captcha.CaptchaServiceStrategy;
 import com.cafe.security.model.Captcha;
 import com.cafe.security.property.CaptchaProperties;
@@ -39,7 +39,7 @@ public class CaptchaController {
         return captchaServiceStrategy.getCaptchaService(captchaProperties.getService().getImplementation());
     }
 
-    @LogPrint(value = "获取图片验证码")
+    @ApiLogPrint(value = "获取图片验证码")
     @ApiOperation(value = "获取图片验证码")
     @GetMapping(value = "/one")
     public ResponseEntity<Captcha> one() {
