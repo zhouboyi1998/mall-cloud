@@ -3,9 +3,9 @@ package com.cafe.common.log.aspect;
 import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
-import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.lang.id.Snowflake;
 import com.cafe.common.log.annotation.ApiLogPrint;
+import com.cafe.common.util.annotation.AnnotationUtil;
 import com.cafe.common.util.aop.AOPUtil;
 import com.cafe.common.util.json.JacksonUtil;
 import org.aspectj.lang.JoinPoint;
@@ -21,7 +21,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.context.annotation.Profile;
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -99,8 +98,11 @@ public class ApiLogConsoleAspect {
             .map(ServletRequestAttributes::getRequest)
             .orElseThrow(NullPointerException::new);
 
+        // 获取方法对象
+        Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
+
         // 打印描述信息
-        LOGGER.info("@Before -> Description: {}", description(joinPoint));
+        LOGGER.info("@Before -> Description: {}", AnnotationUtil.findAnnotationField(method, ApiLogPrint.class, ApiLogPrint::description));
         // 打印来源IP
         LOGGER.info("@Before -> Source: {}", request.getRemoteAddr());
         // 打印请求URL
@@ -137,22 +139,5 @@ public class ApiLogConsoleAspect {
     public void doAfterThrowing(JoinPoint joinPoint, Throwable throwable) {
         // 打印异常信息
         LOGGER.warn("@AfterThrowing -> Throwable: {}", JacksonUtil.writeValueAsString(throwable));
-    }
-
-    /**
-     * 获取接口日志打印注解的描述信息
-     *
-     * @param joinPoint 连接点
-     * @return
-     */
-    public static String description(JoinPoint joinPoint) {
-        // 获取目标签名, 转换成方法签名
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        // 获取目标方法
-        Method method = signature.getMethod();
-        // 获取接口日志打印注解 (必须使用 Spring 提供的工具获取注解, 否则无法获取别名配置)
-        ApiLogPrint apiLogPrint = AnnotationUtils.getAnnotation(method, ApiLogPrint.class);
-        // 返回接口日志打印注解的描述信息
-        return Optional.ofNullable(apiLogPrint).map(ApiLogPrint::description).orElse(StringConstant.EMPTY);
     }
 }
