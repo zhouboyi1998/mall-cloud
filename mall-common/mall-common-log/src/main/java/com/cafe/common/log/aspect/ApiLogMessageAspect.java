@@ -2,7 +2,9 @@ package com.cafe.common.log.aspect;
 
 import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
+import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.log.model.ApiLog;
+import com.cafe.common.util.annotation.AnnotationUtil;
 import com.cafe.common.util.aop.AOPUtil;
 import com.cafe.common.util.json.JacksonUtil;
 import org.aspectj.lang.JoinPoint;
@@ -12,6 +14,7 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
@@ -21,6 +24,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Method;
 import java.util.Optional;
 
 /**
@@ -64,8 +68,11 @@ public class ApiLogMessageAspect {
             .map(ServletRequestAttributes::getRequest)
             .orElseThrow(NullPointerException::new);
 
+        // 获取方法对象
+        Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
+
         // 添加请求相关信息到接口日志中
-        apiLog.setDescription(ApiLogConsoleAspect.description(joinPoint))
+        apiLog.setDescription(AnnotationUtil.findAnnotationField(method, ApiLogPrint.class, ApiLogPrint::description))
             .setSource(request.getRemoteAddr())
             .setUrl(request.getRequestURL().toString())
             .setType(request.getMethod())
