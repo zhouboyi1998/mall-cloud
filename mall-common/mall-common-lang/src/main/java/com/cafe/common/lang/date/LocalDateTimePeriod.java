@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @Project: mall-cloud
@@ -25,6 +26,11 @@ public class LocalDateTimePeriod extends AbstractPeriod {
     private static final long serialVersionUID = 1L;
 
     /**
+     * java.util.LocalDateTime 时间格式化器
+     */
+    public static final DateTimeFormatter LOCAL_DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern(PATTERN);
+
+    /**
      * 开始时间
      */
     private LocalDateTime start;
@@ -33,4 +39,9 @@ public class LocalDateTimePeriod extends AbstractPeriod {
      * 结束时间
      */
     private LocalDateTime end;
+
+    @Override
+    public String[] times() {
+        return new String[]{start.format(LOCAL_DATE_TIME_FORMATTER), end.format(LOCAL_DATE_TIME_FORMATTER)};
+    }
 }

@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -25,6 +26,11 @@ public class DatePeriod extends AbstractPeriod {
     private static final long serialVersionUID = 1L;
 
     /**
+     * java.util.Date 时间格式化器
+     */
+    public static final ThreadLocal<SimpleDateFormat> DATE_FORMATTER = ThreadLocal.withInitial(() -> new SimpleDateFormat(PATTERN));
+
+    /**
      * 开始时间
      */
     private Date start;
@@ -33,4 +39,9 @@ public class DatePeriod extends AbstractPeriod {
      * 结束时间
      */
     private Date end;
+
+    @Override
+    public String[] times() {
+        return new String[]{DATE_FORMATTER.get().format(start), DATE_FORMATTER.get().format(end)};
+    }
 }
