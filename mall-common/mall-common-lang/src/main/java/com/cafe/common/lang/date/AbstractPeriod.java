@@ -12,7 +12,7 @@ import java.util.Objects;
  * @Package: com.cafe.common.lang.date
  * @Author: zhouboyi
  * @Date: 2023/6/20 15:58
- * @Description: 时间区间
+ * @Description: 日期时间区间
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
@@ -22,9 +22,19 @@ public abstract class AbstractPeriod implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
+     * 默认日期时间格式
+     */
+    public static final String DEFAULT_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
+
+    /**
+     * 默认日期格式
+     */
+    public static final String DEFAULT_DATE = "yyyy-MM-dd";
+
+    /**
      * 默认时间格式
      */
-    public static final String PATTERN = "yyyy-MM-dd HH:mm:ss";
+    public static final String DEFAULT_TIME = "HH:mm:ss";
 
     /**
      * 开始时间

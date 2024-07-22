@@ -14,7 +14,7 @@ import java.util.Date;
  * @Package: com.cafe.common.lang.date
  * @Author: zhouboyi
  * @Date: 2023/6/20 16:14
- * @Description: java.util.Date 时间区间
+ * @Description: java.util.Date 日期时间区间
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
@@ -26,9 +26,9 @@ public class DatePeriod extends AbstractPeriod {
     private static final long serialVersionUID = 1L;
 
     /**
-     * java.util.Date 时间格式化器
+     * java.util.Date 日期时间格式化器
      */
-    public static final ThreadLocal<SimpleDateFormat> DATE_FORMATTER = ThreadLocal.withInitial(() -> new SimpleDateFormat(PATTERN));
+    public static final ThreadLocal<SimpleDateFormat> DATE_FORMATTER = ThreadLocal.withInitial(() -> new SimpleDateFormat(DEFAULT_DATE_TIME));
 
     /**
      * 开始时间
