@@ -1,5 +1,7 @@
 package com.cafe.common.enumeration.date;
 
+import com.cafe.common.constant.date.DateTimeConstant;
+
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.common.enumeration.date
@@ -10,19 +12,19 @@ package com.cafe.common.enumeration.date;
 public enum DateTimePatternEnum {
 
     /**
-     * 默认日期时间
+     * 默认日期时间格式
      */
-    DEFAULT_DATE_TIME("yyyy-MM-dd HH:mm:ss"),
+    DEFAULT_DATE_TIME(DateTimeConstant.DEFAULT_DATE_TIME),
 
     /**
-     * 默认日期
+     * 默认日期格式
      */
-    DEFAULT_DATE("yyyy-MM-dd"),
+    DEFAULT_DATE(DateTimeConstant.DEFAULT_DATE),
 
     /**
-     * 默认时间
+     * 默认时间格式
      */
-    DEFAULT_TIME("HH:mm:ss");
+    DEFAULT_TIME(DateTimeConstant.DEFAULT_TIME);
 
     /**
      * 格式
