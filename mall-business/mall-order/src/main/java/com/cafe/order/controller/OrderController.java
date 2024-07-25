@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.order.model.Order;
+import com.cafe.order.query.OrderQuery;
 import com.cafe.order.service.OrderService;
+import com.cafe.order.vo.OrderVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -194,5 +196,23 @@ public class OrderController {
         QueryWrapper<Order> wrapper = WrapperUtil.createQueryWrapper(order);
         Boolean code = orderService.remove(wrapper);
         return ResponseEntity.ok(code);
+    }
+
+    @ApiLogPrint(value = "根据查询条件查询订单列表")
+    @ApiOperation(value = "根据查询条件查询订单列表")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true),
+        @ApiImplicitParam(value = "订单查询条件", name = "orderQuery", dataType = "OrderQuery", paramType = "body", required = true)
+    })
+    @PostMapping(value = "/query/{current}/{size}")
+    public ResponseEntity<Page<OrderVO>> query(
+        @PathVariable(value = "current") Long current,
+        @PathVariable(value = "size") Long size,
+        @RequestBody OrderQuery orderQuery
+    ) {
+        Page<Order> page = new Page<>(current, size);
+        Page<OrderVO> orderVOPage = orderService.query(page, orderQuery);
+        return ResponseEntity.ok(orderVOPage);
     }
 }

@@ -1,6 +1,7 @@
 package com.cafe.common.mybatisplus.util;
 
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.pool.StringConstant;
@@ -32,7 +33,7 @@ public class WrapperUtil {
     }
 
     /**
-     * 构造 QueryWrapper 条件
+     * 构造 QueryWrapper 查询条件
      *
      * @param model
      * @param <T>
@@ -40,6 +41,17 @@ public class WrapperUtil {
      */
     public static <T> QueryWrapper<T> createQueryWrapper(T model) {
         return (QueryWrapper<T>) createWrapper(model, new QueryWrapper<>());
+    }
+
+    /**
+     * 构造 LambdaQueryWrapper 查询条件
+     *
+     * @param model
+     * @param <T>
+     * @return
+     */
+    public static <T> LambdaQueryWrapper<T> createLambdaQueryWrapper(T model) {
+        return createQueryWrapper(model).lambda();
     }
 
     /**
@@ -96,12 +108,34 @@ public class WrapperUtil {
     }
 
     /**
-     * 构造空的 QueryWrapper 条件
+     * 构造空的 QueryWrapper 查询条件
      *
      * @param <T>
      * @return
      */
     public static <T> QueryWrapper<T> emptyQueryWrapper() {
         return new QueryWrapper<>();
+    }
+
+    /**
+     * 构造空的 QueryWrapper 查询条件
+     *
+     * @param model
+     * @param <T>
+     * @return
+     */
+    public static <T> QueryWrapper<T> emptyQueryWrapper(T model) {
+        return new QueryWrapper<>(model);
+    }
+
+    /**
+     * 构造空的 LambdaQueryWrapper 查询条件
+     *
+     * @param model
+     * @param <T>
+     * @return
+     */
+    public static <T> LambdaQueryWrapper<T> emptyLambdaQueryWrapper(T model) {
+        return emptyQueryWrapper(model).lambda();
     }
 }
