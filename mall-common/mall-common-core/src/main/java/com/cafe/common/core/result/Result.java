@@ -1,3 +1,13 @@
+/*
+ * Reference Code Source
+ *
+ * @Source: https://github.com/spring-projects/spring-framework
+ * @GroupId: org.springframework
+ * @ArtifactId: spring-web
+ * @Version: 5.2.15.RELEASE
+ * @Package: org.springframework.http
+ * @Class: ResponseEntity.java
+ */
 package com.cafe.common.core.result;
 
 import com.cafe.common.enumeration.http.HttpStatusEnum;

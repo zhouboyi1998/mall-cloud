@@ -1,3 +1,13 @@
+/*
+ * Reference Code Source
+ *
+ * @Source: https://github.com/twitter-archive/snowflake
+ * @GroupId: com.twitter.service
+ * @ArtifactId: snowflake
+ * @Version: 1.0.2-SNAPSHOT
+ * @Package: com.twitter.service.snowflake
+ * @Class: IdWorker.scala
+ */
 package com.cafe.common.lang.id;
 
 /**
