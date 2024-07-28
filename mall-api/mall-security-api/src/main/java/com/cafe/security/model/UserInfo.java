@@ -1,3 +1,13 @@
+/*
+ * Reference Code Source
+ *
+ * @Source: https://github.com/spring-projects/spring-security
+ * @GroupId: org.springframework.security
+ * @ArtifactId: spring-security-core
+ * @Version: 5.3.9.RELEASE
+ * @Package: org.springframework.security.core.userdetails
+ * @Class: User.java
+ */
 package com.cafe.security.model;
 
 import com.cafe.common.constant.pool.StringConstant;
