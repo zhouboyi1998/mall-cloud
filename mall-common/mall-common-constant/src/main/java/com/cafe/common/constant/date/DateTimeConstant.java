@@ -15,6 +15,11 @@ public class DateTimeConstant {
     public static final String DEFAULT_DATE_TIME = "yyyy-MM-dd HH:mm:ss";
 
     /**
+     * 带毫秒的日期时间格式
+     */
+    public static final String DATE_TIME_WITH_MILLISECOND = "yyyy-MM-dd HH:mm:ss.SSS";
+
+    /**
      * 默认日期格式
      */
     public static final String DEFAULT_DATE = "yyyy-MM-dd";

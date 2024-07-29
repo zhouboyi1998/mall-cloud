@@ -25,6 +25,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 /**
@@ -72,7 +73,8 @@ public class ApiLogMessageAspect {
         Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
 
         // 添加请求相关信息到接口日志中
-        apiLog.setDescription(AnnotationUtil.findAnnotationField(method, ApiLogPrint.class, ApiLogPrint::description))
+        apiLog.setTime(LocalDateTime.now())
+            .setDescription(AnnotationUtil.findAnnotationField(method, ApiLogPrint.class, ApiLogPrint::description))
             .setSource(request.getRemoteAddr())
             .setUrl(request.getRequestURL().toString())
             .setType(request.getMethod())
