@@ -2,7 +2,11 @@
 
     <!-- 日志文件路径及名称 -->
     <springProperty name="APP_NAME" source="spring.application.name" scope="context" />
-    <property name="LOG_FILE" value="logs/${APP_NAME}" />
+    <property name="INFO_LOG_FILE" value="logs/info/${APP_NAME}-info" />
+    <property name="ERROR_LOG_FILE" value="logs/error/${APP_NAME}-error" />
+    <property name="API_LOG_FILE" value="logs/api/${APP_NAME}-api" />
+    <!-- 历史日志文件保留天数 -->
+    <property name="MAX_HISTORY" value="60" />
 
     <!-- Logback 颜色转换器 -->
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter" />
@@ -13,8 +17,10 @@
     <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-64.64logger{63}){cyan} %clr(%-32.32M{31}){green} %clr(%6.6L{5}){magenta} %clr([%tid]){red} %clr([%X{requestId}]){blue} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
     <!-- 日志文件打印格式 -->
     <property name="FILE_LOG_PATTERN" value="${FILE_LOG_PATTERN:-%d{${LOG_DATEFORMAT_PATTERN:-yyyy-MM-dd HH:mm:ss.SSS}} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } --- [%t] %logger %M %L [%tid] [%X{requestId}] : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}" />
+    <!-- 纯日志内容打印格式-->
+    <property name="CONTENT_LOG_PATTERN" value="%m%n" />
 
-    <!-- Logback 日志级别配置 -->
+    <!-- 框架日志输出配置 -->
     <logger name="org.apache.catalina.startup.DigesterFactory" level="ERROR" />
     <logger name="org.apache.catalina.util.LifecycleBase" level="ERROR" />
     <logger name="org.apache.coyote.http11.Http11NioProtocol" level="WARN" />
@@ -34,8 +40,8 @@
         </encoder>
     </appender>
 
-    <!-- 日志文件配置 -->
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <!-- INFO 日志文件配置 -->
+    <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <!-- 日志打印格式 -->
             <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
@@ -44,11 +50,60 @@
             <!-- 编码配置 -->
             <charset>UTF-8</charset>
         </encoder>
-        <!-- 日志文件路径及名称配置 -->
-        <file>${LOG_FILE}.log</file>
+        <!-- 滚动日志文件配置 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 滚动日志文件路径及名称配置 -->
+            <fileNamePattern>${INFO_LOG_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 历史日志文件保留天数 -->
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
     </appender>
 
-    <!-- RPC 推送日志到 SkyWalking -->
+    <!-- ERROR 日志文件配置 -->
+    <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <!-- 日志打印格式 -->
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <pattern>${FILE_LOG_PATTERN}</pattern>
+            </layout>
+            <!-- 编码配置 -->
+            <charset>UTF-8</charset>
+        </encoder>
+        <!-- 日志过滤配置 -->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!-- 滚动日志文件配置 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 滚动日志文件路径及名称配置 -->
+            <fileNamePattern>${ERROR_LOG_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 历史日志文件保留天数 -->
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- API 日志文件配置 -->
+    <appender name="API_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+            <!-- 日志打印格式 -->
+            <layout class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.TraceIdPatternLogbackLayout">
+                <pattern>${CONTENT_LOG_PATTERN}</pattern>
+            </layout>
+            <!-- 编码配置 -->
+            <charset>UTF-8</charset>
+        </encoder>
+        <!-- 滚动日志文件配置 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 滚动日志文件路径及名称配置 -->
+            <fileNamePattern>${API_LOG_FILE}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 历史日志文件保留天数 -->
+            <maxHistory>${MAX_HISTORY}</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- 日志推送配置 (使用 RPC 推送日志到 SkyWalking) -->
     <appender name="SKYWALKING" class="org.apache.skywalking.apm.toolkit.log.logback.v1.x.log.GRPCLogClientAppender">
         <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
             <!-- 日志打印格式 -->
@@ -58,10 +113,16 @@
         </encoder>
     </appender>
 
-    <!-- 日志输出配置 -->
+    <!-- 接口日志消息打印切面 日志输出配置 -->
+    <logger name="com.cafe.common.log.aspect.ApiLogMessageAspect" level="INFO" additivity="true">
+        <appender-ref ref="API_FILE" />
+    </logger>
+
+    <!-- 默认日志输出配置 -->
     <root level="INFO">
         <appender-ref ref="CONSOLE" />
-        <appender-ref ref="FILE" />
+        <appender-ref ref="INFO_FILE" />
+        <appender-ref ref="ERROR_FILE" />
         <appender-ref ref="SKYWALKING" />
     </root>
 
