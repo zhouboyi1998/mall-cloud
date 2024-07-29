@@ -1,10 +1,13 @@
 package com.cafe.common.log.model;
 
+import com.cafe.common.constant.date.DateTimeConstant;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
@@ -19,6 +22,12 @@ import java.io.Serializable;
 public class ApiLog implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    /**
+     * 请求时间
+     */
+    @JsonFormat(pattern = DateTimeConstant.DATE_TIME_WITH_MILLISECOND, shape = JsonFormat.Shape.STRING)
+    private LocalDateTime time;
 
     /**
      * 描述信息

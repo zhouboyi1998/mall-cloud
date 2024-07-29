@@ -17,6 +17,11 @@ public enum DateTimePatternEnum {
     DEFAULT_DATE_TIME(DateTimeConstant.DEFAULT_DATE_TIME),
 
     /**
+     * 带毫秒的日期时间格式
+     */
+    DATE_TIME_WITH_MILLISECOND(DateTimeConstant.DATE_TIME_WITH_MILLISECOND),
+
+    /**
      * 默认日期格式
      */
     DEFAULT_DATE(DateTimeConstant.DEFAULT_DATE),
