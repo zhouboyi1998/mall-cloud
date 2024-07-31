@@ -34,9 +34,9 @@ public class RocketMQConstant {
     public static class Topic {
 
         /**
-         * goods 主题
+         * goods-index 主题
          */
-        public static final String GOODS = "goods";
+        public static final String GOODS_INDEX = "goods-index";
 
         /**
          * brand 主题

@@ -2,8 +2,8 @@ package com.cafe.clickhouse.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.clickhouse.model.Goods;
-import com.cafe.clickhouse.service.GoodsService;
+import com.cafe.clickhouse.model.GoodsWide;
+import com.cafe.clickhouse.service.GoodsWideService;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import io.swagger.annotations.Api;
@@ -28,54 +28,54 @@ import java.util.List;
  * @Package: com.cafe.clickhouse.controller
  * @Author: zhouboyi
  * @Date: 2024/3/15 17:12
- * @Description: 商品接口
+ * @Description: 商品宽表接口
  */
-@Api(value = "商品接口")
+@Api(value = "商品宽表接口")
 @RestController
-@RequestMapping(value = "/goods")
-public class GoodsController {
+@RequestMapping(value = "/goods-wide")
+public class GoodsWideController {
 
-    private final GoodsService goodsService;
+    private final GoodsWideService goodsWideService;
 
     @Autowired
-    public GoodsController(GoodsService goodsService) {
-        this.goodsService = goodsService;
+    public GoodsWideController(GoodsWideService goodsWideService) {
+        this.goodsWideService = goodsWideService;
     }
 
     @ApiLogPrint(value = "查询商品数量")
     @ApiOperation(value = "查询商品数量")
     @GetMapping(value = "/count")
     public ResponseEntity<Integer> count() {
-        Integer count = goodsService.count();
+        Integer count = goodsWideService.count();
         return ResponseEntity.ok(count);
     }
 
     @ApiLogPrint(value = "根据条件查询查询商品数量")
     @ApiOperation(value = "根据条件查询商品数量")
-    @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
+    @ApiImplicitParam(value = "商品Model", name = "goodsWide", dataType = "GoodsWide", paramType = "body", required = true)
     @PostMapping(value = "/count")
-    public ResponseEntity<Integer> count(@RequestBody Goods goods) {
-        QueryWrapper<Goods> wrapper = WrapperUtil.createQueryWrapper(goods);
-        Integer count = goodsService.count(wrapper);
+    public ResponseEntity<Integer> count(@RequestBody GoodsWide goodsWide) {
+        QueryWrapper<GoodsWide> wrapper = WrapperUtil.createQueryWrapper(goodsWide);
+        Integer count = goodsWideService.count(wrapper);
         return ResponseEntity.ok(count);
     }
 
     @ApiLogPrint(value = "查询商品列表")
     @ApiOperation(value = "查询商品列表")
     @GetMapping(value = "/list")
-    public ResponseEntity<List<Goods>> list() {
-        List<Goods> goodsList = goodsService.list();
-        return ResponseEntity.ok(goodsList);
+    public ResponseEntity<List<GoodsWide>> list() {
+        List<GoodsWide> goodsWideList = goodsWideService.list();
+        return ResponseEntity.ok(goodsWideList);
     }
 
     @ApiLogPrint(value = "根据条件查询商品列表")
     @ApiOperation(value = "根据条件查询商品列表")
-    @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
+    @ApiImplicitParam(value = "商品Model", name = "goodsWide", dataType = "GoodsWide", paramType = "body", required = true)
     @PostMapping(value = "/list")
-    public ResponseEntity<List<Goods>> list(@RequestBody Goods goods) {
-        QueryWrapper<Goods> wrapper = WrapperUtil.createQueryWrapper(goods);
-        List<Goods> goodsList = goodsService.list(wrapper);
-        return ResponseEntity.ok(goodsList);
+    public ResponseEntity<List<GoodsWide>> list(@RequestBody GoodsWide goodsWide) {
+        QueryWrapper<GoodsWide> wrapper = WrapperUtil.createQueryWrapper(goodsWide);
+        List<GoodsWide> goodsWideList = goodsWideService.list(wrapper);
+        return ResponseEntity.ok(goodsWideList);
     }
 
     @ApiLogPrint(value = "分页查询商品列表")
@@ -85,13 +85,13 @@ public class GoodsController {
         @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true)
     })
     @GetMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<Page<Goods>> page(
+    public ResponseEntity<Page<GoodsWide>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size
     ) {
-        Page<Goods> page = new Page<>(current, size);
-        Page<Goods> goodsPage = goodsService.page(page);
-        return ResponseEntity.ok(goodsPage);
+        Page<GoodsWide> page = new Page<>(current, size);
+        Page<GoodsWide> goodsWidePage = goodsWideService.page(page);
+        return ResponseEntity.ok(goodsWidePage);
     }
 
     @ApiLogPrint(value = "根据条件分页查询商品")
@@ -99,72 +99,72 @@ public class GoodsController {
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
         @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true),
-        @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
+        @ApiImplicitParam(value = "商品Model", name = "goodsWide", dataType = "GoodsWide", paramType = "body", required = true)
     })
     @PostMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<Page<Goods>> page(
+    public ResponseEntity<Page<GoodsWide>> page(
         @PathVariable(value = "current") Long current,
         @PathVariable(value = "size") Long size,
-        @RequestBody Goods goods
+        @RequestBody GoodsWide goodsWide
     ) {
-        Page<Goods> page = new Page<>(current, size);
-        QueryWrapper<Goods> wrapper = WrapperUtil.createQueryWrapper(goods);
-        Page<Goods> goodsPage = goodsService.page(page, wrapper);
-        return ResponseEntity.ok(goodsPage);
+        Page<GoodsWide> page = new Page<>(current, size);
+        QueryWrapper<GoodsWide> wrapper = WrapperUtil.createQueryWrapper(goodsWide);
+        Page<GoodsWide> goodsWidePage = goodsWideService.page(page, wrapper);
+        return ResponseEntity.ok(goodsWidePage);
     }
 
     @ApiLogPrint(value = "根据id查询单个商品")
     @ApiOperation(value = "根据id查询单个商品")
     @ApiImplicitParam(value = "商品id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/one/{id}")
-    public ResponseEntity<Goods> one(@PathVariable(value = "id") Long id) {
-        Goods goods = goodsService.getById(id);
-        return ResponseEntity.ok(goods);
+    public ResponseEntity<GoodsWide> one(@PathVariable(value = "id") Long id) {
+        GoodsWide goodsWide = goodsWideService.getById(id);
+        return ResponseEntity.ok(goodsWide);
     }
 
     @ApiLogPrint(value = "根据条件查询单个商品")
     @ApiOperation(value = "根据条件查询单个商品")
-    @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
+    @ApiImplicitParam(value = "商品Model", name = "goodsWide", dataType = "GoodsWide", paramType = "body", required = true)
     @PostMapping(value = "/one")
-    public ResponseEntity<Goods> one(@RequestBody Goods goods) {
-        QueryWrapper<Goods> wrapper = WrapperUtil.createQueryWrapper(goods);
-        Goods one = goodsService.getOne(wrapper);
+    public ResponseEntity<GoodsWide> one(@RequestBody GoodsWide goodsWide) {
+        QueryWrapper<GoodsWide> wrapper = WrapperUtil.createQueryWrapper(goodsWide);
+        GoodsWide one = goodsWideService.getOne(wrapper);
         return ResponseEntity.ok(one);
     }
 
     @ApiLogPrint(value = "新增商品")
     @ApiOperation(value = "新增商品")
-    @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
+    @ApiImplicitParam(value = "商品Model", name = "goodsWide", dataType = "GoodsWide", paramType = "body", required = true)
     @PostMapping(value = "/insert")
-    public ResponseEntity<Boolean> insert(@RequestBody Goods goods) {
-        Boolean code = goodsService.save(goods);
+    public ResponseEntity<Boolean> insert(@RequestBody GoodsWide goodsWide) {
+        Boolean code = goodsWideService.save(goodsWide);
         return ResponseEntity.ok(code);
     }
 
     @ApiLogPrint(value = "批量新增商品")
     @ApiOperation(value = "批量新增商品")
-    @ApiImplicitParam(value = "商品列表", name = "goodsList", dataType = "List<Goods>", paramType = "body", required = true)
+    @ApiImplicitParam(value = "商品列表", name = "goodsWideList", dataType = "List<GoodsWide>", paramType = "body", required = true)
     @PostMapping(value = "/insert/batch")
-    public ResponseEntity<Boolean> insertBatch(@RequestBody List<Goods> goodsList) {
-        Boolean code = goodsService.saveBatch(goodsList);
+    public ResponseEntity<Boolean> insertBatch(@RequestBody List<GoodsWide> goodsWideList) {
+        Boolean code = goodsWideService.saveBatch(goodsWideList);
         return ResponseEntity.ok(code);
     }
 
     @ApiLogPrint(value = "根据id修改商品")
     @ApiOperation(value = "根据id修改商品")
-    @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
+    @ApiImplicitParam(value = "商品Model", name = "goodsWide", dataType = "GoodsWide", paramType = "body", required = true)
     @PutMapping(value = "/update")
-    public ResponseEntity<Boolean> update(@RequestBody Goods goods) {
-        Boolean code = goodsService.updateById(goods);
+    public ResponseEntity<Boolean> update(@RequestBody GoodsWide goodsWide) {
+        Boolean code = goodsWideService.updateById(goodsWide);
         return ResponseEntity.ok(code);
     }
 
     @ApiLogPrint(value = "根据ids批量修改商品")
     @ApiOperation(value = "根据ids批量修改商品")
-    @ApiImplicitParam(value = "商品列表", name = "goodsList", dataType = "List<Goods>", paramType = "body", required = true)
+    @ApiImplicitParam(value = "商品列表", name = "goodsWideList", dataType = "List<GoodsWide>", paramType = "body", required = true)
     @PutMapping(value = "/update/batch")
-    public ResponseEntity<Boolean> updateBatch(@RequestBody List<Goods> goodsList) {
-        Boolean code = goodsService.updateBatchById(goodsList);
+    public ResponseEntity<Boolean> updateBatch(@RequestBody List<GoodsWide> goodsWideList) {
+        Boolean code = goodsWideService.updateBatchById(goodsWideList);
         return ResponseEntity.ok(code);
     }
 
@@ -173,7 +173,7 @@ public class GoodsController {
     @ApiImplicitParam(value = "商品id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/delete/{id}")
     public ResponseEntity<Boolean> delete(@PathVariable(value = "id") Long id) {
-        Boolean code = goodsService.removeById(id);
+        Boolean code = goodsWideService.removeById(id);
         return ResponseEntity.ok(code);
     }
 
@@ -182,17 +182,17 @@ public class GoodsController {
     @ApiImplicitParam(value = "商品id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/delete/batch")
     public ResponseEntity<Boolean> deleteBatch(@RequestBody List<Long> ids) {
-        Boolean code = goodsService.removeByIds(ids);
+        Boolean code = goodsWideService.removeByIds(ids);
         return ResponseEntity.ok(code);
     }
 
     @ApiLogPrint(value = "根据条件批量删除商品")
     @ApiOperation(value = "根据条件批量删除商品")
-    @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
+    @ApiImplicitParam(value = "商品Model", name = "goodsWide", dataType = "GoodsWide", paramType = "body", required = true)
     @DeleteMapping(value = "/delete")
-    public ResponseEntity<Boolean> delete(@RequestBody Goods goods) {
-        QueryWrapper<Goods> wrapper = WrapperUtil.createQueryWrapper(goods);
-        Boolean code = goodsService.remove(wrapper);
+    public ResponseEntity<Boolean> delete(@RequestBody GoodsWide goodsWide) {
+        QueryWrapper<GoodsWide> wrapper = WrapperUtil.createQueryWrapper(goodsWide);
+        Boolean code = goodsWideService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
 }

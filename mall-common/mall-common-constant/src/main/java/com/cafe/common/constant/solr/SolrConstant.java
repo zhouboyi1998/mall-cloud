@@ -17,6 +17,6 @@ public class SolrConstant {
         /**
          * 索引名称
          */
-        public static final String INDEX = "goods";
+        public static final String INDEX = "goods-index";
     }
 }

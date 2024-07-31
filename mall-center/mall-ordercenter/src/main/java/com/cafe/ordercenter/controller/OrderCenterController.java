@@ -57,7 +57,7 @@ public class OrderCenterController {
     ) {
         OrderVO orderVO = orderCenterService.submit(addressId, channel, invoice, cartVOList);
         // 发送消息到 Kafka
-        kafkaProducer.send(KafkaConstant.Topic.ORDER_VO, orderVO);
+        kafkaProducer.send(KafkaConstant.Topic.ORDER_INDEX, orderVO);
         return ResponseEntity.ok(orderVO);
     }
 }

@@ -1,11 +1,10 @@
 package com.cafe.elasticsearch.service;
 
-import com.cafe.elasticsearch.model.Goods;
+import com.cafe.elasticsearch.index.OrderIndex;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
-import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateResponse;
 
 import java.io.IOException;
@@ -15,13 +14,13 @@ import java.util.List;
  * @Project: mall-cloud
  * @Package: com.cafe.elasticsearch.service
  * @Author: zhouboyi
- * @Date: 2022/7/28 9:39
+ * @Date: 2024/6/28 16:18
  * @Description:
  */
-public interface GoodsService {
+public interface OrderIndexService {
 
     /**
-     * 获取商品
+     * 获取订单索引
      *
      * @param id
      * @return
@@ -30,25 +29,25 @@ public interface GoodsService {
     GetResponse one(String id) throws IOException;
 
     /**
-     * 插入商品
+     * 插入订单索引
      *
-     * @param goods
+     * @param orderIndex
      * @return
      * @throws IOException
      */
-    IndexResponse insert(Goods goods) throws IOException;
+    IndexResponse insert(OrderIndex orderIndex) throws IOException;
 
     /**
-     * 更新商品
+     * 更新订单索引
      *
-     * @param goods
+     * @param orderIndex
      * @return
      * @throws IOException
      */
-    UpdateResponse update(Goods goods) throws IOException;
+    UpdateResponse update(OrderIndex orderIndex) throws IOException;
 
     /**
-     * 删除商品
+     * 删除订单索引
      *
      * @param id
      * @return
@@ -57,42 +56,29 @@ public interface GoodsService {
     DeleteResponse delete(String id) throws IOException;
 
     /**
-     * 批量插入商品
+     * 批量插入订单索引
      *
-     * @param goodsList
+     * @param orderIndexList
      * @return
      * @throws IOException
      */
-    BulkResponse insertBatch(List<Goods> goodsList) throws IOException;
+    BulkResponse insertBatch(List<OrderIndex> orderIndexList) throws IOException;
 
     /**
-     * 批量更新商品
+     * 批量更新订单索引
      *
-     * @param goodsList
+     * @param orderIndexList
      * @return
      * @throws IOException
      */
-    BulkResponse updateBatch(List<Goods> goodsList) throws IOException;
+    BulkResponse updateBatch(List<OrderIndex> orderIndexList) throws IOException;
 
     /**
-     * 批量删除商品
+     * 批量删除订单索引
      *
      * @param ids
      * @return
      * @throws IOException
      */
     BulkResponse deleteBatch(List<String> ids) throws IOException;
-
-    /**
-     * 搜索商品
-     *
-     * @param current 页码
-     * @param size    每页数据数量
-     * @param keyword 关键词
-     * @param sort    排序属性
-     * @param rule    排序规则
-     * @return
-     * @throws IOException
-     */
-    SearchResponse page(Integer current, Integer size, String keyword, String sort, String rule) throws IOException;
 }

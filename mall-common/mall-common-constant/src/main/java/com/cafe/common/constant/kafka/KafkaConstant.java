@@ -39,9 +39,9 @@ public class KafkaConstant {
         public static final String ORDER_DETAIL = "order-detail";
 
         /**
-         * order-vo 主题
+         * order-index 主题
          */
-        public static final String ORDER_VO = "order-vo";
+        public static final String ORDER_INDEX = "order-index";
 
         /**
          * Producer + TableName 作为组合键, 获取 Topic

@@ -29,7 +29,7 @@ public class ElasticSearchConstant {
         /**
          * 索引名称
          */
-        public static final String INDEX = "goods";
+        public static final String INDEX = "goods-index";
 
         /**
          * 商品搜索关键词匹配字段
@@ -45,11 +45,11 @@ public class ElasticSearchConstant {
     /**
      * 订单VO索引
      */
-    public static class OrderVO {
+    public static class Order {
 
         /**
          * 索引名称
          */
-        public static final String INDEX = "order-vo";
+        public static final String INDEX = "order-index";
     }
 }

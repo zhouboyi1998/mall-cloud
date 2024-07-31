@@ -55,6 +55,9 @@ public class Sku implements Serializable {
     @ApiModelProperty(value = "SKU 秒杀价")
     private BigDecimal seckillPrice;
 
+    @ApiModelProperty(value = "SKU 规格")
+    private String specification;
+
     @ApiModelProperty(value = "SKU 图片")
     private String image;
 
@@ -63,18 +66,6 @@ public class Sku implements Serializable {
 
     @ApiModelProperty(value = "SKU 视频")
     private String video;
-
-    @ApiModelProperty(value = "SKU 规格")
-    private String specification;
-
-    @ApiModelProperty(value = "库存量")
-    private Integer stock;
-
-    @ApiModelProperty(value = "库存单位")
-    private String unit;
-
-    @ApiModelProperty(value = "销量")
-    private Integer saleVolume;
 
     @ApiModelProperty(value = "排序号")
     private Integer sort;
