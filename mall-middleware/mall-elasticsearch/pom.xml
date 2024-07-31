@@ -48,10 +48,6 @@
             <groupId>com.cafe</groupId>
             <artifactId>mall-elasticsearch-api</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-order-api</artifactId>
-        </dependency>
     </dependencies>
 
     <build>

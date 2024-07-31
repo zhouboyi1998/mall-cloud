@@ -11,7 +11,6 @@
         <result column="shop_id" property="shopId" />
         <result column="caption" property="caption" />
         <result column="intro" property="intro" />
-        <result column="comment_volume" property="commentVolume" />
         <result column="sort" property="sort" />
         <result column="audit" property="audit" />
         <result column="status" property="status" />

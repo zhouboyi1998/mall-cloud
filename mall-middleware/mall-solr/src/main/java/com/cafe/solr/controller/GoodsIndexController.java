@@ -1,8 +1,8 @@
 package com.cafe.solr.controller;
 
 import com.cafe.common.log.annotation.ApiLogPrint;
-import com.cafe.solr.model.Goods;
-import com.cafe.solr.service.GoodsService;
+import com.cafe.solr.index.GoodsIndex;
+import com.cafe.solr.service.GoodsIndexService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -23,62 +23,62 @@ import java.util.List;
  * @Package: com.cafe.solr.controller
  * @Author: zhouboyi
  * @Date: 2022/10/26 15:17
- * @Description: Solr 商品接口
+ * @Description: 商品全文索引接口
  */
-@Api(value = "Solr 商品接口")
+@Api(value = "商品全文索引接口")
 @RestController
-@RequestMapping(value = "/goods")
-public class GoodsController {
+@RequestMapping(value = "/goods-index")
+public class GoodsIndexController {
 
-    private final GoodsService goodsService;
+    private final GoodsIndexService goodsIndexService;
 
     @Autowired
-    public GoodsController(GoodsService goodsService) {
-        this.goodsService = goodsService;
+    public GoodsIndexController(GoodsIndexService goodsIndexService) {
+        this.goodsIndexService = goodsIndexService;
     }
 
-    @ApiLogPrint(value = "获取商品")
-    @ApiOperation(value = "获取商品")
+    @ApiLogPrint(value = "获取商品索引")
+    @ApiOperation(value = "获取商品索引")
     @ApiImplicitParam(value = "商品id", name = "id", dataType = "String", paramType = "path", required = true)
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Goods> one(@PathVariable(value = "id") String id) {
-        Goods goods = goodsService.one(id);
-        return ResponseEntity.ok(goods);
+    public ResponseEntity<GoodsIndex> one(@PathVariable(value = "id") String id) {
+        GoodsIndex goodsIndex = goodsIndexService.one(id);
+        return ResponseEntity.ok(goodsIndex);
     }
 
-    @ApiLogPrint(value = "插入商品/更新商品")
-    @ApiOperation(value = "插入商品/更新商品")
-    @ApiImplicitParam(value = "商品Model", name = "goods", dataType = "Goods", paramType = "body", required = true)
+    @ApiLogPrint(value = "插入/更新商品索引")
+    @ApiOperation(value = "插入/更新商品索引")
+    @ApiImplicitParam(value = "商品索引", name = "goodsIndex", dataType = "GoodsIndex", paramType = "body", required = true)
     @PostMapping(value = "")
-    public ResponseEntity<Void> save(@RequestBody Goods goods) {
-        goodsService.save(goods);
+    public ResponseEntity<Void> save(@RequestBody GoodsIndex goodsIndex) {
+        goodsIndexService.save(goodsIndex);
         return ResponseEntity.ok().build();
     }
 
-    @ApiLogPrint(value = "批量插入商品/批量更新商品")
-    @ApiOperation(value = "批量插入商品/批量更新商品")
-    @ApiImplicitParam(value = "商品列表", name = "goodsList", dataType = "List<Goods>", paramType = "body", required = true)
+    @ApiLogPrint(value = "批量插入/批量更新商品索引")
+    @ApiOperation(value = "批量插入/批量更新商品索引")
+    @ApiImplicitParam(value = "商品索引列表", name = "goodsIndexList", dataType = "List<GoodsIndex>", paramType = "body", required = true)
     @PostMapping(value = "/batch")
-    public ResponseEntity<Void> saveBatch(@RequestBody List<Goods> goodsList) {
-        goodsService.saveBatch(goodsList);
+    public ResponseEntity<Void> saveBatch(@RequestBody List<GoodsIndex> goodsIndexList) {
+        goodsIndexService.saveBatch(goodsIndexList);
         return ResponseEntity.ok().build();
     }
 
-    @ApiLogPrint(value = "删除商品")
-    @ApiOperation(value = "删除商品")
+    @ApiLogPrint(value = "删除商品索引")
+    @ApiOperation(value = "删除商品索引")
     @ApiImplicitParam(value = "商品id", name = "id", dataType = "String", paramType = "path", required = true)
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable(value = "id") String id) {
-        goodsService.delete(id);
+        goodsIndexService.delete(id);
         return ResponseEntity.ok().build();
     }
 
-    @ApiLogPrint(value = "批量删除商品")
-    @ApiOperation(value = "批量删除商品")
+    @ApiLogPrint(value = "批量删除商品索引")
+    @ApiOperation(value = "批量删除商品索引")
     @ApiImplicitParam(value = "商品id列表", name = "ids", dataType = "List<String>", paramType = "body", required = true)
     @DeleteMapping(value = "/batch")
     public ResponseEntity<Void> deleteBatch(@RequestBody List<String> ids) {
-        goodsService.deleteBatch(ids);
+        goodsIndexService.deleteBatch(ids);
         return ResponseEntity.ok().build();
     }
 }

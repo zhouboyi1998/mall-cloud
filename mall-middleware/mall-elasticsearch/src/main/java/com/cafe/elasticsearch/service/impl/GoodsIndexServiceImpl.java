@@ -2,8 +2,8 @@ package com.cafe.elasticsearch.service.impl;
 
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
 import com.cafe.common.util.json.JacksonUtil;
-import com.cafe.elasticsearch.model.Goods;
-import com.cafe.elasticsearch.service.GoodsService;
+import com.cafe.elasticsearch.index.GoodsIndex;
+import com.cafe.elasticsearch.service.GoodsIndexService;
 import org.apache.commons.lang3.ObjectUtils;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
@@ -39,12 +39,12 @@ import java.util.List;
  * @Description:
  */
 @Service
-public class GoodsServiceImpl implements GoodsService {
+public class GoodsIndexServiceImpl implements GoodsIndexService {
 
     private final RestHighLevelClient restHighLevelClient;
 
     @Autowired
-    public GoodsServiceImpl(RestHighLevelClient restHighLevelClient) {
+    public GoodsIndexServiceImpl(RestHighLevelClient restHighLevelClient) {
         this.restHighLevelClient = restHighLevelClient;
     }
 
@@ -57,22 +57,22 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public IndexResponse insert(Goods goods) throws IOException {
+    public IndexResponse insert(GoodsIndex goodsIndex) throws IOException {
         // 组装插入请求
         IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.Goods.INDEX)
             .timeout(TimeValue.timeValueSeconds(10))
-            .id(goods.getId().toString())
-            .source(JacksonUtil.writeValueAsString(goods), XContentType.JSON);
+            .id(goodsIndex.getId().toString())
+            .source(JacksonUtil.writeValueAsString(goodsIndex), XContentType.JSON);
         // 插入数据
         return restHighLevelClient.index(indexRequest, RequestOptions.DEFAULT);
     }
 
     @Override
-    public UpdateResponse update(Goods goods) throws IOException {
+    public UpdateResponse update(GoodsIndex goodsIndex) throws IOException {
         // 组装更新请求
-        UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Goods.INDEX, goods.getId().toString())
+        UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Goods.INDEX, goodsIndex.getId().toString())
             .timeout(TimeValue.timeValueSeconds(10))
-            .doc(JacksonUtil.writeValueAsString(goods), XContentType.JSON);
+            .doc(JacksonUtil.writeValueAsString(goodsIndex), XContentType.JSON);
         // 更新数据
         return restHighLevelClient.update(updateRequest, RequestOptions.DEFAULT);
     }
@@ -87,14 +87,14 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public BulkResponse insertBatch(List<Goods> goodsList) throws IOException {
+    public BulkResponse insertBatch(List<GoodsIndex> goodsIndexList) throws IOException {
         // 组装批量插入请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
-        for (Goods goods : goodsList) {
+        for (GoodsIndex goodsIndex : goodsIndexList) {
             IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.Goods.INDEX)
-                // ElasticSearch 索引库的主键不使用自动生成的 ID, 使用数据库中存储的业务 ID
-                .id(goods.getId().toString())
-                .source(JacksonUtil.writeValueAsString(goods), XContentType.JSON);
+                // 设置索引ID字段为商品ID字段, 不额外生成
+                .id(goodsIndex.getId().toString())
+                .source(JacksonUtil.writeValueAsString(goodsIndex), XContentType.JSON);
             bulkRequest.add(indexRequest);
         }
         // 批量插入数据
@@ -102,12 +102,12 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public BulkResponse updateBatch(List<Goods> goodsList) throws IOException {
+    public BulkResponse updateBatch(List<GoodsIndex> goodsIndexList) throws IOException {
         // 组装批量更新请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
-        for (Goods goods : goodsList) {
-            UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Goods.INDEX, goods.getId().toString())
-                .doc(JacksonUtil.writeValueAsString(goods), XContentType.JSON);
+        for (GoodsIndex goodsIndex : goodsIndexList) {
+            UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Goods.INDEX, goodsIndex.getId().toString())
+                .doc(JacksonUtil.writeValueAsString(goodsIndex), XContentType.JSON);
             bulkRequest.add(updateRequest);
         }
         // 批量更新数据

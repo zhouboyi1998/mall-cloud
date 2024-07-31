@@ -4,8 +4,8 @@ import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.model.GoodsConstant;
 import com.cafe.common.constant.rocketmq.RocketMQConstant;
 import com.cafe.common.util.json.JacksonUtil;
-import com.cafe.elasticsearch.model.Goods;
-import com.cafe.elasticsearch.service.GoodsService;
+import com.cafe.elasticsearch.index.GoodsIndex;
+import com.cafe.elasticsearch.service.GoodsIndexService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
@@ -26,16 +26,16 @@ import java.util.Map;
  * @Description: RocketMQ 商品消息消费者
  */
 @Component
-@RocketMQMessageListener(topic = RocketMQConstant.Topic.GOODS, consumerGroup = RocketMQConstant.ConsumerGroup.ELASTICSEARCH)
+@RocketMQMessageListener(topic = RocketMQConstant.Topic.GOODS_INDEX, consumerGroup = RocketMQConstant.ConsumerGroup.ELASTICSEARCH)
 public class GoodsConsumer implements RocketMQListener<String> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(GoodsConsumer.class);
 
-    private final GoodsService goodsService;
+    private final GoodsIndexService goodsIndexService;
 
     @Autowired
-    public GoodsConsumer(GoodsService goodsService) {
-        this.goodsService = goodsService;
+    public GoodsConsumer(GoodsIndexService goodsIndexService) {
+        this.goodsIndexService = goodsIndexService;
     }
 
     @Override
@@ -50,16 +50,16 @@ public class GoodsConsumer implements RocketMQListener<String> {
         try {
             if (GoodsConstant.Status.LAUNCH.equals(status)) {
                 // 获取上架商品的信息
-                List<Goods> goodsList = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<Goods>>() {});
+                List<GoodsIndex> goodsIndexList = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<GoodsIndex>>() {});
                 // 上架商品
-                goodsService.insertBatch(goodsList);
+                goodsIndexService.insertBatch(goodsIndexList);
                 // 打印成功上架商品的日志
                 LOGGER.info("GoodsConsumer.onMessage(): Put away goods success! rocketmq message -> {}", message);
             } else {
                 // 获取下架商品的主键
                 List<String> ids = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<String>>() {});
                 // 下架商品
-                goodsService.deleteBatch(ids);
+                goodsIndexService.deleteBatch(ids);
                 // 打印成功下架商品的日志
                 LOGGER.info("GoodsConsumer.onMessage(): Sold out goods success! rocketmq message -> {}", message);
             }

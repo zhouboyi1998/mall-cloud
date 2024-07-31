@@ -59,9 +59,6 @@ public class Spu implements Serializable {
     @ApiModelProperty(value = "SPU 详细介绍")
     private String intro;
 
-    @ApiModelProperty(value = "评论数")
-    private Integer commentVolume;
-
     @ApiModelProperty(value = "排序号")
     private Integer sort;
 

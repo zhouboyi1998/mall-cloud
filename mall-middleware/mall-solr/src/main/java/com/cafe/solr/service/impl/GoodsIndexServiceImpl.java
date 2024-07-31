@@ -1,8 +1,8 @@
 package com.cafe.solr.service.impl;
 
 import com.cafe.common.constant.solr.SolrConstant;
-import com.cafe.solr.model.Goods;
-import com.cafe.solr.service.GoodsService;
+import com.cafe.solr.index.GoodsIndex;
+import com.cafe.solr.service.GoodsIndexService;
 import org.apache.solr.common.SolrException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.SolrTemplate;
@@ -15,35 +15,35 @@ import java.util.List;
  * @Package: com.cafe.solr.service.impl
  * @Author: zhouboyi
  * @Date: 2022/10/26 15:18
- * @Description: Solr 商品业务实现类
+ * @Description: 商品全文索引业务实现类
  */
 @Service
-public class GoodsServiceImpl implements GoodsService {
+public class GoodsIndexServiceImpl implements GoodsIndexService {
 
     private final SolrTemplate solrTemplate;
 
     @Autowired
-    public GoodsServiceImpl(SolrTemplate solrTemplate) {
+    public GoodsIndexServiceImpl(SolrTemplate solrTemplate) {
         this.solrTemplate = solrTemplate;
     }
 
     @Override
-    public Goods one(String id) {
-        Goods goods = solrTemplate.getById(SolrConstant.Goods.INDEX, id, Goods.class)
+    public GoodsIndex one(String id) {
+        GoodsIndex goodsIndex = solrTemplate.getById(SolrConstant.Goods.INDEX, id, GoodsIndex.class)
             .orElseThrow(() -> new SolrException(SolrException.ErrorCode.NOT_FOUND, "Goods id is not exist!"));
         solrTemplate.commit(SolrConstant.Goods.INDEX);
-        return goods;
+        return goodsIndex;
     }
 
     @Override
-    public void save(Goods goods) {
-        solrTemplate.saveBean(SolrConstant.Goods.INDEX, goods);
+    public void save(GoodsIndex goodsIndex) {
+        solrTemplate.saveBean(SolrConstant.Goods.INDEX, goodsIndex);
         solrTemplate.commit(SolrConstant.Goods.INDEX);
     }
 
     @Override
-    public void saveBatch(List<Goods> goodsList) {
-        solrTemplate.saveBeans(SolrConstant.Goods.INDEX, goodsList);
+    public void saveBatch(List<GoodsIndex> goodsIndexList) {
+        solrTemplate.saveBeans(SolrConstant.Goods.INDEX, goodsIndexList);
         solrTemplate.commit(SolrConstant.Goods.INDEX);
     }
 
