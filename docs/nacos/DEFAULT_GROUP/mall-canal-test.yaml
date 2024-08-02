@@ -13,9 +13,10 @@ spring:
 # RocketMQ 配置
 rocketmq:
   name-server: 192.168.44.128:9876
+  # 生产者配置
   producer:
-    # 生产者组名
-    group: GROUP-ES
+    # 默认生产者组
+    group: ${spring.application.name}
 
 # Canal 数据库监听配置
 canal:
