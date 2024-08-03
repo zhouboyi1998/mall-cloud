@@ -1,7 +1,10 @@
 package com.cafe.elasticsearch.controller;
 
+import com.cafe.common.constant.app.FieldConstant;
+import com.cafe.common.constant.database.DatabaseConstant;
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
 import com.cafe.common.log.annotation.ApiLogPrint;
+import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.elasticsearch.index.GoodsIndex;
 import com.cafe.elasticsearch.service.GoodsIndexService;
 import io.swagger.annotations.Api;
@@ -14,6 +17,7 @@ import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.action.update.UpdateResponse;
+import org.elasticsearch.search.SearchHit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -27,7 +31,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -125,10 +131,46 @@ public class GoodsIndexController {
         @PathVariable(value = "current") Integer current,
         @PathVariable(value = "size") Integer size,
         @RequestParam(value = "keyword", required = false) String keyword,
-        @RequestParam(value = "sort", required = false, defaultValue = ElasticSearchConstant.DEFAULT_SORT) String sort,
-        @RequestParam(value = "rule", required = false, defaultValue = ElasticSearchConstant.DEFAULT_RULE) String rule
+        @RequestParam(value = "sort", required = false, defaultValue = ElasticSearchConstant.INDEX_ID) String sort,
+        @RequestParam(value = "rule", required = false, defaultValue = DatabaseConstant.Rule.ASC) String rule
     ) throws IOException {
         SearchResponse searchResponse = goodsIndexService.page(current, size, keyword, sort, rule);
         return ResponseEntity.ok(searchResponse);
+    }
+
+    @ApiLogPrint(value = "搜索商品索引")
+    @ApiOperation(value = "搜索商品索引")
+    @ApiImplicitParam(value = "关键词", name = "keyword", dataType = "String", paramType = "query", required = true)
+    @GetMapping(value = "/search/index")
+    public ResponseEntity<List<GoodsIndex>> searchIndex(@RequestParam(value = "keyword") String keyword) throws IOException {
+        // 查询商品索引
+        SearchResponse searchResponse = goodsIndexService.list(keyword);
+        // 获取搜索命中结果数组
+        SearchHit[] searchHits = searchResponse.getHits().getHits();
+        // 转换成商品索引列表
+        List<GoodsIndex> goodsIndexList = Arrays.stream(searchHits)
+            .map(SearchHit::getSourceAsMap)
+            .map(sourceAsMap -> JacksonUtil.convertValue(sourceAsMap, GoodsIndex.class))
+            .collect(Collectors.toList());
+        return ResponseEntity.ok(goodsIndexList);
+    }
+
+    @ApiLogPrint(value = "搜索商品ID")
+    @ApiOperation(value = "搜索商品ID")
+    @ApiImplicitParam(value = "关键词", name = "keyword", dataType = "String", paramType = "query", required = true)
+    @GetMapping(value = "/search/id")
+    public ResponseEntity<List<Long>> searchId(@RequestParam(value = "keyword") String keyword) throws IOException {
+        // 查询商品索引
+        SearchResponse searchResponse = goodsIndexService.list(keyword);
+        // 获取搜索命中结果数组
+        SearchHit[] searchHits = searchResponse.getHits().getHits();
+        // 转换成商品ID列表
+        List<Long> ids = Arrays.stream(searchHits)
+            .map(SearchHit::getSourceAsMap)
+            .map(sourceAsMap -> sourceAsMap.get(FieldConstant.ID))
+            .map(String::valueOf)
+            .map(Long::valueOf)
+            .collect(Collectors.toList());
+        return ResponseEntity.ok(ids);
     }
 }

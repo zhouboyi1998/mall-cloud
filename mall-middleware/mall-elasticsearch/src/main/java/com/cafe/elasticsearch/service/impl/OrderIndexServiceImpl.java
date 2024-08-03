@@ -1,6 +1,7 @@
 package com.cafe.elasticsearch.service.impl;
 
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
+import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.elasticsearch.index.OrderIndex;
 import com.cafe.elasticsearch.service.OrderIndexService;
@@ -53,7 +54,7 @@ public class OrderIndexServiceImpl implements OrderIndexService {
     public IndexResponse insert(OrderIndex orderIndex) throws IOException {
         // 组装插入请求
         IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.Order.INDEX)
-            .timeout(TimeValue.timeValueSeconds(10))
+            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN))
             .id(orderIndex.getId().toString())
             .source(JacksonUtil.writeValueAsString(orderIndex), XContentType.JSON);
         // 插入数据
@@ -64,7 +65,7 @@ public class OrderIndexServiceImpl implements OrderIndexService {
     public UpdateResponse update(OrderIndex orderIndex) throws IOException {
         // 组装更新请求
         UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Order.INDEX, orderIndex.getId().toString())
-            .timeout(TimeValue.timeValueSeconds(10))
+            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN))
             .doc(JacksonUtil.writeValueAsString(orderIndex), XContentType.JSON);
         // 更新数据
         return restHighLevelClient.update(updateRequest, RequestOptions.DEFAULT);
@@ -74,7 +75,7 @@ public class OrderIndexServiceImpl implements OrderIndexService {
     public DeleteResponse delete(String id) throws IOException {
         // 组装删除请求
         DeleteRequest deleteRequest = new DeleteRequest(ElasticSearchConstant.Order.INDEX, id)
-            .timeout(TimeValue.timeValueSeconds(10));
+            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN));
         // 删除数据
         return restHighLevelClient.delete(deleteRequest, RequestOptions.DEFAULT);
     }
@@ -82,7 +83,7 @@ public class OrderIndexServiceImpl implements OrderIndexService {
     @Override
     public BulkResponse insertBatch(List<OrderIndex> orderIndexList) throws IOException {
         // 组装批量插入请求
-        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
+        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
         for (OrderIndex orderIndex : orderIndexList) {
             IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.Order.INDEX)
                 // 设置索引ID字段为订单ID字段, 不额外生成
@@ -97,7 +98,7 @@ public class OrderIndexServiceImpl implements OrderIndexService {
     @Override
     public BulkResponse updateBatch(List<OrderIndex> orderIndexList) throws IOException {
         // 组装批量更新请求
-        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
+        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
         for (OrderIndex orderIndex : orderIndexList) {
             UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Order.INDEX, orderIndex.getId().toString())
                 .doc(JacksonUtil.writeValueAsString(orderIndex), XContentType.JSON);
@@ -110,7 +111,7 @@ public class OrderIndexServiceImpl implements OrderIndexService {
     @Override
     public BulkResponse deleteBatch(List<String> ids) throws IOException {
         // 组装批量删除请求
-        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
+        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
         for (String id : ids) {
             DeleteRequest deleteRequest = new DeleteRequest(ElasticSearchConstant.Order.INDEX, id);
             bulkRequest.add(deleteRequest);

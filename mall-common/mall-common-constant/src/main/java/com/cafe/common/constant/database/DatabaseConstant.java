@@ -86,4 +86,20 @@ public class DatabaseConstant {
          */
         public static final String IS_DELETED = "is_deleted";
     }
+
+    /**
+     * 排序规则
+     */
+    public static class Rule {
+
+        /**
+         * 升序
+         */
+        public static final String ASC = "asc";
+
+        /**
+         * 降序
+         */
+        public static final String DESC = "desc";
+    }
 }

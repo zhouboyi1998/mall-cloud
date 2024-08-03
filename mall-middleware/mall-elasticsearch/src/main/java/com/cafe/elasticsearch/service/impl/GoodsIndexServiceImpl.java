@@ -1,6 +1,7 @@
 package com.cafe.elasticsearch.service.impl;
 
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
+import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.elasticsearch.index.GoodsIndex;
 import com.cafe.elasticsearch.service.GoodsIndexService;
@@ -60,7 +61,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
     public IndexResponse insert(GoodsIndex goodsIndex) throws IOException {
         // 组装插入请求
         IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.Goods.INDEX)
-            .timeout(TimeValue.timeValueSeconds(10))
+            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN))
             .id(goodsIndex.getId().toString())
             .source(JacksonUtil.writeValueAsString(goodsIndex), XContentType.JSON);
         // 插入数据
@@ -71,7 +72,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
     public UpdateResponse update(GoodsIndex goodsIndex) throws IOException {
         // 组装更新请求
         UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Goods.INDEX, goodsIndex.getId().toString())
-            .timeout(TimeValue.timeValueSeconds(10))
+            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN))
             .doc(JacksonUtil.writeValueAsString(goodsIndex), XContentType.JSON);
         // 更新数据
         return restHighLevelClient.update(updateRequest, RequestOptions.DEFAULT);
@@ -81,7 +82,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
     public DeleteResponse delete(String id) throws IOException {
         // 组装删除请求
         DeleteRequest deleteRequest = new DeleteRequest(ElasticSearchConstant.Goods.INDEX, id)
-            .timeout(TimeValue.timeValueSeconds(10));
+            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN));
         // 删除数据
         return restHighLevelClient.delete(deleteRequest, RequestOptions.DEFAULT);
     }
@@ -89,7 +90,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
     @Override
     public BulkResponse insertBatch(List<GoodsIndex> goodsIndexList) throws IOException {
         // 组装批量插入请求
-        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
+        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
         for (GoodsIndex goodsIndex : goodsIndexList) {
             IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.Goods.INDEX)
                 // 设置索引ID字段为商品ID字段, 不额外生成
@@ -104,7 +105,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
     @Override
     public BulkResponse updateBatch(List<GoodsIndex> goodsIndexList) throws IOException {
         // 组装批量更新请求
-        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
+        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
         for (GoodsIndex goodsIndex : goodsIndexList) {
             UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Goods.INDEX, goodsIndex.getId().toString())
                 .doc(JacksonUtil.writeValueAsString(goodsIndex), XContentType.JSON);
@@ -117,13 +118,30 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
     @Override
     public BulkResponse deleteBatch(List<String> ids) throws IOException {
         // 组装批量删除请求
-        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
+        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
         for (String id : ids) {
             DeleteRequest deleteRequest = new DeleteRequest(ElasticSearchConstant.Goods.INDEX, id);
             bulkRequest.add(deleteRequest);
         }
         // 批量删除数据
         return restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+    }
+
+    @Override
+    public SearchResponse list(String keyword) throws IOException {
+        // 组装搜索条件
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder()
+            .timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
+        // 如果关键词不为空, 组装关键词匹配
+        if (ObjectUtils.isNotEmpty(keyword)) {
+            QueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(keyword, ElasticSearchConstant.Goods.SEARCH_FIELD);
+            searchSourceBuilder.query(queryBuilder);
+        }
+        // 组装搜索请求
+        SearchRequest searchRequest = new SearchRequest(ElasticSearchConstant.Goods.INDEX)
+            .source(searchSourceBuilder);
+        // 搜索获取返回值
+        return restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
     }
 
     @Override
@@ -135,7 +153,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
             // 排序条件
             .sort(sort, SortOrder.fromString(rule))
             // 超时时间
-            .timeout(TimeValue.timeValueSeconds(10));
+            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TWENTY));
         // 如果关键词不为空, 组装关键词匹配
         if (ObjectUtils.isNotEmpty(keyword)) {
             QueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(keyword, ElasticSearchConstant.Goods.SEARCH_FIELD);

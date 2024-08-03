@@ -12,14 +12,9 @@ import com.cafe.common.constant.app.FieldConstant;
 public class ElasticSearchConstant {
 
     /**
-     * 默认排序字段
+     * 索引库ID
      */
-    public static final String DEFAULT_SORT = "_id";
-
-    /**
-     * 默认排序规则
-     */
-    public static final String DEFAULT_RULE = "asc";
+    public static final String INDEX_ID = "_id";
 
     /**
      * 商品索引
@@ -35,10 +30,11 @@ public class ElasticSearchConstant {
          * 商品搜索关键词匹配字段
          */
         public static final String[] SEARCH_FIELD = {
+            FieldConstant.SKU_NAME,
+            FieldConstant.SPU_NAME,
             FieldConstant.BRAND_NAME,
             FieldConstant.CATEGORY_NAME,
-            FieldConstant.SPU_NAME,
-            FieldConstant.SKU_NAME
+            FieldConstant.SPECIFICATION
         };
     }
 
