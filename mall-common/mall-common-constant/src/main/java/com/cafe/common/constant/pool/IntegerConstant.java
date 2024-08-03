@@ -37,6 +37,8 @@ public class IntegerConstant {
 
     public static final int SIXTEEN = 16;
 
+    public static final int TWENTY = 20;
+
     public static final int FIFTY = 50;
 
     public static final int SIXTY = 60;

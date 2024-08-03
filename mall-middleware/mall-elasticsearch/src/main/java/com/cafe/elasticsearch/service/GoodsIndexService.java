@@ -84,7 +84,16 @@ public interface GoodsIndexService {
     BulkResponse deleteBatch(List<String> ids) throws IOException;
 
     /**
-     * 搜索商品索引
+     * 查询商品索引
+     *
+     * @param keyword 关键词
+     * @return
+     * @throws IOException
+     */
+    SearchResponse list(String keyword) throws IOException;
+
+    /**
+     * 分页查询商品索引
      *
      * @param current 页码
      * @param size    每页数据数量

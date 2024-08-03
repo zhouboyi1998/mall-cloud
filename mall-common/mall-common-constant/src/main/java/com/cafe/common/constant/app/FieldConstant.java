@@ -20,6 +20,11 @@ public class FieldConstant {
     public static final String SERIAL_VERSION_UID = "serialVersionUID";
 
     /**
+     * 主键ID
+     */
+    public static final String ID = "id";
+
+    /**
      * 创建时间
      */
     public static final String CREATE_TIME = "createTime";
@@ -58,6 +63,11 @@ public class FieldConstant {
      * SKU 名称
      */
     public static final String SKU_NAME = "skuName";
+
+    /**
+     * SKU 规格
+     */
+    public static final String SPECIFICATION = "specification";
 
     /**
      * 状态
