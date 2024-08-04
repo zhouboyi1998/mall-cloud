@@ -17,6 +17,13 @@ spring:
   zipkin:
     enabled: true
     base-url: http://host.docker.internal:9411
+  # 微服务配置
+  cloud:
+    # Sentinel 配置
+    sentinel:
+      # Sentinel 控制台
+      transport:
+        dashboard: host.docker.internal:8858
 
 # Seata 配置
 seata:

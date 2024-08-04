@@ -1,12 +1,3 @@
-spring:
-  # 微服务配置
-  cloud:
-    # Sentinel 配置
-    sentinel:
-      # Sentinel 控制台
-      transport:
-        dashboard: 192.168.159.128:8858
-
 # 雪花分布式ID生成器配置
 snowflake:
   worker-id: 0

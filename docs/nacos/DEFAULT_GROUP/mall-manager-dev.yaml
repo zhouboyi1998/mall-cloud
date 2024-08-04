@@ -5,13 +5,6 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/mall_manager?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
-  # 微服务配置
-  cloud:
-    # Sentinel 配置
-    sentinel:
-      # Sentinel 控制台
-      transport:
-        dashboard: 127.0.0.1:8858
 
 # MyBatis-Plus 配置
 mybatis-plus:

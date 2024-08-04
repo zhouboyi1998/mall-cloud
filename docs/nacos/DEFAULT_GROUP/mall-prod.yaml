@@ -17,6 +17,13 @@ spring:
   zipkin:
     enabled: true
     base-url: http://192.168.159.128:9411
+  # 微服务配置
+  cloud:
+    # Sentinel 配置
+    sentinel:
+      # Sentinel 控制台
+      transport:
+        dashboard: 192.168.159.128:8858
 
 # Seata 配置
 seata:
