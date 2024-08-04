@@ -77,7 +77,22 @@ public enum HttpStatusEnum {
     /**
      * 创建订单异常
      */
-    CREATE_ORDER_EXCEPTION(605, "Create Order Exception");
+    CREATE_ORDER_EXCEPTION(605, "Create Order Exception"),
+
+    /**
+     * 没有匹配的商品
+     */
+    NO_MATCH_GOODS(701, "No Match Goods"),
+
+    /**
+     * 商品概要不存在
+     */
+    GOODS_SUMMARY_NOT_FOUND(702, "Goods Summary Not Found"),
+
+    /**
+     * SPU 不存在
+     */
+    SPU_NOT_FOUND(703, "Spu Not Found");
 
     /**
      * 状态码

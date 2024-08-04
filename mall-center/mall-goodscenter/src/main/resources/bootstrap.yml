@@ -1,0 +1,8 @@
+server:
+  port: 18063
+
+spring:
+  application:
+    name: mall-goodscenter
+  profiles:
+    active: dev

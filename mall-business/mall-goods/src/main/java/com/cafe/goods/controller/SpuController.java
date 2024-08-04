@@ -6,6 +6,7 @@ import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.goods.model.Spu;
 import com.cafe.goods.service.SpuService;
+import com.cafe.goods.vo.SpuVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -194,5 +195,14 @@ public class SpuController {
         QueryWrapper<Spu> wrapper = WrapperUtil.createQueryWrapper(spu);
         Boolean code = spuService.remove(wrapper);
         return ResponseEntity.ok(code);
+    }
+
+    @ApiLogPrint(value = "根据 skuId 查询 SPU 视图模型")
+    @ApiOperation(value = "根据 skuId 查询 SPU 视图模型")
+    @ApiImplicitParam(value = "SKU id", name = "skuId", dataType = "Long", paramType = "path", required = true)
+    @GetMapping(value = "/vo/{skuId}")
+    public ResponseEntity<SpuVO> vo(@PathVariable(value = "skuId") Long skuId) {
+        SpuVO spuVO = spuService.vo(skuId);
+        return ResponseEntity.ok(spuVO);
     }
 }

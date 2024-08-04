@@ -37,6 +37,7 @@
     |-- mall-storage (仓储模块)
 
 |-- mall-center (中台模块)
+    |-- mall-goodscenter (商品中心)
     |-- mall-openapicenter (开放接口中心)
     |-- mall-ordercenter (订单中心)
 

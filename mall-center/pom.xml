@@ -16,6 +16,7 @@
     <description>中台模块</description>
 
     <modules>
+        <module>mall-goodscenter</module>
         <module>mall-openapicenter</module>
         <module>mall-ordercenter</module>
     </modules>
