@@ -44,5 +44,6 @@ docker build -f ./docs/docker/mall-merchant/Dockerfile -t mall-merchant:latest .
 
 docker build -f ./docs/docker/mall-ordercenter/Dockerfile -t mall-ordercenter:latest .
 docker build -f ./docs/docker/mall-openapicenter/Dockerfile -t mall-openapicenter:latest .
+docker build -f ./docs/docker/mall-goodscenter/Dockerfile -t mall-goodscenter:latest .
 
 pause

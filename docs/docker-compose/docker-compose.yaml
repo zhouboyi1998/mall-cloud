@@ -259,6 +259,16 @@ services:
       - ./logs:/mall/mall-openapicenter/logs
     restart: always
 
+  mall-goodscenter:
+    image: mall-goodscenter:latest
+    ports:
+      - "18063:18063"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-goodscenter/logs
+    restart: always
+
 networks:
   mall-net:
     driver: bridge

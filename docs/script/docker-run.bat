@@ -44,5 +44,6 @@ docker run -d -p 18087:18087 --name mall-merchant mall-merchant:latest
 
 docker run -d -p 18061:18061 --name mall-ordercenter mall-ordercenter:latest
 docker run -d -p 18062:18062 --name mall-openapicenter mall-openapicenter:latest
+docker run -d -p 18063:18063 --name mall-goodscenter mall-goodscenter:latest
 
 pause
