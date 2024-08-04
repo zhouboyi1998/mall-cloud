@@ -1,11 +1,4 @@
 spring:
-  # 微服务配置
-  cloud:
-    # Sentinel 配置
-    sentinel:
-      # Sentinel 控制台
-      transport:
-        dashboard: host.docker.internal:8858
   # Spring Data 配置
   data:
     # Solr 配置
