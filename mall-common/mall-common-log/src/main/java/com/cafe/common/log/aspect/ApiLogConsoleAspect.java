@@ -114,7 +114,7 @@ public class ApiLogConsoleAspect {
         // 打印执行方法
         LOGGER.info("@Before -> Method: {}", joinPoint.getSignature().getName());
         // 打印请求参数
-        LOGGER.info("@Before -> Argument: {}", AOPUtil.argument(joinPoint));
+        LOGGER.info("@Before -> Argument: {}", AOPUtil.findArgumentString(joinPoint));
     }
 
     /**

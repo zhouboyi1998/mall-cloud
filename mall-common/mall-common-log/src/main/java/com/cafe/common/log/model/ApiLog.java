@@ -8,6 +8,7 @@ import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Map;
 
 /**
  * @Project: mall-cloud
@@ -62,7 +63,7 @@ public class ApiLog implements Serializable {
     /**
      * 请求参数
      */
-    private String argument;
+    private Map<String, Object> argument;
 
     /**
      * 响应结果

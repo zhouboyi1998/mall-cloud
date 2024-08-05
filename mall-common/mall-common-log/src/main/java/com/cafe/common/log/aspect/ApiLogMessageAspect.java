@@ -80,7 +80,7 @@ public class ApiLogMessageAspect {
             .setType(request.getMethod())
             .setClazz(joinPoint.getSignature().getDeclaringTypeName())
             .setMethod(joinPoint.getSignature().getName())
-            .setArgument(AOPUtil.argument(joinPoint));
+            .setArgument(AOPUtil.findArgumentMap(joinPoint));
     }
 
     /**

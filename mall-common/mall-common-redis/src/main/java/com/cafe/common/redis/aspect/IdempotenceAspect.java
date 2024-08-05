@@ -75,11 +75,11 @@ public class IdempotenceAspect {
         Idempotence idempotence = AnnotationUtils.getAnnotation(method, Idempotence.class);
         Assert.notNull(idempotence, "Unable to get @Idempotence annotation!");
 
-        // 组装 Redis 缓存的 Key (方法全限定名 + 参数 Hash 值 + 访问令牌)
+        // 组装 Redis 缓存的完整 Key (方法全限定名 + 参数 Hash 值 + 访问令牌)
         StringBuilder key = new StringBuilder()
             .append(RedisConstant.IDEMPOTENCE_PREFIX).append(className)
             .append(StringConstant.POINT).append(methodName)
-            .append(StringConstant.COLON).append(AOPUtil.argument(joinPoint).hashCode())
+            .append(StringConstant.COLON).append(AOPUtil.findArgumentString(joinPoint).hashCode())
             .append(StringConstant.COLON).append(accessToken);
 
         // 判断是否重复提交
