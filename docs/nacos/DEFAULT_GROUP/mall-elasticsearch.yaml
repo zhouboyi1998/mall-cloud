@@ -1,0 +1,22 @@
+spring:
+  # Kafka 配置
+  kafka:
+    # Kafka 客户端唯一标识 (用于 Kafka 服务端日志记录)
+    client-id: ${spring.application.name}
+    # Kafka 消费者配置
+    consumer:
+      # 默认消费者组
+      group-id: ${spring.application.name}
+      # 如果启动时偏移量不存在, 使用什么策略拉取消息 (earliest 从最早消息开始拉取, latest 从最新消息开始拉取, none 抛出异常)
+      auto-offset-reset: latest
+      # 是否自动提交偏移量
+      enable-auto-commit: true
+      # 单次从 Broker 批量拉取消息的最大数量
+      max-poll-records: 100
+      # 消息反序列化器
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    # Kafka 监听器配置
+    listener:
+      # 消费消息确认机制 (record 单条消息确认, batch 按批次确认, time 按时间间隔确认, count 按指定条数确认)
+      ack-mode: batch
