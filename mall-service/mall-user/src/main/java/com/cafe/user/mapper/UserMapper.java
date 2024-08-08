@@ -16,20 +16,11 @@ import org.apache.ibatis.annotations.Param;
 public interface UserMapper extends BaseMapper<User> {
 
     /**
-     * 根据用户名和客户端id查询用户详情
+     * 根据客户端id和用户信息查询用户
      *
-     * @param username
      * @param clientId
+     * @param user
      * @return
      */
-    User detailByUsername(@Param(value = "username") String username, @Param(value = "clientId") String clientId);
-
-    /**
-     * 根据手机号和客户端id查询用户详情
-     *
-     * @param mobile
-     * @param clientId
-     * @return
-     */
-    User detailByMobile(@Param(value = "mobile") String mobile, @Param(value = "clientId") String clientId);
+    User detail(@Param(value = "clientId") String clientId, @Param(value = "user") User user);
 }
