@@ -10,7 +10,7 @@
  */
 package com.cafe.security.model;
 
-import com.cafe.common.constant.pool.StringConstant;
+import com.cafe.common.util.json.JacksonUtil;
 import io.swagger.annotations.ApiModel;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,7 +26,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -44,49 +44,78 @@ public class UserInfo implements UserDetails, CredentialsContainer {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * 用户ID
+     */
     private final Long id;
 
-    private String username;
+    /**
+     * 用户名
+     */
+    private final String username;
 
-    private String password;
-
+    /**
+     * 手机号
+     */
     private String mobile;
 
-    private final Set<GrantedAuthority> authorities;
+    /**
+     * 密码
+     */
+    private String password;
 
-    private final boolean accountNonExpired;
-
-    private final boolean accountNonLocked;
-
-    private final boolean credentialsNonExpired;
-
+    /**
+     * 账号是否启用
+     */
     private final boolean enabled;
 
-    public UserInfo(Long id, String username, String password, Collection<? extends GrantedAuthority> authorities) {
-        this(id, password, true, true, true, true, authorities);
-        if (username == null || "".equals(username) || password == null) {
-            throw new IllegalArgumentException("Username and password should not be null!");
-        }
-        this.username = username;
+    /**
+     * 账号是否未锁定
+     */
+    private final boolean accountNonLocked;
+
+    /**
+     * 账号是否未过期
+     */
+    private final boolean accountNonExpired;
+
+    /**
+     * 凭证是否未过期
+     */
+    private final boolean credentialsNonExpired;
+
+    /**
+     * 权限列表 (去重)
+     */
+    private final Set<GrantedAuthority> authorities;
+
+    public UserInfo(PrincipalType principalType, String principal, Long id, String username, String password, Integer status, Collection<? extends GrantedAuthority> authorities) {
+        this(principalType, principal, id, username, password, Status.isEnable(status), true, true, true, authorities);
     }
 
-    public UserInfo(Long id, String username, String mobile, String password, Collection<? extends GrantedAuthority> authorities) {
-        // 使用手机号登录时也要同时保存用户名, 因为使用刷新令牌时需要用户名
-        this(id, password, true, true, true, true, authorities);
-        if (mobile == null || "".equals(mobile) || password == null) {
-            throw new IllegalArgumentException("Mobile and password should not be null!");
+    public UserInfo(PrincipalType principalType, String principal, Long id, String username, String password, boolean enabled, boolean accountNonLocked, boolean accountNonExpired, boolean credentialsNonExpired, Collection<? extends GrantedAuthority> authorities) {
+        if (principal == null || "".equals(principal) || password == null) {
+            throw new IllegalArgumentException("Principal and password cannot be null!");
         }
-        this.username = username;
-        this.mobile = mobile;
-    }
 
-    public UserInfo(Long id, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
+        switch (principalType) {
+            case USERNAME:
+                break;
+            case MOBILE:
+                this.mobile = principal;
+                break;
+            default:
+                throw new IllegalArgumentException("Invalid principal type: " + principalType);
+        }
+
         this.id = id;
+        // 不管使用什么作为账号登录, 都要同时保存用户名, 因为使用刷新令牌获取新的访问令牌时, 需要用到用户名
+        this.username = username;
         this.password = password;
         this.enabled = enabled;
+        this.accountNonLocked = accountNonLocked;
         this.accountNonExpired = accountNonExpired;
         this.credentialsNonExpired = credentialsNonExpired;
-        this.accountNonLocked = accountNonLocked;
         this.authorities = Collections.unmodifiableSet(sortAuthorities(authorities));
     }
 
@@ -99,18 +128,13 @@ public class UserInfo implements UserDetails, CredentialsContainer {
         return this.username;
     }
 
-    @Override
-    public String getPassword() {
-        return this.password;
-    }
-
     public String getMobile() {
         return this.mobile;
     }
 
     @Override
-    public Collection<GrantedAuthority> getAuthorities() {
-        return this.authorities;
+    public String getPassword() {
+        return this.password;
     }
 
     @Override
@@ -119,18 +143,23 @@ public class UserInfo implements UserDetails, CredentialsContainer {
     }
 
     @Override
-    public boolean isAccountNonExpired() {
-        return this.accountNonExpired;
-    }
-
-    @Override
     public boolean isAccountNonLocked() {
         return this.accountNonLocked;
     }
 
     @Override
+    public boolean isAccountNonExpired() {
+        return this.accountNonExpired;
+    }
+
+    @Override
     public boolean isCredentialsNonExpired() {
         return this.credentialsNonExpired;
+    }
+
+    @Override
+    public Collection<GrantedAuthority> getAuthorities() {
+        return this.authorities;
     }
 
     @Override
@@ -141,18 +170,16 @@ public class UserInfo implements UserDetails, CredentialsContainer {
     private static SortedSet<GrantedAuthority> sortAuthorities(Collection<? extends GrantedAuthority> authorities) {
         Assert.notNull(authorities, "Cannot pass a null GrantedAuthority collection!");
         SortedSet<GrantedAuthority> sortedAuthorities = new TreeSet<>(new UserInfo.AuthorityComparator());
-
         for (GrantedAuthority grantedAuthority : authorities) {
             Assert.notNull(grantedAuthority, "GrantedAuthority list cannot contain any null elements!");
             sortedAuthorities.add(grantedAuthority);
         }
-
         return sortedAuthorities;
     }
 
     @Override
-    public boolean equals(Object rhs) {
-        return rhs instanceof UserInfo && this.username.equals(((UserInfo) rhs).username);
+    public boolean equals(Object other) {
+        return other instanceof UserDetails && Objects.equals(this.username, ((UserDetails) other).getUsername());
     }
 
     @Override
@@ -162,68 +189,92 @@ public class UserInfo implements UserDetails, CredentialsContainer {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(super.toString()).append(": ");
-        builder.append("Id: ").append(this.id).append("; ");
-        builder.append("Username: ").append(this.username).append("; ");
-        builder.append("Password: [PROTECTED]; ");
-        builder.append("Mobile: ").append(this.mobile).append("; ");
-        builder.append("Enabled: ").append(this.enabled).append("; ");
-        builder.append("AccountNonExpired: ").append(this.accountNonExpired).append("; ");
-        builder.append("credentialsNonExpired: ").append(this.credentialsNonExpired).append("; ");
-        builder.append("AccountNonLocked: ").append(this.accountNonLocked).append("; ");
-        if (!this.authorities.isEmpty()) {
-            builder.append("Granted Authorities: ");
-            boolean first = true;
-            for (GrantedAuthority auth : this.authorities) {
-                if (!first) {
-                    builder.append(",");
-                }
-                first = false;
-                builder.append(auth);
-            }
-        } else {
-            builder.append("Not granted any authorities.");
-        }
-        return builder.toString();
-    }
-
-    public static UserInfo.UserBuilder withUsername(String username) {
-        return builder().username(username);
+        return JacksonUtil.writeValueAsString(this);
     }
 
     public static UserInfo.UserBuilder builder() {
         return new UserInfo.UserBuilder();
     }
 
+    public static UserInfo.UserBuilder withUsername(String username) {
+        return builder().username(username);
+    }
+
     public static UserInfo.UserBuilder withUserDetails(UserDetails userDetails) {
-        return withUsername(userDetails.getUsername()).password(userDetails.getPassword()).accountExpired(!userDetails.isAccountNonExpired()).accountLocked(!userDetails.isAccountNonLocked()).authorities(userDetails.getAuthorities()).credentialsExpired(!userDetails.isCredentialsNonExpired()).disabled(!userDetails.isEnabled());
+        return withUsername(userDetails.getUsername())
+            .password(userDetails.getPassword())
+            .disabled(!userDetails.isEnabled())
+            .accountLocked(!userDetails.isAccountNonLocked())
+            .accountExpired(!userDetails.isAccountNonExpired())
+            .credentialsExpired(!userDetails.isCredentialsNonExpired())
+            .authorities(userDetails.getAuthorities());
+    }
+
+    public static UserInfo.UserBuilder withUserInfo(UserInfo userInfo) {
+        return withUserDetails(userInfo)
+            .id(userInfo.getId())
+            .mobile(userInfo.getMobile());
     }
 
     public static class UserBuilder {
 
+        private PrincipalType principalType;
+
+        /**
+         * 用户ID
+         */
         private Long id;
 
+        /**
+         * 用户名
+         */
         private String username;
 
-        private String password;
-
+        /**
+         * 手机号
+         */
         private String mobile;
 
-        private List<GrantedAuthority> authorities;
+        /**
+         * 密码
+         */
+        private String password;
 
-        private boolean accountExpired;
-
-        private boolean accountLocked;
-
-        private boolean credentialsExpired;
-
+        /**
+         * 账户是否禁用
+         */
         private boolean disabled;
 
-        private Function<String, String> passwordEncoder;
+        /**
+         * 账户是否锁定
+         */
+        private boolean accountLocked;
+
+        /**
+         * 账户是否过期
+         */
+        private boolean accountExpired;
+
+        /**
+         * 证书是否过期
+         */
+        private boolean credentialsExpired;
+
+        /**
+         * 权限列表
+         */
+        private List<GrantedAuthority> authorities;
+
+        private Function<String, String> passwordEncoder = password -> password;
 
         private UserBuilder() {
-            this.passwordEncoder = (password) -> password;
+
+        }
+
+        public UserInfo.UserBuilder principalType(PrincipalType principalType) {
+            Assert.notNull(principalType, "Principal type cannot be null!");
+            this.principalType = principalType;
+            return this;
         }
 
         public UserInfo.UserBuilder id(Long id) {
@@ -238,22 +289,49 @@ public class UserInfo implements UserDetails, CredentialsContainer {
             return this;
         }
 
-        public UserInfo.UserBuilder password(String password) {
-            Assert.notNull(password, "Password cannot be null!");
-            this.password = password;
-            return this;
-        }
-
         public UserInfo.UserBuilder mobile(String mobile) {
             Assert.notNull(mobile, "Mobile cannot be null!");
             this.mobile = mobile;
             return this;
         }
 
-        public UserInfo.UserBuilder passwordEncoder(Function<String, String> encoder) {
-            Assert.notNull(encoder, "Encoder cannot be null!");
-            this.passwordEncoder = encoder;
+        public UserInfo.UserBuilder password(String password) {
+            Assert.notNull(password, "Password cannot be null!");
+            this.password = password;
             return this;
+        }
+
+        public UserInfo.UserBuilder disabled(boolean disabled) {
+            this.disabled = disabled;
+            return this;
+        }
+
+        public UserInfo.UserBuilder accountLocked(boolean accountLocked) {
+            this.accountLocked = accountLocked;
+            return this;
+        }
+
+        public UserInfo.UserBuilder accountExpired(boolean accountExpired) {
+            this.accountExpired = accountExpired;
+            return this;
+        }
+
+        public UserInfo.UserBuilder credentialsExpired(boolean credentialsExpired) {
+            this.credentialsExpired = credentialsExpired;
+            return this;
+        }
+
+        public UserInfo.UserBuilder authorities(Collection<? extends GrantedAuthority> authorities) {
+            this.authorities = new ArrayList<>(authorities);
+            return this;
+        }
+
+        public UserInfo.UserBuilder authorities(GrantedAuthority... authorities) {
+            return this.authorities(Arrays.asList(authorities));
+        }
+
+        public UserInfo.UserBuilder authorities(String... authorities) {
+            return this.authorities(AuthorityUtils.createAuthorityList(authorities));
         }
 
         public UserInfo.UserBuilder roles(String... roles) {
@@ -265,45 +343,26 @@ public class UserInfo implements UserDetails, CredentialsContainer {
             return this.authorities(authorities);
         }
 
-        public UserInfo.UserBuilder authorities(GrantedAuthority... authorities) {
-            return this.authorities(Arrays.asList(authorities));
-        }
-
-        public UserInfo.UserBuilder authorities(Collection<? extends GrantedAuthority> authorities) {
-            this.authorities = new ArrayList<>(authorities);
-            return this;
-        }
-
-        public UserInfo.UserBuilder authorities(String... authorities) {
-            return this.authorities(AuthorityUtils.createAuthorityList(authorities));
-        }
-
-        public UserInfo.UserBuilder accountExpired(boolean accountExpired) {
-            this.accountExpired = accountExpired;
-            return this;
-        }
-
-        public UserInfo.UserBuilder accountLocked(boolean accountLocked) {
-            this.accountLocked = accountLocked;
-            return this;
-        }
-
-        public UserInfo.UserBuilder credentialsExpired(boolean credentialsExpired) {
-            this.credentialsExpired = credentialsExpired;
-            return this;
-        }
-
-        public UserInfo.UserBuilder disabled(boolean disabled) {
-            this.disabled = disabled;
+        public UserInfo.UserBuilder passwordEncoder(Function<String, String> passwordEncoder) {
+            Assert.notNull(passwordEncoder, "PasswordEncoder cannot be null!");
+            this.passwordEncoder = passwordEncoder;
             return this;
         }
 
         public UserDetails build() {
-            String encodedPassword = (String) this.passwordEncoder.apply(this.password);
-            String principal = Optional.ofNullable(this.username)
-                .orElse(Optional.ofNullable(this.mobile)
-                    .orElse(StringConstant.EMPTY));
-            return new UserInfo(this.id, principal, encodedPassword, this.authorities);
+            String principal;
+            switch (this.principalType) {
+                case USERNAME:
+                    principal = this.username;
+                    break;
+                case MOBILE:
+                    principal = this.mobile;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid principal type: " + this.principalType);
+            }
+            String encodedPassword = this.passwordEncoder.apply(this.password);
+            return new UserInfo(this.principalType, principal, this.id, this.username, encodedPassword, !this.disabled, !this.accountLocked, !this.accountExpired, !this.credentialsExpired, this.authorities);
         }
     }
 
@@ -322,6 +381,49 @@ public class UserInfo implements UserDetails, CredentialsContainer {
             } else {
                 return authority1.getAuthority() == null ? 1 : authority1.getAuthority().compareTo(authority2.getAuthority());
             }
+        }
+    }
+
+    public enum PrincipalType {
+
+        /**
+         * 用户名
+         */
+        USERNAME,
+
+        /**
+         * 手机号
+         */
+        MOBILE
+    }
+
+    public enum Status {
+
+        /**
+         * 启用
+         */
+        ENABLE(1),
+
+        /**
+         * 禁用
+         */
+        DISABLE(0);
+
+        /**
+         * 状态码
+         */
+        private final Integer code;
+
+        Status(Integer code) {
+            this.code = code;
+        }
+
+        public Integer code() {
+            return this.code;
+        }
+
+        public static Boolean isEnable(Integer code) {
+            return ENABLE.code().equals(code);
         }
     }
 }

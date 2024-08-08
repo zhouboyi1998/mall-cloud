@@ -66,7 +66,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
             .orElseThrow(() -> new UsernameNotFoundException(HttpStatusEnum.ROLE_UNASSIGNED.getReasonPhrase()));
 
         // 新建用户详细信息
-        UserInfo userDetails = new UserInfo(user.getId(), user.getUsername(), user.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
+        UserInfo userDetails = new UserInfo(UserInfo.PrincipalType.USERNAME, username, user.getId(), user.getUsername(), user.getPassword(), user.getStatus(), AuthorityUtils.createAuthorityList(roleNameArray));
         // 校验用户状态
         validateUserDetails(userDetails);
         LOGGER.info("UserDetailsServiceImpl.loadUserByUsername(): client id -> {}, username -> {}", clientId, username);
@@ -90,7 +90,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
             .orElseThrow(() -> new MobileNotFoundException(HttpStatusEnum.ROLE_UNASSIGNED.getReasonPhrase()));
 
         // 新建用户详细信息
-        UserInfo userDetails = new UserInfo(user.getId(), user.getUsername(), user.getMobile(), user.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
+        UserInfo userDetails = new UserInfo(UserInfo.PrincipalType.MOBILE, mobile, user.getId(), user.getUsername(), user.getPassword(), user.getStatus(), AuthorityUtils.createAuthorityList(roleNameArray));
         // 校验用户状态
         validateUserDetails(userDetails);
         LOGGER.info("UserDetailsServiceImpl.loadUserByMobile(): client id -> {}, mobile -> {}", clientId, mobile);
