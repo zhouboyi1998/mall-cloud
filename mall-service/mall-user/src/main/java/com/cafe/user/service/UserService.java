@@ -13,20 +13,11 @@ import com.cafe.user.model.User;
 public interface UserService extends IService<User> {
 
     /**
-     * 根据用户名和客户端id查询用户详情
+     * 根据客户端id和用户信息查询用户
      *
-     * @param username
      * @param clientId
+     * @param user
      * @return
      */
-    User detailByUsername(String username, String clientId);
-
-    /**
-     * 根据手机号和客户端id查询用户详情
-     *
-     * @param mobile
-     * @param clientId
-     * @return
-     */
-    User detailByMobile(String mobile, String clientId);
+    User detail(String clientId, User user);
 }

@@ -4,8 +4,9 @@ import com.cafe.common.core.feign.FeignRequestInterceptor;
 import com.cafe.user.model.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -20,28 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface UserFeign {
 
     /**
-     * 根据用户名和客户端id查询用户详情
+     * 根据客户端id和用户信息查询用户
      *
-     * @param username
      * @param clientId
+     * @param user
      * @return
      */
-    @GetMapping(value = "/detail/username/{username}/{clientId}")
-    ResponseEntity<User> detailByUsername(
-        @PathVariable(value = "username") String username,
-        @PathVariable(value = "clientId") String clientId
-    );
-
-    /**
-     * 根据手机号和客户端id查询用户详情
-     *
-     * @param mobile
-     * @param clientId
-     * @return
-     */
-    @GetMapping(value = "/detail/mobile/{mobile}/{clientId}")
-    ResponseEntity<User> detailByMobile(
-        @PathVariable(value = "mobile") String mobile,
-        @PathVariable(value = "clientId") String clientId
-    );
+    @PostMapping(value = "/detail/{clientId}")
+    ResponseEntity<User> detail(@PathVariable(value = "clientId") String clientId, @RequestBody User user);
 }

@@ -54,8 +54,8 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
         // 从请求参数中获取客户端id
         String clientId = request.getParameter(RequestConstant.Parameter.CLIENT_ID);
 
-        // 根据用户名和客户端id查询用户
-        User user = Optional.ofNullable(userFeign.detailByUsername(username, clientId))
+        // 根据客户端id和用户名查询用户
+        User user = Optional.ofNullable(userFeign.detail(clientId, new User().setUsername(username)))
             .map(ResponseEntity::getBody)
             .orElseThrow(() -> new UsernameNotFoundException(HttpStatusEnum.USERNAME_NOT_FOUND.getReasonPhrase()));
 
@@ -69,7 +69,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
         UserInfo userDetails = new UserInfo(user.getId(), user.getUsername(), user.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
         // 校验用户状态
         validateUserDetails(userDetails);
-        LOGGER.info("UserDetailsServiceImpl.loadUserByUsername(): username -> {}, client id -> {}", username, clientId);
+        LOGGER.info("UserDetailsServiceImpl.loadUserByUsername(): client id -> {}, username -> {}", clientId, username);
         return userDetails;
     }
 
@@ -78,8 +78,8 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
         // 从请求参数中获取客户端id
         String clientId = request.getParameter(RequestConstant.Parameter.CLIENT_ID);
 
-        // 根据手机号和客户端id查询用户
-        User user = Optional.ofNullable(userFeign.detailByMobile(mobile, clientId))
+        // 根据客户端id和手机号查询用户
+        User user = Optional.ofNullable(userFeign.detail(clientId, new User().setMobile(mobile)))
             .map(ResponseEntity::getBody)
             .orElseThrow(() -> new MobileNotFoundException(HttpStatusEnum.MOBILE_NOT_FOUND.getReasonPhrase()));
 
@@ -93,7 +93,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
         UserInfo userDetails = new UserInfo(user.getId(), user.getUsername(), user.getMobile(), user.getPassword(), AuthorityUtils.createAuthorityList(roleNameArray));
         // 校验用户状态
         validateUserDetails(userDetails);
-        LOGGER.info("UserDetailsServiceImpl.loadUserByMobile(): mobile -> {}, client id -> {}", mobile, clientId);
+        LOGGER.info("UserDetailsServiceImpl.loadUserByMobile(): client id -> {}, mobile -> {}", clientId, mobile);
         return userDetails;
     }
 
