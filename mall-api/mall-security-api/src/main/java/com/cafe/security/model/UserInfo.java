@@ -60,6 +60,11 @@ public class UserInfo implements UserDetails, CredentialsContainer {
     private String mobile;
 
     /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
      * 密码
      */
     private String password;
@@ -104,6 +109,9 @@ public class UserInfo implements UserDetails, CredentialsContainer {
             case MOBILE:
                 this.mobile = principal;
                 break;
+            case EMAIL:
+                this.email = principal;
+                break;
             default:
                 throw new IllegalArgumentException("Invalid principal type: " + principalType);
         }
@@ -130,6 +138,10 @@ public class UserInfo implements UserDetails, CredentialsContainer {
 
     public String getMobile() {
         return this.mobile;
+    }
+
+    public String getEmail() {
+        return this.email;
     }
 
     @Override
@@ -213,7 +225,8 @@ public class UserInfo implements UserDetails, CredentialsContainer {
     public static UserInfo.UserBuilder withUserInfo(UserInfo userInfo) {
         return withUserDetails(userInfo)
             .id(userInfo.getId())
-            .mobile(userInfo.getMobile());
+            .mobile(userInfo.getMobile())
+            .email(userInfo.getEmail());
     }
 
     public static class UserBuilder {
@@ -234,6 +247,11 @@ public class UserInfo implements UserDetails, CredentialsContainer {
          * 手机号
          */
         private String mobile;
+
+        /**
+         * 邮箱
+         */
+        private String email;
 
         /**
          * 密码
@@ -292,6 +310,12 @@ public class UserInfo implements UserDetails, CredentialsContainer {
         public UserInfo.UserBuilder mobile(String mobile) {
             Assert.notNull(mobile, "Mobile cannot be null!");
             this.mobile = mobile;
+            return this;
+        }
+
+        public UserInfo.UserBuilder email(String email) {
+            Assert.notNull(email, "Email cannot be null!");
+            this.email = email;
             return this;
         }
 
@@ -358,6 +382,9 @@ public class UserInfo implements UserDetails, CredentialsContainer {
                 case MOBILE:
                     principal = this.mobile;
                     break;
+                case EMAIL:
+                    principal = this.email;
+                    break;
                 default:
                     throw new IllegalArgumentException("Invalid principal type: " + this.principalType);
             }
@@ -394,7 +421,12 @@ public class UserInfo implements UserDetails, CredentialsContainer {
         /**
          * 手机号
          */
-        MOBILE
+        MOBILE,
+
+        /**
+         * 邮箱
+         */
+        EMAIL
     }
 
     public enum Status {

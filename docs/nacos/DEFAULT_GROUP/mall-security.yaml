@@ -16,12 +16,13 @@ client:
     # 客户端id (后台管理系统)
     - client-id: "manage"
       # 授权模式 (默认): password 密码, authorization_code 授权码, client_credentials 客户端, implicit 隐藏, refresh_token 刷新令牌
-      # 授权模式 (扩展): captcha 图片验证码, mobile 手机号
+      # 授权模式 (扩展): captcha 图片验证码, mobile 手机号, email 邮箱
       authorized-grant-types:
         - "password"
         - "refresh_token"
         - "captcha"
         - "mobile"
+        - "email"
       # 授权范围
       scopes:
         - "all"
@@ -33,12 +34,13 @@ client:
     # 客户端id (前台门户网站)
     - client-id: "portal"
       # 授权模式 (默认): password 密码, authorization_code 授权码, client_credentials 客户端, implicit 隐藏, refresh_token 刷新令牌
-      # 授权模式 (扩展): captcha 图片验证码, mobile 手机号
+      # 授权模式 (扩展): captcha 图片验证码, mobile 手机号, email 邮箱
       authorized-grant-types:
         - "password"
         - "refresh_token"
         - "captcha"
         - "mobile"
+        - "email"
       # 授权范围
       scopes:
         - "all"

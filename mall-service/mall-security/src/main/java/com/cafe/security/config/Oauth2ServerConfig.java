@@ -3,6 +3,7 @@ package com.cafe.security.config;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.security.enhancer.JwtTokenEnhancer;
 import com.cafe.security.granter.CaptchaTokenGranter;
+import com.cafe.security.granter.EmailTokenGranter;
 import com.cafe.security.granter.MobileTokenGranter;
 import com.cafe.security.property.ClientProperties;
 import com.cafe.security.property.ClientProperties.Detail;
@@ -158,25 +159,28 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     }
 
     /**
-     * 配置令牌授权模式
+     * 配置令牌授权器
      *
      * @param endpoints
      * @return
      */
     public CompositeTokenGranter compositeTokenGranter(AuthorizationServerEndpointsConfigurer endpoints) {
-        // 获取 Oauth2 默认提供的授权模式
+        // 获取 Oauth2 默认提供的授权器列表
         List<TokenGranter> tokenGranterList = new ArrayList<>(Collections.singletonList(endpoints.getTokenGranter()));
 
-        // 初始化图片验证码授权模式
+        // 初始化图片验证码授权器
         CaptchaTokenGranter captchaTokenGranter = new CaptchaTokenGranter(authenticationManager, endpoints.getTokenServices(), endpoints.getClientDetailsService(), endpoints.getOAuth2RequestFactory(), redisTemplate);
-        // 初始化手机号授权模式
+        // 初始化手机号授权器
         MobileTokenGranter mobileTokenGranter = new MobileTokenGranter(authenticationManager, endpoints.getTokenServices(), endpoints.getClientDetailsService(), endpoints.getOAuth2RequestFactory());
+        // 初始化邮箱授权器
+        EmailTokenGranter emailTokenGranter = new EmailTokenGranter(authenticationManager, endpoints.getTokenServices(), endpoints.getClientDetailsService(), endpoints.getOAuth2RequestFactory());
 
-        // 添加自定义扩展的授权模式
+        // 添加自定义扩展的授权器到授权其列表中
         tokenGranterList.add(captchaTokenGranter);
         tokenGranterList.add(mobileTokenGranter);
+        tokenGranterList.add(emailTokenGranter);
 
-        // 新建复合授权模式, 加载授权模式集合
+        // 新建复合授权器, 加载授权器集合
         return new CompositeTokenGranter(tokenGranterList);
     }
 
@@ -231,7 +235,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
             .accessTokenConverter(jwtAccessTokenConverter())
             // 令牌增强器链
             .tokenEnhancer(tokenEnhancerChain())
-            // 令牌授权模式
+            // 令牌授权器
             .tokenGranter(compositeTokenGranter(endpoints))
             // 令牌存储方式: 使用 Redis 存储
             .tokenStore(tokenStore());

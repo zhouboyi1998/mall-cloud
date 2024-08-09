@@ -2,6 +2,7 @@ package com.cafe.security.service.impl;
 
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.enumeration.http.HttpStatusEnum;
+import com.cafe.security.exception.EmailNotFoundException;
 import com.cafe.security.exception.MobileNotFoundException;
 import com.cafe.security.model.UserInfo;
 import com.cafe.security.service.UserDetailsExtensionService;
@@ -94,6 +95,30 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
         // 校验用户状态
         validateUserDetails(userDetails);
         LOGGER.info("UserDetailsServiceImpl.loadUserByMobile(): client id -> {}, mobile -> {}", clientId, mobile);
+        return userDetails;
+    }
+
+    @Override
+    public UserDetails loadUserByEmail(String email) throws EmailNotFoundException {
+        // 从请求参数中获取客户端id
+        String clientId = request.getParameter(RequestConstant.Parameter.CLIENT_ID);
+
+        // 根据客户端id和邮箱查询用户
+        User user = Optional.ofNullable(userFeign.detail(clientId, new User().setEmail(email)))
+            .map(ResponseEntity::getBody)
+            .orElseThrow(() -> new EmailNotFoundException(HttpStatusEnum.EMAIL_NOT_FOUND.getReasonPhrase()));
+
+        // 根据用户id查询角色名称列表
+        String[] roleNameArray = Optional.ofNullable(roleFeign.listRoleName(user.getId()))
+            .map(ResponseEntity::getBody)
+            .map(roleNameList -> roleNameList.toArray(new String[0]))
+            .orElseThrow(() -> new EmailNotFoundException(HttpStatusEnum.ROLE_UNASSIGNED.getReasonPhrase()));
+
+        // 新建用户详细信息
+        UserInfo userDetails = new UserInfo(UserInfo.PrincipalType.EMAIL, email, user.getId(), user.getUsername(), user.getPassword(), user.getStatus(), AuthorityUtils.createAuthorityList(roleNameArray));
+        // 校验用户状态
+        validateUserDetails(userDetails);
+        LOGGER.info("UserDetailsServiceImpl.loadUserByEmail(): client id -> {}, email -> {}", clientId, email);
         return userDetails;
     }
 

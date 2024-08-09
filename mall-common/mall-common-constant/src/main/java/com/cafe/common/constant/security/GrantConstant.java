@@ -18,4 +18,9 @@ public class GrantConstant {
      * 手机号授权模式
      */
     public static final String MOBILE = "mobile";
+
+    /**
+     * 邮箱授权模式
+     */
+    public static final String EMAIL = "email";
 }

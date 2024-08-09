@@ -29,7 +29,7 @@ import java.util.Objects;
  * @Package: com.cafe.security.granter
  * @Author: zhouboyi
  * @Date: 2023/2/25 20:28
- * @Description: 图片验证码授权模式
+ * @Description: 图片验证码授权器
  */
 public class CaptchaTokenGranter extends AbstractTokenGranter {
 

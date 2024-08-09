@@ -1,5 +1,6 @@
 package com.cafe.security.service;
 
+import com.cafe.security.exception.EmailNotFoundException;
 import com.cafe.security.exception.MobileNotFoundException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -21,4 +22,13 @@ public interface UserDetailsExtensionService extends UserDetailsService {
      * @throws MobileNotFoundException
      */
     UserDetails loadUserByMobile(String mobile) throws MobileNotFoundException;
+
+    /**
+     * 根据邮箱组装详细信息
+     *
+     * @param email
+     * @return
+     * @throws EmailNotFoundException
+     */
+    UserDetails loadUserByEmail(String email) throws EmailNotFoundException;
 }
