@@ -41,12 +41,15 @@ public class User implements Serializable {
     @ApiModelProperty(value = "用户名")
     private String username;
 
+    @ApiModelProperty(value = "手机号")
+    private String mobile;
+
+    @ApiModelProperty(value = "邮箱")
+    private String email;
+
     @ApiModelProperty(value = "密码")
     @TableField(select = false)
     private String password;
-
-    @ApiModelProperty(value = "手机号")
-    private String mobile;
 
     @ApiModelProperty(value = "状态: 0 禁用, 1 正常")
     private Integer status;

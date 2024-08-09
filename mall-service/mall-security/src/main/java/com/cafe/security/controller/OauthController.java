@@ -56,7 +56,8 @@ public class OauthController {
         @ApiImplicitParam(value = "刷新令牌", name = "refresh_token", dataType = "String", paramType = "form"),
         @ApiImplicitParam(value = "验证码key", name = "key", dataType = "Long", paramType = "form"),
         @ApiImplicitParam(value = "验证码code", name = "code", dataType = "String", paramType = "form"),
-        @ApiImplicitParam(value = "手机号", name = "mobile", dataType = "String", paramType = "form")
+        @ApiImplicitParam(value = "手机号", name = "mobile", dataType = "String", paramType = "form"),
+        @ApiImplicitParam(value = "邮箱", name = "email", dataType = "String", paramType = "form")
     })
     @PostMapping(value = "/token")
     public ResponseEntity<TokenDetails> token(Principal principal, @RequestParam Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {

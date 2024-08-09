@@ -25,6 +25,11 @@ public enum HttpStatusEnum {
     MOBILE_NOT_FOUND(401, "Mobile Not Found"),
 
     /**
+     * 邮箱不存在
+     */
+    EMAIL_NOT_FOUND(401, "Email Not Found"),
+
+    /**
      * 角色未分配
      */
     ROLE_UNASSIGNED(401, "Role Unassigned"),

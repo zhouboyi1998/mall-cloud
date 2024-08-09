@@ -76,7 +76,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
 * 这样在 `Refresh Token` 有效期内，用户可以一直获取新的 `Access Token`
 * 只有用户长时间未登录，`Refresh Token` 过期，才需要重新登录
 
-#### 新增授权模式
+#### 新增授权器
 
 * 新建一个类继承 `AbstractTokenGranter`
 * 重写继承的 `getOAuth2Authentication()` 方法
@@ -90,7 +90,7 @@ public class CaptchaTokenGranter extends AbstractTokenGranter {
 
 * 在 `AuthorizationServerConfigurerAdapter` 配置类中
 * 修改令牌访问端点配置
-* 将扩展的授权模式加入到 `Spring Security` 授权模式列表中
+* 将扩展的授权器加入到 `Spring Security` 授权器列表中
 
 ```
 public CompositeTokenGranter compositeTokenGranter(AuthorizationServerEndpointsConfigurer endpoints) {
@@ -111,7 +111,7 @@ client-config:
 
 #### 新增认证令牌和认证提供器
 
-* 如果新的授权模式需要使用对应的认证令牌，可以自定义认证令牌和认证提供器
+* 如果新的授权器需要使用对应的认证令牌，可以自定义认证令牌和认证提供器
 * 新建一个类继承 `AbstractAuthenticationToken`
 
 ```
@@ -149,21 +149,49 @@ public MobilePasswordAuthenticationProvider mobilePasswordAuthenticationProvider
 }
 ```
 
-#### 刷新令牌默认执行流程
+#### 默认刷新令牌授权器执行流程
 
 * 如果使用了默认的刷新令牌授权器 `RefreshTokenGranter`
-* 这个授权器会调用 `DefaultTokenServices.refreshAccessToken()` 方法
-* 在这个方法中经过一系列调用
-* 最终会调用 `UserDetailsService.loadUserByUsername()` 方法来获取用户信息
-* 并创建一个新的 `Authentication` 对象
+* 这个授权器会调用 `DefaultTokenServices.refreshAccessToken()` 方法来生成新的访问令牌
+* 经过一系列调用，最终会调用 `UserDetailsService.loadUserByUsername()` 方法
+* 并最终创建一个新的 `Authentication` 令牌
 
-
-* 执行流程：
+###### 使用刷新令牌生成新的访问令牌，调用链路中涉及的类和方法
 
 ```
+// 令牌授权器
+TokenGranter.grant()
+AbstractTokenGranter.grant()
+RefreshTokenGranter.getAccessToken()
+
+// 令牌服务
+AuthorizationServerTokenServices.refreshAccessToken()
 DefaultTokenServices.refreshAccessToken()
-...
+
+// 认证管理器
+AuthenticationManager.authenticate()
+
+// 认证提供器
 ProviderManager.authenticate()
-...
+AuthenticationProvider.authenticate()
+PreAuthenticatedAuthenticationProvider.authenticate()
+
+// 用户详情服务
+AuthenticationUserDetailsService.loadUserDetails()
+UserDetailsByNameServiceWrapper.loadUserDetails()
 UserDetailsService.loadUserByUsername()
 ```
+
+* 在 `PreAuthenticatedAuthenticationProvider.authenticate()` 方法中
+* 将 `Authentication` 令牌转换成了具体子类 `PreAuthenticatedAuthenticationToken`
+* 传递给 `UserDetailsByNameServiceWrapper.loadUserDetails()` 方法中使用
+* 方法中调用了 `Principal.getName()` 方法
+    * 由于令牌转换成了 `PreAuthenticatedAuthenticationToken` 类型
+    * 使用的具体实现方法为 `AbstractAuthenticationToken.getName()`
+* 使用其返回值作为 `username` 参数传递给 `UserDetailsService.loadUserByUsername()`
+    * 由于选择了 `UserDetails` 作为 `Authentication` 令牌的 `principal`
+    * 使用该方法实际调用的是 `UserDetails.getUsername()`
+* 所以只要使用了默认的刷新令牌授权器
+* 那么不管使用什么（用户名、手机号、邮箱）作为账号登录
+* 都需要同时保存用户名到 `UserDetails.username` 中
+* 除非重写一个自定义的刷新令牌授权器

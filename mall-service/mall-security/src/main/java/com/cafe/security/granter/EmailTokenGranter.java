@@ -2,7 +2,7 @@ package com.cafe.security.granter;
 
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.constant.security.GrantConstant;
-import com.cafe.security.token.MobilePasswordAuthenticationToken;
+import com.cafe.security.token.EmailPasswordAuthenticationToken;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AccountStatusException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,23 +25,23 @@ import java.util.Map;
  * @Project: mall-cloud
  * @Package: com.cafe.security.granter
  * @Author: zhouboyi
- * @Date: 2023/3/8 10:11
- * @Description: 手机号授权器
+ * @Date: 2024/8/9 9:46
+ * @Description: 邮箱授权器
  */
-public class MobileTokenGranter extends AbstractTokenGranter {
+public class EmailTokenGranter extends AbstractTokenGranter {
 
     private final AuthenticationManager authenticationManager;
 
-    public MobileTokenGranter(
+    public EmailTokenGranter(
         AuthenticationManager authenticationManager,
         AuthorizationServerTokenServices tokenServices,
         ClientDetailsService clientDetailsService,
         OAuth2RequestFactory requestFactory
     ) {
-        this(authenticationManager, tokenServices, clientDetailsService, requestFactory, GrantConstant.MOBILE);
+        this(authenticationManager, tokenServices, clientDetailsService, requestFactory, GrantConstant.EMAIL);
     }
 
-    protected MobileTokenGranter(
+    protected EmailTokenGranter(
         AuthenticationManager authenticationManager,
         AuthorizationServerTokenServices tokenServices,
         ClientDetailsService clientDetailsService,
@@ -56,11 +56,11 @@ public class MobileTokenGranter extends AbstractTokenGranter {
     protected OAuth2Authentication getOAuth2Authentication(ClientDetails client, TokenRequest tokenRequest) {
         Map<String, String> parameters = new LinkedHashMap<>(tokenRequest.getRequestParameters());
 
-        // 手机号密码校验逻辑
-        String mobile = parameters.get(RequestConstant.Parameter.MOBILE);
+        // 邮箱密码校验逻辑
+        String email = parameters.get(RequestConstant.Parameter.EMAIL);
         String password = parameters.get(RequestConstant.Parameter.PASSWORD);
         parameters.remove(RequestConstant.Parameter.PASSWORD);
-        Authentication userAuth = new MobilePasswordAuthenticationToken(mobile, password);
+        Authentication userAuth = new EmailPasswordAuthenticationToken(email, password);
         ((AbstractAuthenticationToken) userAuth).setDetails(parameters);
 
         try {
@@ -73,7 +73,7 @@ public class MobileTokenGranter extends AbstractTokenGranter {
             OAuth2Request storedOAuth2Request = this.getRequestFactory().createOAuth2Request(client, tokenRequest);
             return new OAuth2Authentication(storedOAuth2Request, userAuth);
         } else {
-            throw new InvalidGrantException("Could not authenticate user: mobile -> " + mobile);
+            throw new InvalidGrantException("Could not authenticate user: email -> " + email);
         }
     }
 }

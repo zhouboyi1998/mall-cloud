@@ -2,6 +2,7 @@ package com.cafe.security.config;
 
 import com.cafe.common.constant.security.AuthorizationConstant;
 import com.cafe.security.property.RSACredentialProperties;
+import com.cafe.security.provider.EmailPasswordAuthenticationProvider;
 import com.cafe.security.provider.MobilePasswordAuthenticationProvider;
 import com.cafe.security.provider.UsernamePasswordAuthenticationProvider;
 import com.cafe.security.service.UserDetailsExtensionService;
@@ -99,6 +100,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
+     * 邮箱密码认证提供器
+     *
+     * @return
+     */
+    @Bean
+    public EmailPasswordAuthenticationProvider emailPasswordAuthenticationProvider() {
+        return new EmailPasswordAuthenticationProvider(userDetailsExtensionService, passwordEncoder(), keyPair());
+    }
+
+    /**
      * 认证管理器
      *
      * @return
@@ -140,6 +151,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authenticationProvider(usernamePasswordAuthenticationProvider())
             // 加载手机号密码认证提供器
             .authenticationProvider(mobilePasswordAuthenticationProvider())
+            // 加载邮箱密码认证提供器
+            .authenticationProvider(emailPasswordAuthenticationProvider())
             // 指定用户详细信息组装服务
             .userDetailsService(userDetailsExtensionService)
             // 指定密码编码器

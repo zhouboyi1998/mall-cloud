@@ -66,6 +66,11 @@ public class RequestConstant {
         public static final String MOBILE = "mobile";
 
         /**
+         * 邮箱
+         */
+        public static final String EMAIL = "email";
+
+        /**
          * 图片验证码唯一标识
          */
         public static final String KEY = "key";
