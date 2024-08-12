@@ -1,8 +1,8 @@
 package com.cafe.order.controller;
 
 import com.cafe.common.log.annotation.ApiLogPrint;
-import com.cafe.order.model.OrderDetail;
-import com.cafe.order.service.OrderStateFlowService;
+import com.cafe.order.model.OrderItem;
+import com.cafe.order.service.OrderFlowService;
 import com.cafe.order.vo.OrderVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -25,18 +25,18 @@ import java.util.List;
  * @Package: com.cafe.order.controller
  * @Author: zhouboyi
  * @Date: 2023/10/27 14:55
- * @Description: 订单状态流转接口
+ * @Description: 订单流转接口
  */
-@Api(value = "订单状态流转接口")
+@Api(value = "订单流转接口")
 @RestController
-@RequestMapping(value = "/order-state-flow")
-public class OrderStateFlowController {
+@RequestMapping(value = "/order-flow")
+public class OrderFlowController {
 
-    private final OrderStateFlowService orderStateFlowService;
+    private final OrderFlowService orderFlowService;
 
     @Autowired
-    public OrderStateFlowController(OrderStateFlowService orderStateFlowService) {
-        this.orderStateFlowService = orderStateFlowService;
+    public OrderFlowController(OrderFlowService orderFlowService) {
+        this.orderFlowService = orderFlowService;
     }
 
     @ApiLogPrint(value = "保存订单")
@@ -44,22 +44,22 @@ public class OrderStateFlowController {
     @ApiImplicitParam(value = "订单VO", name = "orderVO", dataType = "OrderVO", paramType = "body", required = true)
     @PostMapping(value = "/save")
     public ResponseEntity<OrderVO> save(@RequestBody OrderVO orderVO) {
-        OrderVO newOrderVO = orderStateFlowService.save(orderVO);
+        OrderVO newOrderVO = orderFlowService.save(orderVO);
         return ResponseEntity.ok(newOrderVO);
     }
 
-    @ApiLogPrint(value = "自动取消超时未支付的订单")
-    @ApiOperation(value = "自动取消超时未支付的订单")
+    @ApiLogPrint(value = "取消超时未支付的订单")
+    @ApiOperation(value = "取消超时未支付的订单")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "当前时间", name = "now", dataType = "LocalDateTime", paramType = "path", required = true),
         @ApiImplicitParam(value = "下单未支付时长 (单位: 分钟)", name = "duration", dataType = "Integer", paramType = "path", required = true)
     })
-    @PutMapping(value = "/cancel/auto/{now}/{duration}")
-    public ResponseEntity<List<OrderDetail>> autoCancel(
+    @PutMapping(value = "/cancel/{now}/{duration}")
+    public ResponseEntity<List<OrderItem>> cancel(
         @PathVariable(value = "now") LocalDateTime now,
         @PathVariable(value = "duration") Integer duration
     ) {
-        List<OrderDetail> orderDetailList = orderStateFlowService.autoCancel(now, duration);
-        return ResponseEntity.ok(orderDetailList);
+        List<OrderItem> orderItemList = orderFlowService.cancel(now, duration);
+        return ResponseEntity.ok(orderItemList);
     }
 }

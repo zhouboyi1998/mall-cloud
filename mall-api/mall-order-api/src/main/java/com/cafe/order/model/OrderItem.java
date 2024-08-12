@@ -28,9 +28,9 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "OrderDetail", description = "订单明细表实体模型")
-@TableName(value = "mall_order_detail")
-public class OrderDetail implements Serializable {
+@ApiModel(value = "OrderItem", description = "订单明细表实体模型")
+@TableName(value = "mall_order_item")
+public class OrderItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -67,8 +67,8 @@ public class OrderDetail implements Serializable {
     @ApiModelProperty(value = "SKU 购买数量")
     private Integer skuQuantity;
 
-    @ApiModelProperty(value = "订单明细实际支付金额")
-    private BigDecimal detailAmount;
+    @ApiModelProperty(value = "订单明细的实际支付金额")
+    private BigDecimal amount;
 
     @ApiModelProperty(value = "状态: 0 下单, 1 支付中, 2 付款失败, 3 付款成功/待发货, 4 已发货, 5 完成, 6 取消, 7 申请退款, 8 退款成功")
     private Integer status;

@@ -27,11 +27,11 @@ public interface OrderCenterService {
     OrderVO submit(Long addressId, Integer channel, Integer invoice, List<CartVO> cartVOList);
 
     /**
-     * 自动取消超时未支付的订单
+     * 取消超时未支付的订单
      *
      * @param now      当前时间
      * @param duration 下单未支付时长 (单位: 分钟)
      * @return
      */
-    void autoCancel(LocalDateTime now, Integer duration);
+    void cancel(LocalDateTime now, Integer duration);
 }

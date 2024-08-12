@@ -23,18 +23,18 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.order.model
  * @Author: zhouboyi
  * @Date: 2022-12-29
- * @Description: 售后服务实体模型
+ * @Description: 售后实体模型
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "SaleService", description = "售后服务实体模型")
-@TableName(value = "mall_sale_service")
-public class SaleService implements Serializable {
+@ApiModel(value = "Aftersale", description = "售后实体模型")
+@TableName(value = "mall_aftersale")
+public class Aftersale implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "售后服务ID")
+    @ApiModelProperty(value = "售后ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
@@ -45,10 +45,10 @@ public class SaleService implements Serializable {
 
     @ApiModelProperty(value = "订单明细ID")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long orderDetailId;
+    private Long orderItemId;
 
-    @ApiModelProperty(value = "服务类型: 0 退货, 1 换货, 2 保障")
-    private Integer serviceType;
+    @ApiModelProperty(value = "售后类型: 0 退货, 1 换货, 2 保障")
+    private Integer aftersaleType;
 
     @ApiModelProperty(value = "售后原因")
     private String reason;

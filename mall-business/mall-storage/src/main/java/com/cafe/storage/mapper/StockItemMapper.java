@@ -1,7 +1,7 @@
 package com.cafe.storage.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.storage.model.StockDetail;
+import com.cafe.storage.model.StockItem;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -12,6 +12,6 @@ import org.apache.ibatis.annotations.Mapper;
  * @Description: 库存明细数据访问接口
  */
 @Mapper
-public interface StockDetailMapper extends BaseMapper<StockDetail> {
+public interface StockItemMapper extends BaseMapper<StockItem> {
 
 }

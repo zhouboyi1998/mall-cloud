@@ -7,10 +7,10 @@ import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.order.converter.OrderConverter;
 import com.cafe.order.model.Order;
-import com.cafe.order.model.OrderDetail;
-import com.cafe.order.service.OrderDetailService;
+import com.cafe.order.model.OrderItem;
+import com.cafe.order.service.OrderFlowService;
+import com.cafe.order.service.OrderItemService;
 import com.cafe.order.service.OrderService;
-import com.cafe.order.service.OrderStateFlowService;
 import com.cafe.order.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,19 +23,19 @@ import java.util.List;
  * @Package: com.cafe.order.service.impl
  * @Author: zhouboyi
  * @Date: 2023/10/27 15:00
- * @Description: 订单状态流转业务实现类
+ * @Description: 订单流转业务实现类
  */
 @Service
-public class OrderStateFlowServiceImpl implements OrderStateFlowService {
+public class OrderFlowServiceImpl implements OrderFlowService {
 
     private final OrderService orderService;
 
-    private final OrderDetailService orderDetailService;
+    private final OrderItemService orderItemService;
 
     @Autowired
-    public OrderStateFlowServiceImpl(OrderService orderService, OrderDetailService orderDetailService) {
+    public OrderFlowServiceImpl(OrderService orderService, OrderItemService orderItemService) {
         this.orderService = orderService;
-        this.orderDetailService = orderDetailService;
+        this.orderItemService = orderItemService;
     }
 
     @Override
@@ -49,21 +49,21 @@ public class OrderStateFlowServiceImpl implements OrderStateFlowService {
 
         // 遍历订单明细, 设置订单id
         Long orderId = newOrder.getId();
-        List<OrderDetail> orderDetailList = orderVO.getOrderDetailList();
-        orderDetailList.forEach(orderDetail -> orderDetail.setOrderId(orderId));
+        List<OrderItem> orderItemList = orderVO.getOrderItemList();
+        orderItemList.forEach(orderItem -> orderItem.setOrderId(orderId));
         // 保存订单明细
-        orderDetailService.saveBatch(orderDetailList);
+        orderItemService.saveBatch(orderItemList);
 
         // 使用订单id获取新保存的订单明细列表
-        List<OrderDetail> newOrderDetailList = orderDetailService.list(WrapperUtil.createQueryWrapper(new OrderDetail().setOrderId(orderId)));
+        List<OrderItem> newOrderItemList = orderItemService.list(WrapperUtil.createQueryWrapper(new OrderItem().setOrderId(orderId)));
 
         // 返回新保存的订单
-        return OrderConverter.INSTANCE.toVO(newOrder).setOrderDetailList(newOrderDetailList);
+        return OrderConverter.INSTANCE.toVO(newOrder).setOrderItemList(newOrderItemList);
     }
 
     @Override
-    public List<OrderDetail> autoCancel(LocalDateTime now, Integer duration) {
-        // 自动取消超时未支付的订单
+    public List<OrderItem> cancel(LocalDateTime now, Integer duration) {
+        // 取消超时未支付的订单
         LambdaUpdateWrapper<Order> orderUpdateWrapper = new LambdaUpdateWrapper<Order>()
             .eq(Order::getStatus, OrderConstant.Status.CREATE)
             .le(Order::getCreateTime, now.minusMinutes(IntegerConstant.TEN))
@@ -72,21 +72,21 @@ public class OrderStateFlowServiceImpl implements OrderStateFlowService {
             .set(Order::getCompletionTime, now);
         orderService.update(orderUpdateWrapper);
 
-        // 查询自动取消的订单明细 (用于还原库存)
-        LambdaQueryWrapper<OrderDetail> orderDetailQueryWrapper = new LambdaQueryWrapper<OrderDetail>()
-            .eq(OrderDetail::getStatus, OrderConstant.Status.CREATE)
-            .le(OrderDetail::getCreateTime, now.minusMinutes(IntegerConstant.TEN));
-        List<OrderDetail> orderDetailList = orderDetailService.list(orderDetailQueryWrapper);
+        // 查询超时未支付的订单明细 (用于还原库存)
+        LambdaQueryWrapper<OrderItem> orderItemQueryWrapper = new LambdaQueryWrapper<OrderItem>()
+            .eq(OrderItem::getStatus, OrderConstant.Status.CREATE)
+            .le(OrderItem::getCreateTime, now.minusMinutes(IntegerConstant.TEN));
+        List<OrderItem> orderItemList = orderItemService.list(orderItemQueryWrapper);
 
         // 订单明细状态设置为取消
-        LambdaUpdateWrapper<OrderDetail> orderDetailUpdateWrapper = new LambdaUpdateWrapper<OrderDetail>()
-            .eq(OrderDetail::getStatus, OrderConstant.Status.CREATE)
-            .le(OrderDetail::getCreateTime, now.minusMinutes(IntegerConstant.TEN))
-            .set(OrderDetail::getStatus, OrderConstant.Status.CANCEL)
-            .set(OrderDetail::getUpdateTime, now)
-            .set(OrderDetail::getCompletionTime, now);
-        orderDetailService.update(orderDetailUpdateWrapper);
+        LambdaUpdateWrapper<OrderItem> orderItemUpdateWrapper = new LambdaUpdateWrapper<OrderItem>()
+            .eq(OrderItem::getStatus, OrderConstant.Status.CREATE)
+            .le(OrderItem::getCreateTime, now.minusMinutes(IntegerConstant.TEN))
+            .set(OrderItem::getStatus, OrderConstant.Status.CANCEL)
+            .set(OrderItem::getUpdateTime, now)
+            .set(OrderItem::getCompletionTime, now);
+        orderItemService.update(orderItemUpdateWrapper);
 
-        return orderDetailList;
+        return orderItemList;
     }
 }

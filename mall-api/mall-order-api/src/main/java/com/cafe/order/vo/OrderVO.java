@@ -1,6 +1,6 @@
 package com.cafe.order.vo;
 
-import com.cafe.order.model.OrderDetail;
+import com.cafe.order.model.OrderItem;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
@@ -93,5 +93,5 @@ public class OrderVO implements Serializable {
     private Boolean deleted;
 
     @ApiModelProperty(value = "订单明细列表")
-    private List<OrderDetail> orderDetailList;
+    private List<OrderItem> orderItemList;
 }
