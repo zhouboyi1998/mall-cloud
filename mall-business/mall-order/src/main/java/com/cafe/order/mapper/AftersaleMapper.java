@@ -1,7 +1,7 @@
 package com.cafe.order.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.order.model.OrderDetail;
+import com.cafe.order.model.Aftersale;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
@@ -9,9 +9,9 @@ import org.apache.ibatis.annotations.Mapper;
  * @Package: com.cafe.order.mapper
  * @Author: zhouboyi
  * @Date: 2022-12-29
- * @Description: 订单明细表数据访问接口
+ * @Description: 售后数据访问接口
  */
 @Mapper
-public interface OrderDetailMapper extends BaseMapper<OrderDetail> {
+public interface AftersaleMapper extends BaseMapper<Aftersale> {
 
 }

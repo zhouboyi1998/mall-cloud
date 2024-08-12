@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.cafe.order.mapper.SaleServiceMapper">
+<mapper namespace="com.cafe.order.mapper.AftersaleMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.order.model.SaleService">
+    <resultMap id="BaseResultMap" type="com.cafe.order.model.Aftersale">
         <id column="id" property="id" />
         <result column="member_id" property="memberId" />
-        <result column="order_detail_id" property="orderDetailId" />
-        <result column="service_type" property="serviceType" />
+        <result column="order_item_id" property="orderItemId" />
+        <result column="aftersale_type" property="aftersaleType" />
         <result column="reason" property="reason" />
         <result column="image_list" property="imageList" />
         <result column="refund_amount" property="refundAmount" />

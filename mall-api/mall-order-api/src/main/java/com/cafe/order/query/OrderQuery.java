@@ -2,7 +2,7 @@ package com.cafe.order.query;
 
 import com.cafe.common.lang.date.LocalDateTimePeriod;
 import com.cafe.order.model.Order;
-import com.cafe.order.model.OrderDetail;
+import com.cafe.order.model.OrderItem;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -25,7 +25,7 @@ public class OrderQuery extends Order {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "订单明细")
-    private OrderDetail orderDetail;
+    private OrderItem orderItem;
 
     @ApiModelProperty(value = "创建时间区间")
     private LocalDateTimePeriod createTimePeriod;

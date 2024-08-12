@@ -14,14 +14,14 @@ import com.cafe.goods.model.Sku;
 import com.cafe.id.feign.IDFeign;
 import com.cafe.member.feign.AddressFeign;
 import com.cafe.member.model.Address;
-import com.cafe.order.feign.OrderStateFlowFeign;
-import com.cafe.order.model.OrderDetail;
+import com.cafe.order.feign.OrderFlowFeign;
+import com.cafe.order.model.OrderItem;
 import com.cafe.order.vo.OrderVO;
 import com.cafe.ordercenter.service.OrderCenterService;
 import com.cafe.storage.feign.StockFeign;
 import com.cafe.storage.vo.CartVO;
 import io.seata.spring.annotation.GlobalTransactional;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -42,6 +42,7 @@ import java.util.stream.Collectors;
  * @Date: 2023/10/24 17:25
  * @Description: 订单中心业务实现类
  */
+@AllArgsConstructor
 @Service
 public class OrderCenterServiceImpl implements OrderCenterService {
 
@@ -57,18 +58,7 @@ public class OrderCenterServiceImpl implements OrderCenterService {
 
     private final IDFeign idFeign;
 
-    private final OrderStateFlowFeign orderStateFlowFeign;
-
-    @Autowired
-    public OrderCenterServiceImpl(SkuFeign skuFeign, AddressFeign addressFeign, AreaFeign areaFeign, StockFeign stockFeign, GoodsFeign goodsFeign, IDFeign idFeign, OrderStateFlowFeign orderStateFlowFeign) {
-        this.skuFeign = skuFeign;
-        this.addressFeign = addressFeign;
-        this.areaFeign = areaFeign;
-        this.stockFeign = stockFeign;
-        this.goodsFeign = goodsFeign;
-        this.idFeign = idFeign;
-        this.orderStateFlowFeign = orderStateFlowFeign;
-    }
+    private final OrderFlowFeign orderFlowFeign;
 
     @GlobalTransactional
     @Override
@@ -200,42 +190,42 @@ public class OrderCenterServiceImpl implements OrderCenterService {
             .setStatus(IntegerConstant.ZERO);
 
         // 循环生成订单明细
-        List<OrderDetail> orderDetailList = new ArrayList<>(goodsList.size());
+        List<OrderItem> orderItemList = new ArrayList<>(goodsList.size());
         goodsList.forEach(goods -> {
             BigDecimal discountPrice = goods.getDiscountPrice();
             Integer quantity = quantityMap.get(goods.getId());
-            OrderDetail orderDetail = new OrderDetail()
+            OrderItem orderItem = new OrderItem()
                 .setSkuId(goods.getId())
                 .setShopId(goods.getShopId())
                 .setSkuName(goods.getSkuName())
                 .setSkuImage(goods.getImage())
                 .setSkuPrice(discountPrice)
                 .setSkuQuantity(quantity)
-                .setDetailAmount(discountPrice.multiply(BigDecimal.valueOf(quantity)))
+                .setAmount(discountPrice.multiply(BigDecimal.valueOf(quantity)))
                 .setStatus(IntegerConstant.ZERO);
-            orderDetailList.add(orderDetail);
+            orderItemList.add(orderItem);
         });
-        orderVO.setOrderDetailList(orderDetailList);
+        orderVO.setOrderItemList(orderItemList);
 
         // 保存订单
-        return Optional.ofNullable(orderStateFlowFeign.save(orderVO))
+        return Optional.ofNullable(orderFlowFeign.save(orderVO))
             .map(ResponseEntity::getBody)
             .orElseThrow(() -> new BusinessException(HttpStatusEnum.CREATE_ORDER_EXCEPTION));
     }
 
     @Override
-    public void autoCancel(LocalDateTime now, Integer duration) {
-        // 自动取消超时未支付的订单
-        List<OrderDetail> orderDetailList = Optional.ofNullable(orderStateFlowFeign.autoCancel(now, duration))
+    public void cancel(LocalDateTime now, Integer duration) {
+        // 取消超时未支付的订单
+        List<OrderItem> orderItemList = Optional.ofNullable(orderFlowFeign.cancel(now, duration))
             .map(ResponseEntity::getBody)
             .orElse(Collections.emptyList());
 
         // 还原商品库存
-        List<CartVO> cartVOList = orderDetailList.stream()
-            .map(orderDetail -> new CartVO()
-                .setSkuId(orderDetail.getSkuId())
-                .setShopId(orderDetail.getShopId())
-                .setQuantity(orderDetail.getSkuQuantity()))
+        List<CartVO> cartVOList = orderItemList.stream()
+            .map(orderItem -> new CartVO()
+                .setSkuId(orderItem.getSkuId())
+                .setShopId(orderItem.getShopId())
+                .setQuantity(orderItem.getSkuQuantity()))
             .collect(Collectors.toList());
         stockFeign.inboundBatch(cartVOList);
     }

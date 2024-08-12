@@ -27,9 +27,9 @@ import java.time.LocalDateTime;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "StockDetail", description = "库存明细实体模型")
-@TableName(value = "mall_stock_detail")
-public class StockDetail implements Serializable {
+@ApiModel(value = "StockItem", description = "库存明细实体模型")
+@TableName(value = "mall_stock_item")
+public class StockItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -46,8 +46,8 @@ public class StockDetail implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long storageId;
 
-    @ApiModelProperty(value = "当前仓库的库存量")
-    private Integer detailStock;
+    @ApiModelProperty(value = "库存明细的库存量")
+    private Integer stock;
 
     @ApiModelProperty(value = "状态: 0 禁用, 1 正常")
     private Integer status;

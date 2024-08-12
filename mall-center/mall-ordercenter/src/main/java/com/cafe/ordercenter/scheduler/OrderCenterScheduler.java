@@ -28,11 +28,11 @@ public class OrderCenterScheduler {
     }
 
     /**
-     * 自动取消超时未支付的订单
+     * 定时取消超时未支付的订单
      */
-    @XxlJob(value = "handleAutoCancelUnpaidOrder")
-    public ReturnT<String> handleAutoCancelUnpaidOrder() throws Exception {
-        orderCenterService.autoCancel(LocalDateTime.now(), IntegerConstant.TEN);
+    @XxlJob(value = "handleCancelTimeoutUnpaidOrder")
+    public ReturnT<String> handleCancelTimeoutUnpaidOrder() throws Exception {
+        orderCenterService.cancel(LocalDateTime.now(), IntegerConstant.TEN);
         XxlJobHelper.log("OrderCenterScheduler.handleAutoCancelUnpaidOrder(): auto cancel unpaid order.");
         return ReturnT.SUCCESS;
     }

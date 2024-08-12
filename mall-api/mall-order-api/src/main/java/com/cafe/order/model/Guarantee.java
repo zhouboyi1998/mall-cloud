@@ -39,7 +39,7 @@ public class Guarantee implements Serializable {
 
     @ApiModelProperty(value = "订单明细ID")
     @JsonSerialize(using = ToStringSerializer.class)
-    private Long orderDetailId;
+    private Long orderItemId;
 
     @ApiModelProperty(value = "保障类型: 0 无理由退款, 1 保修, 2 以旧换新")
     private Integer guaranteeType;

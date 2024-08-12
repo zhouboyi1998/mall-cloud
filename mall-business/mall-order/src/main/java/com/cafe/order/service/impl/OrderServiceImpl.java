@@ -6,10 +6,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.common.lang.date.LocalDateTimePeriod;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.order.converter.OrderConverter;
-import com.cafe.order.mapper.OrderDetailMapper;
+import com.cafe.order.mapper.OrderItemMapper;
 import com.cafe.order.mapper.OrderMapper;
 import com.cafe.order.model.Order;
-import com.cafe.order.model.OrderDetail;
+import com.cafe.order.model.OrderItem;
 import com.cafe.order.query.OrderQuery;
 import com.cafe.order.service.OrderService;
 import com.cafe.order.vo.OrderVO;
@@ -36,23 +36,23 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
     private final OrderMapper orderMapper;
 
-    private final OrderDetailMapper orderDetailMapper;
+    private final OrderItemMapper orderItemMapper;
 
     @Autowired
-    public OrderServiceImpl(OrderMapper orderMapper, OrderDetailMapper orderDetailMapper) {
+    public OrderServiceImpl(OrderMapper orderMapper, OrderItemMapper orderItemMapper) {
         this.orderMapper = orderMapper;
-        this.orderDetailMapper = orderDetailMapper;
+        this.orderItemMapper = orderItemMapper;
     }
 
     @Override
     public Page<OrderVO> query(Page<Order> page, OrderQuery orderQuery) {
         // 构建订单明细 QueryWrapper, 添加订单明细查询条件
-        LambdaQueryWrapper<OrderDetail> orderDetailQueryWrapper = Optional.ofNullable(orderQuery.getOrderDetail())
+        LambdaQueryWrapper<OrderItem> orderItemQueryWrapper = Optional.ofNullable(orderQuery.getOrderItem())
             .map(WrapperUtil::createLambdaQueryWrapper)
-            .orElse(WrapperUtil.emptyLambdaQueryWrapper(new OrderDetail()));
+            .orElse(WrapperUtil.emptyLambdaQueryWrapper(new OrderItem()));
         // 查询订单明细列表
-        List<OrderDetail> orderDetailList = orderDetailMapper.selectList(orderDetailQueryWrapper);
-        Set<Long> orderIdSet = orderDetailList.stream().map(OrderDetail::getOrderId).collect(Collectors.toSet());
+        List<OrderItem> orderItemList = orderItemMapper.selectList(orderItemQueryWrapper);
+        Set<Long> orderIdSet = orderItemList.stream().map(OrderItem::getOrderId).collect(Collectors.toSet());
 
         // 构建订单 QueryWrapper, 添加订单查询条件
         Order order = OrderConverter.INSTANCE.toModel(orderQuery);
@@ -83,12 +83,12 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
         List<Long> orderIdList = orderList.stream().map(Order::getId).collect(Collectors.toList());
 
         // 订单明细按订单ID分组
-        Map<Long, List<OrderDetail>> orderDetailMap = orderDetailList.stream()
-            .filter(orderDetail -> orderIdList.contains(orderDetail.getOrderId()))
-            .collect(Collectors.groupingBy(OrderDetail::getOrderId));
+        Map<Long, List<OrderItem>> orderItemMap = orderItemList.stream()
+            .filter(orderItem -> orderIdList.contains(orderItem.getOrderId()))
+            .collect(Collectors.groupingBy(OrderItem::getOrderId));
         // 组装订单明细到对应的订单视图中
         List<OrderVO> orderVOList = OrderConverter.INSTANCE.toVOList(orderList).stream()
-            .peek(orderVO -> orderVO.setOrderDetailList(orderDetailMap.get(orderVO.getId())))
+            .peek(orderVO -> orderVO.setOrderItemList(orderItemMap.get(orderVO.getId())))
             .collect(Collectors.toList());
         return new Page<OrderVO>(orderPage.getCurrent(), orderPage.getSize(), orderPage.getTotal())
             .setRecords(orderVOList);
