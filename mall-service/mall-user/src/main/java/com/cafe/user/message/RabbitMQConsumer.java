@@ -70,6 +70,6 @@ public class RabbitMQConsumer {
             menuIds.add(roleMenu.getMenuId());
         }
         // 更新 Redis 中的数据
-        roleMenuService.refreshMenuRoleBO(menuIds);
+        roleMenuService.refreshMenuRoleCache(menuIds);
     }
 }

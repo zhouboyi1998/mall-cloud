@@ -2,12 +2,13 @@ package com.cafe.foundation.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cafe.common.constant.model.DefaultValueConstant;
 import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
-import com.cafe.foundation.dto.AreaDTO;
 import com.cafe.foundation.model.Area;
 import com.cafe.foundation.service.AreaService;
+import com.cafe.foundation.vo.AreaDetailVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -198,28 +200,40 @@ public class AreaController {
         return ResponseEntity.ok(code);
     }
 
-    @ApiLogPrint(value = "根据省份id、城市id、区县id获取区域")
-    @ApiOperation(value = "根据省份id、城市id、区县id获取区域")
+    @ApiLogPrint(value = "根据省份id、城市id、区县id获取区域详情")
+    @ApiOperation(value = "根据省份id、城市id、区县id获取区域详情")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "省份id", name = "provinceId", dataType = "Long", paramType = "path", required = true),
         @ApiImplicitParam(value = "城市id", name = "cityId", dataType = "Long", paramType = "path", required = true),
         @ApiImplicitParam(value = "区县id", name = "districtId", dataType = "Long", paramType = "path", required = true)
     })
-    @GetMapping(value = "/dto/{provinceId}/{cityId}/{districtId}")
-    public ResponseEntity<AreaDTO> dto(
+    @GetMapping(value = "/detail/{provinceId}/{cityId}/{districtId}")
+    public ResponseEntity<AreaDetailVO> detail(
         @PathVariable(value = "provinceId") Long provinceId,
         @PathVariable(value = "cityId") Long cityId,
         @PathVariable(value = "districtId") Long districtId
     ) {
-        AreaDTO dto = areaService.dto(provinceId, cityId, districtId);
-        return ResponseEntity.ok(dto);
+        AreaDetailVO areaDetailVO = areaService.detail(provinceId, cityId, districtId);
+        return ResponseEntity.ok(areaDetailVO);
     }
 
-    @ApiLogPrint(value = "查询区域树")
-    @ApiOperation(value = "查询区域树")
+    @ApiLogPrint(value = "根据上级id查询区域树列表")
+    @ApiOperation(value = "根据上级id查询区域树列表")
+    @ApiImplicitParam(value = "上级id", name = "parentId", dataType = "Long", paramType = "query", defaultValue = DefaultValueConstant.DEFAULT_PARENT_ID_STR)
     @GetMapping(value = "/tree-list")
-    public ResponseEntity<List<Tree>> treeList() {
-        List<Tree> treeList = areaService.treeList();
+    public ResponseEntity<List<Tree>> treeList(
+        @RequestParam(value = "parentId", required = false, defaultValue = DefaultValueConstant.DEFAULT_PARENT_ID_STR) Long parentId
+    ) {
+        List<Tree> treeList = areaService.treeList(new Area().setParentId(parentId));
+        return ResponseEntity.ok(treeList);
+    }
+
+    @ApiLogPrint(value = "根据条件查询区域树列表")
+    @ApiOperation(value = "根据条件查询区域树列表")
+    @ApiImplicitParam(value = "区域Model", name = "area", dataType = "Area", paramType = "body", required = true)
+    @PostMapping(value = "/tree-list")
+    public ResponseEntity<List<Tree>> treeList(@RequestBody Area area) {
+        List<Tree> treeList = areaService.treeList(area);
         return ResponseEntity.ok(treeList);
     }
 }

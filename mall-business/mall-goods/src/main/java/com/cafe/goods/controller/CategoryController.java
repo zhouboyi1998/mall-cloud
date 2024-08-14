@@ -2,6 +2,7 @@ package com.cafe.goods.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cafe.common.constant.model.DefaultValueConstant;
 import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -197,29 +199,41 @@ public class CategoryController {
         return ResponseEntity.ok(code);
     }
 
-    @ApiLogPrint(value = "查询分类树")
-    @ApiOperation(value = "查询分类树")
-    @GetMapping(value = "/tree-list")
-    public ResponseEntity<List<Tree>> treeList() {
-        List<Tree> treeList = categoryService.treeList();
-        return ResponseEntity.ok(treeList);
-    }
-
-    @ApiLogPrint(value = "根据上级分类id查询分类树")
-    @ApiOperation(value = "根据上级分类id查询分类树")
-    @ApiImplicitParam(value = "上级分类id", name = "parentId", dataType = "Long", paramType = "path", required = true)
-    @GetMapping(value = "/tree-list/{parentId}")
-    public ResponseEntity<List<Tree>> treeList(@PathVariable(value = "parentId") Long parentId) {
-        List<Tree> treeList = categoryService.treeList(parentId);
-        return ResponseEntity.ok(treeList);
-    }
-
-    @ApiLogPrint(value = "根据分类id查询分类树")
-    @ApiOperation(value = "根据分类id查询分类树")
+    @ApiLogPrint(value = "根据id查询分类树节点")
+    @ApiOperation(value = "根据id查询分类树节点")
     @ApiImplicitParam(value = "分类id", name = "id", dataType = "Long", paramType = "path", required = true)
-    @GetMapping(value = "/tree/{id}")
-    public ResponseEntity<Tree> tree(@PathVariable(value = "id") Long id) {
-        Tree tree = categoryService.tree(id);
+    @GetMapping(value = "/tree-node/{id}")
+    public ResponseEntity<Tree> treeNode(@PathVariable(value = "id") Long id) {
+        Tree tree = categoryService.treeNode(new Category().setId(id));
         return ResponseEntity.ok(tree);
+    }
+
+    @ApiLogPrint(value = "根据条件查询分类树节点")
+    @ApiOperation(value = "根据条件查询分类树节点")
+    @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
+    @PostMapping(value = "/tree-node")
+    public ResponseEntity<Tree> treeNode(@RequestBody Category category) {
+        Tree tree = categoryService.treeNode(category);
+        return ResponseEntity.ok(tree);
+    }
+
+    @ApiLogPrint(value = "根据上级id查询分类树列表")
+    @ApiOperation(value = "根据上级id查询分类树列表")
+    @ApiImplicitParam(value = "上级id", name = "parentId", dataType = "Long", paramType = "query", defaultValue = DefaultValueConstant.DEFAULT_PARENT_ID_STR)
+    @GetMapping(value = "/tree-list")
+    public ResponseEntity<List<Tree>> treeList(
+        @RequestParam(value = "parentId", required = false, defaultValue = DefaultValueConstant.DEFAULT_PARENT_ID_STR) Long parentId
+    ) {
+        List<Tree> treeList = categoryService.treeList(new Category().setParentId(parentId));
+        return ResponseEntity.ok(treeList);
+    }
+
+    @ApiLogPrint(value = "根据条件查询分类树列表")
+    @ApiOperation(value = "根据条件查询分类树列表")
+    @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
+    @PostMapping(value = "/tree-list")
+    public ResponseEntity<List<Tree>> treeList(@RequestBody Category category) {
+        List<Tree> treeList = categoryService.treeList(category);
+        return ResponseEntity.ok(treeList);
     }
 }

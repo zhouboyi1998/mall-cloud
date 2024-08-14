@@ -30,6 +30,10 @@ public class AreaTreeVO extends Tree implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
+    @ApiModelProperty(value = "上级区域ID")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long parentId;
+
     @ApiModelProperty(value = "区域名称")
     private String areaName;
 
@@ -39,12 +43,8 @@ public class AreaTreeVO extends Tree implements Serializable {
     @ApiModelProperty(value = "邮政编码")
     private Integer postCode;
 
-    @ApiModelProperty(value = "上级区域ID")
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long parentId;
-
-    @ApiModelProperty(value = "区域等级: 1 省份, 2 城市, 3 区县")
-    private Integer areaLevel;
+    @ApiModelProperty(value = "区域层级: 1 省份, 2 城市, 3 区县")
+    private Integer level;
 
     @ApiModelProperty(value = "排序号")
     private Integer sort;

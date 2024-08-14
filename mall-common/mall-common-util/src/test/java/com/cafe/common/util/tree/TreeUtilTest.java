@@ -38,20 +38,20 @@ class TreeUtilTest {
     }
 
     @Test
-    void buildTreeList() {
+    void buildTreeNode() {
+        Tree tree = TreeUtil.buildTreeNode(NODE_LIST, 1L);
+        System.out.println(tree);
+    }
+
+    @Test
+    void buildTreeListWithoutParentId() {
         List<Tree> treeList = TreeUtil.buildTreeList(NODE_LIST);
         System.out.println(treeList);
     }
 
     @Test
-    void buildTreeList2() {
-        List<Tree> treeList = TreeUtil.buildTreeList(NODE_LIST, 1L);
+    void buildTreeListWithParentId() {
+        List<Tree> treeList = TreeUtil.buildTreeList(NODE_LIST, 2L);
         System.out.println(treeList);
-    }
-
-    @Test
-    void buildTree() {
-        Tree tree = TreeUtil.buildTree(NODE_LIST, 2L);
-        System.out.println(tree);
     }
 }

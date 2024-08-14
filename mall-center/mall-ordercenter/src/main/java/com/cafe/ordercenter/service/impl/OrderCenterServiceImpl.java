@@ -5,8 +5,8 @@ import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.core.exception.BusinessException;
 import com.cafe.common.enumeration.http.HttpStatusEnum;
-import com.cafe.foundation.dto.AreaDTO;
 import com.cafe.foundation.feign.AreaFeign;
+import com.cafe.foundation.vo.AreaDetailVO;
 import com.cafe.goods.bo.Goods;
 import com.cafe.goods.feign.GoodsFeign;
 import com.cafe.goods.feign.SkuFeign;
@@ -68,11 +68,11 @@ public class OrderCenterServiceImpl implements OrderCenterService {
         // 查询收货地址
         Address address = selectAddress(addressId);
         // 查询区域
-        AreaDTO areaDTO = selectAreaDTO(address);
+        AreaDetailVO areaDetailVO = selectAreaDetailVO(address);
         // 扣减库存
         outboundStock(cartVOList);
         // 创建订单
-        return createOrder(channel, invoice, cartVOList, goodsList, address, areaDTO);
+        return createOrder(channel, invoice, cartVOList, goodsList, address, areaDetailVO);
     }
 
     /**
@@ -118,9 +118,9 @@ public class OrderCenterServiceImpl implements OrderCenterService {
      * @param address
      * @return
      */
-    private AreaDTO selectAreaDTO(Address address) {
-        // 根据省份id、城市id、区县id获取区域 (如果区域不存在, 终止订单提交)
-        return Optional.ofNullable(areaFeign.dto(address.getProvinceId(), address.getCityId(), address.getDistrictId()))
+    private AreaDetailVO selectAreaDetailVO(Address address) {
+        // 根据省份id、城市id、区县id获取区域详情 (如果区域不存在, 终止订单提交)
+        return Optional.ofNullable(areaFeign.detail(address.getProvinceId(), address.getCityId(), address.getDistrictId()))
             .map(ResponseEntity::getBody)
             .orElseThrow(() -> new BusinessException(HttpStatusEnum.AREA_NOT_FOUND, address));
     }
@@ -149,10 +149,10 @@ public class OrderCenterServiceImpl implements OrderCenterService {
      * @param cartVOList
      * @param goodsList
      * @param address
-     * @param areaDTO
+     * @param areaDetailVO
      * @return
      */
-    private OrderVO createOrder(Integer channel, Integer invoice, List<CartVO> cartVOList, List<Goods> goodsList, Address address, AreaDTO areaDTO) {
+    private OrderVO createOrder(Integer channel, Integer invoice, List<CartVO> cartVOList, List<Goods> goodsList, Address address, AreaDetailVO areaDetailVO) {
         // SKU 主键和购买数量映射
         Map<Long, Integer> quantityMap = cartVOList.stream().collect(Collectors.toMap(CartVO::getSkuId, CartVO::getQuantity));
 
@@ -171,7 +171,7 @@ public class OrderCenterServiceImpl implements OrderCenterService {
         BigDecimal payment = amount.get().subtract(discount.get()).add(postage);
 
         // 拼装地址快照
-        String addressSnapshot = areaDTO.getProvinceName() + StringConstant.SPACE + areaDTO.getCityName() + StringConstant.SPACE + areaDTO.getDistrictName() + StringConstant.SPACE + address.getAddress();
+        String addressSnapshot = areaDetailVO.getProvinceName() + StringConstant.SPACE + areaDetailVO.getCityName() + StringConstant.SPACE + areaDetailVO.getDistrictName() + StringConstant.SPACE + address.getAddress();
 
         // 生成订单主体
         OrderVO orderVO = new OrderVO()

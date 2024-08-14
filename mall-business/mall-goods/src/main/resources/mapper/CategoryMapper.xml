@@ -5,9 +5,9 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cafe.goods.model.Category">
         <id column="id" property="id" />
-        <result column="category_name" property="categoryName" />
         <result column="parent_id" property="parentId" />
-        <result column="category_level" property="categoryLevel" />
+        <result column="category_name" property="categoryName" />
+        <result column="level" property="level" />
         <result column="sort" property="sort" />
         <result column="status" property="status" />
         <result column="create_time" property="createTime" />
@@ -15,32 +15,34 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
-    <select id="selectTreeList" resultType="com.cafe.goods.vo.CategoryTreeVO">
+    <select id="selectTreeVOList" resultType="com.cafe.goods.vo.CategoryTreeVO">
         WITH RECURSIVE tree AS (
-            SELECT id, category_name, parent_id, category_level, sort, status
-            FROM mall_category
-            WHERE parent_id = #{parentId}
-            UNION ALL
-            SELECT c.id, c.category_name, c.parent_id, c.category_level, c.sort, c.status
-            FROM mall_category AS c
-                     INNER JOIN tree AS p ON c.parent_id = p.id
+        SELECT id, category_name, parent_id, level, sort, status, is_deleted
+        FROM mall_category
+        <where>
+            <if test="category.id != null">
+                AND id = #{category.id}
+            </if>
+            <if test="category.parentId != null">
+                AND parent_id = #{category.parentId}
+            </if>
+        </where>
+        UNION ALL
+        SELECT c.id, c.category_name, c.parent_id, c.level, c.sort, c.status, c.is_deleted
+        FROM mall_category AS c
+        INNER JOIN tree AS p ON c.parent_id = p.id
         )
         SELECT *
         FROM tree
-    </select>
-
-    <select id="selectTree" resultType="com.cafe.goods.vo.CategoryTreeVO">
-        WITH RECURSIVE tree AS (
-            SELECT id, category_name, parent_id, category_level, sort, status
-            FROM mall_category
-            WHERE id = #{id}
-            UNION ALL
-            SELECT c.id, c.category_name, c.parent_id, c.category_level, c.sort, c.status
-            FROM mall_category AS c
-                     INNER JOIN tree AS p ON c.parent_id = p.id
-        )
-        SELECT *
-        FROM tree
+        <where>
+            <if test="category.status != null">
+                AND status = #{category.status}
+            </if>
+            <if test="category.categoryName != null and category.categoryName != ''">
+                AND category_name LIKE CONCAT('%', #{category.categoryName}, '%')
+            </if>
+            AND is_deleted = 0
+        </where>
     </select>
 
 </mapper>

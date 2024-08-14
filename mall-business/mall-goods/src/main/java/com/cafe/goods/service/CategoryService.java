@@ -16,25 +16,18 @@ import java.util.List;
 public interface CategoryService extends IService<Category> {
 
     /**
-     * 查询分类树
+     * 根据条件查询分类树节点
      *
+     * @param category
      * @return
      */
-    List<Tree> treeList();
+    Tree treeNode(Category category);
 
     /**
-     * 根据上级分类id查询分类树
+     * 根据条件查询分类树列表
      *
-     * @param parentId
+     * @param category
      * @return
      */
-    List<Tree> treeList(Long parentId);
-
-    /**
-     * 根据分类id查询分类树
-     *
-     * @param id
-     * @return
-     */
-    Tree tree(Long id);
+    List<Tree> treeList(Category category);
 }

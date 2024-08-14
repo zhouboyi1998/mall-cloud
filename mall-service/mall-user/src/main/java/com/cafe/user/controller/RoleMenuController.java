@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
+import com.cafe.user.bo.MenuRoleBO;
 import com.cafe.user.model.RoleMenu;
 import com.cafe.user.service.RoleMenuService;
 import io.swagger.annotations.Api;
@@ -194,5 +195,14 @@ public class RoleMenuController {
         QueryWrapper<RoleMenu> wrapper = WrapperUtil.createQueryWrapper(roleMenu);
         Boolean code = roleMenuService.remove(wrapper);
         return ResponseEntity.ok(code);
+    }
+
+    @ApiLogPrint(value = "根据菜单ids获取 <菜单路径-角色名称> 对应关系列表")
+    @ApiOperation(value = "根据菜单ids获取 <菜单路径-角色名称> 对应关系列表")
+    @ApiImplicitParam(value = "菜单ids", name = "menuIds", dataType = "List<Long>", paramType = "body", required = true)
+    @PostMapping(value = "/bo-list")
+    public ResponseEntity<List<MenuRoleBO>> menuRoleBOList(@RequestBody List<Long> menuIds) {
+        List<MenuRoleBO> menuRoleBOList = roleMenuService.menuRoleBOList(menuIds);
+        return ResponseEntity.ok(menuRoleBOList);
     }
 }

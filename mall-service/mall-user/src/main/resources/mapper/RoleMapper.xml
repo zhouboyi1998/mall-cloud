@@ -14,7 +14,7 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
-    <select id="listRoleName" resultType="java.lang.String">
+    <select id="nameList" resultType="java.lang.String">
         SELECT role_name
         FROM mall_role AS r
         LEFT JOIN mall_user_role AS ur ON ur.role_id = r.id
@@ -22,6 +22,8 @@
             <if test="userId != null">
                 AND ur.user_id = #{userId}
             </if>
+            AND r.is_deleted = 0
         </where>
     </select>
+
 </mapper>

@@ -1,7 +1,7 @@
 package com.cafe.foundation.feign;
 
 import com.cafe.common.core.feign.FeignRequestInterceptor;
-import com.cafe.foundation.dto.AreaDTO;
+import com.cafe.foundation.vo.AreaDetailVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,8 +27,8 @@ public interface AreaFeign {
      * @param districtId
      * @return
      */
-    @GetMapping(value = "/dto/{provinceId}/{cityId}/{districtId}")
-    ResponseEntity<AreaDTO> dto(
+    @GetMapping(value = "/detail/{provinceId}/{cityId}/{districtId}")
+    ResponseEntity<AreaDetailVO> detail(
         @PathVariable(value = "provinceId") Long provinceId,
         @PathVariable(value = "cityId") Long cityId,
         @PathVariable(value = "districtId") Long districtId

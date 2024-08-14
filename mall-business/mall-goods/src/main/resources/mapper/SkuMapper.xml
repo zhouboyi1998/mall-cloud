@@ -34,6 +34,7 @@
             #{skuId}
         </foreach>
         AND status &lt;&gt; 1
+        AND is_deleted = 0
     </select>
 
 </mapper>

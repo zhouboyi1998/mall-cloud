@@ -1,5 +1,6 @@
 package com.cafe.common.util.tree;
 
+import com.cafe.common.constant.model.DefaultValueConstant;
 import com.cafe.common.lang.tree.Tree;
 
 import java.util.List;
@@ -16,7 +17,25 @@ import java.util.stream.Collectors;
 public class TreeUtil {
 
     /**
-     * 构建树形结构
+     * 构建树形节点
+     *
+     * @param nodeList 节点列表
+     * @param id       节点ID
+     * @param <T>
+     * @return
+     */
+    public static <T extends Tree> Tree buildTreeNode(List<T> nodeList, Long id) {
+        return nodeList.stream()
+            // 筛选出指定节点
+            .filter(node -> Objects.equals(node.getId(), id))
+            // 为指定节点组装子节点树
+            .map(node -> node.setChildren(buildSubtree(node, nodeList)))
+            .findFirst()
+            .orElse(new Tree());
+    }
+
+    /**
+     * 构建树形列表
      *
      * @param nodeList 节点列表
      * @param <T>
@@ -25,14 +44,14 @@ public class TreeUtil {
     public static <T extends Tree> List<Tree> buildTreeList(List<T> nodeList) {
         return nodeList.stream()
             // 筛选出所有一级节点
-            .filter(node -> Objects.equals(node.getParentId(), 0L))
+            .filter(node -> Objects.equals(node.getParentId(), DefaultValueConstant.DEFAULT_PARENT_ID_LONG))
             // 为所有一级节点组装子节点树
             .map(node -> node.setChildren(buildSubtree(node, nodeList)))
             .collect(Collectors.toList());
     }
 
     /**
-     * 构建树形结构
+     * 构建树形列表
      *
      * @param nodeList 节点列表
      * @param parentId 父节点ID
@@ -46,24 +65,6 @@ public class TreeUtil {
             // 为所有筛选出来的节点组装子节点树
             .map(node -> node.setChildren(buildSubtree(node, nodeList)))
             .collect(Collectors.toList());
-    }
-
-    /**
-     * 构建树形结构
-     *
-     * @param nodeList 节点列表
-     * @param id       节点ID
-     * @param <T>
-     * @return
-     */
-    public static <T extends Tree> Tree buildTree(List<T> nodeList, Long id) {
-        return nodeList.stream()
-            // 筛选出指定节点
-            .filter(node -> Objects.equals(node.getId(), id))
-            // 为指定节点组装子节点树
-            .map(node -> node.setChildren(buildSubtree(node, nodeList)))
-            .findFirst()
-            .orElse(new Tree());
     }
 
     /**
