@@ -200,8 +200,8 @@ public class MenuController {
         return ResponseEntity.ok(code);
     }
 
-    @ApiLogPrint(value = "根据权限列表查询菜单树")
-    @ApiOperation(value = "根据权限列表查询菜单树")
+    @ApiLogPrint(value = "根据权限列表查询菜单树列表")
+    @ApiOperation(value = "根据权限列表查询菜单树列表")
     @GetMapping(value = "/tree-list")
     public ResponseEntity<List<Tree>> treeList(
         @ModelAttribute(value = RequestConstant.ModelAttribute.USER_DETAILS) UserDetails userDetails

@@ -26,6 +26,6 @@ public interface RoleFeign {
      * @param userId
      * @return
      */
-    @GetMapping(value = "/list/name/{userId}")
-    ResponseEntity<List<String>> listRoleName(@PathVariable(value = "userId") Long userId);
+    @GetMapping(value = "/name-list/{userId}")
+    ResponseEntity<List<String>> nameList(@PathVariable(value = "userId") Long userId);
 }

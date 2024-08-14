@@ -5,13 +5,13 @@
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.cafe.user.model.Menu">
         <id column="id" property="id" />
+        <result column="parent_id" property="parentId" />
         <result column="platform_id" property="platformId" />
         <result column="menu_name" property="menuName" />
         <result column="menu_title" property="menuTitle" />
         <result column="menu_icon" property="menuIcon" />
         <result column="menu_path" property="menuPath" />
-        <result column="parent_id" property="parentId" />
-        <result column="menu_level" property="menuLevel" />
+        <result column="level" property="level" />
         <result column="sort" property="sort" />
         <result column="status" property="status" />
         <result column="create_time" property="createTime" />
@@ -20,7 +20,8 @@
     </resultMap>
 
     <select id="selectTreeVOList" resultType="com.cafe.user.vo.MenuTreeVO">
-        SELECT DISTINCT m.id, m.platform_id, m.menu_name, m.menu_title, m.menu_icon, m.menu_path, m.parent_id, m.menu_level, m.sort, m.status
+        SELECT DISTINCT m.id, m.parent_id, m.platform_id, m.menu_name, m.menu_title, m.menu_icon, m.menu_path,
+        m.level, m.sort, m.status
         FROM mall_menu AS m
         LEFT JOIN mall_role_menu AS rm ON rm.menu_id = m.id
         LEFT JOIN mall_role AS r ON r.id = rm.role_id
@@ -29,6 +30,7 @@
             #{authority}
         </foreach>
         AND m.status = 1
+        AND m.is_deleted = 0
         ORDER BY m.sort
     </select>
 

@@ -2,8 +2,8 @@ package com.cafe.foundation.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cafe.common.lang.tree.Tree;
-import com.cafe.foundation.dto.AreaDTO;
 import com.cafe.foundation.model.Area;
+import com.cafe.foundation.vo.AreaDetailVO;
 
 import java.util.List;
 
@@ -17,19 +17,20 @@ import java.util.List;
 public interface AreaService extends IService<Area> {
 
     /**
-     * 根据省份id、城市id、区县id获取区域
+     * 根据省份id、城市id、区县id获取区域详情
      *
      * @param provinceId
      * @param cityId
      * @param districtId
      * @return
      */
-    AreaDTO dto(Long provinceId, Long cityId, Long districtId);
+    AreaDetailVO detail(Long provinceId, Long cityId, Long districtId);
 
     /**
-     * 查询区域树
+     * 根据条件查询区域树列表
      *
+     * @param area
      * @return
      */
-    List<Tree> treeList();
+    List<Tree> treeList(Area area);
 }

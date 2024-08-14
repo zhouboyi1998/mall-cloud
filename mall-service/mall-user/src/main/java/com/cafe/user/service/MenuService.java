@@ -16,7 +16,7 @@ import java.util.List;
 public interface MenuService extends IService<Menu> {
 
     /**
-     * 根据权限列表查询菜单树
+     * 根据权限列表查询菜单树列表
      *
      * @param authorities 权限列表
      * @return

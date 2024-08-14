@@ -1,4 +1,4 @@
-package com.cafe.foundation.dto;
+package com.cafe.foundation.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -13,13 +13,13 @@ import java.io.Serializable;
  * @Package: com.cafe.foundation.dto
  * @Author: zhouboyi
  * @Date: 2023/10/27 16:55
- * @Description: 区域传输模型
+ * @Description: 区域详情视图模型
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "AreaDTO", description = "区域传输模型")
-public class AreaDTO implements Serializable {
+@ApiModel(value = "AreaDetailVO", description = "区域详情视图模型")
+public class AreaDetailVO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

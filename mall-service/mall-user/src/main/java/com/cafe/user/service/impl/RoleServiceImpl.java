@@ -27,7 +27,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
-    public List<String> listRoleName(Long userId) {
-        return roleMapper.listRoleName(userId);
+    public List<String> nameList(Long userId) {
+        return roleMapper.nameList(userId);
     }
 }

@@ -30,15 +30,15 @@ public class CategoryTreeVO extends Tree implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
-    @ApiModelProperty(value = "分类名称")
-    private String categoryName;
-
     @ApiModelProperty(value = "上级分类ID")
     @JsonSerialize(using = ToStringSerializer.class)
     private Long parentId;
 
-    @ApiModelProperty(value = "分类等级: 1 一级分类, 2 二级分类, 3 三级分类")
-    private Integer categoryLevel;
+    @ApiModelProperty(value = "分类名称")
+    private String categoryName;
+
+    @ApiModelProperty(value = "分类层级: 1 一级分类, 2 二级分类, 3 三级分类")
+    private Integer level;
 
     @ApiModelProperty(value = "排序号")
     private Integer sort;

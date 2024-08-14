@@ -1,10 +1,10 @@
 package com.cafe.goods.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.cafe.common.core.exception.BusinessException;
+import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.common.lang.tree.Tree;
-import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.common.util.tree.TreeUtil;
-import com.cafe.goods.converter.CategoryConverter;
 import com.cafe.goods.mapper.CategoryMapper;
 import com.cafe.goods.model.Category;
 import com.cafe.goods.service.CategoryService;
@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @Project: mall-cloud
@@ -32,21 +33,20 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     }
 
     @Override
-    public List<Tree> treeList() {
-        List<Category> categoryList = categoryMapper.selectList(WrapperUtil.emptyQueryWrapper());
-        List<CategoryTreeVO> treeVOList = CategoryConverter.INSTANCE.toTreeVOList(categoryList);
-        return TreeUtil.buildTreeList(treeVOList);
+    public Tree treeNode(Category category) {
+        if (Objects.isNull(category.getId())) {
+            throw new BusinessException(HttpStatusEnum.FAIL.value(), "分类id不允许为空", category);
+        }
+        List<CategoryTreeVO> treeList = categoryMapper.selectTreeVOList(category);
+        return TreeUtil.buildTreeNode(treeList, category.getId());
     }
 
     @Override
-    public List<Tree> treeList(Long parentId) {
-        List<CategoryTreeVO> treeVOList = categoryMapper.selectTreeList(parentId);
-        return TreeUtil.buildTreeList(treeVOList, parentId);
-    }
-
-    @Override
-    public Tree tree(Long id) {
-        List<CategoryTreeVO> treeVOList = categoryMapper.selectTree(id);
-        return TreeUtil.buildTree(treeVOList, id);
+    public List<Tree> treeList(Category category) {
+        if (Objects.isNull(category.getParentId())) {
+            throw new BusinessException(HttpStatusEnum.FAIL.value(), "上级分类id不允许为空", category);
+        }
+        List<CategoryTreeVO> treeList = categoryMapper.selectTreeVOList(category);
+        return TreeUtil.buildTreeList(treeList, category.getParentId());
     }
 }

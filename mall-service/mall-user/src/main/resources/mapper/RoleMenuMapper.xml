@@ -20,7 +20,7 @@
         <collection property="roleNameList" resultMap="RoleNameListMap" javaType="java.util.List" />
     </resultMap>
 
-    <select id="listMenuRoleBO" resultMap="MenuRoleBOMap">
+    <select id="menuRoleBOList" resultMap="MenuRoleBOMap">
         SELECT m.menu_path, r.role_name
         FROM mall_menu AS m
         LEFT JOIN mall_role_menu AS rm ON rm.menu_id = m.id
@@ -31,8 +31,10 @@
                 <foreach collection="menuIds" item="menuId" open="(" close=")" separator=",">
                     #{menuId}
                 </foreach>
-                OR ISNULL(r.role_name)
             </if>
+            AND m.is_deleted = 0
+            AND r.is_deleted = 0
+            OR ISNULL(r.role_name)
         </where>
     </select>
 

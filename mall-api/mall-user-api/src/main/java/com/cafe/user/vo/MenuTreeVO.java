@@ -30,6 +30,10 @@ public class MenuTreeVO extends Tree implements Serializable {
     @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
+    @ApiModelProperty(value = "上级菜单ID")
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long parentId;
+
     @ApiModelProperty(value = "平台ID")
     @JsonSerialize(using = ToStringSerializer.class)
     private Long platformId;
@@ -46,12 +50,8 @@ public class MenuTreeVO extends Tree implements Serializable {
     @ApiModelProperty(value = "菜单路径")
     private String menuPath;
 
-    @ApiModelProperty(value = "上级菜单ID")
-    @JsonSerialize(using = ToStringSerializer.class)
-    private Long parentId;
-
-    @ApiModelProperty(value = "菜单等级: 1 一级菜单, 2 二级菜单, 3 三级菜单")
-    private Integer menuLevel;
+    @ApiModelProperty(value = "菜单层级: 1 一级菜单, 2 二级菜单, 3 三级菜单")
+    private Integer level;
 
     @ApiModelProperty(value = "排序号")
     private Integer sort;

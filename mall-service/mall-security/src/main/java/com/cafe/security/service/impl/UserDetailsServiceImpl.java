@@ -61,7 +61,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
             .orElseThrow(() -> new UsernameNotFoundException(HttpStatusEnum.USERNAME_NOT_FOUND.getReasonPhrase()));
 
         // 根据用户id查询角色名称列表
-        String[] roleNameArray = Optional.ofNullable(roleFeign.listRoleName(user.getId()))
+        String[] roleNameArray = Optional.ofNullable(roleFeign.nameList(user.getId()))
             .map(ResponseEntity::getBody)
             .map(roleNameList -> roleNameList.toArray(new String[0]))
             .orElseThrow(() -> new UsernameNotFoundException(HttpStatusEnum.ROLE_UNASSIGNED.getReasonPhrase()));
@@ -85,7 +85,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
             .orElseThrow(() -> new MobileNotFoundException(HttpStatusEnum.MOBILE_NOT_FOUND.getReasonPhrase()));
 
         // 根据用户id查询角色名称列表
-        String[] roleNameArray = Optional.ofNullable(roleFeign.listRoleName(user.getId()))
+        String[] roleNameArray = Optional.ofNullable(roleFeign.nameList(user.getId()))
             .map(ResponseEntity::getBody)
             .map(roleNameList -> roleNameList.toArray(new String[0]))
             .orElseThrow(() -> new MobileNotFoundException(HttpStatusEnum.ROLE_UNASSIGNED.getReasonPhrase()));
@@ -109,7 +109,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
             .orElseThrow(() -> new EmailNotFoundException(HttpStatusEnum.EMAIL_NOT_FOUND.getReasonPhrase()));
 
         // 根据用户id查询角色名称列表
-        String[] roleNameArray = Optional.ofNullable(roleFeign.listRoleName(user.getId()))
+        String[] roleNameArray = Optional.ofNullable(roleFeign.nameList(user.getId()))
             .map(ResponseEntity::getBody)
             .map(roleNameList -> roleNameList.toArray(new String[0]))
             .orElseThrow(() -> new EmailNotFoundException(HttpStatusEnum.ROLE_UNASSIGNED.getReasonPhrase()));
