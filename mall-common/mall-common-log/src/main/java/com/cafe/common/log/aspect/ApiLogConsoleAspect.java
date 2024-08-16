@@ -73,14 +73,14 @@ public class ApiLogConsoleAspect {
         MDC.put(FieldConstant.REQUEST_ID, String.valueOf(requestId));
 
         // 获取进入连接点之前的时间
-        Long startTime = System.currentTimeMillis();
+        Long startTime = System.nanoTime();
         // 进入连接点 (执行目标方法, 获取目标方法的响应结果)
         Object result = proceedingJoinPoint.proceed();
         // 计算执行耗时
-        Long duration = System.currentTimeMillis() - startTime;
+        Long duration = System.nanoTime() - startTime;
 
         // 打印执行耗时
-        LOGGER.info("@Around -> Duration: {} ms", duration);
+        LOGGER.info("@Around -> Duration: {} ns", duration);
         // 返回目标方法的响应结果
         return result;
     }
