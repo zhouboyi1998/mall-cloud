@@ -2,7 +2,7 @@ package com.cafe.security.provider;
 
 import com.cafe.common.util.codec.RSAUtil;
 import com.cafe.security.service.UserDetailsExtensionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -21,6 +21,7 @@ import java.security.interfaces.RSAPrivateKey;
  * @Date: 2023/3/9 16:13
  * @Description: 用户名密码认证提供器
  */
+@RequiredArgsConstructor
 public class UsernamePasswordAuthenticationProvider implements AuthenticationProvider {
 
     /**
@@ -37,17 +38,6 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
      * 密钥对
      */
     private final KeyPair keyPair;
-
-    @Autowired
-    public UsernamePasswordAuthenticationProvider(
-        UserDetailsExtensionService userDetailsExtensionService,
-        PasswordEncoder passwordEncoder,
-        KeyPair keyPair
-    ) {
-        this.userDetailsExtensionService = userDetailsExtensionService;
-        this.passwordEncoder = passwordEncoder;
-        this.keyPair = keyPair;
-    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

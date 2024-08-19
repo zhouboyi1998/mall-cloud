@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.storage.mapper.StorageMapper;
 import com.cafe.storage.model.Storage;
 import com.cafe.storage.service.StorageService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,13 +14,9 @@ import org.springframework.stereotype.Service;
  * @Date: 2022-12-29
  * @Description: 仓库业务实现类
  */
+@RequiredArgsConstructor
 @Service
 public class StorageServiceImpl extends ServiceImpl<StorageMapper, Storage> implements StorageService {
 
     private final StorageMapper storageMapper;
-
-    @Autowired
-    public StorageServiceImpl(StorageMapper storageMapper) {
-        this.storageMapper = storageMapper;
-    }
 }

@@ -7,7 +7,7 @@ import com.cafe.user.mapper.MenuMapper;
 import com.cafe.user.model.Menu;
 import com.cafe.user.service.MenuService;
 import com.cafe.user.vo.MenuTreeVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,15 +19,11 @@ import java.util.List;
  * @Date: 2022-05-09
  * @Description: 菜单业务实现类
  */
+@RequiredArgsConstructor
 @Service
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements MenuService {
 
     private final MenuMapper menuMapper;
-
-    @Autowired
-    public MenuServiceImpl(MenuMapper menuMapper) {
-        this.menuMapper = menuMapper;
-    }
 
     @Override
     public List<Tree> treeList(List<String> authorities) {

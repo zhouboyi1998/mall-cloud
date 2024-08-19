@@ -10,7 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,16 +31,12 @@ import java.util.List;
  * @Description: 品牌接口
  */
 @Api(value = "品牌接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/brand")
 public class BrandController {
 
     private final BrandService brandService;
-
-    @Autowired
-    public BrandController(BrandService brandService) {
-        this.brandService = brandService;
-    }
 
     @ApiLogPrint(value = "查询品牌数量")
     @ApiOperation(value = "查询品牌数量")

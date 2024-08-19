@@ -6,7 +6,7 @@ import com.cafe.security.provider.EmailPasswordAuthenticationProvider;
 import com.cafe.security.provider.MobilePasswordAuthenticationProvider;
 import com.cafe.security.provider.UsernamePasswordAuthenticationProvider;
 import com.cafe.security.service.UserDetailsExtensionService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,6 +29,7 @@ import java.security.KeyPair;
  * @Date: 2022/5/10 22:17
  * @Description: Web 安全配置
  */
+@RequiredArgsConstructor
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -42,15 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * RSA 证书配置
      */
     private final RSACredentialProperties rsaCredentialProperties;
-
-    @Autowired
-    public WebSecurityConfig(
-        UserDetailsExtensionService userDetailsExtensionService,
-        RSACredentialProperties rsaCredentialProperties
-    ) {
-        this.userDetailsExtensionService = userDetailsExtensionService;
-        this.rsaCredentialProperties = rsaCredentialProperties;
-    }
 
     /**
      * 密码编码器 (SCrypt)

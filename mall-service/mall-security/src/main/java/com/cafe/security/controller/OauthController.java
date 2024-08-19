@@ -7,7 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,29 +26,17 @@ import java.util.Map;
  * @Description: 登录认证接口
  */
 @Api(value = "登录认证接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/oauth")
 public class OauthController {
 
     private final OauthService oauthService;
 
-    @Autowired
-    public OauthController(OauthService oauthService) {
-        this.oauthService = oauthService;
-    }
-
-    /**
-     * Oauth2 登录认证
-     *
-     * @param principal
-     * @param parameters
-     * @return
-     * @throws HttpRequestMethodNotSupportedException
-     */
     @ApiLogPrint(value = "Oauth2 登录认证")
     @ApiOperation(value = "Oauth2 登录认证")
     @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "授权模式", name = "grant_type", dataType = "String", paramType = "form", required = true, allowableValues = "password, refresh_token, captcha"),
+        @ApiImplicitParam(value = "授权模式", name = "grant_type", dataType = "String", paramType = "form", required = true, allowableValues = "password, refresh_token, captcha, mobile, email"),
         @ApiImplicitParam(value = "客户端id", name = "client_id", dataType = "String", paramType = "form", required = true),
         @ApiImplicitParam(value = "客户端密钥", name = "client_secret", dataType = "String", paramType = "form", required = true),
         @ApiImplicitParam(value = "用户名", name = "username", dataType = "String", paramType = "form"),

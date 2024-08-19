@@ -3,9 +3,9 @@ package com.cafe.canal.handler;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.cafe.canal.property.CanalProperties;
 import com.google.protobuf.InvalidProtocolBufferException;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,6 +17,7 @@ import java.util.List;
  * @Date: 2022/7/14 0:12
  * @Description: Canal 处理器入口
  */
+@RequiredArgsConstructor
 @Component
 public class CanalEntryHandler {
 
@@ -27,17 +28,6 @@ public class CanalEntryHandler {
     private final RabbitMQContentHandler rabbitMQContentHandler;
 
     private final RocketMQContentHandler rocketMQContentHandler;
-
-    @Autowired
-    public CanalEntryHandler(
-        CanalProperties canalProperties,
-        RabbitMQContentHandler rabbitMQContentHandler,
-        RocketMQContentHandler rocketMQContentHandler
-    ) {
-        this.canalProperties = canalProperties;
-        this.rabbitMQContentHandler = rabbitMQContentHandler;
-        this.rocketMQContentHandler = rocketMQContentHandler;
-    }
 
     /**
      * 获取 Canal Server 解析 Binlog 得到的信息

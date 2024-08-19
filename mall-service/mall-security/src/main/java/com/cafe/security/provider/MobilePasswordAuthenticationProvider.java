@@ -3,7 +3,7 @@ package com.cafe.security.provider;
 import com.cafe.common.util.codec.RSAUtil;
 import com.cafe.security.service.UserDetailsExtensionService;
 import com.cafe.security.token.MobilePasswordAuthenticationToken;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
@@ -21,6 +21,7 @@ import java.security.interfaces.RSAPrivateKey;
  * @Date: 2023/3/10 11:00
  * @Description: 手机号密码认证提供器
  */
+@RequiredArgsConstructor
 public class MobilePasswordAuthenticationProvider implements AuthenticationProvider {
 
     /**
@@ -37,17 +38,6 @@ public class MobilePasswordAuthenticationProvider implements AuthenticationProvi
      * 密钥对
      */
     private final KeyPair keyPair;
-
-    @Autowired
-    public MobilePasswordAuthenticationProvider(
-        UserDetailsExtensionService userDetailsExtensionService,
-        PasswordEncoder passwordEncoder,
-        KeyPair keyPair
-    ) {
-        this.userDetailsExtensionService = userDetailsExtensionService;
-        this.passwordEncoder = passwordEncoder;
-        this.keyPair = keyPair;
-    }
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {

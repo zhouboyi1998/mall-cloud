@@ -6,7 +6,7 @@ import com.cafe.ordercenter.service.OrderCenterService;
 import com.xxl.job.core.biz.model.ReturnT;
 import com.xxl.job.core.context.XxlJobHelper;
 import com.xxl.job.core.handler.annotation.XxlJob;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -19,15 +19,11 @@ import java.time.format.DateTimeFormatter;
  * @Date: 2023/10/30 14:51
  * @Description: 订单中心 XXL-JOB 定时任务
  */
+@RequiredArgsConstructor
 @Component
 public class OrderCenterScheduler {
 
     private final OrderCenterService orderCenterService;
-
-    @Autowired
-    public OrderCenterScheduler(OrderCenterService orderCenterService) {
-        this.orderCenterService = orderCenterService;
-    }
 
     /**
      * 定时取消超时未支付的订单

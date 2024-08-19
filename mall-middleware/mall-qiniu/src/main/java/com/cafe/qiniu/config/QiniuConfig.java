@@ -5,7 +5,7 @@ import com.cafe.qiniu.property.QiniuProperties;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,15 +16,11 @@ import org.springframework.context.annotation.Configuration;
  * @Date: 2023/10/18 17:41
  * @Description: 七牛云配置类
  */
+@RequiredArgsConstructor
 @Configuration
 public class QiniuConfig {
 
     private final QiniuProperties qiniuProperties;
-
-    @Autowired
-    public QiniuConfig(QiniuProperties qiniuProperties) {
-        this.qiniuProperties = qiniuProperties;
-    }
 
     /**
      * 七牛云授权管理器

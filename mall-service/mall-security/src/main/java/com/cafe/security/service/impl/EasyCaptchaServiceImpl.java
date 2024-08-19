@@ -7,7 +7,7 @@ import com.cafe.id.feign.IDFeign;
 import com.cafe.security.model.Captcha;
 import com.cafe.security.service.CaptchaService;
 import com.wf.captcha.SpecCaptcha;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -20,18 +20,13 @@ import java.util.concurrent.TimeUnit;
  * @Date: 2023/2/24 23:42
  * @Description: Easy Captcha 图片验证码业务实现类
  */
+@RequiredArgsConstructor
 @Service(value = "easyCaptchaServiceImpl")
 public class EasyCaptchaServiceImpl implements CaptchaService {
 
     private final IDFeign idFeign;
 
     private final RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    public EasyCaptchaServiceImpl(IDFeign idFeign, RedisTemplate<String, Object> redisTemplate) {
-        this.idFeign = idFeign;
-        this.redisTemplate = redisTemplate;
-    }
 
     @Override
     public Captcha one() {

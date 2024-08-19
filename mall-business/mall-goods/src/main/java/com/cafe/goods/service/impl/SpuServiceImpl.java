@@ -11,7 +11,7 @@ import com.cafe.goods.model.Sku;
 import com.cafe.goods.model.Spu;
 import com.cafe.goods.service.SpuService;
 import com.cafe.goods.vo.SpuVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,18 +24,13 @@ import java.util.Objects;
  * @Date: 2022-05-09
  * @Description: 标准化产品单元业务实现类
  */
+@RequiredArgsConstructor
 @Service
 public class SpuServiceImpl extends ServiceImpl<SpuMapper, Spu> implements SpuService {
 
     private final SpuMapper spuMapper;
 
     private final SkuMapper skuMapper;
-
-    @Autowired
-    public SpuServiceImpl(SpuMapper spuMapper, SkuMapper skuMapper) {
-        this.spuMapper = spuMapper;
-        this.skuMapper = skuMapper;
-    }
 
     @Override
     public SpuVO vo(Long skuId) {

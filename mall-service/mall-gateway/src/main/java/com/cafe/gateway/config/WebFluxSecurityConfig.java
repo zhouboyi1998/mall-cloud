@@ -6,7 +6,7 @@ import com.cafe.gateway.authorization.AuthorizationManager;
 import com.cafe.gateway.authorization.OauthServerAccessDeniedHandler;
 import com.cafe.gateway.filter.WhitelistWebFilter;
 import com.cafe.gateway.property.SecurityProperties;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
@@ -30,6 +30,7 @@ import reactor.core.publisher.Mono;
  * @Date: 2022/5/10 22:57
  * @Description: WebFlux 安全配置
  */
+@RequiredArgsConstructor
 @Configuration
 @EnableWebFluxSecurity
 public class WebFluxSecurityConfig {
@@ -63,23 +64,6 @@ public class WebFluxSecurityConfig {
      * 未授权处理器
      */
     private final OauthServerAccessDeniedHandler oauthServerAccessDeniedHandler;
-
-    @Autowired
-    public WebFluxSecurityConfig(
-        CorsWebFilter corsWebFilter,
-        WhitelistWebFilter whitelistWebFilter,
-        SecurityProperties securityProperties,
-        AuthorizationManager authorizationManager,
-        OauthServerAuthenticationEntryPoint oauthServerAuthenticationEntryPoint,
-        OauthServerAccessDeniedHandler oauthServerAccessDeniedHandler
-    ) {
-        this.corsWebFilter = corsWebFilter;
-        this.whitelistWebFilter = whitelistWebFilter;
-        this.securityProperties = securityProperties;
-        this.authorizationManager = authorizationManager;
-        this.oauthServerAuthenticationEntryPoint = oauthServerAuthenticationEntryPoint;
-        this.oauthServerAccessDeniedHandler = oauthServerAccessDeniedHandler;
-    }
 
     @Bean
     public SecurityWebFilterChain webFluxSecurityFilterChain(ServerHttpSecurity http) {

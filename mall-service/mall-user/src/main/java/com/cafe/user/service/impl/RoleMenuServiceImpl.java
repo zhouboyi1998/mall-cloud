@@ -7,7 +7,7 @@ import com.cafe.user.bo.MenuRoleBO;
 import com.cafe.user.mapper.RoleMenuMapper;
 import com.cafe.user.model.RoleMenu;
 import com.cafe.user.service.RoleMenuService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -25,21 +25,13 @@ import java.util.stream.Collectors;
  * @Date: 2022-05-09
  * @Description: 角色-菜单关联关系业务实现类
  */
+@RequiredArgsConstructor
 @Service
 public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> implements RoleMenuService {
 
     private final RoleMenuMapper roleMenuMapper;
 
     private final RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    public RoleMenuServiceImpl(
-        RoleMenuMapper roleMenuMapper,
-        RedisTemplate<String, Object> redisTemplate
-    ) {
-        this.roleMenuMapper = roleMenuMapper;
-        this.redisTemplate = redisTemplate;
-    }
 
     @Override
     public List<MenuRoleBO> menuRoleBOList(List<Long> menuIds) {

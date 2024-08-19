@@ -2,7 +2,7 @@ package com.cafe.id.service.impl;
 
 import com.cafe.common.lang.id.Snowflake;
 import com.cafe.id.service.IDService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,15 +12,11 @@ import org.springframework.stereotype.Service;
  * @Date: 2022/10/31 17:02
  * @Description:
  */
+@RequiredArgsConstructor
 @Service(value = "snowflakeIDServiceImpl")
 public class SnowflakeIDServiceImpl implements IDService {
 
     private final Snowflake snowflake;
-
-    @Autowired
-    public SnowflakeIDServiceImpl(Snowflake snowflake) {
-        this.snowflake = snowflake;
-    }
 
     @Override
     public Long nextId() {

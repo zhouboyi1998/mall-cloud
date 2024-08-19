@@ -3,7 +3,7 @@ package com.cafe.canal.handler;
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.cafe.common.constant.rabbitmq.RabbitMQConstant;
 import com.cafe.common.rabbitmq.producer.RabbitMQProducer;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -16,21 +16,13 @@ import java.util.Map;
  * @Date: 2022/7/15 9:52
  * @Description: RabbitMQ 消息内容处理器
  */
+@RequiredArgsConstructor
 @Component
 public class RabbitMQContentHandler {
 
     private final MessageContentHandler messageContentHandler;
 
     private final RabbitMQProducer rabbitMQProducer;
-
-    @Autowired
-    public RabbitMQContentHandler(
-        MessageContentHandler messageContentHandler,
-        RabbitMQProducer rabbitMQProducer
-    ) {
-        this.messageContentHandler = messageContentHandler;
-        this.rabbitMQProducer = rabbitMQProducer;
-    }
 
     public void handle(String tableName, List<CanalEntry.RowData> rowDataList, CanalEntry.EventType eventType) {
         // 组装消息

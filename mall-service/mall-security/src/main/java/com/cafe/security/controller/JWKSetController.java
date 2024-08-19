@@ -4,7 +4,7 @@ import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.security.service.JWKSetService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,16 +20,12 @@ import java.util.Map;
  * @Description: JWKSet 接口
  */
 @Api(value = "JWKSet 接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/jwk-set")
 public class JWKSetController {
 
     private final JWKSetService jwkSetService;
-
-    @Autowired
-    public JWKSetController(JWKSetService jwkSetService) {
-        this.jwkSetService = jwkSetService;
-    }
 
     @ApiLogPrint(value = "获取 RSA JWKSet")
     @ApiOperation(value = "获取 RSA JWKSet")

@@ -7,7 +7,7 @@ import com.cafe.security.property.CaptchaProperties;
 import com.cafe.security.service.CaptchaService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description: 图片验证码接口
  */
 @Api(value = "图片验证码接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/captcha")
 public class CaptchaController {
@@ -29,21 +30,15 @@ public class CaptchaController {
 
     private final CaptchaProperties captchaProperties;
 
-    @Autowired
-    public CaptchaController(CaptchaServiceStrategy captchaServiceStrategy, CaptchaProperties captchaProperties) {
-        this.captchaServiceStrategy = captchaServiceStrategy;
-        this.captchaProperties = captchaProperties;
-    }
-
-    private CaptchaService getCaptchaService() {
-        return captchaServiceStrategy.getCaptchaService(captchaProperties.getService().getImplementation());
+    private CaptchaService captchaService() {
+        return captchaServiceStrategy.captchaService(captchaProperties.getService().getImplementation());
     }
 
     @ApiLogPrint(value = "获取图片验证码")
     @ApiOperation(value = "获取图片验证码")
     @GetMapping(value = "/one")
     public ResponseEntity<Captcha> one() {
-        Captcha one = getCaptchaService().one();
+        Captcha one = captchaService().one();
         return ResponseEntity.ok(one);
     }
 }

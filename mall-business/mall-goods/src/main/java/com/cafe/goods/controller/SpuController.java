@@ -11,7 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,16 +32,12 @@ import java.util.List;
  * @Description: 标准化产品单元接口
  */
 @Api(value = "标准化产品单元接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/spu")
 public class SpuController {
 
     private final SpuService spuService;
-
-    @Autowired
-    public SpuController(SpuService spuService) {
-        this.spuService = spuService;
-    }
 
     @ApiLogPrint(value = "查询标准化产品单元数量")
     @ApiOperation(value = "查询标准化产品单元数量")

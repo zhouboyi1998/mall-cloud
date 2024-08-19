@@ -11,7 +11,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,16 +32,12 @@ import java.util.List;
  * @Description: 库存接口
  */
 @Api(value = "库存接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/stock")
 public class StockController {
 
     private final StockService stockService;
-
-    @Autowired
-    public StockController(StockService stockService) {
-        this.stockService = stockService;
-    }
 
     @ApiLogPrint(value = "查询库存数量")
     @ApiOperation(value = "查询库存数量")

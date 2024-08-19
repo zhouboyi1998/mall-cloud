@@ -3,8 +3,8 @@ package com.cafe.solr.service.impl;
 import com.cafe.common.constant.solr.SolrConstant;
 import com.cafe.solr.index.GoodsIndex;
 import com.cafe.solr.service.GoodsIndexService;
+import lombok.RequiredArgsConstructor;
 import org.apache.solr.common.SolrException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.stereotype.Service;
 
@@ -17,15 +17,11 @@ import java.util.List;
  * @Date: 2022/10/26 15:18
  * @Description: 商品全文索引业务实现类
  */
+@RequiredArgsConstructor
 @Service
 public class GoodsIndexServiceImpl implements GoodsIndexService {
 
     private final SolrTemplate solrTemplate;
-
-    @Autowired
-    public GoodsIndexServiceImpl(SolrTemplate solrTemplate) {
-        this.solrTemplate = solrTemplate;
-    }
 
     @Override
     public GoodsIndex one(String id) {

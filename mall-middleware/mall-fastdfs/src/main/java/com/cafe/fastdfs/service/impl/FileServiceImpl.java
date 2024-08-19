@@ -4,12 +4,12 @@ import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.fastdfs.bo.FileBO;
 import com.cafe.fastdfs.property.FastDFSProperties;
 import com.cafe.fastdfs.service.FileService;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.csource.fastdfs.FileInfo;
 import org.csource.fastdfs.StorageClient;
 import org.csource.fastdfs.TrackerClient;
 import org.csource.fastdfs.TrackerServer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,15 +24,11 @@ import javax.servlet.http.HttpServletResponse;
  * @Date: 2022/7/23 19:36
  * @Description:
  */
+@RequiredArgsConstructor
 @Service
 public class FileServiceImpl implements FileService {
 
     private final FastDFSProperties fastDFSProperties;
-
-    @Autowired
-    public FileServiceImpl(FastDFSProperties fastDFSProperties) {
-        this.fastDFSProperties = fastDFSProperties;
-    }
 
     @SneakyThrows
     @Override

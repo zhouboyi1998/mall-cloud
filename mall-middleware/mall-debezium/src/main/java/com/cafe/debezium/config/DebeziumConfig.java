@@ -10,8 +10,8 @@ import io.debezium.embedded.Connect;
 import io.debezium.engine.DebeziumEngine;
 import io.debezium.engine.RecordChangeEvent;
 import io.debezium.engine.format.ChangeEventFormat;
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.connect.source.SourceRecord;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,18 +22,13 @@ import org.springframework.context.annotation.Configuration;
  * @Date: 2023/4/21 16:22
  * @Description: Debezium 配置类
  */
+@RequiredArgsConstructor
 @Configuration
 public class DebeziumConfig {
 
     private final DebeziumEntryHandler debeziumEntryHandler;
 
     private final DebeziumProperties debeziumProperties;
-
-    @Autowired
-    public DebeziumConfig(DebeziumEntryHandler debeziumEntryHandler, DebeziumProperties debeziumProperties) {
-        this.debeziumEntryHandler = debeziumEntryHandler;
-        this.debeziumProperties = debeziumProperties;
-    }
 
     /**
      * Debezium 配置 (MySQL)

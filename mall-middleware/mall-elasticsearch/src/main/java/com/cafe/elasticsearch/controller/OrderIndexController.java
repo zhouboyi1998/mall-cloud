@@ -6,12 +6,12 @@ import com.cafe.elasticsearch.service.OrderIndexService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.update.UpdateResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,16 +32,12 @@ import java.util.List;
  * @Description: 订单全文索引接口
  */
 @Api(value = "订单全文索引接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/order-index")
 public class OrderIndexController {
 
     private final OrderIndexService orderIndexService;
-
-    @Autowired
-    public OrderIndexController(OrderIndexService orderIndexService) {
-        this.orderIndexService = orderIndexService;
-    }
 
     @ApiLogPrint(value = "获取订单索引")
     @ApiOperation(value = "获取订单索引")

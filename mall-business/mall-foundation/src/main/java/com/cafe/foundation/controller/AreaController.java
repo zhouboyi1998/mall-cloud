@@ -13,7 +13,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,16 +35,12 @@ import java.util.List;
  * @Description: 区域接口
  */
 @Api(value = "区域接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/area")
 public class AreaController {
 
     private final AreaService areaService;
-
-    @Autowired
-    public AreaController(AreaService areaService) {
-        this.areaService = areaService;
-    }
 
     @ApiLogPrint(value = "查询区域数量")
     @ApiOperation(value = "查询区域数量")

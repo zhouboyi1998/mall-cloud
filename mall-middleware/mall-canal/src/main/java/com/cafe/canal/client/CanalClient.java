@@ -5,10 +5,10 @@ import com.alibaba.otter.canal.client.CanalConnectors;
 import com.alibaba.otter.canal.protocol.Message;
 import com.cafe.canal.handler.CanalEntryHandler;
 import com.cafe.canal.property.CanalProperties;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
@@ -20,6 +20,7 @@ import java.net.InetSocketAddress;
  * @Date: 2022/7/13 20:53
  * @Description: Canal 客户端
  */
+@RequiredArgsConstructor
 @Component
 public class CanalClient implements InitializingBean {
 
@@ -28,15 +29,6 @@ public class CanalClient implements InitializingBean {
     private final CanalProperties canalProperties;
 
     private final CanalEntryHandler canalEntryHandler;
-
-    @Autowired
-    public CanalClient(
-        CanalProperties canalProperties,
-        CanalEntryHandler canalEntryHandler
-    ) {
-        this.canalProperties = canalProperties;
-        this.canalEntryHandler = canalEntryHandler;
-    }
 
     @Override
     public void afterPropertiesSet() {

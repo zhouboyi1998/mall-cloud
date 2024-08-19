@@ -1,9 +1,9 @@
 package com.cafe.common.kafka.producer;
 
 import com.cafe.common.util.json.JacksonUtil;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
@@ -14,17 +14,13 @@ import org.springframework.stereotype.Component;
  * @Date: 2023/4/25 11:17
  * @Description: Kafka 消息生产者
  */
+@RequiredArgsConstructor
 @Component
 public class KafkaProducer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(KafkaProducer.class);
 
     private final KafkaTemplate<String, String> kafkaTemplate;
-
-    @Autowired
-    public KafkaProducer(KafkaTemplate<String, String> kafkaTemplate) {
-        this.kafkaTemplate = kafkaTemplate;
-    }
 
     /**
      * 发送消息到 Kafka

@@ -5,6 +5,7 @@ import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.elasticsearch.index.GoodsIndex;
 import com.cafe.elasticsearch.service.GoodsIndexService;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.ObjectUtils;
 import org.elasticsearch.action.bulk.BulkRequest;
@@ -27,7 +28,6 @@ import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,15 +39,11 @@ import java.util.List;
  * @Date: 2022/7/28 9:39
  * @Description:
  */
+@RequiredArgsConstructor
 @Service
 public class GoodsIndexServiceImpl implements GoodsIndexService {
 
     private final RestHighLevelClient restHighLevelClient;
-
-    @Autowired
-    public GoodsIndexServiceImpl(RestHighLevelClient restHighLevelClient) {
-        this.restHighLevelClient = restHighLevelClient;
-    }
 
     @SneakyThrows
     @Override

@@ -4,8 +4,8 @@ import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.elasticsearch.service.ServerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.elasticsearch.action.search.SearchResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,16 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description: ElasticSearch 服务接口
  */
 @Api(value = "ElasticSearch 服务接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/server")
 public class ServerController {
 
     private final ServerService serverService;
-
-    @Autowired
-    public ServerController(ServerService serverService) {
-        this.serverService = serverService;
-    }
 
     @ApiLogPrint(value = "查询服务信息")
     @ApiOperation(value = "查询服务信息")

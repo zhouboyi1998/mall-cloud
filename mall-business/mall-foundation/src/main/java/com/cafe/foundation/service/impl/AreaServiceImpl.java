@@ -10,7 +10,7 @@ import com.cafe.foundation.model.Area;
 import com.cafe.foundation.service.AreaService;
 import com.cafe.foundation.vo.AreaDetailVO;
 import com.cafe.foundation.vo.AreaTreeVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,15 +23,11 @@ import java.util.Objects;
  * @Date: 2022-12-29
  * @Description: 区域业务实现类
  */
+@RequiredArgsConstructor
 @Service
 public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements AreaService {
 
     private final AreaMapper areaMapper;
-
-    @Autowired
-    public AreaServiceImpl(AreaMapper areaMapper) {
-        this.areaMapper = areaMapper;
-    }
 
     @Override
     public AreaDetailVO detail(Long provinceId, Long cityId, Long districtId) {

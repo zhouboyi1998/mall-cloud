@@ -1,10 +1,10 @@
 package com.cafe.merchant.service.impl;
 
-import com.cafe.merchant.model.MerchantShop;
-import com.cafe.merchant.mapper.MerchantShopMapper;
-import com.cafe.merchant.service.MerchantShopService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.cafe.merchant.mapper.MerchantShopMapper;
+import com.cafe.merchant.model.MerchantShop;
+import com.cafe.merchant.service.MerchantShopService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,13 +14,9 @@ import org.springframework.stereotype.Service;
  * @Date: 2022-12-29
  * @Description: 商家-店铺关联关系业务实现类
  */
+@RequiredArgsConstructor
 @Service
 public class MerchantShopServiceImpl extends ServiceImpl<MerchantShopMapper, MerchantShop> implements MerchantShopService {
 
     private final MerchantShopMapper merchantShopMapper;
-
-    @Autowired
-    public MerchantShopServiceImpl(MerchantShopMapper merchantShopMapper) {
-        this.merchantShopMapper = merchantShopMapper;
-    }
 }

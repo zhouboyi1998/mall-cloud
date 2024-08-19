@@ -7,7 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,16 +27,12 @@ import java.util.List;
  * @Description: 商品接口
  */
 @Api(value = "商品接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/goods")
 public class GoodsController {
 
     private final GoodsService goodsService;
-
-    @Autowired
-    public GoodsController(GoodsService goodsService) {
-        this.goodsService = goodsService;
-    }
 
     @ApiLogPrint(value = "查询商品列表")
     @ApiOperation(value = "查询商品列表")

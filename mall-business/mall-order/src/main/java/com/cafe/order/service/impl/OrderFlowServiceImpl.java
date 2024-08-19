@@ -12,7 +12,7 @@ import com.cafe.order.service.OrderFlowService;
 import com.cafe.order.service.OrderItemService;
 import com.cafe.order.service.OrderService;
 import com.cafe.order.vo.OrderVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -25,18 +25,13 @@ import java.util.List;
  * @Date: 2023/10/27 15:00
  * @Description: 订单流转业务实现类
  */
+@RequiredArgsConstructor
 @Service
 public class OrderFlowServiceImpl implements OrderFlowService {
 
     private final OrderService orderService;
 
     private final OrderItemService orderItemService;
-
-    @Autowired
-    public OrderFlowServiceImpl(OrderService orderService, OrderItemService orderItemService) {
-        this.orderService = orderService;
-        this.orderItemService = orderItemService;
-    }
 
     @Override
     public OrderVO save(OrderVO orderVO) {

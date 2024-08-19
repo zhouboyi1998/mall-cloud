@@ -3,8 +3,8 @@ package com.cafe.security.service.impl;
 import com.cafe.id.feign.IDFeign;
 import com.cafe.security.model.Captcha;
 import com.cafe.security.service.CaptchaService;
+import lombok.RequiredArgsConstructor;
 import net.dreamlu.mica.captcha.service.ICaptchaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,18 +14,13 @@ import org.springframework.stereotype.Service;
  * @Date: 2024/4/10 15:47
  * @Description: Mica Captcha 图片验证码业务实现类
  */
+@RequiredArgsConstructor
 @Service(value = "micaCaptchaServiceImpl")
 public class MicaCaptchaServiceImpl implements CaptchaService {
 
     private final ICaptchaService captchaService;
 
     private final IDFeign idFeign;
-
-    @Autowired
-    public MicaCaptchaServiceImpl(ICaptchaService captchaService, IDFeign idFeign) {
-        this.captchaService = captchaService;
-        this.idFeign = idFeign;
-    }
 
     @Override
     public Captcha one() {

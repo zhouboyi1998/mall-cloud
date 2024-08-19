@@ -11,7 +11,7 @@ import com.cafe.common.util.codec.Base64Util;
 import com.cafe.id.feign.IDFeign;
 import com.cafe.security.model.Captcha;
 import com.cafe.security.service.CaptchaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit;
  * @Date: 2024/3/3 0:16
  * @Description: Simple Captcha 图片验证码业务实现类
  */
+@RequiredArgsConstructor
 @Service(value = "simpleCaptchaServiceImpl")
 public class SimpleCaptchaServiceImpl implements CaptchaService {
 
@@ -36,21 +37,6 @@ public class SimpleCaptchaServiceImpl implements CaptchaService {
     private final IDFeign idFeign;
 
     private final RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    public SimpleCaptchaServiceImpl(
-        BackgroundProducer backgroundProducer,
-        TextProducer textProducer,
-        WordRenderer wordRenderer,
-        IDFeign idFeign,
-        RedisTemplate<String, Object> redisTemplate
-    ) {
-        this.backgroundProducer = backgroundProducer;
-        this.textProducer = textProducer;
-        this.wordRenderer = wordRenderer;
-        this.idFeign = idFeign;
-        this.redisTemplate = redisTemplate;
-    }
 
     @Override
     public Captcha one() {

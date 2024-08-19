@@ -13,7 +13,7 @@ import com.cafe.order.model.OrderItem;
 import com.cafe.order.query.OrderQuery;
 import com.cafe.order.service.OrderService;
 import com.cafe.order.vo.OrderVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -31,18 +31,13 @@ import java.util.stream.Collectors;
  * @Date: 2022-12-29
  * @Description: 订单业务实现类
  */
+@RequiredArgsConstructor
 @Service
 public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements OrderService {
 
     private final OrderMapper orderMapper;
 
     private final OrderItemMapper orderItemMapper;
-
-    @Autowired
-    public OrderServiceImpl(OrderMapper orderMapper, OrderItemMapper orderItemMapper) {
-        this.orderMapper = orderMapper;
-        this.orderItemMapper = orderItemMapper;
-    }
 
     @Override
     public Page<OrderVO> query(Page<Order> page, OrderQuery orderQuery) {

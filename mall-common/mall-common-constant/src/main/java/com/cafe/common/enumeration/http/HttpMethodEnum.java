@@ -1,5 +1,8 @@
 package com.cafe.common.enumeration.http;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.util.Objects;
 
 /**
@@ -9,6 +12,8 @@ import java.util.Objects;
  * @Date: 2024/4/23 21:08
  * @Description: 自定义请求方式枚举
  */
+@Getter
+@AllArgsConstructor
 public enum HttpMethodEnum {
 
     /**
@@ -52,14 +57,6 @@ public enum HttpMethodEnum {
     UNKNOWN("UNKNOWN");
 
     private final String name;
-
-    HttpMethodEnum(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public static HttpMethodEnum getHttpMethodByName(String name) {
         HttpMethodEnum[] httpMethodEnums = values();

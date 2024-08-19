@@ -10,9 +10,9 @@ import com.github.shyiko.mysql.binlog.event.EventData;
 import com.github.shyiko.mysql.binlog.event.TableMapEventData;
 import com.github.shyiko.mysql.binlog.event.UpdateRowsEventData;
 import com.github.shyiko.mysql.binlog.event.WriteRowsEventData;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -32,6 +32,7 @@ import java.util.Objects;
  * @Date: 2022/5/16 19:48
  * @Description: Binlog 监听器
  */
+@RequiredArgsConstructor
 @Component
 public class BinlogListener implements CommandLineRunner {
 
@@ -40,15 +41,6 @@ public class BinlogListener implements CommandLineRunner {
     private final BinlogProperties binlogProperties;
 
     private final MessageContentHandler messageContentHandler;
-
-    @Autowired
-    public BinlogListener(
-        BinlogProperties binlogProperties,
-        MessageContentHandler messageContentHandler
-    ) {
-        this.binlogProperties = binlogProperties;
-        this.messageContentHandler = messageContentHandler;
-    }
 
     @Override
     public void run(String... args) {
