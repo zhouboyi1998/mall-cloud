@@ -1,6 +1,6 @@
 package com.cafe.common.jackson.config;
 
-import com.cafe.common.enumeration.date.DateTimePatternEnum;
+import com.cafe.common.constant.date.DateTimeConstant;
 import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
 import com.fasterxml.jackson.databind.ser.std.CalendarSerializer;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
@@ -41,15 +41,15 @@ public class JacksonSerializerConfig {
     Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
         return builder -> builder
             // 序列化器配置
-            .serializerByType(Date.class, new DateSerializer(false, new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE_TIME.getPattern())))
-            .serializerByType(Calendar.class, new CalendarSerializer(false, new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE_TIME.getPattern())))
-            .serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DateTimePatternEnum.DEFAULT_DATE_TIME.getPattern())))
-            .serializerByType(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DateTimePatternEnum.DEFAULT_DATE.getPattern())))
-            .serializerByType(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateTimePatternEnum.DEFAULT_TIME.getPattern())))
+            .serializerByType(Date.class, new DateSerializer(false, new SimpleDateFormat(DateTimeConstant.DEFAULT_DATE_TIME)))
+            .serializerByType(Calendar.class, new CalendarSerializer(false, new SimpleDateFormat(DateTimeConstant.DEFAULT_DATE_TIME)))
+            .serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DateTimeConstant.DEFAULT_DATE_TIME)))
+            .serializerByType(LocalDate.class, new LocalDateSerializer(DateTimeFormatter.ofPattern(DateTimeConstant.DEFAULT_DATE)))
+            .serializerByType(LocalTime.class, new LocalTimeSerializer(DateTimeFormatter.ofPattern(DateTimeConstant.DEFAULT_TIME)))
             // 反序列化器配置
-            .deserializerByType(Date.class, new DateDeserializers.DateDeserializer(DateDeserializers.DateDeserializer.instance, new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE_TIME.getPattern()), DateTimePatternEnum.DEFAULT_DATE_TIME.getPattern()))
-            .deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DateTimePatternEnum.DEFAULT_DATE_TIME.getPattern())))
-            .deserializerByType(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DateTimePatternEnum.DEFAULT_DATE.getPattern())))
-            .deserializerByType(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateTimePatternEnum.DEFAULT_TIME.getPattern())));
+            .deserializerByType(Date.class, new DateDeserializers.DateDeserializer(DateDeserializers.DateDeserializer.instance, new SimpleDateFormat(DateTimeConstant.DEFAULT_DATE_TIME), DateTimeConstant.DEFAULT_DATE_TIME))
+            .deserializerByType(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ofPattern(DateTimeConstant.DEFAULT_DATE_TIME)))
+            .deserializerByType(LocalDate.class, new LocalDateDeserializer(DateTimeFormatter.ofPattern(DateTimeConstant.DEFAULT_DATE)))
+            .deserializerByType(LocalTime.class, new LocalTimeDeserializer(DateTimeFormatter.ofPattern(DateTimeConstant.DEFAULT_TIME)));
     }
 }
