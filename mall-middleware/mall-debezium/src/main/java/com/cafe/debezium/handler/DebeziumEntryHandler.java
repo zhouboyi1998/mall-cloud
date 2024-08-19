@@ -2,11 +2,11 @@ package com.cafe.debezium.handler;
 
 import io.debezium.engine.DebeziumEngine;
 import io.debezium.engine.RecordChangeEvent;
+import lombok.RequiredArgsConstructor;
 import org.apache.kafka.connect.data.Struct;
 import org.apache.kafka.connect.source.SourceRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,17 +19,13 @@ import java.util.Objects;
  * @Date: 2023/4/21 16:23
  * @Description: Debezium 处理器入口
  */
+@RequiredArgsConstructor
 @Component
 public class DebeziumEntryHandler {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DebeziumEntryHandler.class);
 
     private final KafkaContentHandler kafkaContentHandler;
-
-    @Autowired
-    public DebeziumEntryHandler(KafkaContentHandler kafkaContentHandler) {
-        this.kafkaContentHandler = kafkaContentHandler;
-    }
 
     public void handle(
         List<RecordChangeEvent<SourceRecord>> recordChangeEvents,

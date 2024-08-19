@@ -9,7 +9,7 @@ import com.cafe.common.enumeration.media.MediaFormatEnum;
 import com.cafe.id.feign.IDFeign;
 import com.cafe.security.model.Captcha;
 import com.cafe.security.service.CaptchaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -22,18 +22,13 @@ import java.util.concurrent.TimeUnit;
  * @Date: 2023/2/27 9:56
  * @Description: Hutool Captcha 图片验证码业务实现类
  */
+@RequiredArgsConstructor
 @Service(value = "hutoolCaptchaServiceImpl")
 public class HutoolCaptchaServiceImpl implements CaptchaService {
 
     private final IDFeign idFeign;
 
     private final RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    public HutoolCaptchaServiceImpl(IDFeign idFeign, RedisTemplate<String, Object> redisTemplate) {
-        this.idFeign = idFeign;
-        this.redisTemplate = redisTemplate;
-    }
 
     @Override
     public Captcha one() {

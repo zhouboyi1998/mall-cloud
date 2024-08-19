@@ -2,7 +2,7 @@ package com.cafe.security.captcha;
 
 import com.cafe.common.util.StringUtil;
 import com.cafe.security.service.CaptchaService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
  * @Date: 2024/3/4 17:26
  * @Description: 验证码业务策略中心
  */
+@RequiredArgsConstructor
 @Component
 public class CaptchaServiceStrategy {
 
@@ -25,18 +26,13 @@ public class CaptchaServiceStrategy {
 
     private Map<String, CaptchaService> captchaServiceMap;
 
-    @Autowired
-    public CaptchaServiceStrategy(List<CaptchaService> captchaServiceList) {
-        this.captchaServiceList = captchaServiceList;
-    }
-
     @PostConstruct
     public void initCaptchaServiceMap() {
         captchaServiceMap = captchaServiceList.stream()
             .collect(Collectors.toMap(captchaService -> StringUtil.lowerCaseFirstLetter(captchaService.getClass().getSimpleName()), Function.identity()));
     }
 
-    public CaptchaService getCaptchaService(String name) {
+    public CaptchaService captchaService(String name) {
         return captchaServiceMap.get(name);
     }
 }

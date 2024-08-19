@@ -1,10 +1,10 @@
 package com.cafe.elasticsearch.config;
 
 import com.cafe.elasticsearch.property.ElasticSearchProperties;
+import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,15 +15,11 @@ import org.springframework.context.annotation.Configuration;
  * @Date: 2022/7/27 10:55
  * @Description: ElasticSearch 配置类
  */
+@RequiredArgsConstructor
 @Configuration
 public class ElasticSearchConfig {
 
     private final ElasticSearchProperties elasticSearchProperties;
-
-    @Autowired
-    public ElasticSearchConfig(ElasticSearchProperties elasticSearchProperties) {
-        this.elasticSearchProperties = elasticSearchProperties;
-    }
 
     @Bean
     public RestHighLevelClient restHighLevelClient() {

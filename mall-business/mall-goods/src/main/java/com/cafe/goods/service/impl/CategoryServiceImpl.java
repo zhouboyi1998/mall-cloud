@@ -9,7 +9,7 @@ import com.cafe.goods.mapper.CategoryMapper;
 import com.cafe.goods.model.Category;
 import com.cafe.goods.service.CategoryService;
 import com.cafe.goods.vo.CategoryTreeVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,15 +22,11 @@ import java.util.Objects;
  * @Date: 2022-05-09
  * @Description: 分类业务实现类
  */
+@RequiredArgsConstructor
 @Service
 public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> implements CategoryService {
 
     private final CategoryMapper categoryMapper;
-
-    @Autowired
-    public CategoryServiceImpl(CategoryMapper categoryMapper) {
-        this.categoryMapper = categoryMapper;
-    }
 
     @Override
     public Tree treeNode(Category category) {

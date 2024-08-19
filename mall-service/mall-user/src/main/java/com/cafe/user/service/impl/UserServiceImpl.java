@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.user.mapper.UserMapper;
 import com.cafe.user.model.User;
 import com.cafe.user.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,15 +14,11 @@ import org.springframework.stereotype.Service;
  * @Date: 2022-05-09
  * @Description: 用户业务实现类
  */
+@RequiredArgsConstructor
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     private final UserMapper userMapper;
-
-    @Autowired
-    public UserServiceImpl(UserMapper userMapper) {
-        this.userMapper = userMapper;
-    }
 
     @Override
     public User detail(String clientId, User user) {

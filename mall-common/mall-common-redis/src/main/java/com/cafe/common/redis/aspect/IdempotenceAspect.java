@@ -6,12 +6,12 @@ import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.redis.annotation.Idempotence;
 import com.cafe.common.util.aop.AOPUtil;
+import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -31,17 +31,13 @@ import java.util.Optional;
  * @Date: 2023/8/4 15:08
  * @Description: 接口幂等性切面类
  */
+@RequiredArgsConstructor
 @Order(value = IntegerConstant.MIN_VALUE)
 @Aspect
 @Component
 public class IdempotenceAspect {
 
     private final RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    public IdempotenceAspect(RedisTemplate<String, Object> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
 
     /**
      * 配置 @Idempotence 注解为切入点

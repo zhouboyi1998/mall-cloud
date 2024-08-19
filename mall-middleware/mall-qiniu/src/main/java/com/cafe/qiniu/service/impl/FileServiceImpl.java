@@ -7,10 +7,10 @@ import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,6 +23,7 @@ import java.util.Objects;
  * @Date: 2023/10/18 11:33
  * @Description:
  */
+@RequiredArgsConstructor
 @Service
 public class FileServiceImpl implements FileService {
 
@@ -35,14 +36,6 @@ public class FileServiceImpl implements FileService {
     private final UploadManager uploadManager;
 
     private final IDFeign idFeign;
-
-    @Autowired
-    public FileServiceImpl(Auth auth, BucketManager bucketManager, UploadManager uploadManager, IDFeign idFeign) {
-        this.auth = auth;
-        this.bucketManager = bucketManager;
-        this.uploadManager = uploadManager;
-        this.idFeign = idFeign;
-    }
 
     @SneakyThrows
     @Override

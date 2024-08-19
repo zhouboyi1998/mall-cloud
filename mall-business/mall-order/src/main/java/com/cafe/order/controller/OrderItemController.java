@@ -10,7 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,16 +31,12 @@ import java.util.List;
  * @Description: 订单明细表接口
  */
 @Api(value = "订单明细表接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/order-item")
 public class OrderItemController {
 
     private final OrderItemService orderItemService;
-
-    @Autowired
-    public OrderItemController(OrderItemService orderItemService) {
-        this.orderItemService = orderItemService;
-    }
 
     @ApiLogPrint(value = "查询订单明细表数量")
     @ApiOperation(value = "查询订单明细表数量")

@@ -9,9 +9,9 @@ import com.cafe.security.service.UserDetailsExtensionService;
 import com.cafe.user.feign.RoleFeign;
 import com.cafe.user.feign.UserFeign;
 import com.cafe.user.model.User;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.CredentialsExpiredException;
@@ -32,6 +32,7 @@ import java.util.Optional;
  * @Date: 2022/5/6 11:19
  * @Description: 用户详细信息加载实现类
  */
+@RequiredArgsConstructor
 @Service
 public class UserDetailsServiceImpl implements UserDetailsExtensionService {
 
@@ -42,13 +43,6 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
     private final UserFeign userFeign;
 
     private final RoleFeign roleFeign;
-
-    @Autowired
-    public UserDetailsServiceImpl(HttpServletRequest request, UserFeign userFeign, RoleFeign roleFeign) {
-        this.request = request;
-        this.userFeign = userFeign;
-        this.roleFeign = roleFeign;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

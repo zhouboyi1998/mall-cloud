@@ -9,9 +9,9 @@ import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.goods.bo.Goods;
 import com.cafe.goods.mapper.GoodsMapper;
 import com.cafe.goods.service.GoodsService;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -25,6 +25,7 @@ import java.util.Map;
  * @Date: 2022/10/11 11:36
  * @Description:
  */
+@RequiredArgsConstructor
 @Service
 public class GoodsServiceImpl implements GoodsService {
 
@@ -33,12 +34,6 @@ public class GoodsServiceImpl implements GoodsService {
     private final GoodsMapper goodsMapper;
 
     private final RocketMQProducer rocketMQProducer;
-
-    @Autowired
-    public GoodsServiceImpl(GoodsMapper goodsMapper, RocketMQProducer rocketMQProducer) {
-        this.goodsMapper = goodsMapper;
-        this.rocketMQProducer = rocketMQProducer;
-    }
 
     @ResultCache
     @Override

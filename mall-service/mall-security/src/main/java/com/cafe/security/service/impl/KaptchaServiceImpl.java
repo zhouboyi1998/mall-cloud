@@ -8,7 +8,7 @@ import com.cafe.id.feign.IDFeign;
 import com.cafe.security.model.Captcha;
 import com.cafe.security.service.CaptchaService;
 import com.google.code.kaptcha.Producer;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +22,7 @@ import java.util.concurrent.TimeUnit;
  * @Date: 2023/2/24 9:59
  * @Description: Kaptcha 图片验证码业务实现类
  */
+@RequiredArgsConstructor
 @Service(value = "kaptchaServiceImpl")
 public class KaptchaServiceImpl implements CaptchaService {
 
@@ -30,13 +31,6 @@ public class KaptchaServiceImpl implements CaptchaService {
     private final IDFeign idFeign;
 
     private final RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    public KaptchaServiceImpl(Producer producer, IDFeign idFeign, RedisTemplate<String, Object> redisTemplate) {
-        this.producer = producer;
-        this.idFeign = idFeign;
-        this.redisTemplate = redisTemplate;
-    }
 
     @Override
     public Captcha one() {

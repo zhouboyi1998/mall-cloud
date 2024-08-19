@@ -8,9 +8,9 @@ import com.cafe.common.core.request.UserDetails;
 import com.cafe.common.util.json.JacksonUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.nimbusds.jose.JWSObject;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authorization.AuthorizationDecision;
@@ -32,17 +32,13 @@ import java.util.Optional;
  * @Date: 2022/5/10 23:02
  * @Description: 授权管理器
  */
+@RequiredArgsConstructor
 @Component
 public class AuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizationManager.class);
 
     private final RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    public AuthorizationManager(RedisTemplate<String, Object> redisTemplate) {
-        this.redisTemplate = redisTemplate;
-    }
 
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {

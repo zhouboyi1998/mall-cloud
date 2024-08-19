@@ -1,10 +1,10 @@
 package com.cafe.common.rabbitmq.producer;
 
 import com.cafe.common.util.json.JacksonUtil;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,17 +14,13 @@ import org.springframework.stereotype.Component;
  * @Date: 2022/5/18 15:03
  * @Description: RabbitMQ 消息生产者
  */
+@RequiredArgsConstructor
 @Component
 public class RabbitMQProducer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQProducer.class);
 
     private final RabbitTemplate rabbitTemplate;
-
-    @Autowired
-    public RabbitMQProducer(RabbitTemplate rabbitTemplate) {
-        this.rabbitTemplate = rabbitTemplate;
-    }
 
     /**
      * 发送消息到 RabbitMQ

@@ -1,5 +1,8 @@
 package com.cafe.common.enumeration.debezium;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -10,6 +13,8 @@ import java.util.stream.Stream;
  * @Date: 2023/4/21 16:37
  * @Description: Debezium 数据库变更信息枚举
  */
+@Getter
+@AllArgsConstructor
 public enum SchemaFieldEnum {
 
     /**
@@ -27,15 +32,10 @@ public enum SchemaFieldEnum {
      */
     OPERATION_TIME("ts_ms");
 
+    /**
+     * 变更信息字段
+     */
     private final String schemaField;
-
-    SchemaFieldEnum(String schemaField) {
-        this.schemaField = schemaField;
-    }
-
-    public String getSchemaField() {
-        return schemaField;
-    }
 
     public static Boolean contains(String schemaField) {
         return Stream.of(values())

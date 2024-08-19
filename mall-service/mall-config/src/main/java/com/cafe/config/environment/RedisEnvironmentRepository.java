@@ -1,7 +1,7 @@
 package com.cafe.config.environment;
 
+import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.cloud.config.environment.Environment;
 import org.springframework.cloud.config.environment.PropertySource;
@@ -21,6 +21,7 @@ import java.util.Properties;
  * @Date: 2024/2/25 19:55
  * @Description: Redis 配置环境仓库
  */
+@RequiredArgsConstructor
 @Repository
 public class RedisEnvironmentRepository extends AbstractEnvironmentRepository {
 
@@ -30,11 +31,6 @@ public class RedisEnvironmentRepository extends AbstractEnvironmentRepository {
     private static final String REDIS_HASH = "CONFIG";
 
     private final StringRedisTemplate stringRedisTemplate;
-
-    @Autowired
-    public RedisEnvironmentRepository(StringRedisTemplate stringRedisTemplate) {
-        this.stringRedisTemplate = stringRedisTemplate;
-    }
 
     @Override
     protected void addPropertySource(Environment environment, String propertyName) {

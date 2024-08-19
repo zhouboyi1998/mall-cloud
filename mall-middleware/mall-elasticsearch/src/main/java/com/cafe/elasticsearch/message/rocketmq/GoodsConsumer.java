@@ -7,11 +7,11 @@ import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.elasticsearch.index.GoodsIndex;
 import com.cafe.elasticsearch.service.GoodsIndexService;
 import com.fasterxml.jackson.core.type.TypeReference;
+import lombok.RequiredArgsConstructor;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,6 +24,7 @@ import java.util.Map;
  * @Date: 2022/11/3 15:24
  * @Description: RocketMQ 商品消息消费者
  */
+@RequiredArgsConstructor
 @Component
 @RocketMQMessageListener(topic = RocketMQConstant.Topic.GOODS_INDEX, consumerGroup = RocketMQConstant.ConsumerGroup.ELASTICSEARCH)
 public class GoodsConsumer implements RocketMQListener<String> {
@@ -31,11 +32,6 @@ public class GoodsConsumer implements RocketMQListener<String> {
     private static final Logger LOGGER = LoggerFactory.getLogger(GoodsConsumer.class);
 
     private final GoodsIndexService goodsIndexService;
-
-    @Autowired
-    public GoodsConsumer(GoodsIndexService goodsIndexService) {
-        this.goodsIndexService = goodsIndexService;
-    }
 
     @Override
     public void onMessage(String message) {

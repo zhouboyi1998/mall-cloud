@@ -7,7 +7,7 @@ import com.cafe.goodscenter.vo.SpuDetail;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +23,8 @@ import java.util.List;
  * @Date: 2024/7/31 23:16
  * @Description: 商品中心接口
  */
-@AllArgsConstructor
 @Api(value = "商品中心接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/goods-center")
 public class GoodsCenterController {

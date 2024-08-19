@@ -1,5 +1,8 @@
 package com.cafe.common.enumeration.media;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.common.enumeration.media
@@ -7,6 +10,8 @@ package com.cafe.common.enumeration.media;
  * @Date: 2023/2/25 0:35
  * @Description: 媒体文件格式枚举
  */
+@Getter
+@AllArgsConstructor
 public enum MediaFormatEnum {
 
     /**
@@ -28,17 +33,4 @@ public enum MediaFormatEnum {
      * Base64 编码前缀
      */
     private final String base64Prefix;
-
-    MediaFormatEnum(String format, String base64Prefix) {
-        this.format = format;
-        this.base64Prefix = base64Prefix;
-    }
-
-    public String getFormat() {
-        return format;
-    }
-
-    public String getBase64Prefix() {
-        return base64Prefix;
-    }
 }

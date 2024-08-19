@@ -3,7 +3,7 @@ package com.cafe.security.service.impl;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.security.model.TokenDetails;
 import com.cafe.security.service.OauthService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.endpoint.TokenEndpoint;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,7 @@ import java.util.Optional;
  * @Date: 2022/7/8 9:48
  * @Description:
  */
+@RequiredArgsConstructor
 @Service
 public class OauthServiceImpl implements OauthService {
 
@@ -27,11 +28,6 @@ public class OauthServiceImpl implements OauthService {
      * 令牌端点 (获取令牌的入口)
      */
     private final TokenEndpoint tokenEndpoint;
-
-    @Autowired
-    public OauthServiceImpl(TokenEndpoint tokenEndpoint) {
-        this.tokenEndpoint = tokenEndpoint;
-    }
 
     @Override
     public TokenDetails token(Principal principal, Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {

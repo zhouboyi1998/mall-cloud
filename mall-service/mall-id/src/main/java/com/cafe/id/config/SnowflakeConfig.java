@@ -2,7 +2,7 @@ package com.cafe.id.config;
 
 import com.cafe.common.lang.id.Snowflake;
 import com.cafe.id.property.SnowflakeProperties;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -13,15 +13,11 @@ import org.springframework.context.annotation.Configuration;
  * @Date: 2022/12/6 10:47
  * @Description: Snowflake 配置
  */
+@RequiredArgsConstructor
 @Configuration
 public class SnowflakeConfig {
 
     private final SnowflakeProperties snowflakeProperties;
-
-    @Autowired
-    public SnowflakeConfig(SnowflakeProperties snowflakeProperties) {
-        this.snowflakeProperties = snowflakeProperties;
-    }
 
     @Bean
     public Snowflake snowflake() {

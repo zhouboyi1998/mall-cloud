@@ -8,7 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,16 +28,12 @@ import java.util.List;
  * @Description: 订单流转接口
  */
 @Api(value = "订单流转接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/order-flow")
 public class OrderFlowController {
 
     private final OrderFlowService orderFlowService;
-
-    @Autowired
-    public OrderFlowController(OrderFlowService orderFlowService) {
-        this.orderFlowService = orderFlowService;
-    }
 
     @ApiLogPrint(value = "保存订单")
     @ApiOperation(value = "保存订单")

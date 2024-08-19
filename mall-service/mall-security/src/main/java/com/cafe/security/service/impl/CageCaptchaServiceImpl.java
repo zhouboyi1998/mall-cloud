@@ -9,8 +9,8 @@ import com.cafe.id.feign.IDFeign;
 import com.cafe.security.model.Captcha;
 import com.cafe.security.service.CaptchaService;
 import com.github.cage.Cage;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +24,7 @@ import java.util.concurrent.TimeUnit;
  * @Date: 2024/3/1 11:15
  * @Description: Cage Captcha 图片验证码业务实现类
  */
+@RequiredArgsConstructor
 @Service(value = "cageCaptchaServiceImpl")
 public class CageCaptchaServiceImpl implements CaptchaService {
 
@@ -32,13 +33,6 @@ public class CageCaptchaServiceImpl implements CaptchaService {
     private final IDFeign idFeign;
 
     private final RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    public CageCaptchaServiceImpl(Cage cage, IDFeign idFeign, RedisTemplate<String, Object> redisTemplate) {
-        this.cage = cage;
-        this.idFeign = idFeign;
-        this.redisTemplate = redisTemplate;
-    }
 
     @Override
     public Captcha one() {

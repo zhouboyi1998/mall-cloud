@@ -5,9 +5,9 @@ import com.cafe.elasticsearch.service.IndexService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import lombok.RequiredArgsConstructor;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.client.indices.CreateIndexResponse;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,16 +24,12 @@ import org.springframework.web.bind.annotation.RestController;
  * @Description: ElasticSearch 索引接口
  */
 @Api(value = "ElasticSearch 索引接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/index")
 public class IndexController {
 
     private final IndexService indexService;
-
-    @Autowired
-    public IndexController(IndexService indexService) {
-        this.indexService = indexService;
-    }
 
     @ApiLogPrint(value = "判断索引是否存在")
     @ApiOperation(value = "判断索引是否存在")

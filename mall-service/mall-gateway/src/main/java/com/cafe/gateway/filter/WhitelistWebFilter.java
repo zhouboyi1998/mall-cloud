@@ -3,7 +3,7 @@ package com.cafe.gateway.filter;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.gateway.property.SecurityProperties;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
@@ -22,15 +22,11 @@ import java.util.List;
  * @Date: 2022/5/11 11:07
  * @Description: 白名单过滤器
  */
+@RequiredArgsConstructor
 @Component
 public class WhitelistWebFilter implements WebFilter {
 
     private final SecurityProperties securityProperties;
-
-    @Autowired
-    public WhitelistWebFilter(SecurityProperties securityProperties) {
-        this.securityProperties = securityProperties;
-    }
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {

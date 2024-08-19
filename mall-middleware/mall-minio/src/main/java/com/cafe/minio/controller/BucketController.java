@@ -5,7 +5,7 @@ import com.cafe.minio.service.BucketService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,16 +24,12 @@ import java.util.List;
  * @Description: MinIO 存储桶接口
  */
 @Api(value = "MinIO 存储桶接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/bucket")
 public class BucketController {
 
     private final BucketService bucketService;
-
-    @Autowired
-    public BucketController(BucketService bucketService) {
-        this.bucketService = bucketService;
-    }
 
     @ApiLogPrint(value = "查询存储桶列表")
     @ApiOperation(value = "查询存储桶列表")

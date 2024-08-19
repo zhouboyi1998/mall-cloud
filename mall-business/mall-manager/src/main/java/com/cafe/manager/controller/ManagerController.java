@@ -10,7 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,16 +31,12 @@ import java.util.List;
  * @Description: 管理员接口
  */
 @Api(value = "管理员接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/manager")
 public class ManagerController {
 
     private final ManagerService managerService;
-
-    @Autowired
-    public ManagerController(ManagerService managerService) {
-        this.managerService = managerService;
-    }
 
     @ApiLogPrint(value = "查询管理员数量")
     @ApiOperation(value = "查询管理员数量")

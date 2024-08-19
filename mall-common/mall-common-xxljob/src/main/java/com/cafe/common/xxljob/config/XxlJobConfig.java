@@ -2,9 +2,9 @@ package com.cafe.common.xxljob.config;
 
 import com.cafe.common.xxljob.property.XxlJobProperties;
 import com.xxl.job.core.executor.impl.XxlJobSpringExecutor;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,17 +15,13 @@ import org.springframework.context.annotation.Configuration;
  * @Date: 2023/5/5 11:22
  * @Description: XXL-JOB 配置类
  */
+@RequiredArgsConstructor
 @Configuration
 public class XxlJobConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(XxlJobConfig.class);
 
     private final XxlJobProperties xxlJobProperties;
-
-    @Autowired
-    public XxlJobConfig(XxlJobProperties xxlJobProperties) {
-        this.xxlJobProperties = xxlJobProperties;
-    }
 
     @Bean
     public XxlJobSpringExecutor xxlJobSpringExecutor() {

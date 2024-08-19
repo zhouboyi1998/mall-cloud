@@ -10,8 +10,8 @@ import io.minio.GetPresignedObjectUrlArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.http.Method;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FastByteArrayOutputStream;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,6 +27,7 @@ import java.util.Objects;
  * @Date: 2022/6/9 10:54
  * @Description:
  */
+@RequiredArgsConstructor
 @Service
 public class FileServiceImpl implements FileService {
 
@@ -35,13 +36,6 @@ public class FileServiceImpl implements FileService {
     private final MinioClient minioClient;
 
     private final IDFeign idFeign;
-
-    @Autowired
-    public FileServiceImpl(MinioProperties minioProperties, MinioClient minioClient, IDFeign idFeign) {
-        this.minioProperties = minioProperties;
-        this.minioClient = minioClient;
-        this.idFeign = idFeign;
-    }
 
     @SneakyThrows
     @Override

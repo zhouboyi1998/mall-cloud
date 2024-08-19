@@ -10,7 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,16 +31,12 @@ import java.util.List;
  * @Description: 角色接口
  */
 @Api(value = "角色接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/role")
 public class RoleController {
 
     private final RoleService roleService;
-
-    @Autowired
-    public RoleController(RoleService roleService) {
-        this.roleService = roleService;
-    }
 
     @ApiLogPrint(value = "查询角色数量")
     @ApiOperation(value = "查询角色数量")

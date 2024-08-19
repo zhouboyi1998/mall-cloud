@@ -6,7 +6,7 @@ import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.rabbitmq.RabbitMQConstant;
 import com.cafe.common.rabbitmq.producer.RabbitMQProducer;
 import com.cafe.user.relation.UserRelation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
@@ -23,15 +23,11 @@ import java.util.Map;
  * @Date: 2022/5/19 17:01
  * @Description: 消息内容处理器
  */
+@RequiredArgsConstructor
 @Component
 public class MessageContentHandler {
 
     private final RabbitMQProducer rabbitMQProducer;
-
-    @Autowired
-    public MessageContentHandler(RabbitMQProducer rabbitMQProducer) {
-        this.rabbitMQProducer = rabbitMQProducer;
-    }
 
     /**
      * 将不带属性名的 Serializable 转换为带属性名的 Map

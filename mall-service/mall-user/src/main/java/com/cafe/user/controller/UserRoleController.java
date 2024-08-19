@@ -10,7 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,16 +31,12 @@ import java.util.List;
  * @Description: 用户-角色关联关系接口
  */
 @Api(value = "用户-角色关联关系接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/user-role")
 public class UserRoleController {
 
     private final UserRoleService userRoleService;
-
-    @Autowired
-    public UserRoleController(UserRoleService userRoleService) {
-        this.userRoleService = userRoleService;
-    }
 
     @ApiLogPrint(value = "查询用户-角色关联关系数量")
     @ApiOperation(value = "查询用户-角色关联关系数量")

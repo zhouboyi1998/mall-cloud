@@ -1,6 +1,7 @@
 package com.cafe.elasticsearch.service.impl;
 
 import com.cafe.elasticsearch.service.IndexService;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
@@ -9,7 +10,6 @@ import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.client.indices.GetIndexRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -19,15 +19,11 @@ import org.springframework.stereotype.Service;
  * @Date: 2024/3/27 2:28
  * @Description:
  */
+@RequiredArgsConstructor
 @Service
 public class IndexServiceImpl implements IndexService {
 
     private final RestHighLevelClient restHighLevelClient;
-
-    @Autowired
-    public IndexServiceImpl(RestHighLevelClient restHighLevelClient) {
-        this.restHighLevelClient = restHighLevelClient;
-    }
 
     @SneakyThrows
     @Override

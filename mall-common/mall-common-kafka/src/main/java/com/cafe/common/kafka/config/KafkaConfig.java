@@ -1,6 +1,6 @@
 package com.cafe.common.kafka.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -21,17 +21,13 @@ import java.util.Map;
  * @Date: 2023/4/25 10:26
  * @Description: Kafka 配置类
  */
+@RequiredArgsConstructor
 @Configuration
 @EnableConfigurationProperties(value = {KafkaProperties.class})
 @EnableKafka
 public class KafkaConfig {
 
     private final KafkaProperties kafkaProperties;
-
-    @Autowired
-    public KafkaConfig(KafkaProperties kafkaProperties) {
-        this.kafkaProperties = kafkaProperties;
-    }
 
     @Bean
     public ProducerFactory<String, String> producerFactory() {

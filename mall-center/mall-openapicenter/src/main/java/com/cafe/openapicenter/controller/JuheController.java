@@ -3,7 +3,7 @@ package com.cafe.openapicenter.controller;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.openapicenter.service.JuheService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,16 +17,12 @@ import reactor.core.publisher.Mono;
  * @Date: 2024/4/21 4:45
  * @Description: 聚合数据开放接口消费者
  */
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/juhe")
 public class JuheController {
 
     private final JuheService juheService;
-
-    @Autowired
-    public JuheController(JuheService juheService) {
-        this.juheService = juheService;
-    }
 
     @ApiLogPrint(value = "查询手机号码归属地")
     @GetMapping(value = "/mobile2region")

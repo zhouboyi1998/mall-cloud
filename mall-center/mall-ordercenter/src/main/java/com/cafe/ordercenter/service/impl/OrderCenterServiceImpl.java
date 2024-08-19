@@ -21,7 +21,7 @@ import com.cafe.ordercenter.service.OrderCenterService;
 import com.cafe.storage.feign.StockFeign;
 import com.cafe.storage.vo.CartVO;
 import io.seata.spring.annotation.GlobalTransactional;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -42,7 +42,7 @@ import java.util.stream.Collectors;
  * @Date: 2023/10/24 17:25
  * @Description: 订单中心业务实现类
  */
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class OrderCenterServiceImpl implements OrderCenterService {
 

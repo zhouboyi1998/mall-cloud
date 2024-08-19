@@ -5,7 +5,7 @@ import com.cafe.storage.mapper.StockMapper;
 import com.cafe.storage.model.Stock;
 import com.cafe.storage.service.StockService;
 import com.cafe.storage.vo.CartVO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,15 +19,11 @@ import java.util.stream.Collectors;
  * @Date: 2022-12-29
  * @Description: 库存业务实现类
  */
+@RequiredArgsConstructor
 @Service
 public class StockServiceImpl extends ServiceImpl<StockMapper, Stock> implements StockService {
 
     private final StockMapper stockMapper;
-
-    @Autowired
-    public StockServiceImpl(StockMapper stockMapper) {
-        this.stockMapper = stockMapper;
-    }
 
     @Override
     public void inboundBatch(List<CartVO> cartVOList) {

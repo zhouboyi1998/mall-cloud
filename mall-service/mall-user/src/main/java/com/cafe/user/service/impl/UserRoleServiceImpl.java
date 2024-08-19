@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.user.mapper.UserRoleMapper;
 import com.cafe.user.model.UserRole;
 import com.cafe.user.service.UserRoleService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,13 +14,9 @@ import org.springframework.stereotype.Service;
  * @Date: 2022-05-09
  * @Description: 用户-角色关联关系业务实现类
  */
+@RequiredArgsConstructor
 @Service
 public class UserRoleServiceImpl extends ServiceImpl<UserRoleMapper, UserRole> implements UserRoleService {
 
     private final UserRoleMapper userRoleMapper;
-
-    @Autowired
-    public UserRoleServiceImpl(UserRoleMapper userRoleMapper) {
-        this.userRoleMapper = userRoleMapper;
-    }
 }

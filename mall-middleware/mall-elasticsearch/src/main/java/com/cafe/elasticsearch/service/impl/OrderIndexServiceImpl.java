@@ -5,6 +5,7 @@ import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.elasticsearch.index.OrderIndex;
 import com.cafe.elasticsearch.service.OrderIndexService;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
@@ -20,7 +21,6 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.unit.TimeValue;
 import org.elasticsearch.common.xcontent.XContentType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,15 +32,11 @@ import java.util.List;
  * @Date: 2024/6/28 16:18
  * @Description:
  */
+@RequiredArgsConstructor
 @Service
 public class OrderIndexServiceImpl implements OrderIndexService {
 
     private final RestHighLevelClient restHighLevelClient;
-
-    @Autowired
-    public OrderIndexServiceImpl(RestHighLevelClient restHighLevelClient) {
-        this.restHighLevelClient = restHighLevelClient;
-    }
 
     @SneakyThrows
     @Override

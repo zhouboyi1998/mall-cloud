@@ -7,12 +7,12 @@ import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.user.model.RoleMenu;
 import com.cafe.user.service.RoleMenuService;
 import com.fasterxml.jackson.core.type.TypeReference;
+import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.annotation.RabbitListeners;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -26,15 +26,11 @@ import java.util.Map;
  * @Date: 2022/5/18 14:56
  * @Description: RabbitMQ 消息消费者 (接收数据库表修改消息)
  */
+@RequiredArgsConstructor
 @Component
 public class RabbitMQConsumer {
 
     private final RoleMenuService roleMenuService;
-
-    @Autowired
-    public RabbitMQConsumer(RoleMenuService roleMenuService) {
-        this.roleMenuService = roleMenuService;
-    }
 
     /**
      * 监听 RabbitMQ, 接收角色-菜单队列中的消息

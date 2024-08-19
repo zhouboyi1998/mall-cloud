@@ -1,6 +1,8 @@
 package com.cafe.qiniu.enumeration;
 
 import com.qiniu.storage.Region;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.util.Objects;
 
@@ -11,6 +13,8 @@ import java.util.Objects;
  * @Date: 2023/10/19 17:15
  * @Description: 七牛云存储区域枚举
  */
+@Getter
+@AllArgsConstructor
 public enum RegionEnum {
 
     /**
@@ -52,19 +56,6 @@ public enum RegionEnum {
      * 存储区域对象
      */
     private final Region region;
-
-    RegionEnum(String name, Region region) {
-        this.name = name;
-        this.region = region;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public Region getRegion() {
-        return region;
-    }
 
     public static Region getRegionByName(String name) {
         RegionEnum[] regionList = values();

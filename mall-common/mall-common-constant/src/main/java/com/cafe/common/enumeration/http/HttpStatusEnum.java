@@ -1,5 +1,8 @@
 package com.cafe.common.enumeration.http;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.common.enumeration.http
@@ -7,6 +10,8 @@ package com.cafe.common.enumeration.http;
  * @Date: 2022/5/9 9:09
  * @Description: 自定义状态码枚举
  */
+@Getter
+@AllArgsConstructor
 public enum HttpStatusEnum {
 
     /**
@@ -109,16 +114,7 @@ public enum HttpStatusEnum {
      */
     private final String reasonPhrase;
 
-    HttpStatusEnum(Integer value, String reasonPhrase) {
-        this.value = value;
-        this.reasonPhrase = reasonPhrase;
-    }
-
     public Integer value() {
         return value;
-    }
-
-    public String getReasonPhrase() {
-        return reasonPhrase;
     }
 }

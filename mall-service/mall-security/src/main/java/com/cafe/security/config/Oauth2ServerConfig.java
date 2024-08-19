@@ -9,8 +9,8 @@ import com.cafe.security.property.ClientProperties;
 import com.cafe.security.property.ClientProperties.Detail;
 import com.cafe.security.property.RSACredentialProperties;
 import com.cafe.security.service.UserDetailsExtensionService;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -43,6 +43,7 @@ import java.util.List;
  * @Date: 2022/5/9 10:13
  * @Description: OAuth2 认证服务配置
  */
+@RequiredArgsConstructor
 @Configuration
 @EnableAuthorizationServer
 public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
@@ -91,29 +92,6 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      * Redis 交互模板
      */
     private final RedisTemplate<String, Object> redisTemplate;
-
-    @Autowired
-    public Oauth2ServerConfig(
-        PasswordEncoder passwordEncoder,
-        KeyPair keyPair,
-        AuthenticationManager authenticationManager,
-        JwtTokenEnhancer jwtTokenEnhancer,
-        UserDetailsExtensionService userDetailsExtensionService,
-        RSACredentialProperties rsaCredentialProperties,
-        ClientProperties clientProperties,
-        RedisConnectionFactory redisConnectionFactory,
-        RedisTemplate<String, Object> redisTemplate
-    ) {
-        this.passwordEncoder = passwordEncoder;
-        this.keyPair = keyPair;
-        this.authenticationManager = authenticationManager;
-        this.jwtTokenEnhancer = jwtTokenEnhancer;
-        this.userDetailsExtensionService = userDetailsExtensionService;
-        this.rsaCredentialProperties = rsaCredentialProperties;
-        this.clientProperties = clientProperties;
-        this.redisConnectionFactory = redisConnectionFactory;
-        this.redisTemplate = redisTemplate;
-    }
 
     /**
      * 配置令牌存储方式 (如果不配置, 默认使用 JDBC 存储)

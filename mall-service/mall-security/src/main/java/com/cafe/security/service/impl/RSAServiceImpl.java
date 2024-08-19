@@ -1,7 +1,7 @@
 package com.cafe.security.service.impl;
 
 import com.cafe.security.service.RSAService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.security.KeyPair;
@@ -14,6 +14,7 @@ import java.util.Base64;
  * @Date: 2023/8/16 16:06
  * @Description:
  */
+@RequiredArgsConstructor
 @Service
 public class RSAServiceImpl implements RSAService {
 
@@ -21,11 +22,6 @@ public class RSAServiceImpl implements RSAService {
      * 密钥对
      */
     private final KeyPair keyPair;
-
-    @Autowired
-    public RSAServiceImpl(KeyPair keyPair) {
-        this.keyPair = keyPair;
-    }
 
     @Override
     public String publicKey() {

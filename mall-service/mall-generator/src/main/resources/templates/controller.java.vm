@@ -10,7 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +38,7 @@ import ${superControllerClassPackage};
  * @Description: ${table.comment}接口
  */
 @Api(value = "${table.comment}接口")
+@RequiredArgsConstructor
 #if(${restControllerStyle})
 @RestController
 #else
@@ -55,11 +56,6 @@ public class ${table.controllerName} {
 #end
 
     private final ${table.serviceName} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service;
-
-    @Autowired
-    public ${table.controllerName}(${table.serviceName} ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service) {
-        this.${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service = ${entity.substring(0, 1).toLowerCase()}${entity.substring(1)}Service;
-    }
 
     @ApiLogPrint(value = "查询${table.comment}数量")
     @ApiOperation(value = "查询${table.comment}数量")

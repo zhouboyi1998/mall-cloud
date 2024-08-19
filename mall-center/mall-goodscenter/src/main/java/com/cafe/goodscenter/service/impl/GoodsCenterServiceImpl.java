@@ -11,7 +11,7 @@ import com.cafe.goodscenter.converter.GoodsConverter;
 import com.cafe.goodscenter.service.GoodsCenterService;
 import com.cafe.goodscenter.vo.GoodsSummary;
 import com.cafe.goodscenter.vo.SpuDetail;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ import java.util.Optional;
  * @Date: 2024/7/31 23:18
  * @Description: 商品中心业务实现类
  */
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Service
 public class GoodsCenterServiceImpl implements GoodsCenterService {
 

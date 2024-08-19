@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.clickhouse.mapper.GoodsWideMapper;
 import com.cafe.clickhouse.model.GoodsWide;
 import com.cafe.clickhouse.service.GoodsWideService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
@@ -14,13 +14,9 @@ import org.springframework.stereotype.Service;
  * @Date: 2024/3/15 17:10
  * @Description: 商品宽表业务实现类
  */
+@RequiredArgsConstructor
 @Service
 public class GoodsWideServiceImpl extends ServiceImpl<GoodsWideMapper, GoodsWide> implements GoodsWideService {
 
     private final GoodsWideMapper goodsWideMapper;
-
-    @Autowired
-    public GoodsWideServiceImpl(GoodsWideMapper goodsWideMapper) {
-        this.goodsWideMapper = goodsWideMapper;
-    }
 }

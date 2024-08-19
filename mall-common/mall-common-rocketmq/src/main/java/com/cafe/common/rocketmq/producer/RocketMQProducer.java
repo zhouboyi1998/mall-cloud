@@ -1,10 +1,10 @@
 package com.cafe.common.rocketmq.producer;
 
 import com.cafe.common.util.json.JacksonUtil;
+import lombok.RequiredArgsConstructor;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,17 +14,13 @@ import org.springframework.stereotype.Component;
  * @Date: 2023/4/24 21:58
  * @Description: RocketMQ 消息生产者
  */
+@RequiredArgsConstructor
 @Component
 public class RocketMQProducer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(RocketMQProducer.class);
 
     private final RocketMQTemplate rocketMQTemplate;
-
-    @Autowired
-    public RocketMQProducer(RocketMQTemplate rocketMQTemplate) {
-        this.rocketMQTemplate = rocketMQTemplate;
-    }
 
     /**
      * 发送消息到 RocketMQ

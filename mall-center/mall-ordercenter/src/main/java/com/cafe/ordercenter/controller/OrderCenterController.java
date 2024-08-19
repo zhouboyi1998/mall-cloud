@@ -10,7 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +28,7 @@ import java.util.List;
  * @Description: 订单中心接口
  */
 @Api(value = "订单中心接口")
+@RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/order-center")
 public class OrderCenterController {
@@ -35,12 +36,6 @@ public class OrderCenterController {
     private final OrderCenterService orderCenterService;
 
     private final KafkaProducer kafkaProducer;
-
-    @Autowired
-    public OrderCenterController(OrderCenterService orderCenterService, KafkaProducer kafkaProducer) {
-        this.orderCenterService = orderCenterService;
-        this.kafkaProducer = kafkaProducer;
-    }
 
     @ApiLogPrint(value = "提交订单")
     @ApiOperation(value = "提交订单")

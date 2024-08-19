@@ -6,8 +6,8 @@ import io.minio.MakeBucketArgs;
 import io.minio.MinioClient;
 import io.minio.RemoveBucketArgs;
 import io.minio.messages.Bucket;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,15 +20,11 @@ import java.util.stream.Collectors;
  * @Date: 2024/3/26 15:10
  * @Description:
  */
+@RequiredArgsConstructor
 @Service
 public class BucketServiceImpl implements BucketService {
 
     private final MinioClient minioClient;
-
-    @Autowired
-    public BucketServiceImpl(MinioClient minioClient) {
-        this.minioClient = minioClient;
-    }
 
     @SneakyThrows
     @Override
