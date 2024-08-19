@@ -39,7 +39,7 @@ public class CanalClient implements InitializingBean {
     }
 
     @Override
-    public void afterPropertiesSet() throws Exception {
+    public void afterPropertiesSet() {
         // 创建链接
         CanalConnector connector = CanalConnectors.newSingleConnector(
             new InetSocketAddress(canalProperties.getHost(), canalProperties.getPort()),

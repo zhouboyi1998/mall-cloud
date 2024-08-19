@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.elasticsearch.controller
@@ -35,7 +33,7 @@ public class ServerController {
     @ApiLogPrint(value = "查询服务信息")
     @ApiOperation(value = "查询服务信息")
     @GetMapping(value = "/info")
-    public ResponseEntity<SearchResponse> info() throws IOException {
+    public ResponseEntity<SearchResponse> info() {
         SearchResponse searchResponse = serverService.info();
         return ResponseEntity.ok(searchResponse);
     }

@@ -45,7 +45,7 @@ public class FileController {
     public ResponseEntity<String> upload(
         @PathVariable(value = "bucket") String bucket,
         @RequestParam(value = "file") MultipartFile file
-    ) throws Exception {
+    ) {
         String filepath = fileService.upload(bucket, file);
         return ResponseEntity.ok(filepath);
     }
@@ -60,7 +60,7 @@ public class FileController {
     public ResponseEntity<Void> delete(
         @PathVariable(value = "bucket") String bucket,
         @PathVariable(value = "filename") String filename
-    ) throws Exception {
+    ) {
         fileService.delete(bucket, filename);
         return ResponseEntity.ok().build();
     }

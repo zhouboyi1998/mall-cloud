@@ -7,6 +7,7 @@ import com.qiniu.http.Response;
 import com.qiniu.storage.BucketManager;
 import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,8 +44,9 @@ public class FileServiceImpl implements FileService {
         this.idFeign = idFeign;
     }
 
+    @SneakyThrows
     @Override
-    public String upload(String bucket, MultipartFile file) throws Exception {
+    public String upload(String bucket, MultipartFile file) {
         // 使用雪花算法生成文件名
         StringBuilder filename = new StringBuilder(Objects.requireNonNull(idFeign.nextId().getBody()).toString());
         // 获取文件原名
@@ -63,8 +65,9 @@ public class FileServiceImpl implements FileService {
         return StringConstant.SLASH + bucket + StringConstant.SLASH + filename;
     }
 
+    @SneakyThrows
     @Override
-    public void delete(String bucket, String filename) throws Exception {
+    public void delete(String bucket, String filename) {
         // 删除文件
         Response response = bucketManager.delete(bucket, filename);
         LOGGER.info("FileServiceImpl.delete(): response -> {}", response);

@@ -3,8 +3,6 @@ package com.cafe.elasticsearch.service;
 import org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 
-import java.io.IOException;
-
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.elasticsearch.service
@@ -19,25 +17,22 @@ public interface IndexService {
      *
      * @param index 索引名称
      * @return
-     * @throws IOException
      */
-    Boolean exists(String index) throws IOException;
+    Boolean exists(String index);
 
     /**
      * 创建索引
      *
      * @param index 索引名称
      * @return
-     * @throws IOException
      */
-    CreateIndexResponse create(String index) throws IOException;
+    CreateIndexResponse create(String index);
 
     /**
      * 删除索引
      *
      * @param index 索引名称
      * @return
-     * @throws IOException
      */
-    AcknowledgedResponse delete(String index) throws IOException;
+    AcknowledgedResponse delete(String index);
 }

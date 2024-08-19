@@ -38,7 +38,7 @@ public class BucketController {
     @ApiLogPrint(value = "查询存储桶列表")
     @ApiOperation(value = "查询存储桶列表")
     @GetMapping(value = "/list")
-    public ResponseEntity<List<String>> list() throws Exception {
+    public ResponseEntity<List<String>> list() {
         List<String> bucketList = bucketService.list();
         return ResponseEntity.ok(bucketList);
     }
@@ -47,7 +47,7 @@ public class BucketController {
     @ApiOperation(value = "查询存储桶是否存在")
     @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true)
     @GetMapping(value = "/exists/{bucket}")
-    public ResponseEntity<Boolean> exists(@PathVariable(value = "bucket") String bucket) throws Exception {
+    public ResponseEntity<Boolean> exists(@PathVariable(value = "bucket") String bucket) {
         Boolean exists = bucketService.exists(bucket);
         return ResponseEntity.ok(exists);
     }
@@ -56,7 +56,7 @@ public class BucketController {
     @ApiOperation(value = "新建存储桶")
     @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true)
     @PostMapping(value = "/create/{bucket}")
-    public ResponseEntity<Void> create(@PathVariable(value = "bucket") String bucket) throws Exception {
+    public ResponseEntity<Void> create(@PathVariable(value = "bucket") String bucket) {
         bucketService.create(bucket);
         return ResponseEntity.ok().build();
     }
@@ -65,7 +65,7 @@ public class BucketController {
     @ApiOperation(value = "删除存储桶")
     @ApiImplicitParam(value = "存储桶", name = "bucket", dataType = "String", paramType = "path", required = true)
     @DeleteMapping(value = "/remove/{bucket}")
-    public ResponseEntity<Void> remove(@PathVariable(value = "bucket") String bucket) throws Exception {
+    public ResponseEntity<Void> remove(@PathVariable(value = "bucket") String bucket) {
         bucketService.remove(bucket);
         return ResponseEntity.ok().build();
     }

@@ -9,6 +9,7 @@ import com.cafe.security.property.ClientProperties;
 import com.cafe.security.property.ClientProperties.Detail;
 import com.cafe.security.property.RSACredentialProperties;
 import com.cafe.security.service.UserDetailsExtensionService;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -188,10 +189,10 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      * 客户端详细信息配置
      *
      * @param clients
-     * @throws Exception
      */
+    @SneakyThrows
     @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+    public void configure(ClientDetailsServiceConfigurer clients) {
         // 获取所有客户端详细信息配置
         List<Detail> clientDetails = clientProperties.getDetails();
         // 使用内存
@@ -218,10 +219,9 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      * 令牌访问端点配置
      *
      * @param endpoints
-     * @throws Exception
      */
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
             // 认证管理器
             .authenticationManager(authenticationManager)
@@ -245,10 +245,9 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
      * 令牌安全约束配置
      *
      * @param security
-     * @throws Exception
      */
     @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+    public void configure(AuthorizationServerSecurityConfigurer security) {
         // 允许客户端的表单身份验证
         security.allowFormAuthenticationForClients();
     }

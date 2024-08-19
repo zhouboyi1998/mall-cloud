@@ -10,6 +10,7 @@ import io.minio.GetPresignedObjectUrlArgs;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
 import io.minio.http.Method;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.FastByteArrayOutputStream;
@@ -42,8 +43,9 @@ public class FileServiceImpl implements FileService {
         this.idFeign = idFeign;
     }
 
+    @SneakyThrows
     @Override
-    public String upload(String bucket, MultipartFile file) throws Exception {
+    public String upload(String bucket, MultipartFile file) {
         // 使用雪花算法生成文件名
         StringBuilder filename = new StringBuilder(Objects.requireNonNull(idFeign.nextId().getBody()).toString());
         // 获取文件原名
@@ -66,8 +68,9 @@ public class FileServiceImpl implements FileService {
         return StringConstant.SLASH + bucket + StringConstant.SLASH + filename;
     }
 
+    @SneakyThrows
     @Override
-    public void download(String bucket, String filename, HttpServletResponse httpResponse) throws Exception {
+    public void download(String bucket, String filename, HttpServletResponse httpResponse) {
         // 构造参数
         GetObjectArgs args = GetObjectArgs.builder()
             .bucket(bucket)
@@ -102,8 +105,9 @@ public class FileServiceImpl implements FileService {
         servletOutputStream.flush();
     }
 
+    @SneakyThrows
     @Override
-    public String url(String bucket, String filename, Integer expiry) throws Exception {
+    public String url(String bucket, String filename, Integer expiry) {
         // 构造参数
         GetPresignedObjectUrlArgs args = GetPresignedObjectUrlArgs.builder()
             .bucket(bucket)

@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.elasticsearch.message.kafka
@@ -38,11 +36,7 @@ public class OrderConsumer {
         LOGGER.info("OrderConsumer.listener(): kafka topic -> {}, offset -> {}, key -> {}, value -> {}", record.topic(), record.offset(), record.key(), record.value());
         // 获取消息内容
         OrderIndex orderIndex = JacksonUtil.readValue(record.value(), OrderIndex.class);
-        try {
-            // 存储订单索引
-            orderIndexService.insert(orderIndex);
-        } catch (IOException e) {
-            LOGGER.error("OrderConsumer.listener(): Failed to update order index! error message -> {}", e.getMessage(), e);
-        }
+        // 存储订单索引
+        orderIndexService.insert(orderIndex);
     }
 }

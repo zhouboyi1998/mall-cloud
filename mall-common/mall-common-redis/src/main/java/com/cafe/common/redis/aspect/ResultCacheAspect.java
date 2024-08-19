@@ -6,6 +6,7 @@ import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.redis.annotation.ResultCache;
 import com.cafe.common.util.aop.AOPUtil;
 import com.cafe.common.util.json.JacksonUtil;
+import lombok.SneakyThrows;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -56,8 +57,9 @@ public class ResultCacheAspect {
 
     }
 
+    @SneakyThrows
     @Around(value = "resultCache()")
-    public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public Object doAround(ProceedingJoinPoint proceedingJoinPoint) {
         // 获取目标签名, 转换成方法签名
         MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
         // 获取目标类名

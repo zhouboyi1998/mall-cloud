@@ -13,7 +13,6 @@ public interface TrackerService {
      * 获取跟踪器地址
      *
      * @return
-     * @throws Exception
      */
-    String url() throws Exception;
+    String url();
 }

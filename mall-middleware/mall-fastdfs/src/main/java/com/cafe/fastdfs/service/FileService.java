@@ -19,9 +19,8 @@ public interface FileService {
      *
      * @param file
      * @return
-     * @throws Exception
      */
-    String upload(MultipartFile file) throws Exception;
+    String upload(MultipartFile file);
 
     /**
      * 下载文件
@@ -30,9 +29,8 @@ public interface FileService {
      * @param filename     文件名 (例如: M00/00/00/xxx.jpg)
      * @param httpResponse
      * @return
-     * @throws Exception
      */
-    void download(String group, String filename, HttpServletResponse httpResponse) throws Exception;
+    void download(String group, String filename, HttpServletResponse httpResponse);
 
     /**
      * 删除文件
@@ -40,9 +38,8 @@ public interface FileService {
      * @param group    文件组 (例如: group1)
      * @param filename 文件名 (例如: M00/00/00/xxx.jpg)
      * @return
-     * @throws Exception
      */
-    Integer delete(String group, String filename) throws Exception;
+    Integer delete(String group, String filename);
 
     /**
      * 获取文件信息
@@ -50,7 +47,6 @@ public interface FileService {
      * @param group    文件组 (例如: group1)
      * @param filename 文件名 (例如: M00/00/00/xxx.jpg)
      * @return
-     * @throws Exception
      */
-    FileInfo info(String group, String filename) throws Exception;
+    FileInfo info(String group, String filename);
 }

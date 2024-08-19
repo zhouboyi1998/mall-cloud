@@ -17,9 +17,8 @@ public interface FileService {
      * @param bucket 存储桶
      * @param file   文件
      * @return
-     * @throws Exception
      */
-    String upload(String bucket, MultipartFile file) throws Exception;
+    String upload(String bucket, MultipartFile file);
 
     /**
      * 删除文件
@@ -27,7 +26,6 @@ public interface FileService {
      * @param bucket   存储桶
      * @param filename 文件名
      * @return
-     * @throws Exception
      */
-    void delete(String bucket, String filename) throws Exception;
+    void delete(String bucket, String filename);
 }

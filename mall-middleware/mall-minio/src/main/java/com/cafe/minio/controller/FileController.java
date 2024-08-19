@@ -49,7 +49,7 @@ public class FileController {
     public ResponseEntity<String> upload(
         @PathVariable(value = "bucket") String bucket,
         @RequestParam(value = "file") MultipartFile file
-    ) throws Exception {
+    ) {
         String filepath = fileService.upload(bucket, file);
         return ResponseEntity.ok(filepath);
     }
@@ -65,7 +65,7 @@ public class FileController {
         @PathVariable(value = "bucket") String bucket,
         @PathVariable(value = "filename") String filename,
         HttpServletResponse httpResponse
-    ) throws Exception {
+    ) {
         fileService.download(bucket, filename, httpResponse);
         return ResponseEntity.ok().build();
     }
@@ -80,7 +80,7 @@ public class FileController {
     public ResponseEntity<String> url(
         @PathVariable(value = "bucket") String bucket,
         @PathVariable(value = "filename") String filename
-    ) throws Exception {
+    ) {
         String url = fileService.url(bucket, filename, (int) TimeUnit.DAYS.toSeconds(IntegerConstant.SEVEN));
         return ResponseEntity.ok(url);
     }
@@ -97,7 +97,7 @@ public class FileController {
         @PathVariable(value = "bucket") String bucket,
         @PathVariable(value = "filename") String filename,
         @PathVariable(value = "expiry") Integer expiry
-    ) throws Exception {
+    ) {
         String url = fileService.url(bucket, filename, expiry);
         return ResponseEntity.ok(url);
     }

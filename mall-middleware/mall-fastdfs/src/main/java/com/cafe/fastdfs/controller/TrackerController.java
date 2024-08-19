@@ -32,7 +32,7 @@ public class TrackerController {
     @ApiLogPrint(value = "获取跟踪器地址")
     @ApiOperation(value = "获取跟踪器地址")
     @GetMapping(value = "/url")
-    public ResponseEntity<String> url() throws Exception {
+    public ResponseEntity<String> url() {
         String trackerUrl = trackerService.url();
         return ResponseEntity.ok(trackerUrl);
     }

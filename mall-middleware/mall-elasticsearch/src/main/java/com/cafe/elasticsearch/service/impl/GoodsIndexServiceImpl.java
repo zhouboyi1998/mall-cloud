@@ -5,6 +5,7 @@ import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.elasticsearch.index.GoodsIndex;
 import com.cafe.elasticsearch.service.GoodsIndexService;
+import lombok.SneakyThrows;
 import org.apache.commons.lang3.ObjectUtils;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
@@ -29,7 +30,6 @@ import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -49,16 +49,18 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
         this.restHighLevelClient = restHighLevelClient;
     }
 
+    @SneakyThrows
     @Override
-    public GetResponse one(String id) throws IOException {
+    public GetResponse one(String id) {
         // 组装查询请求
         GetRequest getRequest = new GetRequest(ElasticSearchConstant.Goods.INDEX, id);
         // 查询数据
         return restHighLevelClient.get(getRequest, RequestOptions.DEFAULT);
     }
 
+    @SneakyThrows
     @Override
-    public IndexResponse insert(GoodsIndex goodsIndex) throws IOException {
+    public IndexResponse insert(GoodsIndex goodsIndex) {
         // 组装插入请求
         IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.Goods.INDEX)
             .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN))
@@ -68,8 +70,9 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
         return restHighLevelClient.index(indexRequest, RequestOptions.DEFAULT);
     }
 
+    @SneakyThrows
     @Override
-    public UpdateResponse update(GoodsIndex goodsIndex) throws IOException {
+    public UpdateResponse update(GoodsIndex goodsIndex) {
         // 组装更新请求
         UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Goods.INDEX, goodsIndex.getId().toString())
             .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN))
@@ -78,8 +81,9 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
         return restHighLevelClient.update(updateRequest, RequestOptions.DEFAULT);
     }
 
+    @SneakyThrows
     @Override
-    public DeleteResponse delete(String id) throws IOException {
+    public DeleteResponse delete(String id) {
         // 组装删除请求
         DeleteRequest deleteRequest = new DeleteRequest(ElasticSearchConstant.Goods.INDEX, id)
             .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN));
@@ -87,8 +91,9 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
         return restHighLevelClient.delete(deleteRequest, RequestOptions.DEFAULT);
     }
 
+    @SneakyThrows
     @Override
-    public BulkResponse insertBatch(List<GoodsIndex> goodsIndexList) throws IOException {
+    public BulkResponse insertBatch(List<GoodsIndex> goodsIndexList) {
         // 组装批量插入请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
         for (GoodsIndex goodsIndex : goodsIndexList) {
@@ -102,8 +107,9 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
         return restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
     }
 
+    @SneakyThrows
     @Override
-    public BulkResponse updateBatch(List<GoodsIndex> goodsIndexList) throws IOException {
+    public BulkResponse updateBatch(List<GoodsIndex> goodsIndexList) {
         // 组装批量更新请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
         for (GoodsIndex goodsIndex : goodsIndexList) {
@@ -115,8 +121,9 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
         return restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
     }
 
+    @SneakyThrows
     @Override
-    public BulkResponse deleteBatch(List<String> ids) throws IOException {
+    public BulkResponse deleteBatch(List<String> ids) {
         // 组装批量删除请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
         for (String id : ids) {
@@ -127,8 +134,9 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
         return restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
     }
 
+    @SneakyThrows
     @Override
-    public SearchResponse list(String keyword) throws IOException {
+    public SearchResponse list(String keyword) {
         // 组装搜索条件
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder()
             .timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
@@ -144,8 +152,9 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
         return restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
     }
 
+    @SneakyThrows
     @Override
-    public SearchResponse page(Integer current, Integer size, String keyword, String sort, String rule) throws IOException {
+    public SearchResponse page(Integer current, Integer size, String keyword, String sort, String rule) {
         // 组装搜索条件
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder()
             // 分页条件
