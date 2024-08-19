@@ -8,6 +8,7 @@ import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.util.annotation.AnnotationUtil;
 import com.cafe.common.util.aop.AOPUtil;
 import com.cafe.common.util.json.JacksonUtil;
+import lombok.SneakyThrows;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -63,10 +64,10 @@ public class ApiLogConsoleAspect {
      *
      * @param proceedingJoinPoint 连接点
      * @return
-     * @throws Throwable
      */
+    @SneakyThrows
     @Around(value = "pointcut()")
-    public Object doAround(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+    public Object doAround(ProceedingJoinPoint proceedingJoinPoint) {
         // 生成请求ID
         Long requestId = snowflake.nextId();
         // 将请求ID存储到 Slf4J 日志上下文 (MDC) 中

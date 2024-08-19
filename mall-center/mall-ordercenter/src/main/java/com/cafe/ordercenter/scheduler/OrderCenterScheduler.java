@@ -1,5 +1,6 @@
 package com.cafe.ordercenter.scheduler;
 
+import com.cafe.common.constant.date.DateTimeConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.ordercenter.service.OrderCenterService;
 import com.xxl.job.core.biz.model.ReturnT;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @Project: mall-cloud
@@ -31,9 +33,11 @@ public class OrderCenterScheduler {
      * 定时取消超时未支付的订单
      */
     @XxlJob(value = "handleCancelTimeoutUnpaidOrder")
-    public ReturnT<String> handleCancelTimeoutUnpaidOrder() throws Exception {
-        orderCenterService.cancel(LocalDateTime.now(), IntegerConstant.TEN);
-        XxlJobHelper.log("OrderCenterScheduler.handleAutoCancelUnpaidOrder(): auto cancel unpaid order.");
+    public ReturnT<String> handleCancelTimeoutUnpaidOrder() {
+        LocalDateTime now = LocalDateTime.now();
+        orderCenterService.cancel(now, IntegerConstant.TEN);
+        XxlJobHelper.log("OrderCenterScheduler.handleCancelTimeoutUnpaidOrder(): Successful to cancel timeout unpaid order. execute time -> {}",
+            now.format(DateTimeFormatter.ofPattern(DateTimeConstant.DEFAULT_DATE_TIME)));
         return ReturnT.SUCCESS;
     }
 }

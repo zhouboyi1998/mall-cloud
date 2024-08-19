@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -47,24 +46,20 @@ public class GoodsConsumer implements RocketMQListener<String> {
         // 获取上下架标识
         Integer status = Integer.parseInt(String.valueOf(content.get(FieldConstant.STATUS)));
 
-        try {
-            if (GoodsConstant.Status.LAUNCH.equals(status)) {
-                // 获取上架商品的信息
-                List<GoodsIndex> goodsIndexList = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<GoodsIndex>>() {});
-                // 上架商品
-                goodsIndexService.insertBatch(goodsIndexList);
-                // 打印成功上架商品的日志
-                LOGGER.info("GoodsConsumer.onMessage(): Put away goods success! rocketmq message -> {}", message);
-            } else {
-                // 获取下架商品的主键
-                List<String> ids = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<String>>() {});
-                // 下架商品
-                goodsIndexService.deleteBatch(ids);
-                // 打印成功下架商品的日志
-                LOGGER.info("GoodsConsumer.onMessage(): Sold out goods success! rocketmq message -> {}", message);
-            }
-        } catch (IOException e) {
-            LOGGER.error("GoodsConsumer.onMessage(): Failed to update goods index! error message -> {}", e.getMessage(), e);
+        if (GoodsConstant.Status.LAUNCH.equals(status)) {
+            // 获取上架商品的信息
+            List<GoodsIndex> goodsIndexList = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<GoodsIndex>>() {});
+            // 上架商品
+            goodsIndexService.insertBatch(goodsIndexList);
+            // 打印成功上架商品的日志
+            LOGGER.info("GoodsConsumer.onMessage(): Put away goods success! rocketmq message -> {}", message);
+        } else {
+            // 获取下架商品的主键
+            List<String> ids = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<String>>() {});
+            // 下架商品
+            goodsIndexService.deleteBatch(ids);
+            // 打印成功下架商品的日志
+            LOGGER.info("GoodsConsumer.onMessage(): Sold out goods success! rocketmq message -> {}", message);
         }
     }
 }

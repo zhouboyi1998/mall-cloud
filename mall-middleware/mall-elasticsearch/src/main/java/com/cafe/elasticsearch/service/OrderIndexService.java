@@ -7,7 +7,6 @@ import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.update.UpdateResponse;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -24,61 +23,54 @@ public interface OrderIndexService {
      *
      * @param id
      * @return
-     * @throws IOException
      */
-    GetResponse one(String id) throws IOException;
+    GetResponse one(String id);
 
     /**
      * 插入订单索引
      *
      * @param orderIndex
      * @return
-     * @throws IOException
      */
-    IndexResponse insert(OrderIndex orderIndex) throws IOException;
+    IndexResponse insert(OrderIndex orderIndex);
 
     /**
      * 更新订单索引
      *
      * @param orderIndex
      * @return
-     * @throws IOException
      */
-    UpdateResponse update(OrderIndex orderIndex) throws IOException;
+    UpdateResponse update(OrderIndex orderIndex);
 
     /**
      * 删除订单索引
      *
      * @param id
      * @return
-     * @throws IOException
      */
-    DeleteResponse delete(String id) throws IOException;
+    DeleteResponse delete(String id);
 
     /**
      * 批量插入订单索引
      *
      * @param orderIndexList
      * @return
-     * @throws IOException
      */
-    BulkResponse insertBatch(List<OrderIndex> orderIndexList) throws IOException;
+    BulkResponse insertBatch(List<OrderIndex> orderIndexList);
 
     /**
      * 批量更新订单索引
      *
      * @param orderIndexList
      * @return
-     * @throws IOException
      */
-    BulkResponse updateBatch(List<OrderIndex> orderIndexList) throws IOException;
+    BulkResponse updateBatch(List<OrderIndex> orderIndexList);
 
     /**
      * 批量删除订单索引
      *
      * @param ids
      * @return
-     * @throws IOException
      */
-    BulkResponse deleteBatch(List<String> ids) throws IOException;
+    BulkResponse deleteBatch(List<String> ids);
 }

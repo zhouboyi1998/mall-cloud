@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.elasticsearch.controller
@@ -41,7 +39,7 @@ public class IndexController {
     @ApiOperation(value = "判断索引是否存在")
     @ApiImplicitParam(value = "索引名称", name = "index", dataType = "String", paramType = "path", required = true)
     @GetMapping(value = "/{index}")
-    public ResponseEntity<Boolean> exists(@PathVariable(value = "index") String index) throws IOException {
+    public ResponseEntity<Boolean> exists(@PathVariable(value = "index") String index) {
         Boolean exists = indexService.exists(index);
         return ResponseEntity.ok(exists);
     }
@@ -50,7 +48,7 @@ public class IndexController {
     @ApiOperation(value = "创建索引")
     @ApiImplicitParam(value = "索引名称", name = "index", dataType = "String", paramType = "path", required = true)
     @PostMapping(value = "/{index}")
-    public ResponseEntity<CreateIndexResponse> create(@PathVariable(value = "index") String index) throws IOException {
+    public ResponseEntity<CreateIndexResponse> create(@PathVariable(value = "index") String index) {
         CreateIndexResponse createIndexResponse = indexService.create(index);
         return ResponseEntity.ok(createIndexResponse);
     }
@@ -59,7 +57,7 @@ public class IndexController {
     @ApiOperation(value = "删除索引")
     @ApiImplicitParam(value = "索引名称", name = "index", dataType = "String", paramType = "path", required = true)
     @DeleteMapping(value = "/{index}")
-    public ResponseEntity<AcknowledgedResponse> delete(@PathVariable(value = "index") String index) throws IOException {
+    public ResponseEntity<AcknowledgedResponse> delete(@PathVariable(value = "index") String index) {
         AcknowledgedResponse acknowledgedResponse = indexService.delete(index);
         return ResponseEntity.ok(acknowledgedResponse);
     }

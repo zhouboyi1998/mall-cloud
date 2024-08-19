@@ -19,9 +19,8 @@ public interface FileService {
      * @param bucket 存储桶
      * @param file   文件
      * @return
-     * @throws Exception
      */
-    String upload(String bucket, MultipartFile file) throws Exception;
+    String upload(String bucket, MultipartFile file);
 
     /**
      * 下载文件
@@ -30,9 +29,8 @@ public interface FileService {
      * @param filename     文件名
      * @param httpResponse
      * @return
-     * @throws Exception
      */
-    void download(String bucket, String filename, HttpServletResponse httpResponse) throws Exception;
+    void download(String bucket, String filename, HttpServletResponse httpResponse);
 
     /**
      * 获取文件外链
@@ -41,7 +39,6 @@ public interface FileService {
      * @param filename 文件名
      * @param expiry   过期时间 (单位: 秒)
      * @return
-     * @throws Exception
      */
-    String url(String bucket, String filename, Integer expiry) throws Exception;
+    String url(String bucket, String filename, Integer expiry);
 }

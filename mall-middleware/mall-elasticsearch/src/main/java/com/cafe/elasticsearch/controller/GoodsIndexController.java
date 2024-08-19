@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,7 +57,7 @@ public class GoodsIndexController {
     @ApiOperation(value = "获取商品索引")
     @ApiImplicitParam(value = "ElasticSearch id", name = "id", dataType = "String", paramType = "path", required = true)
     @GetMapping(value = "/{id}")
-    public ResponseEntity<GetResponse> one(@PathVariable(value = "id") String id) throws IOException {
+    public ResponseEntity<GetResponse> one(@PathVariable(value = "id") String id) {
         GetResponse getResponse = goodsIndexService.one(id);
         return ResponseEntity.ok(getResponse);
     }
@@ -67,7 +66,7 @@ public class GoodsIndexController {
     @ApiOperation(value = "插入商品索引")
     @ApiImplicitParam(value = "商品索引", name = "goodsIndex", dataType = "GoodsIndex", paramType = "body", required = true)
     @PostMapping(value = "")
-    public ResponseEntity<IndexResponse> insert(@RequestBody GoodsIndex goodsIndex) throws IOException {
+    public ResponseEntity<IndexResponse> insert(@RequestBody GoodsIndex goodsIndex) {
         IndexResponse indexResponse = goodsIndexService.insert(goodsIndex);
         return ResponseEntity.ok(indexResponse);
     }
@@ -76,7 +75,7 @@ public class GoodsIndexController {
     @ApiOperation(value = "更新商品索引")
     @ApiImplicitParam(value = "商品索引", name = "goodsIndex", dataType = "GoodsIndex", paramType = "body", required = true)
     @PutMapping(value = "")
-    public ResponseEntity<UpdateResponse> update(@RequestBody GoodsIndex goodsIndex) throws IOException {
+    public ResponseEntity<UpdateResponse> update(@RequestBody GoodsIndex goodsIndex) {
         UpdateResponse updateResponse = goodsIndexService.update(goodsIndex);
         return ResponseEntity.ok(updateResponse);
     }
@@ -85,7 +84,7 @@ public class GoodsIndexController {
     @ApiOperation(value = "删除商品索引")
     @ApiImplicitParam(value = "ElasticSearch id", name = "id", dataType = "String", paramType = "path", required = true)
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<DeleteResponse> delete(@PathVariable(value = "id") String id) throws IOException {
+    public ResponseEntity<DeleteResponse> delete(@PathVariable(value = "id") String id) {
         DeleteResponse deleteResponse = goodsIndexService.delete(id);
         return ResponseEntity.ok(deleteResponse);
     }
@@ -94,7 +93,7 @@ public class GoodsIndexController {
     @ApiOperation(value = "批量插入商品索引")
     @ApiImplicitParam(value = "商品索引列表", name = "goodsIndexList", dataType = "List<GoodsIndex>", paramType = "body", required = true)
     @PostMapping(value = "/batch")
-    public ResponseEntity<BulkResponse> insertBatch(@RequestBody List<GoodsIndex> goodsIndexList) throws IOException {
+    public ResponseEntity<BulkResponse> insertBatch(@RequestBody List<GoodsIndex> goodsIndexList) {
         BulkResponse bulkResponse = goodsIndexService.insertBatch(goodsIndexList);
         return ResponseEntity.ok(bulkResponse);
     }
@@ -103,7 +102,7 @@ public class GoodsIndexController {
     @ApiOperation(value = "批量更新商品索引")
     @ApiImplicitParam(value = "商品索引列表", name = "goodsIndexList", dataType = "List<GoodsIndex>", paramType = "body", required = true)
     @PutMapping(value = "/batch")
-    public ResponseEntity<BulkResponse> updateBatch(@RequestBody List<GoodsIndex> goodsIndexList) throws IOException {
+    public ResponseEntity<BulkResponse> updateBatch(@RequestBody List<GoodsIndex> goodsIndexList) {
         BulkResponse bulkResponse = goodsIndexService.updateBatch(goodsIndexList);
         return ResponseEntity.ok(bulkResponse);
     }
@@ -112,7 +111,7 @@ public class GoodsIndexController {
     @ApiOperation(value = "批量删除商品索引")
     @ApiImplicitParam(value = "ElasticSearch ids", name = "ids", dataType = "List<String>", paramType = "body", required = true)
     @DeleteMapping(value = "/batch")
-    public ResponseEntity<BulkResponse> deleteBatch(@RequestBody List<String> ids) throws IOException {
+    public ResponseEntity<BulkResponse> deleteBatch(@RequestBody List<String> ids) {
         BulkResponse bulkResponse = goodsIndexService.deleteBatch(ids);
         return ResponseEntity.ok(bulkResponse);
     }
@@ -133,7 +132,7 @@ public class GoodsIndexController {
         @RequestParam(value = "keyword", required = false) String keyword,
         @RequestParam(value = "sort", required = false, defaultValue = ElasticSearchConstant.INDEX_ID) String sort,
         @RequestParam(value = "rule", required = false, defaultValue = DatabaseConstant.Rule.ASC) String rule
-    ) throws IOException {
+    ) {
         SearchResponse searchResponse = goodsIndexService.page(current, size, keyword, sort, rule);
         return ResponseEntity.ok(searchResponse);
     }
@@ -142,7 +141,7 @@ public class GoodsIndexController {
     @ApiOperation(value = "搜索商品索引")
     @ApiImplicitParam(value = "关键词", name = "keyword", dataType = "String", paramType = "query", required = true)
     @GetMapping(value = "/search/index")
-    public ResponseEntity<List<GoodsIndex>> searchIndex(@RequestParam(value = "keyword") String keyword) throws IOException {
+    public ResponseEntity<List<GoodsIndex>> searchIndex(@RequestParam(value = "keyword") String keyword) {
         // 查询商品索引
         SearchResponse searchResponse = goodsIndexService.list(keyword);
         // 获取搜索命中结果数组
@@ -159,7 +158,7 @@ public class GoodsIndexController {
     @ApiOperation(value = "搜索商品ID")
     @ApiImplicitParam(value = "关键词", name = "keyword", dataType = "String", paramType = "query", required = true)
     @GetMapping(value = "/search/id")
-    public ResponseEntity<List<Long>> searchId(@RequestParam(value = "keyword") String keyword) throws IOException {
+    public ResponseEntity<List<Long>> searchId(@RequestParam(value = "keyword") String keyword) {
         // 查询商品索引
         SearchResponse searchResponse = goodsIndexService.list(keyword);
         // 获取搜索命中结果数组

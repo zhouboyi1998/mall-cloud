@@ -4,6 +4,7 @@ import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.fastdfs.bo.FileBO;
 import com.cafe.fastdfs.property.FastDFSProperties;
 import com.cafe.fastdfs.service.FileService;
+import lombok.SneakyThrows;
 import org.csource.fastdfs.FileInfo;
 import org.csource.fastdfs.StorageClient;
 import org.csource.fastdfs.TrackerClient;
@@ -33,8 +34,9 @@ public class FileServiceImpl implements FileService {
         this.fastDFSProperties = fastDFSProperties;
     }
 
+    @SneakyThrows
     @Override
-    public String upload(MultipartFile file) throws Exception {
+    public String upload(MultipartFile file) {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
         StorageClient storageClient = new StorageClient(trackerServer, null);
@@ -52,8 +54,9 @@ public class FileServiceImpl implements FileService {
         return StringConstant.SLASH + result[0] + StringConstant.SLASH + result[1];
     }
 
+    @SneakyThrows
     @Override
-    public void download(String group, String filename, HttpServletResponse httpResponse) throws Exception {
+    public void download(String group, String filename, HttpServletResponse httpResponse) {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
         StorageClient storageClient = new StorageClient(trackerServer, null);
@@ -74,16 +77,18 @@ public class FileServiceImpl implements FileService {
         servletOutputStream.flush();
     }
 
+    @SneakyThrows
     @Override
-    public Integer delete(String group, String filename) throws Exception {
+    public Integer delete(String group, String filename) {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
         StorageClient storageClient = new StorageClient(trackerServer, null);
         return storageClient.delete_file(group, filename);
     }
 
+    @SneakyThrows
     @Override
-    public FileInfo info(String group, String filename) throws Exception {
+    public FileInfo info(String group, String filename) {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
         StorageClient storageClient = new StorageClient(trackerServer, null);

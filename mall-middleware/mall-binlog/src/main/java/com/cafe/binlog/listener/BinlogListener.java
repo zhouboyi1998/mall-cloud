@@ -51,8 +51,7 @@ public class BinlogListener implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-
+    public void run(String... args) {
         // 存储 TableId 和 TableName 的对应关系
         Map<Long, String> tableMap = new HashMap<>(8);
 

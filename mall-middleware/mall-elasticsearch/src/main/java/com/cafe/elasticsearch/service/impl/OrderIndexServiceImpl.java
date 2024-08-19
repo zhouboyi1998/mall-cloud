@@ -5,6 +5,7 @@ import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.elasticsearch.index.OrderIndex;
 import com.cafe.elasticsearch.service.OrderIndexService;
+import lombok.SneakyThrows;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteRequest;
@@ -22,7 +23,6 @@ import org.elasticsearch.common.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.List;
 
 /**
@@ -42,16 +42,18 @@ public class OrderIndexServiceImpl implements OrderIndexService {
         this.restHighLevelClient = restHighLevelClient;
     }
 
+    @SneakyThrows
     @Override
-    public GetResponse one(String id) throws IOException {
+    public GetResponse one(String id) {
         // 组装查询请求
         GetRequest getRequest = new GetRequest(ElasticSearchConstant.Order.INDEX, id);
         // 查询数据
         return restHighLevelClient.get(getRequest, RequestOptions.DEFAULT);
     }
 
+    @SneakyThrows
     @Override
-    public IndexResponse insert(OrderIndex orderIndex) throws IOException {
+    public IndexResponse insert(OrderIndex orderIndex) {
         // 组装插入请求
         IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.Order.INDEX)
             .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN))
@@ -61,8 +63,9 @@ public class OrderIndexServiceImpl implements OrderIndexService {
         return restHighLevelClient.index(indexRequest, RequestOptions.DEFAULT);
     }
 
+    @SneakyThrows
     @Override
-    public UpdateResponse update(OrderIndex orderIndex) throws IOException {
+    public UpdateResponse update(OrderIndex orderIndex) {
         // 组装更新请求
         UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Order.INDEX, orderIndex.getId().toString())
             .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN))
@@ -71,8 +74,9 @@ public class OrderIndexServiceImpl implements OrderIndexService {
         return restHighLevelClient.update(updateRequest, RequestOptions.DEFAULT);
     }
 
+    @SneakyThrows
     @Override
-    public DeleteResponse delete(String id) throws IOException {
+    public DeleteResponse delete(String id) {
         // 组装删除请求
         DeleteRequest deleteRequest = new DeleteRequest(ElasticSearchConstant.Order.INDEX, id)
             .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN));
@@ -80,8 +84,9 @@ public class OrderIndexServiceImpl implements OrderIndexService {
         return restHighLevelClient.delete(deleteRequest, RequestOptions.DEFAULT);
     }
 
+    @SneakyThrows
     @Override
-    public BulkResponse insertBatch(List<OrderIndex> orderIndexList) throws IOException {
+    public BulkResponse insertBatch(List<OrderIndex> orderIndexList) {
         // 组装批量插入请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
         for (OrderIndex orderIndex : orderIndexList) {
@@ -95,8 +100,9 @@ public class OrderIndexServiceImpl implements OrderIndexService {
         return restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
     }
 
+    @SneakyThrows
     @Override
-    public BulkResponse updateBatch(List<OrderIndex> orderIndexList) throws IOException {
+    public BulkResponse updateBatch(List<OrderIndex> orderIndexList) {
         // 组装批量更新请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
         for (OrderIndex orderIndex : orderIndexList) {
@@ -108,8 +114,9 @@ public class OrderIndexServiceImpl implements OrderIndexService {
         return restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
     }
 
+    @SneakyThrows
     @Override
-    public BulkResponse deleteBatch(List<String> ids) throws IOException {
+    public BulkResponse deleteBatch(List<String> ids) {
         // 组装批量删除请求
         BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
         for (String id : ids) {

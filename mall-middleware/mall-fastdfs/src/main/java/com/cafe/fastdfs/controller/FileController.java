@@ -42,7 +42,7 @@ public class FileController {
     @ApiOperation(value = "上传文件")
     @ApiImplicitParam(value = "文件", name = "file", dataType = "MultipartFile", paramType = "form", required = true)
     @PostMapping(value = "/upload")
-    public ResponseEntity<String> upload(@RequestParam(value = "file") MultipartFile file) throws Exception {
+    public ResponseEntity<String> upload(@RequestParam(value = "file") MultipartFile file) {
         String filepath = fileService.upload(file);
         return ResponseEntity.ok(filepath);
     }
@@ -58,7 +58,7 @@ public class FileController {
         @RequestParam(value = "group") String group,
         @RequestParam(value = "filename") String filename,
         HttpServletResponse httpResponse
-    ) throws Exception {
+    ) {
         fileService.download(group, filename, httpResponse);
         return ResponseEntity.ok().build();
     }
@@ -73,7 +73,7 @@ public class FileController {
     public ResponseEntity<Integer> delete(
         @RequestParam(value = "group") String group,
         @RequestParam(value = "filename") String filename
-    ) throws Exception {
+    ) {
         Integer count = fileService.delete(group, filename);
         return ResponseEntity.ok(count);
     }
@@ -88,7 +88,7 @@ public class FileController {
     public ResponseEntity<FileInfo> info(
         @RequestParam(value = "group") String group,
         @RequestParam(value = "filename") String filename
-    ) throws Exception {
+    ) {
         FileInfo fileInfo = fileService.info(group, filename);
         return ResponseEntity.ok(fileInfo);
     }

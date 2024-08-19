@@ -2,8 +2,6 @@ package com.cafe.elasticsearch.service;
 
 import org.elasticsearch.action.search.SearchResponse;
 
-import java.io.IOException;
-
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.elasticsearch.service
@@ -17,7 +15,6 @@ public interface ServerService {
      * 查询服务信息
      *
      * @return
-     * @throws IOException
      */
-    SearchResponse info() throws IOException;
+    SearchResponse info();
 }

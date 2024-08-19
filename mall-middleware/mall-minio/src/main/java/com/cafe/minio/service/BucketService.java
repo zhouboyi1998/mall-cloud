@@ -15,34 +15,30 @@ public interface BucketService {
      * 查询存储桶列表
      *
      * @return
-     * @throws Exception
      */
-    List<String> list() throws Exception;
+    List<String> list();
 
     /**
      * 查询存储桶是否存在
      *
      * @param bucket 存储桶
      * @return
-     * @throws Exception
      */
-    Boolean exists(String bucket) throws Exception;
+    Boolean exists(String bucket);
 
     /**
      * 新建存储桶
      *
      * @param bucket 存储桶
      * @return
-     * @throws Exception
      */
-    void create(String bucket) throws Exception;
+    void create(String bucket);
 
     /**
      * 删除存储桶
      *
      * @param bucket 存储桶
      * @return
-     * @throws Exception
      */
-    void remove(String bucket) throws Exception;
+    void remove(String bucket);
 }
