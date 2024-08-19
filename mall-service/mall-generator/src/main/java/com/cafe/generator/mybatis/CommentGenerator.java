@@ -1,6 +1,6 @@
 package com.cafe.generator.mybatis;
 
-import com.cafe.common.enumeration.date.DateTimePatternEnum;
+import com.cafe.common.constant.date.DateTimeConstant;
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
 import org.mybatis.generator.api.dom.java.CompilationUnit;
@@ -68,7 +68,7 @@ public class CommentGenerator extends DefaultCommentGenerator {
         topLevelClass.addJavaDocLine(" * @Project: mall-cloud");
         topLevelClass.addJavaDocLine(" * @Package:");
         topLevelClass.addJavaDocLine(" * @Author: zhouboyi");
-        topLevelClass.addJavaDocLine(" * @Date: " + new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE.getPattern()).format(new Date()));
+        topLevelClass.addJavaDocLine(" * @Date: " + new SimpleDateFormat(DateTimeConstant.DEFAULT_DATE).format(new Date()));
         topLevelClass.addJavaDocLine(" * @Description: " + remarks);
         topLevelClass.addJavaDocLine(" */");
         // 添加 class 注解

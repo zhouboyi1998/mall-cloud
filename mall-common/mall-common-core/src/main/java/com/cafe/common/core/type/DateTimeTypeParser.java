@@ -1,7 +1,7 @@
 package com.cafe.common.core.type;
 
+import com.cafe.common.constant.date.DateTimeConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
-import com.cafe.common.enumeration.date.DateTimePatternEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
@@ -39,7 +39,7 @@ public class DateTimeTypeParser {
         binder.registerCustomEditor(LocalDateTime.class, new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) throws IllegalArgumentException {
-                setValue(LocalDateTime.parse(text, DateTimeFormatter.ofPattern(DateTimePatternEnum.DEFAULT_DATE_TIME.getPattern())));
+                setValue(LocalDateTime.parse(text, DateTimeFormatter.ofPattern(DateTimeConstant.DEFAULT_DATE_TIME)));
             }
         });
 
@@ -47,7 +47,7 @@ public class DateTimeTypeParser {
         binder.registerCustomEditor(LocalDate.class, new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) throws IllegalArgumentException {
-                setValue(LocalDate.parse(text, DateTimeFormatter.ofPattern(DateTimePatternEnum.DEFAULT_DATE.getPattern())));
+                setValue(LocalDate.parse(text, DateTimeFormatter.ofPattern(DateTimeConstant.DEFAULT_DATE)));
             }
         });
 
@@ -55,7 +55,7 @@ public class DateTimeTypeParser {
         binder.registerCustomEditor(LocalTime.class, new PropertyEditorSupport() {
             @Override
             public void setAsText(String text) throws IllegalArgumentException {
-                setValue(LocalTime.parse(text, DateTimeFormatter.ofPattern(DateTimePatternEnum.DEFAULT_TIME.getPattern())));
+                setValue(LocalTime.parse(text, DateTimeFormatter.ofPattern(DateTimeConstant.DEFAULT_TIME)));
             }
         });
 
@@ -65,11 +65,11 @@ public class DateTimeTypeParser {
             public void setAsText(String text) throws IllegalArgumentException {
                 try {
                     // 解析日期时间格式字符串
-                    setValue(new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE_TIME.getPattern()).parse(text));
+                    setValue(new SimpleDateFormat(DateTimeConstant.DEFAULT_DATE_TIME).parse(text));
                 } catch (ParseException e1) {
                     try {
                         // 解析日期格式字符串 (时间为 00:00:00)
-                        setValue(new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE.getPattern()).parse(text));
+                        setValue(new SimpleDateFormat(DateTimeConstant.DEFAULT_DATE).parse(text));
                     } catch (ParseException e2) {
                         try {
                             // 解析时间格式字符串 (日期为当前年月日)
@@ -77,7 +77,7 @@ public class DateTimeTypeParser {
                             int year = calendar.get(Calendar.YEAR);
                             int month = calendar.get(Calendar.MONTH);
                             int date = calendar.get(Calendar.DATE);
-                            calendar.setTime(new SimpleDateFormat(DateTimePatternEnum.DEFAULT_TIME.getPattern()).parse(text));
+                            calendar.setTime(new SimpleDateFormat(DateTimeConstant.DEFAULT_TIME).parse(text));
                             calendar.set(year, month, date);
                             setValue(calendar.getTime());
                         } catch (ParseException e3) {
@@ -96,15 +96,15 @@ public class DateTimeTypeParser {
                 Calendar calendar = Calendar.getInstance();
                 try {
                     // 解析日期时间格式字符串
-                    calendar.setTime(new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE_TIME.getPattern()).parse(text));
+                    calendar.setTime(new SimpleDateFormat(DateTimeConstant.DEFAULT_DATE_TIME).parse(text));
                 } catch (ParseException e1) {
                     try {
                         // 解析日期格式字符串
-                        calendar.setTime(new SimpleDateFormat(DateTimePatternEnum.DEFAULT_DATE.getPattern()).parse(text));
+                        calendar.setTime(new SimpleDateFormat(DateTimeConstant.DEFAULT_DATE).parse(text));
                     } catch (ParseException e2) {
                         try {
                             // 解析时间格式字符串
-                            calendar.setTime(new SimpleDateFormat(DateTimePatternEnum.DEFAULT_TIME.getPattern()).parse(text));
+                            calendar.setTime(new SimpleDateFormat(DateTimeConstant.DEFAULT_TIME).parse(text));
                         } catch (ParseException e3) {
                             LOGGER.error("DateTimeFormatHandler.initBinder(): Can not parse the String text to Calendar type! text -> {}", text, e3);
                             throw new IllegalArgumentException("Can not parse the String text to Calendar type! text -> " + text);
