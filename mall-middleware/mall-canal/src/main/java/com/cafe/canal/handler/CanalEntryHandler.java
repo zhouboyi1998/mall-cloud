@@ -2,10 +2,9 @@ package com.cafe.canal.handler;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.cafe.canal.property.CanalProperties;
-import com.google.protobuf.InvalidProtocolBufferException;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -17,11 +16,10 @@ import java.util.List;
  * @Date: 2022/7/14 0:12
  * @Description: Canal 处理器入口
  */
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class CanalEntryHandler {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(CanalEntryHandler.class);
 
     private final CanalProperties canalProperties;
 
@@ -34,6 +32,7 @@ public class CanalEntryHandler {
      *
      * @param entryList
      */
+    @SneakyThrows
     public void handle(List<CanalEntry.Entry> entryList) {
         // 循环解析每一行变更的数据
         for (CanalEntry.Entry entry : entryList) {
@@ -43,19 +42,12 @@ public class CanalEntryHandler {
                 continue;
             }
 
-            // 获取 RowChange 对象, 其中包含了一行数据变更的所有特征
-            CanalEntry.RowChange rowChange;
-            try {
-                rowChange = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
-            } catch (InvalidProtocolBufferException e) {
-                LOGGER.error("CanalEntryHandler.handle(): Failed to parser from entry store value! entry -> {}, message -> {}", entry, e.getMessage(), e);
-                throw new RuntimeException("CanalEntryHandler.handle(): Failed to parser from entry store value! entry -> " + entry, e);
-            }
-
-            // 获取 Entry Header
+            // 获取 RowChange, 其中包含了一行数据变更的所有特征
+            CanalEntry.RowChange rowChange = CanalEntry.RowChange.parseFrom(entry.getStoreValue());
+            // 获取 Header
             CanalEntry.Header header = entry.getHeader();
             // 打印日志
-            LOGGER.info("CanalEntryHandler.handle(): database -> {}, table -> {}, operation -> {}", header.getSchemaName(), header.getTableName(), header.getEventType());
+            log.info("CanalEntryHandler.handle(): database -> {}, table -> {}, operation -> {}", header.getSchemaName(), header.getTableName(), header.getEventType());
 
             // 判断是否为需要处理的表
             String tableName = header.getSchemaName() + "." + header.getTableName();

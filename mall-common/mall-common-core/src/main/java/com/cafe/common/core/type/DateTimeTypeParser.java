@@ -2,8 +2,7 @@ package com.cafe.common.core.type;
 
 import com.cafe.common.constant.date.DateTimeConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -27,11 +26,10 @@ import java.util.Date;
  * @Date: 2023/8/8 15:51
  * @Description: 日期时间类型解析器
  */
+@Slf4j
 @RestControllerAdvice(annotations = {RestController.class})
 @Order(value = IntegerConstant.SIXTY)
 public class DateTimeTypeParser {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(DateTimeTypeParser.class);
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
@@ -81,7 +79,7 @@ public class DateTimeTypeParser {
                             calendar.set(year, month, date);
                             setValue(calendar.getTime());
                         } catch (ParseException e3) {
-                            LOGGER.error("DateTimeFormatHandler.initBinder(): Can not parse the String text to Date type! text -> {}", text, e3);
+                            log.error("DateTimeFormatHandler.initBinder(): Can not parse the String text to Date type! text -> {}", text, e3);
                             throw new IllegalArgumentException("Can not parse the String text to Date type! text -> " + text);
                         }
                     }
@@ -106,7 +104,7 @@ public class DateTimeTypeParser {
                             // 解析时间格式字符串
                             calendar.setTime(new SimpleDateFormat(DateTimeConstant.DEFAULT_TIME).parse(text));
                         } catch (ParseException e3) {
-                            LOGGER.error("DateTimeFormatHandler.initBinder(): Can not parse the String text to Calendar type! text -> {}", text, e3);
+                            log.error("DateTimeFormatHandler.initBinder(): Can not parse the String text to Calendar type! text -> {}", text, e3);
                             throw new IllegalArgumentException("Can not parse the String text to Calendar type! text -> " + text);
                         }
                     }

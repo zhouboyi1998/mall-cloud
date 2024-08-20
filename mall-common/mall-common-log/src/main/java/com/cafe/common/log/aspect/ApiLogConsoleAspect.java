@@ -9,6 +9,7 @@ import com.cafe.common.util.annotation.AnnotationUtil;
 import com.cafe.common.util.aop.AOPUtil;
 import com.cafe.common.util.json.JacksonUtil;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -18,8 +19,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
@@ -39,12 +38,11 @@ import java.util.Optional;
  * @Description: 接口日志控制台打印切面
  */
 @Profile(value = {AppConstant.DEV, AppConstant.TEST})
+@Slf4j
 @Order(value = IntegerConstant.ONE)
 @Aspect
 @Component
 public class ApiLogConsoleAspect {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ApiLogConsoleAspect.class);
 
     /**
      * 雪花ID生成器
@@ -81,7 +79,7 @@ public class ApiLogConsoleAspect {
         Long duration = System.nanoTime() - startTime;
 
         // 打印执行耗时
-        LOGGER.info("@Around -> Duration: {} ns", duration);
+        log.info("@Around -> Duration: {} ns", duration);
         // 返回目标方法的响应结果
         return result;
     }
@@ -103,19 +101,19 @@ public class ApiLogConsoleAspect {
         Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
 
         // 打印描述信息
-        LOGGER.info("@Before -> Description: {}", AnnotationUtil.findAnnotationField(method, ApiLogPrint.class, ApiLogPrint::description));
+        log.info("@Before -> Description: {}", AnnotationUtil.findAnnotationField(method, ApiLogPrint.class, ApiLogPrint::description));
         // 打印来源IP
-        LOGGER.info("@Before -> Source: {}", request.getRemoteAddr());
+        log.info("@Before -> Source: {}", request.getRemoteAddr());
         // 打印请求URL
-        LOGGER.info("@Before -> URL: {}", request.getRequestURL().toString());
+        log.info("@Before -> URL: {}", request.getRequestURL().toString());
         // 打印请求类型
-        LOGGER.info("@Before -> Type: {}", request.getMethod());
+        log.info("@Before -> Type: {}", request.getMethod());
         // 打印控制器类
-        LOGGER.info("@Before -> Class: {}", joinPoint.getSignature().getDeclaringTypeName());
+        log.info("@Before -> Class: {}", joinPoint.getSignature().getDeclaringTypeName());
         // 打印执行方法
-        LOGGER.info("@Before -> Method: {}", joinPoint.getSignature().getName());
+        log.info("@Before -> Method: {}", joinPoint.getSignature().getName());
         // 打印请求参数
-        LOGGER.info("@Before -> Argument: {}", AOPUtil.findArgumentString(joinPoint));
+        log.info("@Before -> Argument: {}", AOPUtil.findArgumentString(joinPoint));
     }
 
     /**
@@ -127,7 +125,7 @@ public class ApiLogConsoleAspect {
     @AfterReturning(value = "pointcut()", returning = "result")
     public void doAfterReturning(JoinPoint joinPoint, Object result) {
         // 打印响应结果
-        LOGGER.info("@AfterReturning -> Result: {}", JacksonUtil.writeValueAsString(result));
+        log.info("@AfterReturning -> Result: {}", JacksonUtil.writeValueAsString(result));
     }
 
     /**
@@ -139,6 +137,6 @@ public class ApiLogConsoleAspect {
     @AfterThrowing(value = "pointcut()", throwing = "throwable")
     public void doAfterThrowing(JoinPoint joinPoint, Throwable throwable) {
         // 打印异常信息
-        LOGGER.warn("@AfterThrowing -> Throwable: {}", JacksonUtil.writeValueAsString(throwable));
+        log.warn("@AfterThrowing -> Throwable: {}", JacksonUtil.writeValueAsString(throwable));
     }
 }

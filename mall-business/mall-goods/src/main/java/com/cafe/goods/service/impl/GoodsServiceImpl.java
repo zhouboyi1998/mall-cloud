@@ -10,8 +10,7 @@ import com.cafe.goods.bo.Goods;
 import com.cafe.goods.mapper.GoodsMapper;
 import com.cafe.goods.service.GoodsService;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -25,11 +24,10 @@ import java.util.Map;
  * @Date: 2022/10/11 11:36
  * @Description:
  */
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class GoodsServiceImpl implements GoodsService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(GoodsServiceImpl.class);
 
     private final GoodsMapper goodsMapper;
 
@@ -64,6 +62,6 @@ public class GoodsServiceImpl implements GoodsService {
         // 发送消息到 RocketMQ, 通知 ElasticSearch 上下架商品
         rocketMQProducer.convertAndSend(RocketMQConstant.Topic.GOODS_INDEX, content);
         // 打印日志
-        LOGGER.info("GoodsServiceImpl.launch(): rocketmq message -> {}", JacksonUtil.writeValueAsString(content));
+        log.info("GoodsServiceImpl.launch(): rocketmq message -> {}", JacksonUtil.writeValueAsString(content));
     }
 }

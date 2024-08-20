@@ -13,8 +13,7 @@ import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import com.cafe.common.constant.database.DatabaseConstant;
 import com.cafe.generator.plus.config.builder.DataSourceConfigBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -29,9 +28,8 @@ import java.util.Properties;
  * @Date: 2022/4/22 15:37
  * @Description: MyBatis-Plus 代码生成器
  */
+@Slf4j
 public class MyBatisPlusGenerator {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(MyBatisPlusGenerator.class);
 
     private static final String DATABASE_TYPE = "mysql";
 
@@ -53,7 +51,8 @@ public class MyBatisPlusGenerator {
             // 关闭输入流
             inputStream.close();
         } catch (Exception e) {
-            LOGGER.error("MyBatisPlusGenerator: Failed to create properties! message -> {}", e.getMessage(), e);
+            log.error("MyBatisPlusGenerator: Failed to create properties! message -> {}", e.getMessage(), e);
+            System.exit(1);
         }
     }
 

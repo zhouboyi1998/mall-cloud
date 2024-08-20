@@ -2,8 +2,7 @@ package com.cafe.common.core.exception;
 
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.core.result.Result;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -18,11 +17,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * @Date: 2022/9/29 15:27
  * @Description: 全局异常处理器
  */
+@Slf4j
 @RestControllerAdvice(annotations = {RestController.class})
 @Order(value = IntegerConstant.ONE_HUNDRED)
 public class GlobalExceptionHandler {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     /**
      * 业务异常处理
@@ -33,7 +31,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = BusinessException.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<Object> handle(BusinessException e) {
-        LOGGER.error("GlobalExceptionHandler.handle(BusinessException e): code -> {}, message -> {}, data -> {}", e.getCode(), e.getMessage(), e.getData(), e);
+        log.error("GlobalExceptionHandler.handle(BusinessException e): code -> {}, message -> {}, data -> {}", e.getCode(), e.getMessage(), e.getData(), e);
         return Result.builder().code(e.getCode()).message(e.getMessage()).data(e.getData());
     }
 
@@ -46,7 +44,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
     public Result<String> handle(Exception e) {
-        LOGGER.error("GlobalExceptionHandler.handle(Exception e): exception -> {}, message -> {}", e.getClass().getCanonicalName(), e.getMessage(), e);
+        log.error("GlobalExceptionHandler.handle(Exception e): exception -> {}, message -> {}", e.getClass().getCanonicalName(), e.getMessage(), e);
         return Result.fail(e.getMessage());
     }
 }

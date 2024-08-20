@@ -7,6 +7,7 @@ import com.cafe.common.log.model.ApiLog;
 import com.cafe.common.util.annotation.AnnotationUtil;
 import com.cafe.common.util.aop.AOPUtil;
 import com.cafe.common.util.json.JacksonUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -15,8 +16,6 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -36,12 +35,11 @@ import java.util.Optional;
  * @Description: 接口日志消息打印切面
  */
 @Profile(value = {AppConstant.DEV, AppConstant.TEST, AppConstant.PROD, AppConstant.DOCKER})
+@Slf4j
 @Order(value = IntegerConstant.TWO)
 @Aspect
 @Component
 public class ApiLogMessageAspect {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ApiLogMessageAspect.class);
 
     /**
      * 接口日志
@@ -115,6 +113,6 @@ public class ApiLogMessageAspect {
     @After(value = "pointcut()")
     public void doAfter(JoinPoint joinPoint) {
         // 打印接口日志
-        LOGGER.info("{}", JacksonUtil.writeValueAsString(apiLog));
+        log.info("{}", JacksonUtil.writeValueAsString(apiLog));
     }
 }

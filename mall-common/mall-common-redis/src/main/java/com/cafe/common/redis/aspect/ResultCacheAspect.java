@@ -7,13 +7,12 @@ import com.cafe.common.redis.annotation.ResultCache;
 import com.cafe.common.util.aop.AOPUtil;
 import com.cafe.common.util.json.JacksonUtil;
 import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.annotation.AnnotationUtils;
@@ -35,12 +34,11 @@ import java.util.stream.Collectors;
  * @Date: 2023/7/4 17:25
  * @Description: 接口返回结果缓存切面类
  */
+@Slf4j
 @Order
 @Aspect
 @Component
 public class ResultCacheAspect {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(ResultCacheAspect.class);
 
     private final RedisTemplate<String, Object> redisTemplate;
 
@@ -50,15 +48,21 @@ public class ResultCacheAspect {
     }
 
     /**
-     * 配置 @ResultCache 注解为切入点
+     * 切点
      */
     @Pointcut(value = "@annotation(com.cafe.common.redis.annotation.ResultCache)")
-    public void resultCache() {
+    public void pointcut() {
 
     }
 
+    /**
+     * 环绕通知
+     *
+     * @param proceedingJoinPoint
+     * @return
+     */
     @SneakyThrows
-    @Around(value = "resultCache()")
+    @Around(value = "pointcut()")
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint) {
         // 获取目标签名, 转换成方法签名
         MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
@@ -100,7 +104,7 @@ public class ResultCacheAspect {
             return result;
         } catch (Exception e) {
             // 打印异常信息
-            LOGGER.error("ResultCacheAspect.doAround(): class -> {}, method -> {}, message -> {}", className, methodName, e.getMessage(), e);
+            log.error("ResultCacheAspect.doAround(): class -> {}, method -> {}, message -> {}", className, methodName, e.getMessage(), e);
             // 方法执行异常, 返回缓存在 Redis 中的上一次执行结果
             return redisTemplate.opsForValue().get(key.toString());
         }

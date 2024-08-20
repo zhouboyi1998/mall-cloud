@@ -5,8 +5,7 @@ import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.openapicenter.model.API;
 import com.cafe.openapicenter.service.APIService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -23,10 +22,9 @@ import java.net.URI;
  * @Date: 2024/4/23 20:25
  * @Description:
  */
+@Slf4j
 @Service
 public class APIServiceImpl implements APIService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(APIServiceImpl.class);
 
     private final WebClient webClient;
 
@@ -54,7 +52,7 @@ public class APIServiceImpl implements APIService {
                 return sendRequest(api, webClient.options());
             case TRACE:
             default:
-                LOGGER.error("APIServiceImpl.proxy(): Unsupported HTTP Method! api -> {}", JacksonUtil.writeValueAsString(api));
+                log.error("APIServiceImpl.proxy(): Unsupported HTTP Method! api -> {}", JacksonUtil.writeValueAsString(api));
                 return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, "Unsupported HTTP Method!"));
         }
     }
@@ -113,7 +111,7 @@ public class APIServiceImpl implements APIService {
      * @param response
      */
     private void doOnSuccess(API api, ObjectNode response) {
-        LOGGER.info("APIServiceImpl.doOnSuccess(): api -> {}, response -> {}", JacksonUtil.writeValueAsString(api), response);
+        log.info("APIServiceImpl.doOnSuccess(): api -> {}, response -> {}", JacksonUtil.writeValueAsString(api), response);
     }
 
     /**
@@ -124,7 +122,7 @@ public class APIServiceImpl implements APIService {
      * @return
      */
     private Mono<ObjectNode> onErrorResume(API api, Throwable throwable) {
-        LOGGER.error("APIServiceImpl.onErrorResume(): api -> {}, message -> {}", JacksonUtil.writeValueAsString(api), throwable.getMessage(), throwable);
+        log.error("APIServiceImpl.onErrorResume(): api -> {}, message -> {}", JacksonUtil.writeValueAsString(api), throwable.getMessage(), throwable);
         return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, throwable.getMessage()));
     }
 }

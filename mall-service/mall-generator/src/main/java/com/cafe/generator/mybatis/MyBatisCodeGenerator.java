@@ -1,11 +1,10 @@
 package com.cafe.generator.mybatis;
 
+import lombok.extern.slf4j.Slf4j;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;
 import org.mybatis.generator.config.xml.ConfigurationParser;
 import org.mybatis.generator.internal.DefaultShellCallback;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -19,9 +18,8 @@ import java.util.Optional;
  * @Date: 2022/4/22 14:37
  * @Description: MyBatis 代码生成器
  */
+@Slf4j
 public class MyBatisCodeGenerator {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(MyBatisCodeGenerator.class);
 
     private static final String DATABASE_TYPE = "mysql";
 
@@ -52,9 +50,10 @@ public class MyBatisCodeGenerator {
             mybatisGenerator.generate(null);
 
             // 输出警告信息
-            warns.forEach(warn -> LOGGER.warn("MyBatisCodeGenerator.generate(): warn -> {}", warn));
+            warns.forEach(warn -> log.warn("MyBatisCodeGenerator.generate(): warn -> {}", warn));
         } catch (Exception e) {
-            LOGGER.error("MyBatisCodeGenerator.generate(): Failed to generate code! message -> {}", e.getMessage(), e);
+            log.error("MyBatisCodeGenerator.generate(): Failed to generate code! message -> {}", e.getMessage(), e);
+            System.exit(1);
         }
     }
 

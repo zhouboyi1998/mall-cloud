@@ -53,11 +53,11 @@ public class FileController {
         @ApiImplicitParam(value = "文件名", name = "filename", dataType = "String", paramType = "path", required = true)
     })
     @DeleteMapping(value = "/delete/{bucket}/{filename}")
-    public ResponseEntity<Void> delete(
+    public ResponseEntity<Boolean> delete(
         @PathVariable(value = "bucket") String bucket,
         @PathVariable(value = "filename") String filename
     ) {
-        fileService.delete(bucket, filename);
-        return ResponseEntity.ok().build();
+        Boolean code = fileService.delete(bucket, filename);
+        return ResponseEntity.ok(code);
     }
 }

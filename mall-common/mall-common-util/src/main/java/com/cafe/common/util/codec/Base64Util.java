@@ -1,13 +1,11 @@
 package com.cafe.common.util.codec;
 
 import com.cafe.common.enumeration.media.MediaFormatEnum;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.SneakyThrows;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
@@ -19,8 +17,6 @@ import java.util.Base64;
  * @Description: Base64 编码工具类
  */
 public class Base64Util {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(Base64Util.class);
 
     /**
      * 字符串 Base64 编码
@@ -68,14 +64,11 @@ public class Base64Util {
      * @param bufferedImage 图片缓冲
      * @return
      */
+    @SneakyThrows
     public static String encodeImage(BufferedImage bufferedImage, MediaFormatEnum mediaFormat) {
         // 将图片转换成 Base64 编码
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try {
-            ImageIO.write(bufferedImage, mediaFormat.getFormat(), outputStream);
-        } catch (IOException e) {
-            LOGGER.error("Base64Util.encode(): Could not convert image to base64! message -> {}", e.getMessage(), e);
-        }
+        ImageIO.write(bufferedImage, mediaFormat.getFormat(), outputStream);
         return mediaFormat.getBase64Prefix() + Base64.getEncoder().encodeToString(outputStream.toByteArray());
     }
 }

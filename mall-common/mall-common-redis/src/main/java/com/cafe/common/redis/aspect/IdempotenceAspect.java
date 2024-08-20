@@ -40,14 +40,19 @@ public class IdempotenceAspect {
     private final RedisTemplate<String, Object> redisTemplate;
 
     /**
-     * 配置 @Idempotence 注解为切入点
+     * 切点
      */
     @Pointcut(value = "@annotation(com.cafe.common.redis.annotation.Idempotence)")
-    public void idempotence() {
+    public void pointcut() {
 
     }
 
-    @Before(value = "idempotence()")
+    /**
+     * 前置通知
+     *
+     * @param joinPoint
+     */
+    @Before(value = "pointcut()")
     public void doBefore(JoinPoint joinPoint) {
         // 获取目标签名, 转换成方法签名
         MethodSignature signature = (MethodSignature) joinPoint.getSignature();

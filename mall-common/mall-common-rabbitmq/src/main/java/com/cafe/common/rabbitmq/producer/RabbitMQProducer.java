@@ -2,8 +2,7 @@ package com.cafe.common.rabbitmq.producer;
 
 import com.cafe.common.util.json.JacksonUtil;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
 
@@ -14,11 +13,10 @@ import org.springframework.stereotype.Component;
  * @Date: 2022/5/18 15:03
  * @Description: RabbitMQ 消息生产者
  */
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class RabbitMQProducer {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQProducer.class);
 
     private final RabbitTemplate rabbitTemplate;
 
@@ -33,7 +31,7 @@ public class RabbitMQProducer {
         // 将消息内容转换为 JSON 字符串格式
         String message = JacksonUtil.writeValueAsString(content);
         // 打印日志
-        LOGGER.info("RabbitMQProducer.convertAndSend(): rabbitmq message -> {}", message);
+        log.info("RabbitMQProducer.convertAndSend(): rabbitmq message -> {}", message);
         // 发送消息到 RabbitMQ
         rabbitTemplate.convertAndSend(exchange, routingKey, message);
     }

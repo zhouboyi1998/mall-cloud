@@ -3,10 +3,9 @@ package com.cafe.debezium.handler;
 import io.debezium.engine.DebeziumEngine;
 import io.debezium.engine.RecordChangeEvent;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.apache.kafka.connect.data.Struct;
 import org.apache.kafka.connect.source.SourceRecord;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -23,10 +22,9 @@ import java.util.Objects;
 @Component
 public class DebeziumEntryHandler {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DebeziumEntryHandler.class);
-
     private final KafkaContentHandler kafkaContentHandler;
 
+    @SneakyThrows
     public void handle(
         List<RecordChangeEvent<SourceRecord>> recordChangeEvents,
         DebeziumEngine.RecordCommitter<RecordChangeEvent<SourceRecord>> recordCommitter
@@ -42,10 +40,7 @@ public class DebeziumEntryHandler {
             kafkaContentHandler.handle(sourceRecordChangeValue);
         }
 
-        try {
-            recordCommitter.markBatchFinished();
-        } catch (InterruptedException e) {
-            LOGGER.error("DebeziumEntryHandler.handle(): Record batch mark error! message -> {}", e.getMessage(), e);
-        }
+        // 标记本批次数据已处理完成
+        recordCommitter.markBatchFinished();
     }
 }

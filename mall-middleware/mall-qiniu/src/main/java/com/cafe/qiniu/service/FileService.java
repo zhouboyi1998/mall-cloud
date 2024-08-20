@@ -27,5 +27,5 @@ public interface FileService {
      * @param filename 文件名
      * @return
      */
-    void delete(String bucket, String filename);
+    Boolean delete(String bucket, String filename);
 }

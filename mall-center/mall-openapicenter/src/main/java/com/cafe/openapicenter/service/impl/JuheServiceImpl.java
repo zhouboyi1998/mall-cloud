@@ -4,8 +4,7 @@ import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.openapicenter.service.JuheService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -20,10 +19,9 @@ import reactor.core.publisher.Mono;
  * @Date: 2024/4/21 4:47
  * @Description:
  */
+@Slf4j
 @Service
 public class JuheServiceImpl implements JuheService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(JuheServiceImpl.class);
 
     private final WebClient webClient;
 
@@ -45,10 +43,10 @@ public class JuheServiceImpl implements JuheService {
                 .build())
             .retrieve()
             .bodyToMono(ObjectNode.class)
-            .doOnSuccess(response -> LOGGER.info("JuheServiceImpl.mobile2region(): api id -> 11, response -> {}", response))
+            .doOnSuccess(response -> log.info("JuheServiceImpl.mobile2region(): api id -> 11, response -> {}", response))
             .onErrorResume(throwable -> {
                 String message = throwable.getMessage();
-                LOGGER.error("JuheServiceImpl.mobile2region(): api id -> 11, message -> {}", message, throwable);
+                log.error("JuheServiceImpl.mobile2region(): api id -> 11, message -> {}", message, throwable);
                 return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, message));
             });
     }
@@ -62,10 +60,10 @@ public class JuheServiceImpl implements JuheService {
                 .build())
             .retrieve()
             .bodyToMono(ObjectNode.class)
-            .doOnSuccess(response -> LOGGER.info("JuheServiceImpl.ip2region(): api id -> 1, response -> {}", response))
+            .doOnSuccess(response -> log.info("JuheServiceImpl.ip2region(): api id -> 1, response -> {}", response))
             .onErrorResume(throwable -> {
                 String message = throwable.getMessage();
-                LOGGER.error("JuheServiceImpl.ip2region(): api id -> 1, message -> {}", message, throwable);
+                log.error("JuheServiceImpl.ip2region(): api id -> 1, message -> {}", message, throwable);
                 return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, message));
             });
     }
@@ -79,10 +77,10 @@ public class JuheServiceImpl implements JuheService {
                 .build())
             .retrieve()
             .bodyToMono(ObjectNode.class)
-            .doOnSuccess(response -> LOGGER.info("JuheServiceImpl.weather(): api id -> 73, response -> {}", response))
+            .doOnSuccess(response -> log.info("JuheServiceImpl.weather(): api id -> 73, response -> {}", response))
             .onErrorResume(throwable -> {
                 String message = throwable.getMessage();
-                LOGGER.error("JuheServiceImpl.weather(): api id -> 73, message -> {}", message, throwable);
+                log.error("JuheServiceImpl.weather(): api id -> 73, message -> {}", message, throwable);
                 return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, message));
             });
     }
