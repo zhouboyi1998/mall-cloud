@@ -9,8 +9,8 @@ import com.cafe.common.util.json.JacksonUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.nimbusds.jose.JWSObject;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authorization.AuthorizationDecision;
@@ -21,7 +21,6 @@ import org.springframework.security.web.server.authorization.AuthorizationContex
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
-import java.text.ParseException;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,14 +31,14 @@ import java.util.Optional;
  * @Date: 2022/5/10 23:02
  * @Description: 授权管理器
  */
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class AuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AuthorizationManager.class);
-
     private final RedisTemplate<String, Object> redisTemplate;
 
+    @SneakyThrows
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {
         // 获取 Request
@@ -51,17 +50,13 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
             .orElseThrow(NullPointerException::new);
         // 移除 Token 中的令牌头, 获取 Access Token
         String accessToken = token.replace(RequestConstant.Header.BEARER_PREFIX, StringConstant.EMPTY);
-        try {
-            // 解析 Access Token
-            JWSObject jwsObject = JWSObject.parse(accessToken);
-            // 从解析后的 Access Token 中获取载荷
-            String payload = jwsObject.getPayload().toString();
-            // 解析载荷获取用户详细信息
-            UserDetails userDetails = JacksonUtil.readValue(payload, UserDetails.class);
-            LOGGER.info("AuthorizationManager.check(): user id -> {}, client id -> {}, menu path -> {}", userDetails.getUserId(), userDetails.getClientId(), menuPath);
-        } catch (ParseException e) {
-            LOGGER.error("AuthorizationManager.check(): Could not parse token! access token -> {}, message -> {}", accessToken, e.getMessage(), e);
-        }
+        // 解析 Access Token
+        JWSObject jwsObject = JWSObject.parse(accessToken);
+        // 从解析后的 Access Token 中获取载荷
+        String payload = jwsObject.getPayload().toString();
+        // 解析载荷获取用户详细信息
+        UserDetails userDetails = JacksonUtil.readValue(payload, UserDetails.class);
+        log.info("AuthorizationManager.check(): user id -> {}, client id -> {}, menu path -> {}", userDetails.getUserId(), userDetails.getClientId(), menuPath);
 
         // 获取可以访问当前菜单的角色列表
         List<String> roleNameList = JacksonUtil.convertValue(redisTemplate.opsForHash().get(RedisConstant.MENU_ROLE_MAP, menuPath), new TypeReference<List<String>>() {});

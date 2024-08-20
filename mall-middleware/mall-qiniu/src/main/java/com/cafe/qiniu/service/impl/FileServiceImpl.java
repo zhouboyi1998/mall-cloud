@@ -9,8 +9,7 @@ import com.qiniu.storage.UploadManager;
 import com.qiniu.util.Auth;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -23,11 +22,10 @@ import java.util.Objects;
  * @Date: 2023/10/18 11:33
  * @Description:
  */
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class FileServiceImpl implements FileService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(FileServiceImpl.class);
 
     private final Auth auth;
 
@@ -48,21 +46,20 @@ public class FileServiceImpl implements FileService {
         if (Objects.nonNull(originalFilename) && originalFilename.contains(StringConstant.POINT)) {
             filename.append(originalFilename.substring(originalFilename.indexOf(StringConstant.POINT)));
         }
-
         // 生成文件上传令牌
         String uploadToken = auth.uploadToken(bucket);
         // 上传文件
         Response response = uploadManager.put(file.getBytes(), filename.toString(), uploadToken);
-        LOGGER.info("FileServiceImpl.upload(): response -> {}", response);
-
+        log.info("FileServiceImpl.upload(): Successful to upload file to Qiniu OSS! response body -> {}", response.bodyString());
         return StringConstant.SLASH + bucket + StringConstant.SLASH + filename;
     }
 
     @SneakyThrows
     @Override
-    public void delete(String bucket, String filename) {
+    public Boolean delete(String bucket, String filename) {
         // 删除文件
         Response response = bucketManager.delete(bucket, filename);
-        LOGGER.info("FileServiceImpl.delete(): response -> {}", response);
+        log.info("FileServiceImpl.delete(): Successful to delete file from Qiniu OSS! response body -> {}", response.bodyString());
+        return true;
     }
 }

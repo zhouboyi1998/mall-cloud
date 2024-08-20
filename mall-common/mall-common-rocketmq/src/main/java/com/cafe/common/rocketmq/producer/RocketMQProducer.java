@@ -2,9 +2,8 @@ package com.cafe.common.rocketmq.producer;
 
 import com.cafe.common.util.json.JacksonUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,11 +13,10 @@ import org.springframework.stereotype.Component;
  * @Date: 2023/4/24 21:58
  * @Description: RocketMQ 消息生产者
  */
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class RocketMQProducer {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(RocketMQProducer.class);
 
     private final RocketMQTemplate rocketMQTemplate;
 
@@ -32,7 +30,7 @@ public class RocketMQProducer {
         // 将消息内容转换为 JSON 字符串格式
         String message = JacksonUtil.writeValueAsString(content);
         // 打印日志
-        LOGGER.info("RocketMQProducer.convertAndSend(): rocketmq message -> {}", message);
+        log.info("RocketMQProducer.convertAndSend(): rocketmq message -> {}", message);
         // 发送消息到 RocketMQ
         rocketMQTemplate.convertAndSend(topic, message);
     }

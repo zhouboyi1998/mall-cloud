@@ -10,8 +10,7 @@ import com.cafe.user.feign.RoleFeign;
 import com.cafe.user.feign.UserFeign;
 import com.cafe.user.model.User;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.CredentialsExpiredException;
@@ -32,11 +31,10 @@ import java.util.Optional;
  * @Date: 2022/5/6 11:19
  * @Description: 用户详细信息加载实现类
  */
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class UserDetailsServiceImpl implements UserDetailsExtensionService {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserDetailsServiceImpl.class);
 
     private final HttpServletRequest request;
 
@@ -64,7 +62,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
         UserInfo userDetails = new UserInfo(UserInfo.PrincipalType.USERNAME, username, user.getId(), user.getUsername(), user.getPassword(), user.getStatus(), AuthorityUtils.createAuthorityList(roleNameArray));
         // 校验用户状态
         validateUserDetails(userDetails);
-        LOGGER.info("UserDetailsServiceImpl.loadUserByUsername(): client id -> {}, username -> {}", clientId, username);
+        log.info("UserDetailsServiceImpl.loadUserByUsername(): client id -> {}, username -> {}", clientId, username);
         return userDetails;
     }
 
@@ -88,7 +86,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
         UserInfo userDetails = new UserInfo(UserInfo.PrincipalType.MOBILE, mobile, user.getId(), user.getUsername(), user.getPassword(), user.getStatus(), AuthorityUtils.createAuthorityList(roleNameArray));
         // 校验用户状态
         validateUserDetails(userDetails);
-        LOGGER.info("UserDetailsServiceImpl.loadUserByMobile(): client id -> {}, mobile -> {}", clientId, mobile);
+        log.info("UserDetailsServiceImpl.loadUserByMobile(): client id -> {}, mobile -> {}", clientId, mobile);
         return userDetails;
     }
 
@@ -112,7 +110,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
         UserInfo userDetails = new UserInfo(UserInfo.PrincipalType.EMAIL, email, user.getId(), user.getUsername(), user.getPassword(), user.getStatus(), AuthorityUtils.createAuthorityList(roleNameArray));
         // 校验用户状态
         validateUserDetails(userDetails);
-        LOGGER.info("UserDetailsServiceImpl.loadUserByEmail(): client id -> {}, email -> {}", clientId, email);
+        log.info("UserDetailsServiceImpl.loadUserByEmail(): client id -> {}, email -> {}", clientId, email);
         return userDetails;
     }
 

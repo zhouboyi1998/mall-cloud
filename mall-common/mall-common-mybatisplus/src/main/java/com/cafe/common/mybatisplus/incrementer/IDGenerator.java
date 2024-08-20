@@ -3,8 +3,7 @@ package com.cafe.common.mybatisplus.incrementer;
 import com.baomidou.mybatisplus.core.incrementer.IdentifierGenerator;
 import com.cafe.id.feign.IDFeign;
 import lombok.RequiredArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 /**
@@ -14,11 +13,10 @@ import org.springframework.stereotype.Component;
  * @Date: 2022/11/1 16:59
  * @Description: MyBatis-Plus ID 生成器实现类
  */
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class IDGenerator implements IdentifierGenerator {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(IDGenerator.class);
 
     private final IDFeign idFeign;
 
@@ -26,7 +24,7 @@ public class IDGenerator implements IdentifierGenerator {
     public Number nextId(Object entity) {
         String name = entity.getClass().getName();
         Long id = idFeign.nextId().getBody();
-        LOGGER.info("IDGenerator.nextId(): Generate <{}> primary key -> {}", name, id);
+        log.info("IDGenerator.nextId(): Generate <{}> primary key -> {}", name, id);
         return id;
     }
 }

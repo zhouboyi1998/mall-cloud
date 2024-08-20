@@ -8,10 +8,9 @@ import com.cafe.elasticsearch.index.GoodsIndex;
 import com.cafe.elasticsearch.service.GoodsIndexService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -24,19 +23,18 @@ import java.util.Map;
  * @Date: 2022/11/3 15:24
  * @Description: RocketMQ 商品消息消费者
  */
+@Slf4j
 @RequiredArgsConstructor
 @Component
 @RocketMQMessageListener(topic = RocketMQConstant.Topic.GOODS_INDEX, consumerGroup = RocketMQConstant.ConsumerGroup.ELASTICSEARCH)
 public class GoodsConsumer implements RocketMQListener<String> {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(GoodsConsumer.class);
 
     private final GoodsIndexService goodsIndexService;
 
     @Override
     public void onMessage(String message) {
         // 打印成功接收消息的日志
-        LOGGER.info("GoodsConsumer.onMessage(): rocketmq message -> {}", message);
+        log.info("GoodsConsumer.onMessage(): rocketmq message -> {}", message);
         // 获取消息内容
         Map<String, Object> content = JacksonUtil.readValue(message, new TypeReference<Map<String, Object>>() {});
         // 获取上下架标识
@@ -48,14 +46,14 @@ public class GoodsConsumer implements RocketMQListener<String> {
             // 上架商品
             goodsIndexService.insertBatch(goodsIndexList);
             // 打印成功上架商品的日志
-            LOGGER.info("GoodsConsumer.onMessage(): Put away goods success! rocketmq message -> {}", message);
+            log.info("GoodsConsumer.onMessage(): Put away goods success! rocketmq message -> {}", message);
         } else {
             // 获取下架商品的主键
             List<String> ids = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<String>>() {});
             // 下架商品
             goodsIndexService.deleteBatch(ids);
             // 打印成功下架商品的日志
-            LOGGER.info("GoodsConsumer.onMessage(): Sold out goods success! rocketmq message -> {}", message);
+            log.info("GoodsConsumer.onMessage(): Sold out goods success! rocketmq message -> {}", message);
         }
     }
 }
