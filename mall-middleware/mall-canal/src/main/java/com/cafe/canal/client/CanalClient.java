@@ -29,6 +29,7 @@ public class CanalClient implements InitializingBean {
 
     private final CanalEntryHandler canalEntryHandler;
 
+    @SuppressWarnings({"InfiniteLoopStatement", "BusyWait"})
     @SneakyThrows
     @Override
     public void afterPropertiesSet() {

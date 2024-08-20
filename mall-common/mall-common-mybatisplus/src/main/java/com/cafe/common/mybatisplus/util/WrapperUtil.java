@@ -64,6 +64,7 @@ public class WrapperUtil {
      * @param <Children>
      * @return
      */
+    @SuppressWarnings("unchecked")
     public static <T, R, Children extends AbstractWrapper<T, R, Children>> AbstractWrapper<T, R, Children> createWrapper(T model, AbstractWrapper<T, R, Children> wrapper) {
         // 获取所有属性
         Field[] fields = model.getClass().getDeclaredFields();
