@@ -41,16 +41,14 @@ public class OrderCenterController {
     @ApiOperation(value = "提交订单")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "地址id", name = "addressId", dataType = "Long", paramType = "path", required = true),
-        @ApiImplicitParam(value = "购物车视图模型列表", name = "cartVOList", dataType = "List<CartVO>", paramType = "body", required = true)
+        @ApiImplicitParam(value = "购物车商品列表", name = "cartVOList", dataType = "List<CartVO>", paramType = "body", required = true)
     })
-    @PostMapping(value = "/submit/{addressId}/{channel}/{invoice}")
+    @PostMapping(value = "/submit/{addressId}")
     public ResponseEntity<OrderVO> submit(
         @PathVariable(value = "addressId") Long addressId,
-        @PathVariable(value = "channel") Integer channel,
-        @PathVariable(value = "invoice") Integer invoice,
         @RequestBody List<CartVO> cartVOList
     ) {
-        OrderVO orderVO = orderCenterService.submit(addressId, channel, invoice, cartVOList);
+        OrderVO orderVO = orderCenterService.submit(addressId, cartVOList);
         // 发送消息到 Kafka
         kafkaProducer.send(KafkaConstant.Topic.ORDER_INDEX, orderVO);
         return ResponseEntity.ok(orderVO);
