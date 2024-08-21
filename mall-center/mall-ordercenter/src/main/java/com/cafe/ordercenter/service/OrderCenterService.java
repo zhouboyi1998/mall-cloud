@@ -19,12 +19,10 @@ public interface OrderCenterService {
      * 提交订单
      *
      * @param addressId
-     * @param channel
-     * @param invoice
      * @param cartVOList
      * @return
      */
-    OrderVO submit(Long addressId, Integer channel, Integer invoice, List<CartVO> cartVOList);
+    OrderVO submit(Long addressId, List<CartVO> cartVOList);
 
     /**
      * 取消超时未支付的订单

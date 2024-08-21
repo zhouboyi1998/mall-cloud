@@ -32,6 +32,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -62,21 +63,25 @@ public class OrderCenterServiceImpl implements OrderCenterService {
 
     @GlobalTransactional
     @Override
-    public OrderVO submit(Long addressId, Integer channel, Integer invoice, List<CartVO> cartVOList) {
-        // 查询下单购买的所有商品的
-        List<Goods> goodsList = selectGoodsList(cartVOList);
+    public OrderVO submit(Long addressId, List<CartVO> cartVOList) {
+        // 查询下单商品的详细信息
+        CompletableFuture<List<Goods>> selectGoodsListFuture = CompletableFuture.supplyAsync(() -> selectGoodsList(cartVOList));
         // 查询收货地址
-        Address address = selectAddress(addressId);
-        // 查询区域
-        AreaDetailVO areaDetailVO = selectAreaDetailVO(address);
+        CompletableFuture<Address> selectAddressFuture = CompletableFuture.supplyAsync(() -> selectAddress(addressId));
+        // 查询收货地址的所属区域
+        CompletableFuture<AreaDetailVO> selectAreaDetailVOFuture = selectAddressFuture.thenApplyAsync(this::selectAreaDetailVO);
         // 扣减库存
-        outboundStock(cartVOList);
+        CompletableFuture<Void> outboundStockFuture = CompletableFuture.runAsync(() -> outboundStock(cartVOList));
         // 创建订单
-        return createOrder(channel, invoice, cartVOList, goodsList, address, areaDetailVO);
+        CompletableFuture.allOf(selectGoodsListFuture, selectAreaDetailVOFuture);
+        CompletableFuture<OrderVO> createOrderFuture = CompletableFuture.supplyAsync(() -> createOrder(cartVOList, selectGoodsListFuture.join(), selectAddressFuture.join(), selectAreaDetailVOFuture.join()));
+        // 业务流程全部执行完成, 返回订单信息
+        CompletableFuture.allOf(outboundStockFuture, createOrderFuture);
+        return createOrderFuture.join();
     }
 
     /**
-     * 查询下单购买的所有商品
+     * 查询下单商品的详细信息
      *
      * @param cartVOList
      * @return
@@ -113,7 +118,7 @@ public class OrderCenterServiceImpl implements OrderCenterService {
     }
 
     /**
-     * 查询区域
+     * 查询收货地址的所属区域
      *
      * @param address
      * @return
@@ -144,15 +149,13 @@ public class OrderCenterServiceImpl implements OrderCenterService {
     /**
      * 创建订单
      *
-     * @param channel
-     * @param invoice
      * @param cartVOList
      * @param goodsList
      * @param address
      * @param areaDetailVO
      * @return
      */
-    private OrderVO createOrder(Integer channel, Integer invoice, List<CartVO> cartVOList, List<Goods> goodsList, Address address, AreaDetailVO areaDetailVO) {
+    private OrderVO createOrder(List<CartVO> cartVOList, List<Goods> goodsList, Address address, AreaDetailVO areaDetailVO) {
         // SKU 主键和购买数量映射
         Map<Long, Integer> quantityMap = cartVOList.stream().collect(Collectors.toMap(CartVO::getSkuId, CartVO::getQuantity));
 
@@ -185,8 +188,6 @@ public class OrderCenterServiceImpl implements OrderCenterService {
             .setCoupon(BigDecimalConstant.ZERO)
             .setPostage(postage)
             .setPayment(payment)
-            .setChannel(channel)
-            .setInvoice(invoice)
             .setStatus(IntegerConstant.ZERO);
 
         // 循环生成订单明细
