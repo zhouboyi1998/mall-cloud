@@ -51,12 +51,17 @@ public class CanalProperties {
     private Integer batchSize;
 
     /**
-     * 监听并推送至 RabbitMQ 的数据表
+     * 订阅的数据表
      */
-    private List<String> rabbitTable;
+    private String subscribeTable;
 
     /**
-     * 监听并推送至 RocketMQ 的数据表
+     * 推送至 RabbitMQ 的数据表
      */
-    private List<String> rocketTable;
+    private List<String> rabbitmqTable;
+
+    /**
+     * 推送至 RocketMQ 的数据表
+     */
+    private List<String> rocketmqTable;
 }

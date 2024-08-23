@@ -44,8 +44,8 @@ public class CanalClient implements InitializingBean {
         try {
             // 打开连接
             connector.connect();
-            // 订阅数据库全部表
-            connector.subscribe(".*\\..*");
+            // 订阅的数据表
+            connector.subscribe(canalProperties.getSubscribeTable());
             // 回滚到未进行 ack 的地方，下次 fetch 的时候，可以从最后一个没有 ack 的 message 开始
             connector.rollback();
             while (true) {

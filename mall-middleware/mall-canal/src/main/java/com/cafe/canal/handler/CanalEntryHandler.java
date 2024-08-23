@@ -51,11 +51,11 @@ public class CanalEntryHandler {
 
             // 判断是否为需要处理的表
             String tableName = header.getSchemaName() + "." + header.getTableName();
-            if (canalProperties.getRabbitTable().contains(tableName)) {
+            if (canalProperties.getRabbitmqTable().contains(tableName)) {
                 // 将数据交给 RabbitMQ 消息内容处理器
                 rabbitMQContentHandler.handle(tableName, rowChange.getRowDatasList(), rowChange.getEventType());
             }
-            if (canalProperties.getRocketTable().contains(tableName)) {
+            if (canalProperties.getRocketmqTable().contains(tableName)) {
                 // 将数据交给 RocketMQ 消息内容处理器
                 rocketMQContentHandler.handle(tableName, rowChange.getRowDatasList(), rowChange.getEventType());
             }
