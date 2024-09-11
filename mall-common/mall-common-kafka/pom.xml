@@ -25,11 +25,7 @@
 
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-constant</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-common-util</artifactId>
+            <artifactId>mall-common-jackson</artifactId>
         </dependency>
     </dependencies>
 

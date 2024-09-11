@@ -1,7 +1,8 @@
 package com.cafe.common.rabbitmq.producer;
 
-import com.cafe.common.util.json.JacksonUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,8 @@ public class RabbitMQProducer {
 
     private final RabbitTemplate rabbitTemplate;
 
+    private final ObjectMapper objectMapper;
+
     /**
      * 发送消息到 RabbitMQ
      *
@@ -27,9 +30,10 @@ public class RabbitMQProducer {
      * @param routingKey 路由键
      * @param content    消息内容
      */
+    @SneakyThrows
     public <T> void convertAndSend(String exchange, String routingKey, T content) {
         // 将消息内容转换为 JSON 字符串格式
-        String message = JacksonUtil.writeValueAsString(content);
+        String message = objectMapper.writeValueAsString(content);
         // 打印日志
         log.info("RabbitMQProducer.convertAndSend(): rabbitmq message -> {}", message);
         // 发送消息到 RabbitMQ
