@@ -14,6 +14,9 @@ import com.cafe.order.service.OrderService;
 import com.cafe.order.vo.OrderVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,6 +36,12 @@ public class OrderFlowServiceImpl implements OrderFlowService {
 
     private final OrderItemService orderItemService;
 
+    @Transactional(
+        propagation = Propagation.REQUIRED,
+        rollbackFor = Exception.class,
+        timeout = 30,
+        isolation = Isolation.READ_COMMITTED
+    )
     @Override
     public OrderVO save(OrderVO orderVO) {
         // 保存订单主体
