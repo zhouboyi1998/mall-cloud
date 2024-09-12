@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -16,6 +17,7 @@ import java.util.Objects;
  * @Date: 2023/8/29 17:36
  * @Description: Jackson 序列化工具类
  */
+@DependsOn(value = "jacksonObjectMapper")
 @Component
 public class JacksonUtil {
 
