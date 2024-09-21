@@ -1,19 +1,80 @@
-# Feign 配置
+spring:
+  # 微服务配置
+  cloud:
+    # 负载均衡配置
+    loadbalancer:
+      # 重试配置
+      retry:
+        # 是否开启重试
+        enabled: true
+        # 是否对所有类型的 HTTP 请求都进行重试 (默认: false, 只重试 GET 请求)
+        retry-on-all-operations: false
+        # 对当前服务实例的重试次数
+        max-retries-on-same-service-instance: 1
+        # 切换到另一个服务实例后的重试次数
+        max-retries-on-next-service-instance: 2
+      # 健康检查配置
+      health-check:
+        # 是否开启健康检查
+        repeat-health-check: true
+        # 健康检查的间隔时间 (默认: 25s)
+        interval: 30s
+        # 第一次健康检查的延迟间隔 (默认: 0)
+        initial-delay: 0
+    # Sentinel 配置
+    sentinel:
+      # 是否开启 Sentinel 熔断限流
+      enabled: true
+
+# Ribbon 负载均衡配置
+ribbon:
+  restclient:
+    # 是否选择 RestClient 作为 HTTP 请求客户端
+    enabled: false
+  okhttp:
+    # 是否选择 OkHttp 作为 HTTP 请求客户端
+    enabled: true
+  # Ribbon LoadBalancer 饥饿加载配置
+  eager-load:
+    enabled: true
+    # 启动时立即加载以下服务的 LoadBalancer
+    clients:
+      - mall-id
+
+# Hystrix 熔断限流配置
+hystrix:
+  # Hystrix 指标配置
+  metrics:
+    # 是否开启监控指标
+    enabled: true
+    # 监控指标刷新的间隔时间
+    polling-interval-ms: 5000
+
+# Feign 远程调用配置
 feign:
   httpclient:
-    enabled: true
+    # 是否选择 HttpClient 作为 HTTP 请求客户端
+    enabled: false
   okhttp:
+    # 是否选择 OkHttp 作为 HTTP 请求客户端
     enabled: true
   hystrix:
+    # 是否选择 Hystrix 作为熔断限流器
     enabled: false
   sentinel:
+    # 是否选择 Sentinel 作为熔断限流器
     enabled: true
+  # FeignClient 配置
   client:
     config:
+      # 默认配置
       default:
-        # 超时时间 (单位: 毫秒)
+        # 日志级别
+        logLevel: BASIC
+        # 连接的超时时间 (单位: 毫秒)
         connectTimeout: 10000
-        readTimeout: 10000
+        # 处理的超时时间 (单位: 毫秒)
+        readTimeout: 60000
 
 # Seata 配置
 seata:
