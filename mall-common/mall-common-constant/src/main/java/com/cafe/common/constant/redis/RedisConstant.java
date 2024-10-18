@@ -25,9 +25,9 @@ public class RedisConstant {
     public static final String CAPTCHA_PREFIX = "VALIDATE:CAPTCHA_";
 
     /**
-     * 返回结果Key前缀
+     * 异常应急返回结果Key前缀
      */
-    public static final String RESULT_PREFIX = "CACHE:RESULT_";
+    public static final String FALLBACK_PREFIX = "CACHE:FALLBACK_";
 
     /**
      * 幂等性Key前缀
