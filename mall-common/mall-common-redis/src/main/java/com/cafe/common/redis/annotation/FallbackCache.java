@@ -16,12 +16,12 @@ import java.util.concurrent.TimeUnit;
  * @Package: com.cafe.common.redis.annotation
  * @Author: zhouboyi
  * @Date: 2023/7/4 17:20
- * @Description: 接口返回结果缓存注解
+ * @Description: 异常应急返回结果缓存注解
  */
 @Documented
 @Retention(value = RetentionPolicy.RUNTIME)
 @Target(value = ElementType.METHOD)
-public @interface ResultCache {
+public @interface FallbackCache {
 
     @AliasFor(value = "name")
     String value() default StringConstant.EMPTY;
