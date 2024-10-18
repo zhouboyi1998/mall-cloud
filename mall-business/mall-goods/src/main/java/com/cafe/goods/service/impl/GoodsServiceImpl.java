@@ -3,7 +3,7 @@ package com.cafe.goods.service.impl;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.model.GoodsConstant;
 import com.cafe.common.constant.rocketmq.RocketMQConstant;
-import com.cafe.common.redis.annotation.ResultCache;
+import com.cafe.common.redis.annotation.FallbackCache;
 import com.cafe.common.rocketmq.producer.RocketMQProducer;
 import com.cafe.common.util.json.JacksonUtil;
 import com.cafe.goods.bo.Goods;
@@ -33,7 +33,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     private final RocketMQProducer rocketMQProducer;
 
-    @ResultCache
+    @FallbackCache
     @Override
     public List<Goods> list(List<Long> ids) {
         return goodsMapper.list(ids);
