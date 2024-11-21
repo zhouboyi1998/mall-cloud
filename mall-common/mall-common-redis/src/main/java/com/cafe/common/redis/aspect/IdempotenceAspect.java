@@ -83,11 +83,10 @@ public class IdempotenceAspect {
             .append(StringConstant.COLON).append(AOPUtil.findArgumentString(joinPoint).hashCode())
             .append(StringConstant.COLON).append(accessToken);
 
-        // 判断是否重复提交
-        if (Boolean.TRUE.equals(redisTemplate.hasKey(key.toString()))) {
+        // 判断是否重复提交 (使用 Redis 的 SETNX 命令实现分布式锁)
+        Boolean absent = redisTemplate.opsForValue().setIfAbsent(key.toString(), StringConstant.EMPTY, idempotence.intervalTime(), idempotence.unit());
+        if (Boolean.FALSE.equals(absent)) {
             throw new RuntimeException("Do not repeat submit!");
-        } else {
-            redisTemplate.opsForValue().set(key.toString(), StringConstant.EMPTY, idempotence.intervalTime(), idempotence.unit());
         }
     }
 }
