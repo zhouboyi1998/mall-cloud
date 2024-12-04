@@ -4,6 +4,7 @@ import com.cafe.common.constant.date.DateTimeConstant;
 import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
 import com.fasterxml.jackson.databind.ser.std.CalendarSerializer;
 import com.fasterxml.jackson.databind.ser.std.DateSerializer;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
@@ -41,6 +42,8 @@ public class JacksonSerializerConfig {
     Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {
         return builder -> builder
             // 序列化器配置
+            .serializerByType(Long.TYPE, ToStringSerializer.instance)
+            .serializerByType(Long.class, ToStringSerializer.instance)
             .serializerByType(Date.class, new DateSerializer(false, new SimpleDateFormat(DateTimeConstant.DEFAULT_DATE_TIME)))
             .serializerByType(Calendar.class, new CalendarSerializer(false, new SimpleDateFormat(DateTimeConstant.DEFAULT_DATE_TIME)))
             .serializerByType(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(DateTimeConstant.DEFAULT_DATE_TIME)))

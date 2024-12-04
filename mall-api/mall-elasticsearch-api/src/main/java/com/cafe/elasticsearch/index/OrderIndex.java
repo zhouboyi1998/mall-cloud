@@ -1,13 +1,13 @@
 package com.cafe.elasticsearch.index;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * @Project: mall-cloud
@@ -21,16 +21,14 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ApiModel(value = "OrderIndex", description = "订单全文索引")
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class OrderIndex {
+public class OrderIndex implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "订单ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "订单编号")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long orderNo;
 
     @ApiModelProperty(value = "收货地址快照")

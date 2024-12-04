@@ -22,3 +22,6 @@ skywalking-agent/
 
 # Apollo
 cache/apollo/
+
+# Mac
+.DS_Store

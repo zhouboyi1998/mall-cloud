@@ -3,8 +3,6 @@ package ${package.Entity};
 #foreach($pkg in ${table.importPackages})
 import ${pkg};
 #end
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 #if(${swagger2})
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -94,10 +92,6 @@ public class ${entity} implements Serializable {
 ## 逻辑删除注解
 #if(${logicDeleteFieldName} == ${field.name})
     @TableLogic
-#end
-## Long 类型字段的 JSON 序列化注解
-#if(${field.columnType} == "LONG")
-    @JsonSerialize(using = ToStringSerializer.class)
 #end
     private ${field.propertyType} ${field.propertyName};
 #end

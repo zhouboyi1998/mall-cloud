@@ -6,8 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -36,23 +34,18 @@ public class OrderItem implements Serializable {
 
     @ApiModelProperty(value = "订单明细ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "订单ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long orderId;
 
     @ApiModelProperty(value = "SKU ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long skuId;
 
     @ApiModelProperty(value = "店铺ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long shopId;
 
     @ApiModelProperty(value = "仓库ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long storageId;
 
     @ApiModelProperty(value = "SKU 名称快照")
