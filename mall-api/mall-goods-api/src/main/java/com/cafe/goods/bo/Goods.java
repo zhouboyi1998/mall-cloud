@@ -1,7 +1,5 @@
 package com.cafe.goods.bo;
 
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -28,35 +26,30 @@ public class Goods implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "SKU ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "SKU 名称")
     private String skuName;
 
     @ApiModelProperty(value = "SPU ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long spuId;
 
     @ApiModelProperty(value = "SPU 名称")
     private String spuName;
 
     @ApiModelProperty(value = "品牌ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long brandId;
 
     @ApiModelProperty(value = "品牌名称")
     private String brandName;
 
     @ApiModelProperty(value = "分类ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long categoryId;
 
     @ApiModelProperty(value = "分类名称")
     private String categoryName;
 
     @ApiModelProperty(value = "店铺ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long shopId;
 
     @ApiModelProperty(value = "SKU 原价")

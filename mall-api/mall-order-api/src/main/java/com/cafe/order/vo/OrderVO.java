@@ -1,8 +1,6 @@
 package com.cafe.order.vo;
 
 import com.cafe.order.model.OrderItem;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -30,15 +28,12 @@ public class OrderVO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "订单ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "订单编号")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long orderNo;
 
     @ApiModelProperty(value = "会员ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long memberId;
 
     @ApiModelProperty(value = "收货地址快照")

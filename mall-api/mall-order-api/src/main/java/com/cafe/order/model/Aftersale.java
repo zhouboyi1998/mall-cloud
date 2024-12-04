@@ -6,8 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -36,15 +34,12 @@ public class Aftersale implements Serializable {
 
     @ApiModelProperty(value = "售后ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "会员ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long memberId;
 
     @ApiModelProperty(value = "订单明细ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long orderItemId;
 
     @ApiModelProperty(value = "售后类型: 0 退货, 1 换货, 2 保障")

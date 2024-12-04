@@ -2,8 +2,6 @@ package com.cafe.solr.index;
 
 import com.cafe.common.constant.solr.SolrConstant;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -33,7 +31,6 @@ public class GoodsIndex implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "SKU ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     @Id
     @Field
     private Long id;
