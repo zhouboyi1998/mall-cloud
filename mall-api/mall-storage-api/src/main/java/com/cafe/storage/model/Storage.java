@@ -6,8 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -35,26 +33,21 @@ public class Storage implements Serializable {
 
     @ApiModelProperty(value = "仓库ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "仓库名称")
     private String storageName;
 
     @ApiModelProperty(value = "店铺ID: 0 平台仓库")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long shopId;
 
     @ApiModelProperty(value = "省份ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long provinceId;
 
     @ApiModelProperty(value = "城市ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long cityId;
 
     @ApiModelProperty(value = "区县ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long districtId;
 
     @ApiModelProperty(value = "仓库具体地址")

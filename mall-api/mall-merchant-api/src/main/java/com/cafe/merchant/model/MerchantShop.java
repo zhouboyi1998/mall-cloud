@@ -5,8 +5,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -34,15 +32,12 @@ public class MerchantShop implements Serializable {
 
     @ApiModelProperty(value = "商家-店铺关联关系ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "商家ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long merchantId;
 
     @ApiModelProperty(value = "店铺ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long shopId;
 
     @ApiModelProperty(value = "职位: 0 店员, 1 店长, 2 店主")
