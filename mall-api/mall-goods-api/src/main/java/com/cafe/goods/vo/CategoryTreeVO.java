@@ -1,8 +1,6 @@
 package com.cafe.goods.vo;
 
 import com.cafe.common.lang.tree.Tree;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -27,11 +25,9 @@ public class CategoryTreeVO extends Tree implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @ApiModelProperty(value = "分类ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long id;
 
     @ApiModelProperty(value = "上级分类ID")
-    @JsonSerialize(using = ToStringSerializer.class)
     private Long parentId;
 
     @ApiModelProperty(value = "分类名称")
