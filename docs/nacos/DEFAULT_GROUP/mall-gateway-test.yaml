@@ -1,4 +1,11 @@
 spring:
+  # Spring Security 安全配置
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          # 获取 JWK 公钥接口
+          jwk-set-uri: http://192.168.44.128:${server.port}/mall-security/jwk/jwk-set
   # Redis 配置
   redis:
     host: 192.168.44.128
