@@ -1,9 +1,9 @@
 package com.cafe.common.core.response;
 
-import com.cafe.common.constant.app.AppConstant;
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
-import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.request.RequestConstant;
+import com.cafe.common.constant.security.SecurityConstant;
 import com.cafe.common.core.result.Result;
 import com.cafe.common.util.json.JacksonUtil;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
-import java.net.URI;
 import java.util.Objects;
 
 /**
@@ -35,8 +34,8 @@ import java.util.Objects;
 @Order(value = IntegerConstant.TWO_HUNDRED)
 public class ResponseBodyHandler implements ResponseBodyAdvice<Object> {
 
-    @Value(value = "${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
-    private URI jwkSetUri;
+    @Value(value = "${spring.application.name}")
+    private String applicationName;
 
     @Override
     public boolean supports(MethodParameter returnType, Class<? extends HttpMessageConverter<?>> converterType) {
@@ -51,8 +50,9 @@ public class ResponseBodyHandler implements ResponseBodyAdvice<Object> {
         if (Boolean.parseBoolean(request.getHeaders().getFirst(RequestConstant.Header.IS_FEIGN))) {
             return body;
         }
-        // 安全模块获取 RSA JWKSet 接口的返回结果, 不需要封装 Result 类型
-        if (Objects.equals(request.getURI().getPath(), jwkSetUri.getPath().replace(AppConstant.MALL_SECURITY_PREFIX, StringConstant.EMPTY))) {
+        // 安全服务获取 JWK 公钥接口的返回结果, 不需要封装 Result 类型
+        if (Objects.equals(applicationName, ServiceConstant.MALL_SECURITY) &&
+            Objects.equals(request.getURI().getPath(), SecurityConstant.JWK_SET_URI_PATH)) {
             return body;
         }
         // 返回结果已经是 Result 类型时, 不需要再次封装
