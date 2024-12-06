@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.user.bo.MenuRoleBO;
+import com.cafe.user.facade.RoleMenuFacade;
 import com.cafe.user.model.RoleMenu;
 import com.cafe.user.service.RoleMenuService;
 import io.swagger.annotations.Api;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -38,6 +40,8 @@ import java.util.List;
 public class RoleMenuController {
 
     private final RoleMenuService roleMenuService;
+
+    private final RoleMenuFacade roleMenuFacade;
 
     @ApiLogPrint(value = "查询角色-菜单关联关系数量")
     @ApiOperation(value = "查询角色-菜单关联关系数量")
@@ -200,5 +204,14 @@ public class RoleMenuController {
     public ResponseEntity<List<MenuRoleBO>> menuRoleBOList(@RequestBody List<Long> menuIds) {
         List<MenuRoleBO> menuRoleBOList = roleMenuService.menuRoleBOList(menuIds);
         return ResponseEntity.ok(menuRoleBOList);
+    }
+
+    @ApiLogPrint(value = "根据菜单路径获取角色名称列表")
+    @ApiOperation(value = "根据菜单路径获取角色名称列表")
+    @ApiImplicitParam(value = "菜单路径", name = "menuPath", dataType = "String", paramType = "query", required = true)
+    @GetMapping(value = "/role-name-list")
+    public ResponseEntity<List<String>> roleNameList(@RequestParam(value = "menuPath") String menuPath) {
+        List<String> roleNameList = roleMenuFacade.roleNameList(menuPath);
+        return ResponseEntity.ok(roleNameList);
     }
 }
