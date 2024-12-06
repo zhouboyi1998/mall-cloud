@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
+import com.cafe.order.facade.OrderFacade;
 import com.cafe.order.model.Order;
 import com.cafe.order.query.OrderQuery;
 import com.cafe.order.service.OrderService;
@@ -39,6 +40,8 @@ import java.util.List;
 public class OrderController {
 
     private final OrderService orderService;
+
+    private final OrderFacade orderFacade;
 
     @ApiLogPrint(value = "查询订单数量")
     @ApiOperation(value = "查询订单数量")
@@ -194,8 +197,8 @@ public class OrderController {
         return ResponseEntity.ok(code);
     }
 
-    @ApiLogPrint(value = "根据查询条件查询订单列表")
-    @ApiOperation(value = "根据查询条件查询订单列表")
+    @ApiLogPrint(value = "根据查询条件查询订单列表 (附带订单明细)")
+    @ApiOperation(value = "根据查询条件查询订单列表 (附带订单明细)")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "页码", name = "current", dataType = "Long", paramType = "path", required = true),
         @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Long", paramType = "path", required = true),
@@ -208,7 +211,7 @@ public class OrderController {
         @RequestBody OrderQuery orderQuery
     ) {
         Page<Order> page = new Page<>(current, size);
-        Page<OrderVO> orderVOPage = orderService.query(page, orderQuery);
+        Page<OrderVO> orderVOPage = orderFacade.query(page, orderQuery);
         return ResponseEntity.ok(orderVOPage);
     }
 }

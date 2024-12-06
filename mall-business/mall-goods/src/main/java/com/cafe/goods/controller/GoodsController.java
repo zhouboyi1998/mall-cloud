@@ -2,6 +2,7 @@ package com.cafe.goods.controller;
 
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.goods.bo.Goods;
+import com.cafe.goods.facade.GoodsFacade;
 import com.cafe.goods.service.GoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -34,6 +35,8 @@ public class GoodsController {
 
     private final GoodsService goodsService;
 
+    private final GoodsFacade goodsFacade;
+
     @ApiLogPrint(value = "查询商品列表")
     @ApiOperation(value = "查询商品列表")
     @GetMapping(value = "/list")
@@ -58,7 +61,7 @@ public class GoodsController {
     })
     @PostMapping(value = "/launch/{status}")
     public ResponseEntity<Integer> launch(@RequestBody List<Long> ids, @PathVariable(value = "status") Integer status) {
-        goodsService.launch(ids, status);
+        goodsFacade.launch(ids, status);
         return ResponseEntity.ok(status);
     }
 }

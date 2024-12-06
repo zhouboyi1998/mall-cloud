@@ -17,18 +17,10 @@ import java.util.List;
 public interface GoodsMapper {
 
     /**
-     * 根据库存量单位ids查询商品列表
+     * 根据 skuIds 查询商品列表
      *
-     * @param ids
-     * @return
+     * @param ids 库存量单位ID列表
+     * @return 商品列表
      */
     List<Goods> list(@Param(value = "ids") List<Long> ids);
-
-    /**
-     * 根据ids更新库存量单位状态
-     *
-     * @param ids
-     * @param status
-     */
-    void updateStatus(@Param(value = "ids") List<Long> ids, @Param(value = "status") Integer status);
 }

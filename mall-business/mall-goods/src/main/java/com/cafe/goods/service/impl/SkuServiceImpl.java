@@ -26,4 +26,9 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     public List<Sku> unlisted(List<Long> skuIds) {
         return skuMapper.unlisted(skuIds);
     }
+
+    @Override
+    public Integer updateStatus(List<Long> ids, Integer status) {
+        return skuMapper.updateStatus(ids, status);
+    }
 }

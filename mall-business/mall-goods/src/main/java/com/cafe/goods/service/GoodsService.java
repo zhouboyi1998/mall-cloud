@@ -14,18 +14,10 @@ import java.util.List;
 public interface GoodsService {
 
     /**
-     * 根据库存量单位ids查询商品列表
+     * 根据 skuIds 查询商品列表
      *
-     * @param ids
-     * @return
+     * @param ids 库存量单位ID列表
+     * @return 商品列表
      */
     List<Goods> list(List<Long> ids);
-
-    /**
-     * 批量上下架商品
-     *
-     * @param ids
-     * @param status
-     */
-    void launch(List<Long> ids, Integer status);
 }
