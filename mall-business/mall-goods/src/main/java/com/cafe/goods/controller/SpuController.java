@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
+import com.cafe.goods.facade.SpuFacade;
 import com.cafe.goods.model.Spu;
 import com.cafe.goods.service.SpuService;
 import com.cafe.goods.vo.SpuVO;
@@ -38,6 +39,8 @@ import java.util.List;
 public class SpuController {
 
     private final SpuService spuService;
+
+    private final SpuFacade spuFacade;
 
     @ApiLogPrint(value = "查询标准化产品单元数量")
     @ApiOperation(value = "查询标准化产品单元数量")
@@ -198,7 +201,7 @@ public class SpuController {
     @ApiImplicitParam(value = "SKU id", name = "skuId", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/vo/{skuId}")
     public ResponseEntity<SpuVO> vo(@PathVariable(value = "skuId") Long skuId) {
-        SpuVO spuVO = spuService.vo(skuId);
+        SpuVO spuVO = spuFacade.vo(skuId);
         return ResponseEntity.ok(spuVO);
     }
 }

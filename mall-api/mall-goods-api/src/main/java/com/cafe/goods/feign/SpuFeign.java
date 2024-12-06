@@ -22,8 +22,8 @@ public interface SpuFeign {
     /**
      * 根据 skuId 查询 SPU 视图模型
      *
-     * @param skuId
-     * @return
+     * @param skuId 库存量单位ID
+     * @return 标准化产品单元VO
      */
     @GetMapping(value = "/vo/{skuId}")
     ResponseEntity<SpuVO> vo(@PathVariable(value = "skuId") Long skuId);

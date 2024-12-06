@@ -20,8 +20,17 @@ public interface SkuMapper extends BaseMapper<Sku> {
     /**
      * 根据ids查询未上架的库存量单位列表
      *
-     * @param skuIds
-     * @return
+     * @param skuIds 库存量单位ID列表
+     * @return 库存量单位列表
      */
     List<Sku> unlisted(@Param(value = "skuIds") List<Long> skuIds);
+
+    /**
+     * 根据ids更新库存量单位状态
+     *
+     * @param ids    库存量单位ID列表
+     * @param status 状态
+     * @return 影响行数
+     */
+    Integer updateStatus(@Param(value = "ids") List<Long> ids, @Param(value = "status") Integer status);
 }

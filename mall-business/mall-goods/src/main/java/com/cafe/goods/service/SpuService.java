@@ -2,7 +2,6 @@ package com.cafe.goods.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cafe.goods.model.Spu;
-import com.cafe.goods.vo.SpuVO;
 
 /**
  * @Project: mall-cloud
@@ -13,11 +12,4 @@ import com.cafe.goods.vo.SpuVO;
  */
 public interface SpuService extends IService<Spu> {
 
-    /**
-     * 根据 skuId 查询 SPU 视图模型
-     *
-     * @param skuId
-     * @return
-     */
-    SpuVO vo(Long skuId);
 }
