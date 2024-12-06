@@ -1,8 +1,8 @@
 package com.cafe.order.controller;
 
 import com.cafe.common.log.annotation.ApiLogPrint;
+import com.cafe.order.facade.OrderFlowFacade;
 import com.cafe.order.model.OrderItem;
-import com.cafe.order.service.OrderFlowService;
 import com.cafe.order.vo.OrderVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -33,14 +33,14 @@ import java.util.List;
 @RequestMapping(value = "/order-flow")
 public class OrderFlowController {
 
-    private final OrderFlowService orderFlowService;
+    private final OrderFlowFacade orderFlowFacade;
 
     @ApiLogPrint(value = "保存订单")
     @ApiOperation(value = "保存订单")
     @ApiImplicitParam(value = "订单VO", name = "orderVO", dataType = "OrderVO", paramType = "body", required = true)
     @PostMapping(value = "/save")
     public ResponseEntity<OrderVO> save(@RequestBody OrderVO orderVO) {
-        OrderVO newOrderVO = orderFlowService.save(orderVO);
+        OrderVO newOrderVO = orderFlowFacade.save(orderVO);
         return ResponseEntity.ok(newOrderVO);
     }
 
@@ -55,7 +55,7 @@ public class OrderFlowController {
         @PathVariable(value = "now") LocalDateTime now,
         @PathVariable(value = "duration") Integer duration
     ) {
-        List<OrderItem> orderItemList = orderFlowService.cancel(now, duration);
+        List<OrderItem> orderItemList = orderFlowFacade.cancel(now, duration);
         return ResponseEntity.ok(orderItemList);
     }
 }

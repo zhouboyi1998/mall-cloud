@@ -1,4 +1,4 @@
-package com.cafe.order.service.impl;
+package com.cafe.order.facade.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
@@ -6,9 +6,9 @@ import com.cafe.common.constant.model.OrderConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
 import com.cafe.order.converter.OrderConverter;
+import com.cafe.order.facade.OrderFlowFacade;
 import com.cafe.order.model.Order;
 import com.cafe.order.model.OrderItem;
-import com.cafe.order.service.OrderFlowService;
 import com.cafe.order.service.OrderItemService;
 import com.cafe.order.service.OrderService;
 import com.cafe.order.vo.OrderVO;
@@ -23,14 +23,14 @@ import java.util.List;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.order.service.impl
+ * @Package: com.cafe.order.facade.impl
  * @Author: zhouboyi
  * @Date: 2023/10/27 15:00
- * @Description: 订单流转业务实现类
+ * @Description: 订单流转防腐层实现类
  */
 @RequiredArgsConstructor
 @Service
-public class OrderFlowServiceImpl implements OrderFlowService {
+public class OrderFlowFacadeImpl implements OrderFlowFacade {
 
     private final OrderService orderService;
 

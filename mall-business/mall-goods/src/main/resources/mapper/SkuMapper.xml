@@ -37,4 +37,13 @@
         AND is_deleted = 0
     </select>
 
+    <update id="updateStatus">
+        UPDATE mall_sku AS k
+        SET k.status = #{status}
+        WHERE k.id IN
+        <foreach collection="ids" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </update>
+
 </mapper>
