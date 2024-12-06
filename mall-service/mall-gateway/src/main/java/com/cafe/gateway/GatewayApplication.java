@@ -1,8 +1,10 @@
 package com.cafe.gateway;
 
 import com.cafe.common.constant.app.AppConstant;
+import com.cafe.common.constant.app.FeignConstant;
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
@@ -13,6 +15,7 @@ import org.springframework.context.annotation.ComponentScan;
  * @Description: Spring Cloud Gateway 网关启动类
  */
 @SpringCloudApplication
+@EnableFeignClients(basePackages = FeignConstant.Client.USER)
 @ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
 public class GatewayApplication {
 

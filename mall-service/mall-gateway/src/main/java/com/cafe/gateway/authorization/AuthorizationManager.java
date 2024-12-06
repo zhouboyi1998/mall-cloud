@@ -2,16 +2,15 @@ package com.cafe.gateway.authorization;
 
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
-import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.core.request.UserDetails;
 import com.cafe.common.util.json.JacksonUtil;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.cafe.user.feign.RoleMenuFeign;
 import com.nimbusds.jose.JWSObject;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.authorization.ReactiveAuthorizationManager;
@@ -21,6 +20,7 @@ import org.springframework.security.web.server.authorization.AuthorizationContex
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +36,7 @@ import java.util.Optional;
 @Component
 public class AuthorizationManager implements ReactiveAuthorizationManager<AuthorizationContext> {
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final RoleMenuFeign roleMenuFeign;
 
     @SneakyThrows
     @Override
@@ -58,8 +58,10 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         UserDetails userDetails = JacksonUtil.readValue(payload, UserDetails.class);
         log.info("AuthorizationManager.check(): user id -> {}, client id -> {}, menu path -> {}", userDetails.getUserId(), userDetails.getClientId(), menuPath);
 
-        // 获取可以访问当前菜单的角色列表
-        List<String> roleNameList = JacksonUtil.convertValue(redisTemplate.opsForHash().get(RedisConstant.MENU_ROLE_MAP, menuPath), new TypeReference<List<String>>() {});
+        // 根据菜单路径, 获取可以访问当前菜单的角色列表
+        List<String> roleNameList = Optional.ofNullable(roleMenuFeign.roleNameList(menuPath))
+            .map(ResponseEntity::getBody)
+            .orElse(new ArrayList<>());
 
         // 当用户认证通过, 且用户的角色可以访问当前菜单, 当前用户可以访问当前请求
         return mono
