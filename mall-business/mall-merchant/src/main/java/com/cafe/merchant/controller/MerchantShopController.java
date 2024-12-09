@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
-import com.cafe.merchant.model.MerchantShop;
+import com.cafe.merchant.model.entity.MerchantShop;
 import com.cafe.merchant.service.MerchantShopService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

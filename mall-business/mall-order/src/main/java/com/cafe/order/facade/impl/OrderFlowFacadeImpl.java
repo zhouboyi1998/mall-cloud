@@ -5,13 +5,13 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.cafe.common.constant.model.OrderConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
-import com.cafe.order.converter.OrderConverter;
 import com.cafe.order.facade.OrderFlowFacade;
-import com.cafe.order.model.Order;
-import com.cafe.order.model.OrderItem;
+import com.cafe.order.model.converter.OrderConverter;
+import com.cafe.order.model.entity.Order;
+import com.cafe.order.model.entity.OrderItem;
+import com.cafe.order.model.vo.OrderVO;
 import com.cafe.order.service.OrderItemService;
 import com.cafe.order.service.OrderService;
-import com.cafe.order.vo.OrderVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -45,7 +45,7 @@ public class OrderFlowFacadeImpl implements OrderFlowFacade {
     @Override
     public OrderVO save(OrderVO orderVO) {
         // 保存订单主体
-        Order order = OrderConverter.INSTANCE.toModel(orderVO);
+        Order order = OrderConverter.INSTANCE.toEntity(orderVO);
         orderService.save(order);
 
         // 使用订单编号获取新保存的订单主体

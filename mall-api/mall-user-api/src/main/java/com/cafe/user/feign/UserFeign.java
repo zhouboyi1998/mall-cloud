@@ -1,7 +1,7 @@
 package com.cafe.user.feign;
 
 import com.cafe.common.core.feign.FeignRequestInterceptor;
-import com.cafe.user.model.User;
+import com.cafe.user.model.entity.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;

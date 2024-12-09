@@ -96,7 +96,7 @@ public class MyBatisPlusGenerator {
             .setIdType(IdType.ASSIGN_ID)
             // 时间类型对应策略
             .setDateType(DateType.TIME_PACK)
-            // Model 命名方式
+            // Entity 命名方式
             .setEntityName("%s")
             // Mapper 命名方式
             .setMapperName("%sMapper")
@@ -121,7 +121,7 @@ public class MyBatisPlusGenerator {
         // 3. 生成路径配置
         PackageConfig packageConfig = new PackageConfig()
             .setParent(properties.getProperty("module-package"))
-            .setEntity(properties.getProperty("model-package"))
+            .setEntity(properties.getProperty("entity-package"))
             .setMapper(properties.getProperty("mapper-package"))
             .setXml(properties.getProperty("xml-package"))
             .setService(properties.getProperty("service-package"))
@@ -144,13 +144,13 @@ public class MyBatisPlusGenerator {
             .setLogicDeleteFieldName(DatabaseConstant.Column.IS_DELETED)
             // Boolean 类型字段是否移除 is 前缀
             .setEntityBooleanColumnRemoveIsPrefix(true)
-            // 是否生成序列化ID
+            // 实体是否生成序列化ID
             .setEntitySerialVersionUID(true)
-            // 是否生成字段常量
+            // 实体是否生成字段常量
             .setEntityColumnConstant(false)
-            // 是否生成链式 Model
+            // 实体是否使用链式 Setter 模型
             .setChainModel(true)
-            // 是否生成 Lombok Model
+            // 实体是否使用 Lombok 注解
             .setEntityLombokModel(true)
             // 是否生成 RESTful 风格 Controller
             .setRestControllerStyle(true)

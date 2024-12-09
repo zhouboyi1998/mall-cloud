@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.user.mapper.RoleMenuMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.user.model.RoleMenu">
+    <resultMap id="BaseResultMap" type="com.cafe.user.model.entity.RoleMenu">
         <id column="id" property="id" />
         <result column="role_id" property="roleId" />
         <result column="menu_id" property="menuId" />
@@ -15,7 +15,7 @@
     <resultMap id="RoleNameListMap" type="java.lang.String">
         <result column="role_name" />
     </resultMap>
-    <resultMap id="MenuRoleBOMap" type="com.cafe.user.bo.MenuRoleBO">
+    <resultMap id="MenuRoleBOMap" type="com.cafe.user.model.bo.MenuRoleBO">
         <result column="menu_path" property="menuPath" />
         <collection property="roleNameList" resultMap="RoleNameListMap" javaType="java.util.List" />
     </resultMap>

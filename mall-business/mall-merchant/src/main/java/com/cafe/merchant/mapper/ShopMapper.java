@@ -1,7 +1,7 @@
 package com.cafe.merchant.mapper;
 
-import com.cafe.merchant.model.Shop;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.cafe.merchant.model.entity.Shop;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

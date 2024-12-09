@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
-import com.cafe.member.model.Address;
+import com.cafe.member.model.entity.Address;
 import com.cafe.member.service.AddressService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

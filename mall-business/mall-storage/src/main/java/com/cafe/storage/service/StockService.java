@@ -1,8 +1,8 @@
 package com.cafe.storage.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cafe.storage.model.Stock;
-import com.cafe.storage.vo.CartVO;
+import com.cafe.storage.model.dto.CartDTO;
+import com.cafe.storage.model.entity.Stock;
 
 import java.util.List;
 
@@ -18,16 +18,16 @@ public interface StockService extends IService<Stock> {
     /**
      * 批量入库
      *
-     * @param cartVOList
+     * @param cartDTOList
      * @return
      */
-    void inboundBatch(List<CartVO> cartVOList);
+    void inboundBatch(List<CartDTO> cartDTOList);
 
     /**
      * 批量出库
      *
-     * @param cartVOList
+     * @param cartDTOList
      * @return 库存不足的 SKU 主键列表
      */
-    List<String> outboundBatch(List<CartVO> cartVOList);
+    List<String> outboundBatch(List<CartDTO> cartDTOList);
 }

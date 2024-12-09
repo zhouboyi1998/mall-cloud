@@ -1,7 +1,7 @@
 package com.cafe.goods.feign;
 
 import com.cafe.common.core.feign.FeignRequestInterceptor;
-import com.cafe.goods.model.Sku;
+import com.cafe.goods.model.entity.Sku;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

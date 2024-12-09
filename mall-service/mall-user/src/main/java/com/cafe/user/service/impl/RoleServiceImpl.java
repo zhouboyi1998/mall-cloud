@@ -2,7 +2,7 @@ package com.cafe.user.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.user.mapper.RoleMapper;
-import com.cafe.user.model.Role;
+import com.cafe.user.model.entity.Role;
 import com.cafe.user.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

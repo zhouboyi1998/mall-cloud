@@ -1,7 +1,7 @@
 package com.cafe.security.service.impl;
 
 import com.cafe.id.feign.IDFeign;
-import com.cafe.security.model.Captcha;
+import com.cafe.security.model.vo.Captcha;
 import com.cafe.security.service.CaptchaService;
 import lombok.RequiredArgsConstructor;
 import net.dreamlu.mica.captcha.service.ICaptchaService;

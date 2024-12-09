@@ -1,7 +1,7 @@
 package com.cafe.order.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.order.model.Guarantee;
+import com.cafe.order.model.entity.Guarantee;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

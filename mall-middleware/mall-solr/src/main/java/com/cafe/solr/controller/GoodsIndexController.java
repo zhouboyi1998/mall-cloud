@@ -1,7 +1,7 @@
 package com.cafe.solr.controller;
 
 import com.cafe.common.log.annotation.ApiLogPrint;
-import com.cafe.solr.index.GoodsIndex;
+import com.cafe.solr.model.index.GoodsIndex;
 import com.cafe.solr.service.GoodsIndexService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

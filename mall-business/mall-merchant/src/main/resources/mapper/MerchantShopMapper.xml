@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.merchant.mapper.MerchantShopMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.merchant.model.MerchantShop">
+    <resultMap id="BaseResultMap" type="com.cafe.merchant.model.entity.MerchantShop">
         <id column="id" property="id" />
         <result column="merchant_id" property="merchantId" />
         <result column="shop_id" property="shopId" />

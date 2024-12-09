@@ -1,8 +1,8 @@
 package com.cafe.goods.controller;
 
 import com.cafe.common.log.annotation.ApiLogPrint;
-import com.cafe.goods.bo.Goods;
 import com.cafe.goods.facade.GoodsFacade;
+import com.cafe.goods.model.bo.Goods;
 import com.cafe.goods.service.GoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

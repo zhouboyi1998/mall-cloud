@@ -1,6 +1,6 @@
 package com.cafe.openapicenter.service;
 
-import com.cafe.openapicenter.model.API;
+import com.cafe.openapicenter.model.entity.API;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import reactor.core.publisher.Mono;
 

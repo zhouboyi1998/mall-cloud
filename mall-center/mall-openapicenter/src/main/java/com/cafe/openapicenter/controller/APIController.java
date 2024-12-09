@@ -1,7 +1,7 @@
 package com.cafe.openapicenter.controller;
 
 import com.cafe.common.log.annotation.ApiLogPrint;
-import com.cafe.openapicenter.model.API;
+import com.cafe.openapicenter.model.entity.API;
 import com.cafe.openapicenter.service.APIService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.cafe.goods.facade;
 
-import com.cafe.goods.vo.SpuVO;
+import com.cafe.goods.model.vo.SpuVO;
 
 /**
  * @Project: mall-cloud

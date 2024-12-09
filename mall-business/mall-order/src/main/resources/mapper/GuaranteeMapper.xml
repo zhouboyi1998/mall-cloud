@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.order.mapper.GuaranteeMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.order.model.Guarantee">
+    <resultMap id="BaseResultMap" type="com.cafe.order.model.entity.Guarantee">
         <id column="id" property="id" />
         <result column="order_item_id" property="orderItemId" />
         <result column="guarantee_type" property="guaranteeType" />

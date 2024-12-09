@@ -1,7 +1,7 @@
 package com.cafe.ordercenter.service;
 
-import com.cafe.order.vo.OrderVO;
-import com.cafe.storage.vo.CartVO;
+import com.cafe.order.model.vo.OrderVO;
+import com.cafe.storage.model.dto.CartDTO;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -19,10 +19,10 @@ public interface OrderCenterService {
      * 提交订单
      *
      * @param addressId
-     * @param cartVOList
+     * @param cartDTOList
      * @return
      */
-    OrderVO submit(Long addressId, List<CartVO> cartVOList);
+    OrderVO submit(Long addressId, List<CartDTO> cartDTOList);
 
     /**
      * 取消超时未支付的订单

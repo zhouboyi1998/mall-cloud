@@ -2,7 +2,7 @@ package com.cafe.clickhouse.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.clickhouse.model.GoodsWide;
+import com.cafe.clickhouse.model.entity.GoodsWide;
 import com.cafe.clickhouse.service.GoodsWideService;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;

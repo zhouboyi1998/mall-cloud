@@ -1,7 +1,7 @@
 package com.cafe.storage.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cafe.storage.model.StockItem;
+import com.cafe.storage.model.entity.StockItem;
 
 /**
  * @Project: mall-cloud

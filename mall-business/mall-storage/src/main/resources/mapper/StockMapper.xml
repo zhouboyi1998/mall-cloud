@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.storage.mapper.StockMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.storage.model.Stock">
+    <resultMap id="BaseResultMap" type="com.cafe.storage.model.entity.Stock">
         <id column="id" property="id" />
         <result column="sku_id" property="skuId" />
         <result column="shop_id" property="shopId" />
@@ -15,17 +15,17 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
-    <update id="inbound" parameterType="com.cafe.storage.vo.CartVO">
+    <update id="inbound" parameterType="com.cafe.storage.model.dto.CartDTO">
         UPDATE mall_stock
-        SET stock = stock + #{cartVO.quantity}
-        WHERE sku_id = #{cartVO.skuId}
+        SET stock = stock + #{cartDTO.quantity}
+        WHERE sku_id = #{cartDTO.skuId}
     </update>
 
-    <update id="outbound" parameterType="com.cafe.storage.vo.CartVO">
+    <update id="outbound" parameterType="com.cafe.storage.model.dto.CartDTO">
         UPDATE mall_stock
-        SET stock = stock - #{cartVO.quantity}
-        WHERE sku_id = #{cartVO.skuId}
-          AND stock >= #{cartVO.quantity}
+        SET stock = stock - #{cartDTO.quantity}
+        WHERE sku_id = #{cartDTO.skuId}
+          AND stock >= #{cartDTO.quantity}
     </update>
 
 </mapper>

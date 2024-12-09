@@ -1,7 +1,7 @@
 package com.cafe.solr.service.impl;
 
 import com.cafe.common.constant.solr.SolrConstant;
-import com.cafe.solr.index.GoodsIndex;
+import com.cafe.solr.model.index.GoodsIndex;
 import com.cafe.solr.service.GoodsIndexService;
 import lombok.RequiredArgsConstructor;
 import org.apache.solr.common.SolrException;

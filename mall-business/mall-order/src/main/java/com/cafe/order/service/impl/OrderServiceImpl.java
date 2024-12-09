@@ -2,7 +2,7 @@ package com.cafe.order.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.order.mapper.OrderMapper;
-import com.cafe.order.model.Order;
+import com.cafe.order.model.entity.Order;
 import com.cafe.order.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

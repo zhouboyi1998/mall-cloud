@@ -1,6 +1,6 @@
 package com.cafe.goods.service;
 
-import com.cafe.goods.bo.Goods;
+import com.cafe.goods.model.bo.Goods;
 
 import java.util.List;
 

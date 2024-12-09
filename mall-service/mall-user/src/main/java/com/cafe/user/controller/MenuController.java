@@ -7,7 +7,7 @@ import com.cafe.common.core.request.UserDetails;
 import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
-import com.cafe.user.model.Menu;
+import com.cafe.user.model.entity.Menu;
 import com.cafe.user.service.MenuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
