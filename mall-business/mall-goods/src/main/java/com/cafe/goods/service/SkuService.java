@@ -1,7 +1,7 @@
 package com.cafe.goods.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cafe.goods.model.Sku;
+import com.cafe.goods.model.entity.Sku;
 
 import java.util.List;
 

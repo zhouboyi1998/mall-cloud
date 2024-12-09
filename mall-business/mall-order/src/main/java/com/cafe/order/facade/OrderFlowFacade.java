@@ -1,7 +1,7 @@
 package com.cafe.order.facade;
 
-import com.cafe.order.model.OrderItem;
-import com.cafe.order.vo.OrderVO;
+import com.cafe.order.model.entity.OrderItem;
+import com.cafe.order.model.vo.OrderVO;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -1,7 +1,7 @@
 package com.cafe.goodscenter.service;
 
-import com.cafe.goodscenter.vo.GoodsSummary;
-import com.cafe.goodscenter.vo.SpuDetail;
+import com.cafe.goodscenter.model.vo.GoodsSummary;
+import com.cafe.goodscenter.model.vo.SpuDetail;
 
 import java.util.List;
 

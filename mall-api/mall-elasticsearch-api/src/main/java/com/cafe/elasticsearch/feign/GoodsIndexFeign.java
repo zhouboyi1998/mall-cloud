@@ -1,7 +1,7 @@
 package com.cafe.elasticsearch.feign;
 
 import com.cafe.common.core.feign.FeignRequestInterceptor;
-import com.cafe.elasticsearch.index.GoodsIndex;
+import com.cafe.elasticsearch.model.index.GoodsIndex;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

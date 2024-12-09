@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.order.mapper.OrderMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.order.model.Order">
+    <resultMap id="BaseResultMap" type="com.cafe.order.model.entity.Order">
         <id column="id" property="id" />
         <result column="order_no" property="orderNo" />
         <result column="member_id" property="memberId" />

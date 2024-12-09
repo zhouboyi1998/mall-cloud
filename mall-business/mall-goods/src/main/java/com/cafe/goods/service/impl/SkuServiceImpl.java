@@ -2,7 +2,7 @@ package com.cafe.goods.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.goods.mapper.SkuMapper;
-import com.cafe.goods.model.Sku;
+import com.cafe.goods.model.entity.Sku;
 import com.cafe.goods.service.SkuService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

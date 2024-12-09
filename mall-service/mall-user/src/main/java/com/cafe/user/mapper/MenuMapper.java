@@ -1,8 +1,8 @@
 package com.cafe.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.user.model.Menu;
-import com.cafe.user.vo.MenuTreeVO;
+import com.cafe.user.model.entity.Menu;
+import com.cafe.user.model.vo.MenuTreeVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

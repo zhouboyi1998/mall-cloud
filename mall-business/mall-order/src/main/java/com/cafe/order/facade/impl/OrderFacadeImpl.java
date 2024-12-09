@@ -4,14 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.lang.date.LocalDateTimePeriod;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
-import com.cafe.order.converter.OrderConverter;
 import com.cafe.order.facade.OrderFacade;
-import com.cafe.order.model.Order;
-import com.cafe.order.model.OrderItem;
-import com.cafe.order.query.OrderQuery;
+import com.cafe.order.model.converter.OrderConverter;
+import com.cafe.order.model.entity.Order;
+import com.cafe.order.model.entity.OrderItem;
+import com.cafe.order.model.query.OrderQuery;
+import com.cafe.order.model.vo.OrderVO;
 import com.cafe.order.service.OrderItemService;
 import com.cafe.order.service.OrderService;
-import com.cafe.order.vo.OrderVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -49,7 +49,7 @@ public class OrderFacadeImpl implements OrderFacade {
         Set<Long> orderIdSet = orderItemList.stream().map(OrderItem::getOrderId).collect(Collectors.toSet());
 
         // 构建订单 QueryWrapper, 添加订单查询条件
-        Order order = OrderConverter.INSTANCE.toModel(orderQuery);
+        Order order = OrderConverter.INSTANCE.toEntity(orderQuery);
         LambdaQueryWrapper<Order> orderQueryWrapper = WrapperUtil.createLambdaQueryWrapper(order);
         // 添加订单ID查询条件
         orderQueryWrapper.in(!CollectionUtils.isEmpty(orderIdSet), Order::getId, orderIdSet);

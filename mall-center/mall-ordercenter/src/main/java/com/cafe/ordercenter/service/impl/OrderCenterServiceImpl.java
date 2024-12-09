@@ -6,20 +6,20 @@ import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.core.exception.BusinessException;
 import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.foundation.feign.AreaFeign;
-import com.cafe.foundation.vo.AreaDetailVO;
-import com.cafe.goods.bo.Goods;
+import com.cafe.foundation.model.vo.AreaDetailVO;
 import com.cafe.goods.feign.GoodsFeign;
 import com.cafe.goods.feign.SkuFeign;
-import com.cafe.goods.model.Sku;
+import com.cafe.goods.model.bo.Goods;
+import com.cafe.goods.model.entity.Sku;
 import com.cafe.id.feign.IDFeign;
 import com.cafe.member.feign.AddressFeign;
-import com.cafe.member.model.Address;
+import com.cafe.member.model.entity.Address;
 import com.cafe.order.feign.OrderFlowFeign;
-import com.cafe.order.model.OrderItem;
-import com.cafe.order.vo.OrderVO;
+import com.cafe.order.model.entity.OrderItem;
+import com.cafe.order.model.vo.OrderVO;
 import com.cafe.ordercenter.service.OrderCenterService;
 import com.cafe.storage.feign.StockFeign;
-import com.cafe.storage.vo.CartVO;
+import com.cafe.storage.model.dto.CartDTO;
 import io.seata.spring.annotation.GlobalTransactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -63,18 +63,18 @@ public class OrderCenterServiceImpl implements OrderCenterService {
 
     @GlobalTransactional
     @Override
-    public OrderVO submit(Long addressId, List<CartVO> cartVOList) {
+    public OrderVO submit(Long addressId, List<CartDTO> cartDTOList) {
         // 查询下单商品的详细信息
-        CompletableFuture<List<Goods>> selectGoodsListFuture = CompletableFuture.supplyAsync(() -> selectGoodsList(cartVOList));
+        CompletableFuture<List<Goods>> selectGoodsListFuture = CompletableFuture.supplyAsync(() -> selectGoodsList(cartDTOList));
         // 查询收货地址
         CompletableFuture<Address> selectAddressFuture = CompletableFuture.supplyAsync(() -> selectAddress(addressId));
         // 查询收货地址的所属区域
         CompletableFuture<AreaDetailVO> selectAreaDetailVOFuture = selectAddressFuture.thenApplyAsync(this::selectAreaDetailVO);
         // 扣减库存
-        CompletableFuture<Void> outboundStockFuture = CompletableFuture.runAsync(() -> outboundStock(cartVOList));
+        CompletableFuture<Void> outboundStockFuture = CompletableFuture.runAsync(() -> outboundStock(cartDTOList));
         // 创建订单
         CompletableFuture.allOf(selectGoodsListFuture, selectAreaDetailVOFuture);
-        CompletableFuture<OrderVO> createOrderFuture = CompletableFuture.supplyAsync(() -> createOrder(cartVOList, selectGoodsListFuture.join(), selectAddressFuture.join(), selectAreaDetailVOFuture.join()));
+        CompletableFuture<OrderVO> createOrderFuture = CompletableFuture.supplyAsync(() -> createOrder(cartDTOList, selectGoodsListFuture.join(), selectAddressFuture.join(), selectAreaDetailVOFuture.join()));
         // 业务流程全部执行完成, 返回订单信息
         CompletableFuture.allOf(outboundStockFuture, createOrderFuture);
         return createOrderFuture.join();
@@ -83,12 +83,12 @@ public class OrderCenterServiceImpl implements OrderCenterService {
     /**
      * 查询下单商品的详细信息
      *
-     * @param cartVOList
+     * @param cartDTOList
      * @return
      */
-    private List<Goods> selectGoodsList(List<CartVO> cartVOList) {
+    private List<Goods> selectGoodsList(List<CartDTO> cartDTOList) {
         // 获取 SKU 主键列表
-        List<Long> skuIds = cartVOList.stream().map(CartVO::getSkuId).collect(Collectors.toList());
+        List<Long> skuIds = cartDTOList.stream().map(CartDTO::getSkuId).collect(Collectors.toList());
         // 查询购买的 SKU 是否存在已下架的
         List<Sku> unlisted = Optional.ofNullable(skuFeign.unlisted(skuIds))
             .map(ResponseEntity::getBody)
@@ -133,11 +133,11 @@ public class OrderCenterServiceImpl implements OrderCenterService {
     /**
      * 扣减库存
      *
-     * @param cartVOList
+     * @param cartDTOList
      */
-    private void outboundStock(List<CartVO> cartVOList) {
+    private void outboundStock(List<CartDTO> cartDTOList) {
         // SKU 出库, 返回值是库存不足的 SKU 主键列表
-        List<String> failIds = Optional.ofNullable(stockFeign.outboundBatch(cartVOList))
+        List<String> failIds = Optional.ofNullable(stockFeign.outboundBatch(cartDTOList))
             .map(ResponseEntity::getBody)
             .orElse(Collections.emptyList());
         // 如果存在库存不足的 SKU, 终止提交
@@ -149,15 +149,15 @@ public class OrderCenterServiceImpl implements OrderCenterService {
     /**
      * 创建订单
      *
-     * @param cartVOList
+     * @param cartDTOList
      * @param goodsList
      * @param address
      * @param areaDetailVO
      * @return
      */
-    private OrderVO createOrder(List<CartVO> cartVOList, List<Goods> goodsList, Address address, AreaDetailVO areaDetailVO) {
+    private OrderVO createOrder(List<CartDTO> cartDTOList, List<Goods> goodsList, Address address, AreaDetailVO areaDetailVO) {
         // SKU 主键和购买数量映射
-        Map<Long, Integer> quantityMap = cartVOList.stream().collect(Collectors.toMap(CartVO::getSkuId, CartVO::getQuantity));
+        Map<Long, Integer> quantityMap = cartDTOList.stream().collect(Collectors.toMap(CartDTO::getSkuId, CartDTO::getQuantity));
 
         // 计算总金额和总折扣
         AtomicReference<BigDecimal> amount = new AtomicReference<>(BigDecimal.valueOf(0));
@@ -222,12 +222,12 @@ public class OrderCenterServiceImpl implements OrderCenterService {
             .orElse(Collections.emptyList());
 
         // 还原商品库存
-        List<CartVO> cartVOList = orderItemList.stream()
-            .map(orderItem -> new CartVO()
+        List<CartDTO> cartDTOList = orderItemList.stream()
+            .map(orderItem -> new CartDTO()
                 .setSkuId(orderItem.getSkuId())
                 .setShopId(orderItem.getShopId())
                 .setQuantity(orderItem.getSkuQuantity()))
             .collect(Collectors.toList());
-        stockFeign.inboundBatch(cartVOList);
+        stockFeign.inboundBatch(cartDTOList);
     }
 }

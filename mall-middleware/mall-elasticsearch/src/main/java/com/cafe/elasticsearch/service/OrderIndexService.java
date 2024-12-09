@@ -1,6 +1,6 @@
 package com.cafe.elasticsearch.service;
 
-import com.cafe.elasticsearch.index.OrderIndex;
+import com.cafe.elasticsearch.model.index.OrderIndex;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.delete.DeleteResponse;
 import org.elasticsearch.action.get.GetResponse;

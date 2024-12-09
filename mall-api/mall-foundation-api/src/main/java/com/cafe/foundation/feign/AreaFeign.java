@@ -1,7 +1,7 @@
 package com.cafe.foundation.feign;
 
 import com.cafe.common.core.feign.FeignRequestInterceptor;
-import com.cafe.foundation.vo.AreaDetailVO;
+import com.cafe.foundation.model.vo.AreaDetailVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

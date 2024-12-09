@@ -1,7 +1,7 @@
 package com.cafe.goods.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cafe.goods.model.Spu;
+import com.cafe.goods.model.entity.Spu;
 
 /**
  * @Project: mall-cloud

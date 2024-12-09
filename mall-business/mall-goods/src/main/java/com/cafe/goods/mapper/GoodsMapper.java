@@ -1,6 +1,6 @@
 package com.cafe.goods.mapper;
 
-import com.cafe.goods.bo.Goods;
+import com.cafe.goods.model.bo.Goods;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

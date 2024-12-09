@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.clickhouse.mapper.GoodsWideMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.clickhouse.model.GoodsWide">
+    <resultMap id="BaseResultMap" type="com.cafe.clickhouse.model.entity.GoodsWide">
         <id column="id" property="id" />
         <result column="sku_name" property="skuName" />
         <result column="spu_id" property="spuId" />

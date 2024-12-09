@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.user.mapper.PlatformMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.user.model.Platform">
+    <resultMap id="BaseResultMap" type="com.cafe.user.model.entity.Platform">
         <id column="id" property="id" />
         <result column="client_id" property="clientId" />
         <result column="platform_name" property="platformName" />

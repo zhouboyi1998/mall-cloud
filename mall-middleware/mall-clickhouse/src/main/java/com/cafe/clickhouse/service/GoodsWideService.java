@@ -1,7 +1,7 @@
 package com.cafe.clickhouse.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cafe.clickhouse.model.GoodsWide;
+import com.cafe.clickhouse.model.entity.GoodsWide;
 
 /**
  * @Project: mall-cloud

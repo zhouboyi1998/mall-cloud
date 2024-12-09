@@ -1,6 +1,6 @@
 package com.cafe.security.service;
 
-import com.cafe.security.model.TokenDetails;
+import com.cafe.security.model.bo.TokenDetails;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 
 import java.security.Principal;

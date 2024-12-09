@@ -1,9 +1,9 @@
 package com.cafe.goodscenter.controller;
 
 import com.cafe.common.log.annotation.ApiLogPrint;
+import com.cafe.goodscenter.model.vo.GoodsSummary;
+import com.cafe.goodscenter.model.vo.SpuDetail;
 import com.cafe.goodscenter.service.GoodsCenterService;
-import com.cafe.goodscenter.vo.GoodsSummary;
-import com.cafe.goodscenter.vo.SpuDetail;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

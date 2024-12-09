@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.user.mapper.UserMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.user.model.User">
+    <resultMap id="BaseResultMap" type="com.cafe.user.model.entity.User">
         <id column="id" property="id" />
         <result column="username" property="username" />
         <result column="mobile" property="mobile" />
@@ -15,7 +15,7 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
-    <select id="detail" resultType="com.cafe.user.model.User">
+    <select id="detail" resultType="com.cafe.user.model.entity.User">
         SELECT u.id, u.username, u.password, u.mobile, u.email,
         u.status, u.create_time, u.update_time, u.is_deleted
         FROM mall_user AS u

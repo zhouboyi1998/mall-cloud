@@ -1,7 +1,7 @@
 package com.cafe.manager.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.manager.model.Theme;
+import com.cafe.manager.model.entity.Theme;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

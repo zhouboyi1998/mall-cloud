@@ -1,7 +1,7 @@
 package com.cafe.member.feign;
 
 import com.cafe.common.core.feign.FeignRequestInterceptor;
-import com.cafe.member.model.Address;
+import com.cafe.member.model.entity.Address;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

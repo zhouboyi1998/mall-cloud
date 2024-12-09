@@ -1,7 +1,7 @@
 package com.cafe.clickhouse.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.clickhouse.model.GoodsWide;
+import com.cafe.clickhouse.model.entity.GoodsWide;
 import org.apache.ibatis.annotations.Mapper;
 
 /**
