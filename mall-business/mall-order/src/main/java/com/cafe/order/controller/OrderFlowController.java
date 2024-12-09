@@ -2,8 +2,8 @@ package com.cafe.order.controller;
 
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.order.facade.OrderFlowFacade;
-import com.cafe.order.model.OrderItem;
-import com.cafe.order.vo.OrderVO;
+import com.cafe.order.model.entity.OrderItem;
+import com.cafe.order.model.vo.OrderVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

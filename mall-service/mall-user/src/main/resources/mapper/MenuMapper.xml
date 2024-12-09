@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.user.mapper.MenuMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.user.model.Menu">
+    <resultMap id="BaseResultMap" type="com.cafe.user.model.entity.Menu">
         <id column="id" property="id" />
         <result column="parent_id" property="parentId" />
         <result column="platform_id" property="platformId" />
@@ -19,7 +19,7 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
-    <select id="selectTreeVOList" resultType="com.cafe.user.vo.MenuTreeVO">
+    <select id="selectTreeVOList" resultType="com.cafe.user.model.vo.MenuTreeVO">
         SELECT DISTINCT m.id, m.parent_id, m.platform_id, m.menu_name, m.menu_title, m.menu_icon, m.menu_path,
         m.level, m.sort, m.status
         FROM mall_menu AS m

@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.util.tree.TreeUtil;
 import com.cafe.user.mapper.MenuMapper;
-import com.cafe.user.model.Menu;
+import com.cafe.user.model.entity.Menu;
+import com.cafe.user.model.vo.MenuTreeVO;
 import com.cafe.user.service.MenuService;
-import com.cafe.user.vo.MenuTreeVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

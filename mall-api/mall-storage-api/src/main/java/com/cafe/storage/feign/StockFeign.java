@@ -1,7 +1,7 @@
 package com.cafe.storage.feign;
 
 import com.cafe.common.core.feign.FeignRequestInterceptor;
-import com.cafe.storage.vo.CartVO;
+import com.cafe.storage.model.dto.CartDTO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -24,18 +24,18 @@ public interface StockFeign {
     /**
      * 批量入库
      *
-     * @param cartVOList
+     * @param cartDTOList
      * @return
      */
     @PutMapping(value = "/inbound/batch")
-    ResponseEntity<Void> inboundBatch(@RequestBody List<CartVO> cartVOList);
+    ResponseEntity<Void> inboundBatch(@RequestBody List<CartDTO> cartDTOList);
 
     /**
      * 批量出库
      *
-     * @param cartVOList
+     * @param cartDTOList
      * @return 库存不足的 SKU 主键列表
      */
     @PutMapping(value = "/outbound/batch")
-    ResponseEntity<List<String>> outboundBatch(@RequestBody List<CartVO> cartVOList);
+    ResponseEntity<List<String>> outboundBatch(@RequestBody List<CartDTO> cartDTOList);
 }

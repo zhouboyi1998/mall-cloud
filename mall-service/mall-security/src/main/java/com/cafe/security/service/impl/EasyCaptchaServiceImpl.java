@@ -4,7 +4,7 @@ import com.cafe.common.constant.captcha.CaptchaConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.id.feign.IDFeign;
-import com.cafe.security.model.Captcha;
+import com.cafe.security.model.vo.Captcha;
 import com.cafe.security.service.CaptchaService;
 import com.wf.captcha.SpecCaptcha;
 import lombok.RequiredArgsConstructor;

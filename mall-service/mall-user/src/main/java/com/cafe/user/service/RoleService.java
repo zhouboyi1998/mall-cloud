@@ -1,7 +1,7 @@
 package com.cafe.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cafe.user.model.Role;
+import com.cafe.user.model.entity.Role;
 
 import java.util.List;
 

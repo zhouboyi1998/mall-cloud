@@ -1,7 +1,7 @@
 package com.cafe.merchant.service;
 
-import com.cafe.merchant.model.MerchantShop;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.cafe.merchant.model.entity.MerchantShop;
 
 /**
  * @Project: mall-cloud

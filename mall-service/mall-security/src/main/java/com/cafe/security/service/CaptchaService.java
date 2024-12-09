@@ -1,6 +1,6 @@
 package com.cafe.security.service;
 
-import com.cafe.security.model.Captcha;
+import com.cafe.security.model.vo.Captcha;
 
 /**
  * @Project: mall-cloud

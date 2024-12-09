@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.goods.mapper.SpuMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.goods.model.Spu">
+    <resultMap id="BaseResultMap" type="com.cafe.goods.model.entity.Spu">
         <id column="id" property="id" />
         <result column="spu_name" property="spuName" />
         <result column="brand_id" property="brandId" />

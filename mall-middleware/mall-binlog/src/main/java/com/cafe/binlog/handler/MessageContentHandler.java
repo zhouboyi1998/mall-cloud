@@ -5,7 +5,7 @@ import com.cafe.common.constant.monitor.MonitorConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.rabbitmq.RabbitMQConstant;
 import com.cafe.common.rabbitmq.producer.RabbitMQProducer;
-import com.cafe.user.relation.UserRelation;
+import com.cafe.user.model.relation.UserRelation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -1,7 +1,7 @@
 package com.cafe.goods.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.goods.model.CategoryBrand;
+import com.cafe.goods.model.entity.CategoryBrand;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

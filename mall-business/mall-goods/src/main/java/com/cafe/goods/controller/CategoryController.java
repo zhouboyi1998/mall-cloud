@@ -6,7 +6,9 @@ import com.cafe.common.constant.model.DefaultValueConstant;
 import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
-import com.cafe.goods.model.Category;
+import com.cafe.goods.model.entity.Category;
+import com.cafe.goods.model.query.CategoryTreeListQuery;
+import com.cafe.goods.model.query.CategoryTreeNodeQuery;
 import com.cafe.goods.service.CategoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -200,16 +203,16 @@ public class CategoryController {
     @ApiImplicitParam(value = "分类id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/tree-node/{id}")
     public ResponseEntity<Tree> treeNode(@PathVariable(value = "id") Long id) {
-        Tree tree = categoryService.treeNode(new Category().setId(id));
+        Tree tree = categoryService.treeNode(new CategoryTreeNodeQuery().setId(id));
         return ResponseEntity.ok(tree);
     }
 
     @ApiLogPrint(value = "根据条件查询分类树节点")
     @ApiOperation(value = "根据条件查询分类树节点")
-    @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
+    @ApiImplicitParam(value = "分类树节点查询条件", name = "query", dataType = "CategoryTreeNodeQuery", paramType = "body", required = true)
     @PostMapping(value = "/tree-node")
-    public ResponseEntity<Tree> treeNode(@RequestBody Category category) {
-        Tree tree = categoryService.treeNode(category);
+    public ResponseEntity<Tree> treeNode(@RequestBody @Valid CategoryTreeNodeQuery query) {
+        Tree tree = categoryService.treeNode(query);
         return ResponseEntity.ok(tree);
     }
 
@@ -220,16 +223,16 @@ public class CategoryController {
     public ResponseEntity<List<Tree>> treeList(
         @RequestParam(value = "parentId", required = false, defaultValue = DefaultValueConstant.DEFAULT_PARENT_ID_STR) Long parentId
     ) {
-        List<Tree> treeList = categoryService.treeList(new Category().setParentId(parentId));
+        List<Tree> treeList = categoryService.treeList(new CategoryTreeListQuery().setParentId(parentId));
         return ResponseEntity.ok(treeList);
     }
 
     @ApiLogPrint(value = "根据条件查询分类树列表")
     @ApiOperation(value = "根据条件查询分类树列表")
-    @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
+    @ApiImplicitParam(value = "分类树列表查询条件", name = "query", dataType = "CategoryTreeListQuery", paramType = "body", required = true)
     @PostMapping(value = "/tree-list")
-    public ResponseEntity<List<Tree>> treeList(@RequestBody Category category) {
-        List<Tree> treeList = categoryService.treeList(category);
+    public ResponseEntity<List<Tree>> treeList(@RequestBody @Valid CategoryTreeListQuery query) {
+        List<Tree> treeList = categoryService.treeList(query);
         return ResponseEntity.ok(treeList);
     }
 }

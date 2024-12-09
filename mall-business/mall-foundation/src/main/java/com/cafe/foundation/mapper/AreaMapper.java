@@ -1,9 +1,9 @@
 package com.cafe.foundation.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.foundation.model.Area;
-import com.cafe.foundation.vo.AreaDetailVO;
-import com.cafe.foundation.vo.AreaTreeVO;
+import com.cafe.foundation.model.dto.AreaTreeDTO;
+import com.cafe.foundation.model.entity.Area;
+import com.cafe.foundation.model.vo.AreaDetailVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,10 +22,10 @@ public interface AreaMapper extends BaseMapper<Area> {
     /**
      * 根据省份id、城市id、区县id获取区域详情
      *
-     * @param provinceId
-     * @param cityId
-     * @param districtId
-     * @return
+     * @param provinceId 省份ID
+     * @param cityId     城市ID
+     * @param districtId 区县ID
+     * @return 区域详情
      */
     AreaDetailVO detail(
         @Param(value = "provinceId") Long provinceId,
@@ -34,10 +34,10 @@ public interface AreaMapper extends BaseMapper<Area> {
     );
 
     /**
-     * 根据条件查询区域树列表
+     * 根据条件查询区域树DTO列表
      *
-     * @param area
-     * @return
+     * @param area 查询条件
+     * @return 区域树DTO列表
      */
-    List<AreaTreeVO> selectTreeVOList(@Param(value = "area") Area area);
+    List<AreaTreeDTO> selectTreeDTOList(@Param(value = "area") Area area);
 }

@@ -1,7 +1,6 @@
 package com.cafe.fastdfs.service.impl;
 
 import com.cafe.common.constant.pool.StringConstant;
-import com.cafe.fastdfs.bo.FileBO;
 import com.cafe.fastdfs.property.FastDFSProperties;
 import com.cafe.fastdfs.service.FileService;
 import lombok.RequiredArgsConstructor;
@@ -40,12 +39,8 @@ public class FileServiceImpl implements FileService {
         // 获取文件原始名称
         String originalFilename = file.getOriginalFilename();
 
-        // 封装文件上传信息
-        FileBO fileBO = new FileBO()
-            .setName(originalFilename)
-            .setExtension(StringUtils.getFilenameExtension(originalFilename))
-            .setContent(file.getBytes());
-        String[] result = storageClient.upload_file(fileBO.getContent(), fileBO.getExtension(), null);
+        // 上传文件
+        String[] result = storageClient.upload_file(file.getBytes(), StringUtils.getFilenameExtension(originalFilename), null);
         // result[0]: 文件组, result[1]: 文件名
         return StringConstant.SLASH + result[0] + StringConstant.SLASH + result[1];
     }

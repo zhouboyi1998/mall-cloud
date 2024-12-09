@@ -6,9 +6,10 @@ import com.cafe.common.constant.model.DefaultValueConstant;
 import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
-import com.cafe.foundation.model.Area;
+import com.cafe.foundation.model.entity.Area;
+import com.cafe.foundation.model.query.AreaTreeListQuery;
+import com.cafe.foundation.model.vo.AreaDetailVO;
 import com.cafe.foundation.service.AreaService;
-import com.cafe.foundation.vo.AreaDetailVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -25,6 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -220,16 +222,16 @@ public class AreaController {
     public ResponseEntity<List<Tree>> treeList(
         @RequestParam(value = "parentId", required = false, defaultValue = DefaultValueConstant.DEFAULT_PARENT_ID_STR) Long parentId
     ) {
-        List<Tree> treeList = areaService.treeList(new Area().setParentId(parentId));
+        List<Tree> treeList = areaService.treeList(new AreaTreeListQuery().setParentId(parentId));
         return ResponseEntity.ok(treeList);
     }
 
     @ApiLogPrint(value = "根据条件查询区域树列表")
     @ApiOperation(value = "根据条件查询区域树列表")
-    @ApiImplicitParam(value = "区域Model", name = "area", dataType = "Area", paramType = "body", required = true)
+    @ApiImplicitParam(value = "区域树列表查询条件", name = "query", dataType = "AreaTreeListQuery", paramType = "body", required = true)
     @PostMapping(value = "/tree-list")
-    public ResponseEntity<List<Tree>> treeList(@RequestBody Area area) {
-        List<Tree> treeList = areaService.treeList(area);
+    public ResponseEntity<List<Tree>> treeList(@RequestBody @Valid AreaTreeListQuery query) {
+        List<Tree> treeList = areaService.treeList(query);
         return ResponseEntity.ok(treeList);
     }
 }

@@ -1,6 +1,6 @@
 package com.cafe.solr.service;
 
-import com.cafe.solr.index.GoodsIndex;
+import com.cafe.solr.model.index.GoodsIndex;
 
 import java.util.List;
 

@@ -2,7 +2,7 @@ package com.cafe.manager.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.manager.mapper.ThemeMapper;
-import com.cafe.manager.model.Theme;
+import com.cafe.manager.model.entity.Theme;
 import com.cafe.manager.service.ThemeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

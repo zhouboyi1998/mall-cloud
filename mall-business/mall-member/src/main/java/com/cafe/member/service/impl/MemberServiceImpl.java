@@ -2,7 +2,7 @@ package com.cafe.member.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.member.mapper.MemberMapper;
-import com.cafe.member.model.Member;
+import com.cafe.member.model.entity.Member;
 import com.cafe.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

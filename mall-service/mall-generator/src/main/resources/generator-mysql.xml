@@ -19,7 +19,7 @@
         <!-- XML 文件格式化 -->
         <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter" />
 
-        <!-- Model 序列化 -->
+        <!-- Entity 序列化 -->
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
         <!-- 重写 toString 方法 -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
@@ -47,8 +47,8 @@
             <property name="forceBigDecimals" value="true" />
         </javaTypeResolver>
 
-        <!-- Model 实体模型生成路径 -->
-        <javaModelGenerator targetPackage="${module-package}.${model-package}" targetProject="temp" />
+        <!-- Entity 实体模型生成路径 -->
+        <javaModelGenerator targetPackage="${module-package}.${entity-package}" targetProject="temp" />
 
         <!-- Mapper 映射文件生成路径 -->
         <sqlMapGenerator targetPackage="${module-package}.${xml-package}" targetProject="temp" />
@@ -59,7 +59,7 @@
         <!-- tableName="%" 生成全部表-->
         <table tableName="%">
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
-            <!-- 去除 Model 的前缀 -->
+            <!-- 去除 Entity 的前缀 -->
             <domainObjectRenamingRule searchString="^Mall" replaceString="" />
         </table>
 

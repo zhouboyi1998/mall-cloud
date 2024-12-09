@@ -7,7 +7,7 @@ import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.enumeration.media.MediaFormatEnum;
 import com.cafe.id.feign.IDFeign;
-import com.cafe.security.model.Captcha;
+import com.cafe.security.model.vo.Captcha;
 import com.cafe.security.service.CaptchaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;

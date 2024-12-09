@@ -1,9 +1,9 @@
 package com.cafe.order.facade;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.order.model.Order;
-import com.cafe.order.query.OrderQuery;
-import com.cafe.order.vo.OrderVO;
+import com.cafe.order.model.entity.Order;
+import com.cafe.order.model.query.OrderQuery;
+import com.cafe.order.model.vo.OrderVO;
 
 /**
  * @Project: mall-cloud

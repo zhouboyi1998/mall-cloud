@@ -2,7 +2,7 @@ package com.cafe.user.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cafe.common.lang.tree.Tree;
-import com.cafe.user.model.Menu;
+import com.cafe.user.model.entity.Menu;
 
 import java.util.List;
 

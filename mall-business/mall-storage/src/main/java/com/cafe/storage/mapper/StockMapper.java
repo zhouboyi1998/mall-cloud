@@ -1,8 +1,8 @@
 package com.cafe.storage.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.storage.model.Stock;
-import com.cafe.storage.vo.CartVO;
+import com.cafe.storage.model.dto.CartDTO;
+import com.cafe.storage.model.entity.Stock;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,16 +19,16 @@ public interface StockMapper extends BaseMapper<Stock> {
     /**
      * 入库
      *
-     * @param cartVO
+     * @param cartDTO
      * @return
      */
-    Integer inbound(@Param(value = "cartVO") CartVO cartVO);
+    Integer inbound(@Param(value = "cartDTO") CartDTO cartDTO);
 
     /**
      * 出库
      *
-     * @param cartVO
+     * @param cartDTO
      * @return
      */
-    Integer outbound(@Param(value = "cartVO") CartVO cartVO);
+    Integer outbound(@Param(value = "cartDTO") CartDTO cartDTO);
 }

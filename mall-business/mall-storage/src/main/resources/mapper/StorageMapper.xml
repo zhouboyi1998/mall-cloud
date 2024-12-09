@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.storage.mapper.StorageMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.storage.model.Storage">
+    <resultMap id="BaseResultMap" type="com.cafe.storage.model.entity.Storage">
         <id column="id" property="id" />
         <result column="storage_name" property="storageName" />
         <result column="shop_id" property="shopId" />
