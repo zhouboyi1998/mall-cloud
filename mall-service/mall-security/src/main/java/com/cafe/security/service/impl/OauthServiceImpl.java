@@ -1,7 +1,7 @@
 package com.cafe.security.service.impl;
 
 import com.cafe.common.constant.request.RequestConstant;
-import com.cafe.security.model.TokenDetails;
+import com.cafe.security.model.bo.TokenDetails;
 import com.cafe.security.service.OauthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;

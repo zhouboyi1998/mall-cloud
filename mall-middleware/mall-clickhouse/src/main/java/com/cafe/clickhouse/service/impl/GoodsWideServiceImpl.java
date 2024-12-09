@@ -2,7 +2,7 @@ package com.cafe.clickhouse.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.clickhouse.mapper.GoodsWideMapper;
-import com.cafe.clickhouse.model.GoodsWide;
+import com.cafe.clickhouse.model.entity.GoodsWide;
 import com.cafe.clickhouse.service.GoodsWideService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

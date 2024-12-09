@@ -1,8 +1,8 @@
 package com.cafe.goods.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.goods.model.Category;
-import com.cafe.goods.vo.CategoryTreeVO;
+import com.cafe.goods.model.entity.Category;
+import com.cafe.goods.model.vo.CategoryTreeVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 

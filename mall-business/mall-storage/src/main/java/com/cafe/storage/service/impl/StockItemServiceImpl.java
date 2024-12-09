@@ -2,7 +2,7 @@ package com.cafe.storage.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.storage.mapper.StockItemMapper;
-import com.cafe.storage.model.StockItem;
+import com.cafe.storage.model.entity.StockItem;
 import com.cafe.storage.service.StockItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

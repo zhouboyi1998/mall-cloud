@@ -6,10 +6,10 @@ import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.util.tree.TreeUtil;
 import com.cafe.foundation.mapper.AreaMapper;
-import com.cafe.foundation.model.Area;
+import com.cafe.foundation.model.entity.Area;
+import com.cafe.foundation.model.vo.AreaDetailVO;
+import com.cafe.foundation.model.vo.AreaTreeVO;
 import com.cafe.foundation.service.AreaService;
-import com.cafe.foundation.vo.AreaDetailVO;
-import com.cafe.foundation.vo.AreaTreeVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

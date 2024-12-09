@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.manager.mapper.ThemeMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.manager.model.Theme">
+    <resultMap id="BaseResultMap" type="com.cafe.manager.model.entity.Theme">
         <id column="id" property="id" />
         <result column="basic_name" property="basicName" />
         <result column="basic_code" property="basicCode" />

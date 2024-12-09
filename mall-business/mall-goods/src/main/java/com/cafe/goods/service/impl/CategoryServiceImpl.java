@@ -6,9 +6,9 @@ import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.util.tree.TreeUtil;
 import com.cafe.goods.mapper.CategoryMapper;
-import com.cafe.goods.model.Category;
+import com.cafe.goods.model.entity.Category;
+import com.cafe.goods.model.vo.CategoryTreeVO;
 import com.cafe.goods.service.CategoryService;
-import com.cafe.goods.vo.CategoryTreeVO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.mybatisplus.util.WrapperUtil;
-import com.cafe.storage.model.Stock;
+import com.cafe.storage.model.dto.CartDTO;
+import com.cafe.storage.model.entity.Stock;
 import com.cafe.storage.service.StockService;
-import com.cafe.storage.vo.CartVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -195,19 +195,19 @@ public class StockController {
 
     @ApiLogPrint(value = "批量入库")
     @ApiOperation(value = "批量入库")
-    @ApiImplicitParam(value = "购物车视图模型列表", name = "cartVOList", dataType = "List<CartVO>", paramType = "body", required = true)
+    @ApiImplicitParam(value = "购物车视图模型列表", name = "cartDTOList", dataType = "List<CartDTO>", paramType = "body", required = true)
     @PutMapping(value = "/inbound/batch")
-    public ResponseEntity<Void> inboundBatch(@RequestBody List<CartVO> cartVOList) {
-        stockService.inboundBatch(cartVOList);
+    public ResponseEntity<Void> inboundBatch(@RequestBody List<CartDTO> cartDTOList) {
+        stockService.inboundBatch(cartDTOList);
         return ResponseEntity.ok().build();
     }
 
     @ApiLogPrint(value = "批量出库")
     @ApiOperation(value = "批量出库")
-    @ApiImplicitParam(value = "购物车视图模型列表", name = "cartVOList", dataType = "List<CartVO>", paramType = "body", required = true)
+    @ApiImplicitParam(value = "购物车视图模型列表", name = "cartDTOList", dataType = "List<CartDTO>", paramType = "body", required = true)
     @PutMapping(value = "/outbound/batch")
-    public ResponseEntity<List<String>> outboundBatch(@RequestBody List<CartVO> cartVOList) {
-        List<String> failIds = stockService.outboundBatch(cartVOList);
+    public ResponseEntity<List<String>> outboundBatch(@RequestBody List<CartDTO> cartDTOList) {
+        List<String> failIds = stockService.outboundBatch(cartDTOList);
         return ResponseEntity.ok(failIds);
     }
 }

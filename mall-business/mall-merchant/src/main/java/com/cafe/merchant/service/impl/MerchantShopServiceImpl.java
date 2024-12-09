@@ -2,7 +2,7 @@ package com.cafe.merchant.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.merchant.mapper.MerchantShopMapper;
-import com.cafe.merchant.model.MerchantShop;
+import com.cafe.merchant.model.entity.MerchantShop;
 import com.cafe.merchant.service.MerchantShopService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

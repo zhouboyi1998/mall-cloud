@@ -2,8 +2,8 @@ package com.cafe.foundation.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cafe.common.lang.tree.Tree;
-import com.cafe.foundation.model.Area;
-import com.cafe.foundation.vo.AreaDetailVO;
+import com.cafe.foundation.model.entity.Area;
+import com.cafe.foundation.model.vo.AreaDetailVO;
 
 import java.util.List;
 

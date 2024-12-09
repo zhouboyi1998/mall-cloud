@@ -2,7 +2,7 @@ package com.cafe.goods.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.goods.mapper.CategoryBrandMapper;
-import com.cafe.goods.model.CategoryBrand;
+import com.cafe.goods.model.entity.CategoryBrand;
 import com.cafe.goods.service.CategoryBrandService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

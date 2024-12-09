@@ -1,7 +1,7 @@
 package com.cafe.storage.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.storage.model.StockItem;
+import com.cafe.storage.model.entity.StockItem;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

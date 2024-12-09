@@ -5,7 +5,7 @@ import com.cafe.common.constant.database.DatabaseConstant;
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.util.json.JacksonUtil;
-import com.cafe.elasticsearch.index.GoodsIndex;
+import com.cafe.elasticsearch.model.index.GoodsIndex;
 import com.cafe.elasticsearch.service.GoodsIndexService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

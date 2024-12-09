@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.goods.mapper.GoodsMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.goods.bo.Goods">
+    <resultMap id="BaseResultMap" type="com.cafe.goods.model.bo.Goods">
         <id column="id" property="id" />
         <result column="sku_name" property="skuName" />
         <result column="spu_id" property="spuId" />
@@ -25,7 +25,7 @@
         <result column="launch_time" property="launchTime" />
     </resultMap>
 
-    <select id="list" resultType="com.cafe.goods.bo.Goods">
+    <select id="list" resultType="com.cafe.goods.model.bo.Goods">
         SELECT k.id, k.sku_name, k.spu_id, p.spu_name, p.brand_id, b.brand_name, p.category_id, c.category_name, p.shop_id,
         k.original_price, k.discount_price, k.seckill_price, k.specification, p.caption, p.intro,
         k.image, k.image_list, k.video, k.launch_time

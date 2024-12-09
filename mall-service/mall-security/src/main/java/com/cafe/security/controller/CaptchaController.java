@@ -2,7 +2,7 @@ package com.cafe.security.controller;
 
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.security.captcha.CaptchaServiceStrategy;
-import com.cafe.security.model.Captcha;
+import com.cafe.security.model.vo.Captcha;
 import com.cafe.security.property.CaptchaProperties;
 import com.cafe.security.service.CaptchaService;
 import io.swagger.annotations.Api;

@@ -2,7 +2,7 @@ package com.cafe.elasticsearch.message.kafka;
 
 import com.cafe.common.constant.kafka.KafkaConstant;
 import com.cafe.common.util.json.JacksonUtil;
-import com.cafe.elasticsearch.index.OrderIndex;
+import com.cafe.elasticsearch.model.index.OrderIndex;
 import com.cafe.elasticsearch.service.OrderIndexService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

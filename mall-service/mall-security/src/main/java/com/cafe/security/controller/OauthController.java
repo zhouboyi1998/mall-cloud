@@ -1,7 +1,7 @@
 package com.cafe.security.controller;
 
 import com.cafe.common.log.annotation.ApiLogPrint;
-import com.cafe.security.model.TokenDetails;
+import com.cafe.security.model.bo.TokenDetails;
 import com.cafe.security.service.OauthService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

@@ -2,8 +2,8 @@ package com.cafe.order.feign;
 
 import com.cafe.common.constant.date.DateTimeConstant;
 import com.cafe.common.core.feign.FeignRequestInterceptor;
-import com.cafe.order.model.OrderItem;
-import com.cafe.order.vo.OrderVO;
+import com.cafe.order.model.entity.OrderItem;
+import com.cafe.order.model.vo.OrderVO;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;

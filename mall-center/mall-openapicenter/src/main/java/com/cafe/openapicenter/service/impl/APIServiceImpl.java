@@ -2,7 +2,7 @@ package com.cafe.openapicenter.service.impl;
 
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.util.json.JacksonUtil;
-import com.cafe.openapicenter.model.API;
+import com.cafe.openapicenter.model.entity.API;
 import com.cafe.openapicenter.service.APIService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;

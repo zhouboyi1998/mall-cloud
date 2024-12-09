@@ -2,9 +2,9 @@ package com.cafe.user.facade.impl;
 
 import com.cafe.common.constant.security.AuthorizationConstant;
 import com.cafe.user.facade.RoleMenuFacade;
-import com.cafe.user.model.Menu;
-import com.cafe.user.model.Role;
-import com.cafe.user.model.RoleMenu;
+import com.cafe.user.model.entity.Menu;
+import com.cafe.user.model.entity.Role;
+import com.cafe.user.model.entity.RoleMenu;
 import com.cafe.user.service.MenuService;
 import com.cafe.user.service.RoleMenuService;
 import com.cafe.user.service.RoleService;

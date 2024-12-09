@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.goods.mapper.SkuMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.goods.model.Sku">
+    <resultMap id="BaseResultMap" type="com.cafe.goods.model.entity.Sku">
         <id column="id" property="id" />
         <result column="sku_name" property="skuName" />
         <result column="spu_id" property="spuId" />

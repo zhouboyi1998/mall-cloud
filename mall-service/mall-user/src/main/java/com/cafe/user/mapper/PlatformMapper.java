@@ -1,7 +1,7 @@
 package com.cafe.user.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.user.model.Platform;
+import com.cafe.user.model.entity.Platform;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

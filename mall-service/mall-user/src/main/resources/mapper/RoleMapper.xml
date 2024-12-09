@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.user.mapper.RoleMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.user.model.Role">
+    <resultMap id="BaseResultMap" type="com.cafe.user.model.entity.Role">
         <id column="id" property="id" />
         <result column="platform_id" property="platformId" />
         <result column="role_name" property="roleName" />

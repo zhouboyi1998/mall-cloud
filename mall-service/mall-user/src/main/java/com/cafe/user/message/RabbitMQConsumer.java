@@ -4,7 +4,7 @@ import com.cafe.common.constant.monitor.MonitorConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.rabbitmq.RabbitMQConstant;
 import com.cafe.common.util.json.JacksonUtil;
-import com.cafe.user.model.RoleMenu;
+import com.cafe.user.model.entity.RoleMenu;
 import com.cafe.user.service.RoleMenuService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;

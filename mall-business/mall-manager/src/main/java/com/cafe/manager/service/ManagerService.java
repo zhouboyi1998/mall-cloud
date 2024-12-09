@@ -1,7 +1,7 @@
 package com.cafe.manager.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cafe.manager.model.Manager;
+import com.cafe.manager.model.entity.Manager;
 
 /**
  * @Project: mall-cloud

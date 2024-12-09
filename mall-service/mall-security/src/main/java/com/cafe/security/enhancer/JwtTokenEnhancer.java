@@ -1,7 +1,7 @@
 package com.cafe.security.enhancer;
 
 import com.cafe.common.constant.request.RequestConstant;
-import com.cafe.security.model.UserInfo;
+import com.cafe.security.model.bo.UserInfo;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;

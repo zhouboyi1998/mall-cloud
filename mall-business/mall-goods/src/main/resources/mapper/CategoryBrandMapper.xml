@@ -3,7 +3,7 @@
 <mapper namespace="com.cafe.goods.mapper.CategoryBrandMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.cafe.goods.model.CategoryBrand">
+    <resultMap id="BaseResultMap" type="com.cafe.goods.model.entity.CategoryBrand">
         <id column="id" property="id" />
         <result column="category_id" property="categoryId" />
         <result column="brand_id" property="brandId" />

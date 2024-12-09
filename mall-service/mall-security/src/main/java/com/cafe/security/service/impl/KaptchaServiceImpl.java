@@ -5,7 +5,7 @@ import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.enumeration.media.MediaFormatEnum;
 import com.cafe.common.util.codec.Base64Util;
 import com.cafe.id.feign.IDFeign;
-import com.cafe.security.model.Captcha;
+import com.cafe.security.model.vo.Captcha;
 import com.cafe.security.service.CaptchaService;
 import com.google.code.kaptcha.Producer;
 import lombok.RequiredArgsConstructor;

@@ -1,9 +1,9 @@
 package com.cafe.foundation.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.foundation.model.Area;
-import com.cafe.foundation.vo.AreaDetailVO;
-import com.cafe.foundation.vo.AreaTreeVO;
+import com.cafe.foundation.model.entity.Area;
+import com.cafe.foundation.model.vo.AreaDetailVO;
+import com.cafe.foundation.model.vo.AreaTreeVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
