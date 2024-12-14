@@ -18,7 +18,7 @@
 | 消息队列 | <img src="https://img.shields.io/badge/RabbitMQ-3.6.5-orange"> <img src="https://img.shields.io/badge/RocketMQ-4.9.3-darkorange"> <img src="https://img.shields.io/badge/Kafka-3.4.0-mediumturquoise"> |
 | 对象存储 | <img src="https://img.shields.io/badge/MinIO-8.3.4-crimson"> <img src="https://img.shields.io/badge/FastDFS-1.27.0.0-darkorange"> |
 | 图片验证码 | <img src="https://img.shields.io/badge/Kaptcha-1.1.0-blue"> <img src="https://img.shields.io/badge/Easy Captcha-1.6.2-blue"> <img src="https://img.shields.io/badge/Hutool Captcha-5.0.4-blue"> <img src="https://img.shields.io/badge/Cage Captcha-1.0-sienna"> <img src="https://img.shields.io/badge/Simple Captcha-1.2.2-sienna"> <img src="https://img.shields.io/badge/Mica Captcha-2.1.1 GA-deepskyblue"> |
-| 任务调度 | <img src="https://img.shields.io/badge/XXL JOB-2.4.0-mediumseagreen"> |
+| 任务调度 | <img src="https://img.shields.io/badge/XXL JOB-2.4.0-mediumseagreen"> <img src="https://img.shields.io/badge/Spring Scheduler--brightener"> |
 | 监控告警 | <img src="https://img.shields.io/badge/Prometheus-2.43.0-orange"> <img src="https://img.shields.io/badge/Spring Boot Admin-2.3.1-seagreen"> |
 | 链路追踪 | <img src="https://img.shields.io/badge/SkyWalking-9.0.0-blue"> <img src="https://img.shields.io/badge/Sleuth--brightener"> <img src="https://img.shields.io/badge/Zipkin-2.24.3-orange"> |
 | 容器化 | <img src="https://img.shields.io/badge/Docker-26.1.3-deepskyblue"> <img src="https://img.shields.io/badge/Docker Compose-2.27.0-deepskyblue"> <img src="https://img.shields.io/badge/Kubernetes-1.28.2-royalblue"> |

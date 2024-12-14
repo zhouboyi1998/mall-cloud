@@ -1,7 +1,7 @@
 package com.cafe.security.controller;
 
 import com.cafe.common.log.annotation.ApiLogPrint;
-import com.cafe.security.model.bo.TokenDetails;
+import com.cafe.security.model.vo.Token;
 import com.cafe.security.service.OauthService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -48,8 +48,8 @@ public class OauthController {
         @ApiImplicitParam(value = "邮箱", name = "email", dataType = "String", paramType = "form")
     })
     @PostMapping(value = "/token")
-    public ResponseEntity<TokenDetails> token(Principal principal, @RequestParam Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
-        TokenDetails tokenDetails = oauthService.token(principal, parameters);
-        return ResponseEntity.ok(tokenDetails);
+    public ResponseEntity<Token> token(Principal principal, @RequestParam Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
+        Token token = oauthService.token(principal, parameters);
+        return ResponseEntity.ok(token);
     }
 }

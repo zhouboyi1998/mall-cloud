@@ -1,4 +1,4 @@
-package com.cafe.user.model.vo;
+package com.cafe.user.model.dto;
 
 import com.cafe.common.lang.tree.Tree;
 import io.swagger.annotations.ApiModel;
@@ -14,20 +14,20 @@ import java.io.Serializable;
  * @Package: com.cafe.user.model.vo
  * @Author: zhouboyi
  * @Date: 2022/7/7 17:25
- * @Description: 菜单树视图模型
+ * @Description: 菜单树数据传输模型
  */
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-@ApiModel(value = "MenuTreeVO", description = "菜单树视图模型")
-public class MenuTreeVO extends Tree implements Serializable {
+@ApiModel(value = "MenuTreeDTO", description = "菜单树数据传输模型")
+public class MenuTreeDTO extends Tree implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "菜单ID")
+    @ApiModelProperty(value = "资源ID")
     private Long id;
 
-    @ApiModelProperty(value = "上级菜单ID")
+    @ApiModelProperty(value = "上级资源ID")
     private Long parentId;
 
     @ApiModelProperty(value = "平台ID")

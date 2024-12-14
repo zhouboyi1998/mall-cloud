@@ -16,7 +16,7 @@ public class MySQLConstant {
 
         public static final String ROLE = DatabaseConstant.Database.USER + StringConstant.POINT + DatabaseConstant.Table.ROLE;
 
-        public static final String ROLE_MENU = DatabaseConstant.Database.USER + StringConstant.POINT + DatabaseConstant.Table.ROLE_MENU;
+        public static final String ROLE_RESOURCE = DatabaseConstant.Database.USER + StringConstant.POINT + DatabaseConstant.Table.ROLE_RESOURCE;
 
         public static final String BRAND = DatabaseConstant.Database.GOODS + StringConstant.POINT + DatabaseConstant.Table.BRAND;
 

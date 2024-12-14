@@ -2,6 +2,7 @@ package com.cafe.common.core.request;
 
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.request.RequestConstant;
+import com.cafe.common.core.jwt.Payload;
 import com.cafe.common.util.json.JacksonUtil;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.core.annotation.Order;
@@ -23,11 +24,11 @@ import javax.servlet.http.HttpServletRequest;
 @Order(value = IntegerConstant.FIFTY)
 public class RequestHeaderHandler {
 
-    @ModelAttribute(value = RequestConstant.ModelAttribute.USER_DETAILS)
-    public UserDetails userDetails(HttpServletRequest request) {
-        // 获取请求头中的用户详细信息
-        String userDetails = request.getHeader(RequestConstant.Header.USER_DETAILS);
-        // 将用户详细信息反序列化成 UserDetails 类型, 添加到 ModelAttribute 中
-        return JacksonUtil.readValue(userDetails, UserDetails.class);
+    @ModelAttribute(value = RequestConstant.ModelAttribute.PAYLOAD)
+    public Payload payload(HttpServletRequest request) {
+        // 获取请求头中的 JWT 载荷
+        String payload = request.getHeader(RequestConstant.Header.PAYLOAD);
+        // 将 JWT 载荷反序列化成 Payload 类型, 添加到 ModelAttribute 中
+        return JacksonUtil.readValue(payload, Payload.class);
     }
 }

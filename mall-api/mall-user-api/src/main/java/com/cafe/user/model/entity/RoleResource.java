@@ -19,26 +19,26 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.user.model.entity
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 角色-菜单关联关系实体模型
+ * @Description: 角色-资源关联关系实体模型
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "RoleMenu", description = "角色-菜单关联关系实体模型")
-@TableName(value = "mall_role_menu")
-public class RoleMenu implements Serializable {
+@ApiModel(value = "RoleResource", description = "角色-资源关联关系实体模型")
+@TableName(value = "mall_role_resource")
+public class RoleResource implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "角色-菜单关联关系ID")
+    @ApiModelProperty(value = "角色-资源关联关系ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
     @ApiModelProperty(value = "角色ID")
     private Long roleId;
 
-    @ApiModelProperty(value = "菜单ID")
-    private Long menuId;
+    @ApiModelProperty(value = "资源ID")
+    private Long resourceId;
 
     @ApiModelProperty(value = "创建时间")
     @TableField(fill = FieldFill.INSERT)

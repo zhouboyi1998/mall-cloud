@@ -25,9 +25,9 @@ public class RequestConstant {
         public static final String BEARER_PREFIX = "Bearer ";
 
         /**
-         * 用户详细信息
+         * JWT 载荷
          */
-        public static final String USER_DETAILS = "User-Details";
+        public static final String PAYLOAD = "Payload";
 
         /**
          * 是否为Feign请求
@@ -87,9 +87,9 @@ public class RequestConstant {
     public static class ModelAttribute {
 
         /**
-         * 用户详细信息
+         * JWT 载荷
          */
-        public static final String USER_DETAILS = "userDetails";
+        public static final String PAYLOAD = "payload";
     }
 
     /**
