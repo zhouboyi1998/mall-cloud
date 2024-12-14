@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe.user.mapper.RoleResourceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cafe.user.model.entity.RoleResource">
+        <id column="id" property="id" />
+        <result column="role_id" property="roleId" />
+        <result column="resource_id" property="resourceId" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 使用两个 resultMap, 将角色名称按资源内容组合成 List 类型 -->
+    <resultMap id="RoleNameListMap" type="java.lang.String">
+        <result column="role_name" />
+    </resultMap>
+    <resultMap id="ResourceRoleBOMap" type="com.cafe.user.model.bo.ResourceRoleBO">
+        <result column="resource_content" property="resourceContent" />
+        <collection property="roleNameList" resultMap="RoleNameListMap" javaType="java.util.List" />
+    </resultMap>
+
+    <select id="resourceRoleBOList" resultMap="ResourceRoleBOMap">
+        SELECT resource.resource_content, role.role_name
+        FROM mall_resource AS resource
+        LEFT JOIN mall_role_resource AS rr ON rr.resource_id = resource.id
+        LEFT JOIN mall_role AS role ON role.id = rr.role_id
+        <where>
+            <if test="resourceIds != null and resourceIds.size() > 0">
+                AND rr.resource_id IN
+                <foreach collection="resourceIds" item="resourceId" open="(" close=")" separator=",">
+                    #{resourceId}
+                </foreach>
+            </if>
+            AND resource.is_deleted = 0
+            AND (role.is_deleted = 0 OR ISNULL(role.role_name))
+        </where>
+    </select>
+
+</mapper>

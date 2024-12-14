@@ -2,7 +2,7 @@ package com.cafe.user.model.relation;
 
 import com.cafe.common.constant.mysql.MySQLConstant;
 import com.cafe.user.model.entity.Role;
-import com.cafe.user.model.entity.RoleMenu;
+import com.cafe.user.model.entity.RoleResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,6 +23,6 @@ public class UserRelation {
 
     static {
         TABLE_MODEL_MAP.put(MySQLConstant.DatabaseTable.ROLE, Role.class);
-        TABLE_MODEL_MAP.put(MySQLConstant.DatabaseTable.ROLE_MENU, RoleMenu.class);
+        TABLE_MODEL_MAP.put(MySQLConstant.DatabaseTable.ROLE_RESOURCE, RoleResource.class);
     }
 }

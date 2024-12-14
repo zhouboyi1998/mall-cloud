@@ -14,18 +14,18 @@ import java.util.ArrayList;
  * @Package: com.cafe.user.model.bo
  * @Author: zhouboyi
  * @Date: 2022/9/48 09:47
- * @Description: 菜单-角色关联关系业务对象
+ * @Description: [资源内容-角色名称] 关联关系业务模型
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "MenuRoleBO", description = "菜单-角色关联关系业务模型")
-public class MenuRoleBO implements Serializable {
+@ApiModel(value = "ResourceRoleBO", description = "[资源内容-角色名称] 关联关系业务模型")
+public class ResourceRoleBO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "菜单路径")
-    private String menuPath;
+    @ApiModelProperty(value = "资源内容")
+    private String resourceContent;
 
     @ApiModelProperty(value = "角色名称列表")
     private ArrayList<String> roleNameList;

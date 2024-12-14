@@ -1,6 +1,6 @@
 package com.cafe.security.service;
 
-import com.cafe.security.model.bo.TokenDetails;
+import com.cafe.security.model.vo.Token;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 
 import java.security.Principal;
@@ -18,10 +18,10 @@ public interface OauthService {
     /**
      * Oauth2 登录认证
      *
-     * @param principal
-     * @param parameters
-     * @return
-     * @throws HttpRequestMethodNotSupportedException
+     * @param principal  认证主体
+     * @param parameters 认证参数
+     * @return 认证令牌
+     * @throws HttpRequestMethodNotSupportedException HTTP 请求方式不支持异常
      */
-    TokenDetails token(Principal principal, Map<String, String> parameters) throws HttpRequestMethodNotSupportedException;
+    Token token(Principal principal, Map<String, String> parameters) throws HttpRequestMethodNotSupportedException;
 }

@@ -1,15 +1,10 @@
-package com.cafe.gateway.authorization;
+package com.cafe.gateway.manager;
 
 import com.cafe.common.constant.pool.IntegerConstant;
-import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.redis.RedisConstant;
-import com.cafe.common.constant.request.RequestConstant;
-import com.cafe.common.core.request.UserDetails;
 import com.cafe.common.util.json.JacksonUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.nimbusds.jose.JWSObject;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -22,11 +17,10 @@ import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.gateway.authorization
+ * @Package: com.cafe.gateway.manager
  * @Author: zhouboyi
  * @Date: 2022/5/10 23:02
  * @Description: 授权管理器
@@ -38,34 +32,23 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
 
     private final RedisTemplate<String, Object> redisTemplate;
 
-    @SneakyThrows
     @Override
     public Mono<AuthorizationDecision> check(Mono<Authentication> mono, AuthorizationContext authorizationContext) {
         // 获取 Request
         ServerHttpRequest request = authorizationContext.getExchange().getRequest();
-        // 获取 Request Path 中的菜单路径
+        // 获取菜单路径
         String menuPath = request.getPath().subPath(IntegerConstant.ZERO, IntegerConstant.FOUR).toString();
-        // 获取 Request Header 中的 Token
-        String token = Optional.ofNullable(request.getHeaders().getFirst(RequestConstant.Header.AUTHORIZATION))
-            .orElseThrow(NullPointerException::new);
-        // 移除 Token 中的令牌头, 获取 Access Token
-        String accessToken = token.replace(RequestConstant.Header.BEARER_PREFIX, StringConstant.EMPTY);
-        // 解析 Access Token
-        JWSObject jwsObject = JWSObject.parse(accessToken);
-        // 从解析后的 Access Token 中获取载荷
-        String payload = jwsObject.getPayload().toString();
-        // 解析载荷获取用户详细信息
-        UserDetails userDetails = JacksonUtil.readValue(payload, UserDetails.class);
-        log.info("AuthorizationManager.check(): user id -> {}, client id -> {}, menu path -> {}", userDetails.getUserId(), userDetails.getClientId(), menuPath);
+        // 根据菜单路径, 获取可以访问当前菜单的角色列表
+        List<String> roleNameList = JacksonUtil.convertValue(redisTemplate.opsForHash().get(RedisConstant.RESOURCE_ROLE_MAP, menuPath), new TypeReference<List<String>>() {});
+        log.info("AuthorizationManager.check(): menu path -> {}, role name list -> {}", menuPath, JacksonUtil.writeValueAsString(roleNameList));
 
-        // 获取可以访问当前菜单的角色列表
-        List<String> roleNameList = JacksonUtil.convertValue(redisTemplate.opsForHash().get(RedisConstant.MENU_ROLE_MAP, menuPath), new TypeReference<List<String>>() {});
-
-        // 当用户认证通过, 且用户的角色可以访问当前菜单, 当前用户可以访问当前请求
+        // 判断当前用户是否可以访问当前请求
         return mono
+            // 判断用户是否认证通过
             .filter(Authentication::isAuthenticated)
             .flatMapIterable(Authentication::getAuthorities)
             .map(GrantedAuthority::getAuthority)
+            // 判断用户角色是否可以访问当前菜单
             .any(roleNameList::contains)
             .map(AuthorizationDecision::new)
             .defaultIfEmpty(new AuthorizationDecision(false));
