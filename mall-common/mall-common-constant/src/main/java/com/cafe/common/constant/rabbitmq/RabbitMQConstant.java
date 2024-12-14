@@ -34,14 +34,14 @@ public class RabbitMQConstant {
     public static class RoutingKey {
 
         /**
-         * binlog 交换机和 role-menu 队列绑定的路由键
+         * binlog 交换机和 role-resource 队列绑定的路由键
          */
-        public static final String BINLOG_TO_ROLE_MENU = "binlog-to-role-menu";
+        public static final String BINLOG_TO_ROLE_RESOURCE = "binlog-to-role-resource";
 
         /**
-         * canal 交换机和 role-menu 队列绑定的路由键
+         * canal 交换机和 role-resource 队列绑定的路由键
          */
-        public static final String CANAL_TO_ROLE_MENU = "canal-to-role-menu";
+        public static final String CANAL_TO_ROLE_RESOURCE = "canal-to-role-resource";
 
         /**
          * Exchange + TableName 作为组合键, 获取 RoutingKey
@@ -49,8 +49,8 @@ public class RabbitMQConstant {
         public static final MultiKeyMap<String, String> MAP = new MultiKeyMap<>();
 
         static {
-            MAP.put(Exchange.BINLOG, MySQLConstant.DatabaseTable.ROLE_MENU, BINLOG_TO_ROLE_MENU);
-            MAP.put(Exchange.CANAL, MySQLConstant.DatabaseTable.ROLE_MENU, CANAL_TO_ROLE_MENU);
+            MAP.put(Exchange.BINLOG, MySQLConstant.DatabaseTable.ROLE_RESOURCE, BINLOG_TO_ROLE_RESOURCE);
+            MAP.put(Exchange.CANAL, MySQLConstant.DatabaseTable.ROLE_RESOURCE, CANAL_TO_ROLE_RESOURCE);
         }
     }
 
@@ -60,8 +60,8 @@ public class RabbitMQConstant {
     public static class Queue {
 
         /**
-         * role-menu 队列
+         * role-resource 队列
          */
-        public static final String ROLE_MENU = "role-menu";
+        public static final String ROLE_RESOURCE = "role-resource";
     }
 }

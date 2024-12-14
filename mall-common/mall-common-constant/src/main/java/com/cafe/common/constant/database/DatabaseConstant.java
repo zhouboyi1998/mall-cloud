@@ -41,9 +41,9 @@ public class DatabaseConstant {
         public static final String ROLE = "mall_role";
 
         /**
-         * 角色-菜单关联关系表
+         * 角色-资源关联关系表
          */
-        public static final String ROLE_MENU = "mall_role_menu";
+        public static final String ROLE_RESOURCE = "mall_role_resource";
 
         /**
          * 品牌表
