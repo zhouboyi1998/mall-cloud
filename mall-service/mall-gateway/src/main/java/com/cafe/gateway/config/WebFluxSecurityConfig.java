@@ -1,10 +1,10 @@
 package com.cafe.gateway.config;
 
 import com.cafe.common.constant.security.AuthorizationConstant;
-import com.cafe.gateway.authentication.OauthServerAuthenticationEntryPoint;
-import com.cafe.gateway.authorization.AuthorizationManager;
-import com.cafe.gateway.authorization.OauthServerAccessDeniedHandler;
+import com.cafe.gateway.exception.OauthServerAccessDeniedHandler;
+import com.cafe.gateway.exception.OauthServerAuthenticationEntryPoint;
 import com.cafe.gateway.filter.WhitelistWebFilter;
+import com.cafe.gateway.manager.AuthorizationManager;
 import com.cafe.gateway.property.SecurityProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

@@ -4,7 +4,7 @@ canal:
   subscribe-table: mall_.*\..*
   # 推送至 RabbitMQ 的数据表
   rabbitmq-table:
-    - mall_user.mall_role_menu
+    - mall_user.mall_role_resource
   # 推送至 RocketMQ 的数据表
   rocketmq-table:
     - mall_goods.mall_brand

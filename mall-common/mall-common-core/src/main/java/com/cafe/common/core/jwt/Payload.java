@@ -1,4 +1,4 @@
-package com.cafe.common.core.request;
+package com.cafe.common.core.jwt;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
@@ -11,16 +11,16 @@ import java.util.List;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.core.request
+ * @Package: com.cafe.common.core.jwt
  * @Author: zhouboyi
  * @Date: 2023/8/7 16:16
- * @Description: 用户详细信息 (JWT 载荷)
+ * @Description: JWT 载荷
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @JsonNaming(value = PropertyNamingStrategy.SnakeCaseStrategy.class)
-public class UserDetails implements Serializable {
+public class Payload implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
