@@ -2,4 +2,4 @@
 binlog:
   # 监听的数据表
   table:
-    - mall_user.mall_role_menu
+    - mall_user.mall_role_resource

@@ -89,22 +89,22 @@
 
 #### Queue
 
-###### 创建 role-menu 队列
+###### 创建 role-resource 队列
 
-* **Name**：`role-menu`
+* **Name**：`role-resource`
 * **Durability**：`Durable`
 * **Auto delete**：`No`
 
 #### Routing Key
 
-* 进入 `role-menu` 队列的设置界面，添加 `Bindings`
+* 进入 `role-resource` 队列的设置界面，添加 `Bindings`
 
-###### 绑定 binlog 交换机和 role-menu 队列
+###### 绑定 binlog 交换机和 role-resource 队列
 
 * **From exchange**：`binlog`
-* **Routing key**：`binlog-to-role-menu`
+* **Routing key**：`binlog-to-role-resource`
 
-###### 绑定 canal 交换机和 role-menu 队列
+###### 绑定 canal 交换机和 role-resource 队列
 
 * **From exchange**：`canal`
-* **Routing key**：`canal-to-role-menu`
+* **Routing key**：`canal-to-role-resource`

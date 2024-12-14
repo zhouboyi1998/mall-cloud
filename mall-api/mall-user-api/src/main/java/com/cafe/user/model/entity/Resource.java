@@ -20,40 +20,43 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.user.model.entity
  * @Author: zhouboyi
  * @Date: 2022-05-09
- * @Description: 菜单实体模型
+ * @Description: 资源实体模型
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "Menu", description = "菜单实体模型")
-@TableName(value = "mall_menu")
-public class Menu implements Serializable {
+@ApiModel(value = "Resource", description = "资源实体模型")
+@TableName(value = "mall_resource")
+public class Resource implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "菜单ID")
+    @ApiModelProperty(value = "资源ID")
     @TableId(value = "id", type = IdType.ASSIGN_ID)
     private Long id;
 
-    @ApiModelProperty(value = "上级菜单ID")
+    @ApiModelProperty(value = "上级资源ID")
     private Long parentId;
 
     @ApiModelProperty(value = "平台ID")
     private Long platformId;
 
-    @ApiModelProperty(value = "菜单名称")
-    private String menuName;
+    @ApiModelProperty(value = "资源类型: 1 菜单, 2 按钮")
+    private Integer resourceType;
 
-    @ApiModelProperty(value = "菜单标题")
-    private String menuTitle;
+    @ApiModelProperty(value = "资源名称")
+    private String resourceName;
 
-    @ApiModelProperty(value = "菜单图标")
-    private String menuIcon;
+    @ApiModelProperty(value = "资源标题")
+    private String resourceTitle;
 
-    @ApiModelProperty(value = "菜单路径")
-    private String menuPath;
+    @ApiModelProperty(value = "资源图标")
+    private String resourceIcon;
 
-    @ApiModelProperty(value = "菜单层级: 1 一级菜单, 2 二级菜单, 3 三级菜单")
+    @ApiModelProperty(value = "资源内容: 菜单路径")
+    private String resourceContent;
+
+    @ApiModelProperty(value = "资源层级: 1 一级资源, 2 二级资源, 3 三级资源")
     private Integer level;
 
     @ApiModelProperty(value = "排序号")
