@@ -2,7 +2,7 @@ package com.cafe.canal.handler;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.cafe.common.constant.rabbitmq.RabbitMQConstant;
-import com.cafe.common.rabbitmq.producer.RabbitMQProducer;
+import com.cafe.infrastructure.rabbitmq.producer.RabbitMQProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

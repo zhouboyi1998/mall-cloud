@@ -3,7 +3,7 @@ package com.cafe.order.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.ApiLogPrint;
-import com.cafe.common.mybatisplus.util.WrapperUtil;
+import com.cafe.infrastructure.mybatisplus.util.WrapperUtil;
 import com.cafe.order.model.entity.Aftersale;
 import com.cafe.order.service.AftersaleService;
 import io.swagger.annotations.Api;

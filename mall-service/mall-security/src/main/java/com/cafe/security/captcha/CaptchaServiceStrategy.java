@@ -1,6 +1,6 @@
 package com.cafe.security.captcha;
 
-import com.cafe.common.util.StringUtil;
+import com.cafe.common.util.base.StringUtil;
 import com.cafe.security.service.CaptchaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

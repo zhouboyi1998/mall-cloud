@@ -3,7 +3,7 @@ package com.cafe.user.message;
 import com.cafe.common.constant.monitor.MonitorConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.rabbitmq.RabbitMQConstant;
-import com.cafe.common.util.json.JacksonUtil;
+import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.user.facade.RoleResourceFacade;
 import com.cafe.user.model.entity.RoleResource;
 import com.fasterxml.jackson.core.type.TypeReference;

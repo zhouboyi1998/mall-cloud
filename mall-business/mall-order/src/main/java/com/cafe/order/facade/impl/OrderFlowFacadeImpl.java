@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.cafe.common.constant.model.OrderConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
-import com.cafe.common.mybatisplus.util.WrapperUtil;
+import com.cafe.infrastructure.mybatisplus.util.WrapperUtil;
 import com.cafe.order.facade.OrderFlowFacade;
 import com.cafe.order.model.converter.OrderConverter;
 import com.cafe.order.model.entity.Order;
