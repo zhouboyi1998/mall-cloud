@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  * @Package: com.cafe.id.config
  * @Author: zhouboyi
  * @Date: 2022/12/6 10:47
- * @Description: Snowflake 配置
+ * @Description: Snowflake 配置类
  */
 @RequiredArgsConstructor
 @Configuration

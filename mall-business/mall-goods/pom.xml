@@ -33,19 +33,19 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-mybatisplus</artifactId>
+            <artifactId>mall-infrastructure-mybatisplus</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-redis</artifactId>
+            <artifactId>mall-infrastructure-redis</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-rocketmq</artifactId>
+            <artifactId>mall-infrastructure-rocketmq</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-swagger</artifactId>
+            <artifactId>mall-infrastructure-swagger</artifactId>
         </dependency>
 
         <dependency>

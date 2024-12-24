@@ -1,8 +1,8 @@
 package com.cafe.ordercenter.controller;
 
 import com.cafe.common.constant.kafka.KafkaConstant;
-import com.cafe.common.kafka.producer.KafkaProducer;
 import com.cafe.common.log.annotation.ApiLogPrint;
+import com.cafe.infrastructure.kafka.producer.KafkaProducer;
 import com.cafe.order.model.vo.OrderVO;
 import com.cafe.ordercenter.service.OrderCenterService;
 import com.cafe.storage.model.dto.CartDTO;

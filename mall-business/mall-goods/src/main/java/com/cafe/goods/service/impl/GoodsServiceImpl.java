@@ -1,9 +1,9 @@
 package com.cafe.goods.service.impl;
 
-import com.cafe.common.redis.annotation.FallbackCache;
 import com.cafe.goods.mapper.GoodsMapper;
 import com.cafe.goods.model.bo.Goods;
 import com.cafe.goods.service.GoodsService;
+import com.cafe.infrastructure.redis.annotation.FallbackCache;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
