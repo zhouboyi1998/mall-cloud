@@ -2,7 +2,7 @@ package com.cafe.canal.handler;
 
 import com.alibaba.otter.canal.protocol.CanalEntry;
 import com.cafe.common.constant.rocketmq.RocketMQConstant;
-import com.cafe.common.rocketmq.producer.RocketMQProducer;
+import com.cafe.infrastructure.rocketmq.producer.RocketMQProducer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

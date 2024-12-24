@@ -3,7 +3,7 @@ package com.cafe.debezium.handler;
 import com.cafe.common.constant.kafka.KafkaConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.enumeration.debezium.SchemaFieldEnum;
-import com.cafe.common.kafka.producer.KafkaProducer;
+import com.cafe.infrastructure.kafka.producer.KafkaProducer;
 import lombok.RequiredArgsConstructor;
 import org.apache.kafka.connect.data.Struct;
 import org.springframework.stereotype.Component;

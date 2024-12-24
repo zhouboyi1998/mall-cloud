@@ -3,7 +3,7 @@ package com.cafe.user.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.ApiLogPrint;
-import com.cafe.common.mybatisplus.util.WrapperUtil;
+import com.cafe.infrastructure.mybatisplus.util.WrapperUtil;
 import com.cafe.user.model.entity.UserPlatform;
 import com.cafe.user.service.UserPlatformService;
 import io.swagger.annotations.Api;

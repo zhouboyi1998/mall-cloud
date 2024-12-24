@@ -2,7 +2,7 @@ package com.cafe.goods.facade.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cafe.common.constant.model.GoodsConstant;
-import com.cafe.common.mybatisplus.util.WrapperUtil;
+import com.cafe.infrastructure.mybatisplus.util.WrapperUtil;
 import com.cafe.goods.facade.SpuFacade;
 import com.cafe.goods.model.converter.SpuConverter;
 import com.cafe.goods.model.entity.Sku;
