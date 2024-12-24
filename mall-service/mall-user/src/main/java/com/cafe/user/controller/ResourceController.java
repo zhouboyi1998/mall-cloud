@@ -6,7 +6,7 @@ import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.core.jwt.Payload;
 import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.log.annotation.ApiLogPrint;
-import com.cafe.common.mybatisplus.util.WrapperUtil;
+import com.cafe.infrastructure.mybatisplus.util.WrapperUtil;
 import com.cafe.user.model.entity.Resource;
 import com.cafe.user.service.ResourceService;
 import io.swagger.annotations.Api;

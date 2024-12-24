@@ -5,7 +5,7 @@ import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.constant.security.SecurityConstant;
 import com.cafe.common.core.result.Result;
-import com.cafe.common.util.json.JacksonUtil;
+import com.cafe.common.jackson.util.JacksonUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.core.MethodParameter;

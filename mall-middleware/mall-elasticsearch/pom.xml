@@ -29,7 +29,7 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-kafka</artifactId>
+            <artifactId>mall-infrastructure-kafka</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
@@ -37,11 +37,11 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-rocketmq</artifactId>
+            <artifactId>mall-infrastructure-rocketmq</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-swagger</artifactId>
+            <artifactId>mall-infrastructure-swagger</artifactId>
         </dependency>
 
         <dependency>

@@ -23,6 +23,7 @@
         <module>mall-common</module>
         <module>mall-configuration</module>
         <module>mall-discovery</module>
+        <module>mall-infrastructure</module>
         <module>mall-middleware</module>
         <module>mall-service</module>
     </modules>
@@ -473,6 +474,43 @@
                 <version>${mall-cloud.version}</version>
             </dependency>
 
+            <!-- 基础设施公共包 -->
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-infrastructure-kafka</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-infrastructure-mybatisplus</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-infrastructure-rabbitmq</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-infrastructure-redis</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-infrastructure-rocketmq</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-infrastructure-swagger</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-infrastructure-xxljob</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+
             <!-- 公共包 -->
             <dependency>
                 <groupId>com.cafe</groupId>
@@ -491,11 +529,6 @@
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
-                <artifactId>mall-common-kafka</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
                 <artifactId>mall-common-lang</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
@@ -506,37 +539,7 @@
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
-                <artifactId>mall-common-mybatisplus</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
-                <artifactId>mall-common-rabbitmq</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
-                <artifactId>mall-common-redis</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
-                <artifactId>mall-common-rocketmq</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
-                <artifactId>mall-common-swagger</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
                 <artifactId>mall-common-util</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
-                <artifactId>mall-common-xxljob</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
 

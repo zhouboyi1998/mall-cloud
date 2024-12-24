@@ -2,7 +2,7 @@ package com.cafe.elasticsearch.service.impl;
 
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
-import com.cafe.common.util.json.JacksonUtil;
+import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.elasticsearch.model.index.OrderIndex;
 import com.cafe.elasticsearch.service.OrderIndexService;
 import lombok.RequiredArgsConstructor;

@@ -73,7 +73,7 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-redis</artifactId>
+            <artifactId>mall-infrastructure-redis</artifactId>
         </dependency>
     </dependencies>
 

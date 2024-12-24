@@ -64,7 +64,7 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-kafka</artifactId>
+            <artifactId>mall-infrastructure-kafka</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>

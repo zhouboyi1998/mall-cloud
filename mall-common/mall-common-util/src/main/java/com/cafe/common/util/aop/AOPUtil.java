@@ -1,6 +1,6 @@
 package com.cafe.common.util.aop;
 
-import com.cafe.common.util.json.JacksonUtil;
+import com.cafe.common.jackson.util.JacksonUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.web.multipart.MultipartFile;
