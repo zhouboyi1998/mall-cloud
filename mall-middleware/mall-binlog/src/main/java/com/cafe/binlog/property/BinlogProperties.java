@@ -12,7 +12,7 @@ import java.util.List;
  * @Package: com.cafe.binlog.property
  * @Author: zhouboyi
  * @Date: 2022/5/16 15:09
- * @Description: 获取 application 中定义的数据库监听配置
+ * @Description: Binlog 配置
  */
 @Getter
 @Setter

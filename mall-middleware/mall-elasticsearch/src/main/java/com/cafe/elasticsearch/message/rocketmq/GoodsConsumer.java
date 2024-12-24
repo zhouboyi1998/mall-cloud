@@ -3,7 +3,7 @@ package com.cafe.elasticsearch.message.rocketmq;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.model.GoodsConstant;
 import com.cafe.common.constant.rocketmq.RocketMQConstant;
-import com.cafe.common.util.json.JacksonUtil;
+import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.elasticsearch.model.index.GoodsIndex;
 import com.cafe.elasticsearch.service.GoodsIndexService;
 import com.fasterxml.jackson.core.type.TypeReference;

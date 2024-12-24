@@ -37,7 +37,7 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-rabbitmq</artifactId>
+            <artifactId>mall-infrastructure-rabbitmq</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>

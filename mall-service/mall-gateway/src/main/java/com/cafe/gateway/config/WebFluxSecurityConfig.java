@@ -28,7 +28,7 @@ import reactor.core.publisher.Mono;
  * @Package: com.cafe.gateway.config
  * @Author: zhouboyi
  * @Date: 2022/5/10 22:57
- * @Description: WebFlux 安全配置
+ * @Description: WebFlux 安全配置类
  */
 @RequiredArgsConstructor
 @Configuration

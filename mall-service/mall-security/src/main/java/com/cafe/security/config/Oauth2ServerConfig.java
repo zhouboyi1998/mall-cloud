@@ -41,7 +41,7 @@ import java.util.List;
  * @Package: com.cafe.security.config
  * @Author: zhouboyi
  * @Date: 2022/5/9 10:13
- * @Description: OAuth2 认证服务配置
+ * @Description: OAuth2 认证服务配置类
  */
 @RequiredArgsConstructor
 @Configuration

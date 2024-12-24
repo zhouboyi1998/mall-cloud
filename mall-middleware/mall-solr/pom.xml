@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-swagger</artifactId>
+            <artifactId>mall-infrastructure-swagger</artifactId>
         </dependency>
 
         <dependency>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.cafe</groupId>
+        <artifactId>mall-cloud</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>mall-infrastructure</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <description>基础设施公共包</description>
+
+    <modules>
+        <module>mall-infrastructure-kafka</module>
+        <module>mall-infrastructure-mybatisplus</module>
+        <module>mall-infrastructure-rabbitmq</module>
+        <module>mall-infrastructure-redis</module>
+        <module>mall-infrastructure-rocketmq</module>
+        <module>mall-infrastructure-swagger</module>
+        <module>mall-infrastructure-xxljob</module>
+    </modules>
+
+</project>

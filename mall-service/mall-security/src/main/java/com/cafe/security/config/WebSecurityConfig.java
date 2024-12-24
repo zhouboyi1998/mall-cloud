@@ -27,7 +27,7 @@ import java.security.KeyPair;
  * @Package: com.cafe.security.config
  * @Author: zhouboyi
  * @Date: 2022/5/10 22:17
- * @Description: Web 安全配置
+ * @Description: Web 安全配置类
  */
 @RequiredArgsConstructor
 @Configuration

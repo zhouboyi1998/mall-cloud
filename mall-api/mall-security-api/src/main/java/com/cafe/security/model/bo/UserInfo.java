@@ -10,7 +10,7 @@
  */
 package com.cafe.security.model.bo;
 
-import com.cafe.common.util.json.JacksonUtil;
+import com.cafe.common.jackson.util.JacksonUtil;
 import io.swagger.annotations.ApiModel;
 import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
