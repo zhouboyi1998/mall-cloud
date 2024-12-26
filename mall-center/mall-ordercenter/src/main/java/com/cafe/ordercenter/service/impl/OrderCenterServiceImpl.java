@@ -3,7 +3,6 @@ package com.cafe.ordercenter.service.impl;
 import com.cafe.common.constant.pool.BigDecimalConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
-import com.cafe.common.core.exception.BusinessException;
 import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.foundation.feign.AreaFeign;
 import com.cafe.foundation.model.vo.AreaDetailVO;
@@ -18,6 +17,7 @@ import com.cafe.order.feign.OrderFlowFeign;
 import com.cafe.order.model.entity.OrderItem;
 import com.cafe.order.model.vo.OrderVO;
 import com.cafe.ordercenter.service.OrderCenterService;
+import com.cafe.starter.boot.model.exception.BusinessException;
 import com.cafe.storage.feign.StockFeign;
 import com.cafe.storage.model.dto.CartDTO;
 import io.seata.spring.annotation.GlobalTransactional;
@@ -83,8 +83,8 @@ public class OrderCenterServiceImpl implements OrderCenterService {
     /**
      * 查询下单商品的详细信息
      *
-     * @param cartDTOList
-     * @return
+     * @param cartDTOList 购物车DTO列表
+     * @return 商品详细信息
      */
     private List<Goods> selectGoodsList(List<CartDTO> cartDTOList) {
         // 获取 SKU 主键列表
@@ -107,8 +107,8 @@ public class OrderCenterServiceImpl implements OrderCenterService {
     /**
      * 查询收货地址
      *
-     * @param addressId
-     * @return
+     * @param addressId 地址ID
+     * @return 收货地址
      */
     private Address selectAddress(Long addressId) {
         // 根据地址 ID 查询收货地址 (如果收货地址不存在, 终止订单提交)
@@ -120,8 +120,8 @@ public class OrderCenterServiceImpl implements OrderCenterService {
     /**
      * 查询收货地址的所属区域
      *
-     * @param address
-     * @return
+     * @param address 地址ID
+     * @return 所属区域详情
      */
     private AreaDetailVO selectAreaDetailVO(Address address) {
         // 根据省份id、城市id、区县id获取区域详情 (如果区域不存在, 终止订单提交)
@@ -133,7 +133,7 @@ public class OrderCenterServiceImpl implements OrderCenterService {
     /**
      * 扣减库存
      *
-     * @param cartDTOList
+     * @param cartDTOList 购物车DTO列表
      */
     private void outboundStock(List<CartDTO> cartDTOList) {
         // SKU 出库, 返回值是库存不足的 SKU 主键列表
@@ -149,11 +149,11 @@ public class OrderCenterServiceImpl implements OrderCenterService {
     /**
      * 创建订单
      *
-     * @param cartDTOList
-     * @param goodsList
-     * @param address
-     * @param areaDetailVO
-     * @return
+     * @param cartDTOList  购物车DTO列表
+     * @param goodsList    下单购买的商品列表
+     * @param address      收货地址
+     * @param areaDetailVO 收货区域详情
+     * @return 订单信息
      */
     private OrderVO createOrder(List<CartDTO> cartDTOList, List<Goods> goodsList, Address address, AreaDetailVO areaDetailVO) {
         // SKU 主键和购买数量映射

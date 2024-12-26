@@ -3,7 +3,7 @@ package com.cafe.user.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.constant.request.RequestConstant;
-import com.cafe.common.core.jwt.Payload;
+import com.cafe.starter.boot.model.Payload;
 import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.infrastructure.mybatisplus.util.WrapperUtil;

@@ -50,7 +50,7 @@ public class IdempotenceAspect {
     /**
      * 前置通知
      *
-     * @param joinPoint
+     * @param joinPoint 连接点
      */
     @Before(value = "pointcut()")
     public void doBefore(JoinPoint joinPoint) {

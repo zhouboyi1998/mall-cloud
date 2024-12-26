@@ -1,13 +1,13 @@
 package com.cafe.fastdfs.controller;
 
 import com.cafe.common.log.annotation.ApiLogPrint;
+import com.cafe.fastdfs.model.vo.FileInfoVO;
 import com.cafe.fastdfs.service.FileService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.csource.fastdfs.FileInfo;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -81,11 +81,11 @@ public class FileController {
         @ApiImplicitParam(value = "文件名", name = "filename", dataType = "String", paramType = "query", required = true)
     })
     @GetMapping(value = "/info")
-    public ResponseEntity<FileInfo> info(
+    public ResponseEntity<FileInfoVO> info(
         @RequestParam(value = "group") String group,
         @RequestParam(value = "filename") String filename
     ) {
-        FileInfo fileInfo = fileService.info(group, filename);
-        return ResponseEntity.ok(fileInfo);
+        FileInfoVO vo = fileService.info(group, filename);
+        return ResponseEntity.ok(vo);
     }
 }

@@ -17,10 +17,10 @@
     <description>Redis 公共包</description>
 
     <dependencies>
-        <!-- Spring Boot Web -->
+        <!-- Servlet -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <optional>true</optional>
         </dependency>
         <!-- Spring Data Redis -->
@@ -29,6 +29,7 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
+        <!-- 公共包 -->
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-constant</artifactId>

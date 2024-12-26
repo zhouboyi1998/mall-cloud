@@ -19,16 +19,16 @@ public interface StockMapper extends BaseMapper<Stock> {
     /**
      * 入库
      *
-     * @param cartDTO
-     * @return
+     * @param cartDTO 购物车DTO
+     * @return 入库数量
      */
     Integer inbound(@Param(value = "cartDTO") CartDTO cartDTO);
 
     /**
      * 出库
      *
-     * @param cartDTO
-     * @return
+     * @param cartDTO 购物车DTO
+     * @return 出库数量
      */
     Integer outbound(@Param(value = "cartDTO") CartDTO cartDTO);
 }

@@ -14,7 +14,7 @@ public interface ServerService {
     /**
      * 查询服务信息
      *
-     * @return
+     * @return 查询响应
      */
     SearchResponse info();
 }

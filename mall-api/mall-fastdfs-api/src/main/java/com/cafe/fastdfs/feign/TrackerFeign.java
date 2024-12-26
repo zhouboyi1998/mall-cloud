@@ -1,6 +1,6 @@
 package com.cafe.fastdfs.feign;
 
-import com.cafe.common.core.feign.FeignRequestInterceptor;
+import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ public interface TrackerFeign {
     /**
      * 获取跟踪器地址
      *
-     * @return
+     * @return 跟踪器地址
      */
     @GetMapping(value = "/url")
     ResponseEntity<String> url();

@@ -19,19 +19,26 @@
     <dependencies>
         <!-- Spring Data Solr -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-solr</artifactId>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-solr</artifactId>
+        </dependency>
+        <!-- Swagger API 注解包 -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- Knife4J Swagger API 注解包 -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-annotations</artifactId>
             <optional>true</optional>
         </dependency>
 
+        <!-- 启动包 -->
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-core</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-infrastructure-swagger</artifactId>
+            <artifactId>mall-starter-boot</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>

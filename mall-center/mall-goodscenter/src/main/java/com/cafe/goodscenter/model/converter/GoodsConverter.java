@@ -14,7 +14,7 @@ import java.util.List;
  * @Package: com.cafe.goodscenter.model.converter
  * @Author: zhouboyi
  * @Date: 2024/8/4 21:39
- * @Description:
+ * @Description: 商品模型转换器
  */
 @Mapper(componentModel = "spring")
 public interface GoodsConverter {
@@ -24,24 +24,24 @@ public interface GoodsConverter {
     /**
      * 商品业务模型 -> 商品概要模型
      *
-     * @param goods
-     * @return
+     * @param goods 商品业务模型
+     * @return 商品概要模型
      */
     GoodsSummary toSummary(Goods goods);
 
     /**
      * 商品业务模型列表 -> 商品概要模型列表
      *
-     * @param goodsList
-     * @return
+     * @param goodsList 商品业务模型列表
+     * @return 商品概要模型列表
      */
     List<GoodsSummary> toSummaryList(List<Goods> goodsList);
 
     /**
      * SPU 视图模型 -> SPU 详情模型
      *
-     * @param spuVO
-     * @return
+     * @param spuVO SPU 视图模型
+     * @return SPU 详情模型
      */
     SpuDetail toDetail(SpuVO spuVO);
 }

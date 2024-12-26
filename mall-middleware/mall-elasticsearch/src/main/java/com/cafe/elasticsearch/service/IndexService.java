@@ -16,7 +16,7 @@ public interface IndexService {
      * 查询索引是否存在
      *
      * @param index 索引名称
-     * @return
+     * @return 查询结果 (true 存在, false 不存在)
      */
     Boolean exists(String index);
 
@@ -24,7 +24,7 @@ public interface IndexService {
      * 创建索引
      *
      * @param index 索引名称
-     * @return
+     * @return 创建索引响应
      */
     CreateIndexResponse create(String index);
 
@@ -32,7 +32,7 @@ public interface IndexService {
      * 删除索引
      *
      * @param index 索引名称
-     * @return
+     * @return 回复响应
      */
     AcknowledgedResponse delete(String index);
 }

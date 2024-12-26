@@ -1,6 +1,6 @@
 package com.cafe.id.feign;
 
-import com.cafe.common.core.feign.FeignRequestInterceptor;
+import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +20,7 @@ public interface IDFeign {
     /**
      * 获取下一个分布式ID
      *
-     * @return
+     * @return 分布式ID
      */
     @GetMapping(value = "/next")
     ResponseEntity<Long> nextId();

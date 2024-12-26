@@ -14,7 +14,7 @@ public interface BucketService {
     /**
      * 查询存储桶列表
      *
-     * @return
+     * @return 存储桶列表
      */
     List<String> list();
 
@@ -22,7 +22,7 @@ public interface BucketService {
      * 查询存储桶是否存在
      *
      * @param bucket 存储桶
-     * @return
+     * @return 查询结果 (true 存在, false 不存在)
      */
     Boolean exists(String bucket);
 
@@ -30,7 +30,6 @@ public interface BucketService {
      * 新建存储桶
      *
      * @param bucket 存储桶
-     * @return
      */
     void create(String bucket);
 
@@ -38,7 +37,6 @@ public interface BucketService {
      * 删除存储桶
      *
      * @param bucket 存储桶
-     * @return
      */
     void remove(String bucket);
 }

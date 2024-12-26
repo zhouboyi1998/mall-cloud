@@ -60,9 +60,9 @@ public class APIServiceImpl implements APIService {
     /**
      * 发送请求 (GET / DELETE / HEAD / OPTIONS)
      *
-     * @param api
-     * @param spec
-     * @return
+     * @param api  请求参数
+     * @param spec 请求规格
+     * @return 响应结果
      */
     private Mono<ObjectNode> sendRequest(API api, WebClient.RequestHeadersUriSpec<?> spec) {
         return spec
@@ -77,9 +77,9 @@ public class APIServiceImpl implements APIService {
     /**
      * 发送请求 (POST / PUT / PATCH)
      *
-     * @param api
-     * @param spec
-     * @return
+     * @param api  请求参数
+     * @param spec 请求规格
+     * @return 响应结果
      */
     private Mono<ObjectNode> sendRequest(API api, WebClient.RequestBodyUriSpec spec) {
         return spec
@@ -95,9 +95,9 @@ public class APIServiceImpl implements APIService {
     /**
      * 构建 URI
      *
-     * @param api
-     * @param uriBuilder
-     * @return
+     * @param api        请求参数
+     * @param uriBuilder URI构造器
+     * @return 响应结果
      */
     private URI uri(API api, UriBuilder uriBuilder) {
         api.getQuery().forEach(uriBuilder::queryParam);
@@ -107,8 +107,8 @@ public class APIServiceImpl implements APIService {
     /**
      * doOnSuccess 处理逻辑
      *
-     * @param api
-     * @param response
+     * @param api      请求参数
+     * @param response 响应
      */
     private void doOnSuccess(API api, ObjectNode response) {
         log.info("APIServiceImpl.doOnSuccess(): api -> {}, response -> {}", JacksonUtil.writeValueAsString(api), response);
@@ -117,9 +117,9 @@ public class APIServiceImpl implements APIService {
     /**
      * onErrorResume 处理逻辑
      *
-     * @param api
-     * @param throwable
-     * @return
+     * @param api       请求参数
+     * @param throwable 异常
+     * @return 响应结果
      */
     private Mono<ObjectNode> onErrorResume(API api, Throwable throwable) {
         log.error("APIServiceImpl.onErrorResume(): api -> {}, message -> {}", JacksonUtil.writeValueAsString(api), throwable.getMessage(), throwable);

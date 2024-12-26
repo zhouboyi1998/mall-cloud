@@ -12,7 +12,7 @@ public interface TrackerService {
     /**
      * 获取跟踪器地址
      *
-     * @return
+     * @return 跟踪器地址
      */
     String url();
 }

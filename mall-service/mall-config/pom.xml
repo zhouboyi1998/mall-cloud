@@ -23,13 +23,15 @@
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-common-constant</artifactId>
-        </dependency>
+        <!-- 基础设施 -->
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-infrastructure-redis</artifactId>
+        </dependency>
+        <!-- 公共包 -->
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-common-constant</artifactId>
         </dependency>
     </dependencies>
 
