@@ -9,6 +9,7 @@ import com.cafe.security.service.UserDetailsExtensionService;
 import com.cafe.user.feign.RoleFeign;
 import com.cafe.user.feign.UserFeign;
 import com.cafe.user.model.entity.User;
+import com.cafe.user.model.vo.UserVO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -48,18 +49,18 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
         String clientId = request.getParameter(RequestConstant.Parameter.CLIENT_ID);
 
         // 根据客户端id和用户名查询用户
-        User user = Optional.ofNullable(userFeign.detail(clientId, new User().setUsername(username)))
+        UserVO userVO = Optional.ofNullable(userFeign.detail(clientId, new User().setUsername(username)))
             .map(ResponseEntity::getBody)
             .orElseThrow(() -> new UsernameNotFoundException(HttpStatusEnum.USERNAME_NOT_FOUND.getReasonPhrase()));
 
         // 根据用户id查询角色名称列表
-        String[] roleNameArray = Optional.ofNullable(roleFeign.nameList(user.getId()))
+        String[] roleNameArray = Optional.ofNullable(roleFeign.nameList(userVO.getId()))
             .map(ResponseEntity::getBody)
             .map(roleNameList -> roleNameList.toArray(new String[0]))
             .orElseThrow(() -> new UsernameNotFoundException(HttpStatusEnum.ROLE_UNASSIGNED.getReasonPhrase()));
 
         // 新建用户详细信息
-        UserInfo userDetails = new UserInfo(UserInfo.PrincipalType.USERNAME, username, user.getId(), user.getUsername(), user.getPassword(), user.getStatus(), AuthorityUtils.createAuthorityList(roleNameArray));
+        UserInfo userDetails = new UserInfo(UserInfo.PrincipalType.USERNAME, username, userVO.getId(), userVO.getUsername(), userVO.getPassword(), userVO.getStatus(), AuthorityUtils.createAuthorityList(roleNameArray));
         // 校验用户状态
         validateUserDetails(userDetails);
         log.info("UserDetailsServiceImpl.loadUserByUsername(): client id -> {}, username -> {}", clientId, username);
@@ -72,18 +73,18 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
         String clientId = request.getParameter(RequestConstant.Parameter.CLIENT_ID);
 
         // 根据客户端id和手机号查询用户
-        User user = Optional.ofNullable(userFeign.detail(clientId, new User().setMobile(mobile)))
+        UserVO userVO = Optional.ofNullable(userFeign.detail(clientId, new User().setMobile(mobile)))
             .map(ResponseEntity::getBody)
             .orElseThrow(() -> new MobileNotFoundException(HttpStatusEnum.MOBILE_NOT_FOUND.getReasonPhrase()));
 
         // 根据用户id查询角色名称列表
-        String[] roleNameArray = Optional.ofNullable(roleFeign.nameList(user.getId()))
+        String[] roleNameArray = Optional.ofNullable(roleFeign.nameList(userVO.getId()))
             .map(ResponseEntity::getBody)
             .map(roleNameList -> roleNameList.toArray(new String[0]))
             .orElseThrow(() -> new MobileNotFoundException(HttpStatusEnum.ROLE_UNASSIGNED.getReasonPhrase()));
 
         // 新建用户详细信息
-        UserInfo userDetails = new UserInfo(UserInfo.PrincipalType.MOBILE, mobile, user.getId(), user.getUsername(), user.getPassword(), user.getStatus(), AuthorityUtils.createAuthorityList(roleNameArray));
+        UserInfo userDetails = new UserInfo(UserInfo.PrincipalType.MOBILE, mobile, userVO.getId(), userVO.getUsername(), userVO.getPassword(), userVO.getStatus(), AuthorityUtils.createAuthorityList(roleNameArray));
         // 校验用户状态
         validateUserDetails(userDetails);
         log.info("UserDetailsServiceImpl.loadUserByMobile(): client id -> {}, mobile -> {}", clientId, mobile);
@@ -96,18 +97,18 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
         String clientId = request.getParameter(RequestConstant.Parameter.CLIENT_ID);
 
         // 根据客户端id和邮箱查询用户
-        User user = Optional.ofNullable(userFeign.detail(clientId, new User().setEmail(email)))
+        UserVO userVO = Optional.ofNullable(userFeign.detail(clientId, new User().setEmail(email)))
             .map(ResponseEntity::getBody)
             .orElseThrow(() -> new EmailNotFoundException(HttpStatusEnum.EMAIL_NOT_FOUND.getReasonPhrase()));
 
         // 根据用户id查询角色名称列表
-        String[] roleNameArray = Optional.ofNullable(roleFeign.nameList(user.getId()))
+        String[] roleNameArray = Optional.ofNullable(roleFeign.nameList(userVO.getId()))
             .map(ResponseEntity::getBody)
             .map(roleNameList -> roleNameList.toArray(new String[0]))
             .orElseThrow(() -> new EmailNotFoundException(HttpStatusEnum.ROLE_UNASSIGNED.getReasonPhrase()));
 
         // 新建用户详细信息
-        UserInfo userDetails = new UserInfo(UserInfo.PrincipalType.EMAIL, email, user.getId(), user.getUsername(), user.getPassword(), user.getStatus(), AuthorityUtils.createAuthorityList(roleNameArray));
+        UserInfo userDetails = new UserInfo(UserInfo.PrincipalType.EMAIL, email, userVO.getId(), userVO.getUsername(), userVO.getPassword(), userVO.getStatus(), AuthorityUtils.createAuthorityList(roleNameArray));
         // 校验用户状态
         validateUserDetails(userDetails);
         log.info("UserDetailsServiceImpl.loadUserByEmail(): client id -> {}, email -> {}", clientId, email);
@@ -117,7 +118,7 @@ public class UserDetailsServiceImpl implements UserDetailsExtensionService {
     /**
      * 校验用户状态
      *
-     * @param userDetails
+     * @param userDetails 用户详细信息
      */
     public void validateUserDetails(UserDetails userDetails) {
         if (!userDetails.isEnabled()) {

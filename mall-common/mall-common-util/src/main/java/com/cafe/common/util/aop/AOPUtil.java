@@ -26,7 +26,7 @@ public class AOPUtil {
      * 获取请求参数集合
      *
      * @param joinPoint 连接点
-     * @return
+     * @return 请求参数集合
      */
     public static Map<String, Object> findArgumentMap(JoinPoint joinPoint) {
         // 存储请求参数的集合
@@ -64,8 +64,8 @@ public class AOPUtil {
     /**
      * 获取请求参数 JSON 字符串
      *
-     * @param joinPoint
-     * @return
+     * @param joinPoint 连接点
+     * @return 请求参数 JSON 字符串
      */
     public static String findArgumentString(JoinPoint joinPoint) {
         return JacksonUtil.writeValueAsString(findArgumentMap(joinPoint));

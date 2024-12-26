@@ -17,29 +17,14 @@
     <description>开放接口中心</description>
 
     <dependencies>
-        <!-- Spring Boot WebFlux -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-
+        <!-- 启动包 -->
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-constant</artifactId>
+            <artifactId>mall-starter-web</artifactId>
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-core</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-common-log</artifactId>
+            <artifactId>mall-starter-webflux</artifactId>
         </dependency>
     </dependencies>
 

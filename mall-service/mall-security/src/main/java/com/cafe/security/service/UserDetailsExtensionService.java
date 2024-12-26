@@ -15,20 +15,20 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 public interface UserDetailsExtensionService extends UserDetailsService {
 
     /**
-     * 根据手机号组装详细信息
+     * 根据手机号组装用户详细信息
      *
      * @param mobile 手机号
-     * @return
-     * @throws MobileNotFoundException
+     * @return 用户详细信息
+     * @throws MobileNotFoundException 手机号对应用户不存在异常
      */
     UserDetails loadUserByMobile(String mobile) throws MobileNotFoundException;
 
     /**
-     * 根据邮箱组装详细信息
+     * 根据邮箱组装用户详细信息
      *
-     * @param email
-     * @return
-     * @throws EmailNotFoundException
+     * @param email 邮箱
+     * @return 用户详细信息
+     * @throws EmailNotFoundException 邮箱对应用户不存在异常
      */
     UserDetails loadUserByEmail(String email) throws EmailNotFoundException;
 }

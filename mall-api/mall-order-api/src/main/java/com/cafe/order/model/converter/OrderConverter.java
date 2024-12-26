@@ -13,7 +13,7 @@ import java.util.List;
  * @Package: com.cafe.order.model.converter
  * @Author: zhouboyi
  * @Date: 2023/10/24 10:57
- * @Description:
+ * @Description: 订单模型转换器
  */
 @Mapper(componentModel = "spring")
 public interface OrderConverter {
@@ -23,32 +23,32 @@ public interface OrderConverter {
     /**
      * 视图模型 -> 实体模型
      *
-     * @param orderVO
-     * @return
+     * @param orderVO 视图模型
+     * @return 实体模型
      */
     Order toEntity(OrderVO orderVO);
 
     /**
      * 查询模型 -> 实体模型
      *
-     * @param orderQuery
-     * @return
+     * @param orderQuery 查询模型
+     * @return 实体模型
      */
     Order toEntity(OrderQuery orderQuery);
 
     /**
      * 实体模型 -> 视图模型
      *
-     * @param order
-     * @return
+     * @param order 实体模型
+     * @return 视图模型
      */
     OrderVO toVO(Order order);
 
     /**
      * 实体模型列表 -> 视图模型列表
      *
-     * @param orderList
-     * @return
+     * @param orderList 实体模型列表
+     * @return 视图模型列表
      */
     List<OrderVO> toVOList(List<Order> orderList);
 }

@@ -35,9 +35,9 @@ public class WrapperUtil {
     /**
      * 构造 QueryWrapper 查询条件
      *
-     * @param model
-     * @param <T>
-     * @return
+     * @param model 查询条件
+     * @param <T>   查询对象类型
+     * @return 查询条件封装对象
      */
     public static <T> QueryWrapper<T> createQueryWrapper(T model) {
         return (QueryWrapper<T>) createWrapper(model, new QueryWrapper<>());
@@ -46,9 +46,9 @@ public class WrapperUtil {
     /**
      * 构造 LambdaQueryWrapper 查询条件
      *
-     * @param model
-     * @param <T>
-     * @return
+     * @param model 查询条件
+     * @param <T>   查询对象类型
+     * @return 查询条件封装对象
      */
     public static <T> LambdaQueryWrapper<T> createLambdaQueryWrapper(T model) {
         return createQueryWrapper(model).lambda();
@@ -57,12 +57,12 @@ public class WrapperUtil {
     /**
      * 构造 Wrapper 条件
      *
-     * @param model
-     * @param wrapper
-     * @param <T>
-     * @param <R>
-     * @param <Children>
-     * @return
+     * @param model      查询条件
+     * @param wrapper    查询条件封装对象
+     * @param <T>        查询对象类型
+     * @param <R>        字段类型
+     * @param <Children> 查询条件封装对象类型
+     * @return 查询条件封装对象
      */
     @SuppressWarnings("unchecked")
     public static <T, R, Children extends AbstractWrapper<T, R, Children>> AbstractWrapper<T, R, Children> createWrapper(T model, AbstractWrapper<T, R, Children> wrapper) {
@@ -111,8 +111,8 @@ public class WrapperUtil {
     /**
      * 构造空的 QueryWrapper 查询条件
      *
-     * @param <T>
-     * @return
+     * @param <T> 查询对象类型
+     * @return 查询条件封装对象
      */
     public static <T> QueryWrapper<T> emptyQueryWrapper() {
         return new QueryWrapper<>();
@@ -121,9 +121,9 @@ public class WrapperUtil {
     /**
      * 构造空的 QueryWrapper 查询条件
      *
-     * @param model
-     * @param <T>
-     * @return
+     * @param model 查询条件
+     * @param <T>   查询对象类型
+     * @return 查询条件封装对象
      */
     public static <T> QueryWrapper<T> emptyQueryWrapper(T model) {
         return new QueryWrapper<>(model);
@@ -132,9 +132,9 @@ public class WrapperUtil {
     /**
      * 构造空的 LambdaQueryWrapper 查询条件
      *
-     * @param model
-     * @param <T>
-     * @return
+     * @param model 查询条件
+     * @param <T>   查询对象类型
+     * @return 查询条件封装对象
      */
     public static <T> LambdaQueryWrapper<T> emptyLambdaQueryWrapper(T model) {
         return emptyQueryWrapper(model).lambda();
