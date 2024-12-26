@@ -18,7 +18,7 @@ public interface FileService {
      *
      * @param bucket 存储桶
      * @param file   文件
-     * @return
+     * @return 文件存储路径
      */
     String upload(String bucket, MultipartFile file);
 
@@ -27,8 +27,7 @@ public interface FileService {
      *
      * @param bucket       存储桶
      * @param filename     文件名
-     * @param httpResponse
-     * @return
+     * @param httpResponse HTTP 响应
      */
     void download(String bucket, String filename, HttpServletResponse httpResponse);
 
@@ -38,7 +37,7 @@ public interface FileService {
      * @param bucket   存储桶
      * @param filename 文件名
      * @param expiry   过期时间 (单位: 秒)
-     * @return
+     * @return 外链URL
      */
     String url(String bucket, String filename, Integer expiry);
 }

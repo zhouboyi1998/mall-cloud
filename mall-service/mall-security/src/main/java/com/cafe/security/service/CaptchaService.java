@@ -14,7 +14,7 @@ public interface CaptchaService {
     /**
      * 获取图片验证码
      *
-     * @return
+     * @return 图片验证码
      */
     Captcha one();
 }

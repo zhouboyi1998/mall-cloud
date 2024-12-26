@@ -56,8 +56,8 @@ public abstract class AbstractPeriod implements Serializable {
     /**
      * 判断两个时间区间是否相等
      *
-     * @param that
-     * @return
+     * @param that 另一个时间区间
+     * @return 判断结果 (true 相等, false 不相等)
      */
     public boolean contentEquals(final AbstractPeriod that) {
         // 获取 this 区间的开始时间和结束时间

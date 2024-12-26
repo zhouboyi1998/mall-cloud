@@ -32,8 +32,6 @@ public class DebeziumConfig {
 
     /**
      * Debezium 配置 (MySQL)
-     *
-     * @return
      */
     @Bean
     io.debezium.config.Configuration debeziumMySQLConfig() {
@@ -76,8 +74,7 @@ public class DebeziumConfig {
     /**
      * Debezium 同步执行器
      *
-     * @param configuration
-     * @return
+     * @param configuration Debezium 配置
      */
     @Bean
     DebeziumSyncExecutor debeziumSyncExecutor(io.debezium.config.Configuration configuration) {

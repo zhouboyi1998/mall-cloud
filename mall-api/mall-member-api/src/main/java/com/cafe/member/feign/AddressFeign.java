@@ -1,7 +1,7 @@
 package com.cafe.member.feign;
 
-import com.cafe.common.core.feign.FeignRequestInterceptor;
 import com.cafe.member.model.entity.Address;
+import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +22,8 @@ public interface AddressFeign {
     /**
      * 根据id查询单个收货地址
      *
-     * @param id
-     * @return
+     * @param id 收货地址ID
+     * @return 收货地址
      */
     @GetMapping(value = "/one/{id}")
     ResponseEntity<Address> one(@PathVariable(value = "id") Long id);

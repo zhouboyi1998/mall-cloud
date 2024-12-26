@@ -1,9 +1,9 @@
 package com.cafe.order.feign;
 
 import com.cafe.common.constant.date.DateTimeConstant;
-import com.cafe.common.core.feign.FeignRequestInterceptor;
 import com.cafe.order.model.entity.OrderItem;
 import com.cafe.order.model.vo.OrderVO;
+import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +30,8 @@ public interface OrderFlowFeign {
     /**
      * 保存订单
      *
-     * @param orderVO
-     * @return
+     * @param orderVO 订单数据
+     * @return 新保存的订单
      */
     @PostMapping(value = "/save")
     ResponseEntity<OrderVO> save(@RequestBody OrderVO orderVO);
@@ -41,7 +41,7 @@ public interface OrderFlowFeign {
      *
      * @param now      当前时间
      * @param duration 下单未支付时长 (单位: 分钟)
-     * @return
+     * @return 被取消的订单明细
      */
     @PutMapping(value = "/cancel/{now}/{duration}")
     ResponseEntity<List<OrderItem>> cancel(

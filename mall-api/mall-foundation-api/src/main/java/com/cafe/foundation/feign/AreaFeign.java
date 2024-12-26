@@ -1,7 +1,7 @@
 package com.cafe.foundation.feign;
 
-import com.cafe.common.core.feign.FeignRequestInterceptor;
 import com.cafe.foundation.model.vo.AreaDetailVO;
+import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,10 +22,10 @@ public interface AreaFeign {
     /**
      * 根据省份id、城市id、区县id获取区域
      *
-     * @param provinceId
-     * @param cityId
-     * @param districtId
-     * @return
+     * @param provinceId 省份id
+     * @param cityId     城市id
+     * @param districtId 区县id
+     * @return 区域详情
      */
     @GetMapping(value = "/detail/{provinceId}/{cityId}/{districtId}")
     ResponseEntity<AreaDetailVO> detail(

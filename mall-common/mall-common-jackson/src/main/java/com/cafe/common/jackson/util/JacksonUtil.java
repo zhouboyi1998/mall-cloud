@@ -32,7 +32,7 @@ public class JacksonUtil {
      * 将对象序列化为 JSON 字符串
      *
      * @param value 序列化对象
-     * @return
+     * @return JSON 字符串
      */
     @SneakyThrows
     public static String writeValueAsString(Object value) {
@@ -45,7 +45,7 @@ public class JacksonUtil {
      * @param content   JSON 字符串
      * @param valueType 反序列化对象类型的 Class 对象 (简单数据类型直接使用 Class 对象作为参数)
      * @param <T>       反序列化对象类型
-     * @return
+     * @return 目标对象
      */
     @SneakyThrows
     public static <T> T readValue(String content, Class<T> valueType) {
@@ -58,7 +58,7 @@ public class JacksonUtil {
      * @param content      JSON 字符串
      * @param valueTypeRef 反序列化对象类型的 TypeReference 封装对象 (复杂数据类型使用 TypeReference 对象封装后再作为参数)
      * @param <T>          反序列化对象类型
-     * @return
+     * @return 目标对象
      */
     @SneakyThrows
     public static <T> T readValue(String content, TypeReference<T> valueTypeRef) {
@@ -71,7 +71,7 @@ public class JacksonUtil {
      * @param fromValue   来源对象
      * @param toValueType 目标对象类型的 Class 对象 (简单数据类型直接使用 Class 对象作为参数)
      * @param <T>         目标对象类型
-     * @return
+     * @return 目标对象
      */
     public static <T> T convertValue(Object fromValue, Class<T> toValueType) {
         return OBJECT_MAPPER.convertValue(fromValue, toValueType);
@@ -83,17 +83,17 @@ public class JacksonUtil {
      * @param fromValue      来源对象
      * @param toValueTypeRef 目标对象类型的 TypeReference 封装对象 (复杂数据类型使用 TypeReference 对象封装后再作为参数)
      * @param <T>            目标对象类型
-     * @return
+     * @return 目标对象
      */
     public static <T> T convertValue(Object fromValue, TypeReference<T> toValueTypeRef) {
         return OBJECT_MAPPER.convertValue(fromValue, toValueTypeRef);
     }
 
     /**
-     * 根据键值对创建 ObjectNode
+     * 根据键值对创建 JSON 对象节点
      *
      * @param keysAndValues 键值对
-     * @return
+     * @return JSON 对象节点
      */
     public static ObjectNode createObjectNode(String... keysAndValues) {
         int length = keysAndValues.length;
