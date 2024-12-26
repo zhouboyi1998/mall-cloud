@@ -26,6 +26,7 @@
         <module>mall-infrastructure</module>
         <module>mall-middleware</module>
         <module>mall-service</module>
+        <module>mall-starter</module>
     </modules>
 
     <properties>
@@ -41,6 +42,7 @@
         <!-- 依赖组件版本管理 -->
         <apollo.version>2.1.0</apollo.version>
         <knife4j.version>2.0.9</knife4j.version>
+        <swagger.version>1.5.22</swagger.version>
         <mysql-connector.version>8.0.19</mysql-connector.version>
         <mariadb-client.version>3.3.2</mariadb-client.version>
         <postgresql-driver.version>42.2.20</postgresql-driver.version>
@@ -153,13 +155,25 @@
                 <artifactId>apollo-client</artifactId>
                 <version>${apollo.version}</version>
             </dependency>
-            <!-- Swagger API 文档 -->
+            <!-- Knife4J Swagger API 文档 -->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>
                 <version>${knife4j.version}</version>
             </dependency>
-            <!-- Swagger API 文档聚合 -->
+            <!-- Swagger API 注解包 -->
+            <dependency>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <!-- Knife4J Swagger API 注解包 -->
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <artifactId>knife4j-annotations</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <!-- Knife4J Swagger API 文档聚合 -->
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-aggregation-spring-boot-starter</artifactId>
@@ -229,6 +243,12 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <!-- MyBatis-Plus 注解包 -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
             <!-- MyBatis-Plus 代码生成器 -->
@@ -425,6 +445,23 @@
                 <version>${xxl-job.version}</version>
             </dependency>
 
+            <!-- 启动包 -->
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-starter-boot</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-starter-web</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-starter-webflux</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+
             <!-- 配置中心公共包 -->
             <dependency>
                 <groupId>com.cafe</groupId>
@@ -515,11 +552,6 @@
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-common-constant</artifactId>
-                <version>${mall-cloud.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.cafe</groupId>
-                <artifactId>mall-common-core</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>

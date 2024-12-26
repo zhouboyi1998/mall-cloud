@@ -18,9 +18,9 @@ public interface OrderCenterService {
     /**
      * 提交订单
      *
-     * @param addressId
-     * @param cartDTOList
-     * @return
+     * @param addressId   地址ID
+     * @param cartDTOList 购物车DTO列表
+     * @return 订单VO
      */
     OrderVO submit(Long addressId, List<CartDTO> cartDTOList);
 
@@ -29,7 +29,6 @@ public interface OrderCenterService {
      *
      * @param now      当前时间
      * @param duration 下单未支付时长 (单位: 分钟)
-     * @return
      */
     void cancel(LocalDateTime now, Integer duration);
 }

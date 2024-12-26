@@ -1,7 +1,7 @@
 package com.cafe.goods.feign;
 
-import com.cafe.common.core.feign.FeignRequestInterceptor;
 import com.cafe.goods.model.bo.Goods;
+import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,8 +24,8 @@ public interface GoodsFeign {
     /**
      * 根据库存量单位ids查询商品列表
      *
-     * @param ids
-     * @return
+     * @param ids 库存量单位ID列表
+     * @return 商品列表
      */
     @PostMapping(value = "/list")
     ResponseEntity<List<Goods>> list(@RequestBody List<Long> ids);

@@ -16,36 +16,36 @@ public interface GoodsIndexService {
     /**
      * 获取商品索引
      *
-     * @param id
-     * @return
+     * @param id 商品id
+     * @return 商品索引
      */
     GoodsIndex one(String id);
 
     /**
-     * 插入/更新商品索引
+     * 保存商品索引
      *
-     * @param goodsIndex
+     * @param goodsIndex 商品索引
      */
     void save(GoodsIndex goodsIndex);
 
     /**
-     * 批量插入/批量更新商品索引
+     * 批量保存商品索引
      *
-     * @param goodsIndexList
+     * @param goodsIndexList 商品索引列表
      */
     void saveBatch(List<GoodsIndex> goodsIndexList);
 
     /**
      * 删除商品索引
      *
-     * @param id
+     * @param id 商品id
      */
     void delete(String id);
 
     /**
      * 批量删除商品索引
      *
-     * @param ids
+     * @param ids 商品id列表
      */
     void deleteBatch(List<String> ids);
 }

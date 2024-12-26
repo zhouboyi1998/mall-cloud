@@ -21,8 +21,6 @@ public class MinioConfig {
 
     /**
      * MinIO 客户端
-     *
-     * @return
      */
     @Bean
     public MinioClient minioClient() {

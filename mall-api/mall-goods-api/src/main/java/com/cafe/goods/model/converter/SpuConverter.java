@@ -10,7 +10,7 @@ import org.mapstruct.factory.Mappers;
  * @Package: com.cafe.goods.model.converter
  * @Author: zhouboyi
  * @Date: 2024/8/4 23:24
- * @Description:
+ * @Description: 标准化产品单元模型转换器
  */
 @Mapper(componentModel = "spring")
 public interface SpuConverter {
@@ -20,8 +20,8 @@ public interface SpuConverter {
     /**
      * 实体模型 -> 视图模型
      *
-     * @param spu
-     * @return
+     * @param spu 实体模型
+     * @return 视图模型
      */
     SpuVO toVO(Spu spu);
 }

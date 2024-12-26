@@ -28,9 +28,10 @@
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
 
+        <!-- 启动包 -->
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-core</artifactId>
+            <artifactId>mall-starter-web</artifactId>
             <exclusions>
                 <exclusion>
                     <groupId>de.codecentric</groupId>

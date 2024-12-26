@@ -15,27 +15,27 @@ public interface JuheService {
     /**
      * 查询手机号码归属地
      *
-     * @param phone
-     * @param key
-     * @return
+     * @param phone 手机号码
+     * @param key   请求Key
+     * @return 响应结果
      */
     Mono<ObjectNode> mobile2region(String phone, String key);
 
     /**
      * 查询IP地址归属地
      *
-     * @param ip
-     * @param key
-     * @return
+     * @param ip  IP地址
+     * @param key 请求Key
+     * @return 响应结果
      */
     Mono<ObjectNode> ip2region(String ip, String key);
 
     /**
      * 查询天气
      *
-     * @param city
-     * @param key
-     * @return
+     * @param city 城市
+     * @param key  请求Key
+     * @return 响应结果
      */
     Mono<ObjectNode> weather(String city, String key);
 }

@@ -37,7 +37,7 @@ public class CommentGenerator extends DefaultCommentGenerator {
     /**
      * Java 文件添加 import
      *
-     * @param compilationUnit
+     * @param compilationUnit 编译单元
      */
     @Override
     public void addJavaFileComment(CompilationUnit compilationUnit) {
@@ -57,8 +57,8 @@ public class CommentGenerator extends DefaultCommentGenerator {
     /**
      * Model 添加 class 注释
      *
-     * @param topLevelClass
-     * @param introspectedTable
+     * @param topLevelClass     顶层类（外部类）
+     * @param introspectedTable 数据库表信息
      */
     @Override
     public void addModelClassComment(TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
@@ -78,9 +78,9 @@ public class CommentGenerator extends DefaultCommentGenerator {
     /**
      * 字段添加注释
      *
-     * @param field
-     * @param introspectedTable
-     * @param introspectedColumn
+     * @param field              字段
+     * @param introspectedTable  数据库表信息
+     * @param introspectedColumn 数据库字段信息
      */
     @Override
     public void addFieldComment(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {

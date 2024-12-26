@@ -1,6 +1,6 @@
 package com.cafe.goodscenter.service.impl;
 
-import com.cafe.common.core.exception.BusinessException;
+import com.cafe.starter.boot.model.exception.BusinessException;
 import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.elasticsearch.feign.GoodsIndexFeign;
 import com.cafe.goods.feign.GoodsFeign;

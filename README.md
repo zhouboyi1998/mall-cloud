@@ -43,7 +43,7 @@
 
 |-- mall-common (公共包)
     |-- mall-common-constant (常量公共包)
-    |-- mall-common-core (核心公共包)
+    |-- mall-common-jackson (Jackson 公共包)
     |-- mall-common-lang (数据类型公共包)
     |-- mall-common-log (日志公共包)
     |-- mall-common-util (工具公共包)
@@ -62,13 +62,12 @@
     |-- mall-discovery-zookeeper (Zookeeper 注册中心公共包)
 
 |-- mall-infrastructure (基础设施公共包)
-    |-- mall-infrastructure-jackson (Jackson 公共包)
     |-- mall-infrastructure-kafka (Kafka 消息队列公共包)
     |-- mall-infrastructure-mybatisplus (MyBatis-Plus 公共包)
     |-- mall-infrastructure-rabbitmq (RabbitMQ 消息队列公共包)
     |-- mall-infrastructure-redis (Redis 公共包)
     |-- mall-infrastructure-rocketmq (RocketMQ 消息队列公共包)
-    |-- mall-infrastructure-swagger (Swagger API 文档公共包)
+    |-- mall-infrastructure-swagger (Knife4J Swagger API 文档公共包)
     |-- mall-infrastructure-xxljob (XXL-JOB 分布式任务调度公共包)
 
 |-- mall-middleware (中间件模块)
@@ -90,6 +89,11 @@
     |-- mall-generator (代码生成器)
     |-- mall-id (ID 生成器)
     |-- mall-security (Spring Security 安全模块)
-    |-- mall-swagger (Swagger API 文档聚合模块)
+    |-- mall-swagger (Knife4J Swagger API 文档聚合模块)
     |-- mall-user (用户模块)
+
+|-- mall-starter (启动包)
+    |-- mall-starter-boot (Spring Boot 启动包)
+    |-- mall-starter-web (Spring Boot Web 启动包)
+    |-- mall-starter-webflux (Spring Boot WebFlux 启动包)
 ```

@@ -25,7 +25,7 @@ public class MetaHandler implements MetaObjectHandler {
     /**
      * 新增数据的字段填充处理
      *
-     * @param metaObject
+     * @param metaObject 填充对象
      */
     @Override
     public void insertFill(MetaObject metaObject) {
@@ -37,7 +37,7 @@ public class MetaHandler implements MetaObjectHandler {
     /**
      * 更新数据的字段填充处理
      *
-     * @param metaObject
+     * @param metaObject 填充对象
      */
     @Override
     public void updateFill(MetaObject metaObject) {

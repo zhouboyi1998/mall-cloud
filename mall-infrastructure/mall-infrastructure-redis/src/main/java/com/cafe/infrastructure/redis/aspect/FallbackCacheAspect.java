@@ -58,8 +58,8 @@ public class FallbackCacheAspect {
     /**
      * 环绕通知
      *
-     * @param proceedingJoinPoint
-     * @return
+     * @param proceedingJoinPoint 连接点
+     * @return 返回结果
      */
     @SneakyThrows
     @Around(value = "pointcut()")
