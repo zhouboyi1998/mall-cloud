@@ -14,14 +14,14 @@ public interface JWKService {
     /**
      * 获取 JWK 公钥 (JWKSet 格式)
      *
-     * @return JWK 公钥
+     * @return JWK 公钥 (JWKSet 格式)
      */
     Map<String, Object> jwkSet();
 
     /**
      * 获取 JWK 公钥 (Base64 格式)
      *
-     * @return JWK 公钥
+     * @return JWK 公钥 (Base64 格式)
      */
     String base64();
 }

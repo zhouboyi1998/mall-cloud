@@ -64,8 +64,8 @@ public class MessageContentHandler {
     /**
      * 根据表名获取对应的 JavaBean 列名集合
      *
-     * @param tableName
-     * @return
+     * @param tableName 数据库表名 (格式: database.table)
+     * @return JavaBean 列名集合
      */
     private List<String> fieldNameList(String tableName) {
         // 存储列名的字符串集合
@@ -84,8 +84,8 @@ public class MessageContentHandler {
     /**
      * 处理更新的数据
      *
-     * @param rowList
-     * @return
+     * @param rowList 更新的数据列表
+     * @return 处理后的数据列表
      */
     private List<Map<String, Object>> handleRowList(List<Serializable[]> rowList, List<String> fieldNameList) {
         // 存储处理后的数据

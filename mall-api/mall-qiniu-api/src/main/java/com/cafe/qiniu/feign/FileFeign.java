@@ -1,6 +1,6 @@
 package com.cafe.qiniu.feign;
 
-import com.cafe.common.core.feign.FeignRequestInterceptor;
+import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,7 +26,7 @@ public interface FileFeign {
      *
      * @param bucket 存储桶
      * @param file   文件
-     * @return
+     * @return 存储痛 + 文件名
      */
     @PostMapping(value = "/upload/{bucket}")
     ResponseEntity<String> upload(
@@ -39,7 +39,7 @@ public interface FileFeign {
      *
      * @param bucket   存储桶
      * @param filename 文件名
-     * @return
+     * @return 删除结果 (true 删除成功, false 删除失败)
      */
     @DeleteMapping(value = "/delete/{bucket}/{filename}")
     ResponseEntity<Void> delete(

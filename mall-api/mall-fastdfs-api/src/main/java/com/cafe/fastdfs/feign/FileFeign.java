@@ -1,7 +1,7 @@
 package com.cafe.fastdfs.feign;
 
-import com.cafe.common.core.feign.FeignRequestInterceptor;
-import org.apache.tomcat.jni.FileInfo;
+import com.cafe.fastdfs.model.vo.FileInfoVO;
+import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,7 +28,7 @@ public interface FileFeign {
      * 上传文件
      *
      * @param file 文件
-     * @return
+     * @return 文件组 + 文件名 (例如: /group1/M00/00/00/xxx.jpg)
      */
     @PostMapping(value = "/upload")
     ResponseEntity<String> upload(@RequestParam(value = "file") MultipartFile file);
@@ -38,8 +38,7 @@ public interface FileFeign {
      *
      * @param group        文件组
      * @param filename     文件名
-     * @param httpResponse
-     * @return
+     * @param httpResponse HTTP 响应
      */
     @GetMapping(value = "/download")
     ResponseEntity<Void> download(
@@ -53,7 +52,7 @@ public interface FileFeign {
      *
      * @param group    文件组
      * @param filename 文件名
-     * @return
+     * @return 删除结果 (0 删除失败, 1 删除成功)
      */
     @DeleteMapping(value = "/delete")
     ResponseEntity<Integer> delete(
@@ -66,10 +65,10 @@ public interface FileFeign {
      *
      * @param group    文件组
      * @param filename 文件名
-     * @return
+     * @return 文件信息
      */
     @GetMapping(value = "/info")
-    ResponseEntity<FileInfo> info(
+    ResponseEntity<FileInfoVO> info(
         @RequestParam(value = "group") String group,
         @RequestParam(value = "filename") String filename
     );
