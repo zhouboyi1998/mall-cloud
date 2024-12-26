@@ -14,7 +14,7 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>Swagger API 文档公共包</description>
+    <description>Knife4J Swagger API 文档公共包</description>
 
     <dependencies>
         <!-- Swagger API 文档 -->
@@ -23,6 +23,7 @@
             <artifactId>knife4j-spring-boot-starter</artifactId>
         </dependency>
 
+        <!-- 公共包 -->
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-constant</artifactId>

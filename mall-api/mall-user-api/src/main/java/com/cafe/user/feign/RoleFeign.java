@@ -1,6 +1,6 @@
 package com.cafe.user.feign;
 
-import com.cafe.common.core.feign.FeignRequestInterceptor;
+import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +23,8 @@ public interface RoleFeign {
     /**
      * 根据用户id查询角色名称列表
      *
-     * @param userId
-     * @return
+     * @param userId 用户id
+     * @return 角色名称列表
      */
     @GetMapping(value = "/name-list/{userId}")
     ResponseEntity<List<String>> nameList(@PathVariable(value = "userId") Long userId);

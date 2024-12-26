@@ -18,15 +18,15 @@ public interface GoodsCenterService {
      * 搜索商品
      *
      * @param keyword 关键词
-     * @return
+     * @return 商品摘要列表
      */
     List<GoodsSummary> summary(String keyword);
 
     /**
      * 获取商品详情
      *
-     * @param skuId
-     * @return
+     * @param skuId 库存量单位ID列表
+     * @return 商品详情
      */
     SpuDetail detail(Long skuId);
 }

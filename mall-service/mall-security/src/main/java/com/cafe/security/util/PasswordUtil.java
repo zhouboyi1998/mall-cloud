@@ -29,7 +29,7 @@ public class PasswordUtil {
      *
      * @param plaintext  明文
      * @param ciphertext 密文
-     * @return
+     * @return 是否匹配
      */
     public static Boolean matchBCrypt(String plaintext, String ciphertext) {
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -52,7 +52,7 @@ public class PasswordUtil {
      *
      * @param plaintext  明文
      * @param ciphertext 密文
-     * @return
+     * @return 是否匹配
      */
     public static Boolean matchSCrypt(String plaintext, String ciphertext) {
         PasswordEncoder passwordEncoder = new SCryptPasswordEncoder();

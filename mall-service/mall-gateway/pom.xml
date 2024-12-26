@@ -17,11 +17,6 @@
     <description>Spring Cloud Gateway 网关模块</description>
 
     <dependencies>
-        <!-- Spring Boot WebFlux -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
         <!-- Spring Cloud Gateway 网关 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -53,24 +48,12 @@
             <artifactId>nimbus-jose-jwt</artifactId>
         </dependency>
 
+        <!-- 启动包 -->
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-constant</artifactId>
+            <artifactId>mall-starter-webflux</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-common-core</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-web</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-common-log</artifactId>
-        </dependency>
+        <!-- 基础设施 -->
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-infrastructure-redis</artifactId>

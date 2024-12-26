@@ -17,19 +17,17 @@
     <description>商品中心</description>
 
     <dependencies>
+        <!-- 启动包 -->
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-core</artifactId>
+            <artifactId>mall-starter-web</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-common-log</artifactId>
-        </dependency>
+        <!-- 基础设施 -->
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-infrastructure-swagger</artifactId>
         </dependency>
-
+        <!-- 远程调用接口 -->
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-id-api</artifactId>

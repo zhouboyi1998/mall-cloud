@@ -2,7 +2,9 @@ package com.cafe.user.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cafe.user.mapper.UserMapper;
+import com.cafe.user.model.converter.UserConverter;
 import com.cafe.user.model.entity.User;
+import com.cafe.user.model.vo.UserVO;
 import com.cafe.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +23,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private final UserMapper userMapper;
 
     @Override
-    public User detail(String clientId, User user) {
-        return userMapper.detail(clientId, user);
+    public UserVO detail(String clientId, User user) {
+        User detail = userMapper.detail(clientId, user);
+        return UserConverter.INSTANCE.toVO(detail);
     }
 }

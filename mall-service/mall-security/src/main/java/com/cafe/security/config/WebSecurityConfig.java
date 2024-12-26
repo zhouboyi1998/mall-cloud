@@ -46,8 +46,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 密码编码器 (SCrypt)
-     *
-     * @return
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -55,9 +53,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * 从 RSA 证书文件 (jwt.jks) 中获取密钥对
-     *
-     * @return
+     * 密钥对
      */
     @Bean
     public KeyPair keyPair() {
@@ -73,8 +69,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 用户名密码认证提供器
-     *
-     * @return
      */
     @Bean
     public UsernamePasswordAuthenticationProvider usernamePasswordAuthenticationProvider() {
@@ -83,8 +77,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 手机号密码认证提供器
-     *
-     * @return
      */
     @Bean
     public MobilePasswordAuthenticationProvider mobilePasswordAuthenticationProvider() {
@@ -93,8 +85,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 邮箱密码认证提供器
-     *
-     * @return
      */
     @Bean
     public EmailPasswordAuthenticationProvider emailPasswordAuthenticationProvider() {
@@ -104,8 +94,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
      * 认证管理器
      *
-     * @return
-     * @throws Exception
+     * @throws Exception 认证管理器构建异常
      */
     @Bean
     @Override
@@ -114,10 +103,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * HTTP 相关配置
+     * HTTP 安全相关配置
      *
-     * @param http
-     * @throws Exception
+     * @param http HTTP 安全配置器
+     * @throws Exception HTTP 安全配置异常
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {

@@ -94,33 +94,28 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     private final RedisTemplate<String, Object> redisTemplate;
 
     /**
-     * 配置令牌存储方式 (如果不配置, 默认使用 JDBC 存储)
-     *
-     * @return
+     * 令牌存储仓库
      */
     @Bean
     public TokenStore tokenStore() {
-        // 使用 Redis 存储令牌
+        // 使用 Redis 存储令牌 (如果不配置, 默认使用 JDBC 存储)
         RedisTokenStore redisTokenStore = new RedisTokenStore(redisConnectionFactory);
         redisTokenStore.setPrefix(RedisConstant.TOKEN_PREFIX);
         return redisTokenStore;
     }
 
     /**
-     * 使用密钥对生成 OAuth2 JWT 访问令牌转换器
-     *
-     * @return
+     * OAuth2 JWT 访问令牌转换器
      */
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
+        // 使用密钥对生成 OAuth2 JWT 访问令牌转换器
         JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
         jwtAccessTokenConverter.setKeyPair(keyPair);
         return jwtAccessTokenConverter;
     }
 
     /**
-     * 配置令牌增强器链
-     *
-     * @return
+     * 令牌增强器链
      */
     public TokenEnhancerChain tokenEnhancerChain() {
         // 新建存储令牌增强器的集合
@@ -138,10 +133,9 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     }
 
     /**
-     * 配置令牌授权器
+     * 令牌授权器
      *
-     * @param endpoints
-     * @return
+     * @param endpoints 认证服务端点配置器
      */
     public CompositeTokenGranter compositeTokenGranter(AuthorizationServerEndpointsConfigurer endpoints) {
         // 获取 Oauth2 默认提供的授权器列表
@@ -166,7 +160,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     /**
      * 客户端详细信息配置
      *
-     * @param clients
+     * @param clients 客户端详细信息配置器
      */
     @SneakyThrows
     @Override
@@ -196,7 +190,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     /**
      * 令牌访问端点配置
      *
-     * @param endpoints
+     * @param endpoints 认证服务端点配置器
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
@@ -222,7 +216,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     /**
      * 令牌安全约束配置
      *
-     * @param security
+     * @param security 令牌安全约束配置器
      */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer security) {

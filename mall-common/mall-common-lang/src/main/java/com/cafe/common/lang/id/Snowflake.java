@@ -133,7 +133,7 @@ public class Snowflake {
     /**
      * 获取下一个分布式ID
      *
-     * @return
+     * @return 分布式ID
      */
     public synchronized long nextId() {
         // 获取当前时间戳
@@ -205,7 +205,7 @@ public class Snowflake {
     /**
      * 获取当前时间戳
      *
-     * @return
+     * @return 当前时间戳
      */
     private long timeGen() {
         // 获取系统时间

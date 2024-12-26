@@ -21,9 +21,9 @@ public class AnnotationUtil {
      * @param clazz           类对象
      * @param annotationClazz 注解类对象
      * @param function        注解字段值获取函数
-     * @param <A>
-     * @param <R>
-     * @return
+     * @param <A>             注解类对象
+     * @param <R>             字段值类型
+     * @return 字段值
      */
     public static <A extends Annotation, R> R findAnnotationField(Class<?> clazz, Class<A> annotationClazz, Function<A, R> function) {
         // 必须使用 Spring AnnotationUtils 工具类获取注解, 否则无法获取注解字段别名 (@AliasFor 注解由 Spring 提供)
@@ -37,9 +37,9 @@ public class AnnotationUtil {
      * @param method          方法对象
      * @param annotationClazz 注解类对象
      * @param function        注解字段值获取函数
-     * @param <A>
-     * @param <R>
-     * @return
+     * @param <A>             注解类对象
+     * @param <R>             字段值类型
+     * @return 字段值
      */
     public static <A extends Annotation, R> R findAnnotationField(Method method, Class<A> annotationClazz, Function<A, R> function) {
         // 必须使用 Spring AnnotationUtils 工具类获取注解, 否则无法获取注解字段别名 (@AliasFor 注解由 Spring 提供)

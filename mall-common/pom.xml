@@ -17,7 +17,6 @@
 
     <modules>
         <module>mall-common-constant</module>
-        <module>mall-common-core</module>
         <module>mall-common-jackson</module>
         <module>mall-common-lang</module>
         <module>mall-common-log</module>

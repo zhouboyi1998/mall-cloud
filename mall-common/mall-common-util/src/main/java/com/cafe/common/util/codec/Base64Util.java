@@ -22,7 +22,7 @@ public class Base64Util {
      * 字符串 Base64 编码
      *
      * @param plaintext 字符串明文
-     * @return
+     * @return 字符串密文
      */
     public static String encode(String plaintext) {
         return Base64.getEncoder().encodeToString(plaintext.getBytes(StandardCharsets.UTF_8));
@@ -32,7 +32,7 @@ public class Base64Util {
      * 字符串 Base64 解码
      *
      * @param ciphertext 字符串密文
-     * @return
+     * @return 字符串明文
      */
     public static String decode(String ciphertext) {
         return new String(Base64.getDecoder().decode(ciphertext), StandardCharsets.UTF_8);
@@ -42,7 +42,7 @@ public class Base64Util {
      * URL Base64 编码
      *
      * @param plaintext URL 明文
-     * @return
+     * @return URL 密文
      */
     public static String encodeUrl(String plaintext) {
         return Base64.getUrlEncoder().encodeToString(plaintext.getBytes(StandardCharsets.UTF_8));
@@ -52,7 +52,7 @@ public class Base64Util {
      * URL Base64 解码
      *
      * @param ciphertext URL 密文
-     * @return
+     * @return URL 明文
      */
     public static String decodeUrl(String ciphertext) {
         return new String(Base64.getUrlDecoder().decode(ciphertext), StandardCharsets.UTF_8);
@@ -62,7 +62,7 @@ public class Base64Util {
      * 图片缓冲 Base64 编码
      *
      * @param bufferedImage 图片缓冲
-     * @return
+     * @return 图片 Base64 编码
      */
     @SneakyThrows
     public static String encodeImage(BufferedImage bufferedImage, MediaFormatEnum mediaFormat) {

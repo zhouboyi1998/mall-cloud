@@ -12,7 +12,7 @@ public interface IDService {
     /**
      * 获取下一个分布式ID
      *
-     * @return
+     * @return 分布式ID
      */
     Long nextId();
 }

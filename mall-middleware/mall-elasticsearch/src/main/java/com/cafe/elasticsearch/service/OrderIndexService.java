@@ -21,56 +21,56 @@ public interface OrderIndexService {
     /**
      * 获取订单索引
      *
-     * @param id
-     * @return
+     * @param id 订单ID
+     * @return 获取响应
      */
     GetResponse one(String id);
 
     /**
      * 插入订单索引
      *
-     * @param orderIndex
-     * @return
+     * @param orderIndex 订单索引
+     * @return 索引响应
      */
     IndexResponse insert(OrderIndex orderIndex);
 
     /**
      * 更新订单索引
      *
-     * @param orderIndex
-     * @return
+     * @param orderIndex 订单索引
+     * @return 更新响应
      */
     UpdateResponse update(OrderIndex orderIndex);
 
     /**
      * 删除订单索引
      *
-     * @param id
-     * @return
+     * @param id 订单ID
+     * @return 删除响应
      */
     DeleteResponse delete(String id);
 
     /**
      * 批量插入订单索引
      *
-     * @param orderIndexList
-     * @return
+     * @param orderIndexList 订单索引列表
+     * @return 主体响应
      */
     BulkResponse insertBatch(List<OrderIndex> orderIndexList);
 
     /**
      * 批量更新订单索引
      *
-     * @param orderIndexList
-     * @return
+     * @param orderIndexList 订单索引列表
+     * @return 主体响应
      */
     BulkResponse updateBatch(List<OrderIndex> orderIndexList);
 
     /**
      * 批量删除订单索引
      *
-     * @param ids
-     * @return
+     * @param ids 订单ID列表
+     * @return 主体响应
      */
     BulkResponse deleteBatch(List<String> ids);
 }

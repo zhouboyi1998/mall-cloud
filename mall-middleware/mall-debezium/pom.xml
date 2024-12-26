@@ -54,21 +54,15 @@
             <artifactId>reflections</artifactId>
         </dependency>
 
+        <!-- 启动包 -->
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-constant</artifactId>
+            <artifactId>mall-starter-boot</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-common-core</artifactId>
-        </dependency>
+        <!-- 基础设施 -->
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-infrastructure-kafka</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-common-log</artifactId>
         </dependency>
     </dependencies>
 

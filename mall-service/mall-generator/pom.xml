@@ -78,6 +78,7 @@
             <artifactId>velocity-engine-core</artifactId>
         </dependency>
 
+        <!-- 公共包 -->
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-constant</artifactId>

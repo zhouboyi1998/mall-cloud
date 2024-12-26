@@ -20,8 +20,6 @@ public class FilterConfig {
 
     /**
      * 跨域过滤器
-     *
-     * @return
      */
     @Bean
     public CorsWebFilter corsWebFilter() {

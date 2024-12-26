@@ -1,6 +1,6 @@
 package com.cafe.minio.feign;
 
-import com.cafe.common.core.feign.FeignRequestInterceptor;
+import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +28,7 @@ public interface FileFeign {
      *
      * @param bucket 存储桶
      * @param file   文件
-     * @return
+     * @return 文件存储路径
      */
     @PostMapping(value = "/upload/{bucket}")
     ResponseEntity<String> upload(
@@ -41,11 +41,10 @@ public interface FileFeign {
      *
      * @param bucket       存储桶
      * @param fileName     文件名
-     * @param httpResponse
-     * @return
+     * @param httpResponse HTTP 响应
      */
     @GetMapping(value = "/download/{bucket}/{fileName}")
-    ResponseEntity<String> download(
+    ResponseEntity<Void> download(
         @PathVariable(value = "bucket") String bucket,
         @PathVariable(value = "fileName") String fileName,
         HttpServletResponse httpResponse
@@ -56,7 +55,7 @@ public interface FileFeign {
      *
      * @param bucket   存储桶
      * @param fileName 文件名
-     * @return
+     * @return 外链URL
      */
     @GetMapping(value = "/url/{bucket}/{fileName}")
     ResponseEntity<String> url(
@@ -70,7 +69,7 @@ public interface FileFeign {
      * @param bucket   存储桶
      * @param fileName 文件名
      * @param expiry   过期时间 (单位: 秒)
-     * @return
+     * @return 外链URL
      */
     @GetMapping(value = "/url/{bucket}/{fileName}/{expiry}")
     ResponseEntity<String> url(

@@ -35,8 +35,6 @@ public class JacksonSerializerConfig {
 
     /**
      * Jackson ObjectMapper 构造器自定义配置器
-     *
-     * @return
      */
     @Bean
     Jackson2ObjectMapperBuilderCustomizer jackson2ObjectMapperBuilderCustomizer() {

@@ -21,8 +21,8 @@ public class TreeUtil {
      *
      * @param nodeList 节点列表
      * @param id       节点ID
-     * @param <T>
-     * @return
+     * @param <T>      节点数据类型
+     * @return 树形节点
      */
     public static <T extends Tree> Tree buildTreeNode(List<T> nodeList, Long id) {
         return nodeList.stream()
@@ -38,8 +38,8 @@ public class TreeUtil {
      * 构建树形列表
      *
      * @param nodeList 节点列表
-     * @param <T>
-     * @return
+     * @param <T>      节点数据类型
+     * @return 树形列表
      */
     public static <T extends Tree> List<Tree> buildTreeList(List<T> nodeList) {
         return nodeList.stream()
@@ -55,8 +55,8 @@ public class TreeUtil {
      *
      * @param nodeList 节点列表
      * @param parentId 父节点ID
-     * @param <T>
-     * @return
+     * @param <T>      节点数据类型
+     * @return 树形列表
      */
     public static <T extends Tree> List<Tree> buildTreeList(List<T> nodeList, Long parentId) {
         return nodeList.stream()
@@ -72,8 +72,8 @@ public class TreeUtil {
      *
      * @param currentNode 当前节点
      * @param nodeList    节点列表
-     * @param <T>
-     * @return
+     * @param <T>         树形列表
+     * @return 子节点树
      */
     private static <T extends Tree> List<Tree> buildSubtree(T currentNode, List<T> nodeList) {
         return nodeList.stream()
