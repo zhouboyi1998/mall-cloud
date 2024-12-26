@@ -23,6 +23,7 @@
             <artifactId>spring-kafka</artifactId>
         </dependency>
 
+        <!-- 公共包 -->
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-common-jackson</artifactId>

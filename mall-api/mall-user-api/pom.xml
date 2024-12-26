@@ -17,19 +17,29 @@
     <description>用户模块 API</description>
 
     <dependencies>
+        <!-- Swagger API 注解包 -->
         <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-common-core</artifactId>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- Knife4J Swagger API 注解包 -->
         <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-infrastructure-mybatisplus</artifactId>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-annotations</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- MyBatis-Plus 注解包 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- 启动包 -->
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-infrastructure-swagger</artifactId>
+            <artifactId>mall-starter-boot</artifactId>
             <optional>true</optional>
         </dependency>
     </dependencies>

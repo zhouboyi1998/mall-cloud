@@ -28,9 +28,9 @@ public class CanalEntryHandler {
     private final RocketMQContentHandler rocketMQContentHandler;
 
     /**
-     * 获取 Canal Server 解析 Binlog 得到的信息
+     * 处理变更列表
      *
-     * @param entryList
+     * @param entryList Canal Server 解析 Binlog 日志所得到的变更列表
      */
     @SneakyThrows
     public void handle(List<CanalEntry.Entry> entryList) {

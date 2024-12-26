@@ -24,8 +24,6 @@ public class QiniuConfig {
 
     /**
      * 七牛云授权管理器
-     *
-     * @return
      */
     @Bean
     public Auth auth() {
@@ -33,9 +31,7 @@ public class QiniuConfig {
     }
 
     /**
-     * 存储配置
-     *
-     * @return
+     * 七牛云存储配置
      */
     @Bean
     public com.qiniu.storage.Configuration configuration() {
@@ -43,9 +39,7 @@ public class QiniuConfig {
     }
 
     /**
-     * 存储桶管理器
-     *
-     * @return
+     * 七牛云存储桶管理器
      */
     @Bean
     public BucketManager bucketManager() {
@@ -53,9 +47,7 @@ public class QiniuConfig {
     }
 
     /**
-     * 文件上传管理器
-     *
-     * @return
+     * 七牛云文件上传管理器
      */
     @Bean
     public UploadManager uploadManager() {

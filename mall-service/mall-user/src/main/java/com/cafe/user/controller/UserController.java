@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.infrastructure.mybatisplus.util.WrapperUtil;
 import com.cafe.user.model.entity.User;
+import com.cafe.user.model.vo.UserVO;
 import com.cafe.user.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -192,15 +193,15 @@ public class UserController {
         return ResponseEntity.ok(code);
     }
 
-    @ApiLogPrint(value = "根据客户端id和用户信息查询用户")
-    @ApiOperation(value = "根据客户端id和用户信息查询用户")
+    @ApiLogPrint(value = "根据客户端id和用户查询条件查询用户信息")
+    @ApiOperation(value = "根据客户端id和用户查询条件查询用户信息")
     @ApiImplicitParams(value = {
         @ApiImplicitParam(value = "客户端id", name = "clientId", dataType = "String", paramType = "path", required = true),
         @ApiImplicitParam(value = "用户Model", name = "user", dataType = "User", paramType = "body", required = true)
     })
     @PostMapping(value = "/detail/{clientId}")
-    public ResponseEntity<User> detail(@PathVariable(value = "clientId") String clientId, @RequestBody User user) {
-        User detail = userService.detail(clientId, user);
-        return ResponseEntity.ok(detail);
+    public ResponseEntity<UserVO> detail(@PathVariable(value = "clientId") String clientId, @RequestBody User user) {
+        UserVO userVO = userService.detail(clientId, user);
+        return ResponseEntity.ok(userVO);
     }
 }

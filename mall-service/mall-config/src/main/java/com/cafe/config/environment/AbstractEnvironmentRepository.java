@@ -46,8 +46,8 @@ public abstract class AbstractEnvironmentRepository implements EnvironmentReposi
     /**
      * 读取配置内容并添加到配置环境中
      *
-     * @param environment
-     * @param propertyName
+     * @param environment  环境
+     * @param propertyName 配置键名
      */
     protected abstract void addPropertySource(Environment environment, String propertyName);
 }

@@ -1,7 +1,7 @@
 package com.cafe.elasticsearch.feign;
 
-import com.cafe.common.core.feign.FeignRequestInterceptor;
 import com.cafe.elasticsearch.model.index.GoodsIndex;
+import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,8 +24,8 @@ public interface GoodsIndexFeign {
     /**
      * 搜索商品索引
      *
-     * @param keyword
-     * @return
+     * @param keyword 关键词
+     * @return 商品索引列表
      */
     @GetMapping(value = "/search/index")
     ResponseEntity<List<GoodsIndex>> searchIndex(@RequestParam(value = "keyword") String keyword);
@@ -33,8 +33,8 @@ public interface GoodsIndexFeign {
     /**
      * 搜索商品ID
      *
-     * @param keyword
-     * @return
+     * @param keyword 关键词
+     * @return 商品ID列表
      */
     @GetMapping(value = "/search/id")
     ResponseEntity<List<Long>> searchId(@RequestParam(value = "keyword") String keyword);

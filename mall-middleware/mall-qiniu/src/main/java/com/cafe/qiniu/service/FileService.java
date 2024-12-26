@@ -16,7 +16,7 @@ public interface FileService {
      *
      * @param bucket 存储桶
      * @param file   文件
-     * @return
+     * @return 存储痛 + 文件名
      */
     String upload(String bucket, MultipartFile file);
 
@@ -25,7 +25,7 @@ public interface FileService {
      *
      * @param bucket   存储桶
      * @param filename 文件名
-     * @return
+     * @return 删除结果 (true 删除成功, false 删除失败)
      */
     Boolean delete(String bucket, String filename);
 }

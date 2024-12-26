@@ -1,6 +1,8 @@
 package com.cafe.fastdfs.service.impl;
 
 import com.cafe.common.constant.pool.StringConstant;
+import com.cafe.fastdfs.model.converter.FileInfoConverter;
+import com.cafe.fastdfs.model.vo.FileInfoVO;
 import com.cafe.fastdfs.property.FastDFSProperties;
 import com.cafe.fastdfs.service.FileService;
 import lombok.RequiredArgsConstructor;
@@ -79,10 +81,11 @@ public class FileServiceImpl implements FileService {
 
     @SneakyThrows
     @Override
-    public FileInfo info(String group, String filename) {
+    public FileInfoVO info(String group, String filename) {
         TrackerClient trackerClient = new TrackerClient();
         TrackerServer trackerServer = trackerClient.getConnection();
         StorageClient storageClient = new StorageClient(trackerServer, null);
-        return storageClient.get_file_info(group, filename);
+        FileInfo fileInfo = storageClient.get_file_info(group, filename);
+        return FileInfoConverter.INSTANCE.toVO(fileInfo);
     }
 }
