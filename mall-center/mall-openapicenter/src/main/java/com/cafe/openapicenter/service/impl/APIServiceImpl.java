@@ -29,8 +29,8 @@ public class APIServiceImpl implements APIService {
     private final WebClient webClient;
 
     @Autowired
-    public APIServiceImpl() {
-        this.webClient = WebClient.create();
+    public APIServiceImpl(WebClient webClient) {
+        this.webClient = webClient;
     }
 
     @Override

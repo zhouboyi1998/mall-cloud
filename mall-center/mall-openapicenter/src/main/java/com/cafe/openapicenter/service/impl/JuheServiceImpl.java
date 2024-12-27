@@ -6,8 +6,7 @@ import com.cafe.openapicenter.service.JuheService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
@@ -26,11 +25,8 @@ public class JuheServiceImpl implements JuheService {
     private final WebClient webClient;
 
     @Autowired
-    public JuheServiceImpl() {
-        this.webClient = WebClient.builder()
-            .baseUrl("https://apis.juhe.cn")
-            .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-            .build();
+    public JuheServiceImpl(@Qualifier(value = "webClient4Juhe") WebClient webClient) {
+        this.webClient = webClient;
     }
 
     @Override
