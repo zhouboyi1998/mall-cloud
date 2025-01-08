@@ -1,7 +1,7 @@
 package com.cafe.security.granter;
 
 import com.cafe.common.constant.request.RequestConstant;
-import com.cafe.common.constant.security.GrantConstant;
+import com.cafe.common.constant.security.AuthorizationConstant;
 import com.cafe.security.token.EmailPasswordAuthenticationToken;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AccountStatusException;
@@ -38,7 +38,7 @@ public class EmailTokenGranter extends AbstractTokenGranter {
         ClientDetailsService clientDetailsService,
         OAuth2RequestFactory requestFactory
     ) {
-        this(authenticationManager, tokenServices, clientDetailsService, requestFactory, GrantConstant.EMAIL);
+        this(authenticationManager, tokenServices, clientDetailsService, requestFactory, AuthorizationConstant.GrantType.EMAIL);
     }
 
     protected EmailTokenGranter(
