@@ -2,7 +2,7 @@ package com.cafe.security.granter;
 
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.constant.request.RequestConstant;
-import com.cafe.common.constant.security.GrantConstant;
+import com.cafe.common.constant.security.AuthorizationConstant;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AccountStatusException;
@@ -44,7 +44,7 @@ public class CaptchaTokenGranter extends AbstractTokenGranter {
         OAuth2RequestFactory requestFactory,
         RedisTemplate<String, Object> redisTemplate
     ) {
-        this(authenticationManager, tokenServices, clientDetailsService, requestFactory, GrantConstant.CAPTCHA, redisTemplate);
+        this(authenticationManager, tokenServices, clientDetailsService, requestFactory, AuthorizationConstant.GrantType.CAPTCHA, redisTemplate);
     }
 
     protected CaptchaTokenGranter(
