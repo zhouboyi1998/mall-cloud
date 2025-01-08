@@ -5,7 +5,7 @@ package com.cafe.common.constant.security;
  * @Package: com.cafe.common.constant.security
  * @Author: zhouboyi
  * @Date: 2022/5/10 23:14
- * @Description: 权限相关常量
+ * @Description: 授权相关常量
  */
 public class AuthorizationConstant {
 
@@ -23,4 +23,25 @@ public class AuthorizationConstant {
      * 所有请求
      */
     public static final String ALL_REQUEST = "/**";
+
+    /**
+     * 授权模式
+     */
+    public static class GrantType {
+
+        /**
+         * 图片验证码
+         */
+        public static final String CAPTCHA = "captcha";
+
+        /**
+         * 手机号
+         */
+        public static final String MOBILE = "mobile";
+
+        /**
+         * 邮箱
+         */
+        public static final String EMAIL = "email";
+    }
 }
