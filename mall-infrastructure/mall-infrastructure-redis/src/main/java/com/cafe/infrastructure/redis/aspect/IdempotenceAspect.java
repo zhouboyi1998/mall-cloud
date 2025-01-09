@@ -4,6 +4,7 @@ import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.constant.request.RequestConstant;
+import com.cafe.common.constant.security.AuthorizationConstant;
 import com.cafe.common.util.aop.AOPUtil;
 import com.cafe.infrastructure.redis.annotation.Idempotence;
 import lombok.RequiredArgsConstructor;
@@ -70,21 +71,22 @@ public class IdempotenceAspect {
             .orElseThrow(NullPointerException::new);
         // 获取访问令牌
         String accessToken = request.getHeader(RequestConstant.Header.AUTHORIZATION)
-            .replace(RequestConstant.Header.BEARER_PREFIX, StringConstant.EMPTY);
+            .replace(AuthorizationConstant.TokenType.BEARER + StringConstant.SPACE, StringConstant.EMPTY);
 
         // 获取注解
         Idempotence idempotence = AnnotationUtils.getAnnotation(method, Idempotence.class);
         Assert.notNull(idempotence, "Unable to get @Idempotence annotation!");
 
         // 组装 Redis 缓存的完整 Key (方法全限定名 + 参数 Hash 值 + 访问令牌)
-        StringBuilder key = new StringBuilder()
+        String key = new StringBuilder()
             .append(RedisConstant.IDEMPOTENCE_PREFIX).append(className)
             .append(StringConstant.POINT).append(methodName)
             .append(StringConstant.COLON).append(AOPUtil.findArgumentString(joinPoint).hashCode())
-            .append(StringConstant.COLON).append(accessToken);
+            .append(StringConstant.COLON).append(accessToken)
+            .toString();
 
         // 判断是否重复提交 (使用 Redis 的 SETNX 命令实现分布式锁)
-        Boolean absent = redisTemplate.opsForValue().setIfAbsent(key.toString(), StringConstant.EMPTY, idempotence.intervalTime(), idempotence.unit());
+        Boolean absent = redisTemplate.opsForValue().setIfAbsent(key, StringConstant.EMPTY, idempotence.intervalTime(), idempotence.unit());
         if (Boolean.FALSE.equals(absent)) {
             throw new RuntimeException("Do not repeat submit!");
         }

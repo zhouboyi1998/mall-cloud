@@ -11,12 +11,12 @@ import java.util.Map;
  * @Package: com.cafe.security.service
  * @Author: zhouboyi
  * @Date: 2022/7/8 9:47
- * @Description:
+ * @Description: OAuth2 认证业务接口
  */
-public interface OauthService {
+public interface OAuth2Service {
 
     /**
-     * Oauth2 登录认证
+     * OAuth2 登录认证
      *
      * @param principal  认证主体
      * @param parameters 认证参数

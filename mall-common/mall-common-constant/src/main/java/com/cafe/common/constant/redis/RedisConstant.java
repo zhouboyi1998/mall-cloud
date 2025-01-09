@@ -20,6 +20,11 @@ public class RedisConstant {
     public static final String TOKEN_PREFIX = "AUTH:TOKEN_";
 
     /**
+     * 访问令牌Key中缀
+     */
+    public static final String ACCESS_TOKEN_INFIX = "access:";
+
+    /**
      * 验证码Key前缀
      */
     public static final String CAPTCHA_PREFIX = "VALIDATE:CAPTCHA_";
