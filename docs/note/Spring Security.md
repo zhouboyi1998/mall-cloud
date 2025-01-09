@@ -195,3 +195,19 @@ UserDetailsService.loadUserByUsername()
 * 那么不管使用什么（用户名、手机号、邮箱）作为账号登录
 * 都需要同时保存用户名到 `UserDetails.username` 中
 * 除非重写一个自定义的刷新令牌授权器
+
+#### 获取认证令牌
+
+```
+@PostMapping(value = "/token")
+public ResponseEntity<Token> token(Principal principal, @RequestParam Map<String, String> parameters) throws HttpRequestMethodNotSupportedException {
+    Token token = oauthService.token(principal, parameters);
+    return ResponseEntity.ok(token);
+}
+```
+
+* `Spring Security` 框架会自动注入接口参数中的 `Principal` 对象
+* 类似于 `Spring MVC` 框架会自动注入接口参数中的 `HttpServletRequest` 对象
+
+
+* `parameters` 对象负责接收前端使用 `x-www-form-urlencoded` 方式传入的参数
