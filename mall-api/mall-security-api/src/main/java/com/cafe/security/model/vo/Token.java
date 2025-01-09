@@ -13,12 +13,12 @@ import java.io.Serializable;
  * @Package: com.cafe.security.model.vo
  * @Author: zhouboyi
  * @Date: 2022/5/9 10:48
- * @Description: 认证令牌
+ * @Description: 令牌
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "Token", description = "认证令牌")
+@ApiModel(value = "Token", description = "令牌")
 public class Token implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,8 +29,8 @@ public class Token implements Serializable {
     @ApiModelProperty(value = "刷新令牌")
     private String refreshToken;
 
-    @ApiModelProperty(value = "访问令牌头前缀")
-    private String tokenPrefix;
+    @ApiModelProperty(value = "令牌类型", example = "bearer")
+    private String tokenType;
 
     @ApiModelProperty(value = "有效时间 (秒)")
     private Integer expiresIn;
