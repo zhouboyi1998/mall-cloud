@@ -80,7 +80,7 @@ public class WebFluxSecurityConfig {
             // 白名单配置
             .pathMatchers(StringUtils.toStringArray(securityProperties.getWhitelist()))
             .permitAll()
-            // 鉴权管理器配置
+            // 授权管理器配置
             .anyExchange()
             .access(authorizationManager)
             .and()

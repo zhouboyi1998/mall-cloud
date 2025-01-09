@@ -15,14 +15,14 @@ public class RequestConstant {
     public static class Header {
 
         /**
-         * 访问令牌
+         * 授权令牌
          */
         public static final String AUTHORIZATION = "Authorization";
 
         /**
-         * 访问令牌前缀
+         * 访问令牌
          */
-        public static final String BEARER_PREFIX = "Bearer ";
+        public static final String ACCESS_TOKEN = "Access-Token";
 
         /**
          * JWT 载荷

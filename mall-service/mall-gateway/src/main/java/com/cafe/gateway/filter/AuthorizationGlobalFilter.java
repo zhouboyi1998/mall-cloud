@@ -1,8 +1,8 @@
 package com.cafe.gateway.filter;
 
 import com.cafe.common.constant.pool.IntegerConstant;
-import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.request.RequestConstant;
+import com.cafe.gateway.util.RequestUtil;
 import com.nimbusds.jose.JWSObject;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -10,12 +10,11 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-
-import java.util.Optional;
 
 /**
  * @Project: mall-cloud
@@ -33,12 +32,10 @@ public class AuthorizationGlobalFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         // 获取 Request
         ServerHttpRequest request = exchange.getRequest();
+        // 获取 Request Headers
+        HttpHeaders httpHeaders = request.getHeaders();
         // 获取 Access Token
-        String accessToken = Optional.of(request)
-            .map(ServerHttpRequest::getHeaders)
-            .map(httpHeaders -> httpHeaders.getFirst(RequestConstant.Header.AUTHORIZATION))
-            .map(authorization -> authorization.replace(RequestConstant.Header.BEARER_PREFIX, StringConstant.EMPTY))
-            .orElse(StringConstant.EMPTY);
+        String accessToken = RequestUtil.getAccessTokenByAuthorization(httpHeaders);
         // 如果 Access Token 为空, 直接返回
         if (StringUtils.isEmpty(accessToken)) {
             return chain.filter(exchange);
