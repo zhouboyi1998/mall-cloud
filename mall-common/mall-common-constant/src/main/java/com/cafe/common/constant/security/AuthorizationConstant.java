@@ -44,4 +44,15 @@ public class AuthorizationConstant {
          */
         public static final String EMAIL = "email";
     }
+
+    /**
+     * 令牌类型
+     */
+    public static class TokenType {
+
+        /**
+         * OAuth2 Token
+         */
+        public static final String BEARER = "bearer";
+    }
 }
