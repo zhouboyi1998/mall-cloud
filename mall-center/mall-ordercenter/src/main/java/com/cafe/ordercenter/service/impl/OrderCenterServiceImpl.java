@@ -16,14 +16,15 @@ import com.cafe.member.model.entity.Address;
 import com.cafe.order.feign.OrderFlowFeign;
 import com.cafe.order.model.entity.OrderItem;
 import com.cafe.order.model.vo.OrderVO;
+import com.cafe.ordercenter.executor.ThreadPoolHolder;
 import com.cafe.ordercenter.service.OrderCenterService;
 import com.cafe.starter.boot.model.exception.BusinessException;
 import com.cafe.storage.feign.StockFeign;
 import com.cafe.storage.model.dto.CartDTO;
-import io.seata.spring.annotation.GlobalTransactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -61,20 +62,19 @@ public class OrderCenterServiceImpl implements OrderCenterService {
 
     private final OrderFlowFeign orderFlowFeign;
 
-    @GlobalTransactional
     @Override
     public OrderVO submit(Long addressId, List<CartDTO> cartDTOList) {
         // 查询下单商品的详细信息
-        CompletableFuture<List<Goods>> selectGoodsListFuture = CompletableFuture.supplyAsync(() -> selectGoodsList(cartDTOList));
+        CompletableFuture<List<Goods>> selectGoodsListFuture = CompletableFuture.supplyAsync(() -> selectGoodsList(cartDTOList), ThreadPoolHolder.SUBMIT_ORDER_THREAD_POOL);
         // 查询收货地址
-        CompletableFuture<Address> selectAddressFuture = CompletableFuture.supplyAsync(() -> selectAddress(addressId));
+        CompletableFuture<Address> selectAddressFuture = CompletableFuture.supplyAsync(() -> selectAddress(addressId), ThreadPoolHolder.SUBMIT_ORDER_THREAD_POOL);
         // 查询收货地址的所属区域
-        CompletableFuture<AreaDetailVO> selectAreaDetailVOFuture = selectAddressFuture.thenApplyAsync(this::selectAreaDetailVO);
+        CompletableFuture<AreaDetailVO> selectAreaDetailVOFuture = selectAddressFuture.thenApplyAsync(this::selectAreaDetailVO, ThreadPoolHolder.SUBMIT_ORDER_THREAD_POOL);
         // 扣减库存
-        CompletableFuture<Void> outboundStockFuture = CompletableFuture.runAsync(() -> outboundStock(cartDTOList));
+        CompletableFuture<Void> outboundStockFuture = CompletableFuture.runAsync(() -> outboundStock(cartDTOList), ThreadPoolHolder.SUBMIT_ORDER_THREAD_POOL);
         // 创建订单
         CompletableFuture.allOf(selectGoodsListFuture, selectAreaDetailVOFuture);
-        CompletableFuture<OrderVO> createOrderFuture = CompletableFuture.supplyAsync(() -> createOrder(cartDTOList, selectGoodsListFuture.join(), selectAddressFuture.join(), selectAreaDetailVOFuture.join()));
+        CompletableFuture<OrderVO> createOrderFuture = CompletableFuture.supplyAsync(() -> createOrder(cartDTOList, selectGoodsListFuture.join(), selectAddressFuture.join(), selectAreaDetailVOFuture.join()), ThreadPoolHolder.SUBMIT_ORDER_THREAD_POOL);
         // 业务流程全部执行完成, 返回订单信息
         CompletableFuture.allOf(outboundStockFuture, createOrderFuture);
         return createOrderFuture.join();
@@ -94,7 +94,7 @@ public class OrderCenterServiceImpl implements OrderCenterService {
             .map(ResponseEntity::getBody)
             .orElse(Collections.emptyList());
         // 如果存在下架状态的 SKU, 终止订单提交
-        if (unlisted.size() > 0) {
+        if (!CollectionUtils.isEmpty(unlisted)) {
             throw new BusinessException(HttpStatusEnum.UNLISTED, unlisted);
         }
 
@@ -141,7 +141,7 @@ public class OrderCenterServiceImpl implements OrderCenterService {
             .map(ResponseEntity::getBody)
             .orElse(Collections.emptyList());
         // 如果存在库存不足的 SKU, 终止提交
-        if (failIds.size() > 0) {
+        if (!CollectionUtils.isEmpty(failIds)) {
             throw new BusinessException(HttpStatusEnum.LOW_STOCK, failIds);
         }
     }
