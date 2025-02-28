@@ -21,6 +21,7 @@ import com.cafe.starter.boot.model.exception.BusinessException;
 import com.cafe.storage.feign.StockFeign;
 import com.cafe.storage.model.dto.CartDTO;
 import io.seata.spring.annotation.GlobalTransactional;
+import io.seata.tm.api.transaction.Propagation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -61,7 +62,12 @@ public class OrderCenterServiceImpl implements OrderCenterService {
 
     private final OrderFlowFeign orderFlowFeign;
 
-    @GlobalTransactional
+    @GlobalTransactional(
+        propagation = Propagation.REQUIRED,
+        rollbackFor = Exception.class,
+        timeoutMills = 180000,
+        lockRetryInterval = 10
+    )
     @Override
     public OrderVO submit(Long addressId, List<CartDTO> cartDTOList) {
         // 查询下单商品的详细信息
