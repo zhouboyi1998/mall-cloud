@@ -5,10 +5,10 @@ spring:
       resourceserver:
         jwt:
           # 获取 JWK 公钥接口
-          jwk-set-uri: http://192.168.44.128:${server.port}/mall-security/jwk/jwk-set
+          jwk-set-uri: http://192.168.10.227:${server.port}/mall-security/jwk/jwk-set
   # Redis 配置
   redis:
-    host: 192.168.44.128
+    host: 192.168.10.227
     port: 6379
-    password: 123456
+    password: root
     database: 0

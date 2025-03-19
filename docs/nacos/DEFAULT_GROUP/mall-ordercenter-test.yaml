@@ -4,11 +4,11 @@ spring:
     # Kafka 生产者配置
     producer:
       # Kafka 服务端地址
-      bootstrap-servers: 192.168.44.128:9092
+      bootstrap-servers: 192.168.10.227:9092
 
 # XXL-JOB 配置
 xxl:
   job:
     # 调度中心配置
     admin:
-      addresses: http://192.168.44.128:8001/xxl-job-admin
+      addresses: http://192.168.10.227:8001/xxl-job-admin

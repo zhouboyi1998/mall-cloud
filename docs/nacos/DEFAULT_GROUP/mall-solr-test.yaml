@@ -3,4 +3,4 @@ spring:
   data:
     # Solr 配置
     solr:
-      host: http://192.168.44.128:8983/solr
+      host: http://192.168.10.227:8983/solr

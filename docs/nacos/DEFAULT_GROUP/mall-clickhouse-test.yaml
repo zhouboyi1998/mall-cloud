@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.clickhouse.jdbc.ClickHouseDriver
-    url: jdbc:clickhouse://192.168.44.128:8123/mall_goods
+    url: jdbc:clickhouse://192.168.10.227:8123/mall_goods
     username: default
     password:
     type: com.alibaba.druid.pool.DruidDataSource

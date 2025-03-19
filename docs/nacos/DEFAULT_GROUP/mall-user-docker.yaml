@@ -4,12 +4,12 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://host.docker.internal:3306/mall_user?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
     username: root
-    password: 123456
+    password: root
   # Redis 配置
   redis:
     host: host.docker.internal
     port: 6379
-    password: 123456
+    password: root
     database: 0
   # RabbitMQ 配置
   rabbitmq:

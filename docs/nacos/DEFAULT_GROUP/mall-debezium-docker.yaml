@@ -5,6 +5,6 @@ debezium:
     host: host.docker.internal
     port: 3306
     username: root
-    password: 123456
+    password: root
     # 监听的数据库
     database: mall_order

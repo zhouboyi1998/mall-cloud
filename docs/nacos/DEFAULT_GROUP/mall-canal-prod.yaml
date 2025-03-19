@@ -1,7 +1,7 @@
 spring:
   # RabbitMQ 配置
   rabbitmq:
-    host: 192.168.159.128
+    host: 192.168.10.227
     port: 5672
     username: canal
     password: canal
@@ -12,7 +12,7 @@ spring:
 
 # RocketMQ 配置
 rocketmq:
-  name-server: 192.168.159.128:9876
+  name-server: 192.168.10.227:9876
   # 生产者配置
   producer:
     # 默认生产者组
@@ -20,7 +20,7 @@ rocketmq:
 
 # Canal 数据库监听配置
 canal:
-  host: 192.168.159.128
+  host: 192.168.10.227
   port: 11111
   destination: example
   username: canal

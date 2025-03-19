@@ -1,7 +1,7 @@
 spring:
   # RabbitMQ 配置
   rabbitmq:
-    host: 192.168.44.128
+    host: 192.168.10.227
     port: 5672
     username: binlog
     password: binlog
@@ -12,9 +12,9 @@ spring:
 
 # MySQL Binlog Connector 数据库监听配置
 binlog:
-  host: 192.168.44.128
+  host: 192.168.10.227
   port: 3306
   username: root
-  password: 123456
+  password: root
   # MySQL 服务端唯一标识
   server-id: 1

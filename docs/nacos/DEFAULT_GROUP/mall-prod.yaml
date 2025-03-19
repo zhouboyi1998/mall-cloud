@@ -10,14 +10,14 @@ spring:
   # Zipkin 配置
   zipkin:
     enabled: true
-    base-url: http://192.168.159.128:9411
+    base-url: http://192.168.10.227:9411
   # 微服务配置
   cloud:
     # Sentinel 配置
     sentinel:
       # Sentinel 控制台
       transport:
-        dashboard: 192.168.159.128:8858
+        dashboard: 192.168.10.227:8858
 
 # Seata 配置
 seata:
@@ -28,4 +28,4 @@ seata:
     vgroup-mapping:
       default_tx_group: default
     grouplist:
-      default: 192.168.159.128:8091
+      default: 192.168.10.227:8091
