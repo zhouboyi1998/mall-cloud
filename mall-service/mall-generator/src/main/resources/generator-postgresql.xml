@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+    PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+    "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="generator-postgresql.properties" />
+    <context id="PostgreSqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+
+        <!-- 为与关键字冲突的表名、字段名添加双引号 -->
+        <property name="autoDelimitKeywords" value="true" />
+        <property name="beginningDelimiter" value="&quot;" />
+        <property name="endingDelimiter" value="&quot;" />
+
+        <!-- Java 文件编码 -->
+        <property name="javaFileEncoding" value="UTF-8" />
+        <!-- Java 文件格式化 -->
+        <property name="javaFormatter" value="org.mybatis.generator.api.dom.DefaultJavaFormatter" />
+        <!-- XML 文件格式化 -->
+        <property name="xmlFormatter" value="org.mybatis.generator.api.dom.DefaultXmlFormatter" />
+
+        <!-- Entity 序列化 -->
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+        <!-- 重写 toString 方法 -->
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+        <!-- 生成 Mapper 时覆盖原文件 -->
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
+
+        <commentGenerator type="com.cafe.generator.mybatis.CommentGenerator">
+            <!-- 去除自动生成的注释 -->
+            <property name="suppressAllComments" value="true" />
+            <property name="suppressDate" value="true" />
+            <!-- 生成自定义注释 -->
+            <property name="addRemarkComments" value="true" />
+        </commentGenerator>
+
+        <!-- 数据库连接配置: 驱动、地址、用户名、密码 -->
+        <jdbcConnection driverClass="${driver}" connectionURL="${url}" userId="${username}" password="${password}">
+            <property name="nullCatalogMeansCurrent" value="true" />
+        </jdbcConnection>
+
+        <!--
+            false(默认): 把 JDBC 的 DECIMAL、NUMERIC 类型解析为 java.lang.Integer
+            true: 把 JDBC 的 DECIMAL、NUMERIC 类型解析为 java.math.BigDecimal
+		-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true" />
+        </javaTypeResolver>
+
+        <!-- Entity 实体模型生成路径 -->
+        <javaModelGenerator targetPackage="${module-package}.${entity-package}" targetProject="temp" />
+
+        <!-- Mapper 映射文件生成路径 -->
+        <sqlMapGenerator targetPackage="${module-package}.${xml-package}" targetProject="temp" />
+
+        <!-- Mapper 接口生成路径 -->
+        <javaClientGenerator targetPackage="${module-package}.${mapper-package}" targetProject="temp" type="XMLMAPPER" />
+
+        <!-- 指定数据库模式, tableName="%" 生成全部表-->
+        <table schema="${schema}" tableName="%">
+            <generatedKey column="id" sqlStatement="PostgreSql" identity="true" />
+            <!-- 去除 Entity 的前缀 -->
+            <domainObjectRenamingRule searchString="^Mall" replaceString="" />
+        </table>
+
+    </context>
+</generatorConfiguration>

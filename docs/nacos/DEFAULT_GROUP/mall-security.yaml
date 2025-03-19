@@ -1,0 +1,50 @@
+# RSA 证书配置 (生成证书文件 jwt.jks 时的设置)
+rsa-credential:
+  # 密钥库名称
+  key-store: "jwt.jks"
+  # 密钥库口令
+  store-pass: "123456"
+  # 别名
+  alias: "jwt"
+  # 密钥口令
+  key-pass: "123456"
+
+# 客户端配置
+client:
+  # 客户端详细信息列表
+  details:
+    # 客户端id (后台管理系统)
+    - client-id: "manage"
+      # 授权模式 (默认): password 密码, authorization_code 授权码, client_credentials 客户端, implicit 隐藏, refresh_token 刷新令牌
+      # 授权模式 (扩展): captcha 图片验证码, mobile 手机号, email 邮箱
+      authorized-grant-types:
+        - "password"
+        - "refresh_token"
+        - "captcha"
+        - "mobile"
+        - "email"
+      # 授权范围
+      scopes:
+        - "all"
+      # 访问令牌过期时间 (1小时)
+      access-token-validity-seconds: 3600
+      # 刷新令牌过期时间 (30天)
+      refresh-token-validity-seconds: 2592000
+
+    # 客户端id (前台门户网站)
+    - client-id: "portal"
+      # 授权模式 (默认): password 密码, authorization_code 授权码, client_credentials 客户端, implicit 隐藏, refresh_token 刷新令牌
+      # 授权模式 (扩展): captcha 图片验证码, mobile 手机号, email 邮箱
+      authorized-grant-types:
+        - "password"
+        - "refresh_token"
+        - "captcha"
+        - "mobile"
+        - "email"
+      # 授权范围
+      scopes:
+        - "all"
+      # 访问令牌过期时间 (1小时)
+      access-token-validity-seconds: 3600
+      # 刷新令牌过期时间 (30天)
+      refresh-token-validity-seconds: 2592000

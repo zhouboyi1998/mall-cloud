@@ -1,0 +1,31 @@
+spring:
+  # Sleuth 配置
+  sleuth:
+    enabled: true
+    sampler:
+      # 采样率 (1: 全部采集)
+      probability: 1
+      # 速率 (每秒接收的 trace 数量)
+      rate: 10
+  # Zipkin 配置
+  zipkin:
+    enabled: true
+    base-url: http://192.168.159.128:9411
+  # 微服务配置
+  cloud:
+    # Sentinel 配置
+    sentinel:
+      # Sentinel 控制台
+      transport:
+        dashboard: 192.168.159.128:8858
+
+# Seata 配置
+seata:
+  # 客户端事务组名称
+  tx-service-group: default_tx_group
+  # 客户端事务组与服务端集群的映射关系
+  service:
+    vgroup-mapping:
+      default_tx_group: default
+    grouplist:
+      default: 192.168.159.128:8091

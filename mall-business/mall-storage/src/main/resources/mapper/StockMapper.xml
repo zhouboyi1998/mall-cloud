@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe.storage.mapper.StockMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cafe.storage.model.entity.Stock">
+        <id column="id" property="id" />
+        <result column="sku_id" property="skuId" />
+        <result column="shop_id" property="shopId" />
+        <result column="stock" property="stock" />
+        <result column="unit" property="unit" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="deleted" />
+    </resultMap>
+
+    <update id="inbound" parameterType="com.cafe.storage.model.dto.CartDTO">
+        UPDATE mall_stock
+        SET stock = stock + #{cartDTO.quantity}
+        WHERE sku_id = #{cartDTO.skuId}
+    </update>
+
+    <update id="outbound" parameterType="com.cafe.storage.model.dto.CartDTO">
+        UPDATE mall_stock
+        SET stock = stock - #{cartDTO.quantity}
+        WHERE sku_id = #{cartDTO.skuId}
+          AND stock >= #{cartDTO.quantity}
+    </update>
+
+</mapper>

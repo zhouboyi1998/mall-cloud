@@ -1,0 +1,25 @@
+spring:
+  # 数据库连接配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/mall_user?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+  # Redis 配置
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    database: 0
+  # RabbitMQ 配置
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: binlog
+    password: binlog
+
+# MyBatis-Plus 配置
+mybatis-plus:
+  configuration:
+    # dev 环境打印 SQL 到控制台
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

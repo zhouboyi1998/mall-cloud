@@ -1,0 +1,19 @@
+package ${package.Service};
+
+import ${package.Entity}.${entity};
+import ${superServiceClassPackage};
+
+/**
+ * @Project: mall-cloud
+ * @Package: ${package.Service}
+ * @Author: ${author}
+ * @Date: ${date}
+ * @Description: ${table.comment}业务接口
+ */
+#if(${kotlin})
+interface ${table.serviceName} : ${superServiceClass}<${entity}>
+#else
+public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
+
+}
+#end

@@ -1,0 +1,6 @@
+spring:
+  cloud:
+    config:
+      uri: http://192.168.44.128:8888
+      name: ${spring.application.name}
+      profile: ${spring.profiles.active}

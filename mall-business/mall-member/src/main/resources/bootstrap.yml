@@ -1,0 +1,8 @@
+server:
+  port: 18086
+
+spring:
+  application:
+    name: mall-member
+  profiles:
+    active: dev

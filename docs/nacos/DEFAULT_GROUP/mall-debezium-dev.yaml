@@ -1,0 +1,10 @@
+# Debezium 配置
+debezium:
+  # 数据源配置
+  datasource:
+    host: 127.0.0.1
+    port: 3306
+    username: root
+    password: 123456
+    # 监听的数据库
+    database: mall_order

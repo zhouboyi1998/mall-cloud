@@ -1,0 +1,14 @@
+spring:
+  # Redis 配置
+  redis:
+    host: 192.168.159.128
+    port: 6379
+    password: 123456
+    database: 0
+
+# 验证码配置
+captcha:
+  # 业务接口配置
+  service:
+    # 业务实现类
+    implementation: easyCaptchaServiceImpl

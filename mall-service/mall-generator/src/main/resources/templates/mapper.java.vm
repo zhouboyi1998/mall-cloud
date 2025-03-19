@@ -1,0 +1,21 @@
+package ${package.Mapper};
+
+import ${package.Entity}.${entity};
+import ${superMapperClassPackage};
+import org.apache.ibatis.annotations.Mapper;
+
+/**
+ * @Project: mall-cloud
+ * @Package: ${package.Mapper}
+ * @Author: ${author}
+ * @Date: ${date}
+ * @Description: ${table.comment}数据访问接口
+ */
+@Mapper
+#if(${kotlin})
+interface ${table.mapperName} : ${superMapperClass}<${entity}>
+#else
+public interface ${table.mapperName} extends ${superMapperClass}<${entity}> {
+
+}
+#end

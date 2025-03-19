@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.cafe</groupId>
+        <artifactId>mall-middleware</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>mall-minio</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <description>MinIO 分布式文件存储</description>
+
+    <dependencies>
+        <!-- MinIO 文件存储 -->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+        </dependency>
+        <!-- OK HTTP 网络通信 -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+        </dependency>
+
+        <!-- 启动包 -->
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-starter-web</artifactId>
+        </dependency>
+        <!-- 基础设施 -->
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-infrastructure-swagger</artifactId>
+        </dependency>
+        <!-- 远程调用接口 -->
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-minio-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-id-api</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,8 @@
+server:
+  port: 18085
+
+spring:
+  application:
+    name: mall-manager
+  profiles:
+    active: dev

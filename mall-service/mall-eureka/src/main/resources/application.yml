@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    active: dev
+
+eureka:
+  client:
+    # 是否注册到 Eureka
+    register-with-eureka: false
+    # 是否从 Eureka 注册中心获取其它微服务信息
+    fetch-registry: false
+    # Eureka 地址
+    service-url:
+      default-zone: ${eureka.instance.hostname}:${server.port}/eureka

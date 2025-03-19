@@ -1,0 +1,19 @@
+spring:
+  # 微服务配置
+  cloud:
+    # Spring Cloud Gateway 网关配置
+    gateway:
+      # 服务发现配置
+      discovery:
+        locator:
+          # 从注册中心自动获取微服务名称, 使用微服务名称作为路由id
+          enabled: true
+          # 微服务名称转换为小写
+          lower-case-service-id: true
+
+# 网关安全配置
+security:
+  # 白名单 API
+  whitelist:
+    - "/actuator/**"
+    - "/mall-security/**"

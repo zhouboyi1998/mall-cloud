@@ -1,0 +1,27 @@
+# Maven
+target/
+
+# IDEA
+.idea/
+*.iml
+
+# Eclipse
+.settings/
+.classpath
+.project
+
+# Log
+logs/
+*.log
+
+# Temp
+temp/
+
+# SkyWalking Agent
+skywalking-agent/
+
+# Apollo
+cache/apollo/
+
+# Mac
+.DS_Store

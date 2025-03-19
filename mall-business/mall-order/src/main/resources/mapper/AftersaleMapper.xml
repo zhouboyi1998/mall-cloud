@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe.order.mapper.AftersaleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cafe.order.model.entity.Aftersale">
+        <id column="id" property="id" />
+        <result column="member_id" property="memberId" />
+        <result column="order_item_id" property="orderItemId" />
+        <result column="aftersale_type" property="aftersaleType" />
+        <result column="reason" property="reason" />
+        <result column="image_list" property="imageList" />
+        <result column="refund_amount" property="refundAmount" />
+        <result column="refund_channel" property="refundChannel" />
+        <result column="audit" property="audit" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="audit_time" property="auditTime" />
+        <result column="completion_time" property="completionTime" />
+        <result column="is_deleted" property="deleted" />
+    </resultMap>
+
+</mapper>

@@ -1,0 +1,6 @@
+spring:
+  # Spring Data 配置
+  data:
+    # Solr 配置
+    solr:
+      host: http://192.168.44.128:8983/solr

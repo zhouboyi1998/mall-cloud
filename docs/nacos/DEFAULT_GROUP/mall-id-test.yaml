@@ -1,0 +1,4 @@
+# 雪花分布式ID生成器配置
+snowflake:
+  worker-id: 0
+  datacenter-id: 2

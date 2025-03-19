@@ -1,0 +1,274 @@
+version: "3.9"
+services:
+
+  # ---------- mall-service ----------
+
+  mall-gateway:
+    image: mall-gateway:latest
+    ports:
+      - "18071:18071"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-gateway/logs
+    restart: always
+
+  mall-security:
+    image: mall-security:latest
+    ports:
+      - "18072:18072"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-security/logs
+    restart: always
+
+  mall-user:
+    image: mall-user:latest
+    ports:
+      - "18073:18073"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-user/logs
+    restart: always
+
+  mall-id:
+    image: mall-id:latest
+    ports:
+      - "18074:18074"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-id/logs
+    restart: always
+
+  mall-admin:
+    image: mall-admin:latest
+    ports:
+      - "18075:18075"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-admin/logs
+    restart: always
+
+  mall-swagger:
+    image: mall-swagger:latest
+    ports:
+      - "18076:18076"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-swagger/logs
+    restart: always
+
+  mall-eureka:
+    image: mall-eureka:latest
+    ports:
+      - "8761:8761"
+    networks:
+      - mall-net
+    restart: always
+
+  mall-config:
+    image: mall-config:latest
+    ports:
+      - "8888:8888"
+    networks:
+      - mall-net
+    restart: always
+
+  # ---------- mall-middleware ----------
+
+  mall-solr:
+    image: mall-solr:latest
+    ports:
+      - "18094:18094"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-solr/logs
+    restart: always
+
+  mall-elasticsearch:
+    image: mall-elasticsearch:latest
+    ports:
+      - "18093:18093"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-elasticsearch/logs
+    restart: always
+
+  mall-clickhouse:
+    image: mall-clickhouse:latest
+    ports:
+      - "18096:18096"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-clickhouse/logs
+    restart: always
+
+  mall-fastdfs:
+    image: mall-fastdfs:latest
+    ports:
+      - "18092:18092"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-fastdfs/logs
+    restart: always
+
+  mall-minio:
+    image: mall-minio:latest
+    ports:
+      - "18091:18091"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-minio/logs
+    restart: always
+
+  mall-qiniu:
+    image: mall-qiniu:latest
+    ports:
+      - "18095:18095"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-qiniu/logs
+    restart: always
+
+  mall-binlog:
+    image: mall-binlog:latest
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-binlog/logs
+    restart: always
+
+  mall-canal:
+    image: mall-canal:latest
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-canal/logs
+    restart: always
+
+  mall-debezium:
+    image: mall-debezium:latest
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-debezium/logs
+    restart: always
+
+  # ---------- mall-business ----------
+
+  mall-foundation:
+    image: mall-foundation:latest
+    ports:
+      - "18084:18084"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-foundation/logs
+    restart: always
+
+  mall-goods:
+    image: mall-goods:latest
+    ports:
+      - "18081:18081"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-goods/logs
+    restart: always
+
+  mall-order:
+    image: mall-order:latest
+    ports:
+      - "18082:18082"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-order/logs
+    restart: always
+
+  mall-storage:
+    image: mall-storage:latest
+    ports:
+      - "18083:18083"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-storage/logs
+    restart: always
+
+  mall-manager:
+    image: mall-manager:latest
+    ports:
+      - "18085:18085"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-manager/logs
+    restart: always
+
+  mall-member:
+    image: mall-member:latest
+    ports:
+      - "18086:18086"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-member/logs
+    restart: always
+
+  mall-merchant:
+    image: mall-merchant:latest
+    ports:
+      - "18087:18087"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-merchant/logs
+    restart: always
+
+  # ---------- mall-center ----------
+
+  mall-ordercenter:
+    image: mall-ordercenter:latest
+    ports:
+      - "18061:18061"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-ordercenter/logs
+    restart: always
+
+  mall-openapicenter:
+    image: mall-openapicenter:latest
+    ports:
+      - "18062:18062"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-openapicenter/logs
+    restart: always
+
+  mall-goodscenter:
+    image: mall-goodscenter:latest
+    ports:
+      - "18063:18063"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-goodscenter/logs
+    restart: always
+
+networks:
+  mall-net:
+    driver: bridge

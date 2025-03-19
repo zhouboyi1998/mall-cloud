@@ -1,0 +1,5 @@
+# MySQL Binlog Connector 数据库监听配置
+binlog:
+  # 监听的数据表
+  table:
+    - mall_user.mall_role_resource

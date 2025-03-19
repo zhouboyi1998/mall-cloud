@@ -1,0 +1,8 @@
+server:
+  port: 18074
+
+spring:
+  application:
+    name: mall-id
+  profiles:
+    active: dev

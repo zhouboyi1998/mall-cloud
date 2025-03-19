@@ -1,0 +1,29 @@
+spring:
+  # RabbitMQ 配置
+  rabbitmq:
+    host: host.docker.internal
+    port: 5672
+    username: canal
+    password: canal
+    # 消息确认类型: 确认消息是否成功到达交换机 (Exchange)
+    publisher-confirm-type: correlated
+    # 确认消息是否成功到达队列 (Queue)
+    publisher-returns: true
+
+# RocketMQ 配置
+rocketmq:
+  name-server: host.docker.internal:9876
+  # 生产者配置
+  producer:
+    # 默认生产者组
+    group: ${spring.application.name}
+
+# Canal 数据库监听配置
+canal:
+  host: host.docker.internal
+  port: 11111
+  destination: example
+  username: canal
+  password: canal
+  # 批处理数据量
+  batch-size: 1000

@@ -1,0 +1,8 @@
+server:
+  port: 18091
+
+spring:
+  application:
+    name: mall-minio
+  profiles:
+    active: dev

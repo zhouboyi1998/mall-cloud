@@ -1,0 +1,8 @@
+server:
+  port: 18073
+
+spring:
+  application:
+    name: mall-user
+  profiles:
+    active: dev

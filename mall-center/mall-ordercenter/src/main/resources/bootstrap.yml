@@ -1,0 +1,8 @@
+server:
+  port: 18061
+
+spring:
+  application:
+    name: mall-ordercenter
+  profiles:
+    active: dev

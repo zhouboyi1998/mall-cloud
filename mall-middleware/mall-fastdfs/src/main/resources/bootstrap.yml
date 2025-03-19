@@ -1,0 +1,8 @@
+server:
+  port: 18092
+
+spring:
+  application:
+    name: mall-fastdfs
+  profiles:
+    active: dev

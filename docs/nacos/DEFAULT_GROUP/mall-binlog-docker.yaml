@@ -1,0 +1,20 @@
+spring:
+  # RabbitMQ 配置
+  rabbitmq:
+    host: host.docker.internal
+    port: 5672
+    username: binlog
+    password: binlog
+    # 消息确认类型: 确认消息是否成功到达交换机 (Exchange)
+    publisher-confirm-type: correlated
+    # 确认消息是否成功到达队列 (Queue)
+    publisher-returns: true
+
+# MySQL Binlog Connector 数据库监听配置
+binlog:
+  host: host.docker.internal
+  port: 3306
+  username: root
+  password: 123456
+  # MySQL 服务端唯一标识
+  server-id: 1

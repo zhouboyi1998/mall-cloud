@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe.user.mapper.UserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cafe.user.model.entity.User">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="mobile" property="mobile" />
+        <result column="email" property="email" />
+        <result column="password" property="password" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="deleted" />
+    </resultMap>
+
+    <select id="detail" resultType="com.cafe.user.model.entity.User">
+        SELECT u.id, u.username, u.password, u.mobile, u.email,
+        u.status, u.create_time, u.update_time, u.is_deleted
+        FROM mall_user AS u
+        LEFT JOIN mall_user_platform AS up ON up.user_id = u.id
+        LEFT JOIN mall_platform AS p ON p.id = up.platform_id
+        <where>
+            AND p.client_id = #{clientId}
+            <if test="user.username != null and user.username != ''">
+                AND u.username = #{user.username}
+            </if>
+            <if test="user.mobile != null and user.mobile != ''">
+                AND u.mobile = #{user.mobile}
+            </if>
+            <if test="user.email != null and user.email != ''">
+                AND u.email = #{user.email}
+            </if>
+            AND u.is_deleted = 0
+        </where>
+    </select>
+
+</mapper>

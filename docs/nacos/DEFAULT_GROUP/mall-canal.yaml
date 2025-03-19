@@ -1,0 +1,11 @@
+# Canal 数据库监听配置
+canal:
+  # 订阅的数据表
+  subscribe-table: mall_.*\..*
+  # 推送至 RabbitMQ 的数据表
+  rabbitmq-table:
+    - mall_user.mall_role_resource
+  # 推送至 RocketMQ 的数据表
+  rocketmq-table:
+    - mall_goods.mall_brand
+    - mall_goods.mall_category

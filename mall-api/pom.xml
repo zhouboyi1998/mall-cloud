@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.cafe</groupId>
+        <artifactId>mall-cloud</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>mall-api</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <description>远程调用模块</description>
+
+    <modules>
+        <module>mall-clickhouse-api</module>
+        <module>mall-elasticsearch-api</module>
+        <module>mall-fastdfs-api</module>
+        <module>mall-foundation-api</module>
+        <module>mall-goods-api</module>
+        <module>mall-id-api</module>
+        <module>mall-manager-api</module>
+        <module>mall-member-api</module>
+        <module>mall-merchant-api</module>
+        <module>mall-minio-api</module>
+        <module>mall-order-api</module>
+        <module>mall-qiniu-api</module>
+        <module>mall-security-api</module>
+        <module>mall-solr-api</module>
+        <module>mall-storage-api</module>
+        <module>mall-user-api</module>
+    </modules>
+
+</project>

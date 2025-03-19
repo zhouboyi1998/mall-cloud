@@ -1,0 +1,18 @@
+# MinIO 配置
+minio:
+  # 服务地址
+  endpoint: http://host.docker.internal:9000
+  # 文件地址
+  file-host: http://host.docker.internal:9000
+  # 用户名
+  access-key: administrator
+  # 密码
+  secret-key: 123456789
+  # 字符集&编码
+  character-encoding: utf-8
+  # 下载时使用的 HTTP Response 内容类型 (强制下载)
+  content-type: application/force-download
+  # 下载时使用的 HTTP Header Key
+  header-key: Content-Disposition
+  # 下载时使用的 HTTP Header Value 前缀
+  header-value-prefix: attachment;fileName=

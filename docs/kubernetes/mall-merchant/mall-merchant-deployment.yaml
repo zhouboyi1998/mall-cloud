@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-merchant-deployment
+  labels:
+    name: mall-merchant-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-merchant
+  template:
+    metadata:
+      namespace: mall
+      name: mall-merchant-pod
+      labels:
+        app: mall-merchant
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-merchant-container
+          image: 192.168.159.128:5000/mall/mall-merchant:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18087
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe.goods.mapper.CategoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cafe.goods.model.entity.Category">
+        <id column="id" property="id" />
+        <result column="parent_id" property="parentId" />
+        <result column="category_name" property="categoryName" />
+        <result column="level" property="level" />
+        <result column="sort" property="sort" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="deleted" />
+    </resultMap>
+
+    <select id="selectTreeDTOList" resultType="com.cafe.goods.model.dto.CategoryTreeDTO">
+        WITH RECURSIVE tree AS (
+        SELECT id, category_name, parent_id, level, sort, status, is_deleted
+        FROM mall_category
+        <where>
+            <if test="category.id != null">
+                AND id = #{category.id}
+            </if>
+            <if test="category.parentId != null">
+                AND parent_id = #{category.parentId}
+            </if>
+        </where>
+        UNION ALL
+        SELECT c.id, c.category_name, c.parent_id, c.level, c.sort, c.status, c.is_deleted
+        FROM mall_category AS c
+        INNER JOIN tree AS p ON c.parent_id = p.id
+        )
+        SELECT *
+        FROM tree
+        <where>
+            <if test="category.status != null">
+                AND status = #{category.status}
+            </if>
+            <if test="category.categoryName != null and category.categoryName != ''">
+                AND category_name LIKE CONCAT('%', #{category.categoryName}, '%')
+            </if>
+            AND is_deleted = 0
+        </where>
+    </select>
+
+</mapper>

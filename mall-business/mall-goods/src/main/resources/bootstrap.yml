@@ -1,0 +1,8 @@
+server:
+  port: 18081
+
+spring:
+  application:
+    name: mall-goods
+  profiles:
+    active: dev

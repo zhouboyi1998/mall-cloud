@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.cafe</groupId>
+        <artifactId>mall-api</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>mall-foundation-api</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>${project.artifactId}</name>
+    <description>基座模块 API</description>
+
+    <dependencies>
+        <!-- Swagger API 注解包 -->
+        <dependency>
+            <groupId>io.swagger</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- Knife4J Swagger API 注解包 -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-annotations</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <!-- MyBatis-Plus 注解包 -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- 启动包 -->
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-starter-boot</artifactId>
+            <optional>true</optional>
+        </dependency>
+    </dependencies>
+
+</project>

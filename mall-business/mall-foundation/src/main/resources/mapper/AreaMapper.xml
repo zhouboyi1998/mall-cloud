@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cafe.foundation.mapper.AreaMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.cafe.foundation.model.entity.Area">
+        <id column="id" property="id" />
+        <result column="parent_id" property="parentId" />
+        <result column="area_name" property="areaName" />
+        <result column="area_code" property="areaCode" />
+        <result column="post_code" property="postCode" />
+        <result column="level" property="level" />
+        <result column="sort" property="sort" />
+        <result column="status" property="status" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_deleted" property="deleted" />
+    </resultMap>
+
+    <select id="detail" resultType="com.cafe.foundation.model.vo.AreaDetailVO">
+        SELECT p.id        AS province_id,
+               p.area_name AS province_name,
+               c.id        AS city_id,
+               c.area_name AS city_name,
+               d.id        AS district_id,
+               d.area_name AS district_name,
+               d.post_code
+        FROM mall_area AS p,
+             mall_area AS c,
+             mall_area AS d
+        WHERE p.id = #{provinceId}
+          AND p.is_deleted = 0
+          AND c.id = #{cityId}
+          AND c.parent_id = p.id
+          AND c.is_deleted = 0
+          AND d.id = #{districtId}
+          AND d.parent_id = c.id
+          AND d.is_deleted = 0
+    </select>
+
+    <select id="selectTreeDTOList" resultType="com.cafe.foundation.model.dto.AreaTreeDTO">
+        WITH RECURSIVE tree AS (
+        SELECT id, area_name, area_code, post_code, parent_id, level, sort, status, is_deleted
+        FROM mall_area
+        <where>
+            <if test="area.id != null">
+                AND id = #{area.id}
+            </if>
+            <if test="area.parentId != null">
+                AND parent_id = #{area.parentId}
+            </if>
+        </where>
+        UNION ALL
+        SELECT c.id, c.area_name, c.area_code, c.post_code, c.parent_id, c.level, c.sort, c.status, c.is_deleted
+        FROM mall_area AS c
+        INNER JOIN tree AS p ON c.parent_id = p.id
+        )
+        SELECT *
+        FROM tree
+        <where>
+            <if test="area.areaCode != null">
+                AND area_code = #{area.areaCode}
+            </if>
+            <if test="area.postCode != null">
+                AND post_code = #{area.postCode}
+            </if>
+            <if test="area.status != null">
+                AND status = #{area.status}
+            </if>
+            <if test="area.areaName != null and area.areaName != ''">
+                AND area_name LIKE CONCAT('%', #{area.areaName}, '%')
+            </if>
+            AND is_deleted = 0
+        </where>
+    </select>
+
+</mapper>

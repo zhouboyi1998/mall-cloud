@@ -1,0 +1,8 @@
+server:
+  port: 18094
+
+spring:
+  application:
+    name: mall-solr
+  profiles:
+    active: dev
