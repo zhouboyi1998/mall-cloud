@@ -6,3 +6,8 @@ spring:
     name: mall-elasticsearch
   profiles:
     active: dev
+
+logging:
+  level:
+    org.springframework.data.elasticsearch: DEBUG
+    org.elasticsearch.client: TRACE

@@ -32,4 +32,17 @@ public class ElasticSearchProperties {
      * 网络连接策略
      */
     private String scheme;
+
+    /**
+     * 用户名
+     */
+    private String username;
+
+    /**
+     * 密码
+     */
+    private String password;
+
+
+
 }

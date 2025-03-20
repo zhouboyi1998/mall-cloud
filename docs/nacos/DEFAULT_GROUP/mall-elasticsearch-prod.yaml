@@ -5,11 +5,6 @@ spring:
     consumer:
       # Kafka 服务端地址
       bootstrap-servers: 192.168.10.227:9092
-  elasticsearch:
-    rest:
-      uris: http://localhost:9200
-      username: elastic  # 默认超级用户
-      password: root  # 安装时设置的密码
 
 # ElasticSearch 配置
 elastic-search:
@@ -17,6 +12,9 @@ elastic-search:
   port: 9200
   # 网络连接策略
   scheme: http
+  username: elastic  # 默认超级用户
+  password: root  # 安装时设置的密码
+
 
 # RocketMQ 配置
 rocketmq:

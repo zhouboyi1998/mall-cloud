@@ -6,6 +6,7 @@ spring:
       # Kafka 服务端地址
       bootstrap-servers: 127.0.0.1:9092
 
+
 # ElasticSearch 配置
 elastic-search:
   host: 127.0.0.1
@@ -14,6 +15,7 @@ elastic-search:
   scheme: http
   username: elastic  # 默认超级用户
   password: root  # 安装时设置的密码
+
 
 # RocketMQ 配置
 rocketmq:
