@@ -17,6 +17,7 @@ import com.cafe.order.feign.OrderFlowFeign;
 import com.cafe.order.model.entity.OrderItem;
 import com.cafe.order.model.vo.OrderVO;
 import com.cafe.ordercenter.service.OrderCenterService;
+import com.cafe.ordercenter.utils.TransactionContext;
 import com.cafe.starter.boot.model.exception.BusinessException;
 import com.cafe.storage.feign.StockFeign;
 import com.cafe.storage.model.dto.CartDTO;
@@ -34,6 +35,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
@@ -62,30 +64,77 @@ public class OrderCenterServiceImpl implements OrderCenterService {
 
     private final OrderFlowFeign orderFlowFeign;
 
+    /**
+     *
+     * 1. 并行查询商品和地址
+     *    ├─ selectGoodsList(cartDTOList) → goodsFuture
+     *    └─ selectAddress(addressId) → addressFuture
+     *
+     * 2. 查询区域信息（依赖地址）
+     *    └─ addressFuture → selectAreaDetailVO() → areaFuture
+     *
+     * 3. 扣减库存（依赖商品信息）
+     *    └─ goodsFuture → outboundStock(cartDTOList) → stockFuture
+     *
+     * 4. 创建订单（依赖所有查询结果）
+     *    └─ allOf(goods, address, area) → createOrder(...) → orderFuture
+     *
+     * 5. 事务保证
+     *    └─ stockFuture → orderFuture → finalFuture → return
+     *
+     * @param addressId   地址ID
+     * @param cartDTOList 购物车DTO列表
+     * @return
+     */
     @GlobalTransactional(
-        propagation = Propagation.REQUIRED,
-        rollbackFor = Exception.class,
-        timeoutMills = 180000,
-        lockRetryInterval = 10
+            propagation = Propagation.REQUIRED,
+            rollbackFor = Exception.class,
+            timeoutMills = 30000, // 缩短超时时间
+            lockRetryInterval = 100 // 合理重试间隔
     )
     @Override
     public OrderVO submit(Long addressId, List<CartDTO> cartDTOList) {
-        // 查询下单商品的详细信息
-        CompletableFuture<List<Goods>> selectGoodsListFuture = CompletableFuture.supplyAsync(() -> selectGoodsList(cartDTOList));
-        // 查询收货地址
-        CompletableFuture<Address> selectAddressFuture = CompletableFuture.supplyAsync(() -> selectAddress(addressId));
-        // 查询收货地址的所属区域
-        CompletableFuture<AreaDetailVO> selectAreaDetailVOFuture = selectAddressFuture.thenApplyAsync(this::selectAreaDetailVO);
-        // 扣减库存
-        CompletableFuture<Void> outboundStockFuture = CompletableFuture.runAsync(() -> outboundStock(cartDTOList));
-        // 创建订单
-        CompletableFuture.allOf(selectGoodsListFuture, selectAreaDetailVOFuture);
-        CompletableFuture<OrderVO> createOrderFuture = CompletableFuture.supplyAsync(() -> createOrder(cartDTOList, selectGoodsListFuture.join(), selectAddressFuture.join(), selectAreaDetailVOFuture.join()));
-        // 业务流程全部执行完成, 返回订单信息
-        CompletableFuture.allOf(outboundStockFuture, createOrderFuture);
-        return createOrderFuture.join();
-    }
+        // 1. 并行查询商品和地址
+        CompletableFuture<List<Goods>> goodsFuture = CompletableFuture.supplyAsync(
+                () -> TransactionContext.bind(() -> selectGoodsList(cartDTOList)) // 绑定事务上下文
+        );
+        CompletableFuture<Address> addressFuture = CompletableFuture.supplyAsync(
+                () -> TransactionContext.bind(() -> selectAddress(addressId))
+        );
 
+        // 2. 查询区域信息（依赖地址）
+        CompletableFuture<AreaDetailVO> areaFuture = addressFuture.thenApplyAsync(address ->
+                TransactionContext.bind(() -> selectAreaDetailVO(address))
+        );
+
+        // 3. 扣减库存（依赖商品查询结果）
+        CompletableFuture<Void> stockFuture = goodsFuture.thenRunAsync(() ->
+                TransactionContext.run(() -> { // 使用 Runnable 版本的上下文绑定
+                    try {
+                        outboundStock(cartDTOList);
+                    } catch (Exception e) {
+                        throw new RuntimeException("库存扣减失败", e);
+                    }
+                })
+        );
+
+        // 4. 创建订单（依赖所有查询结果和库存扣减完成）
+        CompletableFuture<OrderVO> orderFuture = CompletableFuture
+                .allOf(goodsFuture, addressFuture, areaFuture, stockFuture)
+                .thenApplyAsync(ignored -> TransactionContext.bind(() -> createOrder(
+                        cartDTOList,
+                        goodsFuture.join(),
+                        addressFuture.join(),
+                        areaFuture.join()
+                )));
+
+        // 5. 处理结果和异常
+        try {
+            return orderFuture.join();
+        } catch (CompletionException e) {
+            throw new RuntimeException("订单提交失败", e.getCause());
+        }
+    }
     /**
      * 查询下单商品的详细信息
      *
