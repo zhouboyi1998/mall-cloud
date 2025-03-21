@@ -34,31 +34,68 @@ CREATE TABLE `config_info` (
                                `effect` varchar(64) DEFAULT NULL COMMENT '配置生效的描述',
                                `type` varchar(64) DEFAULT NULL COMMENT '配置的类型',
                                `c_schema` text COMMENT '配置的模式',
-                               `encrypted_data_key` varchar(1024) NOT NULL DEFAULT '' COMMENT '密钥',
+                               `encrypted_data_key` text NOT NULL COMMENT '密钥',
                                PRIMARY KEY (`id`),
                                UNIQUE KEY `uk_configinfo_datagrouptenant` (`data_id`,`group_id`,`tenant_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='config_info';
 
-CREATE TABLE `config_info_gray` (
-                                    `id` bigint unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+/******************************************/
+/*   表名称 = config_info_aggr             */
+/******************************************/
+CREATE TABLE `config_info_aggr` (
+                                    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
                                     `data_id` varchar(255) NOT NULL COMMENT 'data_id',
                                     `group_id` varchar(128) NOT NULL COMMENT 'group_id',
-                                    `content` longtext NOT NULL COMMENT 'content',
-                                    `md5` varchar(32) DEFAULT NULL COMMENT 'md5',
-                                    `src_user` text COMMENT 'src_user',
-                                    `src_ip` varchar(100) DEFAULT NULL COMMENT 'src_ip',
-                                    `gmt_create` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT 'gmt_create',
-                                    `gmt_modified` datetime(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3) COMMENT 'gmt_modified',
+                                    `datum_id` varchar(255) NOT NULL COMMENT 'datum_id',
+                                    `content` longtext NOT NULL COMMENT '内容',
+                                    `gmt_modified` datetime NOT NULL COMMENT '修改时间',
                                     `app_name` varchar(128) DEFAULT NULL COMMENT 'app_name',
-                                    `tenant_id` varchar(128) DEFAULT '' COMMENT 'tenant_id',
-                                    `gray_name` varchar(128) NOT NULL COMMENT 'gray_name',
-                                    `gray_rule` text NOT NULL COMMENT 'gray_rule',
-                                    `encrypted_data_key` varchar(256) NOT NULL DEFAULT '' COMMENT 'encrypted_data_key',
+                                    `tenant_id` varchar(128) DEFAULT '' COMMENT '租户字段',
                                     PRIMARY KEY (`id`),
-                                    UNIQUE KEY `uk_configinfogray_datagrouptenantgray` (`data_id`,`group_id`,`tenant_id`,`gray_name`),
-                                    KEY `idx_dataid_gmt_modified` (`data_id`,`gmt_modified`),
-                                    KEY `idx_gmt_modified` (`gmt_modified`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='config_info_gray';
+                                    UNIQUE KEY `uk_configinfoaggr_datagrouptenantdatum` (`data_id`,`group_id`,`tenant_id`,`datum_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='增加租户字段';
+
+
+/******************************************/
+/*   表名称 = config_info_beta             */
+/******************************************/
+CREATE TABLE `config_info_beta` (
+                                    `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+                                    `data_id` varchar(255) NOT NULL COMMENT 'data_id',
+                                    `group_id` varchar(128) NOT NULL COMMENT 'group_id',
+                                    `app_name` varchar(128) DEFAULT NULL COMMENT 'app_name',
+                                    `content` longtext NOT NULL COMMENT 'content',
+                                    `beta_ips` varchar(1024) DEFAULT NULL COMMENT 'betaIps',
+                                    `md5` varchar(32) DEFAULT NULL COMMENT 'md5',
+                                    `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                    `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+                                    `src_user` text COMMENT 'source user',
+                                    `src_ip` varchar(50) DEFAULT NULL COMMENT 'source ip',
+                                    `tenant_id` varchar(128) DEFAULT '' COMMENT '租户字段',
+                                    `encrypted_data_key` text NOT NULL COMMENT '密钥',
+                                    PRIMARY KEY (`id`),
+                                    UNIQUE KEY `uk_configinfobeta_datagrouptenant` (`data_id`,`group_id`,`tenant_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='config_info_beta';
+
+/******************************************/
+/*   表名称 = config_info_tag              */
+/******************************************/
+CREATE TABLE `config_info_tag` (
+                                   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'id',
+                                   `data_id` varchar(255) NOT NULL COMMENT 'data_id',
+                                   `group_id` varchar(128) NOT NULL COMMENT 'group_id',
+                                   `tenant_id` varchar(128) DEFAULT '' COMMENT 'tenant_id',
+                                   `tag_id` varchar(128) NOT NULL COMMENT 'tag_id',
+                                   `app_name` varchar(128) DEFAULT NULL COMMENT 'app_name',
+                                   `content` longtext NOT NULL COMMENT 'content',
+                                   `md5` varchar(32) DEFAULT NULL COMMENT 'md5',
+                                   `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+                                   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+                                   `src_user` text COMMENT 'source user',
+                                   `src_ip` varchar(50) DEFAULT NULL COMMENT 'source ip',
+                                   PRIMARY KEY (`id`),
+                                   UNIQUE KEY `uk_configinfotag_datagrouptenanttag` (`data_id`,`group_id`,`tenant_id`,`tag_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='config_info_tag';
 
 /******************************************/
 /*   表名称 = config_tags_relation         */
@@ -111,10 +148,7 @@ CREATE TABLE `his_config_info` (
                                    `src_ip` varchar(50) DEFAULT NULL COMMENT 'source ip',
                                    `op_type` char(10) DEFAULT NULL COMMENT 'operation type',
                                    `tenant_id` varchar(128) DEFAULT '' COMMENT '租户字段',
-                                   `encrypted_data_key` varchar(1024) NOT NULL DEFAULT '' COMMENT '密钥',
-                                   `publish_type` varchar(50)  DEFAULT 'formal' COMMENT 'publish type gray or formal',
-                                   `gray_name` varchar(128) DEFAULT NULL,
-                                   `ext_info`  longtext DEFAULT NULL COMMENT 'ext info',
+                                   `encrypted_data_key` text NOT NULL COMMENT '密钥',
                                    PRIMARY KEY (`nid`),
                                    KEY `idx_gmt_create` (`gmt_create`),
                                    KEY `idx_gmt_modified` (`gmt_modified`),
@@ -169,7 +203,7 @@ CREATE TABLE `roles` (
 
 CREATE TABLE `permissions` (
                                `role` varchar(50) NOT NULL COMMENT 'role',
-                               `resource` varchar(128) NOT NULL COMMENT 'resource',
+                               `resource` varchar(255) NOT NULL COMMENT 'resource',
                                `action` varchar(8) NOT NULL COMMENT 'action',
                                UNIQUE INDEX `uk_role_permission` (`role`,`resource`,`action`) USING BTREE
 );
