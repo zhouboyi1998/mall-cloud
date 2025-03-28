@@ -51,7 +51,7 @@ public class GoodsConsumer implements RocketMQListener<String> {
             log.info("GoodsConsumer.onMessage(): Put away goods success! rocketmq message -> {}", message);
         } else {
             // 获取下架商品的主键
-            List<String> ids = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<String>>() {
+            List<Long> ids = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<Long>>() {
             });
             // 下架商品
             goodsIndexService.deleteBatch(ids);

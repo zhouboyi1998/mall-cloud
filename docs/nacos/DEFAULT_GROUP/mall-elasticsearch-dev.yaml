@@ -6,16 +6,35 @@ spring:
       # Kafka 服务端地址
       bootstrap-servers: 127.0.0.1:9092
 
+  # ElasticSearch 配置
+  elasticsearch:
+    rest:
+      uris: http://127.0.0.1:9200
+      username: elastic
+      password: root
+      connection-timeout: 1s
+      socket-timeout: 30s
+      authentication-type: basic
+      ssl:
+        verification-mode: none
+      retry:
+        max-attempts: 3
+        initial-interval: 1000
+        max-interval: 2000
+        multiplier: 2.0
 
 # ElasticSearch 配置
 elastic-search:
+  # 主机名
   host: 127.0.0.1
+  # 端口
   port: 9200
   # 网络连接策略
   scheme: http
-  username: elastic  # 默认超级用户
-  password: root  # 安装时设置的密码
-
+  # 用户名
+  username: elastic
+  # 密码
+  password: root
 
 # RocketMQ 配置
 rocketmq:
@@ -25,3 +44,19 @@ rocketmq:
   producer:
     # 默认生产者组
     group: ${spring.application.name}
+
+# Actuator 配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  health:
+    elasticsearch:
+      enabled: true
+      response-timeout: 1000

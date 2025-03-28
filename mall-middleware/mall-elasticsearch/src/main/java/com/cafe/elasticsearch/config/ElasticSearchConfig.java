@@ -2,48 +2,37 @@ package com.cafe.elasticsearch.config;
 
 import com.cafe.elasticsearch.property.ElasticSearchProperties;
 import lombok.RequiredArgsConstructor;
-import org.apache.http.HttpHost;
-import org.apache.http.auth.UsernamePasswordCredentials;
-import org.apache.http.client.CredentialsProvider;
-import org.apache.http.impl.client.BasicCredentialsProvider;
-import org.elasticsearch.client.RestClient;
-import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.elasticsearch.client.ClientConfiguration;
+import org.springframework.data.elasticsearch.client.RestClients;
+import org.springframework.data.elasticsearch.config.AbstractElasticsearchConfiguration;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
+
+import java.time.Duration;
 
 @Configuration
+@EnableElasticsearchRepositories(basePackages = "com.cafe.elasticsearch.repository")
 @RequiredArgsConstructor
-public class ElasticSearchConfig {
+public class ElasticSearchConfig extends AbstractElasticsearchConfiguration {
 
     private final ElasticSearchProperties elasticSearchProperties;
 
-    @Bean
-    public RestHighLevelClient restHighLevelClient() {
-        // 1. 创建认证凭据
-        CredentialsProvider credentialsProvider = new BasicCredentialsProvider();
-        credentialsProvider.setCredentials(
-                org.apache.http.auth.AuthScope.ANY,
-                new UsernamePasswordCredentials(
-                        elasticSearchProperties.getUsername(),  // 从配置中获取用户名
-                        elasticSearchProperties.getPassword()   // 从配置中获取密码
-                )
-        );
+    @Override
+    public RestHighLevelClient elasticsearchClient() {
+        String host = elasticSearchProperties.getHost();
+        Integer port = elasticSearchProperties.getPort();
+        String scheme = elasticSearchProperties.getScheme();
+        String username = elasticSearchProperties.getUsername();
+        String password = elasticSearchProperties.getPassword();
 
-        // 2. 构建 HTTP 主机配置
-        HttpHost httpHost = new HttpHost(
-                elasticSearchProperties.getHost(),
-                elasticSearchProperties.getPort(),
-                elasticSearchProperties.getScheme()
-        );
+        ClientConfiguration clientConfiguration = ClientConfiguration.builder()
+            .connectedTo(host + ":" + port)
+            .withConnectTimeout(Duration.ofSeconds(5))
+            .withSocketTimeout(Duration.ofSeconds(3))
+            .withBasicAuth(username, password)
+            .build();
 
-        // 3. 创建客户端并注入认证
-        return new RestHighLevelClient(
-                RestClient.builder(httpHost)
-                        .setHttpClientConfigCallback(
-                                httpClientBuilder -> httpClientBuilder
-                                        .setDefaultCredentialsProvider(credentialsProvider)
-                        )
-        );
+        return RestClients.create(clientConfiguration).rest();
     }
 }

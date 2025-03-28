@@ -29,7 +29,11 @@
             <artifactId>knife4j-annotations</artifactId>
             <optional>true</optional>
         </dependency>
-
+        <!-- spring-es依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
         <!-- 启动包 -->
         <dependency>
             <groupId>com.cafe</groupId>

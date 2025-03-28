@@ -12,23 +12,11 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.action.delete.DeleteResponse;
-import org.elasticsearch.action.get.GetResponse;
-import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.action.update.UpdateResponse;
 import org.elasticsearch.search.SearchHit;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -51,86 +39,94 @@ public class GoodsIndexController {
 
     @ApiLogPrint(value = "获取商品索引")
     @ApiOperation(value = "获取商品索引")
-    @ApiImplicitParam(value = "ElasticSearch id", name = "id", dataType = "String", paramType = "path", required = true)
+    @ApiImplicitParam(value = "商品ID", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/{id}")
-    public ResponseEntity<GetResponse> one(@PathVariable(value = "id") String id) {
-        GetResponse getResponse = goodsIndexService.one(id);
-        return ResponseEntity.ok(getResponse);
+    public ResponseEntity<GoodsIndex> one(@PathVariable(value = "id") Long id) {
+        GoodsIndex goodsIndex = goodsIndexService.one(id);
+        return ResponseEntity.ok(goodsIndex);
     }
 
     @ApiLogPrint(value = "插入商品索引")
     @ApiOperation(value = "插入商品索引")
     @ApiImplicitParam(value = "商品索引", name = "goodsIndex", dataType = "GoodsIndex", paramType = "body", required = true)
     @PostMapping(value = "")
-    public ResponseEntity<IndexResponse> insert(@RequestBody GoodsIndex goodsIndex) {
-        IndexResponse indexResponse = goodsIndexService.insert(goodsIndex);
-        return ResponseEntity.ok(indexResponse);
+    public ResponseEntity<GoodsIndex> insert(@RequestBody GoodsIndex goodsIndex) {
+        GoodsIndex savedGoodsIndex = goodsIndexService.insert(goodsIndex);
+        return ResponseEntity.ok(savedGoodsIndex);
     }
 
     @ApiLogPrint(value = "更新商品索引")
     @ApiOperation(value = "更新商品索引")
     @ApiImplicitParam(value = "商品索引", name = "goodsIndex", dataType = "GoodsIndex", paramType = "body", required = true)
     @PutMapping(value = "")
-    public ResponseEntity<UpdateResponse> update(@RequestBody GoodsIndex goodsIndex) {
-        UpdateResponse updateResponse = goodsIndexService.update(goodsIndex);
-        return ResponseEntity.ok(updateResponse);
+    public ResponseEntity<GoodsIndex> update(@RequestBody GoodsIndex goodsIndex) {
+        GoodsIndex updatedGoodsIndex = goodsIndexService.update(goodsIndex);
+        return ResponseEntity.ok(updatedGoodsIndex);
     }
 
     @ApiLogPrint(value = "删除商品索引")
     @ApiOperation(value = "删除商品索引")
-    @ApiImplicitParam(value = "ElasticSearch id", name = "id", dataType = "String", paramType = "path", required = true)
+    @ApiImplicitParam(value = "商品ID", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<DeleteResponse> delete(@PathVariable(value = "id") String id) {
-        DeleteResponse deleteResponse = goodsIndexService.delete(id);
-        return ResponseEntity.ok(deleteResponse);
+    public ResponseEntity<Void> delete(@PathVariable(value = "id") Long id) {
+        goodsIndexService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
     @ApiLogPrint(value = "批量插入商品索引")
     @ApiOperation(value = "批量插入商品索引")
     @ApiImplicitParam(value = "商品索引列表", name = "goodsIndexList", dataType = "List<GoodsIndex>", paramType = "body", required = true)
     @PostMapping(value = "/batch")
-    public ResponseEntity<BulkResponse> insertBatch(@RequestBody List<GoodsIndex> goodsIndexList) {
-        BulkResponse bulkResponse = goodsIndexService.insertBatch(goodsIndexList);
-        return ResponseEntity.ok(bulkResponse);
+    public ResponseEntity<List<GoodsIndex>> insertBatch(@RequestBody List<GoodsIndex> goodsIndexList) {
+        List<GoodsIndex> savedGoodsIndexList = goodsIndexService.insertBatch(goodsIndexList);
+        return ResponseEntity.ok(savedGoodsIndexList);
     }
 
     @ApiLogPrint(value = "批量更新商品索引")
     @ApiOperation(value = "批量更新商品索引")
     @ApiImplicitParam(value = "商品索引列表", name = "goodsIndexList", dataType = "List<GoodsIndex>", paramType = "body", required = true)
     @PutMapping(value = "/batch")
-    public ResponseEntity<BulkResponse> updateBatch(@RequestBody List<GoodsIndex> goodsIndexList) {
-        BulkResponse bulkResponse = goodsIndexService.updateBatch(goodsIndexList);
-        return ResponseEntity.ok(bulkResponse);
+    public ResponseEntity<List<GoodsIndex>> updateBatch(@RequestBody List<GoodsIndex> goodsIndexList) {
+        List<GoodsIndex> updatedGoodsIndexList = goodsIndexService.updateBatch(goodsIndexList);
+        return ResponseEntity.ok(updatedGoodsIndexList);
     }
 
     @ApiLogPrint(value = "批量删除商品索引")
     @ApiOperation(value = "批量删除商品索引")
-    @ApiImplicitParam(value = "ElasticSearch ids", name = "ids", dataType = "List<String>", paramType = "body", required = true)
+    @ApiImplicitParam(value = "商品ID列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
     @DeleteMapping(value = "/batch")
-    public ResponseEntity<BulkResponse> deleteBatch(@RequestBody List<String> ids) {
-        BulkResponse bulkResponse = goodsIndexService.deleteBatch(ids);
-        return ResponseEntity.ok(bulkResponse);
+    public ResponseEntity<Void> deleteBatch(@RequestBody List<Long> ids) {
+        goodsIndexService.deleteBatch(ids);
+        return ResponseEntity.ok().build();
+    }
+
+    @ApiOperation(value = "根据关键词查询商品索引列表")
+    @ApiImplicitParam(name = "keyword", value = "关键词", required = false, dataType = "String")
+    @GetMapping("/list")
+    public ResponseEntity<List<GoodsIndex>> list(@RequestParam(required = false) String keyword) {
+        List<GoodsIndex> goodsIndexList = goodsIndexService.list(keyword);
+        return ResponseEntity.ok(goodsIndexList);
     }
 
     @ApiLogPrint(value = "分页查询商品索引")
     @ApiOperation(value = "分页查询商品索引")
-    @ApiImplicitParams(value = {
-        @ApiImplicitParam(value = "页码", name = "current", dataType = "Integer", paramType = "path", required = true),
-        @ApiImplicitParam(value = "每页数据数量", name = "size", dataType = "Integer", paramType = "path", required = true),
-        @ApiImplicitParam(value = "关键词", name = "keyword", dataType = "String", paramType = "query"),
-        @ApiImplicitParam(value = "排序属性", name = "sort", dataType = "String", paramType = "query"),
-        @ApiImplicitParam(value = "排序规则", name = "rule", dataType = "String", paramType = "query")
+    @ApiImplicitParams({
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Integer", paramType = "query", required = true),
+        @ApiImplicitParam(value = "每页数量", name = "size", dataType = "Integer", paramType = "query", required = true),
+        @ApiImplicitParam(value = "关键词", name = "keyword", dataType = "String", paramType = "query", required = true),
+        @ApiImplicitParam(value = "排序字段", name = "sort", dataType = "String", paramType = "query", required = true),
+        @ApiImplicitParam(value = "排序规则", name = "rule", dataType = "String", paramType = "query", required = true)
     })
-    @GetMapping(value = "/page/{current}/{size}")
-    public ResponseEntity<SearchResponse> page(
-        @PathVariable(value = "current") Integer current,
-        @PathVariable(value = "size") Integer size,
-        @RequestParam(value = "keyword", required = false) String keyword,
-        @RequestParam(value = "sort", required = false, defaultValue = ElasticSearchConstant.INDEX_ID) String sort,
-        @RequestParam(value = "rule", required = false, defaultValue = DatabaseConstant.Rule.ASC) String rule
+    @GetMapping(value = "/page")
+    public ResponseEntity<Page<GoodsIndex>> page(
+        @RequestParam(value = "current") Integer current,
+        @RequestParam(value = "size") Integer size,
+        @RequestParam(value = "keyword") String keyword,
+        @RequestParam(value = "sort") String sort,
+        @RequestParam(value = "rule") String rule
     ) {
-        SearchResponse searchResponse = goodsIndexService.page(current, size, keyword, sort, rule);
-        return ResponseEntity.ok(searchResponse);
+        Page<GoodsIndex> page = goodsIndexService.page(current, size, keyword, sort, rule);
+        return ResponseEntity.ok(page);
     }
 
     @ApiLogPrint(value = "搜索商品索引")
@@ -138,15 +134,7 @@ public class GoodsIndexController {
     @ApiImplicitParam(value = "关键词", name = "keyword", dataType = "String", paramType = "query", required = true)
     @GetMapping(value = "/search/index")
     public ResponseEntity<List<GoodsIndex>> searchIndex(@RequestParam(value = "keyword") String keyword) {
-        // 查询商品索引
-        SearchResponse searchResponse = goodsIndexService.list(keyword);
-        // 获取搜索命中结果数组
-        SearchHit[] searchHits = searchResponse.getHits().getHits();
-        // 转换成商品索引列表
-        List<GoodsIndex> goodsIndexList = Arrays.stream(searchHits)
-            .map(SearchHit::getSourceAsMap)
-            .map(sourceAsMap -> JacksonUtil.convertValue(sourceAsMap, GoodsIndex.class))
-            .collect(Collectors.toList());
+        List<GoodsIndex> goodsIndexList = goodsIndexService.list(keyword);
         return ResponseEntity.ok(goodsIndexList);
     }
 
@@ -155,16 +143,9 @@ public class GoodsIndexController {
     @ApiImplicitParam(value = "关键词", name = "keyword", dataType = "String", paramType = "query", required = true)
     @GetMapping(value = "/search/id")
     public ResponseEntity<List<Long>> searchId(@RequestParam(value = "keyword") String keyword) {
-        // 查询商品索引
-        SearchResponse searchResponse = goodsIndexService.list(keyword);
-        // 获取搜索命中结果数组
-        SearchHit[] searchHits = searchResponse.getHits().getHits();
-        // 转换成商品ID列表
-        List<Long> ids = Arrays.stream(searchHits)
-            .map(SearchHit::getSourceAsMap)
-            .map(sourceAsMap -> sourceAsMap.get(FieldConstant.ID))
-            .map(String::valueOf)
-            .map(Long::valueOf)
+        List<GoodsIndex> goodsIndexList = goodsIndexService.list(keyword);
+        List<Long> ids = goodsIndexList.stream()
+            .map(GoodsIndex::getId)
             .collect(Collectors.toList());
         return ResponseEntity.ok(ids);
     }

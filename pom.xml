@@ -82,6 +82,7 @@
         <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
         <sky-walking.version>9.0.0</sky-walking.version>
         <xxl-job.version>2.4.0</xxl-job.version>
+        <elasticsearch.version>7.17.9</elasticsearch.version>
     </properties>
 
     <dependencies>
@@ -546,6 +547,19 @@
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-infrastructure-xxljob</artifactId>
                 <version>${mall-cloud.version}</version>
+            </dependency>
+            <!-- Elasticsearch REST Client -->
+            <dependency>
+                <groupId>org.elasticsearch.client</groupId>
+                <artifactId>elasticsearch-rest-high-level-client</artifactId>
+                <version>>${elasticsearch.version}</version>
+            </dependency>
+
+            <!-- Elasticsearch Core -->
+            <dependency>
+                <groupId>org.elasticsearch</groupId>
+                <artifactId>elasticsearch</artifactId>
+                <version>${elasticsearch.version}</version>
             </dependency>
 
             <!-- 公共包 -->

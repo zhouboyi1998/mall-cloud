@@ -1,11 +1,8 @@
 package com.cafe.elasticsearch.service;
 
 import com.cafe.elasticsearch.model.index.OrderIndex;
-import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.action.delete.DeleteResponse;
-import org.elasticsearch.action.get.GetResponse;
-import org.elasticsearch.action.index.IndexResponse;
-import org.elasticsearch.action.update.UpdateResponse;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -22,55 +19,70 @@ public interface OrderIndexService {
      * 获取订单索引
      *
      * @param id 订单ID
-     * @return 获取响应
+     * @return 订单索引
      */
-    GetResponse one(String id);
+    OrderIndex one(Long id);
 
     /**
      * 插入订单索引
      *
      * @param orderIndex 订单索引
-     * @return 索引响应
+     * @return 订单索引
      */
-    IndexResponse insert(OrderIndex orderIndex);
+    OrderIndex insert(OrderIndex orderIndex);
 
     /**
      * 更新订单索引
      *
      * @param orderIndex 订单索引
-     * @return 更新响应
+     * @return 订单索引
      */
-    UpdateResponse update(OrderIndex orderIndex);
+    OrderIndex update(OrderIndex orderIndex);
 
     /**
      * 删除订单索引
      *
      * @param id 订单ID
-     * @return 删除响应
      */
-    DeleteResponse delete(String id);
+    void delete(Long id);
 
     /**
      * 批量插入订单索引
      *
      * @param orderIndexList 订单索引列表
-     * @return 主体响应
+     * @return 订单索引列表
      */
-    BulkResponse insertBatch(List<OrderIndex> orderIndexList);
+    List<OrderIndex> insertBatch(List<OrderIndex> orderIndexList);
 
     /**
      * 批量更新订单索引
      *
      * @param orderIndexList 订单索引列表
-     * @return 主体响应
+     * @return 订单索引列表
      */
-    BulkResponse updateBatch(List<OrderIndex> orderIndexList);
+    List<OrderIndex> updateBatch(List<OrderIndex> orderIndexList);
 
     /**
      * 批量删除订单索引
      *
      * @param ids 订单ID列表
-     * @return 主体响应
      */
-    BulkResponse deleteBatch(List<String> ids);
+    void deleteBatch(List<Long> ids);
+
+    /**
+     * 分页查询订单索引
+     *
+     * @param pageable 分页参数
+     * @return 分页结果
+     */
+    Page<OrderIndex> page(Pageable pageable);
+
+    /**
+     * 根据关键词搜索订单索引
+     *
+     * @param keyword 关键词
+     * @param pageable 分页参数
+     * @return 分页结果
+     */
+    Page<OrderIndex> search(String keyword, Pageable pageable);
 }
