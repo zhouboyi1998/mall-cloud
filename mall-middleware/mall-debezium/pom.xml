@@ -4,20 +4,22 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- 父模块引用 -->
     <parent>
         <groupId>com.cafe</groupId>
         <artifactId>mall-middleware</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <!-- 子模块基本信息 -->
     <artifactId>mall-debezium</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
     <description>Debezium 数据库监听器</description>
 
+    <!-- 依赖管理 -->
     <dependencies>
-        <!-- Debezium 数据库监听器 -->
+        <!-- Debezium Embedded -->
         <dependency>
             <groupId>io.debezium</groupId>
             <artifactId>debezium-embedded</artifactId>
@@ -28,16 +30,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>io.debezium</groupId>
-            <artifactId>debezium-api</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+        <!-- Debezium MySQL Connector -->
         <dependency>
             <groupId>io.debezium</groupId>
             <artifactId>debezium-connector-mysql</artifactId>
@@ -48,31 +41,44 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- Reflections 反射框架 -->
+        <!-- MySQL 驱动 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- Reflections -->
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
+            <version>0.9.11</version>
+        </dependency>
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-infrastructure-kafka</artifactId>
         </dependency>
 
         <!-- 启动包 -->
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-starter-boot</artifactId>
+            <artifactId>mall-starter-web</artifactId>
         </dependency>
-        <!-- 基础设施 -->
-        <dependency>
-            <groupId>com.cafe</groupId>
-            <artifactId>mall-infrastructure-kafka</artifactId>
-        </dependency>
+
     </dependencies>
 
+    <!-- 构建配置 -->
     <build>
         <plugins>
+            <!-- Spring Boot Maven 插件 -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
-
 </project>

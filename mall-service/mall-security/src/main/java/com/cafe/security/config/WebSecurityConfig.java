@@ -28,6 +28,10 @@ import java.security.KeyPair;
  * @Author: zhouboyi
  * @Date: 2022/5/10 22:17
  * @Description: Web 安全配置
+ *
+ * WebSecurityConfigurerAdapter 是 Spring Security 框架中的一个核心类，用于帮助开发者自定义和配置应用程序的安全设置。
+ * 它通过继承该类并覆盖其方法，可以灵活地配置认证、授权、登录、注销、CSRF保护、CORS等安全相关的功能。
+ *
  */
 @RequiredArgsConstructor
 @Configuration
