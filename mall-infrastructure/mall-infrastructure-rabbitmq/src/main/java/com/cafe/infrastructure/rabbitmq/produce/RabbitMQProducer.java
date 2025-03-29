@@ -1,4 +1,4 @@
-package com.cafe.infrastructure.rabbitmq.producer;
+package com.cafe.infrastructure.rabbitmq.produce;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
