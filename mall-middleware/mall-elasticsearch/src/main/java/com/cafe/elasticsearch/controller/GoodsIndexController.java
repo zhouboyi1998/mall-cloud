@@ -1,9 +1,5 @@
 package com.cafe.elasticsearch.controller;
 
-import com.cafe.common.constant.app.FieldConstant;
-import com.cafe.common.constant.database.DatabaseConstant;
-import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.elasticsearch.model.index.GoodsIndex;
 import com.cafe.elasticsearch.service.GoodsIndexService;
@@ -12,13 +8,10 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.search.SearchHit;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
