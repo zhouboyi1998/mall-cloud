@@ -3,6 +3,9 @@ package com.cafe.infrastructure.mybatisplus.util;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.TableFieldInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfo;
+import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.lang.date.AbstractPeriod;
@@ -13,6 +16,7 @@ import org.springframework.util.ReflectionUtils;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * @Project: mall-cloud
@@ -65,47 +69,108 @@ public class WrapperUtil {
      * @return 查询条件封装对象
      */
     @SuppressWarnings("unchecked")
-    public static <T, R, Children extends AbstractWrapper<T, R, Children>> AbstractWrapper<T, R, Children> createWrapper(T model, AbstractWrapper<T, R, Children> wrapper) {
-        // 获取所有属性
-        Field[] fields = model.getClass().getDeclaredFields();
-        // 迭代器遍历所有属性
-        for (Field field : fields) {
-            // 跳过条件构造时忽略的属性
-            if (IGNORE_FIELD_LIST.contains(field.getName())) {
+    public static <T, R, Children extends AbstractWrapper<T, R, Children>> AbstractWrapper<T, R, Children> createWrapper(
+            T model, AbstractWrapper<T, R, Children> wrapper) {
+        Class<?> modelClass = model.getClass();
+        TableInfo tableInfo = TableInfoHelper.getTableInfo(modelClass);
+        if (tableInfo == null) {
+            throw new RuntimeException("实体类未配置表信息");
+        }
+
+        // 从 TableInfo 获取逻辑删除列名
+        String logicDeleteColumn = getLogicDeleteColumn(modelClass);
+
+        // 遍历所有字段（通过 TableFieldInfo 确保使用数据库列名）
+        for (TableFieldInfo tableField : tableInfo.getFieldList()) {
+            // 跳过逻辑删除字段（后面统一处理）
+            if (tableField.isLogicDelete()) {
                 continue;
             }
-            // 设置允许访问该属性 (反射时默认不允许访问私有的属性、方法、构造器)
-            ReflectionUtils.makeAccessible(field);
-            // 获取属性值
-            Object fieldValue = ReflectionUtils.getField(field, model);
-            // 如果属性值不为空, 加入 Wrapper 条件中
-            if (ObjectUtils.isNotEmpty(fieldValue)) {
-                // 将驼峰格式的属性名转换为下划线格式的字段名
-                String column = CaseFormat.LOWER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, field.getName());
-                if (fieldValue instanceof String) {
-                    // 字符串类型使用 like 条件
-                    wrapper.like((R) column, fieldValue);
-                } else if (fieldValue instanceof AbstractPeriod) {
-                    // 转换字段名
-                    column = column.replace(StringConstant.PERIOD, StringConstant.TIME);
-                    // 获取时间区间
-                    AbstractPeriod period = (AbstractPeriod) fieldValue;
-                    Object start = period.getStart();
-                    Object end = period.getEnd();
-                    // 时间区间类型使用 gt / lt 条件
-                    if (ObjectUtils.isNotEmpty(start)) {
-                        wrapper.gt((R) column, start);
+
+            String fieldName = tableField.getProperty();
+            String column = tableField.getColumn(); // 正确获取数据库列名
+
+            if (IGNORE_FIELD_LIST.contains(fieldName)) {
+                continue;
+            }
+
+            try {
+                Field field = modelClass.getDeclaredField(fieldName);
+                ReflectionUtils.makeAccessible(field);
+                Object fieldValue = ReflectionUtils.getField(field, model);
+
+                if (ObjectUtils.isNotEmpty(fieldValue)) {
+                    if (fieldValue instanceof AbstractPeriod) {
+                        handlePeriodCondition(wrapper, column, (AbstractPeriod) fieldValue);
+                    } else if (fieldValue instanceof String) {
+                        wrapper.like((R) column, fieldValue);
+                    } else {
+                        wrapper.eq((R) column, fieldValue);
                     }
-                    if (ObjectUtils.isNotEmpty(end)) {
-                        wrapper.lt((R) column, end);
-                    }
-                } else {
-                    // 其它类型使用 eq 条件
-                    wrapper.eq((R) column, fieldValue);
                 }
+            } catch (NoSuchFieldException e) {
+                throw new RuntimeException("字段不存在: " + fieldName, e);
             }
         }
+
+        // 默认添加逻辑删除条件
+        if (!hasDeletedCondition(wrapper, logicDeleteColumn)) {
+            wrapper.eq((R) logicDeleteColumn, 0);
+        }
+
         return wrapper;
+    }
+
+    /**
+     * 获取逻辑删除字段的数据库列名
+     */
+    private static String getLogicDeleteColumn(Class<?> entityClass) {
+        TableInfo tableInfo = TableInfoHelper.getTableInfo(entityClass);
+        if (tableInfo == null || tableInfo.getLogicDeleteFieldInfo() == null) {
+            throw new RuntimeException("实体类未配置逻辑删除字段");
+        }
+        // 从逻辑删除字段信息中获取列名
+        return tableInfo.getLogicDeleteFieldInfo().getColumn();
+    }
+
+    /**
+     * 检查是否已存在逻辑删除条件（修复正则匹配问题）
+     */
+    private static <T, R, Children extends AbstractWrapper<T, R, Children>> boolean hasDeletedCondition(
+            AbstractWrapper<T, R, Children> wrapper, String logicDeleteColumn) {
+        String sqlSegment = wrapper.getSqlSegment();
+        if (sqlSegment == null) {
+            return false;
+        }
+        // 匹配列名时考虑可能的转义符（如反引号 ` 或引号 "）
+        String pattern = String.format("(?i)(`?\\b%s\\b`?\\s*=\\s*0)", Pattern.quote(logicDeleteColumn));
+        return sqlSegment.matches(".*" + pattern + ".*");
+    }
+
+    /**
+     * 处理时间区间条件（如开始时间、结束时间）
+     * @param wrapper       查询条件封装对象
+     * @param column        数据库列名（如 create_time）
+     * @param period        时间区间对象（包含 start 和 end）
+     */
+    private static <T, R, Children extends AbstractWrapper<T, R, Children>> void handlePeriodCondition(
+            AbstractWrapper<T, R, Children> wrapper,
+            String column,
+            AbstractPeriod period) {
+
+        // 1. 获取时间区间的开始和结束值
+        Object start = period.getStart();
+        Object end = period.getEnd();
+
+        // 2. 添加条件：column > start（如果 start 非空）
+        if (ObjectUtils.isNotEmpty(start)) {
+            wrapper.gt((R) column, start);
+        }
+
+        // 3. 添加条件：column < end（如果 end 非空）
+        if (ObjectUtils.isNotEmpty(end)) {
+            wrapper.lt((R) column, end);
+        }
     }
 
     /**
