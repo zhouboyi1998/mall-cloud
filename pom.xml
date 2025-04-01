@@ -84,6 +84,7 @@
         <sky-walking.version>9.0.0</sky-walking.version>
         <xxl-job.version>2.4.0</xxl-job.version>
         <elasticsearch.version>7.17.9</elasticsearch.version>
+        <spring-data-elasticsearch.version>4.0.0.RELEASE</spring-data-elasticsearch.version>
     </properties>
 
     <dependencies>
@@ -463,6 +464,12 @@
                 <groupId>org.elasticsearch</groupId>
                 <artifactId>elasticsearch</artifactId>
                 <version>${elasticsearch.version}</version>
+            </dependency>
+            <!-- Spring Data Elasticsearch -->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-elasticsearch</artifactId>
+                <version>${spring-data-elasticsearch.version}</version>
             </dependency>
 
             <!-- 启动包 -->
