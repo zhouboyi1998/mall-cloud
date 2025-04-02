@@ -6,6 +6,9 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 
@@ -21,6 +24,7 @@ import java.io.Serializable;
 @Accessors(chain = true)
 @ApiModel(value = "GoodsIndex", description = "商品全文索引")
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
+@Document(indexName = "goods_index")
 public class GoodsIndex implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -29,17 +33,22 @@ public class GoodsIndex implements Serializable {
     private Long id;
 
     @ApiModelProperty(value = "SKU 名称")
+    @Field(name = "skuName")
     private String skuName;
 
     @ApiModelProperty(value = "SPU 名称")
+    @Field(name = "spuName",type = FieldType.Text, analyzer = "ik_max_word")
     private String spuName;
 
     @ApiModelProperty(value = "品牌名称")
+    @Field(name = "brandName")
     private String brandName;
 
     @ApiModelProperty(value = "分类名称")
+    @Field(name = "categoryName")
     private String categoryName;
 
     @ApiModelProperty(value = "SKU 规格")
+    @Field(name = "specification")
     private String specification;
 }

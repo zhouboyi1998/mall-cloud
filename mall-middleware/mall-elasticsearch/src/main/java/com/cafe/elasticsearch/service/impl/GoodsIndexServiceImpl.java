@@ -5,6 +5,7 @@ import com.cafe.elasticsearch.repository.GoodsIndexRepository;
 import com.cafe.elasticsearch.service.GoodsIndexService;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.index.query.MultiMatchQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.data.domain.Page;
@@ -77,21 +78,29 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
 
     @Override
     public List<GoodsIndex> list(String keyword) {
-        if (ObjectUtils.isEmpty(keyword)) {
-            return (List<GoodsIndex>) goodsIndexRepository.findAll();
+        if (StringUtils.isBlank(keyword)) {
+            return StreamSupport.stream(goodsIndexRepository.findAll().spliterator(), false)
+                    .collect(Collectors.toList());
         }
-        
+
+        // 构建原生 Elasticsearch 查询对象
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
-            .withQuery(QueryBuilders.multiMatchQuery(keyword)
-                .field("name", 2.0f)
-                .field("description")
-                .type(MultiMatchQueryBuilder.Type.BEST_FIELDS))
-            .build();
-            
+                // 设置查询条件：使用多字段匹配查询（multi_match）
+                .withQuery(QueryBuilders.multiMatchQuery(keyword)
+                        // 添加匹配字段 skuName，并设置权重为 2.0（相对于其他字段更重要）
+                        .field("skuName", 2.0f)
+                        // 添加匹配字段 brandName，使用默认权重 1.0
+                        .field("brandName")
+                        // 指定匹配类型为 BEST_FIELDS（最佳字段策略，取单个字段的最高匹配度）
+                        .type(MultiMatchQueryBuilder.Type.BEST_FIELDS))
+                // 构建最终的查询对象
+                .build();
         SearchHits<GoodsIndex> searchHits = elasticsearchRestTemplate.search(searchQuery, GoodsIndex.class);
-        return searchHits.stream()
-            .map(SearchHit::getContent)
-            .collect(Collectors.toList());
+
+        List<GoodsIndex> collect = searchHits.stream()
+                .map(SearchHit::getContent)
+                .collect(Collectors.toList());
+        return collect;
     }
 
     @Override
