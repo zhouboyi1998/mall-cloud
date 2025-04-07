@@ -7,11 +7,6 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.action.delete.DeleteResponse;
-import org.elasticsearch.action.get.GetResponse;
-import org.elasticsearch.action.index.IndexResponse;
-import org.elasticsearch.action.update.UpdateResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,64 +36,64 @@ public class OrderIndexController {
 
     @ApiLogPrint(value = "获取订单索引")
     @ApiOperation(value = "获取订单索引")
-    @ApiImplicitParam(value = "ElasticSearch id", name = "id", dataType = "String", paramType = "path", required = true)
+    @ApiImplicitParam(value = "订单id", name = "id", dataType = "Long", paramType = "path", required = true)
     @GetMapping(value = "/{id}")
-    public ResponseEntity<GetResponse> one(@PathVariable(value = "id") String id) {
-        GetResponse getResponse = orderIndexService.one(id);
-        return ResponseEntity.ok(getResponse);
+    public ResponseEntity<OrderIndex> one(@PathVariable(value = "id") Long id) {
+        OrderIndex orderIndex = orderIndexService.one(id);
+        return ResponseEntity.ok(orderIndex);
     }
 
-    @ApiLogPrint(value = "插入订单索引")
-    @ApiOperation(value = "插入订单索引")
+    @ApiLogPrint(value = "保存订单索引")
+    @ApiOperation(value = "保存订单索引")
     @ApiImplicitParam(value = "订单索引", name = "orderIndex", dataType = "OrderIndex", paramType = "body", required = true)
     @PostMapping(value = "")
-    public ResponseEntity<IndexResponse> insert(@RequestBody OrderIndex orderIndex) {
-        IndexResponse indexResponse = orderIndexService.insert(orderIndex);
-        return ResponseEntity.ok(indexResponse);
+    public ResponseEntity<OrderIndex> save(@RequestBody OrderIndex orderIndex) {
+        OrderIndex save = orderIndexService.save(orderIndex);
+        return ResponseEntity.ok(save);
     }
 
-    @ApiLogPrint(value = "更新订单索引")
-    @ApiOperation(value = "更新订单索引")
+    @ApiLogPrint(value = "批量保存订单索引")
+    @ApiOperation(value = "批量保存订单索引")
+    @ApiImplicitParam(value = "订单索引列表", name = "orderIndexList", dataType = "List<OrderIndex>", paramType = "body", required = true)
+    @PostMapping(value = "/batch")
+    public ResponseEntity<List<OrderIndex>> saveBatch(@RequestBody List<OrderIndex> orderIndexList) {
+        List<OrderIndex> saveList = orderIndexService.saveBatch(orderIndexList);
+        return ResponseEntity.ok(saveList);
+    }
+
+    @ApiLogPrint(value = "修改订单索引")
+    @ApiOperation(value = "修改订单索引")
     @ApiImplicitParam(value = "订单索引", name = "orderIndex", dataType = "OrderIndex", paramType = "body", required = true)
     @PutMapping(value = "")
-    public ResponseEntity<UpdateResponse> update(@RequestBody OrderIndex orderIndex) {
-        UpdateResponse updateResponse = orderIndexService.update(orderIndex);
-        return ResponseEntity.ok(updateResponse);
+    public ResponseEntity<OrderIndex> update(@RequestBody OrderIndex orderIndex) {
+        OrderIndex update = orderIndexService.update(orderIndex);
+        return ResponseEntity.ok(update);
+    }
+
+    @ApiLogPrint(value = "批量修改订单索引")
+    @ApiOperation(value = "批量修改订单索引")
+    @ApiImplicitParam(value = "订单索引列表", name = "orderIndexList", dataType = "List<OrderIndex>", paramType = "body", required = true)
+    @PutMapping(value = "/batch")
+    public ResponseEntity<List<OrderIndex>> updateBatch(@RequestBody List<OrderIndex> orderIndexList) {
+        List<OrderIndex> updateList = orderIndexService.updateBatch(orderIndexList);
+        return ResponseEntity.ok(updateList);
     }
 
     @ApiLogPrint(value = "删除订单索引")
     @ApiOperation(value = "删除订单索引")
-    @ApiImplicitParam(value = "ElasticSearch id", name = "id", dataType = "String", paramType = "path", required = true)
+    @ApiImplicitParam(value = "订单id", name = "id", dataType = "Long", paramType = "path", required = true)
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<DeleteResponse> delete(@PathVariable(value = "id") String id) {
-        DeleteResponse deleteResponse = orderIndexService.delete(id);
-        return ResponseEntity.ok(deleteResponse);
-    }
-
-    @ApiLogPrint(value = "批量插入订单索引")
-    @ApiOperation(value = "批量插入订单索引")
-    @ApiImplicitParam(value = "订单索引列表", name = "orderIndexList", dataType = "List<OrderIndex>", paramType = "body", required = true)
-    @PostMapping(value = "/batch")
-    public ResponseEntity<BulkResponse> insertBatch(@RequestBody List<OrderIndex> orderIndexList) {
-        BulkResponse bulkResponse = orderIndexService.insertBatch(orderIndexList);
-        return ResponseEntity.ok(bulkResponse);
-    }
-
-    @ApiLogPrint(value = "批量更新订单索引")
-    @ApiOperation(value = "批量更新订单索引")
-    @ApiImplicitParam(value = "订单索引列表", name = "orderIndexList", dataType = "List<OrderIndex>", paramType = "body", required = true)
-    @PutMapping(value = "/batch")
-    public ResponseEntity<BulkResponse> updateBatch(@RequestBody List<OrderIndex> orderIndexList) {
-        BulkResponse bulkResponse = orderIndexService.updateBatch(orderIndexList);
-        return ResponseEntity.ok(bulkResponse);
+    public ResponseEntity<Void> delete(@PathVariable(value = "id") Long id) {
+        orderIndexService.delete(id);
+        return ResponseEntity.ok().build();
     }
 
     @ApiLogPrint(value = "批量删除订单索引")
     @ApiOperation(value = "批量删除订单索引")
-    @ApiImplicitParam(value = "ElasticSearch ids", name = "ids", dataType = "List<String>", paramType = "body", required = true)
+    @ApiImplicitParam(value = "订单id列表", name = "ids", dataType = "List<String>", paramType = "body", required = true)
     @DeleteMapping(value = "/batch")
-    public ResponseEntity<BulkResponse> deleteBatch(@RequestBody List<String> ids) {
-        BulkResponse bulkResponse = orderIndexService.deleteBatch(ids);
-        return ResponseEntity.ok(bulkResponse);
+    public ResponseEntity<Void> deleteBatch(@RequestBody List<Long> ids) {
+        orderIndexService.deleteBatch(ids);
+        return ResponseEntity.ok().build();
     }
 }

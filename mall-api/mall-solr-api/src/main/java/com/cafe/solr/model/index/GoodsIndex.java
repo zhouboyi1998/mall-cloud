@@ -54,4 +54,36 @@ public class GoodsIndex implements Serializable {
     @ApiModelProperty(value = "SKU 规格")
     @Field
     private String specification;
+
+    @ApiModelProperty(value = "SKU 原价")
+    @Field
+    private Double originalPrice;
+
+    @ApiModelProperty(value = "SKU 折扣价")
+    @Field
+    private Double discountPrice;
+
+    @ApiModelProperty(value = "SKU 秒杀价")
+    @Field
+    private Double seckillPrice;
+
+    @ApiModelProperty(value = "销量")
+    @Field
+    private Integer sale;
+
+    @ApiModelProperty(value = "总评论数")
+    @Field
+    private Integer totalComment;
+
+    @ApiModelProperty(value = "好评数")
+    @Field
+    private Integer goodComment;
+
+    @ApiModelProperty(value = "中评数")
+    @Field
+    private Integer mediumComment;
+
+    @ApiModelProperty(value = "差评数")
+    @Field
+    private Integer badComment;
 }

@@ -1,17 +1,21 @@
 package com.cafe.goodscenter.controller;
 
+import com.cafe.common.constant.database.DatabaseConstant;
+import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.goodscenter.model.vo.GoodsSummary;
 import com.cafe.goodscenter.model.vo.SpuDetail;
 import com.cafe.goodscenter.service.GoodsCenterService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -33,10 +37,22 @@ public class GoodsCenterController {
 
     @ApiLogPrint(value = "搜索商品")
     @ApiOperation(value = "搜索商品")
-    @ApiImplicitParam(value = "关键词", name = "keyword", dataType = "String", paramType = "path", required = true)
-    @GetMapping(value = "/summary/{keyword}")
-    public ResponseEntity<List<GoodsSummary>> summary(@PathVariable(value = "keyword") String keyword) {
-        List<GoodsSummary> goodsSummaryList = goodsCenterService.summary(keyword);
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Integer", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Integer", paramType = "path", required = true),
+        @ApiImplicitParam(value = "排序属性", name = "sort", dataType = "String", paramType = "query"),
+        @ApiImplicitParam(value = "排序规则", name = "rule", dataType = "String", paramType = "query"),
+        @ApiImplicitParam(value = "关键词", name = "keyword", dataType = "String", paramType = "query")
+    })
+    @GetMapping(value = "/summary/{current}/{size}")
+    public ResponseEntity<List<GoodsSummary>> summary(
+        @PathVariable(value = "current") Integer current,
+        @PathVariable(value = "size") Integer size,
+        @RequestParam(value = "sortField", required = false, defaultValue = ElasticSearchConstant.Goods.DEFAULT_SORT_FIELD) String sortField,
+        @RequestParam(value = "sortRule", required = false, defaultValue = DatabaseConstant.Rule.DESC) String sortRule,
+        @RequestParam(value = "keyword", required = false) String keyword
+    ) {
+        List<GoodsSummary> goodsSummaryList = goodsCenterService.summary(current, size, sortField, sortRule, keyword);
         return ResponseEntity.ok(goodsSummaryList);
     }
 

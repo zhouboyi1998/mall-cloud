@@ -17,10 +17,14 @@ public interface GoodsCenterService {
     /**
      * 搜索商品
      *
-     * @param keyword 关键词
+     * @param current   页码
+     * @param size      每页数据数量
+     * @param sortField 排序字段
+     * @param sortRule  排序规则
+     * @param keyword   关键词
      * @return 商品摘要列表
      */
-    List<GoodsSummary> summary(String keyword);
+    List<GoodsSummary> summary(Integer current, Integer size, String sortField, String sortRule, String keyword);
 
     /**
      * 获取商品详情
