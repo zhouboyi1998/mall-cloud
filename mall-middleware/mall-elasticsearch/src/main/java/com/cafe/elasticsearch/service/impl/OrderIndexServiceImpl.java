@@ -1,29 +1,28 @@
 package com.cafe.elasticsearch.service.impl;
 
+import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
-import com.cafe.common.constant.pool.IntegerConstant;
+import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.elasticsearch.model.index.OrderIndex;
+import com.cafe.elasticsearch.repository.OrderIndexRepository;
 import com.cafe.elasticsearch.service.OrderIndexService;
+import com.cafe.elasticsearch.util.DocumentUtil;
+import com.cafe.starter.boot.model.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
-import lombok.SneakyThrows;
-import org.elasticsearch.action.bulk.BulkRequest;
-import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.action.delete.DeleteRequest;
-import org.elasticsearch.action.delete.DeleteResponse;
-import org.elasticsearch.action.get.GetRequest;
-import org.elasticsearch.action.get.GetResponse;
-import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.action.index.IndexResponse;
-import org.elasticsearch.action.update.UpdateRequest;
-import org.elasticsearch.action.update.UpdateResponse;
-import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.RestHighLevelClient;
-import org.elasticsearch.common.unit.TimeValue;
-import org.elasticsearch.common.xcontent.XContentType;
+import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.document.Document;
+import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
+import org.springframework.data.elasticsearch.core.query.UpdateQuery;
+import org.springframework.data.elasticsearch.core.query.UpdateResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 /**
  * @Project: mall-cloud
@@ -36,90 +35,76 @@ import java.util.List;
 @Service
 public class OrderIndexServiceImpl implements OrderIndexService {
 
-    private final RestHighLevelClient restHighLevelClient;
+    private final OrderIndexRepository orderIndexRepository;
 
-    @SneakyThrows
+    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
+
     @Override
-    public GetResponse one(String id) {
-        // 组装查询请求
-        GetRequest getRequest = new GetRequest(ElasticSearchConstant.Order.INDEX, id);
-        // 查询数据
-        return restHighLevelClient.get(getRequest, RequestOptions.DEFAULT);
+    public OrderIndex one(Long id) {
+        return orderIndexRepository.findById(id).orElse(new OrderIndex());
     }
 
-    @SneakyThrows
     @Override
-    public IndexResponse insert(OrderIndex orderIndex) {
-        // 组装插入请求
-        IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.Order.INDEX)
-            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN))
-            .id(orderIndex.getId().toString())
-            .source(JacksonUtil.writeValueAsString(orderIndex), XContentType.JSON);
-        // 插入数据
-        return restHighLevelClient.index(indexRequest, RequestOptions.DEFAULT);
+    public OrderIndex save(OrderIndex orderIndex) {
+        return orderIndexRepository.save(orderIndex);
     }
 
-    @SneakyThrows
     @Override
-    public UpdateResponse update(OrderIndex orderIndex) {
-        // 组装更新请求
-        UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Order.INDEX, orderIndex.getId().toString())
-            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN))
-            .doc(JacksonUtil.writeValueAsString(orderIndex), XContentType.JSON);
-        // 更新数据
-        return restHighLevelClient.update(updateRequest, RequestOptions.DEFAULT);
+    public List<OrderIndex> saveBatch(List<OrderIndex> orderIndexList) {
+        Iterable<OrderIndex> saveIterable = orderIndexRepository.saveAll(orderIndexList);
+        return StreamSupport.stream(saveIterable.spliterator(), false).collect(Collectors.toList());
     }
 
-    @SneakyThrows
     @Override
-    public DeleteResponse delete(String id) {
-        // 组装删除请求
-        DeleteRequest deleteRequest = new DeleteRequest(ElasticSearchConstant.Order.INDEX, id)
-            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN));
-        // 删除数据
-        return restHighLevelClient.delete(deleteRequest, RequestOptions.DEFAULT);
-    }
-
-    @SneakyThrows
-    @Override
-    public BulkResponse insertBatch(List<OrderIndex> orderIndexList) {
-        // 组装批量插入请求
-        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
-        for (OrderIndex orderIndex : orderIndexList) {
-            IndexRequest indexRequest = new IndexRequest(ElasticSearchConstant.Order.INDEX)
-                // 设置索引ID字段为订单ID字段, 不额外生成
-                .id(orderIndex.getId().toString())
-                .source(JacksonUtil.writeValueAsString(orderIndex), XContentType.JSON);
-            bulkRequest.add(indexRequest);
+    public OrderIndex update(OrderIndex orderIndex) {
+        // 获取订单索引
+        OrderIndex currentOrderIndex = orderIndexRepository.findById(orderIndex.getId())
+            .orElseThrow(() -> new BusinessException(HttpStatusEnum.ORDER_INDEX_NOT_FOUND, orderIndex));
+        // 组装修改参数
+        Document document = DocumentUtil.updateDocument(currentOrderIndex, orderIndex);
+        // 组装修改请求
+        UpdateQuery updateQuery = UpdateQuery.builder(String.valueOf(orderIndex.getId()))
+            .withDocument(document)
+            .build();
+        // 修改订单索引
+        UpdateResponse updateResponse = elasticsearchRestTemplate.update(updateQuery, IndexCoordinates.of(ElasticSearchConstant.Order.INDEX));
+        // 判断修改结果
+        if (!Objects.equals(updateResponse.getResult(), UpdateResponse.Result.UPDATED)) {
+            throw new BusinessException(HttpStatusEnum.ORDER_INDEX_UPDATE_FAIL, orderIndex);
         }
-        // 批量插入数据
-        return restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+        return JacksonUtil.convertValue(document, OrderIndex.class);
     }
 
-    @SneakyThrows
     @Override
-    public BulkResponse updateBatch(List<OrderIndex> orderIndexList) {
-        // 组装批量更新请求
-        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
-        for (OrderIndex orderIndex : orderIndexList) {
-            UpdateRequest updateRequest = new UpdateRequest(ElasticSearchConstant.Order.INDEX, orderIndex.getId().toString())
-                .doc(JacksonUtil.writeValueAsString(orderIndex), XContentType.JSON);
-            bulkRequest.add(updateRequest);
-        }
-        // 批量更新数据
-        return restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+    public List<OrderIndex> updateBatch(List<OrderIndex> orderIndexList) {
+        Map<Long, OrderIndex> orderIndexMap = orderIndexList.stream()
+            .collect(Collectors.toMap(OrderIndex::getId, Function.identity()));
+        // 获取当前的订单索引列表
+        Iterable<OrderIndex> currentOrderIndexIterable = orderIndexRepository.findAllById(orderIndexMap.keySet());
+        // 组装批量修改参数
+        List<Document> documentList = StreamSupport.stream(currentOrderIndexIterable.spliterator(), false)
+            .map(currentOrderIndex -> DocumentUtil.updateDocument(currentOrderIndex, orderIndexMap.get(currentOrderIndex.getId())))
+            .collect(Collectors.toList());
+        // 组装批量修改请求
+        List<UpdateQuery> updateQueryList = documentList.stream()
+            .map(document -> UpdateQuery.builder(String.valueOf(document.get(FieldConstant.ID))).withDocument(document).build())
+            .collect(Collectors.toList());
+        // 批量修改订单索引
+        elasticsearchRestTemplate.bulkUpdate(updateQueryList, IndexCoordinates.of(ElasticSearchConstant.Order.INDEX));
+        // 返回修改后的订单索引列表
+        return documentList.stream()
+            .map(document -> JacksonUtil.convertValue(document, OrderIndex.class))
+            .collect(Collectors.toList());
     }
 
-    @SneakyThrows
     @Override
-    public BulkResponse deleteBatch(List<String> ids) {
-        // 组装批量删除请求
-        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
-        for (String id : ids) {
-            DeleteRequest deleteRequest = new DeleteRequest(ElasticSearchConstant.Order.INDEX, id);
-            bulkRequest.add(deleteRequest);
-        }
-        // 批量删除数据
-        return restHighLevelClient.bulk(bulkRequest, RequestOptions.DEFAULT);
+    public void delete(Long id) {
+        orderIndexRepository.deleteById(id);
+    }
+
+    @Override
+    public void deleteBatch(List<Long> ids) {
+        List<OrderIndex> orderIndexList = ids.stream().map(id -> new OrderIndex().setId(id)).collect(Collectors.toList());
+        orderIndexRepository.deleteAll(orderIndexList);
     }
 }
