@@ -17,6 +17,12 @@
     <description>ElasticSearch 搜索引擎 API</description>
 
     <dependencies>
+        <!-- Spring Data ElasticSearch -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-elasticsearch</artifactId>
+        </dependency>
+
         <!-- Swagger API 注解包 -->
         <dependency>
             <groupId>io.swagger</groupId>

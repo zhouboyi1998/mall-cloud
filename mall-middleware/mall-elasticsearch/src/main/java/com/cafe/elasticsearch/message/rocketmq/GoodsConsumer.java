@@ -43,16 +43,14 @@ public class GoodsConsumer implements RocketMQListener<String> {
 
         if (GoodsConstant.Status.LAUNCH.equals(status)) {
             // 获取上架商品的信息
-            List<GoodsIndex> goodsIndexList = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<GoodsIndex>>() {
-            });
+            List<GoodsIndex> goodsIndexList = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<GoodsIndex>>() {});
             // 上架商品
-            goodsIndexService.insertBatch(goodsIndexList);
+            goodsIndexService.saveBatch(goodsIndexList);
             // 打印成功上架商品的日志
             log.info("GoodsConsumer.onMessage(): Put away goods success! rocketmq message -> {}", message);
         } else {
             // 获取下架商品的主键
-            List<String> ids = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<String>>() {
-            });
+            List<Long> ids = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<Long>>() {});
             // 下架商品
             goodsIndexService.deleteBatch(ids);
             // 打印成功下架商品的日志

@@ -1,11 +1,6 @@
 package com.cafe.elasticsearch.service;
 
 import com.cafe.elasticsearch.model.index.OrderIndex;
-import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.action.delete.DeleteResponse;
-import org.elasticsearch.action.get.GetResponse;
-import org.elasticsearch.action.index.IndexResponse;
-import org.elasticsearch.action.update.UpdateResponse;
 
 import java.util.List;
 
@@ -21,56 +16,54 @@ public interface OrderIndexService {
     /**
      * 获取订单索引
      *
-     * @param id 订单ID
-     * @return 获取响应
+     * @param id 订单id
+     * @return 订单索引
      */
-    GetResponse one(String id);
+    OrderIndex one(Long id);
 
     /**
-     * 插入订单索引
+     * 保存订单索引
      *
      * @param orderIndex 订单索引
-     * @return 索引响应
+     * @return 保存的订单索引
      */
-    IndexResponse insert(OrderIndex orderIndex);
+    OrderIndex save(OrderIndex orderIndex);
 
     /**
-     * 更新订单索引
+     * 批量保存订单索引
+     *
+     * @param orderIndexList 订单索引列表
+     * @return 保存的订单索引列表
+     */
+    List<OrderIndex> saveBatch(List<OrderIndex> orderIndexList);
+
+    /**
+     * 修改订单索引
      *
      * @param orderIndex 订单索引
-     * @return 更新响应
+     * @return 修改的订单索引
      */
-    UpdateResponse update(OrderIndex orderIndex);
+    OrderIndex update(OrderIndex orderIndex);
+
+    /**
+     * 批量修改订单索引
+     *
+     * @param orderIndexList 订单索引列表
+     * @return 修改的订单索引列表
+     */
+    List<OrderIndex> updateBatch(List<OrderIndex> orderIndexList);
 
     /**
      * 删除订单索引
      *
-     * @param id 订单ID
-     * @return 删除响应
+     * @param id 订单id
      */
-    DeleteResponse delete(String id);
-
-    /**
-     * 批量插入订单索引
-     *
-     * @param orderIndexList 订单索引列表
-     * @return 主体响应
-     */
-    BulkResponse insertBatch(List<OrderIndex> orderIndexList);
-
-    /**
-     * 批量更新订单索引
-     *
-     * @param orderIndexList 订单索引列表
-     * @return 主体响应
-     */
-    BulkResponse updateBatch(List<OrderIndex> orderIndexList);
+    void delete(Long id);
 
     /**
      * 批量删除订单索引
      *
-     * @param ids 订单ID列表
-     * @return 主体响应
+     * @param ids 订单id列表
      */
-    BulkResponse deleteBatch(List<String> ids);
+    void deleteBatch(List<Long> ids);
 }

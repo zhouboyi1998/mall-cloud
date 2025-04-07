@@ -12,11 +12,6 @@ import com.cafe.common.constant.app.FieldConstant;
 public class ElasticSearchConstant {
 
     /**
-     * 索引库ID
-     */
-    public static final String INDEX_ID = "_id";
-
-    /**
      * 商品索引
      */
     public static class Goods {
@@ -25,6 +20,11 @@ public class ElasticSearchConstant {
          * 索引名称
          */
         public static final String INDEX = "goods-index";
+
+        /**
+         * 默认排序字段
+         */
+        public static final String DEFAULT_SORT_FIELD = FieldConstant.SALE;
 
         /**
          * 商品搜索关键词匹配字段

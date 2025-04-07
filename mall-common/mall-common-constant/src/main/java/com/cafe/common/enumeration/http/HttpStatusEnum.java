@@ -90,19 +90,36 @@ public enum HttpStatusEnum {
     CREATE_ORDER_EXCEPTION(605, "Create Order Exception"),
 
     /**
-     * 没有匹配的商品
-     */
-    NO_MATCH_GOODS(701, "No Match Goods"),
-
-    /**
      * 商品概要不存在
      */
-    GOODS_SUMMARY_NOT_FOUND(702, "Goods Summary Not Found"),
+    GOODS_SUMMARY_NOT_FOUND(606, "Goods Summary Not Found"),
 
     /**
-     * SPU 不存在
+     * 商品详情不存在
      */
-    SPU_NOT_FOUND(703, "Spu Not Found");
+    GOODS_DETAIL_NOT_FOUND(607, "Goods Detail Not Found"),
+
+    /**
+     * 商品索引不存在
+     */
+    GOODS_INDEX_NOT_FOUND(608, "Goods Index Not Found"),
+
+    /**
+     * 商品索引修改失败
+     */
+    GOODS_INDEX_UPDATE_FAIL(609, "Goods Index Update Fail"),
+
+    /**
+     * 订单索引不存在
+     */
+    ORDER_INDEX_NOT_FOUND(610, "Order Index Not Found"),
+
+    /**
+     * 订单索引修改失败
+     */
+    ORDER_INDEX_UPDATE_FAIL(611, "Order Index Update Fail"),
+
+    ;
 
     /**
      * 状态码

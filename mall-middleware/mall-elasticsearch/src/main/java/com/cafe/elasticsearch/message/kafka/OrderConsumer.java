@@ -31,6 +31,6 @@ public class OrderConsumer {
         // 获取消息内容
         OrderIndex orderIndex = JacksonUtil.readValue(record.value(), OrderIndex.class);
         // 存储订单索引
-        orderIndexService.insert(orderIndex);
+        orderIndexService.save(orderIndex);
     }
 }
