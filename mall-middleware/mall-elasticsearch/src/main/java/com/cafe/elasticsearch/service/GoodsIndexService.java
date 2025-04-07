@@ -1,12 +1,7 @@
 package com.cafe.elasticsearch.service;
 
 import com.cafe.elasticsearch.model.index.GoodsIndex;
-import org.elasticsearch.action.bulk.BulkResponse;
-import org.elasticsearch.action.delete.DeleteResponse;
-import org.elasticsearch.action.get.GetResponse;
-import org.elasticsearch.action.index.IndexResponse;
-import org.elasticsearch.action.search.SearchResponse;
-import org.elasticsearch.action.update.UpdateResponse;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -22,76 +17,66 @@ public interface GoodsIndexService {
     /**
      * 获取商品索引
      *
-     * @param id 商品ID
-     * @return 获取响应
+     * @param id 商品id
+     * @return 商品索引
      */
-    GetResponse one(String id);
+    GoodsIndex one(Long id);
 
     /**
-     * 插入商品索引
+     * 保存商品索引
      *
      * @param goodsIndex 商品索引
-     * @return 索引响应
+     * @return 保存的商品索引
      */
-    IndexResponse insert(GoodsIndex goodsIndex);
+    GoodsIndex save(GoodsIndex goodsIndex);
 
     /**
-     * 更新商品索引
+     * 批量保存商品索引
+     *
+     * @param goodsIndexList 商品索引列表
+     * @return 保存的商品索引列表
+     */
+    List<GoodsIndex> saveBatch(List<GoodsIndex> goodsIndexList);
+
+    /**
+     * 修改商品索引
      *
      * @param goodsIndex 商品索引
-     * @return 更新响应
+     * @return 修改的商品索引
      */
-    UpdateResponse update(GoodsIndex goodsIndex);
+    GoodsIndex update(GoodsIndex goodsIndex);
+
+    /**
+     * 批量修改商品索引
+     *
+     * @param goodsIndexList 商品索引列表
+     * @return 修改的商品索引列表
+     */
+    List<GoodsIndex> updateBatch(List<GoodsIndex> goodsIndexList);
 
     /**
      * 删除商品索引
      *
-     * @param id 商品ID
-     * @return 删除响应
+     * @param id 商品id
      */
-    DeleteResponse delete(String id);
-
-    /**
-     * 批量插入商品索引
-     *
-     * @param goodsIndexList 商品索引列表
-     * @return 主体响应
-     */
-    BulkResponse insertBatch(List<GoodsIndex> goodsIndexList);
-
-    /**
-     * 批量更新商品索引
-     *
-     * @param goodsIndexList 商品索引列表
-     * @return 主体响应
-     */
-    BulkResponse updateBatch(List<GoodsIndex> goodsIndexList);
+    void delete(Long id);
 
     /**
      * 批量删除商品索引
      *
-     * @param ids 商品ID列表
-     * @return 主体响应
+     * @param ids 商品id列表
      */
-    BulkResponse deleteBatch(List<String> ids);
+    void deleteBatch(List<Long> ids);
 
     /**
-     * 查询商品索引
+     * 搜索商品索引
      *
-     * @param keyword 关键词
-     * @return 查询响应
+     * @param current   页码
+     * @param size      每页数据数量
+     * @param sortField 排序字段
+     * @param sortRule  排序规则
+     * @param keyword   关键词
+     * @return 商品索引列表
      */
-    SearchResponse list(String keyword);
-
-    /**
-     * 分页查询商品索引
-     *
-     * @param current 页码
-     * @param size    每页数据数量
-     * @param keyword 关键词
-     * @param sort    排序属性
-     * @param rule    排序规则
-     * @return 查询响应
-     */
-    SearchResponse page(Integer current, Integer size, String keyword, String sort, String rule);
+    Page<GoodsIndex> search(Integer current, Integer size, String sortField, String sortRule, String keyword);
 }
