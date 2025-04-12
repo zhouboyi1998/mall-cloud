@@ -2,6 +2,7 @@ package com.cafe.common.util.tree;
 
 import com.cafe.common.constant.model.DefaultValueConstant;
 import com.cafe.common.lang.tree.Tree;
+import com.cafe.common.lang.tree.TreeNode;
 
 import java.util.List;
 import java.util.Objects;
@@ -22,16 +23,18 @@ public class TreeUtil {
      * @param nodeList 节点列表
      * @param id       节点ID
      * @param <T>      节点数据类型
+     * @param <K>      节点ID类型
      * @return 树形节点
      */
-    public static <T extends Tree> Tree buildTreeNode(List<T> nodeList, Long id) {
+    @SuppressWarnings(value = "unchecked")
+    public static <T extends Tree<T, K>, K> T buildTreeNode(List<T> nodeList, K id) {
         return nodeList.stream()
             // 筛选出指定节点
             .filter(node -> Objects.equals(node.getId(), id))
             // 为指定节点组装子节点树
             .map(node -> node.setChildren(buildSubtree(node, nodeList)))
             .findFirst()
-            .orElse(new Tree());
+            .orElse((T) new TreeNode<K>());
     }
 
     /**
@@ -39,15 +42,11 @@ public class TreeUtil {
      *
      * @param nodeList 节点列表
      * @param <T>      节点数据类型
+     * @param <K>      节点ID类型
      * @return 树形列表
      */
-    public static <T extends Tree> List<Tree> buildTreeList(List<T> nodeList) {
-        return nodeList.stream()
-            // 筛选出所有一级节点
-            .filter(node -> Objects.equals(node.getParentId(), DefaultValueConstant.DEFAULT_PARENT_ID_LONG))
-            // 为所有一级节点组装子节点树
-            .map(node -> node.setChildren(buildSubtree(node, nodeList)))
-            .collect(Collectors.toList());
+    public static <T extends Tree<T, K>, K> List<T> buildTreeList(List<T> nodeList, Class<K> clazz) {
+        return buildTreeList(nodeList, defaultParentId(clazz));
     }
 
     /**
@@ -56,9 +55,10 @@ public class TreeUtil {
      * @param nodeList 节点列表
      * @param parentId 父节点ID
      * @param <T>      节点数据类型
+     * @param <K>      节点ID类型
      * @return 树形列表
      */
-    public static <T extends Tree> List<Tree> buildTreeList(List<T> nodeList, Long parentId) {
+    public static <T extends Tree<T, K>, K> List<T> buildTreeList(List<T> nodeList, K parentId) {
         return nodeList.stream()
             // 筛选出指定父节点的所有子节点
             .filter(node -> Objects.equals(node.getParentId(), parentId))
@@ -72,15 +72,35 @@ public class TreeUtil {
      *
      * @param currentNode 当前节点
      * @param nodeList    节点列表
-     * @param <T>         树形列表
+     * @param <T>         节点数据类型
+     * @param <K>         节点ID类型
      * @return 子节点树
      */
-    private static <T extends Tree> List<Tree> buildSubtree(T currentNode, List<T> nodeList) {
+    private static <T extends Tree<T, K>, K> List<T> buildSubtree(T currentNode, List<T> nodeList) {
         return nodeList.stream()
             // 从节点列表中筛选出当前节点的子节点
             .filter(node -> Objects.equals(node.getParentId(), currentNode.getId()))
             // 递归调用组装子节点树
             .map(node -> node.setChildren(buildSubtree(node, nodeList)))
             .collect(Collectors.toList());
+    }
+
+    /**
+     * 获取默认的父节点ID
+     *
+     * @param clazz 父节点ID类型Class对象
+     * @param <K>   父节点ID类型
+     * @return 默认的父节点ID
+     */
+    private static <K> K defaultParentId(Class<K> clazz) {
+        if (Objects.equals(clazz, Integer.class)) {
+            return clazz.cast(DefaultValueConstant.DEFAULT_PARENT_ID_INTEGER);
+        } else if (Objects.equals(clazz, Long.class)) {
+            return clazz.cast(DefaultValueConstant.DEFAULT_PARENT_ID_LONG);
+        } else if (Objects.equals(clazz, String.class)) {
+            return clazz.cast(DefaultValueConstant.DEFAULT_PARENT_ID_STRING);
+        } else {
+            throw new RuntimeException("Unsupported parent id type!");
+        }
     }
 }

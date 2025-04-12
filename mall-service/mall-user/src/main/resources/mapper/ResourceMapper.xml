@@ -20,29 +20,4 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
-    <select id="selectMenuTreeDTOList" resultType="com.cafe.user.model.dto.MenuTreeDTO">
-        SELECT DISTINCT
-        resource.id,
-        resource.parent_id,
-        resource.platform_id,
-        resource.resource_name AS menu_name,
-        resource.resource_title AS menu_title,
-        resource.resource_icon AS menu_icon,
-        resource.resource_content AS menu_path,
-        resource.level,
-        resource.sort,
-        resource.status
-        FROM mall_resource AS resource
-        LEFT JOIN mall_role_resource AS rr ON rr.resource_id = resource.id
-        LEFT JOIN mall_role AS role ON role.id = rr.role_id
-        WHERE role.role_name IN
-        <foreach collection="authorities" item="authority" open="(" close=")" separator=",">
-            #{authority}
-        </foreach>
-        AND resource.resource_type = 1
-        AND resource.status = 1
-        AND resource.is_deleted = 0
-        ORDER BY resource.sort
-    </select>
-
 </mapper>
