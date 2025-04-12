@@ -38,7 +38,7 @@
           AND d.is_deleted = 0
     </select>
 
-    <select id="selectTreeDTOList" resultType="com.cafe.foundation.model.dto.AreaTreeDTO">
+    <select id="selectTreeVOList" resultType="com.cafe.foundation.model.vo.AreaTreeVO">
         WITH RECURSIVE tree AS (
         SELECT id, area_name, area_code, post_code, parent_id, level, sort, status, is_deleted
         FROM mall_area

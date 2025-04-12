@@ -1,9 +1,9 @@
 package com.cafe.goods.model.converter;
 
-import com.cafe.goods.model.dto.CategoryTreeDTO;
 import com.cafe.goods.model.entity.Category;
 import com.cafe.goods.model.query.CategoryTreeListQuery;
 import com.cafe.goods.model.query.CategoryTreeNodeQuery;
+import com.cafe.goods.model.vo.CategoryTreeVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.util.CollectionUtils;
@@ -25,24 +25,24 @@ public interface CategoryConverter {
     CategoryConverter INSTANCE = Mappers.getMapper(CategoryConverter.class);
 
     /**
-     * 实体模型 -> 数据传输模型
+     * 实体模型 -> 树形视图模型
      *
      * @param category 实体模型
-     * @return 数据传输模型
+     * @return 树形视图模型
      */
-    CategoryTreeDTO toDTO(Category category);
+    CategoryTreeVO toTreeVO(Category category);
 
     /**
-     * 实体模型列表 -> 数据传输模型列表
+     * 实体模型列表 -> 树形视图模型列表
      *
      * @param categoryList 实体模型列表
-     * @return 数据传输模型列表
+     * @return 树形视图模型列表
      */
-    default List<CategoryTreeDTO> toDTOList(List<Category> categoryList) {
+    default List<CategoryTreeVO> toTreeVOList(List<Category> categoryList) {
         if (CollectionUtils.isEmpty(categoryList)) {
             return Collections.emptyList();
         }
-        return categoryList.stream().map(this::toDTO).collect(Collectors.toList());
+        return categoryList.stream().map(this::toTreeVO).collect(Collectors.toList());
     }
 
     /**
