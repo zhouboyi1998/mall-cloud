@@ -1,10 +1,10 @@
 package com.cafe.foundation.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cafe.common.lang.tree.Tree;
 import com.cafe.foundation.model.entity.Area;
 import com.cafe.foundation.model.query.AreaTreeListQuery;
 import com.cafe.foundation.model.vo.AreaDetailVO;
+import com.cafe.foundation.model.vo.AreaTreeVO;
 
 import java.util.List;
 
@@ -33,5 +33,5 @@ public interface AreaService extends IService<Area> {
      * @param query 查询条件
      * @return 区域树列表
      */
-    List<Tree> treeList(AreaTreeListQuery query);
+    List<AreaTreeVO> treeList(AreaTreeListQuery query);
 }
