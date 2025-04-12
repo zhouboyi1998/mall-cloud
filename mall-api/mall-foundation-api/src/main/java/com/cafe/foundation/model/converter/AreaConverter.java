@@ -1,8 +1,8 @@
 package com.cafe.foundation.model.converter;
 
-import com.cafe.foundation.model.dto.AreaTreeDTO;
 import com.cafe.foundation.model.entity.Area;
 import com.cafe.foundation.model.query.AreaTreeListQuery;
+import com.cafe.foundation.model.vo.AreaTreeVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import org.springframework.util.CollectionUtils;
@@ -24,24 +24,24 @@ public interface AreaConverter {
     AreaConverter INSTANCE = Mappers.getMapper(AreaConverter.class);
 
     /**
-     * 实体模型 -> 树数据传输模型
+     * 实体模型 -> 树形视图模型
      *
      * @param area 实体模型
-     * @return 树数据传输模型
+     * @return 树形视图模型
      */
-    AreaTreeDTO toTreeDTO(Area area);
+    AreaTreeVO toTreeVO(Area area);
 
     /**
-     * 实体模型列表 -> 树数据传输模型列表
+     * 实体模型列表 -> 树形视图模型列表
      *
      * @param areaList 实体模型列表
-     * @return 树数据传输模型列表
+     * @return 树形视图模型列表
      */
-    default List<AreaTreeDTO> toTreeDTOList(List<Area> areaList) {
+    default List<AreaTreeVO> toTreeVOList(List<Area> areaList) {
         if (CollectionUtils.isEmpty(areaList)) {
             return Collections.emptyList();
         }
-        return areaList.stream().map(this::toTreeDTO).collect(Collectors.toList());
+        return areaList.stream().map(this::toTreeVO).collect(Collectors.toList());
     }
 
     /**

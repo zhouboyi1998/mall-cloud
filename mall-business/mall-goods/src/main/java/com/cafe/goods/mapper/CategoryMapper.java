@@ -1,8 +1,8 @@
 package com.cafe.goods.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.cafe.goods.model.dto.CategoryTreeDTO;
 import com.cafe.goods.model.entity.Category;
+import com.cafe.goods.model.vo.CategoryTreeVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,10 +19,10 @@ import java.util.List;
 public interface CategoryMapper extends BaseMapper<Category> {
 
     /**
-     * 根据条件查询分类树DTO列表
+     * 根据条件查询分类树形视图列表
      *
      * @param category 查询条件
-     * @return 分类树DTO列表
+     * @return 分类树形视图列表
      */
-    List<CategoryTreeDTO> selectTreeDTOList(@Param(value = "category") Category category);
+    List<CategoryTreeVO> selectTreeVOList(@Param(value = "category") Category category);
 }
