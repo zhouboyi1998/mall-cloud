@@ -3,11 +3,11 @@ package com.cafe.foundation.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.constant.model.DefaultValueConstant;
-import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.foundation.model.entity.Area;
 import com.cafe.foundation.model.query.AreaTreeListQuery;
 import com.cafe.foundation.model.vo.AreaDetailVO;
+import com.cafe.foundation.model.vo.AreaTreeVO;
 import com.cafe.foundation.service.AreaService;
 import com.cafe.infrastructure.mybatisplus.util.WrapperUtil;
 import io.swagger.annotations.Api;
@@ -217,12 +217,12 @@ public class AreaController {
 
     @ApiLogPrint(value = "根据上级id查询区域树列表")
     @ApiOperation(value = "根据上级id查询区域树列表")
-    @ApiImplicitParam(value = "上级id", name = "parentId", dataType = "Long", paramType = "query", defaultValue = DefaultValueConstant.DEFAULT_PARENT_ID_STR)
+    @ApiImplicitParam(value = "上级id", name = "parentId", dataType = "Long", paramType = "query", defaultValue = DefaultValueConstant.DEFAULT_PARENT_ID_STRING)
     @GetMapping(value = "/tree-list")
-    public ResponseEntity<List<Tree>> treeList(
-        @RequestParam(value = "parentId", required = false, defaultValue = DefaultValueConstant.DEFAULT_PARENT_ID_STR) Long parentId
+    public ResponseEntity<List<AreaTreeVO>> treeList(
+        @RequestParam(value = "parentId", required = false, defaultValue = DefaultValueConstant.DEFAULT_PARENT_ID_STRING) Long parentId
     ) {
-        List<Tree> treeList = areaService.treeList(new AreaTreeListQuery().setParentId(parentId));
+        List<AreaTreeVO> treeList = areaService.treeList(new AreaTreeListQuery().setParentId(parentId));
         return ResponseEntity.ok(treeList);
     }
 
@@ -230,8 +230,8 @@ public class AreaController {
     @ApiOperation(value = "根据条件查询区域树列表")
     @ApiImplicitParam(value = "区域树列表查询条件", name = "query", dataType = "AreaTreeListQuery", paramType = "body", required = true)
     @PostMapping(value = "/tree-list")
-    public ResponseEntity<List<Tree>> treeList(@RequestBody @Valid AreaTreeListQuery query) {
-        List<Tree> treeList = areaService.treeList(query);
+    public ResponseEntity<List<AreaTreeVO>> treeList(@RequestBody @Valid AreaTreeListQuery query) {
+        List<AreaTreeVO> treeList = areaService.treeList(query);
         return ResponseEntity.ok(treeList);
     }
 }

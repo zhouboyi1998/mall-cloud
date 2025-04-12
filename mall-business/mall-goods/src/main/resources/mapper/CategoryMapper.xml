@@ -15,7 +15,7 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
-    <select id="selectTreeDTOList" resultType="com.cafe.goods.model.dto.CategoryTreeDTO">
+    <select id="selectTreeVOList" resultType="com.cafe.goods.model.vo.CategoryTreeVO">
         WITH RECURSIVE tree AS (
         SELECT id, category_name, parent_id, level, sort, status, is_deleted
         FROM mall_category

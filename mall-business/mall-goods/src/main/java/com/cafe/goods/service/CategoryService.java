@@ -1,10 +1,10 @@
 package com.cafe.goods.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.cafe.common.lang.tree.Tree;
 import com.cafe.goods.model.entity.Category;
 import com.cafe.goods.model.query.CategoryTreeListQuery;
 import com.cafe.goods.model.query.CategoryTreeNodeQuery;
+import com.cafe.goods.model.vo.CategoryTreeVO;
 
 import java.util.List;
 
@@ -23,7 +23,7 @@ public interface CategoryService extends IService<Category> {
      * @param query 查询条件
      * @return 分类树节点
      */
-    Tree treeNode(CategoryTreeNodeQuery query);
+    CategoryTreeVO treeNode(CategoryTreeNodeQuery query);
 
     /**
      * 根据条件查询分类树列表
@@ -31,5 +31,5 @@ public interface CategoryService extends IService<Category> {
      * @param query 查询条件
      * @return 分类树列表
      */
-    List<Tree> treeList(CategoryTreeListQuery query);
+    List<CategoryTreeVO> treeList(CategoryTreeListQuery query);
 }
