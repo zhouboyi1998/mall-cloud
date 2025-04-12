@@ -1,5 +1,8 @@
 package com.cafe.user.facade;
 
+import com.cafe.user.model.entity.Resource;
+import com.cafe.user.model.vo.ResourceTreeVO;
+
 import java.util.List;
 
 /**
@@ -22,4 +25,13 @@ public interface RoleResourceFacade {
      * @param resourceIds 对应关系发生变更的资源ids
      */
     void refreshResourceRoleCache(List<Long> resourceIds);
+
+    /**
+     * 根据权限列表查询资源树列表
+     *
+     * @param authorities 权限列表
+     * @param resource    查询参数
+     * @return 资源树列表
+     */
+    List<ResourceTreeVO> resourceTreeList(List<String> authorities, Resource resource);
 }

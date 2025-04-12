@@ -1,6 +1,6 @@
 package com.cafe.foundation.model.converter;
 
-import com.cafe.foundation.model.dto.AreaTreeDTO;
+import com.cafe.foundation.model.vo.AreaTreeVO;
 import com.cafe.foundation.model.entity.Area;
 import com.cafe.foundation.model.query.AreaTreeListQuery;
 import org.mapstruct.Mapper;
@@ -29,7 +29,7 @@ public interface AreaConverter {
      * @param area 实体模型
      * @return 树数据传输模型
      */
-    AreaTreeDTO toTreeDTO(Area area);
+    AreaTreeVO toTreeDTO(Area area);
 
     /**
      * 实体模型列表 -> 树数据传输模型列表
@@ -37,7 +37,7 @@ public interface AreaConverter {
      * @param areaList 实体模型列表
      * @return 树数据传输模型列表
      */
-    default List<AreaTreeDTO> toTreeDTOList(List<Area> areaList) {
+    default List<AreaTreeVO> toTreeDTOList(List<Area> areaList) {
         if (CollectionUtils.isEmpty(areaList)) {
             return Collections.emptyList();
         }

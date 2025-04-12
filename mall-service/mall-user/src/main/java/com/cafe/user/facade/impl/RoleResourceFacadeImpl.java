@@ -1,13 +1,24 @@
 package com.cafe.user.facade.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.constant.security.AuthorizationConstant;
+import com.cafe.common.util.tree.TreeUtil;
+import com.cafe.infrastructure.mybatisplus.util.WrapperUtil;
 import com.cafe.user.facade.RoleResourceFacade;
 import com.cafe.user.model.bo.ResourceRoleBO;
+import com.cafe.user.model.converter.ResourceConverter;
+import com.cafe.user.model.entity.Resource;
+import com.cafe.user.model.entity.Role;
+import com.cafe.user.model.entity.RoleResource;
+import com.cafe.user.model.vo.ResourceTreeVO;
+import com.cafe.user.service.ResourceService;
 import com.cafe.user.service.RoleResourceService;
+import com.cafe.user.service.RoleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
 import java.util.Collections;
@@ -26,6 +37,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class RoleResourceFacadeImpl implements RoleResourceFacade {
+
+    private final RoleService roleService;
+
+    private final ResourceService resourceService;
 
     private final RoleResourceService roleResourceService;
 
@@ -64,5 +79,40 @@ public class RoleResourceFacadeImpl implements RoleResourceFacade {
             // 将对应关系保存到 Redis 中
             redisTemplate.opsForHash().put(RedisConstant.RESOURCE_ROLE_MAP, resourceRoleBO.getResourceContent(), roleNameList);
         }
+    }
+
+    @Override
+    public List<ResourceTreeVO> resourceTreeList(List<String> authorities, Resource resource) {
+        // 查询角色id列表
+        List<Long> roleIds = roleService.lambdaQuery()
+            .in(Role::getRoleName, authorities)
+            .select(Role::getId)
+            .list()
+            .stream()
+            .map(Role::getId)
+            .collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(roleIds)) {
+            return Collections.emptyList();
+        }
+        // 查询资源id列表
+        List<Long> resourceIds = roleResourceService.lambdaQuery()
+            .in(RoleResource::getRoleId, roleIds)
+            .select(RoleResource::getResourceId)
+            .list()
+            .stream()
+            .map(RoleResource::getResourceId)
+            .collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(resourceIds)) {
+            return Collections.emptyList();
+        }
+        // 查询资源列表
+        LambdaQueryWrapper<Resource> resourceQueryWrapper = WrapperUtil.createLambdaQueryWrapper(resource)
+            .in(Resource::getId, resourceIds)
+            .orderByAsc(Resource::getSort);
+        List<Resource> resourceList = resourceService.list(resourceQueryWrapper);
+        // 转换成资源树VO列表
+        List<ResourceTreeVO> resourceTreeVOList = ResourceConverter.INSTANCE.toTreeVOList(resourceList);
+        // 组装成树形格式
+        return TreeUtil.buildTreeList(resourceTreeVOList, Long.class);
     }
 }

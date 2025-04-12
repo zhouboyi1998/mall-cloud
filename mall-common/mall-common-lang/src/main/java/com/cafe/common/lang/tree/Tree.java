@@ -1,10 +1,5 @@
 package com.cafe.common.lang.tree;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.experimental.Accessors;
-
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,16 +9,50 @@ import java.util.List;
  * @Date: 2024/5/9 17:29
  * @Description: 树形结构
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
-@Accessors(chain = true)
-public class Tree implements Serializable {
+public interface Tree<T extends Tree<T, K>, K> {
 
-    private static final long serialVersionUID = 1L;
+    /**
+     * 获取当前树节点的id
+     *
+     * @return 节点id
+     */
+    K getId();
 
-    private Long id;
+    /**
+     * 设置当前树节点的id
+     *
+     * @param id 节点id
+     * @return 当前树节点
+     */
+    T setId(K id);
 
-    private Long parentId;
+    /**
+     * 获取当前树节点的父节点id
+     *
+     * @return 父节点id
+     */
+    K getParentId();
 
-    private List<Tree> children;
+    /**
+     * 设置当前树节点的父节点id
+     *
+     * @param parentId 父节点id
+     * @return 当前树节点
+     */
+    T setParentId(K parentId);
+
+    /**
+     * 获取当前树节点的子节点列表
+     *
+     * @return 子节点列表
+     */
+    List<T> getChildren();
+
+    /**
+     * 设置当前树节点的子节点列表
+     *
+     * @param children 子节点列表
+     * @return 当前树节点
+     */
+    T setChildren(List<T> children);
 }
