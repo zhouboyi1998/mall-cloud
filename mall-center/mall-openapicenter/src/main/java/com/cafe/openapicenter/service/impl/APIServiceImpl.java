@@ -2,10 +2,12 @@ package com.cafe.openapicenter.service.impl;
 
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.jackson.util.JacksonUtil;
+import com.cafe.common.util.builder.ToStringStyleHolder;
 import com.cafe.openapicenter.model.entity.API;
 import com.cafe.openapicenter.service.APIService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
@@ -52,7 +54,7 @@ public class APIServiceImpl implements APIService {
                 return sendRequest(api, webClient.options());
             case TRACE:
             default:
-                log.error("APIServiceImpl.proxy(): Unsupported HTTP Method! api -> {}", JacksonUtil.writeValueAsString(api));
+                log.error("APIServiceImpl.proxy(): Unsupported HTTP Method! api -> {}", ToStringBuilder.reflectionToString(api, ToStringStyleHolder.JSON_STYLE_WITHOUT_UNICODE));
                 return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, "Unsupported HTTP Method!"));
         }
     }
@@ -111,7 +113,7 @@ public class APIServiceImpl implements APIService {
      * @param response 响应
      */
     private void doOnSuccess(API api, ObjectNode response) {
-        log.info("APIServiceImpl.doOnSuccess(): api -> {}, response -> {}", JacksonUtil.writeValueAsString(api), response);
+        log.info("APIServiceImpl.doOnSuccess(): api -> {}, response -> {}", ToStringBuilder.reflectionToString(api, ToStringStyleHolder.JSON_STYLE_WITHOUT_UNICODE), response);
     }
 
     /**
@@ -122,7 +124,7 @@ public class APIServiceImpl implements APIService {
      * @return 响应结果
      */
     private Mono<ObjectNode> onErrorResume(API api, Throwable throwable) {
-        log.error("APIServiceImpl.onErrorResume(): api -> {}, message -> {}", JacksonUtil.writeValueAsString(api), throwable.getMessage(), throwable);
+        log.error("APIServiceImpl.onErrorResume(): api -> {}, message -> {}", ToStringBuilder.reflectionToString(api, ToStringStyleHolder.JSON_STYLE_WITHOUT_UNICODE), throwable.getMessage(), throwable);
         return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, throwable.getMessage()));
     }
 }
