@@ -4,6 +4,7 @@ import org.springframework.core.annotation.AnnotationUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -27,8 +28,7 @@ public class AnnotationUtil {
      */
     public static <A extends Annotation, R> R findAnnotationField(Class<?> clazz, Class<A> annotationClazz, Function<A, R> function) {
         // 必须使用 Spring AnnotationUtils 工具类获取注解, 否则无法获取注解字段别名 (@AliasFor 注解由 Spring 提供)
-        A annotation = AnnotationUtils.findAnnotation(clazz, annotationClazz);
-        return annotation != null ? function.apply(annotation) : null;
+        return Optional.ofNullable(AnnotationUtils.findAnnotation(clazz, annotationClazz)).map(function).orElse(null);
     }
 
     /**
@@ -43,7 +43,6 @@ public class AnnotationUtil {
      */
     public static <A extends Annotation, R> R findAnnotationField(Method method, Class<A> annotationClazz, Function<A, R> function) {
         // 必须使用 Spring AnnotationUtils 工具类获取注解, 否则无法获取注解字段别名 (@AliasFor 注解由 Spring 提供)
-        A annotation = AnnotationUtils.findAnnotation(method, annotationClazz);
-        return annotation != null ? function.apply(annotation) : null;
+        return Optional.ofNullable(AnnotationUtils.findAnnotation(method, annotationClazz)).map(function).orElse(null);
     }
 }
