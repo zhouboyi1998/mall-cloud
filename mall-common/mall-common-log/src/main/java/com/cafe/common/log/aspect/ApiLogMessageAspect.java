@@ -2,12 +2,13 @@ package com.cafe.common.log.aspect;
 
 import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.log.model.ApiLog;
 import com.cafe.common.util.annotation.AnnotationUtil;
 import com.cafe.common.util.aop.AOPUtil;
+import com.cafe.common.util.builder.ToStringStyleHolder;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -113,6 +114,6 @@ public class ApiLogMessageAspect {
     @After(value = "pointcut()")
     public void doAfter(JoinPoint joinPoint) {
         // 打印接口日志
-        log.info("{}", JacksonUtil.writeValueAsString(apiLog));
+        log.info("{}", ToStringBuilder.reflectionToString(apiLog, ToStringStyleHolder.JSON_STYLE_WITHOUT_UNICODE));
     }
 }
