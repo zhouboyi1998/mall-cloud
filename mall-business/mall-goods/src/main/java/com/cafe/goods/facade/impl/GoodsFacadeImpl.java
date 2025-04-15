@@ -3,7 +3,7 @@ package com.cafe.goods.facade.impl;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.model.GoodsConstant;
 import com.cafe.common.constant.rocketmq.RocketMQConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
+import com.cafe.common.util.builder.ToStringStyleHolder;
 import com.cafe.goods.facade.GoodsFacade;
 import com.cafe.goods.model.bo.Goods;
 import com.cafe.goods.service.GoodsService;
@@ -11,6 +11,7 @@ import com.cafe.goods.service.SkuService;
 import com.cafe.infrastructure.rocketmq.producer.RocketMQProducer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -58,6 +59,6 @@ public class GoodsFacadeImpl implements GoodsFacade {
         // 发送消息到 RocketMQ, 通知 ElasticSearch 上下架商品
         rocketMQProducer.convertAndSend(RocketMQConstant.Topic.GOODS_INDEX, content);
         // 打印日志
-        log.info("GoodsFacadeImpl.launch(): status -> {}, count -> {}, rocketmq message -> {}", status, count, JacksonUtil.writeValueAsString(content));
+        log.info("GoodsFacadeImpl.launch(): status -> {}, count -> {}, rocketmq message -> {}", status, count, ToStringBuilder.reflectionToString(content, ToStringStyleHolder.JSON_STYLE_WITHOUT_UNICODE));
     }
 }

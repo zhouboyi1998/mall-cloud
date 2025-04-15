@@ -7,6 +7,8 @@ import com.cafe.gateway.util.RequestUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
@@ -50,7 +52,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         String menuPath = request.getPath().subPath(IntegerConstant.ZERO, IntegerConstant.FOUR).toString();
         // 根据菜单路径, 获取可以访问当前菜单的角色列表
         List<String> roleNameList = JacksonUtil.convertValue(redisTemplate.opsForHash().get(RedisConstant.RESOURCE_ROLE_MAP, menuPath), new TypeReference<List<String>>() {});
-        log.info("AuthorizationManager.check(): menu path -> {}, role name list -> {}", menuPath, JacksonUtil.writeValueAsString(roleNameList));
+        log.info("AuthorizationManager.check(): menu path -> {}, role name list -> {}", menuPath, ToStringBuilder.reflectionToString(roleNameList, ToStringStyle.JSON_STYLE));
 
         // 判断当前用户是否可以访问当前请求
         return mono
