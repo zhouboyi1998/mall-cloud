@@ -1,7 +1,7 @@
 package com.cafe.elasticsearch.repository;
 
 import com.cafe.elasticsearch.model.index.OrderIndex;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import com.cafe.infrastructure.elasticsearch.repository.ExtensionElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -12,6 +12,6 @@ import org.springframework.stereotype.Repository;
  * @Description:
  */
 @Repository
-public interface OrderIndexRepository extends ElasticsearchRepository<OrderIndex, Long> {
+public interface OrderIndexRepository extends ExtensionElasticsearchRepository<OrderIndex, Long> {
 
 }
