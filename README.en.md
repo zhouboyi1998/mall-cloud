@@ -7,7 +7,7 @@
 <a target="_blank" href="https://opensource.org/licenses/MIT"> 
 <img src="https://img.shields.io/badge/license-MIT-red"> 
 </a>
-<img src="https://img.shields.io/badge/JDK-8-crimson">
+<img src="https://img.shields.io/badge/Java-8-crimson">
 <img src="https://img.shields.io/badge/Spring Boot-2.3.12.RELEASE-brightener">
 <img src="https://img.shields.io/badge/Spring Cloud-Hoxton.SR12-brightener">
 <img src="https://img.shields.io/badge/Spring Cloud Alibaba-2.2.9.RELEASE-brightener">
