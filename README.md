@@ -7,7 +7,7 @@
 <a target="_blank" href="https://opensource.org/licenses/MIT"> 
 <img src="https://img.shields.io/badge/license-MIT-red"> 
 </a>
-<img src="https://img.shields.io/badge/JDK-8-crimson">
+<img src="https://img.shields.io/badge/Java-8-crimson">
 <img src="https://img.shields.io/badge/Spring Boot-2.3.12.RELEASE-brightener">
 <img src="https://img.shields.io/badge/Spring Cloud-Hoxton.SR12-brightener">
 <img src="https://img.shields.io/badge/Spring Cloud Alibaba-2.2.9.RELEASE-brightener">
@@ -62,6 +62,7 @@
     |-- mall-discovery-zookeeper (Zookeeper 注册中心公共包)
 
 |-- mall-infrastructure (基础设施公共包)
+    |-- mall-infrastructure-elasticsearch (ElasticSearch 搜索引擎公共包)
     |-- mall-infrastructure-kafka (Kafka 消息队列公共包)
     |-- mall-infrastructure-mybatisplus (MyBatis-Plus 公共包)
     |-- mall-infrastructure-rabbitmq (RabbitMQ 消息队列公共包)

@@ -1,4 +1,4 @@
-package com.cafe.elasticsearch.util;
+package com.cafe.infrastructure.elasticsearch.util;
 
 import com.cafe.common.constant.app.FieldConstant;
 import org.springframework.data.elasticsearch.core.document.Document;
@@ -11,7 +11,7 @@ import java.util.Optional;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.elasticsearch.util
+ * @Package: com.cafe.infrastructure.elasticsearch.util
  * @Author: zhouboyi
  * @Date: 2025/4/13 0:31
  * @Description: Spring Data ElasticSearch 条件构造工具类
