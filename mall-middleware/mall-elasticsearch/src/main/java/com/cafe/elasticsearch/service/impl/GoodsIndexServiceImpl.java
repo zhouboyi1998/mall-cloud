@@ -1,15 +1,11 @@
 package com.cafe.elasticsearch.service.impl;
 
-import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
-import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.elasticsearch.model.index.GoodsIndex;
 import com.cafe.elasticsearch.repository.GoodsIndexRepository;
 import com.cafe.elasticsearch.service.GoodsIndexService;
-import com.cafe.elasticsearch.util.DocumentUtil;
-import com.cafe.starter.boot.model.exception.BusinessException;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.ObjectUtils;
@@ -24,19 +20,11 @@ import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.data.domain.Page;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
 import org.springframework.data.elasticsearch.core.aggregation.impl.AggregatedPageImpl;
-import org.springframework.data.elasticsearch.core.document.Document;
-import org.springframework.data.elasticsearch.core.mapping.IndexCoordinates;
-import org.springframework.data.elasticsearch.core.query.UpdateQuery;
-import org.springframework.data.elasticsearch.core.query.UpdateResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -52,8 +40,6 @@ import java.util.stream.StreamSupport;
 public class GoodsIndexServiceImpl implements GoodsIndexService {
 
     private final GoodsIndexRepository goodsIndexRepository;
-
-    private final ElasticsearchRestTemplate elasticsearchRestTemplate;
 
     private final RestHighLevelClient restHighLevelClient;
 
@@ -75,44 +61,13 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
 
     @Override
     public GoodsIndex update(GoodsIndex goodsIndex) {
-        // 获取商品索引
-        GoodsIndex currentGoodsIndex = goodsIndexRepository.findById(goodsIndex.getId())
-            .orElseThrow(() -> new BusinessException(HttpStatusEnum.GOODS_INDEX_NOT_FOUND, goodsIndex));
-        // 组装修改参数
-        Document document = DocumentUtil.updateDocument(currentGoodsIndex, goodsIndex);
-        // 组装修改请求
-        UpdateQuery updateQuery = UpdateQuery.builder(String.valueOf(goodsIndex.getId()))
-            .withDocument(document)
-            .build();
-        // 修改商品索引
-        UpdateResponse updateResponse = elasticsearchRestTemplate.update(updateQuery, IndexCoordinates.of(ElasticSearchConstant.Goods.INDEX));
-        // 判断修改结果
-        if (!Objects.equals(updateResponse.getResult(), UpdateResponse.Result.UPDATED)) {
-            throw new BusinessException(HttpStatusEnum.GOODS_INDEX_UPDATE_FAIL, goodsIndex);
-        }
-        return JacksonUtil.convertValue(document, GoodsIndex.class);
+        return goodsIndexRepository.update(goodsIndex);
     }
 
     @Override
     public List<GoodsIndex> updateBatch(List<GoodsIndex> goodsIndexList) {
-        Map<Long, GoodsIndex> goodsIndexMap = goodsIndexList.stream()
-            .collect(Collectors.toMap(GoodsIndex::getId, Function.identity()));
-        // 获取商品索引列表
-        Iterable<GoodsIndex> currentGoodsIndexIterable = goodsIndexRepository.findAllById(goodsIndexMap.keySet());
-        // 组装批量修改参数
-        List<Document> documentList = StreamSupport.stream(currentGoodsIndexIterable.spliterator(), false)
-            .map(currentGoodsIndex -> DocumentUtil.updateDocument(currentGoodsIndex, goodsIndexMap.get(currentGoodsIndex.getId())))
-            .collect(Collectors.toList());
-        // 组装批量修改请求
-        List<UpdateQuery> updateQueryList = documentList.stream()
-            .map(document -> UpdateQuery.builder(String.valueOf(document.get(FieldConstant.ID))).withDocument(document).build())
-            .collect(Collectors.toList());
-        // 批量修改商品索引
-        elasticsearchRestTemplate.bulkUpdate(updateQueryList, IndexCoordinates.of(ElasticSearchConstant.Goods.INDEX));
-        // 返回修改后的商品索引列表
-        return documentList.stream()
-            .map(document -> JacksonUtil.convertValue(document, GoodsIndex.class))
-            .collect(Collectors.toList());
+        Iterable<GoodsIndex> updateIterable = goodsIndexRepository.updateAll(goodsIndexList);
+        return StreamSupport.stream(updateIterable.spliterator(), false).collect(Collectors.toList());
     }
 
     @Override
