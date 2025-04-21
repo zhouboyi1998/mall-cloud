@@ -1,11 +1,10 @@
-package com.cafe.security.service.impl;
+package com.cafe.security.userdetails;
 
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.security.exception.EmailNotFoundException;
 import com.cafe.security.exception.MobileNotFoundException;
 import com.cafe.security.model.bo.UserInfo;
-import com.cafe.security.service.UserDetailsExtensionService;
 import com.cafe.user.feign.RoleFeign;
 import com.cafe.user.feign.UserFeign;
 import com.cafe.user.model.entity.User;
@@ -27,7 +26,7 @@ import java.util.Optional;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.security.service.impl
+ * @Package: com.cafe.security.userdetails
  * @Author: zhouboyi
  * @Date: 2022/5/6 11:19
  * @Description: 用户详细信息加载实现类
@@ -35,7 +34,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 @Service
-public class UserDetailsServiceImpl implements UserDetailsExtensionService {
+public class UserDetailsServiceImpl implements MultiPrincipalUserDetailsService {
 
     private final HttpServletRequest request;
 

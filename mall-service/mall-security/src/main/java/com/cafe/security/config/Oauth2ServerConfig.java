@@ -8,7 +8,7 @@ import com.cafe.security.granter.MobileTokenGranter;
 import com.cafe.security.property.ClientProperties;
 import com.cafe.security.property.ClientProperties.Detail;
 import com.cafe.security.property.RSACredentialProperties;
-import com.cafe.security.service.UserDetailsExtensionService;
+import com.cafe.security.userdetails.MultiPrincipalUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
@@ -69,9 +69,9 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     private final JwtTokenEnhancer jwtTokenEnhancer;
 
     /**
-     * 用户详细信息组装服务
+     * 用户详细信息加载服务
      */
-    private final UserDetailsExtensionService userDetailsExtensionService;
+    private final MultiPrincipalUserDetailsService multiPrincipalUserDetailsService;
 
     /**
      * RSA 证书配置
@@ -199,8 +199,8 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
             .authenticationManager(authenticationManager)
             // 不复用刷新令牌
             .reuseRefreshTokens(false)
-            // 用户详细信息组装服务
-            .userDetailsService(userDetailsExtensionService)
+            // 用户详细信息加载服务
+            .userDetailsService(multiPrincipalUserDetailsService)
             // 登录请求限制的 HTTP 类型
             .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
             // 访问令牌转换器
