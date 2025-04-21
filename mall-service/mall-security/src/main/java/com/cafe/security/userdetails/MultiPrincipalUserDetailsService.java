@@ -1,4 +1,4 @@
-package com.cafe.security.service;
+package com.cafe.security.userdetails;
 
 import com.cafe.security.exception.EmailNotFoundException;
 import com.cafe.security.exception.MobileNotFoundException;
@@ -7,12 +7,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.security.service
+ * @Package: com.cafe.security.userdetails
  * @Author: zhouboyi
  * @Date: 2023/3/10 16:56
- * @Description: 用户详细信息加载扩展接口
+ * @Description: 多主体类型的用户详细信息加载接口 (主体类型: username、mobile、email)
  */
-public interface UserDetailsExtensionService extends UserDetailsService {
+public interface MultiPrincipalUserDetailsService extends UserDetailsService {
 
     /**
      * 根据手机号组装用户详细信息
