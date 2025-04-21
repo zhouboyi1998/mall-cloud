@@ -5,7 +5,7 @@ import com.cafe.security.property.RSACredentialProperties;
 import com.cafe.security.provider.EmailPasswordAuthenticationProvider;
 import com.cafe.security.provider.MobilePasswordAuthenticationProvider;
 import com.cafe.security.provider.UsernamePasswordAuthenticationProvider;
-import com.cafe.security.service.UserDetailsExtensionService;
+import com.cafe.security.userdetails.MultiPrincipalUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.actuate.autoconfigure.security.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
@@ -35,9 +35,9 @@ import java.security.KeyPair;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
-     * 用户详细信息组装服务
+     * 用户详细信息加载服务
      */
-    private final UserDetailsExtensionService userDetailsExtensionService;
+    private final MultiPrincipalUserDetailsService multiPrincipalUserDetailsService;
 
     /**
      * RSA 证书配置
@@ -72,7 +72,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public UsernamePasswordAuthenticationProvider usernamePasswordAuthenticationProvider() {
-        return new UsernamePasswordAuthenticationProvider(userDetailsExtensionService, passwordEncoder(), keyPair());
+        return new UsernamePasswordAuthenticationProvider(multiPrincipalUserDetailsService, passwordEncoder(), keyPair());
     }
 
     /**
@@ -80,7 +80,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public MobilePasswordAuthenticationProvider mobilePasswordAuthenticationProvider() {
-        return new MobilePasswordAuthenticationProvider(userDetailsExtensionService, passwordEncoder(), keyPair());
+        return new MobilePasswordAuthenticationProvider(multiPrincipalUserDetailsService, passwordEncoder(), keyPair());
     }
 
     /**
@@ -88,7 +88,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Bean
     public EmailPasswordAuthenticationProvider emailPasswordAuthenticationProvider() {
-        return new EmailPasswordAuthenticationProvider(userDetailsExtensionService, passwordEncoder(), keyPair());
+        return new EmailPasswordAuthenticationProvider(multiPrincipalUserDetailsService, passwordEncoder(), keyPair());
     }
 
     /**
@@ -134,8 +134,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .authenticationProvider(mobilePasswordAuthenticationProvider())
             // 加载邮箱密码认证提供器
             .authenticationProvider(emailPasswordAuthenticationProvider())
-            // 指定用户详细信息组装服务
-            .userDetailsService(userDetailsExtensionService)
+            // 用户详细信息加载服务
+            .userDetailsService(multiPrincipalUserDetailsService)
             // 指定密码编码器
             .passwordEncoder(passwordEncoder());
     }
