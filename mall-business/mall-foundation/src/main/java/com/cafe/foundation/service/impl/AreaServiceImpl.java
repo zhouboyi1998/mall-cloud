@@ -36,6 +36,6 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
     public List<AreaTreeVO> treeList(AreaTreeListQuery query) {
         Area area = AreaConverter.INSTANCE.toEntity(query);
         List<AreaTreeVO> areaTreeVOList = areaMapper.selectTreeVOList(area);
-        return TreeUtil.buildTreeList(areaTreeVOList, query.getParentId());
+        return TreeUtil.RecursiveBuilder.buildTreeList(areaTreeVOList, query.getParentId());
     }
 }
