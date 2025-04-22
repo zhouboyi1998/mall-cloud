@@ -37,21 +37,83 @@ class TreeUtilTest {
         NODE_LIST.add(new TreeNode<Integer>().setId(212).setParentId(21));
     }
 
+    // -------------------- RecursiveBuilder --------------------
+
     @Test
-    void buildTreeNode() {
-        TreeNode<Integer> tree = TreeUtil.buildTreeNode(NODE_LIST, 1);
+    void buildTreeNodeWithRecursiveBuilder() {
+        TreeNode<Integer> tree = TreeUtil.RecursiveBuilder.buildTreeNode(NODE_LIST, 1);
         System.out.println(tree);
     }
 
     @Test
-    void buildTreeListWithoutParentId() {
-        List<TreeNode<Integer>> treeList = TreeUtil.buildTreeList(NODE_LIST, Integer.class);
+    void buildTreeListByParentIdTypeWithRecursiveBuilder() {
+        List<TreeNode<Integer>> treeList = TreeUtil.RecursiveBuilder.buildTreeList(NODE_LIST, Integer.class);
         System.out.println(treeList);
     }
 
     @Test
-    void buildTreeListWithParentId() {
-        List<TreeNode<Integer>> treeList = TreeUtil.buildTreeList(NODE_LIST, 2);
+    void buildTreeListByParentIdWithRecursiveBuilder() {
+        List<TreeNode<Integer>> treeList = TreeUtil.RecursiveBuilder.buildTreeList(NODE_LIST, 2);
+        System.out.println(treeList);
+    }
+
+    // -------------------- RecursiveBuilder and Parallel --------------------
+
+    @Test
+    void buildTreeNodeWithRecursiveBuilderAndParallel() {
+        TreeNode<Integer> tree = TreeUtil.RecursiveBuilder.buildTreeNode(NODE_LIST, 1, true);
+        System.out.println(tree);
+    }
+
+    @Test
+    void buildTreeListByParentIdTypeWithRecursiveBuilderAndParallel() {
+        List<TreeNode<Integer>> treeList = TreeUtil.RecursiveBuilder.buildTreeList(NODE_LIST, Integer.class, true);
+        System.out.println(treeList);
+    }
+
+    @Test
+    void buildTreeListByParentIdWithRecursiveBuilderAndParallel() {
+        List<TreeNode<Integer>> treeList = TreeUtil.RecursiveBuilder.buildTreeList(NODE_LIST, 2, true);
+        System.out.println(treeList);
+    }
+
+    // -------------------- MapLookupBuilder --------------------
+
+    @Test
+    void buildTreeNodeWithMapLookupBuilder() {
+        TreeNode<Integer> tree = TreeUtil.MapLookupBuilder.buildTreeNode(NODE_LIST, 1);
+        System.out.println(tree);
+    }
+
+    @Test
+    void buildTreeListByParentIdTypeWithMapLookupBuilder() {
+        List<TreeNode<Integer>> treeList = TreeUtil.MapLookupBuilder.buildTreeList(NODE_LIST, Integer.class);
+        System.out.println(treeList);
+    }
+
+    @Test
+    void buildTreeListByParentIdWithMapLookupBuilder() {
+        List<TreeNode<Integer>> treeList = TreeUtil.MapLookupBuilder.buildTreeList(NODE_LIST, 2);
+        System.out.println(treeList);
+    }
+
+    // -------------------- MapLookupBuilder and Parallel --------------------
+
+    @Test
+    void buildTreeNodeWithMapLookupBuilderAndParallel() {
+        TreeNode<Integer> tree = TreeUtil.MapLookupBuilder.buildTreeNode(NODE_LIST, 1, true);
+        System.out.println(tree);
+    }
+
+    @Test
+    void buildTreeListByParentIdTypeWithMapLookupBuilderAndParallel() {
+        List<TreeNode<Integer>> treeList = TreeUtil.MapLookupBuilder.buildTreeList(NODE_LIST, Integer.class, true);
+        System.out.println(treeList);
+    }
+
+    @Test
+    void buildTreeListByParentIdWithMapLookupBuilderAndParallel() {
+        List<TreeNode<Integer>> treeList = TreeUtil.MapLookupBuilder.buildTreeList(NODE_LIST, 2, true);
         System.out.println(treeList);
     }
 }

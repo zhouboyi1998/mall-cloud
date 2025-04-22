@@ -113,6 +113,6 @@ public class RoleResourceFacadeImpl implements RoleResourceFacade {
         // 转换成资源树VO列表
         List<ResourceTreeVO> resourceTreeVOList = ResourceConverter.INSTANCE.toTreeVOList(resourceList);
         // 组装成树形格式
-        return TreeUtil.buildTreeList(resourceTreeVOList, Long.class);
+        return TreeUtil.RecursiveBuilder.buildTreeList(resourceTreeVOList, Long.class);
     }
 }
