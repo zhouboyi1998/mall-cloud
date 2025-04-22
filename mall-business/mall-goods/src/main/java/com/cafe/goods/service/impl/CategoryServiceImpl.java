@@ -31,13 +31,13 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     public CategoryTreeVO treeNode(CategoryTreeNodeQuery query) {
         Category category = CategoryConverter.INSTANCE.toEntity(query);
         List<CategoryTreeVO> categoryTreeVOList = categoryMapper.selectTreeVOList(category);
-        return TreeUtil.buildTreeNode(categoryTreeVOList, category.getId());
+        return TreeUtil.RecursiveBuilder.buildTreeNode(categoryTreeVOList, category.getId());
     }
 
     @Override
     public List<CategoryTreeVO> treeList(CategoryTreeListQuery query) {
         Category category = CategoryConverter.INSTANCE.toEntity(query);
         List<CategoryTreeVO> categoryTreeVOList = categoryMapper.selectTreeVOList(category);
-        return TreeUtil.buildTreeList(categoryTreeVOList, query.getParentId());
+        return TreeUtil.RecursiveBuilder.buildTreeList(categoryTreeVOList, query.getParentId());
     }
 }
