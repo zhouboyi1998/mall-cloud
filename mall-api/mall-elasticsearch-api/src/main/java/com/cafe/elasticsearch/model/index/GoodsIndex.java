@@ -8,12 +8,14 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
@@ -41,17 +43,37 @@ public class GoodsIndex implements Serializable {
     @Field(type = FieldType.Text)
     private String skuName;
 
+    @ApiModelProperty(value = "SPU ID")
+    @Field(type = FieldType.Keyword)
+    private Long spuId;
+
     @ApiModelProperty(value = "SPU 名称")
     @Field(type = FieldType.Text)
     private String spuName;
+
+    @ApiModelProperty(value = "品牌ID")
+    @Field(type = FieldType.Keyword)
+    private Long brandId;
 
     @ApiModelProperty(value = "品牌名称")
     @Field(type = FieldType.Text)
     private String brandName;
 
+    @ApiModelProperty(value = "分类ID")
+    @Field(type = FieldType.Keyword)
+    private Long categoryId;
+
     @ApiModelProperty(value = "分类名称")
     @Field(type = FieldType.Text)
     private String categoryName;
+
+    @ApiModelProperty(value = "店铺ID")
+    @Field(type = FieldType.Keyword)
+    private Long shopId;
+
+    @ApiModelProperty(value = "店铺名称")
+    @Field(type = FieldType.Text)
+    private String shopName;
 
     @ApiModelProperty(value = "SKU 规格")
     @Field(type = FieldType.Text)
@@ -88,4 +110,8 @@ public class GoodsIndex implements Serializable {
     @ApiModelProperty(value = "差评数")
     @Field(type = FieldType.Keyword)
     private Integer badComment;
+
+    @ApiModelProperty(value = "上架时间")
+    @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime launchTime;
 }

@@ -33,6 +33,27 @@ public class GoodsSummary implements Serializable {
     @ApiModelProperty(value = "SPU ID")
     private Long spuId;
 
+    @ApiModelProperty(value = "SPU 名称")
+    private String spuName;
+
+    @ApiModelProperty(value = "品牌ID")
+    private Long brandId;
+
+    @ApiModelProperty(value = "品牌名称")
+    private String brandName;
+
+    @ApiModelProperty(value = "分类ID")
+    private Long categoryId;
+
+    @ApiModelProperty(value = "分类名称")
+    private String categoryName;
+
+    @ApiModelProperty(value = "店铺ID")
+    private Long shopId;
+
+    @ApiModelProperty(value = "店铺名称")
+    private String shopName;
+
     @ApiModelProperty(value = "SKU 原价")
     private BigDecimal originalPrice;
 

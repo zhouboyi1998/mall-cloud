@@ -1,5 +1,6 @@
 package com.cafe.goods.feign;
 
+import com.cafe.common.constant.model.GoodsConstant;
 import com.cafe.goods.model.bo.Goods;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -7,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -22,11 +24,15 @@ import java.util.List;
 public interface GoodsFeign {
 
     /**
-     * 根据库存量单位ids查询商品列表
+     * 根据 skuIds 查询商品列表
      *
-     * @param ids 库存量单位ID列表
+     * @param queryType 查询类型
+     * @param skuIds    库存量单位ID列表
      * @return 商品列表
      */
     @PostMapping(value = "/list")
-    ResponseEntity<List<Goods>> list(@RequestBody List<Long> ids);
+    ResponseEntity<List<Goods>> list(
+        @RequestParam(value = "queryType", required = false, defaultValue = GoodsConstant.QueryType.FULL) String queryType,
+        @RequestBody List<Long> skuIds
+    );
 }
