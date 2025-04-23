@@ -1,9 +1,10 @@
 package com.cafe.goodscenter.model.converter;
 
+import com.cafe.elasticsearch.model.index.GoodsIndex;
 import com.cafe.goods.model.bo.Goods;
 import com.cafe.goods.model.vo.SpuVO;
+import com.cafe.goodscenter.model.vo.GoodsDetail;
 import com.cafe.goodscenter.model.vo.GoodsSummary;
-import com.cafe.goodscenter.model.vo.SpuDetail;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -22,26 +23,42 @@ public interface GoodsConverter {
     GoodsConverter INSTANCE = Mappers.getMapper(GoodsConverter.class);
 
     /**
-     * 商品业务模型 -> 商品概要模型
+     * 商品业务模型 -> 商品全文索引模型
      *
      * @param goods 商品业务模型
-     * @return 商品概要模型
+     * @return 商品全文索引模型
+     */
+    GoodsIndex toIndex(Goods goods);
+
+    /**
+     * 商品业务模型列表 -> 商品全文索引模型列表
+     *
+     * @param goodsList 商品业务模型列表
+     * @return 商品全文索引模型列表
+     */
+    List<GoodsIndex> toIndexList(List<Goods> goodsList);
+
+    /**
+     * 商品业务模型 -> 商品概要视图模型
+     *
+     * @param goods 商品业务模型
+     * @return 商品概要视图模型
      */
     GoodsSummary toSummary(Goods goods);
 
     /**
-     * 商品业务模型列表 -> 商品概要模型列表
+     * 商品业务模型列表 -> 商品概要视图模型列表
      *
      * @param goodsList 商品业务模型列表
-     * @return 商品概要模型列表
+     * @return 商品概要视图模型列表
      */
     List<GoodsSummary> toSummaryList(List<Goods> goodsList);
 
     /**
-     * SPU 视图模型 -> SPU 详情模型
+     * SPU 视图模型 -> 商品详情视图模型
      *
      * @param spuVO SPU 视图模型
-     * @return SPU 详情模型
+     * @return 商品详情视图模型
      */
-    SpuDetail toDetail(SpuVO spuVO);
+    GoodsDetail toDetail(SpuVO spuVO);
 }

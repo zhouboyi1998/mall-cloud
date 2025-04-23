@@ -1,7 +1,7 @@
 package com.cafe.elasticsearch.service;
 
 import com.cafe.elasticsearch.model.index.GoodsIndex;
-import org.springframework.data.domain.Page;
+import com.cafe.infrastructure.elasticsearch.model.vo.AggregatedPageVO;
 
 import java.util.List;
 
@@ -78,5 +78,5 @@ public interface GoodsIndexService {
      * @param keyword   关键词
      * @return 商品索引列表
      */
-    Page<GoodsIndex> search(Integer current, Integer size, String sortField, String sortRule, String keyword);
+    AggregatedPageVO<GoodsIndex> search(Integer current, Integer size, String sortField, String sortRule, String keyword);
 }

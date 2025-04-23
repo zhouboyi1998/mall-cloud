@@ -67,7 +67,7 @@ public enum HttpStatusEnum {
     /**
      * 商品已下架
      */
-    UNLISTED(601, "Products Unlisted"),
+    OFF_SHELVE(601, "Products Off Shelve"),
 
     /**
      * 收货地址不存在
@@ -118,6 +118,21 @@ public enum HttpStatusEnum {
      * 订单索引修改失败
      */
     ORDER_INDEX_UPDATE_FAIL(611, "Order Index Update Fail"),
+
+    /**
+     * 修改商品状态失败
+     */
+    UPDATE_GOODS_STATUS_FAIL(614, "Update Goods Status Fail"),
+
+    /**
+     * 待上架的商品不存在
+     */
+    PENDING_ON_SHELVE_GOODS_NOT_FOUND(615, "Pending On Shelve Goods Not Found"),
+
+    /**
+     * 店铺不存在
+     */
+    SHOP_NOT_FOUND(616, "Shop Not Found"),
 
     ;
 

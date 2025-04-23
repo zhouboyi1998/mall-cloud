@@ -31,10 +31,6 @@
         <!-- 基础设施 -->
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-infrastructure-elasticsearch</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.cafe</groupId>
             <artifactId>mall-infrastructure-kafka</artifactId>
         </dependency>
         <dependency>

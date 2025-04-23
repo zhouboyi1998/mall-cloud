@@ -17,11 +17,32 @@ public class GoodsConstant {
         /**
          * 上架
          */
-        public static final Integer LAUNCH = 1;
+        public static final Integer ON_SHELVE = 1;
 
         /**
          * 下架
          */
-        public static final Integer DELIST = 0;
+        public static final Integer OFF_SHELVE = 0;
+    }
+
+    /**
+     * 查询类型
+     */
+    public static class QueryType {
+
+        /**
+         * 所有字段
+         */
+        public static final String FULL = "FULL";
+
+        /**
+         * 全文索引字段
+         */
+        public static final String INDEX = "INDEX";
+
+        /**
+         * 概要字段
+         */
+        public static final String SUMMARY = "SUMMARY";
     }
 }

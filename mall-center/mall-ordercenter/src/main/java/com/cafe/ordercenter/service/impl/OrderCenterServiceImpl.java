@@ -1,5 +1,6 @@
 package com.cafe.ordercenter.service.impl;
 
+import com.cafe.common.constant.model.GoodsConstant;
 import com.cafe.common.constant.pool.BigDecimalConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
@@ -90,16 +91,16 @@ public class OrderCenterServiceImpl implements OrderCenterService {
         // 获取 SKU 主键列表
         List<Long> skuIds = cartDTOList.stream().map(CartDTO::getSkuId).collect(Collectors.toList());
         // 查询购买的 SKU 是否存在已下架的
-        List<Sku> unlisted = Optional.ofNullable(skuFeign.unlisted(skuIds))
+        List<Sku> offShelveList = Optional.ofNullable(skuFeign.offShelveList(skuIds))
             .map(ResponseEntity::getBody)
             .orElse(Collections.emptyList());
         // 如果存在下架状态的 SKU, 终止订单提交
-        if (!CollectionUtils.isEmpty(unlisted)) {
-            throw new BusinessException(HttpStatusEnum.UNLISTED, unlisted);
+        if (!CollectionUtils.isEmpty(offShelveList)) {
+            throw new BusinessException(HttpStatusEnum.OFF_SHELVE, offShelveList);
         }
 
         // 返回下单购买的所有商品的信息
-        return Optional.ofNullable(goodsFeign.list(skuIds))
+        return Optional.ofNullable(goodsFeign.list(GoodsConstant.QueryType.FULL, skuIds))
             .map(ResponseEntity::getBody)
             .orElse(Collections.emptyList());
     }

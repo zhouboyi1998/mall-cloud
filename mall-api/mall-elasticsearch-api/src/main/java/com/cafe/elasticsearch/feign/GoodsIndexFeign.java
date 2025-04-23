@@ -3,9 +3,9 @@ package com.cafe.elasticsearch.feign;
 import com.cafe.common.constant.database.DatabaseConstant;
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
 import com.cafe.elasticsearch.model.index.GoodsIndex;
+import com.cafe.infrastructure.elasticsearch.model.vo.AggregatedPageVO;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -34,7 +34,7 @@ public interface GoodsIndexFeign {
      * @return 商品索引列表
      */
     @GetMapping(value = "/search/{current}/{size}")
-    ResponseEntity<Page<GoodsIndex>> search(
+    ResponseEntity<AggregatedPageVO<GoodsIndex>> search(
         @PathVariable(value = "current") Integer current,
         @PathVariable(value = "size") Integer size,
         @RequestParam(value = "sortField", required = false, defaultValue = ElasticSearchConstant.Goods.DEFAULT_SORT_FIELD) String sortField,
