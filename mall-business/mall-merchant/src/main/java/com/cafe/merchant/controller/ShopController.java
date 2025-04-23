@@ -74,6 +74,15 @@ public class ShopController {
         return ResponseEntity.ok(shopList);
     }
 
+    @ApiLogPrint(value = "根据店铺ids查询店铺列表")
+    @ApiOperation(value = "根据店铺ids查询店铺列表")
+    @ApiImplicitParam(value = "店铺id列表", name = "ids", dataType = "List<Long>", paramType = "body", required = true)
+    @PostMapping(value = "/list-by-ids")
+    public ResponseEntity<List<Shop>> listByIds(@RequestBody List<Long> ids) {
+        List<Shop> shopList = shopService.listByIds(ids);
+        return ResponseEntity.ok(shopList);
+    }
+
     @ApiLogPrint(value = "分页查询店铺列表")
     @ApiOperation(value = "分页查询店铺列表")
     @ApiImplicitParams(value = {

@@ -5,12 +5,12 @@ import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.elasticsearch.model.index.GoodsIndex;
 import com.cafe.elasticsearch.service.GoodsIndexService;
+import com.cafe.infrastructure.elasticsearch.model.vo.AggregatedPageVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -112,14 +112,14 @@ public class GoodsIndexController {
         @ApiImplicitParam(value = "关键词", name = "keyword", dataType = "String", paramType = "query")
     })
     @GetMapping(value = "/search/{current}/{size}")
-    public ResponseEntity<Page<GoodsIndex>> search(
+    public ResponseEntity<AggregatedPageVO<GoodsIndex>> search(
         @PathVariable(value = "current") Integer current,
         @PathVariable(value = "size") Integer size,
         @RequestParam(value = "sortField", required = false, defaultValue = ElasticSearchConstant.Goods.DEFAULT_SORT_FIELD) String sortField,
         @RequestParam(value = "sortRule", required = false, defaultValue = DatabaseConstant.Rule.DESC) String sortRule,
         @RequestParam(value = "keyword", required = false) String keyword
     ) {
-        Page<GoodsIndex> goodsIndexPage = goodsIndexService.search(current, size, sortField, sortRule, keyword);
+        AggregatedPageVO<GoodsIndex> goodsIndexPage = goodsIndexService.search(current, size, sortField, sortRule, keyword);
         return ResponseEntity.ok(goodsIndexPage);
     }
 }

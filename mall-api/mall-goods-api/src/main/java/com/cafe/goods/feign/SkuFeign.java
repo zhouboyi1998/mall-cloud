@@ -4,6 +4,7 @@ import com.cafe.goods.model.entity.Sku;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +28,19 @@ public interface SkuFeign {
      * @param skuIds 库存量单位ID列表
      * @return 未上架的库存量单位列表
      */
-    @PostMapping(value = "/unlisted")
-    ResponseEntity<List<Sku>> unlisted(@RequestBody List<Long> skuIds);
+    @PostMapping(value = "/off-shelve-list")
+    ResponseEntity<List<Sku>> offShelveList(@RequestBody List<Long> skuIds);
+
+    /**
+     * 批量修改库存量单位状态
+     *
+     * @param status 商品状态
+     * @param skuIds 库存量单位ID列表
+     * @return 影响行数
+     */
+    @PostMapping(value = "/update-status/{status}")
+    ResponseEntity<Integer> updateStatus(
+        @PathVariable(value = "status") Integer status,
+        @RequestBody List<Long> skuIds
+    );
 }

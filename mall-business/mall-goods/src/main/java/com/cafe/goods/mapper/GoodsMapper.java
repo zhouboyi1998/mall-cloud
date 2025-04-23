@@ -19,8 +19,9 @@ public interface GoodsMapper {
     /**
      * 根据 skuIds 查询商品列表
      *
-     * @param ids 库存量单位ID列表
+     * @param queryType 查询类型
+     * @param skuIds    库存量单位ID列表
      * @return 商品列表
      */
-    List<Goods> list(@Param(value = "ids") List<Long> ids);
+    List<Goods> list(@Param(value = "queryType") String queryType, @Param(value = "skuIds") List<Long> skuIds);
 }

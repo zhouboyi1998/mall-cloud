@@ -17,7 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = {FeignConstant.Client.ID, FeignConstant.Client.GOODS, FeignConstant.Client.ELASTICSEARCH})
+@EnableFeignClients(basePackages = {FeignConstant.Client.ID, FeignConstant.Client.GOODS, FeignConstant.Client.MERCHANT, FeignConstant.Client.ELASTICSEARCH})
 @ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
 public class GoodsCenterApplication {
 
