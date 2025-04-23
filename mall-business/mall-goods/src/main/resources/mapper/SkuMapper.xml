@@ -24,7 +24,7 @@
         <result column="is_deleted" property="deleted" />
     </resultMap>
 
-    <select id="unlisted" resultMap="BaseResultMap">
+    <select id="offShelveList" resultMap="BaseResultMap">
         SELECT id, sku_name, spu_id, original_price, discount_price, seckill_price,
         specification, image, image_list, video, sort, audit, status,
         create_time, update_time, audit_time, launch_time
@@ -41,8 +41,8 @@
         UPDATE mall_sku AS k
         SET k.status = #{status}
         WHERE k.id IN
-        <foreach collection="ids" item="id" open="(" close=")" separator=",">
-            #{id}
+        <foreach collection="skuIds" item="skuId" open="(" close=")" separator=",">
+            #{skuId}
         </foreach>
     </update>
 

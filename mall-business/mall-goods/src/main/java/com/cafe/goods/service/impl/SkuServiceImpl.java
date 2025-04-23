@@ -23,12 +23,12 @@ public class SkuServiceImpl extends ServiceImpl<SkuMapper, Sku> implements SkuSe
     private final SkuMapper skuMapper;
 
     @Override
-    public List<Sku> unlisted(List<Long> skuIds) {
-        return skuMapper.unlisted(skuIds);
+    public List<Sku> offShelveList(List<Long> skuIds) {
+        return skuMapper.offShelveList(skuIds);
     }
 
     @Override
-    public Integer updateStatus(List<Long> ids, Integer status) {
-        return skuMapper.updateStatus(ids, status);
+    public Integer updateStatus(Integer status, List<Long> skuIds) {
+        return skuMapper.updateStatus(status, skuIds);
     }
 }

@@ -25,6 +25,10 @@
         <!-- 基础设施 -->
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-infrastructure-rocketmq</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-infrastructure-swagger</artifactId>
         </dependency>
         <!-- 远程调用接口 -->
@@ -39,6 +43,10 @@
         <dependency>
             <groupId>com.cafe</groupId>
             <artifactId>mall-goods-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-merchant-api</artifactId>
         </dependency>
     </dependencies>
 

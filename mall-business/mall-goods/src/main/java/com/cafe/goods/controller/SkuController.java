@@ -194,10 +194,25 @@ public class SkuController {
 
     @ApiLogPrint(value = "根据ids查询未上架的库存量单位列表")
     @ApiOperation(value = "根据ids查询未上架的库存量单位列表")
-    @ApiImplicitParam(value = "SKU ids", name = "skuIds", dataType = "List<Long>", paramType = "body", required = true)
-    @PostMapping(value = "/unlisted")
-    public ResponseEntity<List<Sku>> unlisted(@RequestBody List<Long> skuIds) {
-        List<Sku> skuList = skuService.unlisted(skuIds);
+    @ApiImplicitParam(value = "库存量单位id列表", name = "skuIds", dataType = "List<Long>", paramType = "body", required = true)
+    @PostMapping(value = "/off-shelve-list")
+    public ResponseEntity<List<Sku>> offShelveList(@RequestBody List<Long> skuIds) {
+        List<Sku> skuList = skuService.offShelveList(skuIds);
         return ResponseEntity.ok(skuList);
+    }
+
+    @ApiLogPrint(value = "批量修改库存量单位状态")
+    @ApiOperation(value = "批量修改库存量单位状态")
+    @ApiImplicitParams({
+        @ApiImplicitParam(value = "商品状态", name = "status", dataType = "Integer", paramType = "path", required = true),
+        @ApiImplicitParam(value = "库存量单位id列表", name = "skuIds", dataType = "List<Long>", paramType = "body", required = true)
+    })
+    @PostMapping(value = "/update-status/{status}")
+    public ResponseEntity<Integer> updateStatus(
+        @PathVariable(value = "status") Integer status,
+        @RequestBody List<Long> skuIds
+    ) {
+        Integer count = skuService.updateStatus(status, skuIds);
+        return ResponseEntity.ok(count);
     }
 }

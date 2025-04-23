@@ -14,13 +14,13 @@ import java.math.BigDecimal;
  * @Package: com.cafe.goodscenter.model.vo
  * @Author: zhouboyi
  * @Date: 2024/8/4 23:49
- * @Description: SKU 详情
+ * @Description: 商品子项详情
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "SkuDetail", description = "SKU 详情")
-public class SkuDetail implements Serializable {
+@ApiModel(value = "GoodsItem", description = "商品子项详情")
+public class GoodsItem implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

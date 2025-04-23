@@ -24,7 +24,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     @FallbackCache
     @Override
-    public List<Goods> list(List<Long> ids) {
-        return goodsMapper.list(ids);
+    public List<Goods> list(String queryType, List<Long> skuIds) {
+        return goodsMapper.list(queryType, skuIds);
     }
 }

@@ -20,13 +20,14 @@ public interface SkuService extends IService<Sku> {
      * @param skuIds 库存量单位ID列表
      * @return 库存量单位列表
      */
-    List<Sku> unlisted(List<Long> skuIds);
+    List<Sku> offShelveList(List<Long> skuIds);
 
     /**
-     * 根据ids更新库存量单位状态
+     * 批量修改库存量单位状态
      *
-     * @param ids    库存量单位ID列表
-     * @param status 状态
+     * @param status 商品状态
+     * @param skuIds 库存量单位ID列表
+     * @return 影响行数
      */
-    Integer updateStatus(List<Long> ids, Integer status);
+    Integer updateStatus(Integer status, List<Long> skuIds);
 }

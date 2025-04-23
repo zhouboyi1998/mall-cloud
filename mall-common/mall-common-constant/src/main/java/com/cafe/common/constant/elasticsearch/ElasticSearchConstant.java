@@ -34,7 +34,8 @@ public class ElasticSearchConstant {
             FieldConstant.SPU_NAME,
             FieldConstant.BRAND_NAME,
             FieldConstant.CATEGORY_NAME,
-            FieldConstant.SPECIFICATION
+            FieldConstant.SPECIFICATION,
+            FieldConstant.SHOP_NAME
         };
     }
 

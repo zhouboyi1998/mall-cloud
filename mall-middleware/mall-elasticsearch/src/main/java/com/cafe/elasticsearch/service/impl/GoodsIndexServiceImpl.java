@@ -6,6 +6,8 @@ import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.elasticsearch.model.index.GoodsIndex;
 import com.cafe.elasticsearch.repository.GoodsIndexRepository;
 import com.cafe.elasticsearch.service.GoodsIndexService;
+import com.cafe.infrastructure.elasticsearch.model.converter.PageConverter;
+import com.cafe.infrastructure.elasticsearch.model.vo.AggregatedPageVO;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.ObjectUtils;
@@ -19,7 +21,6 @@ import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.sort.SortOrder;
-import org.springframework.data.domain.Page;
 import org.springframework.data.elasticsearch.core.aggregation.impl.AggregatedPageImpl;
 import org.springframework.stereotype.Service;
 
@@ -83,7 +84,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
 
     @SneakyThrows
     @Override
-    public Page<GoodsIndex> search(Integer current, Integer size, String sortField, String sortRule, String keyword) {
+    public AggregatedPageVO<GoodsIndex> search(Integer current, Integer size, String sortField, String sortRule, String keyword) {
         // 组装搜索条件
         SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder()
             // 滚动分页
@@ -109,6 +110,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
             .map(SearchHit::getSourceAsMap)
             .map(sourceAsMap -> JacksonUtil.convertValue(sourceAsMap, GoodsIndex.class))
             .collect(Collectors.toList());
-        return new AggregatedPageImpl<>(goodsIndexList, searchResponse.getScrollId());
+        AggregatedPageImpl<GoodsIndex> goodsIndexPage = new AggregatedPageImpl<>(goodsIndexList, searchResponse.getScrollId());
+        return PageConverter.INSTANCE.toAggregatedPageVO(goodsIndexPage);
     }
 }
