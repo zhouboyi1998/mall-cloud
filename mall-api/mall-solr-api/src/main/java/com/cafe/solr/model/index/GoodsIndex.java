@@ -12,6 +12,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.solr.core.mapping.SolrDocument;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * @Project: mall-cloud
@@ -39,17 +40,37 @@ public class GoodsIndex implements Serializable {
     @Field
     private String skuName;
 
+    @ApiModelProperty(value = "SPU ID")
+    @Field
+    private Long spuId;
+
     @ApiModelProperty(value = "SPU 名称")
     @Field
     private String spuName;
+
+    @ApiModelProperty(value = "品牌ID")
+    @Field
+    private Long brandId;
 
     @ApiModelProperty(value = "品牌名称")
     @Field
     private String brandName;
 
+    @ApiModelProperty(value = "分类ID")
+    @Field
+    private Long categoryId;
+
     @ApiModelProperty(value = "分类名称")
     @Field
     private String categoryName;
+
+    @ApiModelProperty(value = "店铺ID")
+    @Field
+    private Long shopId;
+
+    @ApiModelProperty(value = "店铺名称")
+    @Field
+    private String shopName;
 
     @ApiModelProperty(value = "SKU 规格")
     @Field
@@ -86,4 +107,8 @@ public class GoodsIndex implements Serializable {
     @ApiModelProperty(value = "差评数")
     @Field
     private Integer badComment;
+
+    @ApiModelProperty(value = "上架时间")
+    @Field
+    private LocalDateTime launchTime;
 }

@@ -14,13 +14,13 @@ import java.util.List;
  * @Package: com.cafe.goodscenter.model.vo
  * @Author: zhouboyi
  * @Date: 2024/8/4 21:17
- * @Description: SPU 详情
+ * @Description: 商品详情
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "SpuDetail", description = "SPU 详情")
-public class SpuDetail implements Serializable {
+@ApiModel(value = "GoodsDetail", description = "商品详情")
+public class GoodsDetail implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -52,5 +52,5 @@ public class SpuDetail implements Serializable {
     private String caption;
 
     @ApiModelProperty(value = "SKU 列表")
-    List<SkuDetail> skuList;
+    List<GoodsItem> skuList;
 }
