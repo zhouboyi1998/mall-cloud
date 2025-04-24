@@ -34,4 +34,6 @@ public @interface FallbackCache {
     long timeout() default LongConstant.MINUS_ONE;
 
     TimeUnit unit() default TimeUnit.SECONDS;
+
+    String condition() default StringConstant.EMPTY;
 }
