@@ -1,5 +1,6 @@
 package com.cafe.user.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date: 2024/12/7 4:09
  * @Description:
  */
-@FeignClient(value = "mall-user", contextId = "role-resource", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_USER, contextId = "role-resource", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/role-resource")
 public interface RoleResourceFeign {
 

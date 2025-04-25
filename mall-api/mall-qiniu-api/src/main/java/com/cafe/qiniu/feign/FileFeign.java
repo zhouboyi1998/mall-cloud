@@ -1,5 +1,6 @@
 package com.cafe.qiniu.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
  * @Date: 2023/11/17 21:04
  * @Description:
  */
-@FeignClient(value = "mall-qiniu", contextId = "file", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_QINIU, contextId = "file", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/file")
 public interface FileFeign {
 

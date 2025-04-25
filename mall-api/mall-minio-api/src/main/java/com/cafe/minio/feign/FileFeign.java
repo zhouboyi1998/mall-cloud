@@ -1,5 +1,6 @@
 package com.cafe.minio.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Date: 2022/6/9 20:03
  * @Description:
  */
-@FeignClient(value = "mall-minio", contextId = "file", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_MINIO, contextId = "file", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/file")
 public interface FileFeign {
 

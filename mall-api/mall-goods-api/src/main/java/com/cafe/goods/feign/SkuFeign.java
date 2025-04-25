@@ -1,5 +1,6 @@
 package com.cafe.goods.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.goods.model.entity.Sku;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -18,7 +19,7 @@ import java.util.List;
  * @Date: 2023/10/25 10:03
  * @Description:
  */
-@FeignClient(value = "mall-goods", contextId = "sku", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_GOODS, contextId = "sku", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/sku")
 public interface SkuFeign {
 

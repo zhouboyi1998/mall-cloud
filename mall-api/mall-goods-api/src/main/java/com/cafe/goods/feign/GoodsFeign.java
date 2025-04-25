@@ -1,5 +1,6 @@
 package com.cafe.goods.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.common.constant.model.GoodsConstant;
 import com.cafe.goods.model.bo.Goods;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
@@ -19,7 +20,7 @@ import java.util.List;
  * @Date: 2023/10/27 10:56
  * @Description:
  */
-@FeignClient(value = "mall-goods", contextId = "goods", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_GOODS, contextId = "goods", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/goods")
 public interface GoodsFeign {
 
