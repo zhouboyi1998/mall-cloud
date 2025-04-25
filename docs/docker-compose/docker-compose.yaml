@@ -177,6 +177,16 @@ services:
       - ./logs:/mall/mall-foundation/logs
     restart: always
 
+  mall-review:
+    image: mall-review:latest
+    ports:
+      - "18088:18088"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-review/logs
+    restart: always
+
   mall-goods:
     image: mall-goods:latest
     ports:
