@@ -1,5 +1,6 @@
 package com.cafe.user.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,7 @@ import java.util.List;
  * @Date: 2022/5/10 9:55
  * @Description:
  */
-@FeignClient(value = "mall-user", contextId = "role", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_USER, contextId = "role", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/role")
 public interface RoleFeign {
 

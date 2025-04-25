@@ -1,5 +1,6 @@
 package com.cafe.fastdfs.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date: 2024/3/26 21:08
  * @Description:
  */
-@FeignClient(value = "mall-fastdfs", contextId = "tracker", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_FASTDFS, contextId = "tracker", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/tracker")
 public interface TrackerFeign {
 

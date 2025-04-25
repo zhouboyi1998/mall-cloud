@@ -1,5 +1,6 @@
 package com.cafe.storage.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import com.cafe.storage.model.dto.CartDTO;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -17,7 +18,7 @@ import java.util.List;
  * @Date: 2023/10/25 17:21
  * @Description:
  */
-@FeignClient(value = "mall-storage", contextId = "stock", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_STORAGE, contextId = "stock", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/stock")
 public interface StockFeign {
 
