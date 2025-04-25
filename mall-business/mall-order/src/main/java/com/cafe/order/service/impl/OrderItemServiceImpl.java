@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * @Package: com.cafe.order.service.impl
  * @Author: zhouboyi
  * @Date: 2022-12-29
- * @Description: 订单明细表业务实现类
+ * @Description: 订单明细业务实现类
  */
 @RequiredArgsConstructor
 @Service
