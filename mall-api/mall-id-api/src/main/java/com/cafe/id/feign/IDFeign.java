@@ -1,5 +1,6 @@
 package com.cafe.id.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date: 2022/11/1 10:07
  * @Description:
  */
-@FeignClient(value = "mall-id", contextId = "id", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_ID, contextId = "id", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/id")
 public interface IDFeign {
 
