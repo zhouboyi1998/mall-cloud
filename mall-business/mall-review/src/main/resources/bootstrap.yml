@@ -1,0 +1,8 @@
+server:
+  port: 18088
+
+spring:
+  application:
+    name: mall-review
+  profiles:
+    active: dev

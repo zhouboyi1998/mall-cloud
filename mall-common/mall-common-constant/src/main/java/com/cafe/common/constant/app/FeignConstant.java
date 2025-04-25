@@ -29,6 +29,8 @@ public class FeignConstant {
 
         public static final String MERCHANT = "com.cafe.merchant.feign";
 
+        public static final String REVIEW = "com.cafe.review.feign";
+
         public static final String ELASTICSEARCH = "com.cafe.elasticsearch.feign";
     }
 }
