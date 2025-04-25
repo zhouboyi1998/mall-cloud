@@ -1,5 +1,6 @@
 package com.cafe.merchant.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.merchant.model.entity.Shop;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -17,7 +18,7 @@ import java.util.List;
  * @Date: 2025/4/23 17:17
  * @Description:
  */
-@FeignClient(value = "mall-merchant", contextId = "shop", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_MERCHANT, contextId = "shop", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/shop")
 public interface ShopFeign {
 

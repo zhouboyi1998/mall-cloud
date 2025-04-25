@@ -1,5 +1,6 @@
 package com.cafe.goods.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.goods.model.vo.SpuVO;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date: 2024/8/4 23:30
  * @Description:
  */
-@FeignClient(value = "mall-goods", contextId = "spu", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_GOODS, contextId = "spu", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/spu")
 public interface SpuFeign {
 

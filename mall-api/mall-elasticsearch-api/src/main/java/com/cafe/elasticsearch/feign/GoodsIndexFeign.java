@@ -1,5 +1,6 @@
 package com.cafe.elasticsearch.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.common.constant.database.DatabaseConstant;
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
 import com.cafe.elasticsearch.model.index.GoodsIndex;
@@ -19,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * @Date: 2024/8/1 0:14
  * @Description:
  */
-@FeignClient(value = "mall-elasticsearch", contextId = "goods-index", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_ELASTICSEARCH, contextId = "goods-index", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/goods-index")
 public interface GoodsIndexFeign {
 
