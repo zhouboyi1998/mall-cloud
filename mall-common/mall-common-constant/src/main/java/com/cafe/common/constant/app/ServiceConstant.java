@@ -58,6 +58,11 @@ public class ServiceConstant {
      */
     public static final String MALL_MERCHANT = "mall-merchant";
 
+    /**
+     * 评论服务
+     */
+    public static final String MALL_REVIEW = "mall-review";
+
     // -------------------- MIDDLEWARE --------------------
 
     /**

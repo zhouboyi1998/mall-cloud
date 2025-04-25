@@ -2,6 +2,7 @@ knife4j:
   cloud:
     enable: true
     routes:
+      # mall-service
       - name: mall-security
         uri: 127.0.0.1:18072
         location: /v2/api-docs
@@ -11,6 +12,7 @@ knife4j:
       - name: mall-id
         uri: 127.0.0.1:18074
         location: /v2/api-docs
+      # mall-business
       - name: mall-goods
         uri: 127.0.0.1:18081
         location: /v2/api-docs
@@ -32,6 +34,10 @@ knife4j:
       - name: mall-merchant
         uri: 127.0.0.1:18087
         location: /v2/api-docs
+      - name: mall-review
+        uri: 127.0.0.1:18088
+        location: /v2/api-docs
+      # mall-middleware
       - name: mall-minio
         uri: 127.0.0.1:18091
         location: /v2/api-docs
@@ -49,4 +55,11 @@ knife4j:
         location: /v2/api-docs
       - name: mall-clickhouse
         uri: 127.0.0.1:18096
+        location: /v2/api-docs
+      # mall-center
+      - name: mall-ordercenter
+        uri: 127.0.0.1:18061
+        location: /v2/api-docs
+      - name: mall-goodscenter
+        uri: 127.0.0.1:18063
         location: /v2/api-docs
