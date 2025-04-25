@@ -1,5 +1,6 @@
 package com.cafe.member.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.member.model.entity.Address;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Date: 2023/10/25 16:53
  * @Description:
  */
-@FeignClient(value = "mall-member", contextId = "address", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_MEMBER, contextId = "address", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/address")
 public interface AddressFeign {
 

@@ -1,5 +1,6 @@
 package com.cafe.fastdfs.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.fastdfs.model.vo.FileInfoVO;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
@@ -20,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Date: 2022/7/23 20:26
  * @Description:
  */
-@FeignClient(value = "mall-fastdfs", contextId = "file", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_FASTDFS, contextId = "file", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/file")
 public interface FileFeign {
 
