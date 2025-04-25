@@ -31,6 +31,7 @@ docker run -d --name mall-debezium mall-debezium:latest
 @REM -------------------- mall-business --------------------
 
 docker run -d -p 18084:18084 --name mall-foundation mall-foundation:latest
+docker run -d -p 18088:18088 --name mall-review mall-review:latest
 
 docker run -d -p 18081:18081 --name mall-goods mall-goods:latest
 docker run -d -p 18082:18082 --name mall-order mall-order:latest

@@ -34,6 +34,7 @@
     |-- mall-member (会员模块)
     |-- mall-merchant (商家模块)
     |-- mall-order (订单模块)
+    |-- mall-review (评论模块)
     |-- mall-storage (仓储模块)
 
 |-- mall-center (中台模块)

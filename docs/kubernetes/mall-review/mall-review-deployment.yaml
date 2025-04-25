@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-review-deployment
+  labels:
+    name: mall-review-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-review
+  template:
+    metadata:
+      namespace: mall
+      name: mall-review-pod
+      labels:
+        app: mall-review
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-review-container
+          image: 192.168.159.128:5000/mall/mall-review:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18088
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

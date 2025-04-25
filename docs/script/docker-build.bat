@@ -31,6 +31,7 @@ docker build -f ./docs/docker/mall-debezium/Dockerfile -t mall-debezium:latest .
 @REM -------------------- mall-business --------------------
 
 docker build -f ./docs/docker/mall-foundation/Dockerfile -t mall-foundation:latest .
+docker build -f ./docs/docker/mall-review/Dockerfile -t mall-review:latest .
 
 docker build -f ./docs/docker/mall-goods/Dockerfile -t mall-goods:latest .
 docker build -f ./docs/docker/mall-order/Dockerfile -t mall-order:latest .
