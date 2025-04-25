@@ -21,12 +21,12 @@ import java.time.LocalDateTime;
  * @Package: com.cafe.order.model.entity
  * @Author: zhouboyi
  * @Date: 2022-12-29
- * @Description: 订单明细表实体模型
+ * @Description: 订单明细实体模型
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value = "OrderItem", description = "订单明细表实体模型")
+@ApiModel(value = "OrderItem", description = "订单明细实体模型")
 @TableName(value = "mall_order_item")
 public class OrderItem implements Serializable {
 
