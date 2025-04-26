@@ -3,13 +3,13 @@ package com.cafe.generator.plus.config.builder;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
 import com.baomidou.mybatisplus.generator.config.converts.TypeConverts;
-import com.cafe.common.enumeration.database.DatabaseTypeEnum;
 import com.cafe.generator.plus.config.converter.ClickHouseTypeConverter;
 import com.cafe.generator.plus.config.converter.MariaDBTypeConverter;
 import com.cafe.generator.plus.config.converter.MySQLTypeConverter;
 import com.cafe.generator.plus.config.converter.OracleTypeConverter;
 import com.cafe.generator.plus.config.converter.PostgreSQLTypeConverter;
 import com.cafe.generator.plus.config.converter.SQLServerTypeConverter;
+import com.cafe.generator.plus.config.converter.SQLiteTypeConverter;
 import com.cafe.generator.plus.config.query.ClickHouseQuery;
 
 import java.util.Properties;
@@ -36,13 +36,12 @@ public class DataSourceConfigBuilder {
                 return new DataSourceConfig().setDbType(dbType).setTypeConvert(new SQLServerTypeConverter());
             case ORACLE_12C:
                 return new DataSourceConfig().setDbType(dbType).setTypeConvert(new OracleTypeConverter());
+            case SQLITE:
+                return new DataSourceConfig().setDbType(dbType).setTypeConvert(new SQLiteTypeConverter());
+            case CLICK_HOUSE:
+                return new DataSourceConfig().setDbType(dbType).setTypeConvert(new ClickHouseTypeConverter()).setDbQuery(new ClickHouseQuery(properties));
             default:
-                switch (DatabaseTypeEnum.getDbType(databaseType)) {
-                    case CLICK_HOUSE:
-                        return new DataSourceConfig().setDbQuery(new ClickHouseQuery(properties)).setTypeConvert(new ClickHouseTypeConverter());
-                    default:
-                        return new DataSourceConfig().setDbType(dbType).setTypeConvert(TypeConverts.getTypeConvert(dbType));
-                }
+                return new DataSourceConfig().setDbType(dbType).setTypeConvert(TypeConverts.getTypeConvert(dbType));
         }
     }
 }
