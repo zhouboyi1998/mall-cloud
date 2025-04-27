@@ -1,10 +1,8 @@
 package com.cafe.ordercenter.controller;
 
-import com.cafe.common.constant.kafka.KafkaConstant;
 import com.cafe.common.log.annotation.ApiLogPrint;
-import com.cafe.infrastructure.kafka.producer.KafkaProducer;
 import com.cafe.order.model.vo.OrderVO;
-import com.cafe.ordercenter.service.OrderCenterService;
+import com.cafe.ordercenter.facade.OrderCenterFacade;
 import com.cafe.storage.model.dto.CartDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -33,9 +31,7 @@ import java.util.List;
 @RequestMapping(value = "/order-center")
 public class OrderCenterController {
 
-    private final OrderCenterService orderCenterService;
-
-    private final KafkaProducer kafkaProducer;
+    private final OrderCenterFacade orderCenterFacade;
 
     @ApiLogPrint(value = "提交订单")
     @ApiOperation(value = "提交订单")
@@ -48,9 +44,7 @@ public class OrderCenterController {
         @PathVariable(value = "addressId") Long addressId,
         @RequestBody List<CartDTO> cartDTOList
     ) {
-        OrderVO orderVO = orderCenterService.submit(addressId, cartDTOList);
-        // 发送消息到 Kafka
-        kafkaProducer.send(KafkaConstant.Topic.ORDER_INDEX, orderVO);
+        OrderVO orderVO = orderCenterFacade.submit(addressId, cartDTOList);
         return ResponseEntity.ok(orderVO);
     }
 }

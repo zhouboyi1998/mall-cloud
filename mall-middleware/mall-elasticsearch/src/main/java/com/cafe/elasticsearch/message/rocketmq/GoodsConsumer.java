@@ -4,16 +4,19 @@ import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.model.GoodsConstant;
 import com.cafe.common.constant.rocketmq.RocketMQConstant;
 import com.cafe.common.jackson.util.JacksonUtil;
+import com.cafe.common.util.builder.ToStringStyleHolder;
 import com.cafe.elasticsearch.model.index.GoodsIndex;
 import com.cafe.elasticsearch.service.GoodsIndexService;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.rocketmq.spring.annotation.ConsumeMode;
+import org.apache.rocketmq.spring.annotation.MessageModel;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,7 +29,14 @@ import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-@RocketMQMessageListener(topic = RocketMQConstant.Topic.GOODS_INDEX, consumerGroup = RocketMQConstant.ConsumerGroup.ELASTICSEARCH)
+@RocketMQMessageListener(
+    topic = RocketMQConstant.Topic.GOODS_INDEX,
+    consumerGroup = RocketMQConstant.ConsumerGroup.ELASTICSEARCH,
+    // 消费模式: 顺序
+    consumeMode = ConsumeMode.ORDERLY,
+    // 订阅模式: 集群
+    messageModel = MessageModel.CLUSTERING
+)
 public class GoodsConsumer implements RocketMQListener<String> {
 
     private final GoodsIndexService goodsIndexService;
@@ -36,27 +46,26 @@ public class GoodsConsumer implements RocketMQListener<String> {
         // 打印成功接收消息的日志
         log.info("GoodsConsumer.onMessage(): rocketmq message -> {}", message);
         // 获取消息内容
-        Map<String, Object> content = JacksonUtil.readValue(message, new TypeReference<Map<String, Object>>() {
-        });
+        Map<String, Object> content = JacksonUtil.readValue(message, new TypeReference<Map<String, Object>>() {});
         // 获取上下架标识
         Integer status = Integer.parseInt(String.valueOf(content.get(FieldConstant.STATUS)));
-
-        if (GoodsConstant.Status.LAUNCH.equals(status)) {
+        // 处理上下架请求
+        if (GoodsConstant.Status.ON_SHELVE.equals(status)) {
             // 获取上架商品的信息
-            List<GoodsIndex> goodsIndexList = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<GoodsIndex>>() {
-            });
+            GoodsIndex goodsIndex = JacksonUtil.convertValue(content.get(FieldConstant.DATA), GoodsIndex.class);
             // 上架商品
-            goodsIndexService.insertBatch(goodsIndexList);
-            // 打印成功上架商品的日志
-            log.info("GoodsConsumer.onMessage(): Put away goods success! rocketmq message -> {}", message);
-        } else {
+            GoodsIndex save = goodsIndexService.save(goodsIndex);
+            // 打印日志
+            log.info("GoodsConsumer.onMessage(): Goods on shelve success! goods index -> {}", ToStringBuilder.reflectionToString(save, ToStringStyleHolder.JSON_STYLE_WITHOUT_UNICODE));
+        } else if (GoodsConstant.Status.OFF_SHELVE.equals(status)) {
             // 获取下架商品的主键
-            List<Long> ids = JacksonUtil.convertValue(content.get(FieldConstant.DATA), new TypeReference<List<Long>>() {
-            });
+            Long id = JacksonUtil.convertValue(content.get(FieldConstant.DATA), Long.class);
             // 下架商品
-            goodsIndexService.deleteBatch(ids);
-            // 打印成功下架商品的日志
-            log.info("GoodsConsumer.onMessage(): Sold out goods success! rocketmq message -> {}", message);
+            goodsIndexService.delete(id);
+            // 打印日志
+            log.info("GoodsConsumer.onMessage(): Goods off shelve success! goods index id -> {}", id);
+        } else {
+            log.error("GoodsConsumer.onMessage(): status [{}] is invalid!", status);
         }
     }
 }

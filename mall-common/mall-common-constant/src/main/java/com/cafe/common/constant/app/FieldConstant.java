@@ -70,6 +70,16 @@ public class FieldConstant {
     public static final String SPECIFICATION = "specification";
 
     /**
+     * 店铺名称
+     */
+    public static final String SHOP_NAME = "shopName";
+
+    /**
+     * SKU 销量
+     */
+    public static final String SALE = "sale";
+
+    /**
      * 状态
      */
     public static final String STATUS = "status";

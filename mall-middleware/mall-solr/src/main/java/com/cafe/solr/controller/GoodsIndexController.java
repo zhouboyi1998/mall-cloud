@@ -42,8 +42,8 @@ public class GoodsIndexController {
         return ResponseEntity.ok(goodsIndex);
     }
 
-    @ApiLogPrint(value = "插入/更新商品索引")
-    @ApiOperation(value = "插入/更新商品索引")
+    @ApiLogPrint(value = "保存商品索引")
+    @ApiOperation(value = "保存商品索引")
     @ApiImplicitParam(value = "商品索引", name = "goodsIndex", dataType = "GoodsIndex", paramType = "body", required = true)
     @PostMapping(value = "")
     public ResponseEntity<Void> save(@RequestBody GoodsIndex goodsIndex) {
@@ -51,8 +51,8 @@ public class GoodsIndexController {
         return ResponseEntity.ok().build();
     }
 
-    @ApiLogPrint(value = "批量插入/批量更新商品索引")
-    @ApiOperation(value = "批量插入/批量更新商品索引")
+    @ApiLogPrint(value = "批量保存商品索引")
+    @ApiOperation(value = "批量保存商品索引")
     @ApiImplicitParam(value = "商品索引列表", name = "goodsIndexList", dataType = "List<GoodsIndex>", paramType = "body", required = true)
     @PostMapping(value = "/batch")
     public ResponseEntity<Void> saveBatch(@RequestBody List<GoodsIndex> goodsIndexList) {

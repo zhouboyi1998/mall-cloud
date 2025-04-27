@@ -27,6 +27,10 @@ import java.util.stream.Collectors;
 @Service
 public class RoleResourceFacadeImpl implements RoleResourceFacade {
 
+    private final RoleService roleService;
+
+    private final ResourceService resourceService;
+
     private final RoleResourceService roleResourceService;
 
     private final RedisTemplate<String, Object> redisTemplate;
@@ -64,5 +68,40 @@ public class RoleResourceFacadeImpl implements RoleResourceFacade {
             // 将对应关系保存到 Redis 中
             redisTemplate.opsForHash().put(RedisConstant.RESOURCE_ROLE_MAP, resourceRoleBO.getResourceContent(), roleNameList);
         }
+    }
+
+    @Override
+    public List<ResourceTreeVO> resourceTreeList(List<String> authorities, Resource resource) {
+        // 查询角色id列表
+        List<Long> roleIds = roleService.lambdaQuery()
+            .in(Role::getRoleName, authorities)
+            .select(Role::getId)
+            .list()
+            .stream()
+            .map(Role::getId)
+            .collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(roleIds)) {
+            return Collections.emptyList();
+        }
+        // 查询资源id列表
+        List<Long> resourceIds = roleResourceService.lambdaQuery()
+            .in(RoleResource::getRoleId, roleIds)
+            .select(RoleResource::getResourceId)
+            .list()
+            .stream()
+            .map(RoleResource::getResourceId)
+            .collect(Collectors.toList());
+        if (CollectionUtils.isEmpty(resourceIds)) {
+            return Collections.emptyList();
+        }
+        // 查询资源列表
+        LambdaQueryWrapper<Resource> resourceQueryWrapper = WrapperUtil.createLambdaQueryWrapper(resource)
+            .in(Resource::getId, resourceIds)
+            .orderByAsc(Resource::getSort);
+        List<Resource> resourceList = resourceService.list(resourceQueryWrapper);
+        // 转换成资源树VO列表
+        List<ResourceTreeVO> resourceTreeVOList = ResourceConverter.INSTANCE.toTreeVOList(resourceList);
+        // 组装成树形格式
+        return TreeUtil.RecursiveBuilder.buildTreeList(resourceTreeVOList, Long.class);
     }
 }

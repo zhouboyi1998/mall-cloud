@@ -25,9 +25,9 @@ import java.security.interfaces.RSAPrivateKey;
 public class MobilePasswordAuthenticationProvider implements AuthenticationProvider {
 
     /**
-     * 用户详细信息组装服务
+     * 用户详细信息加载服务
      */
-    private final UserDetailsExtensionService userDetailsExtensionService;
+    private final MultiPrincipalUserDetailsService multiPrincipalUserDetailsService;
 
     /**
      * 密码编码器
@@ -45,7 +45,6 @@ public class MobilePasswordAuthenticationProvider implements AuthenticationProvi
         // 使用私钥解密获取原始密码
         String password = RSAUtil.decrypt(authentication.getCredentials().toString(), (RSAPrivateKey) keyPair.getPrivate());
 
-        UserDetails userDetails = userDetailsExtensionService.loadUserByMobile(mobile);
         if (passwordEncoder.matches(password, userDetails.getPassword())) {
             // 手机号和密码匹配, 组装 AbstractAuthenticationToken 接口的实现类并返回
             return new MobilePasswordAuthenticationToken(userDetails, password, userDetails.getAuthorities());

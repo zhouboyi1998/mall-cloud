@@ -1,5 +1,6 @@
 package com.cafe.order.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.common.constant.date.DateTimeConstant;
 import com.cafe.order.model.entity.OrderItem;
 import com.cafe.order.model.vo.OrderVO;
@@ -23,7 +24,7 @@ import java.util.List;
  * @Date: 2023/10/27 15:07
  * @Description:
  */
-@FeignClient(value = "mall-order", contextId = "order-flow", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_ORDER, contextId = "order-flow", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/order-flow")
 public interface OrderFlowFeign {
 

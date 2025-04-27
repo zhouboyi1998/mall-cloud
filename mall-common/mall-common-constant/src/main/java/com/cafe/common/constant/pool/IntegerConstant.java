@@ -51,6 +51,8 @@ public class IntegerConstant {
 
     public static final int ONE_THOUSAND = 1000;
 
+    public static final int TWO_THOUSAND_AND_FORTY_EIGHT = 2048;
+
     public static final int TEN_THOUSAND = 10000;
 
     public static final int MAX_VALUE = Integer.MAX_VALUE;

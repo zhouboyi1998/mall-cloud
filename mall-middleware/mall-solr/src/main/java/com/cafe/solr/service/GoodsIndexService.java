@@ -22,14 +22,14 @@ public interface GoodsIndexService {
     GoodsIndex one(String id);
 
     /**
-     * 插入/更新商品索引
+     * 保存商品索引
      *
      * @param goodsIndex 商品索引
      */
     void save(GoodsIndex goodsIndex);
 
     /**
-     * 批量插入/批量更新商品索引
+     * 批量保存商品索引
      *
      * @param goodsIndexList 商品索引列表
      */

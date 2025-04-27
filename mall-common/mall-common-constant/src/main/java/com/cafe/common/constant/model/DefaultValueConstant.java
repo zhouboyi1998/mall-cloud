@@ -10,6 +10,11 @@ package com.cafe.common.constant.model;
 public class DefaultValueConstant {
 
     /**
+     * 默认上级id (整型格式)
+     */
+    public static final Integer DEFAULT_PARENT_ID_INTEGER = 0;
+
+    /**
      * 默认上级id (长整型格式)
      */
     public static final Long DEFAULT_PARENT_ID_LONG = 0L;

@@ -5,10 +5,10 @@ import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.util.tree.TreeUtil;
 import com.cafe.foundation.mapper.AreaMapper;
 import com.cafe.foundation.model.converter.AreaConverter;
-import com.cafe.foundation.model.dto.AreaTreeDTO;
 import com.cafe.foundation.model.entity.Area;
 import com.cafe.foundation.model.query.AreaTreeListQuery;
 import com.cafe.foundation.model.vo.AreaDetailVO;
+import com.cafe.foundation.model.vo.AreaTreeVO;
 import com.cafe.foundation.service.AreaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -34,9 +34,9 @@ public class AreaServiceImpl extends ServiceImpl<AreaMapper, Area> implements Ar
     }
 
     @Override
-    public List<Tree> treeList(AreaTreeListQuery query) {
+    public List<AreaTreeVO> treeList(AreaTreeListQuery query) {
         Area area = AreaConverter.INSTANCE.toEntity(query);
-        List<AreaTreeDTO> dtoList = areaMapper.selectTreeDTOList(area);
-        return TreeUtil.buildTreeList(dtoList, query.getParentId());
+        List<AreaTreeVO> areaTreeVOList = areaMapper.selectTreeVOList(area);
+        return TreeUtil.RecursiveBuilder.buildTreeList(areaTreeVOList, query.getParentId());
     }
 }

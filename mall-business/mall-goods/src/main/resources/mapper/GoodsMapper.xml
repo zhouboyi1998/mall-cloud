@@ -26,21 +26,44 @@
     </resultMap>
 
     <select id="list" resultType="com.cafe.goods.model.bo.Goods">
-        SELECT k.id, k.sku_name, k.spu_id, p.spu_name, p.brand_id, b.brand_name, p.category_id, c.category_name, p.shop_id,
-        k.original_price, k.discount_price, k.seckill_price, k.specification, p.caption, p.intro,
-        k.image, k.image_list, k.video, k.launch_time
+        SELECT
+        <choose>
+            <when test="queryType == 'INDEX'">
+                k.id, k.sku_name, k.spu_id, p.spu_name,
+                p.brand_id, b.brand_name, p.category_id, c.category_name, p.shop_id,
+                k.original_price, k.discount_price, k.seckill_price,
+                k.specification,
+                k.launch_time
+            </when>
+            <when test="queryType == 'SUMMARY'">
+                k.id, k.sku_name, k.spu_id, p.spu_name,
+                p.brand_id, b.brand_name, p.category_id, c.category_name, p.shop_id,
+                k.original_price, k.discount_price, k.seckill_price,
+                k.image
+            </when>
+            <otherwise>
+                k.id, k.sku_name, k.spu_id, p.spu_name,
+                p.brand_id, b.brand_name, p.category_id, c.category_name, p.shop_id,
+                k.original_price, k.discount_price, k.seckill_price,
+                k.specification, p.caption, p.intro, k.image, k.image_list, k.video,
+                k.launch_time
+            </otherwise>
+        </choose>
         FROM mall_sku AS k
         LEFT JOIN mall_spu AS p ON p.id = k.spu_id
         LEFT JOIN mall_brand AS b ON b.id = p.brand_id
         LEFT JOIN mall_category AS c ON c.id = p.category_id
         <where>
-            <if test="ids != null and ids.size() > 0">
+            <if test="skuIds != null and skuIds.size() > 0">
                 AND k.id IN
-                <foreach collection="ids" item="id" open="(" close=")" separator=",">
-                    #{id}
+                <foreach collection="skuIds" item="skuId" open="(" close=")" separator=",">
+                    #{skuId}
                 </foreach>
             </if>
             AND k.is_deleted = 0
+            AND p.is_deleted = 0
+            AND b.is_deleted = 0
+            AND c.is_deleted = 0
         </where>
     </select>
 

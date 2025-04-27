@@ -3,13 +3,14 @@ package com.cafe.common.log.aspect;
 import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.pool.IntegerConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.common.lang.id.Snowflake;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.util.annotation.AnnotationUtil;
 import com.cafe.common.util.aop.AOPUtil;
+import com.cafe.common.util.builder.ToStringStyleHolder;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
@@ -125,7 +126,7 @@ public class ApiLogConsoleAspect {
     @AfterReturning(value = "pointcut()", returning = "result")
     public void doAfterReturning(JoinPoint joinPoint, Object result) {
         // 打印响应结果
-        log.info("@AfterReturning -> Result: {}", JacksonUtil.writeValueAsString(result));
+        log.info("@AfterReturning -> Result: {}", ToStringBuilder.reflectionToString(result, ToStringStyleHolder.JSON_STYLE_WITHOUT_UNICODE));
     }
 
     /**
@@ -137,6 +138,6 @@ public class ApiLogConsoleAspect {
     @AfterThrowing(value = "pointcut()", throwing = "throwable")
     public void doAfterThrowing(JoinPoint joinPoint, Throwable throwable) {
         // 打印异常信息
-        log.warn("@AfterThrowing -> Throwable: {}", JacksonUtil.writeValueAsString(throwable));
+        log.warn("@AfterThrowing -> Throwable: {}", ToStringBuilder.reflectionToString(throwable, ToStringStyleHolder.JSON_STYLE_WITHOUT_UNICODE));
     }
 }

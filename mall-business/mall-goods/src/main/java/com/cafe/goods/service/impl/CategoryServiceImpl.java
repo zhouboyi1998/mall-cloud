@@ -38,7 +38,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     @Override
     public List<Tree> treeList(CategoryTreeListQuery query) {
         Category category = CategoryConverter.INSTANCE.toEntity(query);
-        List<CategoryTreeDTO> dtoList = categoryMapper.selectTreeDTOList(category);
-        return TreeUtil.buildTreeList(dtoList, query.getParentId());
+        List<CategoryTreeVO> categoryTreeVOList = categoryMapper.selectTreeVOList(category);
+        return TreeUtil.RecursiveBuilder.buildTreeList(categoryTreeVOList, query.getParentId());
     }
 }

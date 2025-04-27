@@ -67,7 +67,7 @@ public enum HttpStatusEnum {
     /**
      * 商品已下架
      */
-    UNLISTED(601, "Products Unlisted"),
+    OFF_SHELVE(601, "Products Off Shelve"),
 
     /**
      * 收货地址不存在
@@ -90,6 +90,52 @@ public enum HttpStatusEnum {
     CREATE_ORDER_EXCEPTION(605, "Create Order Exception"),
 
     /**
+     * 商品概要不存在
+     */
+    GOODS_SUMMARY_NOT_FOUND(606, "Goods Summary Not Found"),
+
+    /**
+     * 商品详情不存在
+     */
+    GOODS_DETAIL_NOT_FOUND(607, "Goods Detail Not Found"),
+
+    /**
+     * 商品索引不存在
+     */
+    GOODS_INDEX_NOT_FOUND(608, "Goods Index Not Found"),
+
+    /**
+     * 商品索引修改失败
+     */
+    GOODS_INDEX_UPDATE_FAIL(609, "Goods Index Update Fail"),
+
+    /**
+     * 订单索引不存在
+     */
+    ORDER_INDEX_NOT_FOUND(610, "Order Index Not Found"),
+
+    /**
+     * 订单索引修改失败
+     */
+    ORDER_INDEX_UPDATE_FAIL(611, "Order Index Update Fail"),
+
+    /**
+     * 修改商品状态失败
+     */
+    UPDATE_GOODS_STATUS_FAIL(614, "Update Goods Status Fail"),
+
+    /**
+     * 待上架的商品不存在
+     */
+    PENDING_ON_SHELVE_GOODS_NOT_FOUND(615, "Pending On Shelve Goods Not Found"),
+
+    /**
+     * 店铺不存在
+     */
+    SHOP_NOT_FOUND(616, "Shop Not Found"),
+
+
+    /**
      * 没有匹配的商品
      */
     NO_MATCH_GOODS(701, "No Match Goods"),
@@ -102,7 +148,9 @@ public enum HttpStatusEnum {
     /**
      * SPU 不存在
      */
-    SPU_NOT_FOUND(703, "Spu Not Found");
+    SPU_NOT_FOUND(703, "Spu Not Found")
+
+    ;
 
     /**
      * 状态码

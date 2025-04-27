@@ -7,6 +7,8 @@ import com.cafe.starter.boot.model.Payload;
 import com.cafe.common.lang.tree.Tree;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.infrastructure.mybatisplus.util.WrapperUtil;
+import com.cafe.starter.boot.model.Payload;
+import com.cafe.user.facade.RoleResourceFacade;
 import com.cafe.user.model.entity.Resource;
 import com.cafe.user.service.ResourceService;
 import io.swagger.annotations.Api;
@@ -41,6 +43,8 @@ import java.util.List;
 public class ResourceController {
 
     private final ResourceService resourceService;
+
+    private final RoleResourceFacade roleResourceFacade;
 
     @ApiLogPrint(value = "查询资源数量")
     @ApiOperation(value = "查询资源数量")
@@ -196,11 +200,12 @@ public class ResourceController {
         return ResponseEntity.ok(code);
     }
 
+
     @ApiLogPrint(value = "根据权限列表查询菜单树列表")
     @ApiOperation(value = "根据权限列表查询菜单树列表")
     @GetMapping(value = "/menu-tree-list")
     public ResponseEntity<List<Tree>> menuTreeList(
-        @ModelAttribute(value = RequestConstant.ModelAttribute.PAYLOAD) Payload payload
+            @ModelAttribute(value = RequestConstant.ModelAttribute.PAYLOAD) Payload payload
     ) {
         List<Tree> menuTreeList = resourceService.menuTreeList(payload.getAuthorities());
         return ResponseEntity.ok(menuTreeList);

@@ -1,5 +1,6 @@
 package com.cafe.security.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import java.util.Map;
  * @Date: 2022/5/10 22:10
  * @Description:
  */
-@FeignClient(value = "mall-security", contextId = "jwk", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_SECURITY, contextId = "jwk", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/jwk")
 public interface JWKFeign {
 

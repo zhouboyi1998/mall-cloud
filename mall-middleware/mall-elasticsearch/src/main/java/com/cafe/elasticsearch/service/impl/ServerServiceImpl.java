@@ -2,6 +2,7 @@ package com.cafe.elasticsearch.service.impl;
 
 import com.cafe.elasticsearch.service.ServerService;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -22,14 +23,11 @@ public class ServerServiceImpl implements ServerService {
 
     private final RestHighLevelClient restHighLevelClient;
 
+    @SneakyThrows
     @Override
     public SearchResponse info() {
-        try {
-            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-            SearchRequest searchRequest = new SearchRequest().source(searchSourceBuilder);
-            return restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
-        } catch (Exception e) {
-            return null;
-        }
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        SearchRequest searchRequest = new SearchRequest().source(searchSourceBuilder);
+        return restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
     }
 }

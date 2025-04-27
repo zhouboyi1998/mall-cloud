@@ -22,9 +22,9 @@ public class GoodsServiceImpl implements GoodsService {
 
     private final GoodsMapper goodsMapper;
 
-    @FallbackCache
+    @FallbackCache(condition = "#queryType == T(com.cafe.common.constant.model.GoodsConstant.QueryType).FULL")
     @Override
-    public List<Goods> list(List<Long> ids) {
-        return goodsMapper.list(ids);
+    public List<Goods> list(String queryType, List<Long> skuIds) {
+        return goodsMapper.list(queryType, skuIds);
     }
 }

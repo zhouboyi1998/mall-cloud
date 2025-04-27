@@ -39,17 +39,27 @@ public class OrderIndexServiceImpl implements OrderIndexService {
 
     @Override
     public OrderIndex one(Long id) {
-        return orderIndexRepository.findById(id).orElse(null);
     }
 
     @Override
-    public OrderIndex insert(OrderIndex orderIndex) {
         return orderIndexRepository.save(orderIndex);
+    }
+
+    @Override
+    public List<OrderIndex> saveBatch(List<OrderIndex> orderIndexList) {
+        Iterable<OrderIndex> saveIterable = orderIndexRepository.saveAll(orderIndexList);
+        return StreamSupport.stream(saveIterable.spliterator(), false).collect(Collectors.toList());
     }
 
     @Override
     public OrderIndex update(OrderIndex orderIndex) {
-        return orderIndexRepository.save(orderIndex);
+        return orderIndexRepository.update(orderIndex);
+    }
+
+    @Override
+    public List<OrderIndex> updateBatch(List<OrderIndex> orderIndexList) {
+        Iterable<OrderIndex> updateIterable = orderIndexRepository.updateAll(orderIndexList);
+        return StreamSupport.stream(updateIterable.spliterator(), false).collect(Collectors.toList());
     }
 
     @Override
@@ -58,19 +68,7 @@ public class OrderIndexServiceImpl implements OrderIndexService {
     }
 
     @Override
-    public List<OrderIndex> insertBatch(List<OrderIndex> orderIndexList) {
-        return (List<OrderIndex>) orderIndexRepository.saveAll(orderIndexList);
-    }
-
-    @Override
-    public List<OrderIndex> updateBatch(List<OrderIndex> orderIndexList) {
-        return (List<OrderIndex>) orderIndexRepository.saveAll(orderIndexList);
-    }
-
-    @Override
     public void deleteBatch(List<Long> ids) {
-        Iterable<OrderIndex> iterable = orderIndexRepository.findAllById(ids);
-        List<OrderIndex> orderIndexList = StreamSupport.stream(iterable.spliterator(), false).collect(Collectors.toList());
         orderIndexRepository.deleteAll(orderIndexList);
     }
 
@@ -84,7 +82,7 @@ public class OrderIndexServiceImpl implements OrderIndexService {
         if (ObjectUtils.isEmpty(keyword)) {
             return orderIndexRepository.findAll(pageable);
         }
-        
+
         NativeSearchQuery searchQuery = new NativeSearchQueryBuilder()
             .withQuery(QueryBuilders.multiMatchQuery(keyword)
                 .field("orderNo", 2.0f)
@@ -92,12 +90,12 @@ public class OrderIndexServiceImpl implements OrderIndexService {
                 .type(MultiMatchQueryBuilder.Type.BEST_FIELDS))
             .withPageable(pageable)
             .build();
-            
+
         SearchHits<OrderIndex> searchHits = elasticsearchRestTemplate.search(searchQuery, OrderIndex.class);
         List<OrderIndex> content = searchHits.stream()
             .map(SearchHit::getContent)
             .collect(Collectors.toList());
-            
+
         return new PageImpl<>(content, pageable, searchHits.getTotalHits());
     }
 }

@@ -1,5 +1,6 @@
 package com.cafe.minio.feign;
 
+import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.starter.boot.interceptor.feign.FeignRequestInterceptor;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ import java.util.List;
  * @Date: 2024/3/26 21:11
  * @Description:
  */
-@FeignClient(value = "mall-minio", contextId = "bucket", configuration = {FeignRequestInterceptor.class})
+@FeignClient(value = ServiceConstant.MALL_MINIO, contextId = "bucket", configuration = {FeignRequestInterceptor.class})
 @RequestMapping(value = "/bucket")
 public interface BucketFeign {
 

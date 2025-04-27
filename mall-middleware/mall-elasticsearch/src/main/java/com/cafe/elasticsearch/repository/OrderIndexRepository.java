@@ -1,21 +1,17 @@
 package com.cafe.elasticsearch.repository;
 
 import com.cafe.elasticsearch.model.index.OrderIndex;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+import com.cafe.infrastructure.elasticsearch.repository.ExtensionElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 
+/**
+ * @Project: mall-cloud
+ * @Package: com.cafe.elasticsearch.repository
+ * @Author: zhouboyi
+ * @Date: 2025/4/7 16:38
+ * @Description:
+ */
 @Repository
-public interface OrderIndexRepository extends ElasticsearchRepository<OrderIndex, Long> {
-    
-    /**
-     * 根据订单号或客户名称搜索
-     *
-     * @param orderNo 订单号
-     * @param customerName 客户名称
-     * @param pageable 分页参数
-     * @return 分页结果
-     */
-    Page<OrderIndex> findByOrderNoContainingOrCustomerNameContaining(String orderNo, String customerName, Pageable pageable);
-} 
+public interface OrderIndexRepository extends ExtensionElasticsearchRepository<OrderIndex, Long> {
+
+}

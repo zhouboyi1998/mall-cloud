@@ -18,21 +18,29 @@ public interface OrderIndexService {
     /**
      * 获取订单索引
      *
-     * @param id 订单ID
+     * @param id 订单id
      * @return 订单索引
      */
     OrderIndex one(Long id);
 
     /**
-     * 插入订单索引
+     * 保存订单索引
      *
      * @param orderIndex 订单索引
-     * @return 订单索引
+     * @return 保存的订单索引
      */
-    OrderIndex insert(OrderIndex orderIndex);
+    OrderIndex save(OrderIndex orderIndex);
 
     /**
-     * 更新订单索引
+     * 批量保存订单索引
+     *
+     * @param orderIndexList 订单索引列表
+     * @return 保存的订单索引列表
+     */
+    List<OrderIndex> saveBatch(List<OrderIndex> orderIndexList);
+
+    /**
+     * 修改订单索引
      *
      * @param orderIndex 订单索引
      * @return 订单索引
@@ -40,6 +48,7 @@ public interface OrderIndexService {
     OrderIndex update(OrderIndex orderIndex);
 
     /**
+     * 批量修改订单索引
      * 删除订单索引
      *
      * @param id 订单ID
@@ -50,15 +59,7 @@ public interface OrderIndexService {
      * 批量插入订单索引
      *
      * @param orderIndexList 订单索引列表
-     * @return 订单索引列表
-     */
-    List<OrderIndex> insertBatch(List<OrderIndex> orderIndexList);
-
-    /**
-     * 批量更新订单索引
-     *
-     * @param orderIndexList 订单索引列表
-     * @return 订单索引列表
+     * @return 修改的订单索引列表
      */
     List<OrderIndex> updateBatch(List<OrderIndex> orderIndexList);
 

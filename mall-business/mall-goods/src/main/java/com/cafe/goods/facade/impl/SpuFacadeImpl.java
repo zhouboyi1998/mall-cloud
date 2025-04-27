@@ -44,7 +44,7 @@ public class SpuFacadeImpl implements SpuFacade {
             return null;
         }
         // 获取 SKU 列表
-        Sku query = new Sku().setSpuId(spu.getId()).setStatus(GoodsConstant.Status.LAUNCH);
+        Sku query = new Sku().setSpuId(spu.getId()).setStatus(GoodsConstant.Status.ON_SHELVE);
         QueryWrapper<Sku> wrapper = WrapperUtil.createQueryWrapper(query);
         List<Sku> skuList = skuService.list(wrapper);
         // 组装成 SpuVO 并返回
