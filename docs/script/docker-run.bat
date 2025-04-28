@@ -7,6 +7,7 @@ docker run -d -p 18071:18071 --name mall-gateway mall-gateway:latest
 docker run -d -p 18072:18072 --name mall-security mall-security:latest
 docker run -d -p 18073:18073 --name mall-user mall-user:latest
 docker run -d -p 18074:18074 --name mall-id mall-id:latest
+docker run -d -p 18077:18077 --name mall-captcha mall-captcha:latest
 
 docker run -d -p 18075:18075 --name mall-admin mall-admin:latest
 docker run -d -p 18076:18076 --name mall-swagger mall-swagger:latest
