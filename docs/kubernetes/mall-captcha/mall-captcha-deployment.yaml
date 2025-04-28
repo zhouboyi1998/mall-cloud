@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-captcha-deployment
+  labels:
+    name: mall-captcha-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-captcha
+  template:
+    metadata:
+      namespace: mall
+      name: mall-captcha-pod
+      labels:
+        app: mall-captcha
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-captcha-container
+          image: 192.168.159.128:5000/mall/mall-captcha:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18077
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

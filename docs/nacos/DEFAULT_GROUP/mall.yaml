@@ -103,7 +103,7 @@ management:
       enabled: true
   metrics:
     tags:
-      application: ${spring.appcation.name}
+      application: ${spring.application.name}
     export:
       prometheus:
         enabled: true

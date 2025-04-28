@@ -1,9 +1,10 @@
 package com.cafe.security.granter;
 
-import com.cafe.common.constant.redis.RedisConstant;
+import com.cafe.captcha.feign.CaptchaFeign;
+import com.cafe.captcha.model.query.CaptchaVerifyQuery;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.constant.security.AuthorizationConstant;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AccountStatusException;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -22,7 +23,7 @@ import org.springframework.security.oauth2.provider.token.AuthorizationServerTok
 
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @Project: mall-cloud
@@ -35,16 +36,16 @@ public class CaptchaTokenGranter extends AbstractTokenGranter {
 
     private final AuthenticationManager authenticationManager;
 
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final CaptchaFeign captchaFeign;
 
     public CaptchaTokenGranter(
         AuthenticationManager authenticationManager,
         AuthorizationServerTokenServices tokenServices,
         ClientDetailsService clientDetailsService,
         OAuth2RequestFactory requestFactory,
-        RedisTemplate<String, Object> redisTemplate
+        CaptchaFeign captchaFeign
     ) {
-        this(authenticationManager, tokenServices, clientDetailsService, requestFactory, AuthorizationConstant.GrantType.CAPTCHA, redisTemplate);
+        this(authenticationManager, tokenServices, clientDetailsService, requestFactory, AuthorizationConstant.GrantType.CAPTCHA, captchaFeign);
     }
 
     protected CaptchaTokenGranter(
@@ -53,11 +54,11 @@ public class CaptchaTokenGranter extends AbstractTokenGranter {
         ClientDetailsService clientDetailsService,
         OAuth2RequestFactory requestFactory,
         String grantType,
-        RedisTemplate<String, Object> redisTemplate
+        CaptchaFeign captchaFeign
     ) {
         super(tokenServices, clientDetailsService, requestFactory, grantType);
         this.authenticationManager = authenticationManager;
-        this.redisTemplate = redisTemplate;
+        this.captchaFeign = captchaFeign;
     }
 
     @Override
@@ -65,19 +66,18 @@ public class CaptchaTokenGranter extends AbstractTokenGranter {
         Map<String, String> parameters = new LinkedHashMap<>(tokenRequest.getRequestParameters());
 
         // 验证码校验逻辑
-        String key = RedisConstant.CAPTCHA_PREFIX + parameters.get(RequestConstant.Parameter.KEY);
+        // 获取验证码校验相关参数
+        Long key = Long.valueOf(parameters.get(RequestConstant.Parameter.KEY));
         String code = parameters.get(RequestConstant.Parameter.CODE).toUpperCase();
         parameters.remove(RequestConstant.Parameter.KEY);
         parameters.remove(RequestConstant.Parameter.CODE);
 
-        // 从 Redis 中获取正确的图片验证码文本
-        String correctCode = (String) redisTemplate.opsForValue().get(key);
         // 校验输入的验证码是否正确
-        if (Objects.equals(correctCode, code)) {
-            redisTemplate.delete(key);
-        } else if (Objects.isNull(correctCode)) {
-            throw new InvalidGrantException("Captcha has expired!");
-        } else {
+        CaptchaVerifyQuery query = new CaptchaVerifyQuery().setKey(key).setCode(code);
+        Boolean verify = Optional.ofNullable(captchaFeign.verify(query))
+            .map(ResponseEntity::getBody)
+            .orElseThrow(() -> new InvalidGrantException("Captcha has expired!"));
+        if (!verify) {
             throw new InvalidGrantException("Captcha code input error!");
         }
 
