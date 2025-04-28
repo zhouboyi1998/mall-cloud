@@ -1,0 +1,8 @@
+server:
+  port: 18077
+
+spring:
+  application:
+    name: mall-captcha
+  profiles:
+    active: dev

@@ -40,7 +40,12 @@ scrape_configs:
       - targets: [ "127.0.0.1:18074" ]
     metrics_path: "/actuator/prometheus"
 
-  ...
+  - job_name: "mall-captcha"
+    static_configs:
+      - targets: [ "127.0.0.1:18077" ]
+    metrics_path: "/actuator/prometheus"
+
+  # ...
 ```
 
 * `job_name`：模块名
@@ -82,7 +87,7 @@ management:
       enabled: true
   metrics:
     tags:
-      application: ${spring.appcation.name}
+      application: ${spring.application.name}
     export:
       prometheus:
         enabled: true

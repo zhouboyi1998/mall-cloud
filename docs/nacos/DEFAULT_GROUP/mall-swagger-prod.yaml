@@ -12,6 +12,9 @@ knife4j:
       - name: mall-id
         uri: 192.168.159.128:18074
         location: /v2/api-docs
+      - name: mall-captcha
+        uri: 192.168.159.128:18077
+        location: /v2/api-docs
       # mall-business
       - name: mall-goods
         uri: 192.168.159.128:18081

@@ -134,6 +134,11 @@ public enum HttpStatusEnum {
      */
     SHOP_NOT_FOUND(616, "Shop Not Found"),
 
+    /**
+     * 验证码业务实现类不存在
+     */
+    CAPTCHA_SERVICE_IMPL_NOT_FOUND(617, "Captcha Service Implementation Not Found"),
+
     ;
 
     /**

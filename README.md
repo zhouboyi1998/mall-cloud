@@ -85,6 +85,7 @@
 
 |-- mall-service (基础服务模块)
     |-- mall-admin (Spring Boot Admin 监控模块)
+    |-- mall-captcha (验证码生成器)
     |-- mall-config (Spring Cloud Config 配置中心服务端)
     |-- mall-eureka (Eureka 注册中心服务端)
     |-- mall-gateway (Spring Cloud Gateway 网关模块)

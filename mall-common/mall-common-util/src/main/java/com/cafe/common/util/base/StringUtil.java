@@ -10,10 +10,10 @@ package com.cafe.common.util.base;
 public class StringUtil {
 
     public static String upperCaseFirstLetter(String str) {
-        return str == null || str.length() == 0 ? str : str.substring(0, 1).toUpperCase() + str.substring(1);
+        return str == null || str.isEmpty() ? str : str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
     public static String lowerCaseFirstLetter(String str) {
-        return str == null || str.length() == 0 ? str : str.substring(0, 1).toLowerCase() + str.substring(1);
+        return str == null || str.isEmpty() ? str : str.substring(0, 1).toLowerCase() + str.substring(1);
     }
 }

@@ -7,6 +7,7 @@ docker build -f ./docs/docker/mall-gateway/Dockerfile -t mall-gateway:latest .
 docker build -f ./docs/docker/mall-security/Dockerfile -t mall-security:latest .
 docker build -f ./docs/docker/mall-user/Dockerfile -t mall-user:latest .
 docker build -f ./docs/docker/mall-id/Dockerfile -t mall-id:latest .
+docker build -f ./docs/docker/mall-captcha/Dockerfile -t mall-captcha:latest .
 
 docker build -f ./docs/docker/mall-admin/Dockerfile -t mall-admin:latest .
 docker build -f ./docs/docker/mall-swagger/Dockerfile -t mall-swagger:latest .

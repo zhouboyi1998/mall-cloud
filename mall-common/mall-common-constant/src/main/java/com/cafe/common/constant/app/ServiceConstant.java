@@ -26,6 +26,11 @@ public class ServiceConstant {
      */
     public static final String MALL_ID = "mall-id";
 
+    /**
+     * 验证码生成服务
+     */
+    public static final String MALL_CAPTCHA = "mall-captcha";
+
     // -------------------- BUSINESS --------------------
 
     /**

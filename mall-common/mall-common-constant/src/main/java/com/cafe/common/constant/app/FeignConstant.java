@@ -13,6 +13,8 @@ public class FeignConstant {
 
         public static final String ID = "com.cafe.id.feign";
 
+        public static final String CAPTCHA = "com.cafe.captcha.feign";
+
         public static final String USER = "com.cafe.user.feign";
 
         public static final String FOUNDATION = "com.cafe.foundation.feign";
