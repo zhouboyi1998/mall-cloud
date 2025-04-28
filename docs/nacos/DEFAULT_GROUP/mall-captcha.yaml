@@ -1,0 +1,6 @@
+# 验证码配置
+captcha:
+  # 业务接口配置
+  service:
+    # 默认业务实现类前缀
+    default-impl-prefix: easy

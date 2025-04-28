@@ -17,7 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = {FeignConstant.Client.ID, FeignConstant.Client.USER})
+@EnableFeignClients(basePackages = {FeignConstant.Client.CAPTCHA, FeignConstant.Client.USER})
 @ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
 public class SecurityApplication {
 
