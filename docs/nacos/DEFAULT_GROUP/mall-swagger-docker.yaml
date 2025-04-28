@@ -12,6 +12,9 @@ knife4j:
       - name: mall-id
         uri: host.docker.internal:18074
         location: /v2/api-docs
+      - name: mall-captcha
+        uri: host.docker.internal:18077
+        location: /v2/api-docs
       # mall-business
       - name: mall-goods
         uri: host.docker.internal:18081
