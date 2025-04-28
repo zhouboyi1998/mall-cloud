@@ -43,6 +43,16 @@ services:
       - ./logs:/mall/mall-id/logs
     restart: always
 
+  mall-captcha:
+    image: mall-captcha:latest
+    ports:
+      - "18077:18077"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-captcha/logs
+    restart: always
+
   mall-admin:
     image: mall-admin:latest
     ports:

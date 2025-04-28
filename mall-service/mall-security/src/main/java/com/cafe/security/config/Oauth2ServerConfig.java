@@ -1,5 +1,6 @@
 package com.cafe.security.config;
 
+import com.cafe.captcha.feign.CaptchaFeign;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.security.enhancer.JwtTokenEnhancer;
 import com.cafe.security.granter.CaptchaTokenGranter;
@@ -14,7 +15,6 @@ import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -89,9 +89,9 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
     private final RedisConnectionFactory redisConnectionFactory;
 
     /**
-     * Redis 交互模板
+     * 验证码远程调用接口
      */
-    private final RedisTemplate<String, Object> redisTemplate;
+    private final CaptchaFeign captchaFeign;
 
     /**
      * 令牌存储仓库
@@ -142,7 +142,7 @@ public class Oauth2ServerConfig extends AuthorizationServerConfigurerAdapter {
         List<TokenGranter> tokenGranterList = new ArrayList<>(Collections.singletonList(endpoints.getTokenGranter()));
 
         // 初始化图片验证码授权器
-        CaptchaTokenGranter captchaTokenGranter = new CaptchaTokenGranter(authenticationManager, endpoints.getTokenServices(), endpoints.getClientDetailsService(), endpoints.getOAuth2RequestFactory(), redisTemplate);
+        CaptchaTokenGranter captchaTokenGranter = new CaptchaTokenGranter(authenticationManager, endpoints.getTokenServices(), endpoints.getClientDetailsService(), endpoints.getOAuth2RequestFactory(), captchaFeign);
         // 初始化手机号授权器
         MobileTokenGranter mobileTokenGranter = new MobileTokenGranter(authenticationManager, endpoints.getTokenServices(), endpoints.getClientDetailsService(), endpoints.getOAuth2RequestFactory());
         // 初始化邮箱授权器
