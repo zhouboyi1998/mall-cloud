@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.infrastructure.mybatisplus.util.WrapperUtil;
+import com.cafe.review.facade.OrderReviewFacade;
 import com.cafe.review.model.entity.OrderReview;
+import com.cafe.review.model.query.OrderReviewSaveQuery;
 import com.cafe.review.service.OrderReviewService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -37,6 +39,8 @@ import java.util.List;
 public class OrderReviewController {
 
     private final OrderReviewService orderReviewService;
+
+    private final OrderReviewFacade orderReviewFacade;
 
     @ApiLogPrint(value = "查询订单-评论关联关系数量")
     @ApiOperation(value = "查询订单-评论关联关系数量")
@@ -189,6 +193,24 @@ public class OrderReviewController {
     public ResponseEntity<Boolean> delete(@RequestBody OrderReview orderReview) {
         QueryWrapper<OrderReview> wrapper = WrapperUtil.createQueryWrapper(orderReview);
         Boolean code = orderReviewService.remove(wrapper);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiLogPrint(value = "保存订单评论")
+    @ApiOperation(value = "保存订单评论")
+    @ApiImplicitParam(value = "保存订单评论请求", name = "query", dataType = "OrderReviewSaveQuery", paramType = "body", required = true)
+    @PostMapping(value = "/review")
+    public ResponseEntity<Boolean> review(@RequestBody OrderReviewSaveQuery query) {
+        Boolean code = orderReviewFacade.review(query);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiLogPrint(value = "批量保存订单评论")
+    @ApiOperation(value = "批量保存订单评论")
+    @ApiImplicitParam(value = "保存订单评论请求列表", name = "queryList", dataType = "List<OrderReviewSaveQuery>", paramType = "body", required = true)
+    @PostMapping(value = "/review/batch")
+    public ResponseEntity<Boolean> reviewBatch(@RequestBody List<OrderReviewSaveQuery> queryList) {
+        Boolean code = orderReviewFacade.reviewBatch(queryList);
         return ResponseEntity.ok(code);
     }
 }

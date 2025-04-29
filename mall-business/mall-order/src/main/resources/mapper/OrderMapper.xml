@@ -17,6 +17,7 @@
         <result column="payment" property="payment" />
         <result column="channel" property="channel" />
         <result column="invoice" property="invoice" />
+        <result column="review" property="review" />
         <result column="status" property="status" />
         <result column="create_time" property="createTime" />
         <result column="update_time" property="updateTime" />
