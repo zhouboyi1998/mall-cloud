@@ -63,6 +63,9 @@ public class OrderItem implements Serializable {
     @ApiModelProperty(value = "订单明细的实际支付金额")
     private BigDecimal amount;
 
+    @ApiModelProperty(value = "评价: 0 未评价, 1 已评价")
+    private Integer review;
+
     @ApiModelProperty(value = "状态: 0 下单, 1 支付中, 2 付款失败, 3 付款成功/待发货, 4 已发货, 5 完成, 6 取消, 7 申请退款, 8 退款成功")
     private Integer status;
 

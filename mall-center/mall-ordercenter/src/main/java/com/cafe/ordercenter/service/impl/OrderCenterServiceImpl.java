@@ -14,11 +14,18 @@ import com.cafe.goods.model.entity.Sku;
 import com.cafe.id.feign.IDFeign;
 import com.cafe.member.feign.AddressFeign;
 import com.cafe.member.model.entity.Address;
+import com.cafe.order.feign.OrderFeign;
 import com.cafe.order.feign.OrderFlowFeign;
+import com.cafe.order.feign.OrderItemFeign;
 import com.cafe.order.model.entity.OrderItem;
 import com.cafe.order.model.vo.OrderVO;
 import com.cafe.ordercenter.executor.ThreadPoolHolder;
 import com.cafe.ordercenter.service.OrderCenterService;
+import com.cafe.review.feign.GoodsReviewFeign;
+import com.cafe.review.feign.OrderReviewFeign;
+import com.cafe.review.model.query.GoodsReviewSaveQuery;
+import com.cafe.review.model.query.OrderReviewAndGoodsReviewSaveQuery;
+import com.cafe.review.model.query.OrderReviewSaveQuery;
 import com.cafe.starter.boot.model.exception.BusinessException;
 import com.cafe.storage.feign.StockFeign;
 import com.cafe.storage.model.dto.CartDTO;
@@ -62,6 +69,14 @@ public class OrderCenterServiceImpl implements OrderCenterService {
     private final IDFeign idFeign;
 
     private final OrderFlowFeign orderFlowFeign;
+
+    private final GoodsReviewFeign goodsReviewFeign;
+
+    private final OrderReviewFeign orderReviewFeign;
+
+    private final OrderFeign orderFeign;
+
+    private final OrderItemFeign orderItemFeign;
 
     @Override
     public OrderVO submit(Long addressId, List<CartDTO> cartDTOList) {
@@ -230,5 +245,25 @@ public class OrderCenterServiceImpl implements OrderCenterService {
                 .setQuantity(orderItem.getSkuQuantity()))
             .collect(Collectors.toList());
         stockFeign.inboundBatch(cartDTOList);
+    }
+
+    @Override
+    public void review(OrderReviewAndGoodsReviewSaveQuery query) {
+        // 保存商品评论
+        List<GoodsReviewSaveQuery> goodsReviewSaveQueryList = query.getGoodsReviewSaveQueryList();
+        goodsReviewFeign.reviewBatch(goodsReviewSaveQueryList);
+        // 修改订单明细评论状态
+        List<Long> orderItemIds = goodsReviewSaveQueryList.stream()
+            .map(GoodsReviewSaveQuery::getOrderItemId)
+            .distinct()
+            .collect(Collectors.toList());
+        orderItemFeign.reviewBatch(orderItemIds);
+
+        // 保存订单评论
+        List<OrderReviewSaveQuery> orderReviewSaveQueryList = query.getOrderReviewSaveQueryList();
+        orderReviewFeign.reviewBatch(orderReviewSaveQueryList);
+        // 修改订单评论状态
+        Long orderId = orderReviewSaveQueryList.get(0).getOrderId();
+        orderFeign.review(orderId);
     }
 }

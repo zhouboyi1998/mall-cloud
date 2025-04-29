@@ -3,6 +3,7 @@ package com.cafe.ordercenter.controller;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.order.model.vo.OrderVO;
 import com.cafe.ordercenter.facade.OrderCenterFacade;
+import com.cafe.review.model.query.OrderReviewAndGoodsReviewSaveQuery;
 import com.cafe.storage.model.dto.CartDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -46,5 +47,14 @@ public class OrderCenterController {
     ) {
         OrderVO orderVO = orderCenterFacade.submit(addressId, cartDTOList);
         return ResponseEntity.ok(orderVO);
+    }
+
+    @ApiLogPrint(value = "评价订单")
+    @ApiOperation(value = "评价订单")
+    @ApiImplicitParam(value = "保存订单评论和商品评论请求条件", name = "query", dataType = "OrderReviewAndGoodsReviewSaveQuery", paramType = "body", required = true)
+    @PostMapping(value = "/review")
+    public ResponseEntity<Void> review(@RequestBody OrderReviewAndGoodsReviewSaveQuery query) {
+        orderCenterFacade.review(query);
+        return ResponseEntity.ok().build();
     }
 }

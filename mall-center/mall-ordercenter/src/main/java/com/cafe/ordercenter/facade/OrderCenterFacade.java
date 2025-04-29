@@ -1,6 +1,7 @@
 package com.cafe.ordercenter.facade;
 
 import com.cafe.order.model.vo.OrderVO;
+import com.cafe.review.model.query.OrderReviewAndGoodsReviewSaveQuery;
 import com.cafe.storage.model.dto.CartDTO;
 
 import java.util.List;
@@ -22,4 +23,11 @@ public interface OrderCenterFacade {
      * @return 订单VO
      */
     OrderVO submit(Long addressId, List<CartDTO> cartDTOList);
+
+    /**
+     * 评价订单
+     *
+     * @param query 保存订单评论和商品评论请求条件
+     */
+    void review(OrderReviewAndGoodsReviewSaveQuery query);
 }

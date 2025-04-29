@@ -24,4 +24,20 @@ public class OrderConstant {
          */
         public static final Integer CANCEL = 6;
     }
+
+    /**
+     * 评价状态
+     */
+    public static class Review {
+
+        /**
+         * 未评价
+         */
+        public static final Integer NOT_REVIEW = 0;
+
+        /**
+         * 已评价
+         */
+        public static final Integer REVIEWED = 1;
+    }
 }
