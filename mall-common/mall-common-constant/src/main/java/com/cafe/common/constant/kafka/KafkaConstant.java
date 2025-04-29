@@ -44,6 +44,11 @@ public class KafkaConstant {
         public static final String ORDER_INDEX = "order-index";
 
         /**
+         * goods-review 主题
+         */
+        public static final String GOODS_REVIEW = "goods-review";
+
+        /**
          * Producer + TableName 作为组合键, 获取 Topic
          */
         public static final MultiKeyMap<String, String> MAP = new MultiKeyMap<>();
