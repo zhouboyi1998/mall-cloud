@@ -4,7 +4,9 @@ import com.cafe.common.constant.kafka.KafkaConstant;
 import com.cafe.infrastructure.kafka.producer.KafkaProducer;
 import com.cafe.order.model.vo.OrderVO;
 import com.cafe.ordercenter.facade.OrderCenterFacade;
+import com.cafe.ordercenter.model.message.GoodsReviewMessage;
 import com.cafe.ordercenter.service.OrderCenterService;
+import com.cafe.review.model.query.OrderReviewAndGoodsReviewSaveQuery;
 import com.cafe.storage.model.dto.CartDTO;
 import io.seata.spring.annotation.GlobalTransactional;
 import io.seata.tm.api.transaction.Propagation;
@@ -41,5 +43,24 @@ public class OrderCenterFacadeImpl implements OrderCenterFacade {
         // 发送订单信息到 Kafka
         kafkaProducer.send(KafkaConstant.Topic.ORDER_INDEX, orderVO);
         return orderVO;
+    }
+
+    @GlobalTransactional(
+        propagation = Propagation.REQUIRED,
+        rollbackFor = Exception.class,
+        timeoutMills = 45000,
+        lockRetryInterval = 10
+    )
+    @Override
+    public void review(OrderReviewAndGoodsReviewSaveQuery query) {
+        // 评价订单
+        orderCenterService.review(query);
+        // 发送商品评价信息到 Kafka
+        query.getGoodsReviewSaveQueryList().stream()
+            // 封装商品评价消息体必要信息, 减小消息体体积
+            .map(goodsReviewSaveQuery -> new GoodsReviewMessage()
+                .setSkuId(goodsReviewSaveQuery.getSkuId())
+                .setRating(goodsReviewSaveQuery.getReview().getRating()))
+            .forEach(goodsReviewMessage -> kafkaProducer.send(KafkaConstant.Topic.GOODS_REVIEW, goodsReviewMessage));
     }
 }
