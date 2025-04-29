@@ -1,6 +1,7 @@
 package com.cafe.ordercenter.service;
 
 import com.cafe.order.model.vo.OrderVO;
+import com.cafe.review.model.query.OrderReviewAndGoodsReviewSaveQuery;
 import com.cafe.storage.model.dto.CartDTO;
 
 import java.time.LocalDateTime;
@@ -31,4 +32,11 @@ public interface OrderCenterService {
      * @param duration 下单未支付时长 (单位: 分钟)
      */
     void cancel(LocalDateTime now, Integer duration);
+
+    /**
+     * 评价订单
+     *
+     * @param query 保存订单评论和商品评论请求条件
+     */
+    void review(OrderReviewAndGoodsReviewSaveQuery query);
 }

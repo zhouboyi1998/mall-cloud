@@ -191,4 +191,22 @@ public class OrderItemController {
         Boolean code = orderItemService.remove(wrapper);
         return ResponseEntity.ok(code);
     }
+
+    @ApiLogPrint(value = "评价订单明细")
+    @ApiOperation(value = "评价订单明细")
+    @ApiImplicitParam(value = "订单明细id", name = "orderItemId", dataType = "Long", paramType = "path", required = true)
+    @GetMapping(value = "/review/{orderItemId}")
+    public ResponseEntity<Boolean> review(@PathVariable(value = "orderItemId") Long orderItemId) {
+        Boolean code = orderItemService.review(orderItemId);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiLogPrint(value = "批量评价订单明细")
+    @ApiOperation(value = "批量评价订单明细")
+    @ApiImplicitParam(value = "订单明细id列表", name = "orderItemIds", dataType = "List<Long>", paramType = "body", required = true)
+    @PutMapping(value = "/review/batch")
+    public ResponseEntity<Boolean> reviewBatch(@RequestBody List<Long> orderItemIds) {
+        Boolean code = orderItemService.reviewBatch(orderItemIds);
+        return ResponseEntity.ok(code);
+    }
 }

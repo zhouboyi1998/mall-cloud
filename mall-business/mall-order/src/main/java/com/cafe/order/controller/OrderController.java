@@ -214,4 +214,22 @@ public class OrderController {
         Page<OrderVO> orderVOPage = orderFacade.query(page, orderQuery);
         return ResponseEntity.ok(orderVOPage);
     }
+
+    @ApiLogPrint(value = "评价订单")
+    @ApiOperation(value = "评价订单")
+    @ApiImplicitParam(value = "订单id", name = "orderId", dataType = "Long", paramType = "path", required = true)
+    @GetMapping(value = "/review/{orderId}")
+    public ResponseEntity<Boolean> review(@PathVariable(value = "orderId") Long orderId) {
+        Boolean code = orderService.review(orderId);
+        return ResponseEntity.ok(code);
+    }
+
+    @ApiLogPrint(value = "批量评价订单")
+    @ApiOperation(value = "批量评价订单")
+    @ApiImplicitParam(value = "订单id列表", name = "orderIds", dataType = "List<Long>", paramType = "body", required = true)
+    @PutMapping(value = "/review/batch")
+    public ResponseEntity<Boolean> reviewBatch(@RequestBody List<Long> orderIds) {
+        Boolean code = orderService.reviewBatch(orderIds);
+        return ResponseEntity.ok(code);
+    }
 }

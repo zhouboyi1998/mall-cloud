@@ -139,6 +139,11 @@ public enum HttpStatusEnum {
      */
     CAPTCHA_SERVICE_IMPL_NOT_FOUND(617, "Captcha Service Implementation Not Found"),
 
+    /**
+     * 未知的评论类型
+     */
+    UNKNOWN_REVIEW_TYPE(618, "Unknown Review Type"),
+
     ;
 
     /**

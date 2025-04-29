@@ -60,6 +60,10 @@
             <groupId>com.cafe</groupId>
             <artifactId>mall-member-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-review-api</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
