@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Project: mall-cloud
@@ -212,5 +213,23 @@ public class GoodsReviewController {
     public ResponseEntity<Boolean> reviewBatch(@RequestBody List<GoodsReviewSaveQuery> queryList) {
         Boolean code = goodsReviewFacade.reviewBatch(queryList);
         return ResponseEntity.ok(code);
+    }
+
+    @ApiLogPrint(value = "统计 SKU 评论数量")
+    @ApiOperation(value = "统计 SKU 评论数量")
+    @ApiImplicitParam(value = "SKU ID", name = "skuId", dataType = "Long", paramType = "path", required = true)
+    @GetMapping(value = "/statistic/{skuId}")
+    public ResponseEntity<Map<String, Integer>> statistic(@PathVariable(value = "skuId") Long skuId) {
+        Map<String, Integer> statistic = goodsReviewFacade.statistic(skuId);
+        return ResponseEntity.ok(statistic);
+    }
+
+    @ApiLogPrint(value = "批量统计 SKU 评论数量")
+    @ApiOperation(value = "批量统计 SKU 评论数量")
+    @ApiImplicitParam(value = "SKU ID 列表", name = "skuIds", dataType = "List<Long>", paramType = "body", required = true)
+    @PostMapping(value = "/statistic/batch")
+    public ResponseEntity<Map<Long, Map<String, Integer>>> statisticBatch(@RequestBody List<Long> skuIds) {
+        Map<Long, Map<String, Integer>> statisticMap = goodsReviewFacade.statisticBatch(skuIds);
+        return ResponseEntity.ok(statisticMap);
     }
 }

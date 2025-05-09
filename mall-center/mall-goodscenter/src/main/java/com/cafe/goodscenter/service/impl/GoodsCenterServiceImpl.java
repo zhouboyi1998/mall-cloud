@@ -21,6 +21,8 @@ import com.cafe.infrastructure.elasticsearch.model.vo.AggregatedPageVO;
 import com.cafe.infrastructure.rocketmq.producer.RocketMQProducer;
 import com.cafe.merchant.feign.ShopFeign;
 import com.cafe.merchant.model.entity.Shop;
+import com.cafe.order.feign.OrderItemFeign;
+import com.cafe.review.feign.GoodsReviewFeign;
 import com.cafe.starter.boot.model.exception.BusinessException;
 import io.seata.spring.annotation.GlobalTransactional;
 import io.seata.tm.api.transaction.Propagation;
@@ -58,6 +60,10 @@ public class GoodsCenterServiceImpl implements GoodsCenterService {
     private final SkuFeign skuFeign;
 
     private final ShopFeign shopFeign;
+
+    private final OrderItemFeign orderItemFeign;
+
+    private final GoodsReviewFeign goodsReviewFeign;
 
     private final RocketMQProducer rocketMQProducer;
 
@@ -104,14 +110,26 @@ public class GoodsCenterServiceImpl implements GoodsCenterService {
             .orElseThrow(() -> new BusinessException(HttpStatusEnum.SHOP_NOT_FOUND, shopIds));
         Map<Long, String> shopMap = shopList.stream().collect(Collectors.toMap(Shop::getId, Shop::getShopName));
 
-        // TODO 查询商品的销量
+        // 查询商品的销量
+        Map<Long, Integer> saleMap = Optional.ofNullable(orderItemFeign.saleBatch(skuIds))
+            .map(ResponseEntity::getBody)
+            .orElseThrow(() -> new BusinessException(HttpStatusEnum.GOODS_SALE_NOT_FOUND, skuIds));
 
-        // TODO 查询商品的评论数
+        // 查询商品的评论数量
+        Map<Long, Map<String, Integer>> reviewStatisticMap = Optional.ofNullable(goodsReviewFeign.statisticBatch(skuIds))
+            .map(ResponseEntity::getBody)
+            .orElseThrow(() -> new BusinessException(HttpStatusEnum.GOODS_REVIEW_STATISTIC_NOT_FOUND, skuIds));
 
         // 遍历处理上架的商品
         goodsIndexList.forEach(goodsIndex -> {
             // 组装扩展数据
             goodsIndex.setShopName(shopMap.get(goodsIndex.getShopId()));
+            goodsIndex.setSale(saleMap.get(goodsIndex.getId()));
+            Map<String, Integer> reviewStatistic = reviewStatisticMap.get(goodsIndex.getId());
+            goodsIndex.setTotalReview(reviewStatistic.get(FieldConstant.TOTAL_REVIEW));
+            goodsIndex.setGoodReview(reviewStatistic.get(FieldConstant.GOOD_REVIEW));
+            goodsIndex.setMediumReview(reviewStatistic.get(FieldConstant.MEDIUM_REVIEW));
+            goodsIndex.setBadReview(reviewStatistic.get(FieldConstant.BAD_REVIEW));
             // 将上架商品的信息组装进 RocketMQ 消息内容中
             Map<String, Object> content = new HashMap<>(2);
             content.put(FieldConstant.STATUS, GoodsConstant.Status.ON_SHELVE);

@@ -7,8 +7,12 @@ import com.cafe.order.model.entity.OrderItem;
 import com.cafe.order.service.OrderItemService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -37,5 +41,27 @@ public class OrderItemServiceImpl extends ServiceImpl<OrderItemMapper, OrderItem
             .in(OrderItem::getId, orderItemIds)
             .set(OrderItem::getReview, OrderConstant.Review.REVIEWED)
             .update();
+    }
+
+    @Override
+    public Integer sale(Long skuId) {
+        return lambdaQuery()
+            .eq(OrderItem::getSkuId, skuId)
+            .list()
+            .stream()
+            .mapToInt(OrderItem::getSkuQuantity)
+            .sum();
+    }
+
+    @Override
+    public Map<Long, Integer> saleBatch(List<Long> skuIds) {
+        if (CollectionUtils.isEmpty(skuIds)) {
+            return Collections.emptyMap();
+        }
+        return lambdaQuery()
+            .in(OrderItem::getSkuId, skuIds)
+            .list()
+            .stream()
+            .collect(Collectors.groupingBy(OrderItem::getSkuId, Collectors.summingInt(OrderItem::getSkuQuantity)));
     }
 }

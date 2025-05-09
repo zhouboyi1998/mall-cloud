@@ -78,14 +78,14 @@ public class GoodsWide implements Serializable {
     private Integer sale;
 
     @ApiModelProperty(value = "总评论数")
-    private Integer totalComment;
+    private Integer totalReview;
 
     @ApiModelProperty(value = "好评数")
-    private Integer goodComment;
+    private Integer goodReview;
 
     @ApiModelProperty(value = "中评数")
-    private Integer mediumComment;
+    private Integer mediumReview;
 
     @ApiModelProperty(value = "差评数")
-    private Integer badComment;
+    private Integer badReview;
 }

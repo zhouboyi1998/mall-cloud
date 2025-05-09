@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Project: mall-cloud
@@ -208,5 +209,23 @@ public class OrderItemController {
     public ResponseEntity<Boolean> reviewBatch(@RequestBody List<Long> orderItemIds) {
         Boolean code = orderItemService.reviewBatch(orderItemIds);
         return ResponseEntity.ok(code);
+    }
+
+    @ApiLogPrint(value = "统计 SKU 销量")
+    @ApiOperation(value = "统计 SKU 销量")
+    @ApiImplicitParam(value = "SKU ID", name = "skuId", dataType = "Long", paramType = "path", required = true)
+    @GetMapping(value = "/sale/{skuId}")
+    public ResponseEntity<Integer> sale(@PathVariable(value = "skuId") Long skuId) {
+        Integer sale = orderItemService.sale(skuId);
+        return ResponseEntity.ok(sale);
+    }
+
+    @ApiLogPrint(value = "批量统计 SKU 销量")
+    @ApiOperation(value = "批量统计 SKU 销量")
+    @ApiImplicitParam(value = "SKU ID 列表", name = "skuIds", dataType = "List<Long>", paramType = "body", required = true)
+    @PostMapping(value = "/sale/batch")
+    public ResponseEntity<Map<Long, Integer>> saleBatch(@RequestBody List<Long> skuIds) {
+        Map<Long, Integer> saleMap = orderItemService.saleBatch(skuIds);
+        return ResponseEntity.ok(saleMap);
     }
 }
