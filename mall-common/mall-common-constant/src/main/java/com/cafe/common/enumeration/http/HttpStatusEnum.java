@@ -144,6 +144,16 @@ public enum HttpStatusEnum {
      */
     UNKNOWN_REVIEW_TYPE(618, "Unknown Review Type"),
 
+    /**
+     * 商品销量不存在
+     */
+    GOODS_SALE_NOT_FOUND(619, "Goods Sale Not Found"),
+
+    /**
+     * 商品评论数量统计不存在
+     */
+    GOODS_REVIEW_STATISTIC_NOT_FOUND(620, "Goods Review Statistic Not Found"),
+
     ;
 
     /**

@@ -3,6 +3,7 @@ package com.cafe.review.facade;
 import com.cafe.review.model.query.GoodsReviewSaveQuery;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Project: mall-cloud
@@ -28,4 +29,20 @@ public interface GoodsReviewFacade {
      * @return 是否保存成功
      */
     Boolean reviewBatch(List<GoodsReviewSaveQuery> queryList);
+
+    /**
+     * 统计 SKU 评论数量
+     *
+     * @param skuId SKU ID
+     * @return SKU 评论数量
+     */
+    Map<String, Integer> statistic(Long skuId);
+
+    /**
+     * 批量统计 SKU 评论数量
+     *
+     * @param skuIds SKU ID 列表
+     * @return SKU 评论数量集合
+     */
+    Map<Long, Map<String, Integer>> statisticBatch(List<Long> skuIds);
 }

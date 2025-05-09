@@ -6,11 +6,13 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Project: mall-cloud
@@ -40,4 +42,22 @@ public interface OrderItemFeign {
      */
     @PutMapping(value = "/review/batch")
     ResponseEntity<Boolean> reviewBatch(@RequestBody List<Long> orderItemIds);
+
+    /**
+     * 统计 SKU 销量
+     *
+     * @param skuId SKU ID
+     * @return SKU 销量
+     */
+    @GetMapping(value = "/sale/{skuId}")
+    ResponseEntity<Integer> sale(@PathVariable(value = "skuId") Long skuId);
+
+    /**
+     * 批量统计 SKU 销量
+     *
+     * @param skuIds SKU ID 列表
+     * @return SKU 销量集合
+     */
+    @PostMapping(value = "/sale/batch")
+    ResponseEntity<Map<Long, Integer>> saleBatch(@RequestBody List<Long> skuIds);
 }
