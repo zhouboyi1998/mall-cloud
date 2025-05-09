@@ -97,19 +97,19 @@ public class GoodsIndex implements Serializable {
 
     @ApiModelProperty(value = "总评论数")
     @Field(type = FieldType.Keyword)
-    private Integer totalComment;
+    private Integer totalReview;
 
     @ApiModelProperty(value = "好评数")
     @Field(type = FieldType.Keyword)
-    private Integer goodComment;
+    private Integer goodReview;
 
     @ApiModelProperty(value = "中评数")
     @Field(type = FieldType.Keyword)
-    private Integer mediumComment;
+    private Integer mediumReview;
 
     @ApiModelProperty(value = "差评数")
     @Field(type = FieldType.Keyword)
-    private Integer badComment;
+    private Integer badReview;
 
     @ApiModelProperty(value = "上架时间")
     @Field(type = FieldType.Date, format = DateFormat.custom, pattern = "yyyy-MM-dd HH:mm:ss")

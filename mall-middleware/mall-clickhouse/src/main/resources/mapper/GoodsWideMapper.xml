@@ -21,10 +21,10 @@
         <result column="caption" property="caption" />
         <result column="intro" property="intro" />
         <result column="sale" property="sale" />
-        <result column="total_comment" property="totalComment" />
-        <result column="good_comment" property="goodComment" />
-        <result column="medium_comment" property="mediumComment" />
-        <result column="bad_comment" property="badComment" />
+        <result column="total_review" property="totalReview" />
+        <result column="good_review" property="goodReview" />
+        <result column="medium_review" property="mediumReview" />
+        <result column="bad_review" property="badReview" />
     </resultMap>
 
 </mapper>
