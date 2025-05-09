@@ -94,19 +94,19 @@ public class GoodsIndex implements Serializable {
 
     @ApiModelProperty(value = "总评论数")
     @Field
-    private Integer totalComment;
+    private Integer totalReview;
 
     @ApiModelProperty(value = "好评数")
     @Field
-    private Integer goodComment;
+    private Integer goodReview;
 
     @ApiModelProperty(value = "中评数")
     @Field
-    private Integer mediumComment;
+    private Integer mediumReview;
 
     @ApiModelProperty(value = "差评数")
     @Field
-    private Integer badComment;
+    private Integer badReview;
 
     @ApiModelProperty(value = "上架时间")
     @Field

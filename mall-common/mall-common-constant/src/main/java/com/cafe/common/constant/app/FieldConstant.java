@@ -80,6 +80,26 @@ public class FieldConstant {
     public static final String SALE = "sale";
 
     /**
+     * 总评论数
+     */
+    public static final String TOTAL_REVIEW = "totalReview";
+
+    /**
+     * 好评数
+     */
+    public static final String GOOD_REVIEW = "goodReview";
+
+    /**
+     * 中评数
+     */
+    public static final String MEDIUM_REVIEW = "mediumReview";
+
+    /**
+     * 差评数
+     */
+    public static final String BAD_REVIEW = "badReview";
+
+    /**
      * 状态
      */
     public static final String STATUS = "status";
