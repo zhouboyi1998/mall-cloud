@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.cafe.order.model.entity.OrderItem;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Project: mall-cloud
@@ -29,4 +30,20 @@ public interface OrderItemService extends IService<OrderItem> {
      * @return 是否评价成功
      */
     Boolean reviewBatch(List<Long> orderItemIds);
+
+    /**
+     * 统计 SKU 销量
+     *
+     * @param skuId SKU ID
+     * @return SKU 销量
+     */
+    Integer sale(Long skuId);
+
+    /**
+     * 批量统计 SKU 销量
+     *
+     * @param skuIds SKU ID 列表
+     * @return SKU 销量集合
+     */
+    Map<Long, Integer> saleBatch(List<Long> skuIds);
 }
