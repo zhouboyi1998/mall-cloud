@@ -19,6 +19,7 @@ docker run -d -p 8888:8888 --name mall-config mall-config:latest
 
 docker run -d -p 18094:18094 --name mall-solr mall-solr:latest
 docker run -d -p 18093:18093 --name mall-elasticsearch mall-elasticsearch:latest
+docker run -d -p 18097:18097 --name mall-meilisearch mall-meilisearch:latest
 docker run -d -p 18096:18096 --name mall-clickhouse mall-clickhouse:latest
 
 docker run -d -p 18092:18092 --name mall-fastdfs mall-fastdfs:latest

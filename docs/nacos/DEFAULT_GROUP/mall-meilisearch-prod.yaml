@@ -1,0 +1,4 @@
+# MeiliSearch 配置
+meilisearch:
+  host-url: http://192.168.159.128:7700
+  api-key: zhouboyi1998

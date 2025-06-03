@@ -79,6 +79,7 @@
     |-- mall-debezium (Debezium 数据库监听器)
     |-- mall-elasticsearch (ElasticSearch 搜索引擎)
     |-- mall-fastdfs (FastDFS 分布式文件存储)
+    |-- mall-meilisearch (MeiliSearch 搜索引擎)
     |-- mall-minio (MinIO 分布式文件存储)
     |-- mall-qiniu (七牛云对象存储)
     |-- mall-solr (Solr 搜索引擎)
