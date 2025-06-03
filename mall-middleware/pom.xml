@@ -22,6 +22,7 @@
         <module>mall-debezium</module>
         <module>mall-elasticsearch</module>
         <module>mall-fastdfs</module>
+        <module>mall-meilisearch</module>
         <module>mall-minio</module>
         <module>mall-qiniu</module>
         <module>mall-solr</module>

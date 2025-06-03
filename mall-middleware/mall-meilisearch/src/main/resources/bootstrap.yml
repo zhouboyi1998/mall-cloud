@@ -1,0 +1,8 @@
+server:
+  port: 18097
+
+spring:
+  application:
+    name: mall-meilisearch
+  profiles:
+    active: dev
