@@ -24,6 +24,7 @@
         <module>mall-goods-api</module>
         <module>mall-id-api</module>
         <module>mall-manager-api</module>
+        <module>mall-meilisearch-api</module>
         <module>mall-member-api</module>
         <module>mall-merchant-api</module>
         <module>mall-minio-api</module>
