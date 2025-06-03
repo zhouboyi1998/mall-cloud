@@ -50,3 +50,6 @@ knife4j:
       - name: mall-clickhouse
         uri: 192.168.44.128:18096
         location: /v2/api-docs
+      - name: mall-meilisearch
+        uri: 192.168.44.128:18097
+        location: /v2/api-docs
