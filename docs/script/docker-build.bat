@@ -19,6 +19,7 @@ docker build -f ./docs/docker/mall-config/Dockerfile -t mall-config:latest .
 
 docker build -f ./docs/docker/mall-solr/Dockerfile -t mall-solr:latest .
 docker build -f ./docs/docker/mall-elasticsearch/Dockerfile -t mall-elasticsearch:latest .
+docker build -f ./docs/docker/mall-meilisearch/Dockerfile -t mall-meilisearch:latest .
 docker build -f ./docs/docker/mall-clickhouse/Dockerfile -t mall-clickhouse:latest .
 
 docker build -f ./docs/docker/mall-fastdfs/Dockerfile -t mall-fastdfs:latest .

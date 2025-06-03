@@ -52,6 +52,7 @@
         <clickhouse-jdbc.version>0.4.6</clickhouse-jdbc.version>
         <lz4.version>1.8.0</lz4.version>
         <druid.version>1.2.6</druid.version>
+        <meilisearch-client.version>0.14.4</meilisearch-client.version>
         <mybatis-pagehelper.version>1.3.0</mybatis-pagehelper.version>
         <mybatis-generator.version>1.4.0</mybatis-generator.version>
         <mybatis-plus.version>3.4.1</mybatis-plus.version>
@@ -233,6 +234,12 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
                 <version>${druid.version}</version>
+            </dependency>
+            <!-- MeiliSearch 客户端 -->
+            <dependency>
+                <groupId>com.meilisearch.sdk</groupId>
+                <artifactId>meilisearch-java</artifactId>
+                <version>${meilisearch-client.version}</version>
             </dependency>
             <!-- PageHelper 分页插件 -->
             <dependency>
@@ -671,6 +678,11 @@
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-solr-api</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-meilisearch-api</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
