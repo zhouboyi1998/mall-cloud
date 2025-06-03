@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-meilisearch-deployment
+  labels:
+    name: mall-meilisearch-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-meilisearch
+  template:
+    metadata:
+      namespace: mall
+      name: mall-meilisearch-pod
+      labels:
+        app: mall-meilisearch
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-meilisearch-container
+          image: 192.168.159.128:5000/mall/mall-meilisearch:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18097
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
