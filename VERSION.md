@@ -2,8 +2,8 @@
 | :--- | :--- |
 | 行式数据库 | <img src="https://img.shields.io/badge/MySQL-8.0.19-royalblue"> <img src="https://img.shields.io/badge/MariaDB-11.1.2-peru"> <img src="https://img.shields.io/badge/PostgreSQL-14.3-royalblue"> <img src="https://img.shields.io/badge/SQL Server-2022-yellow"> <img src="https://img.shields.io/badge/Oracle XE-21c-crimson"> <img src="https://img.shields.io/badge/SQLite-3.39.1-blue"> |
 | 列式数据库 | <img src="https://img.shields.io/badge/ClickHouse-23.11.2.11-goldenrod"> |
-| KV 数据库 | <img src="https://img.shields.io/badge/Redis-3.2.100-crimson"> |
-| 搜索引擎 | <img src="https://img.shields.io/badge/ElasticSearch-7.6.2-darkturquoise"> <img src="https://img.shields.io/badge/Solr-8.11.1-orangered"> |
+| KV 数据库 | <img src="https://img.shields.io/badge/Redis-7.4.4-crimson"> <img src="https://img.shields.io/badge/Valkey-7.2.9-royalblue"> |
+| 搜索引擎 | <img src="https://img.shields.io/badge/ElasticSearch-7.6.2-darkturquoise"> <img src="https://img.shields.io/badge/Solr-8.11.1-orangered"> <img src="https://img.shields.io/badge/MeiliSearch-1.14.0-deeppink"> |
 | ORM | <img src="https://img.shields.io/badge/MyBatis Plus-3.4.1-dodgerblue"> <img src="https://img.shields.io/badge/Spring Data--brightener"> |
 | 注册中心 | <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> <img src="https://img.shields.io/badge/Zookeeper-3.6.3-forestgreen"> <img src="https://img.shields.io/badge/Consul-1.17.0-mediumvioletred"> <img src="https://img.shields.io/badge/Eureka--brightener"> |
 | 配置中心 | <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> <img src="https://img.shields.io/badge/Zookeeper-3.6.3-forestgreen"> <img src="https://img.shields.io/badge/Consul-1.17.0-mediumvioletred"> <img src="https://img.shields.io/badge/Apollo-2.1.0-darkseagreen"> <img src="https://img.shields.io/badge/Spring Cloud Config--brightener"> |

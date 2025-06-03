@@ -1,0 +1,4 @@
+# MeiliSearch 配置
+meilisearch:
+  host-url: http://host.docker.internal:7700
+  api-key: zhouboyi1998
