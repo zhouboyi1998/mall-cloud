@@ -111,6 +111,16 @@ services:
       - ./logs:/mall/mall-elasticsearch/logs
     restart: always
 
+  mall-meilisearch:
+    image: mall-meilisearch:latest
+    ports:
+      - "18097:18097"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-meilisearch/logs
+    restart: always
+
   mall-clickhouse:
     image: mall-clickhouse:latest
     ports:
