@@ -55,6 +55,11 @@ public class FieldConstant {
     public static final String CATEGORY_NAME = "categoryName";
 
     /**
+     * SPU ID
+     */
+    public static final String SPU_ID = "spuId";
+
+    /**
      * SPU 名称
      */
     public static final String SPU_NAME = "spuName";
@@ -70,9 +75,29 @@ public class FieldConstant {
     public static final String SPECIFICATION = "specification";
 
     /**
+     * 店铺ID
+     */
+    public static final String SHOP_ID = "shopId";
+
+    /**
      * 店铺名称
      */
     public static final String SHOP_NAME = "shopName";
+
+    /**
+     * SKU 原价
+     */
+    public static final String ORIGINAL_PRICE = "originalPrice";
+
+    /**
+     * SKU 折扣价
+     */
+    public static final String DISCOUNT_PRICE = "discountPrice";
+
+    /**
+     * SKU 秒杀价
+     */
+    public static final String SECKILL_PRICE = "seckillPrice";
 
     /**
      * SKU 销量
