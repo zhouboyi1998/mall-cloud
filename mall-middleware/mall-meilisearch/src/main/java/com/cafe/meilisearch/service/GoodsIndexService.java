@@ -1,6 +1,7 @@
 package com.cafe.meilisearch.service;
 
 import com.cafe.meilisearch.model.index.GoodsIndex;
+import com.meilisearch.sdk.model.Searchable;
 import com.meilisearch.sdk.model.TaskInfo;
 
 import java.util.List;
@@ -13,6 +14,13 @@ import java.util.List;
  * @Description:
  */
 public interface GoodsIndexService {
+
+    /**
+     * 初始化商品索引
+     *
+     * @return 任务信息
+     */
+    List<TaskInfo> init();
 
     /**
      * 获取商品索引
@@ -69,4 +77,16 @@ public interface GoodsIndexService {
      * @return 任务信息列表
      */
     List<TaskInfo> deleteBatch(List<Long> ids);
+
+    /**
+     * 搜索商品索引
+     *
+     * @param current   页码
+     * @param size      每页数据数量
+     * @param sortField 排序字段
+     * @param sortRule  排序规则
+     * @param keyword   关键词
+     * @return 搜索结果
+     */
+    Searchable search(Integer current, Integer size, String sortField, String sortRule, String keyword);
 }
