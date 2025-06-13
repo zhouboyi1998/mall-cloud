@@ -1,11 +1,15 @@
 package com.cafe.meilisearch.controller;
 
+import com.cafe.common.constant.database.DatabaseConstant;
+import com.cafe.common.constant.meilisearch.MeiliSearchConstant;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.meilisearch.model.index.GoodsIndex;
 import com.cafe.meilisearch.service.GoodsIndexService;
+import com.meilisearch.sdk.model.Searchable;
 import com.meilisearch.sdk.model.TaskInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -34,6 +39,14 @@ import java.util.List;
 public class GoodsIndexController {
 
     private final GoodsIndexService goodsIndexService;
+
+    @ApiLogPrint(value = "初始化商品索引")
+    @ApiOperation(value = "初始化商品索引")
+    @GetMapping(value = "/init")
+    public ResponseEntity<List<TaskInfo>> init() {
+        List<TaskInfo> taskInfoList = goodsIndexService.init();
+        return ResponseEntity.ok(taskInfoList);
+    }
 
     @ApiLogPrint(value = "获取商品索引")
     @ApiOperation(value = "获取商品索引")
@@ -96,5 +109,26 @@ public class GoodsIndexController {
     public ResponseEntity<List<TaskInfo>> deleteBatch(@RequestBody List<Long> ids) {
         List<TaskInfo> taskInfoList = goodsIndexService.deleteBatch(ids);
         return ResponseEntity.ok(taskInfoList);
+    }
+
+    @ApiLogPrint(value = "搜索商品索引")
+    @ApiOperation(value = "搜索商品索引")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Integer", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Integer", paramType = "path", required = true),
+        @ApiImplicitParam(value = "排序属性", name = "sort", dataType = "String", paramType = "query"),
+        @ApiImplicitParam(value = "排序规则", name = "rule", dataType = "String", paramType = "query"),
+        @ApiImplicitParam(value = "关键词", name = "keyword", dataType = "String", paramType = "query")
+    })
+    @GetMapping(value = "/search/{current}/{size}")
+    public ResponseEntity<Searchable> search(
+        @PathVariable(value = "current") Integer current,
+        @PathVariable(value = "size") Integer size,
+        @RequestParam(value = "sortField", required = false, defaultValue = MeiliSearchConstant.Goods.DEFAULT_SORT_FIELD) String sortField,
+        @RequestParam(value = "sortRule", required = false, defaultValue = DatabaseConstant.Rule.DESC) String sortRule,
+        @RequestParam(value = "keyword", required = false) String keyword
+    ) {
+        Searchable searchable = goodsIndexService.search(current, size, sortField, sortRule, keyword);
+        return ResponseEntity.ok(searchable);
     }
 }
