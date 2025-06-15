@@ -53,3 +53,6 @@ knife4j:
       - name: mall-meilisearch
         uri: 192.168.44.128:18097
         location: /v2/api-docs
+      - name: mall-opensearch
+        uri: 192.168.44.128:18098
+        location: /v2/api-docs
