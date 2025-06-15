@@ -28,6 +28,7 @@
         <module>mall-member-api</module>
         <module>mall-merchant-api</module>
         <module>mall-minio-api</module>
+        <module>mall-opensearch-api</module>
         <module>mall-order-api</module>
         <module>mall-qiniu-api</module>
         <module>mall-review-api</module>

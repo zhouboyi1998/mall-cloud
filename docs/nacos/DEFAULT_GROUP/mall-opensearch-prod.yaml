@@ -1,0 +1,7 @@
+# OpenSearch 配置
+opensearch:
+  protocol: http
+  host: 192.168.159.128
+  port: 9200
+  username: admin
+  password: admin
