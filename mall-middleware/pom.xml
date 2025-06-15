@@ -24,6 +24,7 @@
         <module>mall-fastdfs</module>
         <module>mall-meilisearch</module>
         <module>mall-minio</module>
+        <module>mall-opensearch</module>
         <module>mall-qiniu</module>
         <module>mall-solr</module>
     </modules>

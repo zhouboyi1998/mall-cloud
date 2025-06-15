@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-opensearch-deployment
+  labels:
+    name: mall-opensearch-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-opensearch
+  template:
+    metadata:
+      namespace: mall
+      name: mall-opensearch-pod
+      labels:
+        app: mall-opensearch
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-opensearch-container
+          image: 192.168.159.128:5000/mall/mall-opensearch:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18098
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
