@@ -3,7 +3,7 @@
 | 行式数据库 | <img src="https://img.shields.io/badge/MySQL-8.0.19-royalblue"> <img src="https://img.shields.io/badge/MariaDB-11.1.2-peru"> <img src="https://img.shields.io/badge/PostgreSQL-14.3-royalblue"> <img src="https://img.shields.io/badge/SQL Server-2022-yellow"> <img src="https://img.shields.io/badge/Oracle XE-21c-crimson"> <img src="https://img.shields.io/badge/SQLite-3.39.1-blue"> |
 | 列式数据库 | <img src="https://img.shields.io/badge/ClickHouse-23.11.2.11-goldenrod"> |
 | KV 数据库 | <img src="https://img.shields.io/badge/Redis-7.4.4-crimson"> <img src="https://img.shields.io/badge/Valkey-7.2.9-royalblue"> |
-| 搜索引擎 | <img src="https://img.shields.io/badge/ElasticSearch-7.6.2-darkturquoise"> <img src="https://img.shields.io/badge/Solr-8.11.1-orangered"> <img src="https://img.shields.io/badge/MeiliSearch-1.14.0-deeppink"> |
+| 搜索引擎 | <img src="https://img.shields.io/badge/ElasticSearch-7.6.2-darkturquoise"> <img src="https://img.shields.io/badge/Solr-8.11.1-orangered"> <img src="https://img.shields.io/badge/MeiliSearch-1.14.0-deeppink"> <img src="https://img.shields.io/badge/OpenSearch-1.3.20-blue"> |
 | ORM | <img src="https://img.shields.io/badge/MyBatis Plus-3.4.1-dodgerblue"> <img src="https://img.shields.io/badge/Spring Data--brightener"> |
 | 注册中心 | <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> <img src="https://img.shields.io/badge/Zookeeper-3.6.3-forestgreen"> <img src="https://img.shields.io/badge/Consul-1.17.0-mediumvioletred"> <img src="https://img.shields.io/badge/Eureka--brightener"> |
 | 配置中心 | <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> <img src="https://img.shields.io/badge/Zookeeper-3.6.3-forestgreen"> <img src="https://img.shields.io/badge/Consul-1.17.0-mediumvioletred"> <img src="https://img.shields.io/badge/Apollo-2.1.0-darkseagreen"> <img src="https://img.shields.io/badge/Spring Cloud Config--brightener"> |
@@ -23,4 +23,4 @@
 | 链路追踪 | <img src="https://img.shields.io/badge/SkyWalking-9.0.0-blue"> <img src="https://img.shields.io/badge/Sleuth--brightener"> <img src="https://img.shields.io/badge/Zipkin-2.24.3-orange"> |
 | 容器化 | <img src="https://img.shields.io/badge/Docker-26.1.3-deepskyblue"> <img src="https://img.shields.io/badge/Docker Compose-2.27.0-deepskyblue"> <img src="https://img.shields.io/badge/Kubernetes-1.28.2-royalblue"> |
 | 制品仓库 | <img src="https://img.shields.io/badge/Harbor-2.9.4-darkcyan"> |
-| 可视化 | <img src="https://img.shields.io/badge/Kibana-7.6.2-darkturquoise"> <img src="https://img.shields.io/badge/ElasticSearch Head--darkturquoise"> <img src="https://img.shields.io/badge/Kafka UI Lite-1.2.11-deepgreen"> |
+| 可视化 | <img src="https://img.shields.io/badge/Kibana-7.6.2-darkturquoise"> <img src="https://img.shields.io/badge/ElasticSearch Head--darkturquoise"> <img src="https://img.shields.io/badge/OpenSearch Dashboards-1.3.20-blue"> <img src="https://img.shields.io/badge/Kafka UI Lite-1.2.11-deepgreen"> |
