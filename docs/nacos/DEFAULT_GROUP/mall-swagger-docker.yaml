@@ -62,6 +62,9 @@ knife4j:
       - name: mall-meilisearch
         uri: host.docker.internal:18097
         location: /v2/api-docs
+      - name: mall-opensearch
+        uri: host.docker.internal:18098
+        location: /v2/api-docs
       # mall-center
       - name: mall-ordercenter
         uri: host.docker.internal:18061
