@@ -1,5 +1,6 @@
 package com.cafe.opensearch.service;
 
+import com.cafe.infrastructure.elasticsearch.model.vo.AggregatedPageVO;
 import com.cafe.opensearch.model.index.GoodsIndex;
 import org.opensearch.action.bulk.BulkResponse;
 import org.opensearch.action.delete.DeleteResponse;
@@ -72,4 +73,16 @@ public interface GoodsIndexService {
      * @return 批量响应
      */
     BulkResponse deleteBatch(List<Long> ids);
+
+    /**
+     * 搜索商品索引
+     *
+     * @param current   页码
+     * @param size      每页数据数量
+     * @param sortField 排序字段
+     * @param sortRule  排序规则
+     * @param keyword   关键词
+     * @return 商品索引列表
+     */
+    AggregatedPageVO<GoodsIndex> search(Integer current, Integer size, String sortField, String sortRule, String keyword);
 }
