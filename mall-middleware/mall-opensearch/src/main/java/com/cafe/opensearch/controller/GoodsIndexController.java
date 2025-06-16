@@ -1,10 +1,14 @@
 package com.cafe.opensearch.controller;
 
+import com.cafe.common.constant.database.DatabaseConstant;
+import com.cafe.common.constant.opensearch.OpenSearchConstant;
 import com.cafe.common.log.annotation.ApiLogPrint;
+import com.cafe.infrastructure.elasticsearch.model.vo.AggregatedPageVO;
 import com.cafe.opensearch.model.index.GoodsIndex;
 import com.cafe.opensearch.service.GoodsIndexService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.opensearch.action.bulk.BulkResponse;
@@ -19,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -99,5 +104,26 @@ public class GoodsIndexController {
     public ResponseEntity<BulkResponse> deleteBatch(@RequestBody List<Long> ids) {
         BulkResponse bulkResponse = goodsIndexService.deleteBatch(ids);
         return ResponseEntity.ok(bulkResponse);
+    }
+
+    @ApiLogPrint(value = "搜索商品索引")
+    @ApiOperation(value = "搜索商品索引")
+    @ApiImplicitParams(value = {
+        @ApiImplicitParam(value = "页码", name = "current", dataType = "Integer", paramType = "path", required = true),
+        @ApiImplicitParam(value = "每页显示数量", name = "size", dataType = "Integer", paramType = "path", required = true),
+        @ApiImplicitParam(value = "排序属性", name = "sort", dataType = "String", paramType = "query"),
+        @ApiImplicitParam(value = "排序规则", name = "rule", dataType = "String", paramType = "query"),
+        @ApiImplicitParam(value = "关键词", name = "keyword", dataType = "String", paramType = "query")
+    })
+    @GetMapping(value = "/search/{current}/{size}")
+    public ResponseEntity<AggregatedPageVO<GoodsIndex>> search(
+        @PathVariable(value = "current") Integer current,
+        @PathVariable(value = "size") Integer size,
+        @RequestParam(value = "sortField", required = false, defaultValue = OpenSearchConstant.Goods.DEFAULT_SORT_FIELD) String sortField,
+        @RequestParam(value = "sortRule", required = false, defaultValue = DatabaseConstant.Rule.DESC) String sortRule,
+        @RequestParam(value = "keyword", required = false) String keyword
+    ) {
+        AggregatedPageVO<GoodsIndex> goodsIndexPage = goodsIndexService.search(current, size, sortField, sortRule, keyword);
+        return ResponseEntity.ok(goodsIndexPage);
     }
 }
