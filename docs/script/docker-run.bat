@@ -14,6 +14,7 @@ docker run -d -p 18076:18076 --name mall-swagger mall-swagger:latest
 
 docker run -d -p 8761:8761 --name mall-eureka mall-eureka:latest
 docker run -d -p 8888:8888 --name mall-config mall-config:latest
+docker run -d -p 8040:8040 --name mall-zuul mall-zuul:latest
 
 @REM -------------------- mall-middleware --------------------
 
