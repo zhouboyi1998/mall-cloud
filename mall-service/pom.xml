@@ -26,6 +26,7 @@
         <module>mall-security</module>
         <module>mall-swagger</module>
         <module>mall-user</module>
+        <module>mall-zuul</module>
     </modules>
 
 </project>

@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-zuul-deployment
+  labels:
+    name: mall-zuul-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-zuul
+  template:
+    metadata:
+      namespace: mall
+      name: mall-zuul-pod
+      labels:
+        app: mall-zuul
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-zuul-container
+          image: 192.168.159.128:5000/mall/mall-zuul:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8040
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
