@@ -89,6 +89,14 @@ services:
       - mall-net
     restart: always
 
+  mall-zuul:
+    image: mall-zuul:latest
+    ports:
+      - "8040:8040"
+    networks:
+      - mall-net
+    restart: always
+
   # ---------- mall-middleware ----------
 
   mall-solr:

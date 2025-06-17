@@ -1,0 +1,8 @@
+server:
+  port: 8040
+
+spring:
+  application:
+    name: mall-zuul
+  profiles:
+    active: dev

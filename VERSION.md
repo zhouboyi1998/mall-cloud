@@ -7,8 +7,8 @@
 | ORM | <img src="https://img.shields.io/badge/MyBatis Plus-3.4.1-dodgerblue"> <img src="https://img.shields.io/badge/Spring Data--brightener"> |
 | 注册中心 | <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> <img src="https://img.shields.io/badge/Zookeeper-3.6.3-forestgreen"> <img src="https://img.shields.io/badge/Consul-1.17.0-mediumvioletred"> <img src="https://img.shields.io/badge/Eureka--brightener"> |
 | 配置中心 | <img src="https://img.shields.io/badge/Nacos-2.0.3-deepskyblue"> <img src="https://img.shields.io/badge/Zookeeper-3.6.3-forestgreen"> <img src="https://img.shields.io/badge/Consul-1.17.0-mediumvioletred"> <img src="https://img.shields.io/badge/Apollo-2.1.0-darkseagreen"> <img src="https://img.shields.io/badge/Spring Cloud Config--brightener"> |
-| 远程调用 | <img src="https://img.shields.io/badge/OpenFeign--brightener"> |
-| 网关 | <img src="https://img.shields.io/badge/Spring Cloud Gateway--brightener"> |
+| 远程调用 | <img src="https://img.shields.io/badge/Spring Cloud OpenFeign--brightener"> |
+| 网关 | <img src="https://img.shields.io/badge/Spring Cloud Gateway--brightener"> <img src="https://img.shields.io/badge/Zuul--brightener"> |
 | 安全 | <img src="https://img.shields.io/badge/Spring Security--brightener"> <img src="https://img.shields.io/badge/Spring Cloud Oauth2--brightener"> <img src="https://img.shields.io/badge/Nimbus JOSE JWT-8.16-deepskyblue"> |
 | 服务流控 | <img src="https://img.shields.io/badge/Hystrix--brightener"> <img src="https://img.shields.io/badge/Sentinel-1.8.1-royalblue"> |
 | 分布式事务 | <img src="https://img.shields.io/badge/Seata-1.5.2-royalblue"> |
