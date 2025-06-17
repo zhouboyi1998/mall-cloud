@@ -96,6 +96,7 @@
     |-- mall-security (Spring Security 安全模块)
     |-- mall-swagger (Knife4J Swagger API 文档聚合模块)
     |-- mall-user (用户模块)
+    |-- mall-zuul (Zuul 网关模块)
 
 |-- mall-starter (启动包)
     |-- mall-starter-boot (Spring Boot 启动包)

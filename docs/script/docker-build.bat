@@ -14,6 +14,7 @@ docker build -f ./docs/docker/mall-swagger/Dockerfile -t mall-swagger:latest .
 
 docker build -f ./docs/docker/mall-eureka/Dockerfile -t mall-eureka:latest .
 docker build -f ./docs/docker/mall-config/Dockerfile -t mall-config:latest .
+docker build -f ./docs/docker/mall-zuul/Dockerfile -t mall-zuul:latest .
 
 @REM -------------------- mall-middleware --------------------
 
