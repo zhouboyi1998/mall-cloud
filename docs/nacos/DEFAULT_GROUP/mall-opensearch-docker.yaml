@@ -1,6 +1,6 @@
 # OpenSearch 配置
 opensearch:
-  protocol: http
+  scheme: http
   host: host.docker.internal
   port: 9200
   username: admin
