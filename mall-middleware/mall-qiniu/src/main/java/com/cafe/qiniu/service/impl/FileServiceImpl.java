@@ -50,16 +50,16 @@ public class FileServiceImpl implements FileService {
         String uploadToken = auth.uploadToken(bucket);
         // 上传文件
         Response response = uploadManager.put(file.getBytes(), filename.toString(), uploadToken);
-        log.info("FileServiceImpl.upload(): Successful to upload file to Qiniu OSS! response body -> {}", response.bodyString());
+        log.info("FileServiceImpl.upload(): Upload file to Qiniu OSS! status code -> [{}], response body -> {}", response.statusCode, response.bodyString());
         return StringConstant.SLASH + bucket + StringConstant.SLASH + filename;
     }
 
     @SneakyThrows
     @Override
-    public Boolean delete(String bucket, String filename) {
+    public Integer delete(String bucket, String filename) {
         // 删除文件
         Response response = bucketManager.delete(bucket, filename);
-        log.info("FileServiceImpl.delete(): Successful to delete file from Qiniu OSS! response body -> {}", response.bodyString());
-        return true;
+        log.info("FileServiceImpl.delete(): Delete file from Qiniu OSS! status code -> [{}], response body -> {}", response.statusCode, response.bodyString());
+        return response.statusCode;
     }
 }
