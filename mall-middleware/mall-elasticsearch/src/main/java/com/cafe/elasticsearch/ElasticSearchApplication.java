@@ -1,12 +1,10 @@
 package com.cafe.elasticsearch;
 
 import com.cafe.common.constant.app.AppConstant;
-import com.cafe.infrastructure.elasticsearch.repository.support.SimpleExtensionElasticsearchRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 /**
  * @Project: mall-cloud
@@ -17,7 +15,6 @@ import org.springframework.data.elasticsearch.repository.config.EnableElasticsea
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableElasticsearchRepositories(basePackages = "com.cafe.elasticsearch.repository", repositoryBaseClass = SimpleExtensionElasticsearchRepository.class)
 @ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
 public class ElasticSearchApplication {
 

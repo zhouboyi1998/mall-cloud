@@ -7,11 +7,10 @@ spring:
       bootstrap-servers: host.docker.internal:9092
 
 # ElasticSearch 配置
-elastic-search:
+elasticsearch:
+  scheme: http
   host: host.docker.internal
   port: 9200
-  # 网络连接策略
-  scheme: http
 
 # RocketMQ 配置
 rocketmq:

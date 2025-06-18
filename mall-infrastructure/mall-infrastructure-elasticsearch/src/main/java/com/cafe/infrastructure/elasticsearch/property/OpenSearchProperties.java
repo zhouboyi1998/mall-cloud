@@ -1,4 +1,4 @@
-package com.cafe.opensearch.property;
+package com.cafe.infrastructure.elasticsearch.property;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.opensearch.property
+ * @Package: com.cafe.infrastructure.elasticsearch.property
  * @Author: zhouboyi
  * @Date: 2025/6/15 16:23
  * @Description: OpenSearch 配置
@@ -19,9 +19,9 @@ import org.springframework.stereotype.Component;
 public class OpenSearchProperties {
 
     /**
-     * 协议
+     * 网络连接策略 (http / https)
      */
-    private String protocol;
+    private String scheme;
 
     /**
      * 主机名

@@ -7,11 +7,10 @@ spring:
       bootstrap-servers: 127.0.0.1:9092
 
 # ElasticSearch 配置
-elastic-search:
+elasticsearch:
+  scheme: http
   host: 127.0.0.1
   port: 9200
-  # 网络连接策略
-  scheme: http
 
 # RocketMQ 配置
 rocketmq:

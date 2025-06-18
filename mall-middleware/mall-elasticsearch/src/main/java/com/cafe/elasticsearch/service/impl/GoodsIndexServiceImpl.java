@@ -104,7 +104,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
         // 发起请求, 获取响应
         SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
         // 获取搜索命中结果
-        org.elasticsearch.search.SearchHit[] searchHits = searchResponse.getHits().getHits();
+        SearchHit[] searchHits = searchResponse.getHits().getHits();
         // 转换成商品索引列表
         List<GoodsIndex> goodsIndexList = Arrays.stream(searchHits)
             .map(SearchHit::getSourceAsMap)

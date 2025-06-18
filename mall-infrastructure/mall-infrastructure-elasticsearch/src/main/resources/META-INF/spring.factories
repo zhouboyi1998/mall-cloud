@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration = \
+  com.cafe.infrastructure.elasticsearch.config.ElasticSearchRepositoryAutoConfiguration, \
+  com.cafe.infrastructure.elasticsearch.config.ElasticSearchClientAutoConfiguration, \
+  com.cafe.infrastructure.elasticsearch.config.OpenSearchClientAutoConfiguration
