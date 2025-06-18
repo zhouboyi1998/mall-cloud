@@ -25,7 +25,7 @@ public interface FileService {
      *
      * @param bucket   存储桶
      * @param filename 文件名
-     * @return 删除结果 (true 删除成功, false 删除失败)
+     * @return 响应状态码
      */
-    Boolean delete(String bucket, String filename);
+    Integer delete(String bucket, String filename);
 }
