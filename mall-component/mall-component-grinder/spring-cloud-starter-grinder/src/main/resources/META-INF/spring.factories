@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration = \
+  com.cafe.component.grinder.starter.config.GrinderServerAutoConfiguration, \
+  com.cafe.component.grinder.starter.config.GrinderDiscoveryAutoConfiguration, \
+  com.cafe.component.grinder.starter.config.GrinderHttpAutoConfiguration

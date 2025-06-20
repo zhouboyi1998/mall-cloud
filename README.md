@@ -49,6 +49,9 @@
     |-- mall-common-log (日志公共包)
     |-- mall-common-util (工具公共包)
 
+|-- mall-component (组件包)
+    |-- mall-component-grinder (Grinder 网关组件包)
+
 |-- mall-configuration (配置中心公共包)
     |-- mall-configuration-apollo (Apollo 配置中心公共包)
     |-- mall-configuration-config (Spring Cloud Config 配置中心公共包)
@@ -92,6 +95,7 @@
     |-- mall-eureka (Eureka 注册中心服务端)
     |-- mall-gateway (Spring Cloud Gateway 网关模块)
     |-- mall-generator (代码生成器)
+    |-- mall-grinder (Grinder 网关模块)
     |-- mall-id (ID 生成器)
     |-- mall-security (Spring Security 安全模块)
     |-- mall-swagger (Knife4J Swagger API 文档聚合模块)

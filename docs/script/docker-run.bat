@@ -16,6 +16,8 @@ docker run -d -p 8761:8761 --name mall-eureka mall-eureka:latest
 docker run -d -p 8888:8888 --name mall-config mall-config:latest
 docker run -d -p 8040:8040 --name mall-zuul mall-zuul:latest
 
+docker run -d -p 18011:18011 --name mall-grinder mall-grinder:latest
+
 @REM -------------------- mall-middleware --------------------
 
 docker run -d -p 18094:18094 --name mall-solr mall-solr:latest

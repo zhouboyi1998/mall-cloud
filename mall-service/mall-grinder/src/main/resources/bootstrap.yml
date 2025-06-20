@@ -1,0 +1,8 @@
+server:
+  port: 18011
+
+spring:
+  application:
+    name: mall-grinder
+  profiles:
+    active: dev

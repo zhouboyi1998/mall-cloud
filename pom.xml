@@ -21,6 +21,7 @@
         <module>mall-business</module>
         <module>mall-center</module>
         <module>mall-common</module>
+        <module>mall-component</module>
         <module>mall-configuration</module>
         <module>mall-discovery</module>
         <module>mall-infrastructure</module>
@@ -480,6 +481,18 @@
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-starter-webflux</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+
+            <!-- 组件包 -->
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>grinder-core</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>spring-cloud-starter-grinder</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
 

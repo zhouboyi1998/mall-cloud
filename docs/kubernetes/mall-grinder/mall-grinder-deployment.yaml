@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-grinder-deployment
+  labels:
+    name: mall-grinder-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-grinder
+  template:
+    metadata:
+      namespace: mall
+      name: mall-grinder-pod
+      labels:
+        app: mall-grinder
+    spec:
+      restartPolicy: Always
+      containers:
+        - name: mall-grinder-container
+          image: 192.168.159.128:5000/mall/mall-grinder:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 18011
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

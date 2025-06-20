@@ -97,6 +97,14 @@ services:
       - mall-net
     restart: always
 
+  mall-grinder:
+    image: mall-grinder:latest
+    ports:
+      - "18011:18011"
+    networks:
+      - mall-net
+    restart: always
+
   # ---------- mall-middleware ----------
 
   mall-solr:
