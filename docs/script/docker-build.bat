@@ -16,6 +16,8 @@ docker build -f ./docs/docker/mall-eureka/Dockerfile -t mall-eureka:latest .
 docker build -f ./docs/docker/mall-config/Dockerfile -t mall-config:latest .
 docker build -f ./docs/docker/mall-zuul/Dockerfile -t mall-zuul:latest .
 
+docker build -f ./docs/docker/mall-grinder/Dockerfile -t mall-grinder:latest .
+
 @REM -------------------- mall-middleware --------------------
 
 docker build -f ./docs/docker/mall-solr/Dockerfile -t mall-solr:latest .
