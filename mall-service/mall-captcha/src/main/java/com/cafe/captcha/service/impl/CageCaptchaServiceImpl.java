@@ -40,7 +40,7 @@ public class CageCaptchaServiceImpl extends BaseCaptchaServiceImpl implements Ca
         BufferedImage bufferedImage = cage.drawImage(code);
 
         // 生成图片验证码唯一标识
-        Long key = idFeign.nextId().getBody();
+        Long key = idFeign.nextId(null).getBody();
 
         // 保存图片验证码的唯一标识和文本到 Redis 中
         redisTemplate.opsForValue().set(RedisConstant.CAPTCHA_PREFIX + key, code, IntegerConstant.SIXTY, TimeUnit.SECONDS);

@@ -1,4 +1,18 @@
-# 雪花分布式ID生成器配置
-snowflake:
-  worker-id: 0
-  datacenter-id: 2
+spring:
+  # Redis 配置
+  redis:
+    host: 192.168.44.128
+    port: 6379
+    password: 123456
+    database: 0
+
+# 分布式ID配置
+id:
+  # 雪花分布式ID生成器配置
+  snowflake:
+    worker-id: 0
+    datacenter-id: 2
+  # Redis 分布式ID生成器配置
+  redis:
+    worker-id: 0
+    datacenter-id: 2

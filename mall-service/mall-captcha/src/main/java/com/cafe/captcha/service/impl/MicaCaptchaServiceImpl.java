@@ -26,7 +26,7 @@ public class MicaCaptchaServiceImpl extends BaseCaptchaServiceImpl implements Ca
     @Override
     public Captcha one() {
         // 生成图片验证码唯一标识
-        Long key = idFeign.nextId().getBody();
+        Long key = idFeign.nextId(null).getBody();
 
         // 生成图片验证码
         String base64Image = micaCaptchaService.generateBase64(String.valueOf(key));

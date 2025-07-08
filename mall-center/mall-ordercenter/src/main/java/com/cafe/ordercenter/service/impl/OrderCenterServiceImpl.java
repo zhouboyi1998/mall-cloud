@@ -194,7 +194,7 @@ public class OrderCenterServiceImpl implements OrderCenterService {
 
         // 生成订单主体
         OrderVO orderVO = new OrderVO()
-            .setOrderNo(idFeign.nextId().getBody())
+            .setOrderNo(idFeign.nextId(null).getBody())
             .setMemberId(address.getMemberId())
             .setAddress(addressSnapshot)
             .setReceiver(address.getReceiver())

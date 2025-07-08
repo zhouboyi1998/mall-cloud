@@ -6,6 +6,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @Project: mall-cloud
@@ -21,8 +22,9 @@ public interface IDFeign {
     /**
      * 获取下一个分布式ID
      *
+     * @param generator 分布式ID生成器
      * @return 分布式ID
      */
     @GetMapping(value = "/next")
-    ResponseEntity<Long> nextId();
+    ResponseEntity<Long> nextId(@RequestParam(value = "generator", required = false) String generator);
 }

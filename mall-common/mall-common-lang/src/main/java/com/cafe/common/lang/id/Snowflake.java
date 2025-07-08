@@ -15,7 +15,7 @@ package com.cafe.common.lang.id;
  * @Package: com.cafe.common.lang.id
  * @Author: zhouboyi
  * @Date: 2022/10/28 9:59
- * @Description: 雪花算法 (生成分布式ID)
+ * @Description: 雪花算法
  */
 public class Snowflake {
 
@@ -44,6 +44,8 @@ public class Snowflake {
      * 数据中心ID占用位数 (一共 2^5 个数据中心)
      */
     private static final long DATACENTER_ID_BIT = 5L;
+
+    // 时间戳占用位数 (一共 2^41 毫秒, 约 69 年)
 
     // ------------- --- MASK / MAX ----------------
 
@@ -108,12 +110,6 @@ public class Snowflake {
 
     // ---------------- CONSTRUCTOR ----------------
 
-    /**
-     * 有参构造方法 (手动传入工作机器ID和数据中心ID)
-     *
-     * @param workerId     工作机器ID
-     * @param datacenterId 数据中心ID
-     */
     public Snowflake(long workerId, long datacenterId) {
         // 工作机器ID超出限制
         if (workerId > WORKER_ID_MASK || workerId < 0) {
@@ -173,7 +169,7 @@ public class Snowflake {
                 timestamp = tilNextMillis(lastTimestamp);
             }
         } else {
-            // 如果前时间戳等于最后一次生成分布式ID的时间戳 (时间已经走到下一毫秒), 重置序列号
+            // 如果当前时间戳大于最后一次生成分布式ID的时间戳 (时间已经走到下一毫秒), 重置序列号
             sequence = 0L;
         }
 

@@ -38,4 +38,14 @@ public class RedisConstant {
      * 幂等性Key前缀
      */
     public static final String IDEMPOTENCE_PREFIX = "LIMIT:IDEMPOTENCE_";
+
+    /**
+     * 分布式ID Key前缀
+     */
+    public static final String ID_PREFIX = "DISTRIBUTED:ID_";
+
+    /**
+     * 默认的分布式ID分组
+     */
+    public static final String DEFAULT_ID_GROUP = "default";
 }

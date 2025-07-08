@@ -41,7 +41,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public String upload(String bucket, MultipartFile file) {
         // 使用雪花算法生成文件名
-        StringBuilder filename = new StringBuilder(Objects.requireNonNull(idFeign.nextId().getBody()).toString());
+        StringBuilder filename = new StringBuilder(Objects.requireNonNull(idFeign.nextId(null).getBody()).toString());
         // 获取文件原名
         String originalFilename = file.getOriginalFilename();
         // 如果文件原名存在扩展名, 获取扩展名并拼接

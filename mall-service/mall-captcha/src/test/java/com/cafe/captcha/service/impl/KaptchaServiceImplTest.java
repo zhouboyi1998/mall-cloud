@@ -66,7 +66,7 @@ public class KaptchaServiceImplTest {
     void testOne() {
         long key = 123456789L;
         // 模拟生成图片验证码唯一标识
-        when(idFeign.nextId()).thenReturn(ResponseEntity.ok(key));
+        when(idFeign.nextId(null)).thenReturn(ResponseEntity.ok(key));
 
         // 生成图片验证码
         Captcha captcha = captchaService.one();
