@@ -2,6 +2,8 @@ package com.cafe.component.grinder.starter.config;
 
 import com.cafe.component.grinder.starter.support.http.HttpInvoker;
 import com.cafe.component.grinder.starter.support.http.apache.ApacheHttpClientInvoker;
+import com.cafe.component.grinder.starter.support.http.okhttp.OkHttpInvoker;
+import okhttp3.OkHttpClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -27,5 +29,15 @@ public class GrinderHttpAutoConfiguration {
     @ConditionalOnProperty(value = "grinder.http-client", havingValue = "APACHE_HTTP_CLIENT", matchIfMissing = true)
     public HttpInvoker apacheHttpClientInvoker() {
         return new ApacheHttpClientInvoker();
+    }
+
+    /**
+     * OkHttp 调用器
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    @ConditionalOnProperty(value = "grinder.http-client", havingValue = "OK_HTTP")
+    public HttpInvoker okHttpInvoker() {
+        return new OkHttpInvoker(new OkHttpClient());
     }
 }
