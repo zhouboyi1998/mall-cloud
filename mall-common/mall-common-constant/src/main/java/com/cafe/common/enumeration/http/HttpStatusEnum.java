@@ -154,6 +154,11 @@ public enum HttpStatusEnum {
      */
     GOODS_REVIEW_STATISTIC_NOT_FOUND(620, "Goods Review Statistic Not Found"),
 
+    /**
+     * 分布式ID业务实现类不存在
+     */
+    ID_SERVICE_IMPL_NOT_FOUND(621, "ID Service Implementation Not Found"),
+
     ;
 
     /**
