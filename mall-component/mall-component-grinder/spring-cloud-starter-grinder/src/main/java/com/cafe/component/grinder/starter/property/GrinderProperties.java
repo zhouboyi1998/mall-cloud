@@ -84,6 +84,11 @@ public class GrinderProperties {
         /**
          * Apache HttpClient
          */
-        APACHE_HTTP_CLIENT
+        APACHE_HTTP_CLIENT,
+
+        /**
+         * OkHttp
+         */
+        OK_HTTP
     }
 }
