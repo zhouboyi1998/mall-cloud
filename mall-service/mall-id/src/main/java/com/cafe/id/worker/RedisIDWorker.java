@@ -6,10 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @Project: mall-cloud
@@ -59,5 +61,23 @@ public class RedisIDWorker {
 
         // 拼接完整的分布式ID
         return ((timestamp - EPOCH) << TIMESTAMP_SHIFT) | increment;
+    }
+
+    /**
+     * 移除过期的 Redis Key
+     */
+    public Long removeExpiredKeys() {
+        // 获取 UTC 日期
+        LocalDate date = LocalDateTime.now().atZone(ZoneOffset.UTC).toLocalDate();
+
+        // 组装 Redis Key 匹配规则
+        String pattern = RedisConstant.ID_PREFIX + StringConstant.ASTERISK + StringConstant.COLON + StringConstant.ASTERISK;
+        // 获取所有匹配的 Redis Key
+        Set<String> keySet = stringRedisTemplate.keys(pattern);
+
+        // 过滤出当前日期之前的 Redis Key
+        keySet.removeIf(key -> !LocalDate.parse(key.substring(RedisConstant.ID_PREFIX.length()).split(StringConstant.COLON)[0]).isBefore(date));
+        // 批量删除 Redis Key
+        return stringRedisTemplate.delete(keySet);
     }
 }
