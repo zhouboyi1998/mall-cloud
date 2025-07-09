@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * @Project: mall-cloud
@@ -159,5 +160,25 @@ public class RedisIDWorker {
      */
     public long nextId() {
         return nextId(RedisConstant.DEFAULT_ID_GROUP);
+    }
+
+    /**
+     * 移除过期的 Redis 分布式ID Key
+     *
+     * @return 移除的 Key 数量
+     */
+    public Long removeExpiredKeys() {
+        // 获取当前日期戳
+        long datestamp = LocalDate.now().toEpochDay();
+
+        // 组装 Redis Key 匹配规则
+        String pattern = RedisConstant.ID_PREFIX + StringConstant.ASTERISK + StringConstant.COLON + StringConstant.ASTERISK;
+        // 获取所有匹配的 Redis Key
+        Set<String> keySet = stringRedisTemplate.keys(pattern);
+
+        // 从集合中过滤出所有 7 天之前的 Redis Key
+        keySet.removeIf(key -> Long.parseLong(key.substring(RedisConstant.ID_PREFIX.length()).split(StringConstant.COLON)[0]) + 7 > datestamp);
+        // 批量删除 Redis Key
+        return stringRedisTemplate.delete(keySet);
     }
 }
