@@ -19,8 +19,9 @@ public interface StockService extends IService<Stock> {
      * 批量入库
      *
      * @param cartDTOList 购物车DTO列表
+     * @return 入库失败的 SKU 主键列表
      */
-    void inboundBatch(List<CartDTO> cartDTOList);
+    List<Long> inboundBatch(List<CartDTO> cartDTOList);
 
     /**
      * 批量出库
@@ -28,5 +29,5 @@ public interface StockService extends IService<Stock> {
      * @param cartDTOList 购物车DTO列表
      * @return 库存不足的 SKU 主键列表
      */
-    List<String> outboundBatch(List<CartDTO> cartDTOList);
+    List<Long> outboundBatch(List<CartDTO> cartDTOList);
 }
