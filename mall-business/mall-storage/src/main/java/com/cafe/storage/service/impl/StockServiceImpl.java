@@ -7,6 +7,9 @@ import com.cafe.storage.model.entity.Stock;
 import com.cafe.storage.service.StockService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 import java.util.List;
@@ -26,27 +29,43 @@ public class StockServiceImpl extends ServiceImpl<StockMapper, Stock> implements
 
     private final StockMapper stockMapper;
 
+    @Transactional(
+        propagation = Propagation.REQUIRED,
+        rollbackFor = Exception.class,
+        timeout = 10,
+        isolation = Isolation.REPEATABLE_READ
+    )
     @Override
-    public void inboundBatch(List<CartDTO> cartDTOList) {
-        cartDTOList.forEach(stockMapper::inbound);
+    public List<Long> inboundBatch(List<CartDTO> cartDTOList) {
+        // 遍历购物车 DTO 中的 SKU, 逐个入库, 收集入库失败的 SKU 主键
+        return cartDTOList.stream()
+            .map(cartDTO -> stockMapper.inbound(cartDTO) < 1 ? cartDTO.getSkuId() : null)
+            .filter(Objects::nonNull)
+            .collect(Collectors.toList());
     }
 
+    @Transactional(
+        propagation = Propagation.REQUIRED,
+        rollbackFor = Exception.class,
+        timeout = 10,
+        isolation = Isolation.REPEATABLE_READ
+    )
     @Override
-    public List<String> outboundBatch(List<CartDTO> cartDTOList) {
-        // 遍历购物车中的 SKU, 逐个出库, 收集库存不足的 SKU 主键
-        List<Long> failIds = cartDTOList.stream()
+    public List<Long> outboundBatch(List<CartDTO> cartDTOList) {
+        // 遍历购物车 DTO 中的 SKU, 逐个出库, 收集库存不足的 SKU 主键
+        List<Long> outboundFailIds = cartDTOList.stream()
             .map(cartDTO -> stockMapper.outbound(cartDTO) < 1 ? cartDTO.getSkuId() : null)
             .filter(Objects::nonNull)
             .collect(Collectors.toList());
 
         // 如果有 SKU 出库失败, 回滚出库成功的 SKU 的库存
-        if (!CollectionUtils.isEmpty(failIds)) {
+        if (!CollectionUtils.isEmpty(outboundFailIds)) {
             cartDTOList.stream()
-                .filter(cartDTO -> !failIds.contains(cartDTO.getSkuId()))
+                .filter(cartDTO -> !outboundFailIds.contains(cartDTO.getSkuId()))
                 .forEach(stockMapper::inbound);
         }
 
         // 返回库存不足的 SKU 主键列表
-        return failIds.stream().map(String::valueOf).collect(Collectors.toList());
+        return outboundFailIds;
     }
 }

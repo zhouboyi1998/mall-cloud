@@ -1,6 +1,7 @@
 package com.cafe.ordercenter.facade.impl;
 
 import com.cafe.common.constant.kafka.KafkaConstant;
+import com.cafe.common.constant.model.OrderConstant;
 import com.cafe.infrastructure.kafka.producer.KafkaProducer;
 import com.cafe.order.model.vo.OrderVO;
 import com.cafe.ordercenter.facade.OrderCenterFacade;
@@ -13,6 +14,7 @@ import io.seata.tm.api.transaction.Propagation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -43,6 +45,23 @@ public class OrderCenterFacadeImpl implements OrderCenterFacade {
         // 发送订单信息到 Kafka
         kafkaProducer.send(KafkaConstant.Topic.ORDER_INDEX, orderVO);
         return orderVO;
+    }
+
+    @GlobalTransactional(
+        propagation = Propagation.REQUIRED,
+        rollbackFor = Exception.class,
+        timeoutMills = 120000,
+        lockRetryInterval = 10
+    )
+    @Override
+    public List<Long> cancel(LocalDateTime now, Integer duration) {
+        // 取消超时未支付的订单
+        List<Long> cancelOrderIds = orderCenterService.cancel(now, duration);
+        // 发送订单信息到 Kafka
+        cancelOrderIds.stream()
+            .map(cancelOrderId -> new OrderVO().setId(cancelOrderId).setStatus(OrderConstant.Status.CANCEL))
+            .forEach(orderVO -> kafkaProducer.send(KafkaConstant.Topic.ORDER_INDEX, orderVO));
+        return cancelOrderIds;
     }
 
     @GlobalTransactional(
