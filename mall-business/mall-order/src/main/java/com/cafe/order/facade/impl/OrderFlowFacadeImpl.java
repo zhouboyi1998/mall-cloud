@@ -65,6 +65,12 @@ public class OrderFlowFacadeImpl implements OrderFlowFacade {
         return OrderConverter.INSTANCE.toVO(newOrder).setOrderItemList(newOrderItemList);
     }
 
+    @Transactional(
+        propagation = Propagation.REQUIRED,
+        rollbackFor = Exception.class,
+        timeout = 20,
+        isolation = Isolation.READ_COMMITTED
+    )
     @Override
     public List<OrderItem> cancel(LocalDateTime now, Integer duration) {
         // 取消超时未支付的订单

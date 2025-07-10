@@ -4,6 +4,7 @@ import com.cafe.order.model.vo.OrderVO;
 import com.cafe.review.model.query.OrderReviewAndGoodsReviewSaveQuery;
 import com.cafe.storage.model.dto.CartDTO;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -23,6 +24,14 @@ public interface OrderCenterFacade {
      * @return 订单VO
      */
     OrderVO submit(Long addressId, List<CartDTO> cartDTOList);
+
+    /**
+     * 取消超时未支付的订单
+     *
+     * @param now      当前时间
+     * @param duration 下单未支付时长 (单位: 分钟)
+     */
+    List<Long> cancel(LocalDateTime now, Integer duration);
 
     /**
      * 评价订单

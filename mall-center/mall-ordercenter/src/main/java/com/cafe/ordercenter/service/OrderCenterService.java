@@ -31,7 +31,7 @@ public interface OrderCenterService {
      * @param now      当前时间
      * @param duration 下单未支付时长 (单位: 分钟)
      */
-    void cancel(LocalDateTime now, Integer duration);
+    List<Long> cancel(LocalDateTime now, Integer duration);
 
     /**
      * 评价订单

@@ -153,12 +153,12 @@ public class OrderCenterServiceImpl implements OrderCenterService {
      */
     private void outboundStock(List<CartDTO> cartDTOList) {
         // SKU 出库, 返回值是库存不足的 SKU 主键列表
-        List<String> failIds = Optional.ofNullable(stockFeign.outboundBatch(cartDTOList))
+        List<Long> outboundFailIds = Optional.ofNullable(stockFeign.outboundBatch(cartDTOList))
             .map(ResponseEntity::getBody)
             .orElse(Collections.emptyList());
         // 如果存在库存不足的 SKU, 终止提交
-        if (!CollectionUtils.isEmpty(failIds)) {
-            throw new BusinessException(HttpStatusEnum.LOW_STOCK, failIds);
+        if (!CollectionUtils.isEmpty(outboundFailIds)) {
+            throw new BusinessException(HttpStatusEnum.LOW_STOCK, outboundFailIds);
         }
     }
 
@@ -231,7 +231,7 @@ public class OrderCenterServiceImpl implements OrderCenterService {
     }
 
     @Override
-    public void cancel(LocalDateTime now, Integer duration) {
+    public List<Long> cancel(LocalDateTime now, Integer duration) {
         // 取消超时未支付的订单
         List<OrderItem> orderItemList = Optional.ofNullable(orderFlowFeign.cancel(now, duration))
             .map(ResponseEntity::getBody)
@@ -245,6 +245,11 @@ public class OrderCenterServiceImpl implements OrderCenterService {
                 .setQuantity(orderItem.getSkuQuantity()))
             .collect(Collectors.toList());
         stockFeign.inboundBatch(cartDTOList);
+
+        // 返回订单id列表
+        return orderItemList.stream()
+            .map(OrderItem::getOrderId)
+            .collect(Collectors.toList());
     }
 
     @Override

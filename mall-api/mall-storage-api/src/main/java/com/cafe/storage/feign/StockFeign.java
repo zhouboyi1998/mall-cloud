@@ -26,9 +26,10 @@ public interface StockFeign {
      * 批量入库
      *
      * @param cartDTOList 购物车DTO列表
+     * @return 入库失败的 SKU 主键列表
      */
     @PutMapping(value = "/inbound/batch")
-    ResponseEntity<Void> inboundBatch(@RequestBody List<CartDTO> cartDTOList);
+    ResponseEntity<List<Long>> inboundBatch(@RequestBody List<CartDTO> cartDTOList);
 
     /**
      * 批量出库
@@ -37,5 +38,5 @@ public interface StockFeign {
      * @return 库存不足的 SKU 主键列表
      */
     @PutMapping(value = "/outbound/batch")
-    ResponseEntity<List<String>> outboundBatch(@RequestBody List<CartDTO> cartDTOList);
+    ResponseEntity<List<Long>> outboundBatch(@RequestBody List<CartDTO> cartDTOList);
 }

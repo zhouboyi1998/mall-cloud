@@ -195,19 +195,19 @@ public class StockController {
 
     @ApiLogPrint(value = "批量入库")
     @ApiOperation(value = "批量入库")
-    @ApiImplicitParam(value = "购物车视图模型列表", name = "cartDTOList", dataType = "List<CartDTO>", paramType = "body", required = true)
+    @ApiImplicitParam(value = "购物车DTO列表", name = "cartDTOList", dataType = "List<CartDTO>", paramType = "body", required = true)
     @PutMapping(value = "/inbound/batch")
-    public ResponseEntity<Void> inboundBatch(@RequestBody List<CartDTO> cartDTOList) {
-        stockService.inboundBatch(cartDTOList);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<List<Long>> inboundBatch(@RequestBody List<CartDTO> cartDTOList) {
+        List<Long> inboundFailIds = stockService.inboundBatch(cartDTOList);
+        return ResponseEntity.ok(inboundFailIds);
     }
 
     @ApiLogPrint(value = "批量出库")
     @ApiOperation(value = "批量出库")
-    @ApiImplicitParam(value = "购物车视图模型列表", name = "cartDTOList", dataType = "List<CartDTO>", paramType = "body", required = true)
+    @ApiImplicitParam(value = "购物车DTO列表", name = "cartDTOList", dataType = "List<CartDTO>", paramType = "body", required = true)
     @PutMapping(value = "/outbound/batch")
-    public ResponseEntity<List<String>> outboundBatch(@RequestBody List<CartDTO> cartDTOList) {
-        List<String> failIds = stockService.outboundBatch(cartDTOList);
-        return ResponseEntity.ok(failIds);
+    public ResponseEntity<List<Long>> outboundBatch(@RequestBody List<CartDTO> cartDTOList) {
+        List<Long> outboundFailIds = stockService.outboundBatch(cartDTOList);
+        return ResponseEntity.ok(outboundFailIds);
     }
 }
