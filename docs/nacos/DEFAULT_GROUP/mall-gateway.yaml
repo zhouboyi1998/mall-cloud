@@ -15,5 +15,6 @@ spring:
 security:
   # 白名单 API
   whitelist:
-    - "/actuator/**"
-    - "/mall-security/**"
+    - "/mall-security/jwk/**"
+    - "/mall-security/oauth/**"
+    - "/mall-security/token-store/**"

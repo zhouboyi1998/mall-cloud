@@ -18,6 +18,7 @@ spec:
         app: mall-grinder
     spec:
       restartPolicy: Always
+      terminationGracePeriodSeconds: 60
       containers:
         - name: mall-grinder-container
           image: 192.168.159.128:5000/mall/mall-grinder:latest
