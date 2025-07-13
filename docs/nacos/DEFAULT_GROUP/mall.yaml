@@ -1,4 +1,12 @@
+server:
+  # 停机方式: 优雅
+  shutdown: GRACEFUL
+
 spring:
+  # 生命周期配置
+  lifecycle:
+    # 优雅停机时已接受请求的执行超时时间 (默认: 30s)
+    timeout-per-shutdown-phase: 60s
   # 微服务配置
   cloud:
     # 负载均衡配置
@@ -100,6 +108,9 @@ management:
     metrics:
       enabled: true
     prometheus:
+      enabled: true
+    # 开放停机端点: POST /actuator/shutdown
+    shutdown:
       enabled: true
   metrics:
     tags:

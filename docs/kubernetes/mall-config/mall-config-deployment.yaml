@@ -18,6 +18,7 @@ spec:
         app: mall-config
     spec:
       restartPolicy: Always
+      terminationGracePeriodSeconds: 60
       containers:
         - name: mall-config-container
           image: 192.168.159.128:5000/mall/mall-config:latest

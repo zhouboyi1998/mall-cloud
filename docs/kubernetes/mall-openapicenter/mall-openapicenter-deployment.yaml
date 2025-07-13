@@ -18,6 +18,7 @@ spec:
         app: mall-openapicenter
     spec:
       restartPolicy: Always
+      terminationGracePeriodSeconds: 60
       containers:
         - name: mall-openapicenter-container
           image: 192.168.159.128:5000/mall/mall-openapicenter:latest
