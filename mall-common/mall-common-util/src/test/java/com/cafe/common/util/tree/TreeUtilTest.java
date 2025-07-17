@@ -1,6 +1,6 @@
 package com.cafe.common.util.tree;
 
-import com.cafe.common.lang.tree.TreeNode;
+import com.cafe.common.lang.datastructures.tree.TreeNode;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.cafe.common.lang.date;
+package com.cafe.common.lang.datastructures.date;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.lang.date
+ * @Package: com.cafe.common.lang.datastructures.date
  * @Author: zhouboyi
  * @Date: 2023/6/16 18:29
  * @Description: java.time.LocalDateTime 日期时间区间
