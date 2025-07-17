@@ -1,13 +1,13 @@
-package com.cafe.common.lang.tree;
+package com.cafe.common.lang.datastructures.tree;
 
 import java.util.List;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.lang.tree
+ * @Package: com.cafe.common.lang.datastructures.tree
  * @Author: zhouboyi
  * @Date: 2024/5/9 17:29
- * @Description: 树形结构
+ * @Description: 普通树
  */
 public interface Tree<T extends Tree<T, K>, K> {
 

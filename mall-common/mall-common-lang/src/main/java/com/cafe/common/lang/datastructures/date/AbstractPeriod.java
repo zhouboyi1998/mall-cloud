@@ -1,4 +1,4 @@
-package com.cafe.common.lang.date;
+package com.cafe.common.lang.datastructures.date;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,7 +9,7 @@ import java.util.Objects;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.lang.date
+ * @Package: com.cafe.common.lang.datastructures.date
  * @Author: zhouboyi
  * @Date: 2023/6/20 15:58
  * @Description: 日期时间区间
