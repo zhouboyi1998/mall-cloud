@@ -1,6 +1,6 @@
 package com.cafe.id.config;
 
-import com.cafe.common.lang.id.Snowflake;
+import com.cafe.common.lang.algorithm.id.Snowflake;
 import com.cafe.id.property.IDProperties;
 import com.cafe.infrastructure.redis.worker.RedisIDWorker;
 import lombok.RequiredArgsConstructor;

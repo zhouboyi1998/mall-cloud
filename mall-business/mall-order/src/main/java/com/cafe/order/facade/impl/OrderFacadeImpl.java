@@ -2,7 +2,7 @@ package com.cafe.order.facade.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.cafe.common.lang.date.LocalDateTimePeriod;
+import com.cafe.common.lang.datastructures.date.LocalDateTimePeriod;
 import com.cafe.infrastructure.mybatisplus.util.WrapperUtil;
 import com.cafe.order.facade.OrderFacade;
 import com.cafe.order.model.converter.OrderConverter;

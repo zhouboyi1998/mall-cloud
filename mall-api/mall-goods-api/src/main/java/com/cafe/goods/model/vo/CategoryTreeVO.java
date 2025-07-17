@@ -1,6 +1,6 @@
 package com.cafe.goods.model.vo;
 
-import com.cafe.common.lang.tree.Tree;
+import com.cafe.common.lang.datastructures.tree.Tree;
 import com.cafe.goods.model.entity.Category;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

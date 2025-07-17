@@ -1,6 +1,6 @@
 package com.cafe.user.model.vo;
 
-import com.cafe.common.lang.tree.Tree;
+import com.cafe.common.lang.datastructures.tree.Tree;
 import com.cafe.user.model.entity.Resource;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

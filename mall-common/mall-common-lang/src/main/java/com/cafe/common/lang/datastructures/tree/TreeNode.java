@@ -1,4 +1,4 @@
-package com.cafe.common.lang.tree;
+package com.cafe.common.lang.datastructures.tree;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,10 +9,10 @@ import java.util.List;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.lang.tree
+ * @Package: com.cafe.common.lang.datastructures.tree
  * @Author: zhouboyi
  * @Date: 2025/4/8 18:01
- * @Description: 默认树形节点
+ * @Description: 普通树节点
  */
 @Data
 @EqualsAndHashCode(callSuper = false)

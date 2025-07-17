@@ -1,8 +1,8 @@
 package com.cafe.common.util.tree;
 
 import com.cafe.common.constant.model.DefaultValueConstant;
-import com.cafe.common.lang.tree.Tree;
-import com.cafe.common.lang.tree.TreeNode;
+import com.cafe.common.lang.datastructures.tree.Tree;
+import com.cafe.common.lang.datastructures.tree.TreeNode;
 
 import java.util.ArrayList;
 import java.util.List;

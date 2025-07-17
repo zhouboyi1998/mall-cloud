@@ -1,6 +1,6 @@
 package com.cafe.order.model.query;
 
-import com.cafe.common.lang.date.LocalDateTimePeriod;
+import com.cafe.common.lang.datastructures.date.LocalDateTimePeriod;
 import com.cafe.order.model.entity.Order;
 import com.cafe.order.model.entity.OrderItem;
 import io.swagger.annotations.ApiModel;

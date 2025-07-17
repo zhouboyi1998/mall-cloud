@@ -1,10 +1,10 @@
-package com.cafe.common.lang.id;
+package com.cafe.common.lang.algorithm.id;
 
 import org.junit.jupiter.api.Test;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.lang.id
+ * @Package: com.cafe.common.lang.algorithm.id
  * @Author: zhouboyi
  * @Date: 2023/7/28 16:15
  * @Description:

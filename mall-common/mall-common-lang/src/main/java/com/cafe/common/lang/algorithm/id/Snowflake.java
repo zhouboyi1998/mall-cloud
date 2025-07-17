@@ -8,11 +8,11 @@
  * @Package: com.twitter.service.snowflake
  * @Class: IdWorker.scala
  */
-package com.cafe.common.lang.id;
+package com.cafe.common.lang.algorithm.id;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.lang.id
+ * @Package: com.cafe.common.lang.algorithm.id
  * @Author: zhouboyi
  * @Date: 2022/10/28 9:59
  * @Description: 雪花算法

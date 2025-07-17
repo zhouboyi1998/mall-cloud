@@ -1,4 +1,4 @@
-package com.cafe.common.lang.date;
+package com.cafe.common.lang.datastructures.date;
 
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.Test;
@@ -10,7 +10,7 @@ import java.util.Date;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.lang.date
+ * @Package: com.cafe.common.lang.datastructures.date
  * @Author: zhouboyi
  * @Date: 2023/9/7 10:38
  * @Description:
