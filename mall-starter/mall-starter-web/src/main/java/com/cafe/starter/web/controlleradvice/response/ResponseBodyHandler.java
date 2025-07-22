@@ -1,7 +1,6 @@
 package com.cafe.starter.web.controlleradvice.response;
 
 import com.cafe.common.constant.app.ServiceConstant;
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.constant.security.SecurityConstant;
 import com.cafe.common.jackson.util.JacksonUtil;
@@ -31,7 +30,7 @@ import java.util.Objects;
  */
 @RestControllerAdvice(annotations = {RestController.class})
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-@Order(value = IntegerConstant.TWO_HUNDRED)
+@Order(value = 200)
 public class ResponseBodyHandler implements ResponseBodyAdvice<Object> {
 
     @Value(value = "${spring.application.name}")

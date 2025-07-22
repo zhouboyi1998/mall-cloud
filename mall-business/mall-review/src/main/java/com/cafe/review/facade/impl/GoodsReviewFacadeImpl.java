@@ -2,7 +2,6 @@ package com.cafe.review.facade.impl;
 
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.model.ReviewConstant;
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.review.facade.GoodsReviewFacade;
 import com.cafe.review.model.converter.GoodsReviewConverter;
 import com.cafe.review.model.entity.GoodsReview;
@@ -39,10 +38,10 @@ import java.util.stream.Collectors;
 public class GoodsReviewFacadeImpl implements GoodsReviewFacade {
 
     private static final Map<String, Integer> ZERO_STATISTIC = new HashMap<String, Integer>(4) {{
-        put(FieldConstant.TOTAL_REVIEW, IntegerConstant.ZERO);
-        put(FieldConstant.GOOD_REVIEW, IntegerConstant.ZERO);
-        put(FieldConstant.MEDIUM_REVIEW, IntegerConstant.ZERO);
-        put(FieldConstant.BAD_REVIEW, IntegerConstant.ZERO);
+        put(FieldConstant.TOTAL_REVIEW, 0);
+        put(FieldConstant.GOOD_REVIEW, 0);
+        put(FieldConstant.MEDIUM_REVIEW, 0);
+        put(FieldConstant.BAD_REVIEW, 0);
     }};
 
     private final GoodsReviewFacade goodsReviewFacade;

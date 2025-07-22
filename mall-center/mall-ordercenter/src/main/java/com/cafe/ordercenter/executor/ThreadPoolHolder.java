@@ -1,6 +1,5 @@
 package com.cafe.ordercenter.executor;
 
-import com.cafe.common.constant.pool.IntegerConstant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
@@ -30,14 +29,14 @@ public class ThreadPoolHolder {
     public void initSubmitOrderThreadPool() {
         // 创建线程池
         SUBMIT_ORDER_THREAD_POOL = new ThreadPoolExecutor(
-            // 核心线程数: 2 * CPU 核心数
+            // 核心线程数
             Runtime.getRuntime().availableProcessors() * 2,
-            // 最大线程数: 4 * CPU 核心数
+            // 最大线程数
             Runtime.getRuntime().availableProcessors() * 4,
-            // 多余的空闲线程存活时间: 60 秒
-            IntegerConstant.SIXTY, TimeUnit.SECONDS,
-            // 阻塞队列容量: 2048
-            new LinkedBlockingQueue<>(IntegerConstant.TWO_THOUSAND_AND_FORTY_EIGHT),
+            // 多余的空闲线程存活时间
+            60, TimeUnit.SECONDS,
+            // 阻塞队列容量
+            new LinkedBlockingQueue<>(2048),
             // 拒绝策略: 如果线程池已满, 直接在调用方的线程中执行任务
             new ThreadPoolExecutor.CallerRunsPolicy()
         );

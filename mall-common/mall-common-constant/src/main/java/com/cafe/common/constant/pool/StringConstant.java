@@ -118,19 +118,4 @@ public class StringConstant {
      * 错误
      */
     public static final String FALSE = "false";
-
-    /**
-     * 时间
-     */
-    public static final String TIME = "time";
-
-    /**
-     * 时间区间
-     */
-    public static final String PERIOD = "period";
-
-    /**
-     * 消息
-     */
-    public static final String MESSAGE = "message";
 }

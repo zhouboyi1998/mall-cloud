@@ -1,6 +1,5 @@
 package com.cafe.infrastructure.redis.annotation;
 
-import com.cafe.common.constant.pool.LongConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import org.springframework.core.annotation.AliasFor;
 
@@ -31,7 +30,7 @@ public @interface FallbackCache {
 
     String key() default StringConstant.EMPTY;
 
-    long timeout() default LongConstant.MINUS_ONE;
+    long timeout() default -1L;
 
     TimeUnit unit() default TimeUnit.SECONDS;
 

@@ -1,7 +1,6 @@
 package com.cafe.elasticsearch.service.impl;
 
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.elasticsearch.model.index.GoodsIndex;
 import com.cafe.elasticsearch.repository.GoodsIndexRepository;
@@ -93,7 +92,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
             // 排序
             .sort(sortField, SortOrder.fromString(sortRule))
             // 超时时间
-            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TWENTY));
+            .timeout(TimeValue.timeValueSeconds(20));
         // 如果关键词不为空, 匹配关键词
         if (ObjectUtils.isNotEmpty(keyword)) {
             QueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(keyword, ElasticSearchConstant.Goods.SEARCH_FIELD);

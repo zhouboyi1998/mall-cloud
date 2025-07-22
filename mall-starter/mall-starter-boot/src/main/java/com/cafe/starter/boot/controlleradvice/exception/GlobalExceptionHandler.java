@@ -1,6 +1,5 @@
 package com.cafe.starter.boot.controlleradvice.exception;
 
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.starter.boot.model.Result;
 import com.cafe.starter.boot.model.exception.BusinessException;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +19,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  */
 @Slf4j
 @RestControllerAdvice(annotations = {RestController.class})
-@Order(value = IntegerConstant.ONE_HUNDRED)
+@Order(value = 100)
 public class GlobalExceptionHandler {
 
     /**

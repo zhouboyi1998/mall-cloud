@@ -2,7 +2,6 @@ package com.cafe.common.log.aspect;
 
 import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.app.FieldConstant;
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.lang.algorithm.id.Snowflake;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.util.annotation.AnnotationUtil;
@@ -40,7 +39,7 @@ import java.util.Optional;
  */
 @Profile(value = {AppConstant.DEV, AppConstant.TEST})
 @Slf4j
-@Order(value = IntegerConstant.ONE)
+@Order(value = 1)
 @Aspect
 @Component
 public class ApiLogConsoleAspect {

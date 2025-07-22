@@ -1,8 +1,7 @@
 package com.cafe.ordercenter.service.impl;
 
 import com.cafe.common.constant.model.GoodsConstant;
-import com.cafe.common.constant.pool.BigDecimalConstant;
-import com.cafe.common.constant.pool.IntegerConstant;
+import com.cafe.common.constant.model.OrderConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.enumeration.http.HttpStatusEnum;
 import com.cafe.foundation.feign.AreaFeign;
@@ -176,15 +175,15 @@ public class OrderCenterServiceImpl implements OrderCenterService {
         Map<Long, Integer> quantityMap = cartDTOList.stream().collect(Collectors.toMap(CartDTO::getSkuId, CartDTO::getQuantity));
 
         // 计算总金额和总折扣
-        AtomicReference<BigDecimal> amount = new AtomicReference<>(BigDecimal.valueOf(0));
-        AtomicReference<BigDecimal> discount = new AtomicReference<>(BigDecimal.valueOf(0));
+        AtomicReference<BigDecimal> amount = new AtomicReference<>(BigDecimal.ZERO);
+        AtomicReference<BigDecimal> discount = new AtomicReference<>(BigDecimal.ZERO);
         goodsList.forEach(goods -> {
             amount.set(amount.get().add(goods.getOriginalPrice()));
             discount.set(discount.get().add(goods.getOriginalPrice().subtract(goods.getDiscountPrice())));
         });
 
         // 判断是否需要邮费 (商品总金额 100 块以下收 8 块邮费)
-        BigDecimal postage = amount.get().compareTo(BigDecimalConstant.ONE_HUNDRED) >= 0 ? BigDecimalConstant.ZERO : BigDecimalConstant.EIGHT;
+        BigDecimal postage = amount.get().compareTo(BigDecimal.valueOf(100)) >= 0 ? BigDecimal.ZERO : BigDecimal.valueOf(8);
 
         // 计算实际支付金额
         BigDecimal payment = amount.get().subtract(discount.get()).add(postage);
@@ -201,10 +200,10 @@ public class OrderCenterServiceImpl implements OrderCenterService {
             .setMobile(address.getMobile())
             .setAmount(amount.get())
             .setDiscount(discount.get())
-            .setCoupon(BigDecimalConstant.ZERO)
+            .setCoupon(BigDecimal.ZERO)
             .setPostage(postage)
             .setPayment(payment)
-            .setStatus(IntegerConstant.ZERO);
+            .setStatus(OrderConstant.Status.CREATE);
 
         // 循环生成订单明细
         List<OrderItem> orderItemList = new ArrayList<>(goodsList.size());
@@ -219,7 +218,7 @@ public class OrderCenterServiceImpl implements OrderCenterService {
                 .setSkuPrice(discountPrice)
                 .setSkuQuantity(quantity)
                 .setAmount(discountPrice.multiply(BigDecimal.valueOf(quantity)))
-                .setStatus(IntegerConstant.ZERO);
+                .setStatus(OrderConstant.Status.CREATE);
             orderItemList.add(orderItem);
         });
         orderVO.setOrderItemList(orderItemList);

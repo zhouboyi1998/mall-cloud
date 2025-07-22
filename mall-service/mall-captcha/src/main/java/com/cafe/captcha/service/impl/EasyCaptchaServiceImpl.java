@@ -4,7 +4,6 @@ import com.cafe.captcha.model.vo.Captcha;
 import com.cafe.captcha.property.CaptchaProperties;
 import com.cafe.captcha.service.CaptchaService;
 import com.cafe.common.constant.captcha.CaptchaConstant;
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.id.feign.IDFeign;
 import com.wf.captcha.SpecCaptcha;
@@ -37,7 +36,7 @@ public class EasyCaptchaServiceImpl extends BaseCaptchaServiceImpl implements Ca
         Long key = idFeign.nextId(null).getBody();
 
         // 保存图片验证码的唯一标识和文本到 Redis 中
-        redisTemplate.opsForValue().set(RedisConstant.CAPTCHA_PREFIX + key, code, IntegerConstant.SIXTY, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(RedisConstant.CAPTCHA_PREFIX + key, code, CaptchaConstant.TIMEOUT, TimeUnit.SECONDS);
 
         // 返回图片验证码
         return new Captcha().setKey(key).setImage(specCaptcha.toBase64());

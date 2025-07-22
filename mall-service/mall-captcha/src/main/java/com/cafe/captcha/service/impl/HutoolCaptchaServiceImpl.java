@@ -6,7 +6,6 @@ import com.cafe.captcha.model.vo.Captcha;
 import com.cafe.captcha.property.CaptchaProperties;
 import com.cafe.captcha.service.CaptchaService;
 import com.cafe.common.constant.captcha.CaptchaConstant;
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.enumeration.media.MediaFormatEnum;
 import com.cafe.id.feign.IDFeign;
@@ -31,7 +30,7 @@ public class HutoolCaptchaServiceImpl extends BaseCaptchaServiceImpl implements 
     @Override
     public Captcha one() {
         // 生成图片验证码
-        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(CaptchaConstant.WIDTH, CaptchaConstant.HEIGHT, CaptchaConstant.LENGTH, IntegerConstant.FIFTY);
+        LineCaptcha lineCaptcha = CaptchaUtil.createLineCaptcha(CaptchaConstant.WIDTH, CaptchaConstant.HEIGHT, CaptchaConstant.LENGTH, CaptchaConstant.LINE_COUNT);
         // 获取图片验证码文本
         String code = lineCaptcha.getCode().toUpperCase();
 
@@ -39,7 +38,7 @@ public class HutoolCaptchaServiceImpl extends BaseCaptchaServiceImpl implements 
         Long key = idFeign.nextId(null).getBody();
 
         // 保存图片验证码的唯一标识和文本到 Redis 中
-        redisTemplate.opsForValue().set(RedisConstant.CAPTCHA_PREFIX + key, code, IntegerConstant.SIXTY, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(RedisConstant.CAPTCHA_PREFIX + key, code, CaptchaConstant.TIMEOUT, TimeUnit.SECONDS);
 
         // 返回图片验证码
         return new Captcha().setKey(key).setImage(MediaFormatEnum.PNG.getBase64Prefix() + lineCaptcha.getImageBase64());

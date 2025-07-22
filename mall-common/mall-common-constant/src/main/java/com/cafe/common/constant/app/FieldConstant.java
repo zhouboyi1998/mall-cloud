@@ -133,4 +133,19 @@ public class FieldConstant {
      * 数据
      */
     public static final String DATA = "data";
+
+    /**
+     * 时间
+     */
+    public static final String TIME = "time";
+
+    /**
+     * 时间区间
+     */
+    public static final String PERIOD = "period";
+
+    /**
+     * 消息
+     */
+    public static final String MESSAGE = "message";
 }

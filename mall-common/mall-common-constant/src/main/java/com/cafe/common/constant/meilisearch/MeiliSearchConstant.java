@@ -12,6 +12,11 @@ import com.cafe.common.constant.app.FieldConstant;
 public class MeiliSearchConstant {
 
     /**
+     * 批处理的批次大小
+     */
+    public static final Integer BATCH_SIZE = 1000;
+
+    /**
      * 商品索引
      */
     public static class Goods {

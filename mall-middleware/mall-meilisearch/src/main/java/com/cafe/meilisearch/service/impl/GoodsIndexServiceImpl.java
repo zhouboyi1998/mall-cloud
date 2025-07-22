@@ -1,7 +1,6 @@
 package com.cafe.meilisearch.service.impl;
 
 import com.cafe.common.constant.meilisearch.MeiliSearchConstant;
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.meilisearch.model.index.GoodsIndex;
 import com.cafe.meilisearch.service.GoodsIndexService;
@@ -67,7 +66,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
     @Override
     public List<TaskInfo> saveBatch(List<GoodsIndex> goodsIndexList) {
         TaskInfo[] taskInfos = client.index(MeiliSearchConstant.Goods.INDEX)
-            .addDocumentsInBatches(JacksonUtil.writeValueAsString(goodsIndexList), IntegerConstant.ONE_THOUSAND, MeiliSearchConstant.Goods.PRIMARY_KEY);
+            .addDocumentsInBatches(JacksonUtil.writeValueAsString(goodsIndexList), MeiliSearchConstant.BATCH_SIZE, MeiliSearchConstant.Goods.PRIMARY_KEY);
         return Arrays.stream(taskInfos).collect(Collectors.toList());
     }
 
@@ -80,7 +79,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
     @Override
     public List<TaskInfo> updateBatch(List<GoodsIndex> goodsIndexList) {
         TaskInfo[] taskInfos = client.index(MeiliSearchConstant.Goods.INDEX)
-            .updateDocumentsInBatches(JacksonUtil.writeValueAsString(goodsIndexList), IntegerConstant.ONE_THOUSAND, MeiliSearchConstant.Goods.PRIMARY_KEY);
+            .updateDocumentsInBatches(JacksonUtil.writeValueAsString(goodsIndexList), MeiliSearchConstant.BATCH_SIZE, MeiliSearchConstant.Goods.PRIMARY_KEY);
         return Arrays.stream(taskInfos).collect(Collectors.toList());
     }
 

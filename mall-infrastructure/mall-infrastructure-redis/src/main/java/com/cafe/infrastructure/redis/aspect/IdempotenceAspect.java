@@ -1,6 +1,5 @@
 package com.cafe.infrastructure.redis.aspect;
 
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.constant.request.RequestConstant;
@@ -33,7 +32,7 @@ import java.util.Optional;
  * @Description: 接口幂等性切面类
  */
 @RequiredArgsConstructor
-@Order(value = IntegerConstant.MIN_VALUE)
+@Order(value = Integer.MIN_VALUE)
 @Aspect
 @Component
 public class IdempotenceAspect {

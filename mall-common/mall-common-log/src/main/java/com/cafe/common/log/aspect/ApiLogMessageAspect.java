@@ -1,7 +1,6 @@
 package com.cafe.common.log.aspect;
 
 import com.cafe.common.constant.app.AppConstant;
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.common.log.model.ApiLog;
 import com.cafe.common.util.annotation.AnnotationUtil;
@@ -37,7 +36,7 @@ import java.util.Optional;
  */
 @Profile(value = {AppConstant.DEV, AppConstant.TEST, AppConstant.PROD, AppConstant.DOCKER})
 @Slf4j
-@Order(value = IntegerConstant.TWO)
+@Order(value = 2)
 @Aspect
 @Component
 public class ApiLogMessageAspect {

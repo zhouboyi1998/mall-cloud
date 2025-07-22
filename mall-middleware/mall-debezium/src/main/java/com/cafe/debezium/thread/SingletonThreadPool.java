@@ -1,6 +1,5 @@
 package com.cafe.debezium.thread;
 
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.thread.ThreadConstant;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 
@@ -30,9 +29,17 @@ public enum SingletonThreadPool {
 
     SingletonThreadPool() {
         executorService = new ThreadPoolExecutor(
-            IntegerConstant.EIGHT, IntegerConstant.SIXTEEN, IntegerConstant.SIXTY, TimeUnit.SECONDS,
-            new ArrayBlockingQueue<>(IntegerConstant.TWO_HUNDRED_AND_FIFTY_SIX),
+            // 核心线程数
+            Runtime.getRuntime().availableProcessors(),
+            // 最大线程数
+            Runtime.getRuntime().availableProcessors() * 2,
+            // 多余的空闲线程存活时间
+            60, TimeUnit.SECONDS,
+            // 阻塞队列容量
+            new ArrayBlockingQueue<>(256),
+            // 线程工厂: 设置线程名称格式
             new ThreadFactoryBuilder().setNameFormat(ThreadConstant.DEBEZIUM_LISTENER_POOL).build(),
+            // 拒绝策略: 如果线程池已满, 直接丢弃任务
             new ThreadPoolExecutor.DiscardPolicy()
         );
     }

@@ -1,6 +1,5 @@
 package com.cafe.gateway.manager;
 
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.gateway.util.RequestUtil;
@@ -49,7 +48,7 @@ public class AuthorizationManager implements ReactiveAuthorizationManager<Author
         Boolean hasAccessToken = Optional.ofNullable(redisTemplate.hasKey(RedisConstant.TOKEN_PREFIX + RedisConstant.ACCESS_TOKEN_INFIX + accessToken)).orElse(Boolean.FALSE);
 
         // 获取菜单路径
-        String menuPath = request.getPath().subPath(IntegerConstant.ZERO, IntegerConstant.FOUR).toString();
+        String menuPath = request.getPath().subPath(0, 4).toString();
         // 根据菜单路径, 获取可以访问当前菜单的角色列表
         List<String> roleNameList = JacksonUtil.convertValue(redisTemplate.opsForHash().get(RedisConstant.RESOURCE_ROLE_MAP, menuPath), new TypeReference<List<String>>() {});
         log.info("AuthorizationManager.check(): menu path -> {}, role name list -> {}", menuPath, ToStringBuilder.reflectionToString(roleNameList, ToStringStyle.JSON_STYLE));
