@@ -1,6 +1,6 @@
 package com.cafe.openapicenter.service.impl;
 
-import com.cafe.common.constant.pool.StringConstant;
+import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.common.util.builder.ToStringStyleHolder;
 import com.cafe.openapicenter.model.entity.API;
@@ -55,7 +55,7 @@ public class APIServiceImpl implements APIService {
             case TRACE:
             default:
                 log.error("APIServiceImpl.proxy(): Unsupported HTTP Method! api -> {}", ToStringBuilder.reflectionToString(api, ToStringStyleHolder.JSON_STYLE_WITHOUT_UNICODE));
-                return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, "Unsupported HTTP Method!"));
+                return Mono.just(JacksonUtil.createObjectNode(FieldConstant.MESSAGE, "Unsupported HTTP Method!"));
         }
     }
 
@@ -125,6 +125,6 @@ public class APIServiceImpl implements APIService {
      */
     private Mono<ObjectNode> onErrorResume(API api, Throwable throwable) {
         log.error("APIServiceImpl.onErrorResume(): api -> {}, message -> {}", ToStringBuilder.reflectionToString(api, ToStringStyleHolder.JSON_STYLE_WITHOUT_UNICODE), throwable.getMessage(), throwable);
-        return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, throwable.getMessage()));
+        return Mono.just(JacksonUtil.createObjectNode(FieldConstant.MESSAGE, throwable.getMessage()));
     }
 }

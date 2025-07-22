@@ -1,6 +1,5 @@
 package com.cafe.minio.controller;
 
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.minio.service.FileService;
 import io.swagger.annotations.Api;
@@ -77,7 +76,7 @@ public class FileController {
         @PathVariable(value = "bucket") String bucket,
         @PathVariable(value = "filename") String filename
     ) {
-        String url = fileService.url(bucket, filename, (int) TimeUnit.DAYS.toSeconds(IntegerConstant.SEVEN));
+        String url = fileService.url(bucket, filename, (int) TimeUnit.DAYS.toSeconds(7));
         return ResponseEntity.ok(url);
     }
 

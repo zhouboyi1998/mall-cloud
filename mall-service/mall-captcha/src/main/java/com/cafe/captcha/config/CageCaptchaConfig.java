@@ -1,7 +1,6 @@
 package com.cafe.captcha.config;
 
 import com.cafe.common.constant.captcha.CaptchaConstant;
-import com.cafe.common.constant.pool.FloatConstant;
 import com.cafe.common.enumeration.media.MediaFormatEnum;
 import com.github.cage.Cage;
 import com.github.cage.image.EffectConfig;
@@ -28,6 +27,6 @@ public class CageCaptchaConfig {
         // 创建 Painter 图片验证码绘画器
         Painter painter = new Painter(CaptchaConstant.WIDTH, CaptchaConstant.HEIGHT, Color.WHITE, Painter.Quality.MAX, effectConfig, null);
         // 创建 Cage 验证码实例, 并注入到 Spring 容器中
-        return new Cage(painter, null, null, MediaFormatEnum.PNG.getFormat(), FloatConstant.ONE_POINT_ZERO, null, null);
+        return new Cage(painter, null, null, MediaFormatEnum.PNG.getFormat(), 1.0F, null, null);
     }
 }

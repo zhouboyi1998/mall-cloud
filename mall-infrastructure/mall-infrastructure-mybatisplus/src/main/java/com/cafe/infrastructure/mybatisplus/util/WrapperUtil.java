@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.cafe.common.constant.app.FieldConstant;
-import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.lang.datastructures.date.AbstractPeriod;
 import com.google.common.base.CaseFormat;
 import org.apache.commons.lang3.ObjectUtils;
@@ -87,7 +86,7 @@ public class WrapperUtil {
                     wrapper.like((R) column, fieldValue);
                 } else if (fieldValue instanceof AbstractPeriod) {
                     // 转换字段名
-                    column = column.replace(StringConstant.PERIOD, StringConstant.TIME);
+                    column = column.replace(FieldConstant.PERIOD, FieldConstant.TIME);
                     // 获取时间区间
                     AbstractPeriod period = (AbstractPeriod) fieldValue;
                     Object start = period.getStart();

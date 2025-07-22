@@ -1,6 +1,6 @@
 package com.cafe.captcha.config.mica;
 
-import com.cafe.common.constant.pool.IntegerConstant;
+import com.cafe.common.constant.captcha.CaptchaConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import lombok.RequiredArgsConstructor;
 import net.dreamlu.mica.captcha.cache.ICaptchaCache;
@@ -25,6 +25,6 @@ public class MicaCaptchaCache implements ICaptchaCache {
     @Override
     public void put(String cache, String key, String code) {
         // 保存图片验证码的唯一标识和文本到 Redis 中
-        redisTemplate.opsForValue().set(RedisConstant.CAPTCHA_PREFIX + key, code, IntegerConstant.SIXTY, TimeUnit.SECONDS);
+        redisTemplate.opsForValue().set(RedisConstant.CAPTCHA_PREFIX + key, code, CaptchaConstant.TIMEOUT, TimeUnit.SECONDS);
     }
 }

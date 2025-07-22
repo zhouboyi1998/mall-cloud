@@ -1,7 +1,6 @@
 package com.cafe.opensearch.service.impl;
 
 import com.cafe.common.constant.opensearch.OpenSearchConstant;
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.infrastructure.elasticsearch.model.converter.PageConverter;
 import com.cafe.infrastructure.elasticsearch.model.vo.AggregatedPageVO;
@@ -63,7 +62,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
     @Override
     public IndexResponse save(GoodsIndex goodsIndex) {
         IndexRequest indexRequest = new IndexRequest(OpenSearchConstant.Goods.INDEX)
-            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN))
+            .timeout(TimeValue.timeValueSeconds(10))
             .id(String.valueOf(goodsIndex.getId()))
             .source(JacksonUtil.writeValueAsString(goodsIndex), XContentType.JSON);
         return restHighLevelClient.index(indexRequest, RequestOptions.DEFAULT);
@@ -72,7 +71,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
     @SneakyThrows
     @Override
     public BulkResponse saveBatch(List<GoodsIndex> goodsIndexList) {
-        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
+        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
         for (GoodsIndex goodsIndex : goodsIndexList) {
             IndexRequest indexRequest = new IndexRequest(OpenSearchConstant.Goods.INDEX)
                 .id(String.valueOf(goodsIndex.getId()))
@@ -86,7 +85,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
     @Override
     public UpdateResponse update(GoodsIndex goodsIndex) {
         UpdateRequest updateRequest = new UpdateRequest(OpenSearchConstant.Goods.INDEX, String.valueOf(goodsIndex.getId()))
-            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN))
+            .timeout(TimeValue.timeValueSeconds(10))
             .doc(JacksonUtil.writeValueAsString(goodsIndex), XContentType.JSON);
         return restHighLevelClient.update(updateRequest, RequestOptions.DEFAULT);
     }
@@ -94,7 +93,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
     @SneakyThrows
     @Override
     public BulkResponse updateBatch(List<GoodsIndex> goodsIndexList) {
-        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
+        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
         for (GoodsIndex goodsIndex : goodsIndexList) {
             UpdateRequest updateRequest = new UpdateRequest(OpenSearchConstant.Goods.INDEX, String.valueOf(goodsIndex.getId()))
                 .doc(JacksonUtil.writeValueAsString(goodsIndex), XContentType.JSON);
@@ -107,14 +106,14 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
     @Override
     public DeleteResponse delete(Long id) {
         DeleteRequest deleteRequest = new DeleteRequest(OpenSearchConstant.Goods.INDEX, String.valueOf(id))
-            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TEN));
+            .timeout(TimeValue.timeValueSeconds(10));
         return restHighLevelClient.delete(deleteRequest, RequestOptions.DEFAULT);
     }
 
     @SneakyThrows
     @Override
     public BulkResponse deleteBatch(List<Long> ids) {
-        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(IntegerConstant.SIXTY));
+        BulkRequest bulkRequest = new BulkRequest().timeout(TimeValue.timeValueSeconds(60));
         for (Long id : ids) {
             DeleteRequest deleteRequest = new DeleteRequest(OpenSearchConstant.Goods.INDEX, String.valueOf(id));
             bulkRequest.add(deleteRequest);
@@ -133,7 +132,7 @@ public class GoodsIndexServiceImpl implements GoodsIndexService {
             // 排序
             .sort(sortField, SortOrder.fromString(sortRule))
             // 超时时间
-            .timeout(TimeValue.timeValueSeconds(IntegerConstant.TWENTY));
+            .timeout(TimeValue.timeValueSeconds(20));
         // 如果关键词不为空, 匹配关键词
         if (ObjectUtils.isNotEmpty(keyword)) {
             QueryBuilder queryBuilder = QueryBuilders.multiMatchQuery(keyword, OpenSearchConstant.Goods.SEARCH_FIELD);

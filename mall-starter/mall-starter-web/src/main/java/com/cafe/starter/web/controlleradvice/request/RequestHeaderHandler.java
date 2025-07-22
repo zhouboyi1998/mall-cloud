@@ -1,6 +1,5 @@
 package com.cafe.starter.web.controlleradvice.request;
 
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.starter.boot.model.Payload;
@@ -21,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestControllerAdvice(annotations = {RestController.class})
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
-@Order(value = IntegerConstant.FIFTY)
+@Order(value = 50)
 public class RequestHeaderHandler {
 
     @ModelAttribute(value = RequestConstant.ModelAttribute.PAYLOAD)
