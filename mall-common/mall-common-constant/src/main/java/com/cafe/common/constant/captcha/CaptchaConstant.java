@@ -25,7 +25,17 @@ public class CaptchaConstant {
     public static final Integer LENGTH = 4;
 
     /**
+     * 干扰线数量
+     */
+    public static final Integer LINE_COUNT = 50;
+
+    /**
      * 文本字符集
      */
     public static final String CHARACTER_SET = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    /**
+     * 验证码超时时间 (单位: 秒)
+     */
+    public static final Integer TIMEOUT = 180;
 }

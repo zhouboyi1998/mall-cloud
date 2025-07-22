@@ -1,7 +1,6 @@
 package com.cafe.starter.boot.controlleradvice.type;
 
 import com.cafe.common.constant.date.DateTimeConstant;
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.util.date.DateUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
@@ -27,7 +26,7 @@ import java.util.Date;
  */
 @Slf4j
 @RestControllerAdvice(annotations = {RestController.class})
-@Order(value = IntegerConstant.SIXTY)
+@Order(value = 60)
 public class DateTimeTypeParser {
 
     @InitBinder

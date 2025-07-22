@@ -1,6 +1,5 @@
 package com.cafe.gateway.filter;
 
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.gateway.util.RequestUtil;
 import com.nimbusds.jose.JWSObject;
@@ -53,6 +52,6 @@ public class AuthorizationGlobalFilter implements GlobalFilter, Ordered {
 
     @Override
     public int getOrder() {
-        return IntegerConstant.ONE_HUNDRED;
+        return 100;
     }
 }

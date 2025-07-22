@@ -1,6 +1,6 @@
 package com.cafe.openapicenter.service.impl;
 
-import com.cafe.common.constant.pool.StringConstant;
+import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.jackson.util.JacksonUtil;
 import com.cafe.openapicenter.service.JuheService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -43,7 +43,7 @@ public class JuheServiceImpl implements JuheService {
             .onErrorResume(throwable -> {
                 String message = throwable.getMessage();
                 log.error("JuheServiceImpl.mobile2region(): api id -> 11, message -> {}", message, throwable);
-                return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, message));
+                return Mono.just(JacksonUtil.createObjectNode(FieldConstant.MESSAGE, message));
             });
     }
 
@@ -60,7 +60,7 @@ public class JuheServiceImpl implements JuheService {
             .onErrorResume(throwable -> {
                 String message = throwable.getMessage();
                 log.error("JuheServiceImpl.ip2region(): api id -> 1, message -> {}", message, throwable);
-                return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, message));
+                return Mono.just(JacksonUtil.createObjectNode(FieldConstant.MESSAGE, message));
             });
     }
 
@@ -77,7 +77,7 @@ public class JuheServiceImpl implements JuheService {
             .onErrorResume(throwable -> {
                 String message = throwable.getMessage();
                 log.error("JuheServiceImpl.weather(): api id -> 73, message -> {}", message, throwable);
-                return Mono.just(JacksonUtil.createObjectNode(StringConstant.MESSAGE, message));
+                return Mono.just(JacksonUtil.createObjectNode(FieldConstant.MESSAGE, message));
             });
     }
 }

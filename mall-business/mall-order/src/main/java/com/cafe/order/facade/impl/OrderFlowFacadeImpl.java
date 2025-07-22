@@ -3,7 +3,6 @@ package com.cafe.order.facade.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.cafe.common.constant.model.OrderConstant;
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.infrastructure.mybatisplus.util.WrapperUtil;
 import com.cafe.order.facade.OrderFlowFacade;
 import com.cafe.order.model.converter.OrderConverter;
@@ -76,7 +75,7 @@ public class OrderFlowFacadeImpl implements OrderFlowFacade {
         // 取消超时未支付的订单
         LambdaUpdateWrapper<Order> orderUpdateWrapper = new LambdaUpdateWrapper<Order>()
             .eq(Order::getStatus, OrderConstant.Status.CREATE)
-            .le(Order::getCreateTime, now.minusMinutes(IntegerConstant.TEN))
+            .le(Order::getCreateTime, now.minusMinutes(10))
             .set(Order::getStatus, OrderConstant.Status.CANCEL)
             .set(Order::getUpdateTime, now)
             .set(Order::getCompletionTime, now);
@@ -85,13 +84,13 @@ public class OrderFlowFacadeImpl implements OrderFlowFacade {
         // 查询超时未支付的订单明细 (用于还原库存)
         LambdaQueryWrapper<OrderItem> orderItemQueryWrapper = new LambdaQueryWrapper<OrderItem>()
             .eq(OrderItem::getStatus, OrderConstant.Status.CREATE)
-            .le(OrderItem::getCreateTime, now.minusMinutes(IntegerConstant.TEN));
+            .le(OrderItem::getCreateTime, now.minusMinutes(10));
         List<OrderItem> orderItemList = orderItemService.list(orderItemQueryWrapper);
 
         // 订单明细状态设置为取消
         LambdaUpdateWrapper<OrderItem> orderItemUpdateWrapper = new LambdaUpdateWrapper<OrderItem>()
             .eq(OrderItem::getStatus, OrderConstant.Status.CREATE)
-            .le(OrderItem::getCreateTime, now.minusMinutes(IntegerConstant.TEN))
+            .le(OrderItem::getCreateTime, now.minusMinutes(10))
             .set(OrderItem::getStatus, OrderConstant.Status.CANCEL)
             .set(OrderItem::getUpdateTime, now)
             .set(OrderItem::getCompletionTime, now);

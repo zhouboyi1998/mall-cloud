@@ -1,6 +1,5 @@
 package com.cafe.infrastructure.redis.annotation;
 
-import com.cafe.common.constant.pool.LongConstant;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.Documented;
@@ -23,10 +22,10 @@ import java.util.concurrent.TimeUnit;
 public @interface Idempotence {
 
     @AliasFor(value = "intervalTime")
-    long value() default LongConstant.TWO;
+    long value() default 2L;
 
     @AliasFor(value = "value")
-    long intervalTime() default LongConstant.TWO;
+    long intervalTime() default 2L;
 
     TimeUnit unit() default TimeUnit.SECONDS;
 }

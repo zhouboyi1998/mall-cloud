@@ -1,6 +1,5 @@
 package com.cafe.infrastructure.redis.aspect;
 
-import com.cafe.common.constant.pool.IntegerConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.jackson.util.JacksonUtil;
@@ -113,7 +112,7 @@ public class FallbackCacheAspect {
             Object result = proceedingJoinPoint.proceed();
             // 方法执行正常, 将返回值存入 Redis 缓存中
             long timeout = fallbackCache.timeout();
-            if (timeout < IntegerConstant.ZERO) {
+            if (timeout < 0) {
                 redisTemplate.opsForValue().set(key.toString(), result);
             } else {
                 redisTemplate.opsForValue().set(key.toString(), result, timeout, fallbackCache.unit());
