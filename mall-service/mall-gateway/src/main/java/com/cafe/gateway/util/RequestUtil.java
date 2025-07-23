@@ -37,7 +37,8 @@ public class RequestUtil {
     public static String getAccessTokenByAuthorization(HttpHeaders httpHeaders) {
         return Optional.ofNullable(httpHeaders)
             .map(headers -> headers.getFirst(RequestConstant.Header.AUTHORIZATION))
-            .map(authorization -> authorization.replace(AuthorizationConstant.TokenType.BEARER + StringConstant.SPACE, StringConstant.EMPTY))
+            .map(authorization -> authorization.replaceFirst(AuthorizationConstant.TokenType.BEARER, StringConstant.EMPTY))
+            .map(String::trim)
             .orElse(null);
     }
 }

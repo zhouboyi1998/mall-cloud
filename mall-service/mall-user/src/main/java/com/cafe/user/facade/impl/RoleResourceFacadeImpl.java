@@ -1,6 +1,7 @@
 package com.cafe.user.facade.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.cafe.common.constant.model.ResourceConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.constant.security.AuthorizationConstant;
 import com.cafe.common.util.tree.TreeUtil;
@@ -24,7 +25,6 @@ import javax.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 /**
@@ -51,15 +51,13 @@ public class RoleResourceFacadeImpl implements RoleResourceFacade {
     public void initResourceRoleCache() {
         // 获取 [资源内容-角色名称] 对应关系列表
         List<ResourceRoleBO> roleNameListBOList = roleResourceService.resourceRoleBOList(Collections.emptyList());
-        // 将对应关系组装成 Map 格式
-        Map<String, List<String>> relationMap = new TreeMap<>();
-        for (ResourceRoleBO resourceRoleBO : roleNameListBOList) {
-            // 添加权限前缀
-            List<String> roleNameList = resourceRoleBO.getRoleNameList().stream()
+        // 将对应关系转换成 Map 格式
+        Map<String, List<String>> relationMap = roleNameListBOList.stream()
+            .collect(Collectors.toMap(ResourceRoleBO::getResourceContent, resourceRoleBO -> resourceRoleBO.getRoleNameList().stream()
+                // 添加权限前缀
                 .map(roleName -> AuthorizationConstant.AUTHORITY_PREFIX + roleName)
-                .collect(Collectors.toList());
-            relationMap.put(resourceRoleBO.getResourceContent(), roleNameList);
-        }
+                .collect(Collectors.toList())
+            ));
         // 初始化之前先删除对应的 key, 清空旧的数据
         redisTemplate.delete(RedisConstant.RESOURCE_ROLE_MAP);
         // 将对应关系保存到 Redis 中
@@ -71,14 +69,14 @@ public class RoleResourceFacadeImpl implements RoleResourceFacade {
         // 根据资源ID列表获取 [资源内容-角色名称] 对应关系列表
         List<ResourceRoleBO> roleNameListBOList = roleResourceService.resourceRoleBOList(resourceIds);
         // 更新 Redis 中的对应关系
-        for (ResourceRoleBO resourceRoleBO : roleNameListBOList) {
-            // 添加权限前缀
-            List<String> roleNameList = resourceRoleBO.getRoleNameList().stream()
+        roleNameListBOList.stream()
+            .map(resourceRoleBO -> resourceRoleBO.setRoleNameList(resourceRoleBO.getRoleNameList().stream()
+                // 添加权限前缀
                 .map(roleName -> AuthorizationConstant.AUTHORITY_PREFIX + roleName)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()))
+            )
             // 将对应关系保存到 Redis 中
-            redisTemplate.opsForHash().put(RedisConstant.RESOURCE_ROLE_MAP, resourceRoleBO.getResourceContent(), roleNameList);
-        }
+            .forEach(resourceRoleBO -> redisTemplate.opsForHash().put(RedisConstant.RESOURCE_ROLE_MAP, resourceRoleBO.getResourceContent(), resourceRoleBO.getRoleNameList()));
     }
 
     @Override
@@ -108,6 +106,8 @@ public class RoleResourceFacadeImpl implements RoleResourceFacade {
         // 查询资源列表
         LambdaQueryWrapper<Resource> resourceQueryWrapper = WrapperUtil.createLambdaQueryWrapper(resource)
             .in(Resource::getId, resourceIds)
+            // 查询资源的类型: 菜单、按钮
+            .in(Resource::getResourceType, ResourceConstant.Type.MENU, ResourceConstant.Type.BUTTON)
             .orderByAsc(Resource::getSort);
         List<Resource> resourceList = resourceService.list(resourceQueryWrapper);
         // 转换成资源树VO列表
