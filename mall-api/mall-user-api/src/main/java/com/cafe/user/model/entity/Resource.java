@@ -41,7 +41,7 @@ public class Resource implements Serializable {
     @ApiModelProperty(value = "平台ID")
     private Long platformId;
 
-    @ApiModelProperty(value = "资源类型: 1 菜单, 2 按钮")
+    @ApiModelProperty(value = "资源类型: 1 菜单, 2 按钮, 3 API")
     private Integer resourceType;
 
     @ApiModelProperty(value = "资源名称")
@@ -53,7 +53,7 @@ public class Resource implements Serializable {
     @ApiModelProperty(value = "资源图标")
     private String resourceIcon;
 
-    @ApiModelProperty(value = "资源内容: 菜单路径")
+    @ApiModelProperty(value = "资源内容: 菜单路径, API 路径")
     private String resourceContent;
 
     @ApiModelProperty(value = "资源层级: 1 一级资源, 2 二级资源, 3 三级资源")

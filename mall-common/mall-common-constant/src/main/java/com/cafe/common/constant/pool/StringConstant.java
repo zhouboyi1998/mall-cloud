@@ -40,6 +40,11 @@ public class StringConstant {
     public static final String ASTERISK = "*";
 
     /**
+     * 星星
+     */
+    public static final String DOUBLE_ASTERISK = "**";
+
+    /**
      * 与
      */
     public static final String AMPERSAND = "&";
