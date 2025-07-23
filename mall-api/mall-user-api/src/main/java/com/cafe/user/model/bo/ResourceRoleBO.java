@@ -7,7 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Project: mall-cloud
@@ -28,5 +28,5 @@ public class ResourceRoleBO implements Serializable {
     private String resourceContent;
 
     @ApiModelProperty(value = "角色名称列表")
-    private ArrayList<String> roleNameList;
+    private List<String> roleNameList;
 }
