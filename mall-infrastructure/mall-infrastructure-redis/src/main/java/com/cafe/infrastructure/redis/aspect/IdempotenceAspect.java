@@ -7,21 +7,25 @@ import com.cafe.common.constant.security.AuthorizationConstant;
 import com.cafe.common.util.aop.AOPUtil;
 import com.cafe.infrastructure.redis.annotation.Idempotence;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.lang.JoinPoint;
+import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Method;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -29,12 +33,14 @@ import java.util.Optional;
  * @Package: com.cafe.infrastructure.redis.aspect
  * @Author: zhouboyi
  * @Date: 2023/8/4 15:08
- * @Description: 接口幂等性切面类
+ * @Description: 幂等切面类
  */
+@Slf4j
 @RequiredArgsConstructor
 @Order(value = Integer.MIN_VALUE)
 @Aspect
 @Component
+@ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class IdempotenceAspect {
 
     private final RedisTemplate<String, Object> redisTemplate;
@@ -48,45 +54,55 @@ public class IdempotenceAspect {
     }
 
     /**
-     * 前置通知
+     * 环绕通知
      *
-     * @param joinPoint 连接点
+     * @param proceedingJoinPoint 连接点
+     * @return 返回结果
      */
-    @Before(value = "pointcut()")
-    public void doBefore(JoinPoint joinPoint) {
-        // 获取目标签名, 转换成方法签名
-        MethodSignature signature = (MethodSignature) joinPoint.getSignature();
-        // 获取目标类名
-        String className = joinPoint.getTarget().getClass().getName();
-        // 获取目标方法
-        Method method = signature.getMethod();
-        // 获取目标方法名
-        String methodName = method.getName();
-
-        // 获取 HTTP 请求
-        HttpServletRequest request = Optional.ofNullable(RequestContextHolder.getRequestAttributes())
+    @SneakyThrows
+    @Around(value = "pointcut()")
+    public Object doAround(ProceedingJoinPoint proceedingJoinPoint) {
+        // 获取访问令牌
+        String accessTokenMD5 = Optional.ofNullable(RequestContextHolder.getRequestAttributes())
             .map(attributes -> (ServletRequestAttributes) attributes)
             .map(ServletRequestAttributes::getRequest)
-            .orElseThrow(NullPointerException::new);
-        // 获取访问令牌
-        String accessToken = request.getHeader(RequestConstant.Header.AUTHORIZATION)
-            .replace(AuthorizationConstant.TokenType.BEARER + StringConstant.SPACE, StringConstant.EMPTY);
+            .map(request -> request.getHeader(RequestConstant.Header.AUTHORIZATION))
+            .map(authorization -> authorization.replaceFirst(AuthorizationConstant.TokenType.BEARER, StringConstant.EMPTY))
+            .map(String::trim)
+            // 使用 MD5 算法获取低冲突概率的访问令牌 Hash 值
+            .map(String::getBytes)
+            .map(DigestUtils::md5DigestAsHex)
+            .orElse(null);
+        // 如果访问令牌为空, 不进行幂等性校验, 直接放行
+        if (Objects.isNull(accessTokenMD5)) {
+            return proceedingJoinPoint.proceed();
+        }
 
+        // 获取目标方法
+        Method method = ((MethodSignature) proceedingJoinPoint.getSignature()).getMethod();
         // 获取注解
         Idempotence idempotence = AnnotationUtils.getAnnotation(method, Idempotence.class);
         Assert.notNull(idempotence, "Unable to get @Idempotence annotation!");
 
-        // 组装 Redis 缓存的完整 Key (方法全限定名 + 参数 Hash 值 + 访问令牌)
-        String key = new StringBuilder()
-            .append(RedisConstant.IDEMPOTENCE_PREFIX).append(className)
-            .append(StringConstant.POINT).append(methodName)
-            .append(StringConstant.COLON).append(AOPUtil.findArgumentString(joinPoint).hashCode())
-            .append(StringConstant.COLON).append(accessToken)
-            .toString();
+        // 获取目标方法的全限定名
+        String targetMethodFQN = AOPUtil.resolveTargetMethodFullQualifiedName(proceedingJoinPoint);
+        // 获取请求参数 JSON 字符串
+        String argumentString = AOPUtil.findArgumentString(proceedingJoinPoint);
+        // 使用 MD5 算法获取低冲突概率的请求参数 Hash 值
+        String argumentMD5 = DigestUtils.md5DigestAsHex(argumentString.getBytes());
+        // 组装幂等键
+        final String idempotenceKey = RedisConstant.IDEMPOTENCE_PREFIX + targetMethodFQN +
+            StringConstant.COLON + argumentMD5 +
+            StringConstant.COLON + accessTokenMD5;
 
-        // 判断是否重复提交 (使用 Redis 的 SETNX 命令实现分布式锁)
-        Boolean absent = redisTemplate.opsForValue().setIfAbsent(key, StringConstant.EMPTY, idempotence.intervalTime(), idempotence.unit());
-        if (Boolean.FALSE.equals(absent)) {
+        // 使用 Redis 的 SETNX 命令实现分布式锁
+        Boolean absent = Optional.ofNullable(redisTemplate.opsForValue().setIfAbsent(idempotenceKey, StringConstant.EMPTY, idempotence.intervalTime(), idempotence.intervalUnit())).orElse(Boolean.FALSE);
+        if (absent) {
+            // 如果幂等键不存在, 放行本次请求
+            return proceedingJoinPoint.proceed();
+        } else {
+            // 如果幂等键已存在, 判断本次请求为重复提交
+            log.warn("IdempotenceAspect.doAround(): Duplicate request! idempotence key -> {}", idempotenceKey);
             throw new RuntimeException("Do not repeat submit!");
         }
     }
