@@ -22,17 +22,17 @@ import java.util.concurrent.TimeUnit;
 @Target(value = ElementType.METHOD)
 public @interface FallbackCache {
 
-    @AliasFor(value = "name")
+    @AliasFor(value = "cacheName")
     String value() default StringConstant.EMPTY;
 
     @AliasFor(value = "value")
-    String name() default StringConstant.EMPTY;
+    String cacheName() default StringConstant.EMPTY;
 
-    String key() default StringConstant.EMPTY;
+    String cacheKey() default StringConstant.EMPTY;
 
-    long timeout() default -1L;
+    long expireTime() default -1L;
 
-    TimeUnit unit() default TimeUnit.SECONDS;
+    TimeUnit expireUnit() default TimeUnit.SECONDS;
 
     String condition() default StringConstant.EMPTY;
 }

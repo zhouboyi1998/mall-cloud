@@ -55,6 +55,11 @@ public class StringConstant {
     public static final String AT = "@";
 
     /**
+     * 井号
+     */
+    public static final String HASH = "#";
+
+    /**
      * 冒号
      */
     public static final String COLON = ":";

@@ -3,6 +3,7 @@ package com.cafe.ordercenter.facade.impl;
 import com.cafe.common.constant.kafka.KafkaConstant;
 import com.cafe.common.constant.model.OrderConstant;
 import com.cafe.infrastructure.kafka.producer.KafkaProducer;
+import com.cafe.infrastructure.redis.annotation.Idempotence;
 import com.cafe.order.model.vo.OrderVO;
 import com.cafe.ordercenter.facade.OrderCenterFacade;
 import com.cafe.ordercenter.model.message.GoodsReviewMessage;
@@ -32,6 +33,7 @@ public class OrderCenterFacadeImpl implements OrderCenterFacade {
 
     private final KafkaProducer kafkaProducer;
 
+    @Idempotence(value = 300)
     @GlobalTransactional(
         propagation = Propagation.REQUIRED,
         rollbackFor = Exception.class,

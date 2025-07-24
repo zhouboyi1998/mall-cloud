@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  * @Package: com.cafe.infrastructure.redis.annotation
  * @Author: zhouboyi
  * @Date: 2023/8/4 15:06
- * @Description: 接口幂等性注解
+ * @Description: 幂等注解
  */
 @Documented
 @Retention(value = RetentionPolicy.RUNTIME)
@@ -22,10 +22,10 @@ import java.util.concurrent.TimeUnit;
 public @interface Idempotence {
 
     @AliasFor(value = "intervalTime")
-    long value() default 2L;
+    long value() default 30L;
 
     @AliasFor(value = "value")
-    long intervalTime() default 2L;
+    long intervalTime() default 30L;
 
-    TimeUnit unit() default TimeUnit.SECONDS;
+    TimeUnit intervalUnit() default TimeUnit.SECONDS;
 }

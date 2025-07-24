@@ -1,4 +1,10 @@
 spring:
+  # Redis 配置
+  redis:
+    host: host.docker.internal
+    port: 6379
+    password: 123456
+    database: 0
   # Kafka 配置
   kafka:
     # Kafka 生产者配置

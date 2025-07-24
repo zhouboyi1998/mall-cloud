@@ -29,6 +29,10 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-infrastructure-redis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-infrastructure-swagger</artifactId>
         </dependency>
         <dependency>
