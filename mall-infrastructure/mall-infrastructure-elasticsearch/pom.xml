@@ -52,7 +52,7 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
-            <artifactId>mall-common-jackson</artifactId>
+            <artifactId>mall-common-json</artifactId>
         </dependency>
     </dependencies>
 

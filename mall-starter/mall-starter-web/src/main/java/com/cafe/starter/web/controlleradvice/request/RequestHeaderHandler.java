@@ -1,7 +1,7 @@
 package com.cafe.starter.web.controlleradvice.request;
 
 import com.cafe.common.constant.request.RequestConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
+import com.cafe.common.json.util.JacksonUtil;
 import com.cafe.starter.boot.model.Payload;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;
 import org.springframework.core.annotation.Order;

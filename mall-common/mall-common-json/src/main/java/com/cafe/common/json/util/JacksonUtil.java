@@ -1,4 +1,4 @@
-package com.cafe.common.jackson.util;
+package com.cafe.common.json.util;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -12,7 +12,7 @@ import java.util.Objects;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.jackson.util
+ * @Package: com.cafe.common.json.util
  * @Author: zhouboyi
  * @Date: 2023/8/29 17:36
  * @Description: Jackson 序列化工具类
