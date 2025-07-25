@@ -13,7 +13,7 @@ class SnowflakeTest {
 
     @Test
     void nextId() {
-        Snowflake snowflake = new Snowflake(1, 1);
+        Snowflake snowflake = new Snowflake(31, 0);
         for (int i = 0; i < 10; i++) {
             System.out.println(snowflake.nextId());
         }
