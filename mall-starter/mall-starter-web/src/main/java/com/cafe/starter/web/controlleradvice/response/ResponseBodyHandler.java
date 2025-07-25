@@ -3,7 +3,7 @@ package com.cafe.starter.web.controlleradvice.response;
 import com.cafe.common.constant.app.ServiceConstant;
 import com.cafe.common.constant.request.RequestConstant;
 import com.cafe.common.constant.security.SecurityConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
+import com.cafe.common.json.util.JacksonUtil;
 import com.cafe.starter.boot.model.Result;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnWebApplication;

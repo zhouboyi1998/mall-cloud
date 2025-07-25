@@ -595,7 +595,7 @@
             </dependency>
             <dependency>
                 <groupId>com.cafe</groupId>
-                <artifactId>mall-common-jackson</artifactId>
+                <artifactId>mall-common-json</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>

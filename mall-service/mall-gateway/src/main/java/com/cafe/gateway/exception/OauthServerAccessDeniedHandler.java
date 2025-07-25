@@ -1,7 +1,7 @@
 package com.cafe.gateway.exception;
 
 import com.cafe.common.constant.request.RequestConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
+import com.cafe.common.json.util.JacksonUtil;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

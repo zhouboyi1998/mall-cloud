@@ -1,7 +1,7 @@
 package com.cafe.meilisearch.service.impl;
 
 import com.cafe.common.constant.meilisearch.MeiliSearchConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
+import com.cafe.common.json.util.JacksonUtil;
 import com.cafe.meilisearch.model.index.GoodsIndex;
 import com.cafe.meilisearch.service.GoodsIndexService;
 import com.meilisearch.sdk.Client;

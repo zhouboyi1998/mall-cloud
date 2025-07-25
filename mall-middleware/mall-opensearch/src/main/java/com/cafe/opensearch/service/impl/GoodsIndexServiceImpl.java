@@ -1,7 +1,7 @@
 package com.cafe.opensearch.service.impl;
 
 import com.cafe.common.constant.opensearch.OpenSearchConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
+import com.cafe.common.json.util.JacksonUtil;
 import com.cafe.infrastructure.elasticsearch.model.converter.PageConverter;
 import com.cafe.infrastructure.elasticsearch.model.vo.AggregatedPageVO;
 import com.cafe.opensearch.model.index.GoodsIndex;

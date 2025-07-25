@@ -44,7 +44,7 @@
 
 |-- mall-common (公共包)
     |-- mall-common-constant (常量公共包)
-    |-- mall-common-jackson (Jackson 公共包)
+    |-- mall-common-json (JSON 公共包)
     |-- mall-common-lang (数据结构与算法公共包)
     |-- mall-common-log (日志公共包)
     |-- mall-common-util (工具公共包)

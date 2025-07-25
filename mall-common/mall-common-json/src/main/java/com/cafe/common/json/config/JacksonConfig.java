@@ -1,4 +1,4 @@
-package com.cafe.common.jackson.config;
+package com.cafe.common.json.config;
 
 import com.cafe.common.constant.date.DateTimeConstant;
 import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
@@ -25,7 +25,7 @@ import java.util.Date;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.common.jackson.config
+ * @Package: com.cafe.common.json.config
  * @Author: zhouboyi
  * @Date: 2023/6/12 15:02
  * @Description: Jackson 配置类

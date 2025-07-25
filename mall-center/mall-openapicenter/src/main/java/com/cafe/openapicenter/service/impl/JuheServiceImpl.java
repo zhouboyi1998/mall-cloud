@@ -1,7 +1,7 @@
 package com.cafe.openapicenter.service.impl;
 
 import com.cafe.common.constant.app.FieldConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
+import com.cafe.common.json.util.JacksonUtil;
 import com.cafe.openapicenter.service.JuheService;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
 package com.cafe.openapicenter.service.impl;
 
 import com.cafe.common.constant.app.FieldConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
+import com.cafe.common.json.util.JacksonUtil;
 import com.cafe.common.util.builder.ToStringStyleHolder;
 import com.cafe.openapicenter.model.entity.API;
 import com.cafe.openapicenter.service.APIService;
