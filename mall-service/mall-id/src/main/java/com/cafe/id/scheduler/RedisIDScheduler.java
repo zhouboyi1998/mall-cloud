@@ -1,12 +1,14 @@
 package com.cafe.id.scheduler;
 
 import com.cafe.id.worker.RedisIDWorker;
+import com.cafe.infrastructure.redis.annotation.DistributedLock;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Project: mall-cloud
@@ -22,6 +24,7 @@ public class RedisIDScheduler {
 
     private final RedisIDWorker redisIDWorker;
 
+    @DistributedLock(value = 25, expireUnit = TimeUnit.HOURS)
     @PostConstruct
     @Scheduled(cron = "0 0 1 * * ?")
     public void removeExpiredKeys() {
