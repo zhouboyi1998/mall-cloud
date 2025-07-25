@@ -1,5 +1,6 @@
 package com.cafe.common.util.aop;
 
+import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.json.util.JacksonUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
@@ -7,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -68,5 +70,53 @@ public class AOPUtil {
      */
     public static String findArgumentString(JoinPoint joinPoint) {
         return JacksonUtil.writeValueAsString(findArgumentMap(joinPoint));
+    }
+
+    /**
+     * 解析目标类的全限定名
+     *
+     * @param joinPoint 连接点
+     * @return 目标类的全限定名
+     */
+    public static String resolveTargetClassFullQualifiedName(JoinPoint joinPoint) {
+        return joinPoint.getTarget().getClass().getName();
+    }
+
+    /**
+     * 解析目标方法的全限定名
+     *
+     * @param joinPoint          连接点
+     * @param withParameterTypes 是否包含参数类型
+     * @return 目标方法的全限定名
+     */
+    public static String resolveTargetMethodFullQualifiedName(JoinPoint joinPoint, boolean withParameterTypes) {
+        // 获取目标方法所在类的全限定名
+        String className = resolveTargetClassFullQualifiedName(joinPoint);
+        // 获取目标方法
+        Method method = ((MethodSignature) joinPoint.getSignature()).getMethod();
+        // 获取目标方法名
+        String methodName = method.getName();
+        StringBuilder sb = new StringBuilder().append(className).append(StringConstant.HASH).append(methodName);
+
+        // 判断是否需要包含参数类型
+        if (withParameterTypes) {
+            // 获取目标方法参数类型列表
+            String parameterTypes = Arrays.stream(method.getParameterTypes())
+                .map(Class::getName)
+                .collect(Collectors.joining(StringConstant.COMMA));
+            sb.append(StringConstant.LEFT_PARENTHESIS).append(parameterTypes).append(StringConstant.RIGHT_PARENTHESIS);
+        }
+
+        return sb.toString();
+    }
+
+    /**
+     * 解析目标方法的全限定名
+     *
+     * @param joinPoint 连接点
+     * @return 目标方法的全限定名
+     */
+    public static String resolveTargetMethodFullQualifiedName(JoinPoint joinPoint) {
+        return resolveTargetMethodFullQualifiedName(joinPoint, true);
     }
 }

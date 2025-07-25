@@ -25,10 +25,8 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * @Project: mall-cloud
@@ -64,19 +62,6 @@ public class IdempotenceAspect {
     @SneakyThrows
     @Around(value = "pointcut()")
     public Object doAround(ProceedingJoinPoint proceedingJoinPoint) {
-        // 获取目标签名, 转换成方法签名
-        MethodSignature signature = (MethodSignature) proceedingJoinPoint.getSignature();
-        // 获取目标类名
-        String className = proceedingJoinPoint.getTarget().getClass().getName();
-        // 获取目标方法
-        Method method = signature.getMethod();
-        // 获取目标方法名
-        String methodName = method.getName();
-        // 获取目标方法参数类型列表
-        String parameterTypes = Arrays.stream(method.getParameterTypes())
-            .map(Class::getName)
-            .collect(Collectors.joining(StringConstant.COMMA));
-
         // 获取访问令牌
         String accessTokenMD5 = Optional.ofNullable(RequestContextHolder.getRequestAttributes())
             .map(attributes -> (ServletRequestAttributes) attributes)
@@ -93,19 +78,22 @@ public class IdempotenceAspect {
             return proceedingJoinPoint.proceed();
         }
 
+        // 获取目标方法
+        Method method = ((MethodSignature) proceedingJoinPoint.getSignature()).getMethod();
+        // 获取注解
+        Idempotence idempotence = AnnotationUtils.getAnnotation(method, Idempotence.class);
+        Assert.notNull(idempotence, "Unable to get @Idempotence annotation!");
+
+        // 获取目标方法的全限定名
+        String targetMethodFQN = AOPUtil.resolveTargetMethodFullQualifiedName(proceedingJoinPoint);
+
         // 获取请求参数 JSON 字符串
         String argumentString = AOPUtil.findArgumentString(proceedingJoinPoint);
         // 使用 MD5 算法获取低冲突概率的请求参数 Hash 值
         String argumentMD5 = DigestUtils.md5DigestAsHex(argumentString.getBytes());
 
-        // 获取注解
-        Idempotence idempotence = AnnotationUtils.getAnnotation(method, Idempotence.class);
-        Assert.notNull(idempotence, "Unable to get @Idempotence annotation!");
-
         // 组装幂等 Key
-        String key = RedisConstant.IDEMPOTENCE_PREFIX + className +
-            StringConstant.HASH + methodName +
-            StringConstant.LEFT_PARENTHESIS + parameterTypes + StringConstant.RIGHT_PARENTHESIS +
+        String key = RedisConstant.IDEMPOTENCE_PREFIX + targetMethodFQN +
             StringConstant.COLON + argumentMD5 +
             StringConstant.COLON + accessTokenMD5;
 
