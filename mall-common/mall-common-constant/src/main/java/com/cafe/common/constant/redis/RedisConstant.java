@@ -48,4 +48,9 @@ public class RedisConstant {
      * 默认的分布式ID分组
      */
     public static final String DEFAULT_ID_GROUP = "default";
+
+    /**
+     * 分布式锁Key前缀
+     */
+    public static final String DISTRIBUTED_LOCK_PREFIX = "DISTRIBUTED:LOCK_";
 }
