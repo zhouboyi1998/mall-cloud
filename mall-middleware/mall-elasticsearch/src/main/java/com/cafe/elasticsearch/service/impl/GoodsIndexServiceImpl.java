@@ -1,7 +1,7 @@
 package com.cafe.elasticsearch.service.impl;
 
 import com.cafe.common.constant.elasticsearch.ElasticSearchConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
+import com.cafe.common.json.util.JacksonUtil;
 import com.cafe.elasticsearch.model.index.GoodsIndex;
 import com.cafe.elasticsearch.repository.GoodsIndexRepository;
 import com.cafe.elasticsearch.service.GoodsIndexService;

@@ -2,7 +2,7 @@ package com.cafe.infrastructure.redis.aspect;
 
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.redis.RedisConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
+import com.cafe.common.json.util.JacksonUtil;
 import com.cafe.common.util.aop.AOPUtil;
 import com.cafe.infrastructure.redis.annotation.FallbackCache;
 import lombok.SneakyThrows;

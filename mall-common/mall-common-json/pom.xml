@@ -10,11 +10,11 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>mall-common-jackson</artifactId>
+    <artifactId>mall-common-json</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>${project.artifactId}</name>
-    <description>Jackson 公共包</description>
+    <description>JSON 公共包</description>
 
     <dependencies>
         <!-- Spring Boot JSON -->

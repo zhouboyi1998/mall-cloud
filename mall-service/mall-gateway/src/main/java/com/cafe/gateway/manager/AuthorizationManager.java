@@ -2,7 +2,7 @@ package com.cafe.gateway.manager;
 
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.redis.RedisConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
+import com.cafe.common.json.util.JacksonUtil;
 import com.cafe.gateway.util.RequestUtil;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;

@@ -1,7 +1,7 @@
 package com.cafe.infrastructure.elasticsearch.repository.support;
 
 import com.cafe.common.constant.app.FieldConstant;
-import com.cafe.common.jackson.util.JacksonUtil;
+import com.cafe.common.json.util.JacksonUtil;
 import com.cafe.infrastructure.elasticsearch.repository.ExtensionElasticsearchRepository;
 import com.cafe.infrastructure.elasticsearch.util.DocumentUtil;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
