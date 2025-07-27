@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -132,7 +133,7 @@ public class SkuController {
     @ApiOperation(value = "新增库存量单位")
     @ApiImplicitParam(value = "库存量单位Model", name = "sku", dataType = "Sku", paramType = "body", required = true)
     @PostMapping(value = "/insert")
-    public ResponseEntity<Boolean> insert(@RequestBody Sku sku) {
+    public ResponseEntity<Boolean> insert(@RequestBody @Valid Sku sku) {
         Boolean code = skuService.save(sku);
         return ResponseEntity.ok(code);
     }
@@ -150,7 +151,7 @@ public class SkuController {
     @ApiOperation(value = "根据id修改库存量单位")
     @ApiImplicitParam(value = "库存量单位Model", name = "sku", dataType = "Sku", paramType = "body", required = true)
     @PutMapping(value = "/update")
-    public ResponseEntity<Boolean> update(@RequestBody Sku sku) {
+    public ResponseEntity<Boolean> update(@RequestBody @Valid Sku sku) {
         Boolean code = skuService.updateById(sku);
         return ResponseEntity.ok(code);
     }

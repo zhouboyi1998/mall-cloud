@@ -2,6 +2,7 @@ package com.cafe.review.facade.impl;
 
 import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.model.ReviewConstant;
+import com.cafe.foundation.annotation.SensitiveWordValidation;
 import com.cafe.review.facade.GoodsReviewFacade;
 import com.cafe.review.model.converter.GoodsReviewConverter;
 import com.cafe.review.model.entity.GoodsReview;
@@ -58,6 +59,7 @@ public class GoodsReviewFacadeImpl implements GoodsReviewFacade {
         timeout = 10,
         isolation = Isolation.READ_COMMITTED
     )
+    @SensitiveWordValidation(textFieldPath = "query.review.comment")
     @Override
     public Boolean review(GoodsReviewSaveQuery query) {
         // 保存评论

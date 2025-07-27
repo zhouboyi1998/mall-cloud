@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -136,7 +137,7 @@ public class SpuController {
     @ApiOperation(value = "新增标准化产品单元")
     @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     @PostMapping(value = "/insert")
-    public ResponseEntity<Boolean> insert(@RequestBody Spu spu) {
+    public ResponseEntity<Boolean> insert(@RequestBody @Valid Spu spu) {
         Boolean code = spuService.save(spu);
         return ResponseEntity.ok(code);
     }
@@ -154,7 +155,7 @@ public class SpuController {
     @ApiOperation(value = "根据id修改标准化产品单元")
     @ApiImplicitParam(value = "标准化产品单元Model", name = "spu", dataType = "Spu", paramType = "body", required = true)
     @PutMapping(value = "/update")
-    public ResponseEntity<Boolean> update(@RequestBody Spu spu) {
+    public ResponseEntity<Boolean> update(@RequestBody @Valid Spu spu) {
         Boolean code = spuService.updateById(spu);
         return ResponseEntity.ok(code);
     }

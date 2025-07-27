@@ -42,6 +42,10 @@
             <groupId>com.cafe</groupId>
             <artifactId>mall-merchant-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-foundation-api</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
