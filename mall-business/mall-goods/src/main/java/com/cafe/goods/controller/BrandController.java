@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -132,7 +133,7 @@ public class BrandController {
     @ApiOperation(value = "新增品牌")
     @ApiImplicitParam(value = "品牌Model", name = "brand", dataType = "Brand", paramType = "body", required = true)
     @PostMapping(value = "/insert")
-    public ResponseEntity<Boolean> insert(@RequestBody Brand brand) {
+    public ResponseEntity<Boolean> insert(@RequestBody @Valid Brand brand) {
         Boolean code = brandService.save(brand);
         return ResponseEntity.ok(code);
     }
@@ -150,7 +151,7 @@ public class BrandController {
     @ApiOperation(value = "根据id修改品牌")
     @ApiImplicitParam(value = "品牌Model", name = "brand", dataType = "Brand", paramType = "body", required = true)
     @PutMapping(value = "/update")
-    public ResponseEntity<Boolean> update(@RequestBody Brand brand) {
+    public ResponseEntity<Boolean> update(@RequestBody @Valid Brand brand) {
         Boolean code = brandService.updateById(brand);
         return ResponseEntity.ok(code);
     }

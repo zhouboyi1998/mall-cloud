@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -132,7 +133,7 @@ public class MerchantController {
     @ApiOperation(value = "新增商家")
     @ApiImplicitParam(value = "商家Model", name = "merchant", dataType = "Merchant", paramType = "body", required = true)
     @PostMapping(value = "/insert")
-    public ResponseEntity<Boolean> insert(@RequestBody Merchant merchant) {
+    public ResponseEntity<Boolean> insert(@RequestBody @Valid Merchant merchant) {
         Boolean code = merchantService.save(merchant);
         return ResponseEntity.ok(code);
     }
@@ -150,7 +151,7 @@ public class MerchantController {
     @ApiOperation(value = "根据id修改商家")
     @ApiImplicitParam(value = "商家Model", name = "merchant", dataType = "Merchant", paramType = "body", required = true)
     @PutMapping(value = "/update")
-    public ResponseEntity<Boolean> update(@RequestBody Merchant merchant) {
+    public ResponseEntity<Boolean> update(@RequestBody @Valid Merchant merchant) {
         Boolean code = merchantService.updateById(merchant);
         return ResponseEntity.ok(code);
     }

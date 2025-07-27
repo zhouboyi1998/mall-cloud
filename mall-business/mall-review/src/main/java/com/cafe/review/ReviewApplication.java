@@ -17,7 +17,7 @@ import org.springframework.context.annotation.ComponentScan;
  */
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients(basePackages = FeignConstant.Client.ID)
+@EnableFeignClients(basePackages = {FeignConstant.Client.ID, FeignConstant.Client.FOUNDATION})
 @ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
 public class ReviewApplication {
 

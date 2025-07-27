@@ -115,6 +115,11 @@ public class StringConstant {
     public static final String RIGHT_BRACE = "}";
 
     /**
+     * 点 (正则表达式)
+     */
+    public static final String POINT_REGEX = "\\.";
+
+    /**
      * 空
      */
     public static final String NULL = "null";

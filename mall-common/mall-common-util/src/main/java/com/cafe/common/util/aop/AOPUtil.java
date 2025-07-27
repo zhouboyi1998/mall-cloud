@@ -4,14 +4,18 @@ import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.json.util.JacksonUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.springframework.util.ObjectUtils;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 
@@ -70,6 +74,73 @@ public class AOPUtil {
      */
     public static String findArgumentString(JoinPoint joinPoint) {
         return JacksonUtil.writeValueAsString(findArgumentMap(joinPoint));
+    }
+
+    /**
+     * 获取请求参数
+     *
+     * @param joinPoint    连接点
+     * @param argumentPath 请求参数路径
+     * @return 请求参数
+     */
+    public static Object findArgument(JoinPoint joinPoint, String argumentPath) {
+        // 分割请求参数路径, 获取各级参数名称
+        String[] argumentNames = argumentPath.split(StringConstant.POINT_REGEX);
+        if (ObjectUtils.isEmpty(argumentNames)) {
+            return null;
+        }
+
+        // 获取方法参数集合
+        Map<String, Object> argumentMap = findArgumentMap(joinPoint);
+        // 获取一级参数
+        Object argument = argumentMap.get(argumentNames[0]);
+        if (argument == null) {
+            return null;
+        }
+
+        try {
+            // 递归查找参数值
+            return recursiveFindArgument(argument, argumentNames, 1);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    /**
+     * 递归获取请求参数
+     *
+     * @param currentArgumentValue 当前参数值
+     * @param argumentNames        各级参数名称列表
+     * @param nextArgumentIndex    下一级参数索引
+     * @return 请求参数
+     */
+    public static Object recursiveFindArgument(Object currentArgumentValue, String[] argumentNames, int nextArgumentIndex) {
+        // 如果已经处理完所有参数路径, 返回当前参数
+        if (Objects.isNull(currentArgumentValue) || nextArgumentIndex >= argumentNames.length) {
+            return currentArgumentValue;
+        }
+        // 获取当前参数的类对象
+        Class<?> clazz = currentArgumentValue.getClass();
+
+        // 获取下一级参数名
+        String nextArgumentName = argumentNames[nextArgumentIndex];
+        // 获取下一级参数
+        Field argument = ReflectionUtils.findField(clazz, nextArgumentName);
+        if (argument == null) {
+            return null;
+        }
+        // 设置下一级参数可访问
+        argument.setAccessible(true);
+        // 获取下一级参数值
+        Object nextArgumentValue = ReflectionUtils.getField(argument, currentArgumentValue);
+
+        if (nextArgumentIndex == argumentNames.length - 1) {
+            // 如果是最后一层参数, 返回参数值
+            return nextArgumentValue;
+        } else {
+            // 否则, 递归查找再下一级参数值
+            return recursiveFindArgument(nextArgumentValue, argumentNames, nextArgumentIndex + 1);
+        }
     }
 
     /**
