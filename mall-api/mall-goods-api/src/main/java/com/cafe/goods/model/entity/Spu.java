@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.cafe.foundation.annotation.Sensitive;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -36,6 +37,7 @@ public class Spu implements Serializable {
     private Long id;
 
     @ApiModelProperty(value = "SPU 名称")
+    @Sensitive
     private String spuName;
 
     @ApiModelProperty(value = "品牌ID")
@@ -48,9 +50,11 @@ public class Spu implements Serializable {
     private Long shopId;
 
     @ApiModelProperty(value = "SPU 说明")
+    @Sensitive
     private String caption;
 
     @ApiModelProperty(value = "SPU 详细介绍")
+    @Sensitive
     private String intro;
 
     @ApiModelProperty(value = "排序号")

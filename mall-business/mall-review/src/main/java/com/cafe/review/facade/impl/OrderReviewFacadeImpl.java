@@ -1,6 +1,7 @@
 package com.cafe.review.facade.impl;
 
 import com.cafe.common.constant.model.ReviewConstant;
+import com.cafe.foundation.annotation.SensitiveWordValidation;
 import com.cafe.review.facade.OrderReviewFacade;
 import com.cafe.review.model.converter.OrderReviewConverter;
 import com.cafe.review.model.entity.OrderReview;
@@ -44,6 +45,7 @@ public class OrderReviewFacadeImpl implements OrderReviewFacade {
         timeout = 10,
         isolation = Isolation.READ_COMMITTED
     )
+    @SensitiveWordValidation(textFieldPath = "query.review.comment")
     @Override
     public Boolean review(OrderReviewSaveQuery query) {
         // 保存评论

@@ -159,6 +159,11 @@ public enum HttpStatusEnum {
      */
     ID_SERVICE_IMPL_NOT_FOUND(621, "ID Service Implementation Not Found"),
 
+    /**
+     * 文本中存在敏感词
+     */
+    SENSITIVE_WORD_FOUND(622, "Sensitive Word Found"),
+
     ;
 
     /**

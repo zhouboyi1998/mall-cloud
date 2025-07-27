@@ -138,7 +138,7 @@ public class CategoryController {
     @ApiOperation(value = "新增分类")
     @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
     @PostMapping(value = "/insert")
-    public ResponseEntity<Boolean> insert(@RequestBody Category category) {
+    public ResponseEntity<Boolean> insert(@RequestBody @Valid Category category) {
         Boolean code = categoryService.save(category);
         return ResponseEntity.ok(code);
     }
@@ -156,7 +156,7 @@ public class CategoryController {
     @ApiOperation(value = "根据id修改分类")
     @ApiImplicitParam(value = "分类Model", name = "category", dataType = "Category", paramType = "body", required = true)
     @PutMapping(value = "/update")
-    public ResponseEntity<Boolean> update(@RequestBody Category category) {
+    public ResponseEntity<Boolean> update(@RequestBody @Valid Category category) {
         Boolean code = categoryService.updateById(category);
         return ResponseEntity.ok(code);
     }

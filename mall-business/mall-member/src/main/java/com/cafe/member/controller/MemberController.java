@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -132,7 +133,7 @@ public class MemberController {
     @ApiOperation(value = "新增会员")
     @ApiImplicitParam(value = "会员Model", name = "member", dataType = "Member", paramType = "body", required = true)
     @PostMapping(value = "/insert")
-    public ResponseEntity<Boolean> insert(@RequestBody Member member) {
+    public ResponseEntity<Boolean> insert(@RequestBody @Valid Member member) {
         Boolean code = memberService.save(member);
         return ResponseEntity.ok(code);
     }
@@ -150,7 +151,7 @@ public class MemberController {
     @ApiOperation(value = "根据id修改会员")
     @ApiImplicitParam(value = "会员Model", name = "member", dataType = "Member", paramType = "body", required = true)
     @PutMapping(value = "/update")
-    public ResponseEntity<Boolean> update(@RequestBody Member member) {
+    public ResponseEntity<Boolean> update(@RequestBody @Valid Member member) {
         Boolean code = memberService.updateById(member);
         return ResponseEntity.ok(code);
     }

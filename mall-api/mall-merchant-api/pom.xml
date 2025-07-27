@@ -42,6 +42,12 @@
             <artifactId>mall-starter-boot</artifactId>
             <optional>true</optional>
         </dependency>
+        <!-- 远程调用接口 -->
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-foundation-api</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
 </project>

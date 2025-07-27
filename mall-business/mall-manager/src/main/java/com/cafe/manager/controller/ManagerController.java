@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -132,7 +133,7 @@ public class ManagerController {
     @ApiOperation(value = "新增管理员")
     @ApiImplicitParam(value = "管理员Model", name = "manager", dataType = "Manager", paramType = "body", required = true)
     @PostMapping(value = "/insert")
-    public ResponseEntity<Boolean> insert(@RequestBody Manager manager) {
+    public ResponseEntity<Boolean> insert(@RequestBody @Valid Manager manager) {
         Boolean code = managerService.save(manager);
         return ResponseEntity.ok(code);
     }
@@ -150,7 +151,7 @@ public class ManagerController {
     @ApiOperation(value = "根据id修改管理员")
     @ApiImplicitParam(value = "管理员Model", name = "manager", dataType = "Manager", paramType = "body", required = true)
     @PutMapping(value = "/update")
-    public ResponseEntity<Boolean> update(@RequestBody Manager manager) {
+    public ResponseEntity<Boolean> update(@RequestBody @Valid Manager manager) {
         Boolean code = managerService.updateById(manager);
         return ResponseEntity.ok(code);
     }

@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.cafe.foundation.annotation.Sensitive;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -39,6 +40,7 @@ public class Category implements Serializable {
     private Long parentId;
 
     @ApiModelProperty(value = "分类名称")
+    @Sensitive
     private String categoryName;
 
     @ApiModelProperty(value = "分类层级: 1 一级分类, 2 二级分类, 3 三级分类")
