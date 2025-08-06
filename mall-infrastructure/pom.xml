@@ -24,6 +24,7 @@
         <module>mall-infrastructure-rocketmq</module>
         <module>mall-infrastructure-swagger</module>
         <module>mall-infrastructure-xxljob</module>
+        <module>mall-infrastructure-caffeine</module>
     </modules>
 
 </project>

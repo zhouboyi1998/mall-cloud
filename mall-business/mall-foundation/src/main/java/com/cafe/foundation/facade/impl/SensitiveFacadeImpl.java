@@ -1,6 +1,5 @@
 package com.cafe.foundation.facade.impl;
 
-import com.cafe.common.constant.model.InterferenceConstant;
 import com.cafe.common.constant.model.SensitiveConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.lang.algorithm.automaton.AhoCorasick;
@@ -74,9 +73,7 @@ public class SensitiveFacadeImpl implements SensitiveFacade {
         // 忽略大小写
         text = text.toLowerCase();
         // 移除干扰符
-        List<Interference> interferenceList = interferenceService.lambdaQuery()
-            .eq(Interference::getStatus, InterferenceConstant.Status.ENABLE)
-            .list();
+        List<Interference> interferenceList = interferenceService.enableList();
         for (Interference interference : interferenceList) {
             text = text.replaceAll(interference.getInterferenceSymbol(), StringConstant.EMPTY);
         }
