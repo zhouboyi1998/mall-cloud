@@ -548,6 +548,11 @@
             <!-- 基础设施公共包 -->
             <dependency>
                 <groupId>com.cafe</groupId>
+                <artifactId>mall-infrastructure-caffeine</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
                 <artifactId>mall-infrastructure-elasticsearch</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>

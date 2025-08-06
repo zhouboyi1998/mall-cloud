@@ -31,6 +31,10 @@
         <!-- 基础设施 -->
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-infrastructure-caffeine</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-infrastructure-mybatisplus</artifactId>
         </dependency>
         <dependency>
