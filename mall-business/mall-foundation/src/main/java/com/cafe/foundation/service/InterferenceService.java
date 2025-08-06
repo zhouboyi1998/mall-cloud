@@ -3,6 +3,8 @@ package com.cafe.foundation.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.cafe.foundation.model.entity.Interference;
 
+import java.util.List;
+
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.foundation.service
@@ -12,4 +14,10 @@ import com.cafe.foundation.model.entity.Interference;
  */
 public interface InterferenceService extends IService<Interference> {
 
+    /**
+     * 查询启用的干扰符列表
+     *
+     * @return 启用的干扰符列表
+     */
+    List<Interference> enableList();
 }

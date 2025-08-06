@@ -4,6 +4,7 @@ import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.json.util.JacksonUtil;
 import com.cafe.common.util.aop.AOPUtil;
+import com.cafe.common.util.expression.SpELUtil;
 import com.cafe.infrastructure.redis.annotation.FallbackCache;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +18,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.expression.Expression;
-import org.springframework.expression.spel.standard.SpelExpressionParser;
-import org.springframework.expression.spel.support.StandardEvaluationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.DigestUtils;
@@ -85,15 +83,8 @@ public class FallbackCacheAspect {
         String condition = fallbackCache.condition();
         // 如果表达式为空, 默认不跳过缓存逻辑; 如果表达式不为空, 根据表达式的评估结果决定是否跳过缓存逻辑
         if (StringUtils.hasText(condition)) {
-            // 将目标方法的参数列表添加到 SpEL 评估上下文中
-            StandardEvaluationContext context = new StandardEvaluationContext();
-            argumentMap.forEach(context::setVariable);
-            // 解析 SpEL 表达式
-            SpelExpressionParser parser = new SpelExpressionParser();
-            Expression expression = parser.parseExpression(condition);
-            Boolean enable = expression.getValue(context, Boolean.class);
             // 如果 SpEL 表达式的评估结果为 false, 跳过缓存逻辑, 直接执行方法
-            if (Objects.equals(enable, Boolean.FALSE)) {
+            if (Objects.equals(SpELUtil.evaluate(condition, argumentMap, Boolean.class), Boolean.FALSE)) {
                 return proceedingJoinPoint.proceed();
             }
         }
