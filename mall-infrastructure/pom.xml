@@ -16,6 +16,7 @@
     <description>基础设施公共包</description>
 
     <modules>
+        <module>mall-infrastructure-caffeine</module>
         <module>mall-infrastructure-elasticsearch</module>
         <module>mall-infrastructure-kafka</module>
         <module>mall-infrastructure-mybatisplus</module>
