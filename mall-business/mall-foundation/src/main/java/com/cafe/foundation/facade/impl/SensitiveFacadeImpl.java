@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -43,7 +42,6 @@ public class SensitiveFacadeImpl implements SensitiveFacade {
 
     private final InterferenceService interferenceService;
 
-    @PostConstruct
     @Override
     public void initSensitiveTrie() {
         // 获取写锁
