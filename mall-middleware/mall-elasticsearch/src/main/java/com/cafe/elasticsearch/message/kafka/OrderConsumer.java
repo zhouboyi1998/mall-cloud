@@ -25,9 +25,9 @@ public class OrderConsumer {
     private final OrderIndexService orderIndexService;
 
     @KafkaListener(topics = {KafkaConstant.Topic.ORDER_INDEX}, groupId = KafkaConstant.ConsumerGroup.ELASTICSEARCH)
-    public void listener(ConsumerRecord<String, String> record) {
+    public void orderIndexListener(ConsumerRecord<String, String> record) {
         // 打印成功接收消息的日志
-        log.info("OrderConsumer.listener(): kafka topic -> {}, offset -> {}, key -> {}, value -> {}", record.topic(), record.offset(), record.key(), record.value());
+        log.info("OrderConsumer.orderIndexListener(): kafka topic -> {}, offset -> {}, key -> {}, value -> {}", record.topic(), record.offset(), record.key(), record.value());
         // 获取消息内容
         OrderIndex orderIndex = JacksonUtil.readValue(record.value(), OrderIndex.class);
         // 存储订单索引

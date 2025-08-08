@@ -15,5 +15,5 @@ spring:
   rabbitmq:
     host: host.docker.internal
     port: 5672
-    username: binlog
-    password: binlog
+    username: cafe
+    password: cafe
