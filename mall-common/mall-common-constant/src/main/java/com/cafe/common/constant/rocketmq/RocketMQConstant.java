@@ -49,6 +49,11 @@ public class RocketMQConstant {
         public static final String CATEGORY = "category";
 
         /**
+         * sensitive 主题
+         */
+        public static final String SENSITIVE = "sensitive";
+
+        /**
          * Producer + TableName 作为组合键, 获取 Topic
          */
         public static final MultiKeyMap<String, String> MAP = new MultiKeyMap<>();
@@ -68,5 +73,21 @@ public class RocketMQConstant {
          * elasticsearch 消费者组
          */
         public static final String ELASTICSEARCH = "elasticsearch";
+
+        /**
+         * foundation 消费者组
+         */
+        public static final String FOUNDATION = "foundation";
+    }
+
+    /**
+     * 哈希键
+     */
+    public static class HashKey {
+
+        /**
+         * 敏感词消息通用哈希键
+         */
+        public static final String SENSITIVE = "sensitive";
     }
 }
