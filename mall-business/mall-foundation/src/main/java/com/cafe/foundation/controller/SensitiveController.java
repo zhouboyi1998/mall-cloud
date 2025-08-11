@@ -2,11 +2,15 @@ package com.cafe.foundation.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.cafe.common.constant.model.SensitiveConstant;
+import com.cafe.common.constant.rocketmq.RocketMQConstant;
 import com.cafe.common.log.annotation.ApiLogPrint;
 import com.cafe.foundation.facade.SensitiveFacade;
+import com.cafe.foundation.model.dto.SensitiveMessageBodyDTO;
 import com.cafe.foundation.model.entity.Sensitive;
 import com.cafe.foundation.service.SensitiveService;
 import com.cafe.infrastructure.mybatisplus.util.WrapperUtil;
+import com.cafe.infrastructure.rocketmq.producer.RocketMQProducer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -40,6 +44,8 @@ public class SensitiveController {
     private final SensitiveService sensitiveService;
 
     private final SensitiveFacade sensitiveFacade;
+
+    private final RocketMQProducer rocketMQProducer;
 
     @ApiLogPrint(value = "查询敏感词数量")
     @ApiOperation(value = "查询敏感词数量")
@@ -199,7 +205,9 @@ public class SensitiveController {
     @ApiOperation(value = "初始化敏感词字典树")
     @GetMapping(value = "/init-sensitive-trie")
     public ResponseEntity<Void> initSensitiveTrie() {
-        sensitiveFacade.initSensitiveTrie();
+        SensitiveMessageBodyDTO messageBody = new SensitiveMessageBodyDTO()
+            .setType(SensitiveConstant.MessageType.REINITIALIZE_SENSITIVE_TRIE);
+        rocketMQProducer.asyncSendOrderly(RocketMQConstant.Topic.SENSITIVE, messageBody, RocketMQConstant.HashKey.SENSITIVE);
         return ResponseEntity.ok().build();
     }
 
@@ -208,7 +216,10 @@ public class SensitiveController {
     @ApiImplicitParam(value = "敏感词Id列表", name = "sensitiveIds", dataType = "List", paramType = "body", required = true)
     @PostMapping(value = "/add-sensitive-words")
     public ResponseEntity<Void> addSensitiveWords(@RequestBody List<Long> sensitiveIds) {
-        sensitiveFacade.addSensitiveWords(sensitiveIds);
+        SensitiveMessageBodyDTO messageBody = new SensitiveMessageBodyDTO()
+            .setType(SensitiveConstant.MessageType.ADD_SENSITIVE_WORDS)
+            .setContent(sensitiveIds);
+        rocketMQProducer.asyncSendOrderly(RocketMQConstant.Topic.SENSITIVE, messageBody, RocketMQConstant.HashKey.SENSITIVE);
         return ResponseEntity.ok().build();
     }
 

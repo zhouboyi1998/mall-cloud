@@ -6,6 +6,14 @@ spring:
     username: root
     password: 123456
 
+# RocketMQ 配置
+rocketmq:
+  name-server: 127.0.0.1:9876
+  # 生产者配置
+  producer:
+    # 默认生产者组
+    group: ${spring.application.name}
+
 # MyBatis-Plus 配置
 mybatis-plus:
   configuration:

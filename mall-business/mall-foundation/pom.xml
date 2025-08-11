@@ -39,6 +39,10 @@
         </dependency>
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-infrastructure-rocketmq</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-infrastructure-swagger</artifactId>
         </dependency>
         <!-- 远程调用接口 -->
