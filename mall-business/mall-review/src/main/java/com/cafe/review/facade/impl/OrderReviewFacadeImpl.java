@@ -31,7 +31,7 @@ import java.util.List;
 @Service
 public class OrderReviewFacadeImpl implements OrderReviewFacade {
 
-    private final OrderReviewFacade orderReviewFacade;
+    private final OrderReviewFacade self;
 
     private final OrderReviewService orderReviewService;
 
@@ -71,6 +71,6 @@ public class OrderReviewFacadeImpl implements OrderReviewFacade {
     @Override
     public Boolean reviewBatch(List<OrderReviewSaveQuery> queryList) {
         // 循环保存订单评论
-        return queryList.stream().allMatch(orderReviewFacade::review);
+        return queryList.stream().allMatch(self::review);
     }
 }
