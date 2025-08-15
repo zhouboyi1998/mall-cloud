@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 @Service
 public class ReviewTagServiceImpl extends ServiceImpl<ReviewTagMapper, ReviewTag> implements ReviewTagService {
 
-    private final ReviewTagService reviewTagService;
+    private final ReviewTagService self;
 
     private final ReviewTagMapper reviewTagMapper;
 
@@ -41,13 +41,11 @@ public class ReviewTagServiceImpl extends ServiceImpl<ReviewTagMapper, ReviewTag
     public void removeAndSave(Long reviewId, List<Long> tagIds) {
         // 删除旧的关联关系
         reviewTagMapper.delete(Wrappers.lambdaQuery(ReviewTag.class).eq(ReviewTag::getReviewId, reviewId));
-        // 保存新的关联关系
+        // 判断是否有新的关联关系需要保存
         if (CollectionUtils.isEmpty(tagIds)) {
             return;
         }
-        List<ReviewTag> reviewTagList = tagIds.stream()
-            .map(tagId -> new ReviewTag().setReviewId(reviewId).setTagId(tagId))
-            .collect(Collectors.toList());
-        reviewTagService.saveBatch(reviewTagList);
+        // 保存新的关联关系
+        self.saveBatch(tagIds.stream().map(tagId -> new ReviewTag().setReviewId(reviewId).setTagId(tagId)).collect(Collectors.toList()));
     }
 }

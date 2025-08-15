@@ -45,7 +45,7 @@ public class GoodsReviewFacadeImpl implements GoodsReviewFacade {
         put(FieldConstant.BAD_REVIEW, 0);
     }};
 
-    private final GoodsReviewFacade goodsReviewFacade;
+    private final GoodsReviewFacade self;
 
     private final GoodsReviewService goodsReviewService;
 
@@ -85,7 +85,7 @@ public class GoodsReviewFacadeImpl implements GoodsReviewFacade {
     @Override
     public Boolean reviewBatch(List<GoodsReviewSaveQuery> queryList) {
         // 循环保存商品评论
-        return queryList.stream().allMatch(goodsReviewFacade::review);
+        return queryList.stream().allMatch(self::review);
     }
 
     @Override
@@ -127,6 +127,6 @@ public class GoodsReviewFacadeImpl implements GoodsReviewFacade {
         if (CollectionUtils.isEmpty(skuIds)) {
             return Collections.emptyMap();
         }
-        return skuIds.parallelStream().collect(Collectors.toMap(Function.identity(), goodsReviewFacade::statistic));
+        return skuIds.parallelStream().collect(Collectors.toMap(Function.identity(), self::statistic));
     }
 }
