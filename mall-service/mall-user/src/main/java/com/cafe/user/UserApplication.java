@@ -2,6 +2,7 @@ package com.cafe.user;
 
 import com.cafe.common.constant.app.AppConstant;
 import com.cafe.common.constant.app.FeignConstant;
+import org.springframework.amqp.rabbit.annotation.EnableRabbit;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
@@ -19,6 +20,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients(basePackages = FeignConstant.Client.ID)
+@EnableRabbit
 @EnableScheduling
 @ComponentScan(basePackages = AppConstant.DEFAULT_PACKAGE)
 public class UserApplication {

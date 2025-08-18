@@ -1,3 +1,11 @@
+spring:
+  # RabbitMQ 配置
+  rabbitmq:
+    # 生产者是否确认消息成功投递到交换机: NONE 不确认; CORRELATED 异步等待回调结果; SIMPLE 同步等待回调结果
+    publisher-confirm-type: CORRELATED
+    # 消息无法到达队列时是否退回给生产者
+    publisher-returns: true
+
 # MySQL Binlog Connector 数据库监听配置
 binlog:
   # 监听的数据表
