@@ -42,69 +42,20 @@
 
 ---
 
-### 🧰 初始化环境
+### 🧰 初始化用户
 
-* 进入 `RabbitMQ` 管理界面，创建项目需要使用的**用户、交换机、队列、路由键**
+#### 用户
 
-#### Admin
+###### 创建项目用户 cafe
 
-###### 创建 binlog 用户
+* **Username**：`cafe`
+* **Password**：`cafe`
 
-* **Username**：`binlog`
-* **Password**：`binlog`
+#### 权限
 
-###### 创建 canal 用户
-
-* **Username**：`canal`
-* **Password**：`canal`
-
-#### Permissions
-
-* 分别进入 `binlog`、`canal` 用户的设置界面，添加 `Permissions`
-
-###### 分别添加 / Virtual host 给 binlog、canal 用户
+###### 将 Virtual host 根路径权限赋予给 cafe 用户
 
 * **Virtual host**：`/`
 * **Configure regexp**：`.*`
 * **Write regexp**：`.*`
 * **Read regexp**：`.*`
-
-#### Exchange
-
-###### 创建 binlog 交换机
-
-* **Name**：`binlog`
-* **Type**：`direct`
-* **Durability**：`Durable`
-* **Auto delete**：`No`
-* **Internal**：`No`
-
-###### 创建 canal 交换机
-
-* **Name**：`canal`
-* **Type**：`direct`
-* **Durability**：`Durable`
-* **Auto delete**：`No`
-* **Internal**：`No`
-
-#### Queue
-
-###### 创建 role-resource 队列
-
-* **Name**：`role-resource`
-* **Durability**：`Durable`
-* **Auto delete**：`No`
-
-#### Routing Key
-
-* 进入 `role-resource` 队列的设置界面，添加 `Bindings`
-
-###### 绑定 binlog 交换机和 role-resource 队列
-
-* **From exchange**：`binlog`
-* **Routing key**：`binlog-to-role-resource`
-
-###### 绑定 canal 交换机和 role-resource 队列
-
-* **From exchange**：`canal`
-* **Routing key**：`canal-to-role-resource`

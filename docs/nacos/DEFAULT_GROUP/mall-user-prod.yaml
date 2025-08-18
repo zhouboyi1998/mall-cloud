@@ -15,5 +15,6 @@ spring:
   rabbitmq:
     host: 192.168.159.128
     port: 5672
-    username: binlog
-    password: binlog
+    username: cafe
+    password: cafe
+    virtual-host: /
