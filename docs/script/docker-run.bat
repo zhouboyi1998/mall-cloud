@@ -10,6 +10,8 @@ docker run -d -p 18074:18074 --name mall-id mall-id:latest
 docker run -d -p 18077:18077 --name mall-captcha mall-captcha:latest
 
 docker run -d -p 18075:18075 --name mall-admin mall-admin:latest
+docker run -d -p 8701:8701 --name mall-hystrix mall-hystrix:latest
+docker run -d -p 8702:8702 --name mall-turbine mall-turbine:latest
 docker run -d -p 18076:18076 --name mall-swagger mall-swagger:latest
 
 docker run -d -p 8761:8761 --name mall-eureka mall-eureka:latest

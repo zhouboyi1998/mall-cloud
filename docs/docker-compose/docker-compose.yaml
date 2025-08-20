@@ -63,6 +63,22 @@ services:
       - ./logs:/mall/mall-admin/logs
     restart: always
 
+  mall-hystrix:
+    image: mall-hystrix:latest
+    ports:
+      - "8701:8701"
+    networks:
+      - mall-net
+    restart: always
+
+  mall-turbine:
+    image: mall-turbine:latest
+    ports:
+      - "8702:8702"
+    networks:
+      - mall-net
+    restart: always
+
   mall-swagger:
     image: mall-swagger:latest
     ports:

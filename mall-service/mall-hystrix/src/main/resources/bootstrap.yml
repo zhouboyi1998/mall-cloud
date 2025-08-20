@@ -1,0 +1,12 @@
+server:
+  port: 8701
+
+spring:
+  application:
+    name: mall-hystrix
+  profiles:
+    active: dev
+
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "**"

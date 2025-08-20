@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-hystrix-deployment
+  labels:
+    name: mall-hystrix-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-hystrix
+  template:
+    metadata:
+      namespace: mall
+      name: mall-hystrix-pod
+      labels:
+        app: mall-hystrix
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: mall-hystrix-container
+          image: 192.168.159.128:5000/mall/mall-hystrix:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8701
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi
