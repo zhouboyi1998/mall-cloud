@@ -97,9 +97,11 @@
     |-- mall-gateway (Spring Cloud Gateway 网关模块)
     |-- mall-generator (代码生成器)
     |-- mall-grinder (Grinder 网关模块)
+    |-- mall-hystrix (Hystrix Dashboard 仪表盘模块)
     |-- mall-id (ID 生成器)
     |-- mall-security (Spring Security 安全模块)
     |-- mall-swagger (Knife4J Swagger API 文档聚合模块)
+    |-- mall-turbine (Turbine 集群监控模块)
     |-- mall-user (用户模块)
     |-- mall-zuul (Zuul 网关模块)
 

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: mall
+  name: mall-turbine-deployment
+  labels:
+    name: mall-turbine-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mall-turbine
+  template:
+    metadata:
+      namespace: mall
+      name: mall-turbine-pod
+      labels:
+        app: mall-turbine
+    spec:
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
+      containers:
+        - name: mall-turbine-container
+          image: 192.168.159.128:5000/mall/mall-turbine:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8702
+              protocol: TCP
+          resources:
+            requests:
+              cpu: 200m
+              memory: 256Mi

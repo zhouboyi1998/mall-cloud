@@ -1,0 +1,13 @@
+server:
+  port: 8702
+
+spring:
+  application:
+    name: mall-turbine
+  profiles:
+    active: dev
+
+turbine:
+  combine-host-port: true
+  app-config: mall-security,mall-user,mall-id
+  cluster-name-expression: new String('default')

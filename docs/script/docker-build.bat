@@ -10,6 +10,8 @@ docker build -f ./docs/docker/mall-id/Dockerfile -t mall-id:latest .
 docker build -f ./docs/docker/mall-captcha/Dockerfile -t mall-captcha:latest .
 
 docker build -f ./docs/docker/mall-admin/Dockerfile -t mall-admin:latest .
+docker build -f ./docs/docker/mall-hystrix/Dockerfile -t mall-hystrix:latest .
+docker build -f ./docs/docker/mall-turbine/Dockerfile -t mall-turbine:latest .
 docker build -f ./docs/docker/mall-swagger/Dockerfile -t mall-swagger:latest .
 
 docker build -f ./docs/docker/mall-eureka/Dockerfile -t mall-eureka:latest .

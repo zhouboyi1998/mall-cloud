@@ -23,9 +23,11 @@
         <module>mall-gateway</module>
         <module>mall-generator</module>
         <module>mall-grinder</module>
+        <module>mall-hystrix</module>
         <module>mall-id</module>
         <module>mall-security</module>
         <module>mall-swagger</module>
+        <module>mall-turbine</module>
         <module>mall-user</module>
         <module>mall-zuul</module>
     </modules>
