@@ -23,9 +23,11 @@
         <module>mall-common</module>
         <module>mall-component</module>
         <module>mall-configuration</module>
+        <module>mall-develop</module>
         <module>mall-discovery</module>
         <module>mall-infrastructure</module>
         <module>mall-middleware</module>
+        <module>mall-operation</module>
         <module>mall-service</module>
         <module>mall-starter</module>
     </modules>
