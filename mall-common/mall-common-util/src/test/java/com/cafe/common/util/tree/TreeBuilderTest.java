@@ -17,9 +17,11 @@ import static com.cafe.common.util.tree.Constant.NODE_LIST;
  */
 public class TreeBuilderTest {
 
+    // -------------------- RecursiveBuilder --------------------
+
     @Test
-    void buildTreeNode() {
-        TreeNode<Integer> tree = TreeBuilder.<TreeNode<Integer>, Integer>builder()
+    void buildTreeNodeWithRecursiveBuilder() {
+        TreeNode<Integer> tree = TreeBuilder.<TreeNode<Integer>, Integer>recursiveBuilder()
             .nodeList(NODE_LIST)
             .idGetter(TreeNode::getId)
             .parentIdGetter(TreeNode::getParentId)
@@ -32,13 +34,45 @@ public class TreeBuilderTest {
     }
 
     @Test
-    void buildTreeList() {
-        List<TreeNode<Integer>> treeList = TreeBuilder.<TreeNode<Integer>, Integer>builder()
+    void buildTreeListWithRecursiveBuilder() {
+        List<TreeNode<Integer>> treeList = TreeBuilder.<TreeNode<Integer>, Integer>recursiveBuilder()
             .nodeList(NODE_LIST)
             .idGetter(TreeNode::getId)
             .parentIdGetter(TreeNode::getParentId)
             .childrenSetter(TreeNode::setChildren)
             .firstLevelNodeFilter(node -> Objects.equals(node.getParentId(), 0))
+            .parallelChecker(() -> NODE_LIST.size() > 100)
+            .build()
+            .buildTreeList();
+        System.out.println(treeList);
+    }
+
+    // -------------------- MapLookupBuilder --------------------
+
+    @Test
+    void buildTreeNodeWithMapLookupBuilder() {
+        TreeNode<Integer> tree = TreeBuilder.<TreeNode<Integer>, Integer>mapLookupBuilder()
+            .nodeList(NODE_LIST)
+            .id(1)
+            .idGetter(TreeNode::getId)
+            .parentIdGetter(TreeNode::getParentId)
+            .childrenGetter(TreeNode::getChildren)
+            .childrenSetter(TreeNode::setChildren)
+            .defaultRootSupplier(TreeNode::new)
+            .build()
+            .buildTreeNode();
+        System.out.println(tree);
+    }
+
+    @Test
+    void buildTreeListWithMapLookupBuilder() {
+        List<TreeNode<Integer>> treeList = TreeBuilder.<TreeNode<Integer>, Integer>mapLookupBuilder()
+            .nodeList(NODE_LIST)
+            .parentId(0)
+            .idGetter(TreeNode::getId)
+            .parentIdGetter(TreeNode::getParentId)
+            .childrenGetter(TreeNode::getChildren)
+            .childrenSetter(TreeNode::setChildren)
             .parallelChecker(() -> NODE_LIST.size() > 100)
             .build()
             .buildTreeList();
