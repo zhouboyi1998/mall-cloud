@@ -53,42 +53,6 @@ services:
       - ./logs:/mall/mall-captcha/logs
     restart: always
 
-  mall-admin:
-    image: mall-admin:latest
-    ports:
-      - "18075:18075"
-    networks:
-      - mall-net
-    volumes:
-      - ./logs:/mall/mall-admin/logs
-    restart: always
-
-  mall-hystrix:
-    image: mall-hystrix:latest
-    ports:
-      - "8701:8701"
-    networks:
-      - mall-net
-    restart: always
-
-  mall-turbine:
-    image: mall-turbine:latest
-    ports:
-      - "8702:8702"
-    networks:
-      - mall-net
-    restart: always
-
-  mall-swagger:
-    image: mall-swagger:latest
-    ports:
-      - "18076:18076"
-    networks:
-      - mall-net
-    volumes:
-      - ./logs:/mall/mall-swagger/logs
-    restart: always
-
   mall-eureka:
     image: mall-eureka:latest
     ports:
@@ -117,6 +81,46 @@ services:
     image: mall-grinder:latest
     ports:
       - "18011:18011"
+    networks:
+      - mall-net
+    restart: always
+
+  # ---------- mall-develop ----------
+
+  mall-swagger:
+    image: mall-swagger:latest
+    ports:
+      - "18076:18076"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-swagger/logs
+    restart: always
+
+  # ---------- mall-operation ----------
+
+  mall-admin:
+    image: mall-admin:latest
+    ports:
+      - "18075:18075"
+    networks:
+      - mall-net
+    volumes:
+      - ./logs:/mall/mall-admin/logs
+    restart: always
+
+  mall-hystrix:
+    image: mall-hystrix:latest
+    ports:
+      - "8701:8701"
+    networks:
+      - mall-net
+    restart: always
+
+  mall-turbine:
+    image: mall-turbine:latest
+    ports:
+      - "8702:8702"
     networks:
       - mall-net
     restart: always

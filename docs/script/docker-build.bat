@@ -9,16 +9,21 @@ docker build -f ./docs/docker/mall-user/Dockerfile -t mall-user:latest .
 docker build -f ./docs/docker/mall-id/Dockerfile -t mall-id:latest .
 docker build -f ./docs/docker/mall-captcha/Dockerfile -t mall-captcha:latest .
 
-docker build -f ./docs/docker/mall-admin/Dockerfile -t mall-admin:latest .
-docker build -f ./docs/docker/mall-hystrix/Dockerfile -t mall-hystrix:latest .
-docker build -f ./docs/docker/mall-turbine/Dockerfile -t mall-turbine:latest .
-docker build -f ./docs/docker/mall-swagger/Dockerfile -t mall-swagger:latest .
-
 docker build -f ./docs/docker/mall-eureka/Dockerfile -t mall-eureka:latest .
 docker build -f ./docs/docker/mall-config/Dockerfile -t mall-config:latest .
 docker build -f ./docs/docker/mall-zuul/Dockerfile -t mall-zuul:latest .
 
 docker build -f ./docs/docker/mall-grinder/Dockerfile -t mall-grinder:latest .
+
+@REM -------------------- mall-develop --------------------
+
+docker build -f ./docs/docker/mall-swagger/Dockerfile -t mall-swagger:latest .
+
+@REM -------------------- mall-operation --------------------
+
+docker build -f ./docs/docker/mall-admin/Dockerfile -t mall-admin:latest .
+docker build -f ./docs/docker/mall-hystrix/Dockerfile -t mall-hystrix:latest .
+docker build -f ./docs/docker/mall-turbine/Dockerfile -t mall-turbine:latest .
 
 @REM -------------------- mall-middleware --------------------
 

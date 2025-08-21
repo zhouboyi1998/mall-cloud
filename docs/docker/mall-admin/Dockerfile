@@ -2,7 +2,7 @@ FROM openjdk:8-jre
 LABEL maintainer="zhouboyi<1144188685@qq.com>"
 
 WORKDIR /mall/mall-admin
-COPY ./mall-service/mall-admin/target/mall-admin.jar /mall/mall-admin/mall-admin.jar
+COPY ./mall-operation/mall-admin/target/mall-admin.jar /mall/mall-admin/mall-admin.jar
 COPY ./skywalking-agent /mall/skywalking-agent
 
 EXPOSE 18075

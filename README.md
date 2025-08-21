@@ -59,6 +59,10 @@
     |-- mall-configuration-nacos (Nacos 配置中心公共包)
     |-- mall-configuration-zookeeper (Zookeeper 配置中心公共包)
 
+|-- mall-develop (开发服务模块)
+    |-- mall-generator (代码生成器)
+    |-- mall-swagger (Knife4J Swagger API 文档聚合模块)
+
 |-- mall-discovery (注册中心公共包)
     |-- mall-discovery-consul (Consul 注册中心公共包)
     |-- mall-discovery-eureka (Eureka 注册中心公共包)
@@ -89,19 +93,19 @@
     |-- mall-qiniu (七牛云对象存储)
     |-- mall-solr (Solr 搜索引擎)
 
-|-- mall-service (基础服务模块)
+|-- mall-operation (运维服务模块)
     |-- mall-admin (Spring Boot Admin 监控模块)
+    |-- mall-hystrix (Hystrix Dashboard 仪表盘模块)
+    |-- mall-turbine (Turbine 集群监控模块)
+
+|-- mall-service (基础服务模块)
     |-- mall-captcha (验证码生成器)
     |-- mall-config (Spring Cloud Config 配置中心服务端)
     |-- mall-eureka (Eureka 注册中心服务端)
     |-- mall-gateway (Spring Cloud Gateway 网关模块)
-    |-- mall-generator (代码生成器)
     |-- mall-grinder (Grinder 网关模块)
-    |-- mall-hystrix (Hystrix Dashboard 仪表盘模块)
     |-- mall-id (ID 生成器)
     |-- mall-security (Spring Security 安全模块)
-    |-- mall-swagger (Knife4J Swagger API 文档聚合模块)
-    |-- mall-turbine (Turbine 集群监控模块)
     |-- mall-user (用户模块)
     |-- mall-zuul (Zuul 网关模块)
 

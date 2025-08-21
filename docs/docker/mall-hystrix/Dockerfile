@@ -2,7 +2,7 @@ FROM openjdk:8-jre
 LABEL maintainer="zhouboyi<1144188685@qq.com>"
 
 WORKDIR /mall/mall-hystrix
-COPY ./mall-service/mall-hystrix/target/mall-hystrix.jar /mall/mall-hystrix/mall-hystrix.jar
+COPY ./mall-operation/mall-hystrix/target/mall-hystrix.jar /mall/mall-hystrix/mall-hystrix.jar
 COPY ./skywalking-agent /mall/skywalking-agent
 
 EXPOSE 8701

@@ -10,21 +10,15 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>mall-service</artifactId>
+    <artifactId>mall-operation</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <description>基础服务模块</description>
+    <description>运维服务模块</description>
 
     <modules>
-        <module>mall-captcha</module>
-        <module>mall-config</module>
-        <module>mall-eureka</module>
-        <module>mall-gateway</module>
-        <module>mall-grinder</module>
-        <module>mall-id</module>
-        <module>mall-security</module>
-        <module>mall-user</module>
-        <module>mall-zuul</module>
+        <module>mall-admin</module>
+        <module>mall-hystrix</module>
+        <module>mall-turbine</module>
     </modules>
 
 </project>
