@@ -173,10 +173,14 @@ public class TreeUtil {
             Map<K, T> nodeMap = initNodeMap(nodeList, parallel);
             // 遍历节点列表, 构建树形列表
             return (parallel ? nodeList.parallelStream() : nodeList.stream())
+                // 筛选出非空节点
+                .filter(Objects::nonNull)
                 // 查询当前节点的父节点, 将当前节点存入父节点的子节点列表中
-                .peek(node -> Optional.ofNullable(node.getParentId())
+                .peek(node -> Optional.of(node)
+                    .map(Tree::getParentId)
                     .map(nodeMap::get)
-                    .map(parent -> parent.getChildren().add(node)))
+                    .map(Tree::getChildren)
+                    .map(children -> children.add(node)))
                 // 筛选出指定节点
                 .filter(node -> Objects.equals(node.getId(), id))
                 // 必须先收集, 再开启一个新的 Stream 流来执行 findAny()
@@ -242,10 +246,14 @@ public class TreeUtil {
             Map<K, T> nodeMap = initNodeMap(nodeList, parallel);
             // 遍历节点列表, 构建树形列表
             return (parallel ? nodeList.parallelStream() : nodeList.stream())
+                // 筛选出非空节点
+                .filter(Objects::nonNull)
                 // 查询当前节点的父节点, 将当前节点存入父节点的子节点列表中
-                .peek(node -> Optional.ofNullable(node.getParentId())
+                .peek(node -> Optional.of(node)
+                    .map(Tree::getParentId)
                     .map(nodeMap::get)
-                    .map(parent -> parent.getChildren().add(node)))
+                    .map(Tree::getChildren)
+                    .map(children -> children.add(node)))
                 // 筛选出指定父节点的所有子节点
                 .filter(node -> Objects.equals(node.getParentId(), parentId))
                 .collect(Collectors.toList());
