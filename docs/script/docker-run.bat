@@ -9,16 +9,21 @@ docker run -d -p 18073:18073 --name mall-user mall-user:latest
 docker run -d -p 18074:18074 --name mall-id mall-id:latest
 docker run -d -p 18077:18077 --name mall-captcha mall-captcha:latest
 
-docker run -d -p 18075:18075 --name mall-admin mall-admin:latest
-docker run -d -p 8701:8701 --name mall-hystrix mall-hystrix:latest
-docker run -d -p 8702:8702 --name mall-turbine mall-turbine:latest
-docker run -d -p 18076:18076 --name mall-swagger mall-swagger:latest
-
 docker run -d -p 8761:8761 --name mall-eureka mall-eureka:latest
 docker run -d -p 8888:8888 --name mall-config mall-config:latest
 docker run -d -p 8040:8040 --name mall-zuul mall-zuul:latest
 
 docker run -d -p 18011:18011 --name mall-grinder mall-grinder:latest
+
+@REM -------------------- mall-develop --------------------
+
+docker run -d -p 18076:18076 --name mall-swagger mall-swagger:latest
+
+@REM -------------------- mall-operation --------------------
+
+docker run -d -p 18075:18075 --name mall-admin mall-admin:latest
+docker run -d -p 8701:8701 --name mall-hystrix mall-hystrix:latest
+docker run -d -p 8702:8702 --name mall-turbine mall-turbine:latest
 
 @REM -------------------- mall-middleware --------------------
 
