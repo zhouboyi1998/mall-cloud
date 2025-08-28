@@ -4,7 +4,7 @@ services:
   # ---------- mall-service ----------
 
   mall-gateway:
-    image: mall-gateway:latest
+    image: ${MALL_GATEWAY_IMAGE}
     ports:
       - "18071:18071"
     networks:
@@ -14,7 +14,7 @@ services:
     restart: always
 
   mall-security:
-    image: mall-security:latest
+    image: ${MALL_SECURITY_IMAGE}
     ports:
       - "18072:18072"
     networks:
@@ -24,7 +24,7 @@ services:
     restart: always
 
   mall-user:
-    image: mall-user:latest
+    image: ${MALL_USER_IMAGE}
     ports:
       - "18073:18073"
     networks:
@@ -34,7 +34,7 @@ services:
     restart: always
 
   mall-id:
-    image: mall-id:latest
+    image: ${MALL_ID_IMAGE}
     ports:
       - "18074:18074"
     networks:
@@ -44,7 +44,7 @@ services:
     restart: always
 
   mall-captcha:
-    image: mall-captcha:latest
+    image: ${MALL_CAPTCHA_IMAGE}
     ports:
       - "18077:18077"
     networks:
@@ -54,7 +54,7 @@ services:
     restart: always
 
   mall-eureka:
-    image: mall-eureka:latest
+    image: ${MALL_EUREKA_IMAGE}
     ports:
       - "8761:8761"
     networks:
@@ -62,7 +62,7 @@ services:
     restart: always
 
   mall-config:
-    image: mall-config:latest
+    image: ${MALL_CONFIG_IMAGE}
     ports:
       - "8888:8888"
     networks:
@@ -70,7 +70,7 @@ services:
     restart: always
 
   mall-zuul:
-    image: mall-zuul:latest
+    image: ${MALL_ZUUL_IMAGE}
     ports:
       - "8040:8040"
     networks:
@@ -78,7 +78,7 @@ services:
     restart: always
 
   mall-grinder:
-    image: mall-grinder:latest
+    image: ${MALL_GRINDER_IMAGE}
     ports:
       - "18011:18011"
     networks:
@@ -88,7 +88,7 @@ services:
   # ---------- mall-develop ----------
 
   mall-swagger:
-    image: mall-swagger:latest
+    image: ${MALL_SWAGGER_IMAGE}
     ports:
       - "18076:18076"
     networks:
@@ -100,7 +100,7 @@ services:
   # ---------- mall-operation ----------
 
   mall-admin:
-    image: mall-admin:latest
+    image: ${MALL_ADMIN_IMAGE}
     ports:
       - "18075:18075"
     networks:
@@ -110,7 +110,7 @@ services:
     restart: always
 
   mall-hystrix:
-    image: mall-hystrix:latest
+    image: ${MALL_HYSTRIX_IMAGE}
     ports:
       - "8701:8701"
     networks:
@@ -118,7 +118,7 @@ services:
     restart: always
 
   mall-turbine:
-    image: mall-turbine:latest
+    image: ${MALL_TURBINE_IMAGE}
     ports:
       - "8702:8702"
     networks:
@@ -128,7 +128,7 @@ services:
   # ---------- mall-middleware ----------
 
   mall-solr:
-    image: mall-solr:latest
+    image: ${MALL_SOLR_IMAGE}
     ports:
       - "18094:18094"
     networks:
@@ -138,7 +138,7 @@ services:
     restart: always
 
   mall-elasticsearch:
-    image: mall-elasticsearch:latest
+    image: ${MALL_ELASTICSEARCH_IMAGE}
     ports:
       - "18093:18093"
     networks:
@@ -148,7 +148,7 @@ services:
     restart: always
 
   mall-meilisearch:
-    image: mall-meilisearch:latest
+    image: ${MALL_MEILISEARCH_IMAGE}
     ports:
       - "18097:18097"
     networks:
@@ -158,7 +158,7 @@ services:
     restart: always
 
   mall-opensearch:
-    image: mall-opensearch:latest
+    image: ${MALL_OPENSEARCH_IMAGE}
     ports:
       - "18098:18098"
     networks:
@@ -168,7 +168,7 @@ services:
     restart: always
 
   mall-clickhouse:
-    image: mall-clickhouse:latest
+    image: ${MALL_CLICKHOUSE_IMAGE}
     ports:
       - "18096:18096"
     networks:
@@ -178,7 +178,7 @@ services:
     restart: always
 
   mall-fastdfs:
-    image: mall-fastdfs:latest
+    image: ${MALL_FASTDFS_IMAGE}
     ports:
       - "18092:18092"
     networks:
@@ -188,7 +188,7 @@ services:
     restart: always
 
   mall-minio:
-    image: mall-minio:latest
+    image: ${MALL_MINIO_IMAGE}
     ports:
       - "18091:18091"
     networks:
@@ -198,7 +198,7 @@ services:
     restart: always
 
   mall-qiniu:
-    image: mall-qiniu:latest
+    image: ${MALL_QINIU_IMAGE}
     ports:
       - "18095:18095"
     networks:
@@ -208,7 +208,7 @@ services:
     restart: always
 
   mall-binlog:
-    image: mall-binlog:latest
+    image: ${MALL_BINLOG_IMAGE}
     networks:
       - mall-net
     volumes:
@@ -216,7 +216,7 @@ services:
     restart: always
 
   mall-canal:
-    image: mall-canal:latest
+    image: ${MALL_CANAL_IMAGE}
     networks:
       - mall-net
     volumes:
@@ -224,7 +224,7 @@ services:
     restart: always
 
   mall-debezium:
-    image: mall-debezium:latest
+    image: ${MALL_DEBEZIUM_IMAGE}
     networks:
       - mall-net
     volumes:
@@ -234,7 +234,7 @@ services:
   # ---------- mall-business ----------
 
   mall-foundation:
-    image: mall-foundation:latest
+    image: ${MALL_FOUNDATION_IMAGE}
     ports:
       - "18084:18084"
     networks:
@@ -244,7 +244,7 @@ services:
     restart: always
 
   mall-review:
-    image: mall-review:latest
+    image: ${MALL_REVIEW_IMAGE}
     ports:
       - "18088:18088"
     networks:
@@ -254,7 +254,7 @@ services:
     restart: always
 
   mall-goods:
-    image: mall-goods:latest
+    image: ${MALL_GOODS_IMAGE}
     ports:
       - "18081:18081"
     networks:
@@ -264,7 +264,7 @@ services:
     restart: always
 
   mall-order:
-    image: mall-order:latest
+    image: ${MALL_ORDER_IMAGE}
     ports:
       - "18082:18082"
     networks:
@@ -274,7 +274,7 @@ services:
     restart: always
 
   mall-storage:
-    image: mall-storage:latest
+    image: ${MALL_STORAGE_IMAGE}
     ports:
       - "18083:18083"
     networks:
@@ -284,7 +284,7 @@ services:
     restart: always
 
   mall-manager:
-    image: mall-manager:latest
+    image: ${MALL_MANAGER_IMAGE}
     ports:
       - "18085:18085"
     networks:
@@ -294,7 +294,7 @@ services:
     restart: always
 
   mall-member:
-    image: mall-member:latest
+    image: ${MALL_MEMBER_IMAGE}
     ports:
       - "18086:18086"
     networks:
@@ -304,7 +304,7 @@ services:
     restart: always
 
   mall-merchant:
-    image: mall-merchant:latest
+    image: ${MALL_MERCHANT_IMAGE}
     ports:
       - "18087:18087"
     networks:
@@ -316,7 +316,7 @@ services:
   # ---------- mall-center ----------
 
   mall-ordercenter:
-    image: mall-ordercenter:latest
+    image: ${MALL_ORDERCENTER_IMAGE}
     ports:
       - "18061:18061"
     networks:
@@ -326,7 +326,7 @@ services:
     restart: always
 
   mall-openapicenter:
-    image: mall-openapicenter:latest
+    image: ${MALL_OPENAPICENTER_IMAGE}
     ports:
       - "18062:18062"
     networks:
@@ -336,7 +336,7 @@ services:
     restart: always
 
   mall-goodscenter:
-    image: mall-goodscenter:latest
+    image: ${MALL_GOODSCENTER_IMAGE}
     ports:
       - "18063:18063"
     networks:

@@ -2,8 +2,10 @@
 
 ### 📦 Ubuntu 安装
 
-* 选择与安装的 `Docker` 版本兼容的 `Docker Compose` 版本安装
-    * 版本对应关系可以在 `Docker Compose` 的 `GitHub RELEASE` 页面查看
+#### 独立式安装
+
+* 查看系统安装的 `Docker` 版本，选择兼容的 `Docker Compose` 版本安装
+* 版本对应关系可以在 `Docker Compose` 的 `GitHub RELEASE` 页面查看
 
 ```shell
 sudo curl -SL https://github.com/docker/compose/releases/download/v2.27.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
@@ -29,7 +31,7 @@ sudo apt-mark hold docker-compose
 
 ---
 
-### 🐳 Docker Compose 文件
+### 🐳 Docker Compose 配置文件模板
 
 ```yaml
 version: "3.9"
@@ -68,7 +70,7 @@ networks:
     driver: bridge
 ```
 
-#### 配置项
+#### 基本配置项
 
 * `version`：当前配置文件使用的语法版本
 
@@ -98,82 +100,97 @@ networks:
 
 ### 🔑 Docker Compose 命令
 
-#### 命令参数
+#### 命令格式
 
-* `-f` / `--file`：指定 `Docker Compose` 文件（默认为当前目录下的 `docker-compose.yaml` 文件）
-
-#### 通用参数
-
-* `service_name`：指定需要操作的服务名称（默认为所有服务）
-
-#### 命令
-
-* 上线服务
-    * `-d`：后台运行容器
-    * `--build`：使用 `Dockerfile` 构建镜像，并使用构建的镜像启动容器
+###### 独立式安装
 
 ```shell
-docker-compose [-f file_name] up [-d] [--build] [service_name]
+docker-compose -v
 ```
 
-* 下线服务（停止服务并删除服务）
+###### 插件式安装
 
 ```shell
-docker-compose [-f file_name] down [service_name]
+docker compose -v
+```  
+
+#### 命令列表
+
+* `-f` / `--file`：指定 `Docker Compose` 配置文件（默认为当前目录下的 `docker-compose.yaml` 文件）
+* `--env-file`：指定 `Docker Compose` 环境变量文件
+
+###### 上线服务
+
+* `-d`：后台运行容器
+* `--build`：使用 `Dockerfile` 构建镜像，并使用构建的镜像启动容器
+
+```shell
+docker-compose [-f yaml_file_name] [--env-file env_file_name] up [-d] [--build] [service_name]
 ```
 
-* 查看所有运行的服务
+###### 下线服务（停止服务并删除服务）
+
+```shell
+docker-compose [-f yaml_file_name] [--env-file env_file_name] down [service_name]
+```
+
+###### 查看所有运行的服务
 
 ```shell
 docker-compose ps
 ```
 
-* 暂停服务
+###### 暂停服务
 
 ```shell
 docker-compose pause [service_name]
 ```
 
-* 恢复已暂停的服务
+###### 恢复已暂停的服务
 
 ```shell
 docker-compose unpause [service_name]
 ```
 
-* 停止服务（不会删除服务，可以使用 `docker-compose start` 命令再次启动服务）
+###### 停止服务
+
+* 不会删除服务，可以使用 `docker-compose start` 命令再次启动服务
 
 ```shell
 docker-compose stop [service_name]
 ```
 
-* 启动已经存在的服务
+###### 启动已经存在的服务
 
 ```shell
 docker-compose start [service_name]
 ```
 
-* 重启服务
-    * `-t`：指定服务延迟多长时间后重启（例如：`-t 10s` 表示服务在 `10` 秒后重启）
+###### 重启服务
+
+* `-t`：指定服务延迟多长时间后重启（例如：`-t 10s` 表示服务在 `10` 秒后重启）
 
 ```shell
 docker-compose restart [-t time] [service_name]
 ```
 
-* 删除已经停止的服务
-    * `-f` / `--force`：强制删除服务
+###### 删除已经停止的服务
+
+* `-f` / `--force`：强制删除服务
 
 ```shell
 docker-compose rm [-f] [service_name]
 ```
 
-* 查看服务容器的日志
-    * `-f`：持续查看日志
+###### 查看服务容器的日志
+
+* `-f`：持续查看日志
 
 ```shell
 docker-compose logs [-f] [service_name]
 ```
 
-* 查看服务容器内部运行的进程
+###### 查看服务容器内部运行的进程
 
 ```shell
 docker-compose top [service_name]
@@ -188,13 +205,13 @@ docker-compose top [service_name]
 #### 上线所有服务
 
 ```shell
-docker-compose -f ./docs/docker-compose/docker-compose.yaml up -d
+docker-compose -f ./docs/docker-compose/docker-compose.yaml --env-file ./docs/docker-compose/docker-compose.env up -d
 ```
 
 #### 下线所有服务
 
 ```shell
-docker-compose -f ./docs/docker-compose/docker-compose.yaml down
+docker-compose -f ./docs/docker-compose/docker-compose.yaml --env-file ./docs/docker-compose/docker-compose.env down
 ```
 
 #### 上线某个服务
@@ -202,7 +219,7 @@ docker-compose -f ./docs/docker-compose/docker-compose.yaml down
 * 将 `mall-id` 替换成实际需要上线的服务名称
 
 ```shell
-docker-compose -f ./docs/docker-compose/docker-compose.yaml up -d mall-id
+docker-compose -f ./docs/docker-compose/docker-compose.yaml --env-file ./docs/docker-compose/docker-compose.env up -d mall-id
 ```
 
 #### 下线某个服务
@@ -210,5 +227,5 @@ docker-compose -f ./docs/docker-compose/docker-compose.yaml up -d mall-id
 * 将 `mall-id` 替换成实际需要下线的服务名称
 
 ```shell
-docker-compose -f ./docs/docker-compose/docker-compose.yaml down mall-id
+docker-compose -f ./docs/docker-compose/docker-compose.yaml --env-file ./docs/docker-compose/docker-compose.env down mall-id
 ```
