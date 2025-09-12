@@ -1,5 +1,8 @@
 package com.cafe.id.service;
 
+import com.cafe.id.support.IDGenerator;
+import com.cafe.starter.boot.strategy.IStrategy;
+
 /**
  * @Project: mall-cloud
  * @Package: com.cafe.id.service
@@ -7,7 +10,7 @@ package com.cafe.id.service;
  * @Date: 2022/10/31 17:01
  * @Description:
  */
-public interface IDService {
+public interface IDService extends IStrategy<IDGenerator> {
 
     /**
      * 获取下一个分布式ID

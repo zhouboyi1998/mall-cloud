@@ -1,4 +1,4 @@
-package com.cafe.id.worker;
+package com.cafe.id.support.redis;
 
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.redis.RedisConstant;
@@ -15,7 +15,7 @@ import java.util.Set;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.id.worker
+ * @Package: com.cafe.id.support.redis
  * @Author: zhouboyi
  * @Date: 2025/7/8 16:53
  * @Description:

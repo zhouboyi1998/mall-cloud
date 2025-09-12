@@ -1,8 +1,8 @@
 package com.cafe.captcha.service.impl;
 
 import com.cafe.captcha.model.vo.Captcha;
-import com.cafe.captcha.property.CaptchaProperties;
 import com.cafe.captcha.service.CaptchaService;
+import com.cafe.captcha.support.CaptchaGenerator;
 import com.cafe.common.constant.captcha.CaptchaConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.enumeration.media.MediaFormatEnum;
@@ -23,12 +23,17 @@ import java.util.concurrent.TimeUnit;
  * @Description: Kaptcha 图片验证码业务实现类
  */
 @RequiredArgsConstructor
-@Service(value = CaptchaProperties.GeneratorServiceName.KAPTCHA)
+@Service
 public class KaptchaServiceImpl extends BaseCaptchaServiceImpl implements CaptchaService {
 
     private final Producer producer;
 
     private final IDFeign idFeign;
+
+    @Override
+    public CaptchaGenerator getKey() {
+        return CaptchaGenerator.KAPTCHA;
+    }
 
     @Override
     public Captcha one() {

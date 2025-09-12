@@ -1,8 +1,8 @@
 package com.cafe.captcha.service.impl;
 
 import com.cafe.captcha.model.vo.Captcha;
-import com.cafe.captcha.property.CaptchaProperties;
 import com.cafe.captcha.service.CaptchaService;
+import com.cafe.captcha.support.CaptchaGenerator;
 import com.cafe.id.feign.IDFeign;
 import lombok.RequiredArgsConstructor;
 import net.dreamlu.mica.captcha.service.ICaptchaService;
@@ -16,12 +16,17 @@ import org.springframework.stereotype.Service;
  * @Description: Mica Captcha 图片验证码业务实现类
  */
 @RequiredArgsConstructor
-@Service(value = CaptchaProperties.GeneratorServiceName.MICA_CAPTCHA)
+@Service
 public class MicaCaptchaServiceImpl extends BaseCaptchaServiceImpl implements CaptchaService {
 
     private final ICaptchaService micaCaptchaService;
 
     private final IDFeign idFeign;
+
+    @Override
+    public CaptchaGenerator getKey() {
+        return CaptchaGenerator.MICA;
+    }
 
     @Override
     public Captcha one() {

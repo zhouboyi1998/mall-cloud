@@ -1,6 +1,6 @@
 package com.cafe.id.scheduler;
 
-import com.cafe.id.worker.RedisIDWorker;
+import com.cafe.id.support.redis.RedisIDWorker;
 import com.cafe.infrastructure.redis.annotation.DistributedLock;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
