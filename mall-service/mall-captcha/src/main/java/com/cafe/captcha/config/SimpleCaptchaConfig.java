@@ -5,7 +5,7 @@ import cn.apiclub.captcha.backgrounds.FlatColorBackgroundProducer;
 import cn.apiclub.captcha.text.producer.DefaultTextProducer;
 import cn.apiclub.captcha.text.producer.TextProducer;
 import cn.apiclub.captcha.text.renderer.WordRenderer;
-import com.cafe.captcha.config.simple.ColorfulWordRenderer;
+import com.cafe.captcha.support.simple.ColorfulWordRenderer;
 import com.cafe.common.constant.captcha.CaptchaConstant;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

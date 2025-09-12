@@ -4,8 +4,8 @@ import cn.apiclub.captcha.backgrounds.BackgroundProducer;
 import cn.apiclub.captcha.text.producer.TextProducer;
 import cn.apiclub.captcha.text.renderer.WordRenderer;
 import com.cafe.captcha.model.vo.Captcha;
-import com.cafe.captcha.property.CaptchaProperties;
 import com.cafe.captcha.service.CaptchaService;
+import com.cafe.captcha.support.CaptchaGenerator;
 import com.cafe.common.constant.captcha.CaptchaConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.enumeration.media.MediaFormatEnum;
@@ -24,7 +24,7 @@ import java.util.concurrent.TimeUnit;
  * @Description: Simple Captcha 图片验证码业务实现类
  */
 @RequiredArgsConstructor
-@Service(value = CaptchaProperties.GeneratorServiceName.SIMPLE_CAPTCHA)
+@Service
 public class SimpleCaptchaServiceImpl extends BaseCaptchaServiceImpl implements CaptchaService {
 
     private final BackgroundProducer backgroundProducer;
@@ -34,6 +34,11 @@ public class SimpleCaptchaServiceImpl extends BaseCaptchaServiceImpl implements 
     private final WordRenderer wordRenderer;
 
     private final IDFeign idFeign;
+
+    @Override
+    public CaptchaGenerator getKey() {
+        return CaptchaGenerator.SIMPLE;
+    }
 
     @Override
     public Captcha one() {

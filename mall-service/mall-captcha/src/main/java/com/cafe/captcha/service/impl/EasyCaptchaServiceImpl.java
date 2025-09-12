@@ -1,8 +1,8 @@
 package com.cafe.captcha.service.impl;
 
 import com.cafe.captcha.model.vo.Captcha;
-import com.cafe.captcha.property.CaptchaProperties;
 import com.cafe.captcha.service.CaptchaService;
+import com.cafe.captcha.support.CaptchaGenerator;
 import com.cafe.common.constant.captcha.CaptchaConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.id.feign.IDFeign;
@@ -20,10 +20,15 @@ import java.util.concurrent.TimeUnit;
  * @Description: Easy Captcha 图片验证码业务实现类
  */
 @RequiredArgsConstructor
-@Service(value = CaptchaProperties.GeneratorServiceName.EASY_CAPTCHA)
+@Service
 public class EasyCaptchaServiceImpl extends BaseCaptchaServiceImpl implements CaptchaService {
 
     private final IDFeign idFeign;
+
+    @Override
+    public CaptchaGenerator getKey() {
+        return CaptchaGenerator.EASY;
+    }
 
     @Override
     public Captcha one() {

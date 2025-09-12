@@ -1,7 +1,7 @@
 package com.cafe.id.service.impl;
 
-import com.cafe.id.property.IDProperties;
 import com.cafe.id.service.IDService;
+import com.cafe.id.support.IDGenerator;
 import com.cafe.infrastructure.redis.worker.RedisIDWorker;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,15 @@ import org.springframework.stereotype.Service;
  * @Description:
  */
 @RequiredArgsConstructor
-@Service(value = IDProperties.GeneratorServiceName.REDIS)
+@Service
 public class RedisIDServiceImpl implements IDService {
 
     private final RedisIDWorker redisIDWorker;
+
+    @Override
+    public IDGenerator getKey() {
+        return IDGenerator.REDIS;
+    }
 
     @Override
     public Long nextId() {

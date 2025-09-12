@@ -1,8 +1,7 @@
 package com.cafe.id.controller;
 
-import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.log.annotation.ApiLogPrint;
-import com.cafe.id.service.IDServiceStrategy;
+import com.cafe.id.service.IDServiceStrategyHolder;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -26,14 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/id")
 public class IDController {
 
-    private final IDServiceStrategy idServiceStrategy;
+    private final IDServiceStrategyHolder idServiceStrategyHolder;
 
     @ApiLogPrint(value = "获取下一个分布式ID")
     @ApiOperation(value = "获取下一个分布式ID")
     @ApiImplicitParam(value = "分布式ID生成器", name = "generator", dataType = "String", paramType = "query")
     @GetMapping(value = "/next")
-    public ResponseEntity<Long> nextId(@RequestParam(value = "generator", required = false, defaultValue = StringConstant.EMPTY) String generator) {
-        Long id = idServiceStrategy.idService(generator).nextId();
+    public ResponseEntity<Long> nextId(@RequestParam(value = "generator", required = false) String generator) {
+        Long id = idServiceStrategyHolder.get(generator).nextId();
         return ResponseEntity.ok(id);
     }
 }

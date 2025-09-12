@@ -100,26 +100,6 @@ public enum HttpStatusEnum {
     GOODS_DETAIL_NOT_FOUND(607, "Goods Detail Not Found"),
 
     /**
-     * 商品索引不存在
-     */
-    GOODS_INDEX_NOT_FOUND(608, "Goods Index Not Found"),
-
-    /**
-     * 商品索引修改失败
-     */
-    GOODS_INDEX_UPDATE_FAIL(609, "Goods Index Update Fail"),
-
-    /**
-     * 订单索引不存在
-     */
-    ORDER_INDEX_NOT_FOUND(610, "Order Index Not Found"),
-
-    /**
-     * 订单索引修改失败
-     */
-    ORDER_INDEX_UPDATE_FAIL(611, "Order Index Update Fail"),
-
-    /**
      * 修改商品状态失败
      */
     UPDATE_GOODS_STATUS_FAIL(614, "Update Goods Status Fail"),
@@ -135,11 +115,6 @@ public enum HttpStatusEnum {
     SHOP_NOT_FOUND(616, "Shop Not Found"),
 
     /**
-     * 验证码业务实现类不存在
-     */
-    CAPTCHA_SERVICE_IMPL_NOT_FOUND(617, "Captcha Service Implementation Not Found"),
-
-    /**
      * 未知的评论类型
      */
     UNKNOWN_REVIEW_TYPE(618, "Unknown Review Type"),
@@ -153,11 +128,6 @@ public enum HttpStatusEnum {
      * 商品评论数量统计不存在
      */
     GOODS_REVIEW_STATISTIC_NOT_FOUND(620, "Goods Review Statistic Not Found"),
-
-    /**
-     * 分布式ID业务实现类不存在
-     */
-    ID_SERVICE_IMPL_NOT_FOUND(621, "ID Service Implementation Not Found"),
 
     /**
      * 文本中存在敏感词
