@@ -1,4 +1,4 @@
-package com.cafe.captcha.config.simple;
+package com.cafe.captcha.support.simple;
 
 import cn.apiclub.captcha.text.renderer.WordRenderer;
 
@@ -16,7 +16,7 @@ import java.util.Random;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.captcha.config.simple
+ * @Package: com.cafe.captcha.support.simple
  * @Author: zhouboyi
  * @Date: 2024/3/3 2:20
  * @Description: Simple Captcha 七彩文字渲染器

@@ -3,8 +3,8 @@ package com.cafe.captcha.service.impl;
 import cn.hutool.captcha.CaptchaUtil;
 import cn.hutool.captcha.LineCaptcha;
 import com.cafe.captcha.model.vo.Captcha;
-import com.cafe.captcha.property.CaptchaProperties;
 import com.cafe.captcha.service.CaptchaService;
+import com.cafe.captcha.support.CaptchaGenerator;
 import com.cafe.common.constant.captcha.CaptchaConstant;
 import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.enumeration.media.MediaFormatEnum;
@@ -22,10 +22,15 @@ import java.util.concurrent.TimeUnit;
  * @Description: Hutool Captcha 图片验证码业务实现类
  */
 @RequiredArgsConstructor
-@Service(value = CaptchaProperties.GeneratorServiceName.HUTOOL_CAPTCHA)
+@Service
 public class HutoolCaptchaServiceImpl extends BaseCaptchaServiceImpl implements CaptchaService {
 
     private final IDFeign idFeign;
+
+    @Override
+    public CaptchaGenerator getKey() {
+        return CaptchaGenerator.HUTOOL;
+    }
 
     @Override
     public Captcha one() {

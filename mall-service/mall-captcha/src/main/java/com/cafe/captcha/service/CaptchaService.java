@@ -2,6 +2,8 @@ package com.cafe.captcha.service;
 
 import com.cafe.captcha.model.query.CaptchaVerifyQuery;
 import com.cafe.captcha.model.vo.Captcha;
+import com.cafe.captcha.support.CaptchaGenerator;
+import com.cafe.common.lang.pattern.strategy.IStrategy;
 
 /**
  * @Project: mall-cloud
@@ -10,7 +12,7 @@ import com.cafe.captcha.model.vo.Captcha;
  * @Date: 2023/2/24 9:59
  * @Description: 图片验证码业务接口
  */
-public interface CaptchaService {
+public interface CaptchaService extends IStrategy<CaptchaGenerator> {
 
     /**
      * 获取图片验证码

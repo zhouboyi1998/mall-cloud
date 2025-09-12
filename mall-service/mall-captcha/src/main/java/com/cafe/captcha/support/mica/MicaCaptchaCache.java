@@ -1,4 +1,4 @@
-package com.cafe.captcha.config.mica;
+package com.cafe.captcha.support.mica;
 
 import com.cafe.common.constant.captcha.CaptchaConstant;
 import com.cafe.common.constant.redis.RedisConstant;
@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * @Project: mall-cloud
- * @Package: com.cafe.captcha.config.mica
+ * @Package: com.cafe.captcha.support.mica
  * @Author: zhouboyi
  * @Date: 2024/4/10 16:08
  * @Description: Mica 图片验证码缓存
