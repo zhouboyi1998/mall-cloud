@@ -21,6 +21,11 @@ public enum IDGenerator {
      */
     REDIS,
 
+    /**
+     * Redisson 分布式ID生成器
+     */
+    REDISSON,
+
     ;
 
     /**

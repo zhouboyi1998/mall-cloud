@@ -3,7 +3,9 @@ package com.cafe.id.config;
 import com.cafe.common.lang.algorithm.id.Snowflake;
 import com.cafe.id.property.IDProperties;
 import com.cafe.infrastructure.redis.worker.RedisIDWorker;
+import com.cafe.infrastructure.redisson.worker.RedissonIDWorker;
 import lombok.RequiredArgsConstructor;
+import org.redisson.api.RedissonClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -23,6 +25,8 @@ public class IDConfig {
 
     private final StringRedisTemplate stringRedisTemplate;
 
+    private final RedissonClient redissonClient;
+
     @Bean
     public Snowflake snowflake() {
         return new Snowflake(idProperties.getSnowflake().getWorkerId(), idProperties.getSnowflake().getDatacenterId());
@@ -31,5 +35,10 @@ public class IDConfig {
     @Bean
     public RedisIDWorker redisIDWorker() {
         return new RedisIDWorker(idProperties.getRedis().getWorkerId(), idProperties.getRedis().getDatacenterId(), stringRedisTemplate);
+    }
+
+    @Bean
+    public RedissonIDWorker redissonIDWorker() {
+        return new RedissonIDWorker(idProperties.getRedisson().getWorkerId(), idProperties.getRedisson().getDatacenterId(), redissonClient);
     }
 }

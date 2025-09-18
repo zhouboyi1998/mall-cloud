@@ -76,6 +76,7 @@
     |-- mall-infrastructure-mybatisplus (MyBatis-Plus 公共包)
     |-- mall-infrastructure-rabbitmq (RabbitMQ 消息队列公共包)
     |-- mall-infrastructure-redis (Redis 公共包)
+    |-- mall-infrastructure-redisson (Redisson 公共包)
     |-- mall-infrastructure-rocketmq (RocketMQ 消息队列公共包)
     |-- mall-infrastructure-swagger (Knife4J Swagger API 文档公共包)
     |-- mall-infrastructure-xxljob (XXL-JOB 分布式任务调度公共包)

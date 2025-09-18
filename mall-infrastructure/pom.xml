@@ -22,6 +22,7 @@
         <module>mall-infrastructure-mybatisplus</module>
         <module>mall-infrastructure-rabbitmq</module>
         <module>mall-infrastructure-redis</module>
+        <module>mall-infrastructure-redisson</module>
         <module>mall-infrastructure-rocketmq</module>
         <module>mall-infrastructure-swagger</module>
         <module>mall-infrastructure-xxljob</module>
