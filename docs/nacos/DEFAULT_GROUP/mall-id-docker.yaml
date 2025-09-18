@@ -16,3 +16,7 @@ id:
   redis:
     worker-id: 0
     datacenter-id: 4
+  # Redisson 分布式ID生成器配置
+  redisson:
+    worker-id: 0
+    datacenter-id: 4
