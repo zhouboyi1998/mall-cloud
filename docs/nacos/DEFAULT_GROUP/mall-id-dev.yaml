@@ -24,3 +24,7 @@ id:
   jedis:
     worker-id: 0
     datacenter-id: 1
+  # Lettuce 分布式ID生成器配置
+  lettuce:
+    worker-id: 0
+    datacenter-id: 1

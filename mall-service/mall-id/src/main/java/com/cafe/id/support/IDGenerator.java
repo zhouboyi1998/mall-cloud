@@ -31,6 +31,11 @@ public enum IDGenerator {
      */
     JEDIS,
 
+    /**
+     * Lettuce 分布式ID生成器
+     */
+    LETTUCE,
+
     ;
 
     /**

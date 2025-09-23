@@ -74,6 +74,7 @@
     |-- mall-infrastructure-elasticsearch (ElasticSearch 搜索引擎公共包)
     |-- mall-infrastructure-jedis (Jedis 公共包)
     |-- mall-infrastructure-kafka (Kafka 消息队列公共包)
+    |-- mall-infrastructure-lettuce (Lettuce 公共包)
     |-- mall-infrastructure-mybatisplus (MyBatis-Plus 公共包)
     |-- mall-infrastructure-rabbitmq (RabbitMQ 消息队列公共包)
     |-- mall-infrastructure-redis (Redis 公共包)

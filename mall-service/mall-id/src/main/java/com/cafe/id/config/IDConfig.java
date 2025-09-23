@@ -3,8 +3,10 @@ package com.cafe.id.config;
 import com.cafe.common.lang.algorithm.id.Snowflake;
 import com.cafe.id.property.IDProperties;
 import com.cafe.infrastructure.jedis.worker.JedisIDWorker;
+import com.cafe.infrastructure.lettuce.worker.LettuceIDWorker;
 import com.cafe.infrastructure.redis.worker.RedisIDWorker;
 import com.cafe.infrastructure.redisson.worker.RedissonIDWorker;
+import io.lettuce.core.RedisClient;
 import lombok.RequiredArgsConstructor;
 import org.redisson.api.RedissonClient;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +33,8 @@ public class IDConfig {
 
     private final JedisPool jedisPool;
 
+    private final RedisClient redisClient;
+
     @Bean
     public Snowflake snowflake() {
         return new Snowflake(idProperties.getSnowflake().getWorkerId(), idProperties.getSnowflake().getDatacenterId());
@@ -49,5 +53,10 @@ public class IDConfig {
     @Bean
     public JedisIDWorker jedisIDWorker() {
         return new JedisIDWorker(idProperties.getJedis().getWorkerId(), idProperties.getJedis().getDatacenterId(), jedisPool);
+    }
+
+    @Bean
+    public LettuceIDWorker lettuceIDWorker() {
+        return new LettuceIDWorker(idProperties.getLettuce().getWorkerId(), idProperties.getLettuce().getDatacenterId(), redisClient);
     }
 }

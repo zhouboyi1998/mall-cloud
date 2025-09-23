@@ -20,6 +20,7 @@
         <module>mall-infrastructure-elasticsearch</module>
         <module>mall-infrastructure-jedis</module>
         <module>mall-infrastructure-kafka</module>
+        <module>mall-infrastructure-lettuce</module>
         <module>mall-infrastructure-mybatisplus</module>
         <module>mall-infrastructure-rabbitmq</module>
         <module>mall-infrastructure-redis</module>

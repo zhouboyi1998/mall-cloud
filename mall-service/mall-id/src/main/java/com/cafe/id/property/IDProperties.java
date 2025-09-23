@@ -32,6 +32,8 @@ public class IDProperties {
 
     private Jedis jedis;
 
+    private Lettuce lettuce;
+
     /**
      * 雪花分布式ID生成器配置
      */
@@ -92,6 +94,24 @@ public class IDProperties {
     @Getter
     @Setter
     public static class Jedis {
+
+        /**
+         * 工作机器ID
+         */
+        private Long workerId;
+
+        /**
+         * 数据中心ID
+         */
+        private Long datacenterId;
+    }
+
+    /**
+     * Lettuce 分布式ID生成器配置
+     */
+    @Getter
+    @Setter
+    public static class Lettuce {
 
         /**
          * 工作机器ID
