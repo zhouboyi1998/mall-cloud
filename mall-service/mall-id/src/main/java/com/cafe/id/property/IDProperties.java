@@ -30,6 +30,8 @@ public class IDProperties {
 
     private Redisson redisson;
 
+    private Jedis jedis;
+
     /**
      * 雪花分布式ID生成器配置
      */
@@ -72,6 +74,24 @@ public class IDProperties {
     @Getter
     @Setter
     public static class Redisson {
+
+        /**
+         * 工作机器ID
+         */
+        private Long workerId;
+
+        /**
+         * 数据中心ID
+         */
+        private Long datacenterId;
+    }
+
+    /**
+     * Jedis 分布式ID生成器配置
+     */
+    @Getter
+    @Setter
+    public static class Jedis {
 
         /**
          * 工作机器ID

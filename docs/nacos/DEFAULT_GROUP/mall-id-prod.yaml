@@ -20,3 +20,7 @@ id:
   redisson:
     worker-id: 0
     datacenter-id: 3
+  # Jedis 分布式ID生成器配置
+  jedis:
+    worker-id: 0
+    datacenter-id: 3

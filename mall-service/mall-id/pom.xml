@@ -25,6 +25,10 @@
         <!-- 基础设施 -->
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-infrastructure-jedis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-infrastructure-redis</artifactId>
         </dependency>
         <dependency>
