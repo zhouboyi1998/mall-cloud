@@ -8,23 +8,5 @@ spring:
 
 # 分布式ID配置
 id:
-  # 雪花分布式ID生成器配置
-  snowflake:
-    worker-id: 0
-    datacenter-id: 3
-  # Redis 分布式ID生成器配置
-  redis:
-    worker-id: 0
-    datacenter-id: 3
-  # Redisson 分布式ID生成器配置
-  redisson:
-    worker-id: 0
-    datacenter-id: 3
-  # Jedis 分布式ID生成器配置
-  jedis:
-    worker-id: 0
-    datacenter-id: 3
-  # Lettuce 分布式ID生成器配置
-  lettuce:
-    worker-id: 0
-    datacenter-id: 3
+  worker-id: 0
+  datacenter-id: 3
