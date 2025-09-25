@@ -5,6 +5,10 @@ import com.cafe.common.util.aop.AOPUtil;
 import com.cafe.common.util.expression.SpELUtil;
 import com.cafe.infrastructure.caffeine.annotation.CaffeineCache;
 import com.cafe.infrastructure.caffeine.manager.CaffeineCacheManager;
+import com.cafe.infrastructure.caffeine.support.ExpirePolicy;
+import com.cafe.infrastructure.caffeine.support.MaximumPolicy;
+import com.github.benmanes.caffeine.cache.CacheLoader;
+import com.github.benmanes.caffeine.cache.Weigher;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -79,8 +83,20 @@ public class CaffeineCacheAspect {
         // 获取注解的缓存相关属性
         String cacheName = caffeineCache.cacheName();
         String cacheKey = caffeineCache.cacheKey();
+
+        int initialCapacity = caffeineCache.initialCapacity();
+        MaximumPolicy maximumPolicy = caffeineCache.maximumPolicy();
+        long maximumSize = caffeineCache.maximumSize();
+        long maximumWeight = caffeineCache.maximumWeight();
+        Weigher<String, Object> weigher = caffeineCache.weigher().newInstance();
+
         long expireTime = caffeineCache.expireTime();
         TimeUnit expireUnit = caffeineCache.expireUnit();
+        ExpirePolicy expirePolicy = caffeineCache.expirePolicy();
+
+        long refreshInterval = caffeineCache.refreshInterval();
+        TimeUnit refreshUnit = caffeineCache.refreshUnit();
+        CacheLoader<String, Object> cacheLoader = caffeineCache.cacheLoader().newInstance();
 
         // 生成缓存名称 (如果注解配置的缓存名称为空, 默认使用目标方法的全限定名)
         final String finalCacheName = StringUtils.hasText(cacheName) ? cacheName : AOPUtil.resolveTargetMethodFullQualifiedName(proceedingJoinPoint, false);
@@ -98,7 +114,7 @@ public class CaffeineCacheAspect {
             // 缓存未命中, 执行方法获取结果
             Object result = proceedingJoinPoint.proceed();
             // 缓存方法的执行结果
-            caffeineCacheManager.put(finalCacheName, finalCacheKey, result, expireTime, expireUnit);
+            caffeineCacheManager.put(finalCacheName, finalCacheKey, result, initialCapacity, maximumPolicy, maximumSize, maximumWeight, weigher, expireTime, expireUnit, expirePolicy, refreshInterval, refreshUnit, cacheLoader);
             // 返回方法的执行结果
             return result;
         }
