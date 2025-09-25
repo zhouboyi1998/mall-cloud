@@ -18,8 +18,24 @@ import org.springframework.stereotype.Component;
 @ConfigurationProperties(prefix = "caffeine")
 public class CaffeineProperties {
 
+    public static final int INITIAL_CAPACITY = 64;
+
+    public static final long MAXIMUM_SIZE = 1024L;
+
+    public static final long MAXIMUM_WEIGHT = 1024L;
+
     /**
-     * 默认最大缓存数量
+     * 默认初始容量
      */
-    private Integer defaultMaximumSize = 1000;
+    private Integer initialCapacity = INITIAL_CAPACITY;
+
+    /**
+     * 默认最大容量
+     */
+    private Long maximumSize = MAXIMUM_SIZE;
+
+    /**
+     * 默认最大权重
+     */
+    private Long maximumWeight = MAXIMUM_WEIGHT;
 }

@@ -1,6 +1,13 @@
 package com.cafe.infrastructure.caffeine.annotation;
 
 import com.cafe.common.constant.pool.StringConstant;
+import com.cafe.infrastructure.caffeine.property.CaffeineProperties;
+import com.cafe.infrastructure.caffeine.support.ExpirePolicy;
+import com.cafe.infrastructure.caffeine.support.InvalidCacheLoader;
+import com.cafe.infrastructure.caffeine.support.MaximumPolicy;
+import com.cafe.infrastructure.caffeine.support.SimpleWeigher;
+import com.github.benmanes.caffeine.cache.CacheLoader;
+import com.github.benmanes.caffeine.cache.Weigher;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.Documented;
@@ -30,9 +37,27 @@ public @interface CaffeineCache {
 
     String cacheKey() default StringConstant.EMPTY;
 
-    long expireTime() default -1L;
+    int initialCapacity() default CaffeineProperties.INITIAL_CAPACITY;
+
+    MaximumPolicy maximumPolicy() default MaximumPolicy.MAXiMUM_SIZE;
+
+    long maximumSize() default CaffeineProperties.MAXIMUM_SIZE;
+
+    long maximumWeight() default CaffeineProperties.MAXIMUM_WEIGHT;
+
+    Class<? extends Weigher<String, Object>> weigher() default SimpleWeigher.class;
+
+    long expireTime();
 
     TimeUnit expireUnit() default TimeUnit.SECONDS;
+
+    ExpirePolicy expirePolicy() default ExpirePolicy.EXPIRE_AFTER_WRITE;
+
+    long refreshInterval() default -1L;
+
+    TimeUnit refreshUnit() default TimeUnit.SECONDS;
+
+    Class<? extends CacheLoader<String, Object>> cacheLoader() default InvalidCacheLoader.class;
 
     String condition() default StringConstant.EMPTY;
 }
