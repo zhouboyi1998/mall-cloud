@@ -1,10 +1,16 @@
 package com.cafe.infrastructure.caffeine.manager;
 
 import com.cafe.infrastructure.caffeine.property.CaffeineProperties;
+import com.cafe.infrastructure.caffeine.support.ExpirePolicy;
+import com.cafe.infrastructure.caffeine.support.InvalidCacheLoader;
+import com.cafe.infrastructure.caffeine.support.MaximumPolicy;
 import com.github.benmanes.caffeine.cache.Cache;
+import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.github.benmanes.caffeine.cache.Weigher;
 import lombok.RequiredArgsConstructor;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
@@ -28,23 +34,65 @@ public class CaffeineCacheManager {
     private final CaffeineProperties caffeineProperties;
 
     /**
-     * 保存缓存数据
+     * 构建缓存
      *
-     * @param cacheName  缓存名称
-     * @param cacheKey   缓存键
-     * @param cacheValue 缓存值
-     * @param expireTime 缓存过期时间
-     * @param expireUnit 缓存过期时间单位
+     * @param initialCapacity 缓存初始容量
+     * @param maximumPolicy   缓存最大限度策略
+     * @param maximumSize     缓存最大容量
+     * @param maximumWeight   缓存最大权重
+     * @param weigher         缓存权重计算器
+     * @param expireTime      缓存过期时间
+     * @param expireUnit      缓存过期时间单位
+     * @param expirePolicy    缓存过期策略
+     * @param refreshInterval 缓存刷新间隔
+     * @param refreshUnit     缓存刷新间隔单位
+     * @param cacheLoader     缓存加载器
+     * @return 缓存
      */
-    public void put(String cacheName, String cacheKey, Object cacheValue, long expireTime, TimeUnit expireUnit) {
-        cacheMap.computeIfAbsent(cacheName, n -> Caffeine.newBuilder()
-                // 缓存最大数量
-                .maximumSize(caffeineProperties.getDefaultMaximumSize())
-                // 缓存过期时间
-                .expireAfterWrite(expireTime, expireUnit)
-                // 使用手动管理缓存
-                .build())
-            .put(cacheKey, cacheValue);
+    public Cache<String, Object> build(
+        Integer initialCapacity, MaximumPolicy maximumPolicy, Long maximumSize, Long maximumWeight, Weigher<String, Object> weigher,
+        Long expireTime, TimeUnit expireUnit, ExpirePolicy expirePolicy,
+        Long refreshInterval, TimeUnit refreshUnit, CacheLoader<String, Object> cacheLoader
+    ) {
+        // 新建 Caffeine 缓存构造器
+        Caffeine<Object, Object> caffeine = Caffeine.newBuilder()
+            // 设置缓存初始容量
+            .initialCapacity(Optional.ofNullable(initialCapacity).filter(s -> s >= 0).orElse(caffeineProperties.getCapacity().getInitialCapacity()));
+
+        // 设置缓存最大限度
+        switch (maximumPolicy) {
+            case MAXiMUM_SIZE:
+                // 设置缓存最大容量
+                caffeine.maximumSize(Optional.ofNullable(maximumSize).filter(s -> s >= 0L).orElse(caffeineProperties.getCapacity().getMaximumSize()));
+                break;
+            case MAXIMUM_WEIGHT:
+                // 设置缓存最大权重
+                caffeine.maximumWeight(Optional.ofNullable(maximumWeight).filter(s -> s >= 0L).orElse(caffeineProperties.getCapacity().getMaximumWeight()))
+                    // 设置缓存权重计算器
+                    .weigher(weigher);
+                break;
+        }
+
+        // 设置缓存过期时间
+        switch (expirePolicy) {
+            case EXPIRE_AFTER_WRITE:
+                caffeine.expireAfterWrite(expireTime, expireUnit);
+                break;
+            case EXPIRE_AFTER_ACCESS:
+                caffeine.expireAfterAccess(expireTime, expireUnit);
+                break;
+        }
+
+        // 构造缓存
+        if (Objects.nonNull(refreshInterval) && refreshInterval >= 0L && Objects.nonNull(refreshUnit) && Objects.nonNull(cacheLoader) && !(cacheLoader instanceof InvalidCacheLoader)) {
+            // 设置缓存刷新间隔
+            return caffeine.refreshAfterWrite(refreshInterval, refreshUnit)
+                // 构造自动刷新缓存 (每隔一段时间通过缓存加载器刷新缓存数据)
+                .build(cacheLoader);
+        } else {
+            // 构造普通缓存
+            return caffeine.build();
+        }
     }
 
     /**
@@ -53,23 +101,52 @@ public class CaffeineCacheManager {
      * @param cacheName         缓存名称
      * @param cacheKey          缓存键
      * @param cacheValue        缓存值
+     * @param initialCapacity   缓存初始容量
+     * @param maximumPolicy     缓存最大限度策略
+     * @param maximumSize       缓存最大容量
+     * @param maximumWeight     缓存最大权重
+     * @param weigher           缓存权重计算器
      * @param expireTime        缓存过期时间
      * @param expireUnit        缓存过期时间单位
+     * @param expirePolicy      缓存过期策略
      * @param refreshInterval   缓存刷新间隔
      * @param refreshUnit       缓存刷新间隔单位
      * @param cacheLoadFunction 缓存加载函数
      */
-    public void put(String cacheName, String cacheKey, Object cacheValue, long expireTime, TimeUnit expireUnit, long refreshInterval, TimeUnit refreshUnit, Function<String, Object> cacheLoadFunction) {
-        cacheMap.computeIfAbsent(cacheName, n -> Caffeine.newBuilder()
-                // 缓存最大数量
-                .maximumSize(caffeineProperties.getDefaultMaximumSize())
-                // 缓存过期时间
-                .expireAfterWrite(expireTime, expireUnit)
-                // 缓存刷新间隔
-                .refreshAfterWrite(refreshInterval, refreshUnit)
-                // 使用自动加载缓存 (需要传入缓存加载函数)
-                .build(cacheLoadFunction::apply))
-            .put(cacheKey, cacheValue);
+    public void put(
+        String cacheName, String cacheKey, Object cacheValue,
+        Integer initialCapacity, MaximumPolicy maximumPolicy, Long maximumSize, Long maximumWeight, Weigher<String, Object> weigher,
+        Long expireTime, TimeUnit expireUnit, ExpirePolicy expirePolicy,
+        Long refreshInterval, TimeUnit refreshUnit, Function<String, Object> cacheLoadFunction
+    ) {
+        put(cacheName, cacheKey, cacheValue, initialCapacity, maximumPolicy, maximumSize, maximumWeight, weigher, expireTime, expireUnit, expirePolicy, refreshInterval, refreshUnit, (CacheLoader<String, Object>) cacheLoadFunction::apply);
+    }
+
+    /**
+     * 保存缓存数据
+     *
+     * @param cacheName       缓存名称
+     * @param cacheKey        缓存键
+     * @param cacheValue      缓存值
+     * @param initialCapacity 缓存初始容量
+     * @param maximumPolicy   缓存最大限度策略
+     * @param maximumSize     缓存最大容量
+     * @param maximumWeight   缓存最大权重
+     * @param weigher         缓存权重计算器
+     * @param expireTime      缓存过期时间
+     * @param expireUnit      缓存过期时间单位
+     * @param expirePolicy    缓存过期策略
+     * @param refreshInterval 缓存刷新间隔
+     * @param refreshUnit     缓存刷新间隔单位
+     * @param cacheLoader     缓存加载器
+     */
+    public void put(
+        String cacheName, String cacheKey, Object cacheValue,
+        Integer initialCapacity, MaximumPolicy maximumPolicy, Long maximumSize, Long maximumWeight, Weigher<String, Object> weigher,
+        Long expireTime, TimeUnit expireUnit, ExpirePolicy expirePolicy,
+        Long refreshInterval, TimeUnit refreshUnit, CacheLoader<String, Object> cacheLoader
+    ) {
+        cacheMap.computeIfAbsent(cacheName, n -> build(initialCapacity, maximumPolicy, maximumSize, maximumWeight, weigher, expireTime, expireUnit, expirePolicy, refreshInterval, refreshUnit, cacheLoader)).put(cacheKey, cacheValue);
     }
 
     /**
@@ -107,6 +184,15 @@ public class CaffeineCacheManager {
 
     /**
      * 批量删除缓存数据
+     *
+     * @param cacheName 缓存名称
+     */
+    public void invalidateAll(String cacheName, Iterable<String> cacheKeys) {
+        Optional.ofNullable(cacheMap.get(cacheName)).ifPresent(cache -> cache.invalidateAll(cacheKeys));
+    }
+
+    /**
+     * 删除所有缓存数据
      *
      * @param cacheName 缓存名称
      */
