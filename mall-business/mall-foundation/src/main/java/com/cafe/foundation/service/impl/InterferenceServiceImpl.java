@@ -6,6 +6,7 @@ import com.cafe.foundation.mapper.InterferenceMapper;
 import com.cafe.foundation.model.entity.Interference;
 import com.cafe.foundation.service.InterferenceService;
 import com.cafe.infrastructure.caffeine.annotation.CaffeineCache;
+import com.cafe.infrastructure.caffeine.annotation.Expire;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class InterferenceServiceImpl extends ServiceImpl<InterferenceMapper, Int
 
     private final InterferenceMapper interferenceMapper;
 
-    @CaffeineCache(expireTime = 1, expireUnit = TimeUnit.DAYS)
+    @CaffeineCache(expire = @Expire(expireTime = 1, expireUnit = TimeUnit.DAYS))
     @Override
     public List<Interference> enableList() {
         return this.lambdaQuery().eq(Interference::getStatus, InterferenceConstant.Status.ENABLE).list();
