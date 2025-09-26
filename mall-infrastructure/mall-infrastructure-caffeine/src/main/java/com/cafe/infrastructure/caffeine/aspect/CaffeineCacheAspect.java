@@ -4,6 +4,10 @@ import com.cafe.common.json.util.JacksonUtil;
 import com.cafe.common.util.aop.AOPUtil;
 import com.cafe.common.util.expression.SpELUtil;
 import com.cafe.infrastructure.caffeine.annotation.CaffeineCache;
+import com.cafe.infrastructure.caffeine.annotation.Capacity;
+import com.cafe.infrastructure.caffeine.annotation.Expire;
+import com.cafe.infrastructure.caffeine.annotation.Info;
+import com.cafe.infrastructure.caffeine.annotation.Refresh;
 import com.cafe.infrastructure.caffeine.manager.CaffeineCacheManager;
 import com.cafe.infrastructure.caffeine.support.ExpirePolicy;
 import com.cafe.infrastructure.caffeine.support.MaximumPolicy;
@@ -70,8 +74,9 @@ public class CaffeineCacheAspect {
         CaffeineCache caffeineCache = AnnotationUtils.getAnnotation(method, CaffeineCache.class);
         Assert.notNull(caffeineCache, "Unable to get @CaffeineCache annotation!");
 
-        // 获取注解的 condition 属性 (SpEL 表达式)
-        String condition = caffeineCache.condition();
+        // 获取缓存启用条件 (SpEL 表达式), 判断缓存是否启用
+        Info info = caffeineCache.info();
+        String condition = info.condition();
         // 如果表达式为空, 默认不跳过缓存逻辑; 如果表达式不为空, 根据表达式的评估结果决定是否跳过缓存逻辑
         if (StringUtils.hasText(condition)) {
             // 如果 SpEL 表达式的评估结果为 false, 跳过缓存逻辑, 直接执行方法
@@ -80,23 +85,26 @@ public class CaffeineCacheAspect {
             }
         }
 
-        // 获取注解的缓存相关属性
-        String cacheName = caffeineCache.cacheName();
-        String cacheKey = caffeineCache.cacheKey();
-
-        int initialCapacity = caffeineCache.initialCapacity();
-        MaximumPolicy maximumPolicy = caffeineCache.maximumPolicy();
-        long maximumSize = caffeineCache.maximumSize();
-        long maximumWeight = caffeineCache.maximumWeight();
-        Weigher<String, Object> weigher = caffeineCache.weigher().newInstance();
-
-        long expireTime = caffeineCache.expireTime();
-        TimeUnit expireUnit = caffeineCache.expireUnit();
-        ExpirePolicy expirePolicy = caffeineCache.expirePolicy();
-
-        long refreshInterval = caffeineCache.refreshInterval();
-        TimeUnit refreshUnit = caffeineCache.refreshUnit();
-        CacheLoader<String, Object> cacheLoader = caffeineCache.cacheLoader().newInstance();
+        // 获取缓存信息
+        String cacheName = info.cacheName();
+        String cacheKey = info.cacheKey();
+        // 获取缓存容量相关配置
+        Capacity capacity = caffeineCache.capacity();
+        int initialCapacity = capacity.initialCapacity();
+        MaximumPolicy maximumPolicy = capacity.maximumPolicy();
+        long maximumSize = capacity.maximumSize();
+        long maximumWeight = capacity.maximumWeight();
+        Weigher<String, Object> weigher = capacity.weigher().newInstance();
+        // 获取缓存过期时间相关配置
+        Expire expire = caffeineCache.expire();
+        long expireTime = expire.expireTime();
+        TimeUnit expireUnit = expire.expireUnit();
+        ExpirePolicy expirePolicy = expire.expirePolicy();
+        // 获取缓存刷新相关配置
+        Refresh refresh = caffeineCache.refresh();
+        long refreshInterval = refresh.refreshInterval();
+        TimeUnit refreshUnit = refresh.refreshUnit();
+        CacheLoader<String, Object> cacheLoader = refresh.cacheLoader().newInstance();
 
         // 生成缓存名称 (如果注解配置的缓存名称为空, 默认使用目标方法的全限定名)
         final String finalCacheName = StringUtils.hasText(cacheName) ? cacheName : AOPUtil.resolveTargetMethodFullQualifiedName(proceedingJoinPoint, false);
