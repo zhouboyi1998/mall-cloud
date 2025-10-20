@@ -89,6 +89,7 @@
         <spring-boot-admin.version>2.3.1</spring-boot-admin.version>
         <sky-walking.version>9.0.0</sky-walking.version>
         <xxl-job.version>2.4.0</xxl-job.version>
+        <easy-excel.version>4.0.3</easy-excel.version>
     </properties>
 
     <dependencies>
@@ -480,6 +481,12 @@
                 <artifactId>xxl-job-core</artifactId>
                 <version>${xxl-job.version}</version>
             </dependency>
+            <!-- EasyExcel -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>easyexcel</artifactId>
+                <version>${easy-excel.version}</version>
+            </dependency>
 
             <!-- 启动包 -->
             <dependency>
@@ -563,6 +570,11 @@
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-infrastructure-caffeine</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-infrastructure-easyexcel</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>

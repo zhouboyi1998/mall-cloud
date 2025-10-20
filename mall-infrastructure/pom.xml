@@ -17,6 +17,7 @@
 
     <modules>
         <module>mall-infrastructure-caffeine</module>
+        <module>mall-infrastructure-easyexcel</module>
         <module>mall-infrastructure-elasticsearch</module>
         <module>mall-infrastructure-jedis</module>
         <module>mall-infrastructure-kafka</module>
