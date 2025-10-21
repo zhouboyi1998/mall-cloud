@@ -73,6 +73,7 @@
     |-- mall-infrastructure-caffeine (Caffeine 缓存公共包)
     |-- mall-infrastructure-easyexcel (EasyExcel 公共包)
     |-- mall-infrastructure-elasticsearch (ElasticSearch 搜索引擎公共包)
+    |-- mall-infrastructure-fastexcel (FastExcel 公共包)
     |-- mall-infrastructure-jedis (Jedis 公共包)
     |-- mall-infrastructure-kafka (Kafka 消息队列公共包)
     |-- mall-infrastructure-lettuce (Lettuce 公共包)

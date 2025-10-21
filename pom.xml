@@ -90,6 +90,7 @@
         <sky-walking.version>9.0.0</sky-walking.version>
         <xxl-job.version>2.4.0</xxl-job.version>
         <easy-excel.version>4.0.3</easy-excel.version>
+        <fast-excel.version>1.2.0</fast-excel.version>
     </properties>
 
     <dependencies>
@@ -487,6 +488,12 @@
                 <artifactId>easyexcel</artifactId>
                 <version>${easy-excel.version}</version>
             </dependency>
+            <!-- FastExcel -->
+            <dependency>
+                <groupId>cn.idev.excel</groupId>
+                <artifactId>fastexcel</artifactId>
+                <version>${fast-excel.version}</version>
+            </dependency>
 
             <!-- 启动包 -->
             <dependency>
@@ -580,6 +587,11 @@
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-infrastructure-elasticsearch</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-infrastructure-fastexcel</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>

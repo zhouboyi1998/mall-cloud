@@ -18,7 +18,7 @@
 | 消息队列 | <img src="https://img.shields.io/badge/RabbitMQ-3.6.5-orange"> <img src="https://img.shields.io/badge/RocketMQ-4.9.3-darkorange"> <img src="https://img.shields.io/badge/Kafka-3.4.0-mediumturquoise"> |
 | 对象存储 | <img src="https://img.shields.io/badge/MinIO-8.3.4-crimson"> <img src="https://img.shields.io/badge/FastDFS-1.27.0.0-darkorange"> |
 | 本地缓存 | <img src="https://img.shields.io/badge/Caffeine--sienna"> |
-| 文件处理 | <img src="https://img.shields.io/badge/EasyExcel-4.0.3-forestgreen"> |
+| 文件处理 | <img src="https://img.shields.io/badge/EasyExcel-4.0.3-forestgreen"> <img src="https://img.shields.io/badge/FastExcel-1.2.0-forestgreen"> |
 | 图片验证码 | <img src="https://img.shields.io/badge/Kaptcha-1.1.0-blue"> <img src="https://img.shields.io/badge/Easy Captcha-1.6.2-blue"> <img src="https://img.shields.io/badge/Hutool Captcha-5.0.4-blue"> <img src="https://img.shields.io/badge/Cage Captcha-1.0-sienna"> <img src="https://img.shields.io/badge/Simple Captcha-1.2.2-sienna"> <img src="https://img.shields.io/badge/Mica Captcha-2.1.1 GA-deepskyblue"> |
 | 任务调度 | <img src="https://img.shields.io/badge/XXL JOB-2.4.0-mediumseagreen"> <img src="https://img.shields.io/badge/Spring Scheduler--brightener"> |
 | 监控告警 | <img src="https://img.shields.io/badge/Prometheus-2.43.0-orange"> <img src="https://img.shields.io/badge/Spring Boot Admin-2.3.1-seagreen"> <img src="https://img.shields.io/badge/Hystrix Dashboard--brightener"> <img src="https://img.shields.io/badge/Turbine--brightener"> |
