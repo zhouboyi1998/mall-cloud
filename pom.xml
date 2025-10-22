@@ -92,6 +92,7 @@
         <easy-excel.version>4.0.3</easy-excel.version>
         <fast-excel.version>1.2.0</fast-excel.version>
         <poi.version>5.4.1</poi.version>
+        <easy-poi.version>4.5.0</easy-poi.version>
     </properties>
 
     <dependencies>
@@ -506,6 +507,12 @@
                 <artifactId>poi-ooxml</artifactId>
                 <version>${poi.version}</version>
             </dependency>
+            <!-- EasyPOI -->
+            <dependency>
+                <groupId>cn.afterturn</groupId>
+                <artifactId>easypoi-spring-boot-starter</artifactId>
+                <version>${easy-poi.version}</version>
+            </dependency>
 
             <!-- 启动包 -->
             <dependency>
@@ -594,6 +601,11 @@
             <dependency>
                 <groupId>com.cafe</groupId>
                 <artifactId>mall-infrastructure-easyexcel</artifactId>
+                <version>${mall-cloud.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.cafe</groupId>
+                <artifactId>mall-infrastructure-easypoi</artifactId>
                 <version>${mall-cloud.version}</version>
             </dependency>
             <dependency>
