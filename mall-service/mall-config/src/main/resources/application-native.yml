@@ -1,0 +1,5 @@
+# 配置中心配置
+configuration-center:
+  repository: NATIVE
+  local:
+    base-path: ./docs/nacos/DEFAULT_GROUP

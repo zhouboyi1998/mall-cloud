@@ -1,8 +1,10 @@
 package com.cafe.config.environment;
 
+import com.cafe.config.property.ConfigurationCenterProperties;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.cloud.config.environment.Environment;
 import org.springframework.cloud.config.environment.PropertySource;
 import org.springframework.core.io.InputStreamResource;
@@ -23,19 +25,17 @@ import java.util.Properties;
  */
 @RequiredArgsConstructor
 @Repository
-public class RedisEnvironmentRepository extends AbstractEnvironmentRepository {
+@ConditionalOnProperty(name = "configuration-center.repository", havingValue = "REDIS")
+public class RedisConfigEnvironmentRepository extends AbstractEnvironmentRepository {
 
-    /**
-     * 配置在 Redis 中的 Hash
-     */
-    private static final String REDIS_HASH = "CONFIG";
+    private final ConfigurationCenterProperties configurationCenterProperties;
 
     private final StringRedisTemplate stringRedisTemplate;
 
     @Override
     protected void addPropertySource(Environment environment, String propertyName) {
         // 从 Redis 数据源中读取 yaml 格式的配置内容 (propertyName 即配置在 Redis 中的 Key)
-        String configuration = stringRedisTemplate.<String, String>opsForHash().get(REDIS_HASH, propertyName);
+        String configuration = stringRedisTemplate.<String, String>opsForHash().get(configurationCenterProperties.getRedis().getHash(), propertyName);
         if (Objects.isNull(configuration)) {
             return;
         }
