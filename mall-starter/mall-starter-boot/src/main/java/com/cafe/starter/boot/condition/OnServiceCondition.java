@@ -35,7 +35,7 @@ public class OnServiceCondition implements Condition {
             return true;
         }
 
-        // 获取注解属性
+        // 获取注解属性映射
         MultiValueMap<String, Object> attributes = annotatedTypeMetadata.getAllAnnotationAttributes(ConditionalOnService.class.getName());
         if (Objects.nonNull(attributes)) {
             // 获取包含的服务列表
@@ -58,26 +58,40 @@ public class OnServiceCondition implements Condition {
     }
 
     /**
-     * 从注解属性中获取服务名称列表
+     * 获取服务名称列表
      *
-     * @param attributes    注解属性
-     * @param attributeName 属性名称
+     * @param attributes    注解属性映射
+     * @param attributeName 注解属性名称
      * @return 服务名称列表
      */
     private List<String> getServices(MultiValueMap<String, Object> attributes, String attributeName) {
+        // 从注解属性映射中获取注解属性值
         return Optional.ofNullable(attributes.get(attributeName))
             .orElse(Collections.emptyList())
             .stream()
             .filter(Objects::nonNull)
-            .map(services -> {
-                if (services instanceof String) {
-                    return Collections.singletonList((String) services);
-                } else if (services instanceof String[]) {
-                    return new ArrayList<>(Arrays.asList((String[]) services));
-                }
-                return new ArrayList<String>();
-            })
+            // 解析注解属性值获取服务名称列表
+            .map(this::parseAttribute)
             .flatMap(List::stream)
             .collect(Collectors.toList());
+    }
+
+    /**
+     * 解析注解属性值获取服务名称列表
+     *
+     * @param attributeValue 注解属性值
+     * @return 服务名称列表
+     */
+    private List<String> parseAttribute(Object attributeValue) {
+        // 解析字符串类型的注解属性值
+        if (attributeValue instanceof String) {
+            return Collections.singletonList((String) attributeValue);
+        }
+        // 解析字符串数组类型的注解属性值
+        if (attributeValue instanceof String[]) {
+            return new ArrayList<>(Arrays.asList((String[]) attributeValue));
+        }
+        // 默认返回空列表
+        return new ArrayList<>();
     }
 }
