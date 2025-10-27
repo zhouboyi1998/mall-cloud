@@ -7,6 +7,7 @@
 <a target="_blank" href="https://opensource.org/licenses/MIT"> 
 <img src="https://img.shields.io/badge/license-MIT-red"> 
 </a>
+<a href="https://deepwiki.com/zhouboyi1998/mall-cloud"><img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki"></a>
 <img src="https://img.shields.io/badge/Java-8-sienna">
 <img src="https://img.shields.io/badge/Spring Boot-2.3.12.RELEASE-brightener">
 <img src="https://img.shields.io/badge/Spring Cloud-Hoxton.SR12-brightener">
