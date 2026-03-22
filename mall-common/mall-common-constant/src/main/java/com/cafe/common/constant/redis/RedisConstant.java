@@ -15,6 +15,11 @@ public class RedisConstant {
     public static final String RESOURCE_ROLE_MAP = "AUTH:RESOURCE_ROLE_MAP";
 
     /**
+     * 角色-资源对应关系消息唯一ID集合Key
+     */
+    public static final String ROLE_RESOURCE_MESSAGE_ID_SET = "MESSAGE_ID:ROLE_RESOURCE";
+
+    /**
      * 令牌存储Key前缀
      */
     public static final String TOKEN_PREFIX = "AUTH:TOKEN_";

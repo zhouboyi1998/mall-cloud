@@ -4,6 +4,7 @@ import com.cafe.common.constant.app.FieldConstant;
 import com.cafe.common.constant.monitor.MonitorConstant;
 import com.cafe.common.constant.pool.StringConstant;
 import com.cafe.common.constant.rabbitmq.RabbitMQConstant;
+import com.cafe.id.feign.IDFeign;
 import com.cafe.infrastructure.rabbitmq.producer.RabbitMQProducer;
 import com.cafe.user.model.relation.UserRelation;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @Project: mall-cloud
@@ -28,6 +30,8 @@ import java.util.Map;
 public class MessageContentHandler {
 
     private final RabbitMQProducer rabbitMQProducer;
+
+    private final IDFeign idFeign;
 
     /**
      * 将不带属性名的 Serializable 转换为带属性名的 Map
@@ -53,11 +57,15 @@ public class MessageContentHandler {
         List<Map<String, Object>> afterDataList = handleRowList(afterRowList, fieldNameList);
         content.put(MonitorConstant.AFTER_DATA, afterDataList);
 
+        // 生成消息唯一ID
+        String messageId = Objects.requireNonNull(idFeign.nextId(null).getBody()).toString();
+
         // 发送消息到 RabbitMQ
         rabbitMQProducer.convertAndSend(
             RabbitMQConstant.Exchange.BINLOG,
             RabbitMQConstant.RoutingKey.MAP.get(RabbitMQConstant.Exchange.BINLOG, tableName),
-            content
+            content,
+            messageId
         );
     }
 

@@ -2,23 +2,27 @@ package com.cafe.user.message;
 
 import com.cafe.common.constant.monitor.MonitorConstant;
 import com.cafe.common.constant.rabbitmq.RabbitMQConstant;
+import com.cafe.common.constant.redis.RedisConstant;
 import com.cafe.common.json.util.JacksonUtil;
 import com.cafe.user.facade.RoleResourceFacade;
 import com.cafe.user.model.entity.RoleResource;
 import com.fasterxml.jackson.core.type.TypeReference;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.Argument;
 import org.springframework.amqp.rabbit.annotation.Exchange;
 import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.rabbit.annotation.RabbitListeners;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @Project: mall-cloud
@@ -33,6 +37,8 @@ import java.util.Map;
 public class RoleResourceConsumer {
 
     private final RoleResourceFacade roleResourceFacade;
+
+    private final RedisTemplate<String, Object> redisTemplate;
 
     @RabbitListeners(value = {
         @RabbitListener(bindings = @QueueBinding(
@@ -52,9 +58,19 @@ public class RoleResourceConsumer {
             key = {RabbitMQConstant.RoutingKey.CANAL_ROLE_RESOURCE}
         ))
     })
-    public void refreshResourceRoleListener(String message) {
+    public void refreshResourceRoleListener(String message, Message messageObject) {
+        // 获取消息唯一ID
+        String messageId = messageObject.getMessageProperties().getCorrelationId();
         // 打印成功接收消息的日志
-        log.info("RoleResourceConsumer.refreshResourceRoleListener(): rabbitmq message -> {}", message);
+        log.info("RoleResourceConsumer.refreshResourceRoleListener(): rabbitmq messageId -> {}, message -> {}", messageId, message);
+
+        // 校验消息是否已经被消费
+        Long count = redisTemplate.opsForSet().add(RedisConstant.ROLE_RESOURCE_MESSAGE_ID_SET, messageId);
+        // Redis Set 插入失败, 表示消息已经被消费
+        if (!Objects.equals(count, 1L)) {
+            log.warn("RoleResourceConsumer.refreshResourceRoleListener(): rabbitmq messageId [{}] has been consumed!", messageId);
+            return;
+        }
 
         // 存储资源ID列表
         List<Long> resourceIds = new ArrayList<>();

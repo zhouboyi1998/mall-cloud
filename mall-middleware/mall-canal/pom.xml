@@ -41,6 +41,11 @@
             <groupId>com.cafe</groupId>
             <artifactId>mall-infrastructure-rocketmq</artifactId>
         </dependency>
+        <!-- 远程调用接口 -->
+        <dependency>
+            <groupId>com.cafe</groupId>
+            <artifactId>mall-id-api</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

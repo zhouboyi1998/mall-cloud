@@ -36,6 +36,10 @@
         <!-- 远程调用接口 -->
         <dependency>
             <groupId>com.cafe</groupId>
+            <artifactId>mall-id-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.cafe</groupId>
             <artifactId>mall-user-api</artifactId>
         </dependency>
     </dependencies>
